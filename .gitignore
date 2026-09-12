@@ -1,0 +1,18 @@
+# Rust
+target/
+
+# insta writes these next to a snapshot it could not match; never commit one
+*.snap.new
+
+# Terminal recordings. Whatever was on the screen when one was made is inside it.
+*.cast
+
+# Editor and OS
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
