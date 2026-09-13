@@ -14,12 +14,13 @@ use std::sync::atomic::{AtomicBool, AtomicU32, AtomicU64, Ordering};
 use std::sync::{Arc, Mutex, PoisonError};
 use std::time::Duration;
 
-use nutsh_prism::{Client, Entity, ListOptions, PrismError};
+use nutsh_prism::{Entity, ListOptions, PrismError};
 use tokio::sync::{Notify, mpsc};
 use tokio::task::JoinHandle;
 
 use crate::actions::{Outcome, PlanRef};
 use crate::journal::JournalId;
+use crate::source::Source;
 use crate::store::{Failure, TableKey, Update};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
@@ -619,7 +620,7 @@ struct Running {
 }
 
 pub struct Scheduler {
-    client: Arc<Client>,
+    client: Arc<dyn Source>,
     tx: mpsc::Sender<Msg>,
     tasks: HashMap<SubId, Running>,
     next_id: u64,
@@ -633,7 +634,7 @@ pub struct Scheduler {
 }
 
 impl Scheduler {
-    pub fn new(client: Arc<Client>, tx: mpsc::Sender<Msg>) -> Scheduler {
+    pub fn new(client: Arc<dyn Source>, tx: mpsc::Sender<Msg>) -> Scheduler {
         Scheduler {
             client,
             tx,
@@ -900,7 +901,7 @@ impl Drop for Scheduler {
 }
 
 async fn run(
-    client: Arc<Client>,
+    client: Arc<dyn Source>,
     tx: mpsc::Sender<Msg>,
     epoch: u64,
     id: SubId,
@@ -911,8 +912,16 @@ async fn run(
     let mut backoff = poll_interval(sub.interval);
     loop {
         let dirty = controls.probe.take_dirty();
-        let Some((mut generation, mut error)) =
-            attempt(&client, &tx, id, &sub, &controls, &generations, dirty).await
+        let Some((mut generation, mut error)) = attempt(
+            client.as_ref(),
+            &tx,
+            id,
+            &sub,
+            &controls,
+            &generations,
+            dirty,
+        )
+        .await
         else {
             return;
         };
@@ -925,7 +934,16 @@ async fn run(
         // inside the same cycle so the view sees one answer rather than a raw error that
         // becomes a sentence, and only when that answers 404 too is it the endpoint's own.
         if is_missing_list(&sub, error.as_ref()) {
-            let Some(second) = attempt(&client, &tx, id, &sub, &controls, &generations, true).await
+            let Some(second) = attempt(
+                client.as_ref(),
+                &tx,
+                id,
+                &sub,
+                &controls,
+                &generations,
+                true,
+            )
+            .await
             else {
                 return;
             };
@@ -1073,7 +1091,7 @@ fn is_endpoint_list(sub: &Subscription) -> bool {
 /// error if it failed. `None` is the receiver having gone away, which is the only reason a task
 /// stops in the middle of a cycle rather than at the end of one.
 async fn attempt(
-    client: &Client,
+    client: &dyn Source,
     tx: &mpsc::Sender<Msg>,
     id: SubId,
     sub: &Subscription,
@@ -1186,7 +1204,7 @@ pub(crate) struct Walk {
 /// made once against the spec in `xtask::catalog::overlay::apply`; whether this Prism Central
 /// actually honours the order is [`calibrate`]'s, made once against the server.
 async fn cycle(
-    client: &Client,
+    client: &dyn Source,
     tx: &mpsc::Sender<Msg>,
     id: SubId,
     sub: &Subscription,
@@ -1265,7 +1283,7 @@ async fn cycle(
 /// One `$limit=1` list ordered by `field` descending: the probe's own question, asked with the
 /// table's filter and parents so it sees the same collection the walk would.
 async fn probe(
-    client: &Client,
+    client: &dyn Source,
     sub: &Subscription,
     field: &str,
 ) -> Result<ProbeAnswer, PrismError> {
@@ -1293,7 +1311,7 @@ async fn probe(
 /// calibrates: a kind with no `probe_by`, a disarmed table and every cycle past the first armed
 /// one pass `None`, and pay for no per-row scan.
 async fn list(
-    client: &Client,
+    client: &dyn Source,
     tx: &mpsc::Sender<Msg>,
     id: SubId,
     sub: &Subscription,
@@ -1396,7 +1414,7 @@ async fn list(
 /// One `get_in` for a `single` subscription: the parents fill the path, the ext id the last
 /// placeholder. The `Entity` it pushes updates one row without disturbing the list's cycle.
 async fn fetch_one(
-    client: &Client,
+    client: &dyn Source,
     tx: &mpsc::Sender<Msg>,
     id: SubId,
     sub: &Subscription,

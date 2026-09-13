@@ -919,10 +919,9 @@ async fn a_404_on_one_entity_is_an_ordinary_error() {
 /// pausing it would strand a mutation somebody is waiting on with nothing on screen saying so.
 #[tokio::test(start_paused = true)]
 async fn a_paused_subscription_issues_nothing_until_it_is_woken() {
-    let pc = MockPc::builder().start().await;
-    let client = Arc::new(common::client(&pc).await);
+    let source = common::FakeSource::new();
     let (tx, mut rx) = mpsc::channel(64);
-    let mut scheduler = Scheduler::new(client, tx);
+    let mut scheduler = Scheduler::new(source.clone(), tx);
     let key = vms();
     let list = scheduler.subscribe(Subscription::list(key.clone(), Duration::from_secs(5)));
     // A watch is a `single` that says so - `watching()` is the only thing that tells the two
@@ -937,14 +936,13 @@ async fn a_paused_subscription_issues_nothing_until_it_is_woken() {
     }
 
     scheduler.set_idle(true);
-    let listed = pc.requests_to(VMS).len();
+    let listed = source.lists();
     tokio::time::advance(Duration::from_secs(600)).await;
     tokio::task::yield_now().await;
-    assert_eq!(pc.requests_to(VMS).len(), listed, "nobody is reading it");
+    assert_eq!(source.lists(), listed, "nobody is reading it");
 
-    // The watch keeps its own clock. On a real one for this half: waiting out a cycle under the
-    // paused clock would race its auto-advance rather than time anything.
-    tokio::time::resume();
+    // The watch keeps its own clock, and the paused one may run: with no socket under the
+    // source, the scheduler's own timers are the only ones auto-advance can reach.
     for _ in 0..2 {
         let sub = tokio::time::timeout(Duration::from_secs(10), next_complete(&mut rx))
             .await
@@ -954,7 +952,7 @@ async fn a_paused_subscription_issues_nothing_until_it_is_woken() {
             "and while the pause holds it is the only one cycling"
         );
     }
-    assert_eq!(pc.requests_to(VMS).len(), listed, "still nobody reading it");
+    assert_eq!(source.lists(), listed, "still nobody reading it");
 
     // Waking runs a cycle immediately, and with a forced walk.
     scheduler.set_idle(false);
@@ -964,7 +962,7 @@ async fn a_paused_subscription_issues_nothing_until_it_is_woken() {
     })
     .await
     .expect("waking runs a cycle now");
-    assert!(pc.requests_to(VMS).len() > listed);
+    assert!(source.lists() > listed);
     scheduler.unsubscribe(list);
     scheduler.unsubscribe(watch);
 }
@@ -1119,10 +1117,10 @@ async fn a_completed_cycle_forgets_a_remembered_404() {
 /// The rows and the reason stay on the table. What stops is the asking.
 #[tokio::test(start_paused = true)]
 async fn a_refused_credential_stops_the_subscription() {
-    let pc = MockPc::builder().start().await;
-    let client = Arc::new(common::raw_client(&pc, "wrong"));
+    let source = common::FakeSource::new();
+    source.refuse_credential();
     let (tx, mut rx) = mpsc::channel(64);
-    let mut scheduler = Scheduler::new(client, tx);
+    let mut scheduler = Scheduler::new(source.clone(), tx);
     let mut store = Store::default();
     let key = vms();
     let _sub = scheduler.subscribe(Subscription::list(key.clone(), Duration::from_millis(200)));
@@ -1131,20 +1129,21 @@ async fn a_refused_credential_stops_the_subscription() {
     assert!(matches!(msg, Msg::Error { .. }), "{msg:?}");
     let failure = store.table(&key).error.clone().expect("a failure");
     assert!(failure.is_terminal(), "{failure:?}");
-    assert_eq!(pc.requests().len(), 1, "one presentation");
+    assert_eq!(source.lists(), 1, "one presentation");
 
     // Half an hour of cycles at two hundred milliseconds. Not one of them goes out.
     tokio::time::advance(Duration::from_secs(1800)).await;
     tokio::task::yield_now().await;
     assert_eq!(
-        pc.requests().len(),
+        source.lists(),
         1,
         "a refused password is never presented again"
     );
-    // And the task itself is gone. `Client::send` would refuse to put the password on the wire
-    // whatever this loop did, so the request count alone cannot tell a stopped subscription
-    // from one spinning against the gate; a subscription still cycling reports a failure every
-    // two hundred milliseconds, and nine thousand of them have now had their chance.
+    // The count is the scheduler's own here: nothing below it refuses a second request, so a
+    // subscription that had kept cycling would have asked again. `Client`'s half — that the
+    // credential never reaches the wire a second time — is pinned in `nutsh_prism`'s own
+    // `tests/auth.rs`. A subscription still cycling also reports a failure every two hundred
+    // milliseconds, and nine thousand of them have now had their chance.
     assert!(
         rx.try_recv().is_err(),
         "the subscription is still reporting failures"
@@ -1367,29 +1366,28 @@ async fn nothing_more(rx: &mut mpsc::Receiver<Msg>) {
 /// schedule runs **exactly one** cycle, because that is where the loop goes back to.
 #[tokio::test(start_paused = true)]
 async fn off_stops_at_once_and_a_refresh_then_buys_exactly_one_cycle() {
-    let pc = MockPc::builder().start().await;
-    let client = Arc::new(common::client(&pc).await);
+    let source = common::FakeSource::new();
     let (tx, mut rx) = mpsc::channel(64);
-    let mut scheduler = Scheduler::new(client, tx);
+    let mut scheduler = Scheduler::new(source.clone(), tx);
     let id = scheduler.subscribe(Subscription::list(vms(), Duration::from_secs(5)));
     while next_complete(&mut rx).await != id {}
 
     // Asleep on its five seconds. `off` while it sleeps must not buy one more cycle.
     assert!(scheduler.set_interval(id, None));
     assert!(scheduler.is_manual(id));
-    let after = pc.requests_to(VMS).len();
+    let after = source.lists();
     tokio::time::advance(Duration::from_secs(600)).await;
     tokio::time::resume();
     nothing_more(&mut rx).await;
-    assert_eq!(pc.requests_to(VMS).len(), after, "no schedule, no cycles");
+    assert_eq!(source.lists(), after, "no schedule, no cycles");
 
     // `ctrl-r`: one cycle, and the schedule is still off.
     scheduler.refresh(id);
     while next_complete(&mut rx).await != id {}
-    let once = pc.requests_to(VMS).len();
+    let once = source.lists();
     assert!(once > after);
     nothing_more(&mut rx).await;
-    assert_eq!(pc.requests_to(VMS).len(), once, "exactly one");
+    assert_eq!(source.lists(), once, "exactly one");
     assert!(scheduler.is_manual(id), "and still manual");
 
     // A named interval arms, so the rhythm starts with a cycle rather than with silence.
@@ -1405,10 +1403,9 @@ async fn off_stops_at_once_and_a_refresh_then_buys_exactly_one_cycle() {
 /// by construction rather than by two lists.
 #[tokio::test(start_paused = true)]
 async fn set_interval_kind_leaves_a_task_watch_alone() {
-    let pc = MockPc::builder().start().await;
-    let client = Arc::new(common::client(&pc).await);
+    let source = common::FakeSource::new();
     let (tx, _rx) = mpsc::channel(64);
-    let mut scheduler = Scheduler::new(client, tx);
+    let mut scheduler = Scheduler::new(source, tx);
     let key = vms();
     let list = scheduler.subscribe(Subscription::list(key.clone(), Duration::from_secs(5)));
     let watch = scheduler
@@ -1429,20 +1426,19 @@ async fn set_interval_kind_leaves_a_task_watch_alone() {
 /// after five idle minutes would refresh a table that is supposed to be silent.
 #[tokio::test(start_paused = true)]
 async fn waking_from_the_pause_leaves_a_manual_view_alone() {
-    let pc = MockPc::builder().start().await;
-    let client = Arc::new(common::client(&pc).await);
+    let source = common::FakeSource::new();
     let (tx, mut rx) = mpsc::channel(64);
-    let mut scheduler = Scheduler::new(client, tx);
+    let mut scheduler = Scheduler::new(source.clone(), tx);
     let id = scheduler.subscribe(Subscription::list(vms(), Duration::from_secs(5)));
     while next_complete(&mut rx).await != id {}
     scheduler.set_interval(id, None);
     scheduler.set_idle(true);
-    let before = pc.requests_to(VMS).len();
+    let before = source.lists();
 
     scheduler.set_idle(false);
     scheduler.refresh_all();
     tokio::time::resume();
     nothing_more(&mut rx).await;
-    assert_eq!(pc.requests_to(VMS).len(), before, "still nothing polling");
+    assert_eq!(source.lists(), before, "still nothing polling");
     scheduler.unsubscribe(id);
 }

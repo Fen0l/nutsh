@@ -20,6 +20,7 @@ pub mod sampler;
 pub mod scheduler;
 pub mod search;
 pub mod session;
+pub mod source;
 pub mod stats;
 pub mod status;
 pub mod store;
