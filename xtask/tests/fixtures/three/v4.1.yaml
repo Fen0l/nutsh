@@ -1,0 +1,11 @@
+openapi: 3.0.1
+info:
+  title: three
+  version: "1"
+paths:
+  /three/v4.1/config/bolts:
+    get:
+      operationId: listBolts
+  /three/v4.1/config/nuts:
+    get:
+      operationId: listNuts

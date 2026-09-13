@@ -1,0 +1,22 @@
+[
+  {
+    "$objectType": "vmm.v4.ahv.config.Disk",
+    "extId": "9a1b2c3d-0000-4000-8000-000000000101",
+    "diskAddress": { "busType": "SCSI", "index": 0 },
+    "backingInfo": {
+      "$objectType": "vmm.v4.ahv.config.VmDisk",
+      "diskSizeBytes": 53687091200,
+      "storageContainer": { "extId": "5f6e7d8c-0000-4000-8000-000000000201" }
+    }
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.Disk",
+    "extId": "9a1b2c3d-0000-4000-8000-000000000102",
+    "diskAddress": { "busType": "SCSI", "index": 1 },
+    "backingInfo": {
+      "$objectType": "vmm.v4.ahv.config.VmDisk",
+      "diskSizeBytes": 214748364800,
+      "storageContainer": { "extId": "5f6e7d8c-0000-4000-8000-000000000201" }
+    }
+  }
+]

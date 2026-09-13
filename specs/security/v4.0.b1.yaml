@@ -1,0 +1,3512 @@
+openapi: 3.0.1
+info:
+  title: Nutanix Security APIs
+  description: "Manage security features, such as encryption, certificates, or platform\
+    \ hardening."
+  version: 4.0-beta-1
+  x-repo-name: security
+  x-logo:
+    altText: Security Logo
+    url: https://developers.nutanix.com/api/v1/namespaces/security/images/security-logo-img.svg
+servers:
+- url: "https://{pc-ip}:9440/api"
+security:
+- basicAuthScheme: []
+- apiKeyAuthScheme: []
+tags:
+- name: STIGs
+  description: |
+    The Security Technical Implementation Guide (STIG) is a configuration standard consisting of cybersecurity requirements for a specific product. STIGs usage provides a methodology for securing protocols within networks, servers, computers, and logical designs to improve overall security. The STIG APIs provide the ability to view the STIG report and details about the STIGs in a cluster.
+- name: ApprovalPolicies
+  description: "The approval policies define the approval flow for the Secure Snap\
+    \ feature in the system. The approval policies APIs allow users to manage approval\
+    \ policies in the system. It can be created, updated, deleted, and listed."
+  x-displayName: Approval Policies
+paths:
+  /security/v4.0.b1/management/approval-policies:
+    get:
+      tags:
+      - ApprovalPolicies
+      summary: List approval policies
+      description: Fetches a list of approval policies for secure snapshots.
+      operationId: listApprovalPolicies
+      parameters:
+      - name: $select
+        in: query
+        description: |
+          A URL query parameter that allows clients to request a specific set of properties for each entity or complex type. Expression specified with the $select must conform to the [OData V4.01](https://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html) URL conventions. If a $select expression consists of a single select item that is an asterisk (i.e., *), then all properties on the matching resource will be returned.
+          - approverGroups
+          - description
+          - isUpdatePending
+          - name
+          - securedPolicies
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Returns a list of approval policies.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/security.v4.0.b1.management.ApprovalPolicy'
+                additionalProperties: false
+                description: REST response for all response codes in API path /security/v4.0.b1/management/approval-policies
+                  Get operation
+        "4XX":
+          description: Client error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/security.v4.0.b1.error.ErrorResponse'
+                additionalProperties: false
+                description: REST response for all response codes in API path /security/v4.0.b1/management/approval-policies
+                  Get operation
+        "5XX":
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/security.v4.0.b1.error.ErrorResponse'
+                additionalProperties: false
+                description: REST response for all response codes in API path /security/v4.0.b1/management/approval-policies
+                  Get operation
+      x-permissions:
+        deploymentList:
+        - ON_PREM
+        operationName: View Approval Policy
+        roleList:
+        - Secure Policy Editor
+        - Secure Policy Admin
+        - Secure Policy Viewer
+        - Super Admin
+        - Prism Admin
+        - Prism Viewer
+      x-rate-limit:
+      - type: xsmall
+        count: 3
+        timeUnit: seconds
+      - type: small
+        count: 3
+        timeUnit: seconds
+      - type: large
+        count: 5
+        timeUnit: seconds
+      - type: xlarge
+        count: 10
+        timeUnit: seconds
+      x-supported-versions:
+      - product: PC
+        version: "2024.3"
+      x-code-samples:
+      - lang: Java
+        source: |2
+
+          package sample;
+
+          import com.nutanix.sec.java.client.ApiClient;
+          import com.nutanix.sec.java.client.api.ApprovalPoliciesApi;
+          import com.nutanix.dp1.sec.security.v4.management.ListApprovalPoliciesApiResponse;
+          import org.springframework.web.client.RestClientException;
+
+          public class JavaSdkSample {
+              public static void main(String[] args) {
+                  // Configure the client
+                  ApiClient apiClient = new ApiClient();
+                  // IPv4/IPv6 address or FQDN of the cluster
+                  apiClient.setHost("localhost");
+                  // Port to which to connect to
+                  apiClient.setPort(9440);
+                  // Interval in ms to use during retry attempts
+                  apiClient.setRetryInterval(5000);
+                  // Max retry attempts while reconnecting on a loss of connection
+                  apiClient.setMaxRetryAttempts(5);
+                  // UserName to connect to the cluster
+                  String username = "username";
+                  // Password to connect to the cluster
+                  String password = "password";
+                  apiClient.setUsername(username);
+                  apiClient.setPassword(password);
+
+                  // Please add authorization information here if needed.
+                  ApprovalPoliciesApi approvalPoliciesApi = new ApprovalPoliciesApi(apiClient);
+
+
+                  try {
+                      ListApprovalPoliciesApiResponse listApprovalPoliciesApiResponse = approvalPoliciesApi.listApprovalPolicies(null);
+                      System.out.println(listApprovalPoliciesApiResponse.toString());
+
+                  } catch (RestClientException ex) {
+                      System.out.println(ex.getMessage());
+                  }
+              }
+          }
+      - lang: JavaScript
+        source: |2
+
+          import { ApiClient, ApprovalPoliciesApi } from "@nutanix-api/security-js-client";
+
+          // Configure the client
+          let apiClientInstance = new ApiClient();
+          // IPv4/IPv6 address or FQDN of the cluster
+          apiClientInstance.host = 'localhost';
+          // Port to which to connect to
+          apiClientInstance.port = '9440';
+          // Max retry attempts while reconnecting on a loss of connection
+          apiClientInstance.maxRetryAttempts = 5;
+          // Interval in ms to use during retry attempts
+          apiClientInstance.retryInterval = 5000;
+          // UserName to connect to the cluster
+          apiClientInstance.username = 'username';
+          // Password to connect to the cluster
+          apiClientInstance.password = 'password';
+          // Please add authorization information here if needed.
+          let approvalPoliciesApi = new ApprovalPoliciesApi(apiClientInstance);
+
+          function sample() {
+
+
+              // Construct Optional Parameters
+              var opts = {};
+              opts["$select"] = "string_sample_data";
+
+
+
+
+              approvalPoliciesApi.listApprovalPolicies(opts).then(({data, response}) => {
+                  console.log(`API returned the following status code: ${response.status}`);
+                  console.log(data.getData());
+              }).catch((error) => {
+                  console.log(`Error is: ${error}`);
+              });
+
+          }
+          sample()
+      - lang: Python
+        source: |2+
+
+          import ntnx_security_py_client
+
+          if __name__ == "__main__":
+              # Configure the client
+              config = ntnx_security_py_client.Configuration()
+              # IPv4/IPv6 address or FQDN of the cluster
+              config.host = "localhost"
+              # Port to which to connect to
+              config.port = 9440
+              # Max retry attempts while reconnecting on a loss of connection
+              config.max_retry_attempts = 3
+              # Backoff factor to use during retry attempts
+              config.backoff_factor = 3
+              # UserName to connect to the cluster
+              config.username = "username"
+              # Password to connect to the cluster
+              config.password = "password"
+              # Please add authorization information here if needed.
+              client = ntnx_security_py_client.ApiClient(configuration=config)
+              approval_policies_api = ntnx_security_py_client.ApprovalPoliciesApi(api_client=client)
+
+
+              try:
+                  api_response = approval_policies_api.list_approval_policies()
+                  print(api_response)
+              except ntnx_security_py_client.rest.ApiException as e:
+                  print(e)
+
+      - lang: Go
+        source: |2+
+
+          package main
+
+          import (
+              "fmt"
+              "time"
+              "github.com/nutanix/ntnx-api-golang-clients/security-go-client/v4/api"
+              "github.com/nutanix/ntnx-api-golang-clients/security-go-client/v4/client"
+              import1 "github.com/nutanix/ntnx-api-golang-clients/security-go-client/v4/models/security/v4/management"
+          )
+
+          var (
+              ApiClientInstance *client.ApiClient
+              ApprovalPoliciesApiInstance *api.ApprovalPoliciesApi
+          )
+
+          func main() {
+              ApiClientInstance = client.NewApiClient()
+              // IPv4/IPv6 address or FQDN of the cluster
+              ApiClientInstance.Host = "localhost"
+              // Port to which to connect to
+              ApiClientInstance.Port = 9440
+              // Interval in ms to use during retry attempts
+              ApiClientInstance.RetryInterval = 5 * time.Second
+              // Max retry attempts while reconnecting on a loss of connection
+              ApiClientInstance.MaxRetryAttempts = 5
+              // UserName to connect to the cluster
+              ApiClientInstance.Username = "username"
+              // Password to connect to the cluster
+              ApiClientInstance.Password = "password"
+              // Please add authorization information here if needed.
+              ApprovalPoliciesApiInstance = api.NewApprovalPoliciesApi(ApiClientInstance)
+
+
+
+              response, error := ApprovalPoliciesApiInstance.ListApprovalPolicies(nil)
+              if error != nil {
+                  fmt.Println(error)
+                  return
+              }
+              data, _ := response.GetData().([]import1.ApprovalPolicy)
+              fmt.Println(data)
+
+          }
+
+      - lang: cURL
+        source: |2+
+
+          curl --request GET \
+               --url "https://{pc-ip}:9440/api/security/v4.0.b1/management/approval-policies?$select=string_sample_data" \
+               --header 'Accept: application/json' \
+               --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+
+      - lang: Wget
+        source: |2
+
+
+          wget --verbose \
+               --method GET \
+               --header 'Accept: application/json' \
+          --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+          - "https://{pc-ip}:9440/api/security/v4.0.b1/management/approval-policies?$select=string_sample_data"
+    post:
+      tags:
+      - ApprovalPolicies
+      summary: Create an approval policy
+      description: Create an approval policy for secure snapshots.
+      operationId: createApprovalPolicy
+      requestBody:
+        description: Details used to create an approval policy.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/security.v4.0.b1.management.ApprovalPolicy'
+        required: true
+      responses:
+        "202":
+          description: The request to create an approval policy is accepted.
+          headers:
+            Location:
+              style: simple
+              explode: false
+              schema:
+                pattern: "^((http[s]?):\\/)?\\/?([^:\\/\\s]+)((\\/\\w+)*(:[0-9]+)*?\\\
+                  /)([\\w\\-\\.]+[^#?\\s]+)(.*)?(#[\\w\\-]+)?$"
+                type: string
+                description: Indicates the target of a redirection or the URL of a
+                  newly created resource.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/prism.v4.0.config.TaskReference'
+                additionalProperties: false
+                description: REST response for all response codes in API path /security/v4.0.b1/management/approval-policies
+                  Post operation
+        "4XX":
+          description: Client error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/security.v4.0.b1.error.ErrorResponse'
+                additionalProperties: false
+                description: REST response for all response codes in API path /security/v4.0.b1/management/approval-policies
+                  Post operation
+        "5XX":
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/security.v4.0.b1.error.ErrorResponse'
+                additionalProperties: false
+                description: REST response for all response codes in API path /security/v4.0.b1/management/approval-policies
+                  Post operation
+      x-permissions:
+        deploymentList:
+        - ON_PREM
+        operationName: Create Approval Policy
+        roleList:
+        - Secure Policy Admin
+        - Super Admin
+        - Prism Admin
+      x-rate-limit:
+      - type: xsmall
+        count: 3
+        timeUnit: seconds
+      - type: small
+        count: 3
+        timeUnit: seconds
+      - type: large
+        count: 5
+        timeUnit: seconds
+      - type: xlarge
+        count: 10
+        timeUnit: seconds
+      x-supported-versions:
+      - product: PC
+        version: "2024.3"
+      x-code-samples:
+      - lang: Java
+        source: |2
+
+          package sample;
+
+          import com.nutanix.sec.java.client.ApiClient;
+          import com.nutanix.sec.java.client.api.ApprovalPoliciesApi;
+          import com.nutanix.dp1.sec.security.v4.management.ApprovalPolicy;
+          import com.nutanix.dp1.sec.security.v4.management.CreateApprovalPolicyApiResponse;
+          import org.springframework.web.client.RestClientException;
+
+          public class JavaSdkSample {
+              public static void main(String[] args) {
+                  // Configure the client
+                  ApiClient apiClient = new ApiClient();
+                  // IPv4/IPv6 address or FQDN of the cluster
+                  apiClient.setHost("localhost");
+                  // Port to which to connect to
+                  apiClient.setPort(9440);
+                  // Interval in ms to use during retry attempts
+                  apiClient.setRetryInterval(5000);
+                  // Max retry attempts while reconnecting on a loss of connection
+                  apiClient.setMaxRetryAttempts(5);
+                  // UserName to connect to the cluster
+                  String username = "username";
+                  // Password to connect to the cluster
+                  String password = "password";
+                  apiClient.setUsername(username);
+                  apiClient.setPassword(password);
+
+                  // Please add authorization information here if needed.
+                  ApprovalPoliciesApi approvalPoliciesApi = new ApprovalPoliciesApi(apiClient);
+
+                  ApprovalPolicy approvalPolicy = new ApprovalPolicy();
+
+                  // ApprovalPolicy object initializations here...
+                  approvalPolicy.setApproverGroups(new ArrayList<>());  // required field
+                  approvalPolicy.setName("Platinum Approval Policy");  // required field
+
+                  try {
+                      CreateApprovalPolicyApiResponse createApprovalPolicyApiResponse = approvalPoliciesApi.createApprovalPolicy(approvalPolicy);
+                      System.out.println(createApprovalPolicyApiResponse.toString());
+
+                  } catch (RestClientException ex) {
+                      System.out.println(ex.getMessage());
+                  }
+              }
+          }
+      - lang: JavaScript
+        source: |2
+
+          import { ApiClient, ApprovalPoliciesApi, ApprovalPolicy } from "@nutanix-api/security-js-client";
+
+          // Configure the client
+          let apiClientInstance = new ApiClient();
+          // IPv4/IPv6 address or FQDN of the cluster
+          apiClientInstance.host = 'localhost';
+          // Port to which to connect to
+          apiClientInstance.port = '9440';
+          // Max retry attempts while reconnecting on a loss of connection
+          apiClientInstance.maxRetryAttempts = 5;
+          // Interval in ms to use during retry attempts
+          apiClientInstance.retryInterval = 5000;
+          // UserName to connect to the cluster
+          apiClientInstance.username = 'username';
+          // Password to connect to the cluster
+          apiClientInstance.password = 'password';
+          // Please add authorization information here if needed.
+          let approvalPoliciesApi = new ApprovalPoliciesApi(apiClientInstance);
+
+          function sample() {
+              let approvalPolicy = new ApprovalPolicy();
+
+              // ApprovalPolicy object initializations here...
+              approvalPolicy.setApproverGroups([]);  // required field
+              approvalPolicy.setName("Platinum Approval Policy");  // required field
+
+
+
+
+
+
+              approvalPoliciesApi.createApprovalPolicy(approvalPolicy).then(({data, response}) => {
+                  console.log(`API returned the following status code: ${response.status}`);
+                  console.log(data.getData());
+              }).catch((error) => {
+                  console.log(`Error is: ${error}`);
+              });
+
+          }
+          sample()
+      - lang: Python
+        source: |2+
+
+          import ntnx_security_py_client
+
+          if __name__ == "__main__":
+              # Configure the client
+              config = ntnx_security_py_client.Configuration()
+              # IPv4/IPv6 address or FQDN of the cluster
+              config.host = "localhost"
+              # Port to which to connect to
+              config.port = 9440
+              # Max retry attempts while reconnecting on a loss of connection
+              config.max_retry_attempts = 3
+              # Backoff factor to use during retry attempts
+              config.backoff_factor = 3
+              # UserName to connect to the cluster
+              config.username = "username"
+              # Password to connect to the cluster
+              config.password = "password"
+              # Please add authorization information here if needed.
+              client = ntnx_security_py_client.ApiClient(configuration=config)
+              approval_policies_api = ntnx_security_py_client.ApprovalPoliciesApi(api_client=client)
+              approvalPolicy = ntnx_security_py_client.ApprovalPolicy()
+
+              # ApprovalPolicy object initializations here...
+              approvalPolicy.approver_groups = []  # required field
+              approvalPolicy.name = "Platinum Approval Policy"  # required field
+
+
+              try:
+                  api_response = approval_policies_api.create_approval_policy(body=approvalPolicy)
+                  print(api_response)
+              except ntnx_security_py_client.rest.ApiException as e:
+                  print(e)
+
+      - lang: Go
+        source: |2+
+
+          package main
+
+          import (
+              "fmt"
+              "time"
+              "github.com/nutanix/ntnx-api-golang-clients/security-go-client/v4/api"
+              "github.com/nutanix/ntnx-api-golang-clients/security-go-client/v4/client"
+              import1 "github.com/nutanix/ntnx-api-golang-clients/security-go-client/v4/models/security/v4/management"
+              import2 "github.com/nutanix/ntnx-api-golang-clients/security-go-client/v4/models/prism/v4/config"
+          )
+
+          var (
+              ApiClientInstance *client.ApiClient
+              ApprovalPoliciesApiInstance *api.ApprovalPoliciesApi
+          )
+
+          func main() {
+              ApiClientInstance = client.NewApiClient()
+              // IPv4/IPv6 address or FQDN of the cluster
+              ApiClientInstance.Host = "localhost"
+              // Port to which to connect to
+              ApiClientInstance.Port = 9440
+              // Interval in ms to use during retry attempts
+              ApiClientInstance.RetryInterval = 5 * time.Second
+              // Max retry attempts while reconnecting on a loss of connection
+              ApiClientInstance.MaxRetryAttempts = 5
+              // UserName to connect to the cluster
+              ApiClientInstance.Username = "username"
+              // Password to connect to the cluster
+              ApiClientInstance.Password = "password"
+              // Please add authorization information here if needed.
+              ApprovalPoliciesApiInstance = api.NewApprovalPoliciesApi(ApiClientInstance)
+
+              approvalPolicy := import1.NewApprovalPolicy()
+
+              // ApprovalPolicy object initializations here...
+
+
+
+              response, error := ApprovalPoliciesApiInstance.CreateApprovalPolicy(approvalPolicy)
+              if error != nil {
+                  fmt.Println(error)
+                  return
+              }
+              data, _ := response.GetData().(import2.TaskReference)
+              fmt.Println(data)
+
+          }
+
+      - lang: cURL
+        source: |2+
+
+          curl --request POST \
+               --url "https://{pc-ip}:9440/api/security/v4.0.b1/management/approval-policies" \
+               --header 'Accept: application/json' \
+                        --header 'Content-Type: application/json' \
+               --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+                        --data {"tenantId":"string","extId":"string","links":[{"href":"string","rel":"string","$objectType":"common.v1.response.ApiLink"}],"name":"PlatinumApprovalPolicy","description":"Thispolicyisforplatinumsnapshots","approverGroups":[{"name":"PlatinumApprovers","expiryHours":0,"approvers":[{"tenantId":"string","extId":"string","links":[{"href":"string","rel":"string","$objectType":"common.v1.response.ApiLink"}],"username":"string","userType":"$UNKNOWN","idpId":"string","displayName":"string","firstName":"string","middleInitial":"string","lastName":"string","emailId":"string","locale":"string","region":"string","password":"string","isForceResetPasswordEnabled":true,"additionalAttributes":[{"name":"string","value":"string","$objectType":"common.v1.config.KVPair"}],"status":"$UNKNOWN","bucketsAccessKeys":[{"tenantId":"string","extId":"string","links":[{"href":"string","rel":"string","$objectType":"common.v1.response.ApiLink"}],"accessKeyName":"string","secretAccessKey":"string","userId":"string","createdTime":"2015-07-20T15:49:04-07:00","lastUpdatedBy":"string","assignedTo":"string","creationType":"$UNKNOWN","expiryTime":"2015-07-20T15:49:04-07:00","status":"$UNKNOWN","createdBy":"string","lastUpdatedTime":"2015-07-20T15:49:04-07:00","$objectType":"iam.v4.authn.BucketsAccessKey"}],"lastLoginTime":"2015-07-20T15:49:04-07:00","createdTime":"2015-07-20T15:49:04-07:00","lastUpdatedTime":"2015-07-20T15:49:04-07:00","createdBy":"string","lastUpdatedBy":"string","description":"string","creationType":"$UNKNOWN","$objectType":"iam.v4.authn.User"}],"$objectType":"security.v4.management.ApproverGroup"}],"securedPolicies":[{"policyExtId":"string","policyType":"$UNKNOWN","$objectType":"security.v4.management.SecuredPolicy"}],"lastUpdatedBy":"admin","lastUpdateTime":"2015-07-20T15:49:04-07:00","isUpdatePending":true,"$objectType":"security.v4.management.ApprovalPolicy"} \
+
+      - lang: Wget
+        source: |2
+
+
+          wget --verbose \
+               --method POST \
+               --header 'Accept: application/json' \
+                   --header 'Content-Type: application/json' \
+          --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+                   --body-data {"tenantId":"string","extId":"string","links":[{"href":"string","rel":"string","$objectType":"common.v1.response.ApiLink"}],"name":"PlatinumApprovalPolicy","description":"Thispolicyisforplatinumsnapshots","approverGroups":[{"name":"PlatinumApprovers","expiryHours":0,"approvers":[{"tenantId":"string","extId":"string","links":[{"href":"string","rel":"string","$objectType":"common.v1.response.ApiLink"}],"username":"string","userType":"$UNKNOWN","idpId":"string","displayName":"string","firstName":"string","middleInitial":"string","lastName":"string","emailId":"string","locale":"string","region":"string","password":"string","isForceResetPasswordEnabled":true,"additionalAttributes":[{"name":"string","value":"string","$objectType":"common.v1.config.KVPair"}],"status":"$UNKNOWN","bucketsAccessKeys":[{"tenantId":"string","extId":"string","links":[{"href":"string","rel":"string","$objectType":"common.v1.response.ApiLink"}],"accessKeyName":"string","secretAccessKey":"string","userId":"string","createdTime":"2015-07-20T15:49:04-07:00","lastUpdatedBy":"string","assignedTo":"string","creationType":"$UNKNOWN","expiryTime":"2015-07-20T15:49:04-07:00","status":"$UNKNOWN","createdBy":"string","lastUpdatedTime":"2015-07-20T15:49:04-07:00","$objectType":"iam.v4.authn.BucketsAccessKey"}],"lastLoginTime":"2015-07-20T15:49:04-07:00","createdTime":"2015-07-20T15:49:04-07:00","lastUpdatedTime":"2015-07-20T15:49:04-07:00","createdBy":"string","lastUpdatedBy":"string","description":"string","creationType":"$UNKNOWN","$objectType":"iam.v4.authn.User"}],"$objectType":"security.v4.management.ApproverGroup"}],"securedPolicies":[{"policyExtId":"string","policyType":"$UNKNOWN","$objectType":"security.v4.management.SecuredPolicy"}],"lastUpdatedBy":"admin","lastUpdateTime":"2015-07-20T15:49:04-07:00","isUpdatePending":true,"$objectType":"security.v4.management.ApprovalPolicy"} \
+          - "https://{pc-ip}:9440/api/security/v4.0.b1/management/approval-policies"
+  /security/v4.0.b1/management/approval-policies/{extId}:
+    get:
+      tags:
+      - ApprovalPolicies
+      summary: Get an approval policy details
+      description: Fetches the details of a specific approval policy by its external
+        identifier.
+      operationId: getApprovalPolicyByExtId
+      parameters:
+      - name: extId
+        in: path
+        description: Approval policy external identifier.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+          example: 9540800d-aa80-410e-9e1c-f50f336d8d99
+      - name: $select
+        in: query
+        description: |
+          A URL query parameter that allows clients to request a specific set of properties for each entity or complex type. Expression specified with the $select must conform to the [OData V4.01](https://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html) URL conventions. If a $select expression consists of a single select item that is an asterisk (i.e., *), then all properties on the matching resource will be returned.
+          - approverGroups
+          - description
+          - isUpdatePending
+          - name
+          - securedPolicies
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Approval policy details.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/security.v4.0.b1.management.ApprovalPolicy'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /security/v4.0.b1/management/approval-policies/{extId}\
+                  \ Get operation"
+        "4XX":
+          description: Client error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/security.v4.0.b1.error.ErrorResponse'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /security/v4.0.b1/management/approval-policies/{extId}\
+                  \ Get operation"
+        "5XX":
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/security.v4.0.b1.error.ErrorResponse'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /security/v4.0.b1/management/approval-policies/{extId}\
+                  \ Get operation"
+      x-permissions:
+        deploymentList:
+        - ON_PREM
+        operationName: View Approval Policy
+        roleList:
+        - Secure Policy Editor
+        - Secure Policy Admin
+        - Secure Policy Viewer
+        - Super Admin
+        - Prism Admin
+        - Prism Viewer
+      x-rate-limit:
+      - type: xsmall
+        count: 3
+        timeUnit: seconds
+      - type: small
+        count: 3
+        timeUnit: seconds
+      - type: large
+        count: 5
+        timeUnit: seconds
+      - type: xlarge
+        count: 10
+        timeUnit: seconds
+      x-supported-versions:
+      - product: PC
+        version: "2024.3"
+      x-code-samples:
+      - lang: Java
+        source: "\npackage sample;\n\nimport com.nutanix.sec.java.client.ApiClient;\n\
+          import com.nutanix.sec.java.client.api.ApprovalPoliciesApi;\nimport com.nutanix.dp1.sec.security.v4.management.GetApprovalPolicyApiResponse;\n\
+          import org.springframework.web.client.RestClientException;\n\npublic class\
+          \ JavaSdkSample {\n    public static void main(String[] args) {\n      \
+          \  // Configure the client\n        ApiClient apiClient = new ApiClient();\n\
+          \        // IPv4/IPv6 address or FQDN of the cluster\n        apiClient.setHost(\"\
+          localhost\");\n        // Port to which to connect to\n        apiClient.setPort(9440);\n\
+          \        // Interval in ms to use during retry attempts\n        apiClient.setRetryInterval(5000);\n\
+          \        // Max retry attempts while reconnecting on a loss of connection\n\
+          \        apiClient.setMaxRetryAttempts(5);\n        // UserName to connect\
+          \ to the cluster\n        String username = \"username\";\n        // Password\
+          \ to connect to the cluster\n        String password = \"password\";\n \
+          \       apiClient.setUsername(username);\n        apiClient.setPassword(password);\n\
+          \n        // Please add authorization information here if needed.\n    \
+          \    ApprovalPoliciesApi approvalPoliciesApi = new ApprovalPoliciesApi(apiClient);\n\
+          \n        \n        String extId = \"Bd5f6dCD-a2A7-ce08-9EDC-dC2FC9DDCD14\"\
+          ;\n\n        try {\n            GetApprovalPolicyApiResponse getApprovalPolicyApiResponse\
+          \ = approvalPoliciesApi.getApprovalPolicyByExtId(extId, null);\n       \
+          \     System.out.println(getApprovalPolicyApiResponse.toString());\n\n \
+          \       } catch (RestClientException ex) {\n            System.out.println(ex.getMessage());\n\
+          \        }\n    }\n}\n"
+      - lang: JavaScript
+        source: "\nimport { ApiClient, ApprovalPoliciesApi } from \"@nutanix-api/security-js-client\"\
+          ;\n\n// Configure the client\nlet apiClientInstance = new ApiClient();\n\
+          // IPv4/IPv6 address or FQDN of the cluster\napiClientInstance.host = 'localhost';\n\
+          // Port to which to connect to\napiClientInstance.port = '9440';\n// Max\
+          \ retry attempts while reconnecting on a loss of connection\napiClientInstance.maxRetryAttempts\
+          \ = 5;\n// Interval in ms to use during retry attempts\napiClientInstance.retryInterval\
+          \ = 5000;\n// UserName to connect to the cluster\napiClientInstance.username\
+          \ = 'username';\n// Password to connect to the cluster\napiClientInstance.password\
+          \ = 'password';\n// Please add authorization information here if needed.\n\
+          let approvalPoliciesApi = new ApprovalPoliciesApi(apiClientInstance);\n\n\
+          function sample() {\n\n    \n    let extId = \"AB63fAeF-acAf-c5ee-4DFC-fADc2aFF5eEc\"\
+          ;\n\n    // Construct Optional Parameters\n    var opts = {};\n    opts[\"\
+          $select\"] = \"string_sample_data\";\n\n\n\n\n    approvalPoliciesApi.getApprovalPolicyByExtId(extId,\
+          \ opts).then(({data, response}) => {\n        console.log(`API returned\
+          \ the following status code: ${response.status}`);\n        console.log(data.getData());\n\
+          \    }).catch((error) => {\n        console.log(`Error is: ${error}`);\n\
+          \    });\n\n}\nsample()\n"
+      - lang: Python
+        source: "\nimport ntnx_security_py_client\n\nif __name__ == \"__main__\":\n\
+          \    # Configure the client\n    config = ntnx_security_py_client.Configuration()\n\
+          \    # IPv4/IPv6 address or FQDN of the cluster\n    config.host = \"localhost\"\
+          \n    # Port to which to connect to\n    config.port = 9440\n    # Max retry\
+          \ attempts while reconnecting on a loss of connection\n    config.max_retry_attempts\
+          \ = 3\n    # Backoff factor to use during retry attempts\n    config.backoff_factor\
+          \ = 3\n    # UserName to connect to the cluster\n    config.username = \"\
+          username\"\n    # Password to connect to the cluster\n    config.password\
+          \ = \"password\"\n    # Please add authorization information here if needed.\n\
+          \    client = ntnx_security_py_client.ApiClient(configuration=config)\n\
+          \    approval_policies_api = ntnx_security_py_client.ApprovalPoliciesApi(api_client=client)\n\
+          \    \n    ext_id = \"eB952dbA-eEdA-EfbC-AeD2-DBc3fAeC586d\"\n\n\n    try:\n\
+          \        api_response = approval_policies_api.get_approval_policy_by_ext_id(extId=ext_id)\n\
+          \        print(api_response)\n    except ntnx_security_py_client.rest.ApiException\
+          \ as e:\n        print(e)\n\n"
+      - lang: Go
+        source: "\npackage main\n\nimport (\n    \"fmt\"\n    \"time\"\n    \"github.com/nutanix/ntnx-api-golang-clients/security-go-client/v4/api\"\
+          \n    \"github.com/nutanix/ntnx-api-golang-clients/security-go-client/v4/client\"\
+          \n    import1 \"github.com/nutanix/ntnx-api-golang-clients/security-go-client/v4/models/security/v4/management\"\
+          \n)\n\nvar (\n    ApiClientInstance *client.ApiClient\n    ApprovalPoliciesApiInstance\
+          \ *api.ApprovalPoliciesApi\n)\n\nfunc main() {\n    ApiClientInstance =\
+          \ client.NewApiClient()\n    // IPv4/IPv6 address or FQDN of the cluster\n\
+          \    ApiClientInstance.Host = \"localhost\"\n    // Port to which to connect\
+          \ to\n    ApiClientInstance.Port = 9440\n    // Interval in ms to use during\
+          \ retry attempts\n    ApiClientInstance.RetryInterval = 5 * time.Second\n\
+          \    // Max retry attempts while reconnecting on a loss of connection\n\
+          \    ApiClientInstance.MaxRetryAttempts = 5\n    // UserName to connect\
+          \ to the cluster\n    ApiClientInstance.Username = \"username\"\n    //\
+          \ Password to connect to the cluster\n    ApiClientInstance.Password = \"\
+          password\"\n    // Please add authorization information here if needed.\n\
+          \    ApprovalPoliciesApiInstance = api.NewApprovalPoliciesApi(ApiClientInstance)\n\
+          \n    \n    extId := \"A0cd501F-baDc-dDDB-fd99-cEB6d91DBe6C\"\n\n\n    response,\
+          \ error := ApprovalPoliciesApiInstance.GetApprovalPolicyByExtId(&extId,\
+          \ nil)\n    if error != nil {\n        fmt.Println(error)\n        return\n\
+          \    }\n    data, _ := response.GetData().(import1.ApprovalPolicy)\n   \
+          \ fmt.Println(data)\n\n}\n\n"
+      - lang: cURL
+        source: |2+
+
+          curl --request GET \
+               --url "https://{pc-ip}:9440/api/security/v4.0.b1/management/approval-policies/EbEFBDC8-3aCA-fcA0-aA11-d8faC7A6cACe?$select=string_sample_data" \
+               --header 'Accept: application/json' \
+               --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+
+      - lang: Wget
+        source: |2
+
+
+          wget --verbose \
+               --method GET \
+               --header 'Accept: application/json' \
+          --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+          - "https://{pc-ip}:9440/api/security/v4.0.b1/management/approval-policies/C8Cbf66F-657f-dCc3-dF4C-17bfAca407bf?$select=string_sample_data"
+    put:
+      tags:
+      - ApprovalPolicies
+      summary: Update the details of a specific approval policy
+      description: Updates the details of a specific approval policy by its external
+        identifier.
+      operationId: updateApprovalPolicyByExtId
+      parameters:
+      - name: extId
+        in: path
+        description: Approval policy external identifier.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+          example: d351d946-f32c-478d-8e9f-4121baeba8a5
+      - name: If-Match
+        in: header
+        description: "The If-Match request header makes the request conditional. When\
+          \ not provided, the server will respond with  an HTTP-428 (Precondition\
+          \ Required) response code indicating that the server requires the request\
+          \ to be conditional. The server will allow the successful completion of\
+          \ PUT and PATCH operations, if the resource matches the ETag value returned\
+          \ to the response of a GET operation. If the conditional does not match,\
+          \ then an HTTP-412 (Precondition Failed) response will be returned."
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: NTNX-Request-Id
+        in: header
+        description: |
+          A unique identifier that is associated with each request. The provided value must be opaque and preferably in Universal Unique Identifier (UUID) format. This identifier is also used as an idempotence token for safely retrying requests in case of network errors. All the supported Nutanix API clients add this auto-generated request identifier to each request.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+          example: 177e2479-bcdc-48e7-aacc-faef80877426
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/security.v4.0.b1.management.ApprovalPolicy'
+        required: true
+      responses:
+        "202":
+          description: The request to update an approval policy is accepted.
+          headers:
+            Location:
+              style: simple
+              explode: false
+              schema:
+                pattern: "^((http[s]?):\\/)?\\/?([^:\\/\\s]+)((\\/\\w+)*(:[0-9]+)*?\\\
+                  /)([\\w\\-\\.]+[^#?\\s]+)(.*)?(#[\\w\\-]+)?$"
+                type: string
+                description: Indicates the target of a redirection or the URL of a
+                  newly created resource.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/prism.v4.0.config.TaskReference'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /security/v4.0.b1/management/approval-policies/{extId}\
+                  \ Put operation"
+        "4XX":
+          description: Client error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/security.v4.0.b1.error.ErrorResponse'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /security/v4.0.b1/management/approval-policies/{extId}\
+                  \ Put operation"
+        "5XX":
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/security.v4.0.b1.error.ErrorResponse'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /security/v4.0.b1/management/approval-policies/{extId}\
+                  \ Put operation"
+      x-permissions:
+        deploymentList:
+        - ON_PREM
+        operationName: Update Approval Policy
+        roleList:
+        - Secure Policy Admin
+        - Secure Policy Editor
+        - Super Admin
+        - Prism Admin
+      x-rate-limit:
+      - type: xsmall
+        count: 3
+        timeUnit: seconds
+      - type: small
+        count: 3
+        timeUnit: seconds
+      - type: large
+        count: 5
+        timeUnit: seconds
+      - type: xlarge
+        count: 10
+        timeUnit: seconds
+      x-supported-versions:
+      - product: PC
+        version: "2024.3"
+      x-code-samples:
+      - lang: Java
+        source: "\npackage sample;\n\nimport com.nutanix.sec.java.client.ApiClient;\n\
+          import com.nutanix.sec.java.client.api.ApprovalPoliciesApi;\nimport com.nutanix.dp1.sec.security.v4.management.ApprovalPolicy;\n\
+          import com.nutanix.dp1.sec.security.v4.management.GetApprovalPolicyApiResponse;\n\
+          import com.nutanix.dp1.sec.security.v4.management.UpdateApprovalPolicyApiResponse;\n\
+          import org.springframework.web.client.RestClientException;\nimport java.util.HashMap;\n\
+          import org.apache.http.HttpHeaders;\n\npublic class JavaSdkSample {\n  \
+          \  public static void main(String[] args) {\n        // Configure the client\n\
+          \        ApiClient apiClient = new ApiClient();\n        // IPv4/IPv6 address\
+          \ or FQDN of the cluster\n        apiClient.setHost(\"localhost\");\n  \
+          \      // Port to which to connect to\n        apiClient.setPort(9440);\n\
+          \        // Interval in ms to use during retry attempts\n        apiClient.setRetryInterval(5000);\n\
+          \        // Max retry attempts while reconnecting on a loss of connection\n\
+          \        apiClient.setMaxRetryAttempts(5);\n        // UserName to connect\
+          \ to the cluster\n        String username = \"username\";\n        // Password\
+          \ to connect to the cluster\n        String password = \"password\";\n \
+          \       apiClient.setUsername(username);\n        apiClient.setPassword(password);\n\
+          \n        // Please add authorization information here if needed.\n    \
+          \    ApprovalPoliciesApi approvalPoliciesApi = new ApprovalPoliciesApi(apiClient);\n\
+          \n        ApprovalPolicy approvalPolicy = new ApprovalPolicy();\n\n    \
+          \    // ApprovalPolicy object initializations here...\n        approvalPolicy.setApproverGroups(new\
+          \ ArrayList<>());  // required field\n        approvalPolicy.setName(\"\
+          Platinum Approval Policy\");  // required field\n        \n        String\
+          \ extId = \"b2fc0d7C-c37d-be7d-CAFD-bd2fAaE16DaA\";\n\n        // perform\
+          \ GET call\n        GetApprovalPolicyApiResponse getResponse = null;\n \
+          \       try {\n            getResponse = approvalPoliciesApi.getApprovalPolicyByExtId(extId);\n\
+          \        } catch(RestClientException ex) {\n            System.out.println(ex.getMessage());\n\
+          \        }\n        // Extract E-Tag Header\n        String eTag = ApiClient.getEtag(getResponse);\n\
+          \        // initialize/change parameters for update\n        HashMap<String,\
+          \ Object> opts = new HashMap<>();\n        opts.put(HttpHeaders.IF_MATCH,\
+          \ eTag);\n        try {\n            UpdateApprovalPolicyApiResponse updateApprovalPolicyApiResponse\
+          \ = approvalPoliciesApi.updateApprovalPolicyByExtId(extId, approvalPolicy,\
+          \ opts);\n            System.out.println(updateApprovalPolicyApiResponse.toString());\n\
+          \n        } catch (RestClientException ex) {\n            System.out.println(ex.getMessage());\n\
+          \        }\n    }\n}\n"
+      - lang: JavaScript
+        source: "\nimport { ApiClient, ApprovalPoliciesApi, ApprovalPolicy, GetApprovalPolicyApiResponse\
+          \ } from \"@nutanix-api/security-js-client\";\n\n// Configure the client\n\
+          let apiClientInstance = new ApiClient();\n// IPv4/IPv6 address or FQDN of\
+          \ the cluster\napiClientInstance.host = 'localhost';\n// Port to which to\
+          \ connect to\napiClientInstance.port = '9440';\n// Max retry attempts while\
+          \ reconnecting on a loss of connection\napiClientInstance.maxRetryAttempts\
+          \ = 5;\n// Interval in ms to use during retry attempts\napiClientInstance.retryInterval\
+          \ = 5000;\n// UserName to connect to the cluster\napiClientInstance.username\
+          \ = 'username';\n// Password to connect to the cluster\napiClientInstance.password\
+          \ = 'password';\n// Please add authorization information here if needed.\n\
+          let approvalPoliciesApi = new ApprovalPoliciesApi(apiClientInstance);\n\n\
+          function sample() {\n    let approvalPolicy = new ApprovalPolicy();\n\n\
+          \    // ApprovalPolicy object initializations here...\n    approvalPolicy.setApproverGroups([]);\
+          \  // required field\n    approvalPolicy.setName(\"Platinum Approval Policy\"\
+          );  // required field\n\n    \n    let extId = \"dEC1AfbC-eaBE-CEfd-5ABe-1fEF20b18Abf\"\
+          ;\n\n\n    // Perform Get call\n    approvalPoliciesApi.getApprovalPolicyByExtId(extId).then(({data,\
+          \ response}) => {\n        console.log(`API returned the following status\
+          \ code: ${response.status}`);\n        // Extract E-Tag Header\n       \
+          \ let etagValue = ApiClient.getEtag(data);\n\n        approvalPoliciesApi.updateApprovalPolicyByExtId(extId,\
+          \ approvalPolicy, {\"If-Match\" : etagValue}).then(({data, response}) =>\
+          \ {\n            console.log(`API returned the following status code: ${response.status}`);\n\
+          \            console.log(data.getData());\n        }).catch((error) => {\n\
+          \            console.log(`Error is: ${error}`);\n        });\n    });\n\n\
+          }\nsample()\n"
+      - lang: Python
+        source: "\nimport ntnx_security_py_client\n\nif __name__ == \"__main__\":\n\
+          \    # Configure the client\n    config = ntnx_security_py_client.Configuration()\n\
+          \    # IPv4/IPv6 address or FQDN of the cluster\n    config.host = \"localhost\"\
+          \n    # Port to which to connect to\n    config.port = 9440\n    # Max retry\
+          \ attempts while reconnecting on a loss of connection\n    config.max_retry_attempts\
+          \ = 3\n    # Backoff factor to use during retry attempts\n    config.backoff_factor\
+          \ = 3\n    # UserName to connect to the cluster\n    config.username = \"\
+          username\"\n    # Password to connect to the cluster\n    config.password\
+          \ = \"password\"\n    # Please add authorization information here if needed.\n\
+          \    client = ntnx_security_py_client.ApiClient(configuration=config)\n\
+          \    approval_policies_api = ntnx_security_py_client.ApprovalPoliciesApi(api_client=client)\n\
+          \    approvalPolicy = ntnx_security_py_client.ApprovalPolicy()\n\n    #\
+          \ ApprovalPolicy object initializations here...\n    approvalPolicy.approver_groups\
+          \ = []  # required field\n    approvalPolicy.name = \"Platinum Approval\
+          \ Policy\"  # required field\n    \n    ext_id = \"dcA05830-0Dd8-7bbf-1D7a-26FA5048aBFF\"\
+          \n\n    try:\n        api_response = approval_policies_api.get_approval_policy_by_ext_id(extId=ext_id)\n\
+          \    except ntnx_security_py_client.rest.ApiException as e:\n        print(e)\n\
+          \    # Extract E-Tag Header\n    etag_value = ntnx_security_py_client.ApiClient.get_etag(api_response)\n\
+          \n    try:\n        api_response = approval_policies_api.update_approval_policy_by_ext_id(extId=ext_id,\
+          \ body=approvalPolicy, if_match=etag_value)\n        print(api_response)\n\
+          \    except ntnx_security_py_client.rest.ApiException as e:\n        print(e)\n\
+          \n"
+      - lang: Go
+        source: "\npackage main\n\nimport (\n    \"fmt\"\n    \"time\"\n    \"github.com/nutanix/ntnx-api-golang-clients/security-go-client/v4/api\"\
+          \n    \"github.com/nutanix/ntnx-api-golang-clients/security-go-client/v4/client\"\
+          \n    import1 \"github.com/nutanix/ntnx-api-golang-clients/security-go-client/v4/models/security/v4/management\"\
+          \n    import2 \"github.com/nutanix/ntnx-api-golang-clients/security-go-client/v4/models/prism/v4/config\"\
+          \n)\n\nvar (\n    ApiClientInstance *client.ApiClient\n    ApprovalPoliciesApiInstance\
+          \ *api.ApprovalPoliciesApi\n)\n\nfunc main() {\n    ApiClientInstance =\
+          \ client.NewApiClient()\n    // IPv4/IPv6 address or FQDN of the cluster\n\
+          \    ApiClientInstance.Host = \"localhost\"\n    // Port to which to connect\
+          \ to\n    ApiClientInstance.Port = 9440\n    // Interval in ms to use during\
+          \ retry attempts\n    ApiClientInstance.RetryInterval = 5 * time.Second\n\
+          \    // Max retry attempts while reconnecting on a loss of connection\n\
+          \    ApiClientInstance.MaxRetryAttempts = 5\n    // UserName to connect\
+          \ to the cluster\n    ApiClientInstance.Username = \"username\"\n    //\
+          \ Password to connect to the cluster\n    ApiClientInstance.Password = \"\
+          password\"\n    // Please add authorization information here if needed.\n\
+          \    ApprovalPoliciesApiInstance = api.NewApprovalPoliciesApi(ApiClientInstance)\n\
+          \n    approvalPolicy := import1.NewApprovalPolicy()\n\n    // ApprovalPolicy\
+          \ object initializations here...\n\n    \n    extId := \"eec7d6f4-a235-A6ac-BfD8-0aaBCE8C9b5c\"\
+          \n\n    getResponse, err := ApprovalPoliciesApiInstance.GetApprovalPolicyByExtId(&extId)\n\
+          \    if err != nil {\n        fmt.Println(err)\n        return\n    }\n\n\
+          \    // Extract E-Tag Header\n    etagValue := ApiClientInstance.GetEtag(getResponse)\n\
+          \n    args := make(map[string] interface{})\n    args[\"If-Match\"] = etagValue\n\
+          \n    response, error := ApprovalPoliciesApiInstance.UpdateApprovalPolicyByExtId(&extId,\
+          \ approvalPolicy, args)\n    if error != nil {\n        fmt.Println(error)\n\
+          \        return\n    }\n    data, _ := response.GetData().(import2.TaskReference)\n\
+          \    fmt.Println(data)\n\n}\n\n"
+      - lang: cURL
+        source: |2+
+
+          curl --request PUT \
+               --url "https://{pc-ip}:9440/api/security/v4.0.b1/management/approval-policies/5cba9aF4-2AA7-F43D-9FCA-4F0ceBAcBddf" \
+               --header 'Accept: application/json' \
+                        --header 'Content-Type: application/json' \
+                        --header 'If-Match: string_sample_data' \
+                        --header 'NTNX-Request-Id: 3fa85f64-5717-4562-b3fc-2c963f66afa6' \
+               --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+                        --data {"tenantId":"string","extId":"string","links":[{"href":"string","rel":"string","$objectType":"common.v1.response.ApiLink"}],"name":"PlatinumApprovalPolicy","description":"Thispolicyisforplatinumsnapshots","approverGroups":[{"name":"PlatinumApprovers","expiryHours":0,"approvers":[{"tenantId":"string","extId":"string","links":[{"href":"string","rel":"string","$objectType":"common.v1.response.ApiLink"}],"username":"string","userType":"$UNKNOWN","idpId":"string","displayName":"string","firstName":"string","middleInitial":"string","lastName":"string","emailId":"string","locale":"string","region":"string","password":"string","isForceResetPasswordEnabled":true,"additionalAttributes":[{"name":"string","value":"string","$objectType":"common.v1.config.KVPair"}],"status":"$UNKNOWN","bucketsAccessKeys":[{"tenantId":"string","extId":"string","links":[{"href":"string","rel":"string","$objectType":"common.v1.response.ApiLink"}],"accessKeyName":"string","secretAccessKey":"string","userId":"string","createdTime":"2015-07-20T15:49:04-07:00","lastUpdatedBy":"string","assignedTo":"string","creationType":"$UNKNOWN","expiryTime":"2015-07-20T15:49:04-07:00","status":"$UNKNOWN","createdBy":"string","lastUpdatedTime":"2015-07-20T15:49:04-07:00","$objectType":"iam.v4.authn.BucketsAccessKey"}],"lastLoginTime":"2015-07-20T15:49:04-07:00","createdTime":"2015-07-20T15:49:04-07:00","lastUpdatedTime":"2015-07-20T15:49:04-07:00","createdBy":"string","lastUpdatedBy":"string","description":"string","creationType":"$UNKNOWN","$objectType":"iam.v4.authn.User"}],"$objectType":"security.v4.management.ApproverGroup"}],"securedPolicies":[{"policyExtId":"string","policyType":"$UNKNOWN","$objectType":"security.v4.management.SecuredPolicy"}],"lastUpdatedBy":"admin","lastUpdateTime":"2015-07-20T15:49:04-07:00","isUpdatePending":true,"$objectType":"security.v4.management.ApprovalPolicy"} \
+
+      - lang: Wget
+        source: |2
+
+
+          wget --verbose \
+               --method PUT \
+               --header 'Accept: application/json' \
+                   --header 'Content-Type: application/json' \
+                   --header 'If-Match: string_sample_data' \
+                   --header 'NTNX-Request-Id: 3fa85f64-5717-4562-b3fc-2c963f66afa6' \
+          --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+                   --body-data {"tenantId":"string","extId":"string","links":[{"href":"string","rel":"string","$objectType":"common.v1.response.ApiLink"}],"name":"PlatinumApprovalPolicy","description":"Thispolicyisforplatinumsnapshots","approverGroups":[{"name":"PlatinumApprovers","expiryHours":0,"approvers":[{"tenantId":"string","extId":"string","links":[{"href":"string","rel":"string","$objectType":"common.v1.response.ApiLink"}],"username":"string","userType":"$UNKNOWN","idpId":"string","displayName":"string","firstName":"string","middleInitial":"string","lastName":"string","emailId":"string","locale":"string","region":"string","password":"string","isForceResetPasswordEnabled":true,"additionalAttributes":[{"name":"string","value":"string","$objectType":"common.v1.config.KVPair"}],"status":"$UNKNOWN","bucketsAccessKeys":[{"tenantId":"string","extId":"string","links":[{"href":"string","rel":"string","$objectType":"common.v1.response.ApiLink"}],"accessKeyName":"string","secretAccessKey":"string","userId":"string","createdTime":"2015-07-20T15:49:04-07:00","lastUpdatedBy":"string","assignedTo":"string","creationType":"$UNKNOWN","expiryTime":"2015-07-20T15:49:04-07:00","status":"$UNKNOWN","createdBy":"string","lastUpdatedTime":"2015-07-20T15:49:04-07:00","$objectType":"iam.v4.authn.BucketsAccessKey"}],"lastLoginTime":"2015-07-20T15:49:04-07:00","createdTime":"2015-07-20T15:49:04-07:00","lastUpdatedTime":"2015-07-20T15:49:04-07:00","createdBy":"string","lastUpdatedBy":"string","description":"string","creationType":"$UNKNOWN","$objectType":"iam.v4.authn.User"}],"$objectType":"security.v4.management.ApproverGroup"}],"securedPolicies":[{"policyExtId":"string","policyType":"$UNKNOWN","$objectType":"security.v4.management.SecuredPolicy"}],"lastUpdatedBy":"admin","lastUpdateTime":"2015-07-20T15:49:04-07:00","isUpdatePending":true,"$objectType":"security.v4.management.ApprovalPolicy"} \
+          - "https://{pc-ip}:9440/api/security/v4.0.b1/management/approval-policies/eEE65986-a457-b7bF-F2AD-27E9de68CCfF"
+  /security/v4.0.b1/management/approval-policies/{extId}/$action/associate-policies:
+    post:
+      tags:
+      - ApprovalPolicies
+      summary: Update list of secured policies
+      description: Update the list of secured policies linked to an approval policy
+        with particular external identifier.
+      operationId: associatePolicies
+      parameters:
+      - name: extId
+        in: path
+        description: Approval policy external identifier.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+          example: 2bbbb827-2bda-456c-84d6-46c6957bbca4
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/security.v4.0.b1.management.SecuredPolicy'
+        required: true
+      responses:
+        "202":
+          description: The request to update the list of secured policies is accepted.
+          headers:
+            Location:
+              style: simple
+              explode: false
+              schema:
+                pattern: "^((http[s]?):\\/)?\\/?([^:\\/\\s]+)((\\/\\w+)*(:[0-9]+)*?\\\
+                  /)([\\w\\-\\.]+[^#?\\s]+)(.*)?(#[\\w\\-]+)?$"
+                type: string
+                description: Indicates the target of a redirection or the URL of a
+                  newly created resource.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/prism.v4.0.config.TaskReference'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /security/v4.0.b1/management/approval-policies/{extId}/$action/associate-policies\
+                  \ Post operation"
+        "4XX":
+          description: Client error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/security.v4.0.b1.error.ErrorResponse'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /security/v4.0.b1/management/approval-policies/{extId}/$action/associate-policies\
+                  \ Post operation"
+        "5XX":
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/security.v4.0.b1.error.ErrorResponse'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /security/v4.0.b1/management/approval-policies/{extId}/$action/associate-policies\
+                  \ Post operation"
+      x-permissions:
+        deploymentList:
+        - ON_PREM
+        operationName: Associate Protection Policy
+        roleList:
+        - Secure Policy Disaster Recovery Admin
+        - Disaster Recovery Admin
+        - Super Admin
+        - Prism Admin
+      x-rate-limit:
+      - type: xsmall
+        count: 3
+        timeUnit: seconds
+      - type: small
+        count: 3
+        timeUnit: seconds
+      - type: large
+        count: 5
+        timeUnit: seconds
+      - type: xlarge
+        count: 10
+        timeUnit: seconds
+      x-supported-versions:
+      - product: PC
+        version: "2024.3"
+      x-code-samples:
+      - lang: Java
+        source: "\npackage sample;\n\nimport com.nutanix.sec.java.client.ApiClient;\n\
+          import com.nutanix.sec.java.client.api.ApprovalPoliciesApi;\nimport com.nutanix.dp1.sec.security.v4.management.PolicyType;\n\
+          import com.nutanix.dp1.sec.security.v4.management.SecuredPolicy;\nimport\
+          \ com.nutanix.dp1.sec.security.v4.management.AssociatePoliciesApiResponse;\n\
+          import org.springframework.web.client.RestClientException;\n\npublic class\
+          \ JavaSdkSample {\n    public static void main(String[] args) {\n      \
+          \  // Configure the client\n        ApiClient apiClient = new ApiClient();\n\
+          \        // IPv4/IPv6 address or FQDN of the cluster\n        apiClient.setHost(\"\
+          localhost\");\n        // Port to which to connect to\n        apiClient.setPort(9440);\n\
+          \        // Interval in ms to use during retry attempts\n        apiClient.setRetryInterval(5000);\n\
+          \        // Max retry attempts while reconnecting on a loss of connection\n\
+          \        apiClient.setMaxRetryAttempts(5);\n        // UserName to connect\
+          \ to the cluster\n        String username = \"username\";\n        // Password\
+          \ to connect to the cluster\n        String password = \"password\";\n \
+          \       apiClient.setUsername(username);\n        apiClient.setPassword(password);\n\
+          \n        // Please add authorization information here if needed.\n    \
+          \    ApprovalPoliciesApi approvalPoliciesApi = new ApprovalPoliciesApi(apiClient);\n\
+          \n        List<SecuredPolicy> securedPolicyList = new ArrayList<>(Arrays.asList(new\
+          \ SecuredPolicy()));\n\n        // SecuredPolicy object initializations\
+          \ here...\n        securedPolicyList.get(0).setPolicyExtId(\"b1e9eFCf-BACD-4Afe-8BF0-AADd565B1EEe\"\
+          );   // required field\n        securedPolicyList.get(0).setPolicyType(PolicyType.UNKNOWN);\
+          \   // required field\n        \n        String extId = \"bcf8edFd-41DD-84A0-fcFB-adAfe4DdD238\"\
+          ;\n\n        try {\n            AssociatePoliciesApiResponse associatePoliciesApiResponse\
+          \ = approvalPoliciesApi.associatePolicies(extId, securedPolicyList);\n \
+          \           System.out.println(associatePoliciesApiResponse.toString());\n\
+          \n        } catch (RestClientException ex) {\n            System.out.println(ex.getMessage());\n\
+          \        }\n    }\n}\n"
+      - lang: JavaScript
+        source: "\nimport { ApiClient, ApprovalPoliciesApi, PolicyType, SecuredPolicy\
+          \ } from \"@nutanix-api/security-js-client\";\n\n// Configure the client\n\
+          let apiClientInstance = new ApiClient();\n// IPv4/IPv6 address or FQDN of\
+          \ the cluster\napiClientInstance.host = 'localhost';\n// Port to which to\
+          \ connect to\napiClientInstance.port = '9440';\n// Max retry attempts while\
+          \ reconnecting on a loss of connection\napiClientInstance.maxRetryAttempts\
+          \ = 5;\n// Interval in ms to use during retry attempts\napiClientInstance.retryInterval\
+          \ = 5000;\n// UserName to connect to the cluster\napiClientInstance.username\
+          \ = 'username';\n// Password to connect to the cluster\napiClientInstance.password\
+          \ = 'password';\n// Please add authorization information here if needed.\n\
+          let approvalPoliciesApi = new ApprovalPoliciesApi(apiClientInstance);\n\n\
+          function sample() {\n    let securedPolicyList = [new SecuredPolicy()];\n\
+          \n    // SecuredPolicy object initializations here...\n    securedPolicyList[0].setPolicyExtId(\"\
+          Ee2ab77D-fEeF-D0af-7Cc4-4DCA14430b00\"); // required field\n    securedPolicyList[0].setPolicyType(PolicyType.UNKNOWN);\
+          \ // required field\n\n    \n    let extId = \"FE1Fdeb6-2bdE-bf2F-fFDc-A6A3D04d4D5f\"\
+          ;\n\n\n\n\n\n    approvalPoliciesApi.associatePolicies(extId, securedPolicyList).then(({data,\
+          \ response}) => {\n        console.log(`API returned the following status\
+          \ code: ${response.status}`);\n        console.log(data.getData());\n  \
+          \  }).catch((error) => {\n        console.log(`Error is: ${error}`);\n \
+          \   });\n\n}\nsample()\n"
+      - lang: Python
+        source: "\nimport ntnx_security_py_client\n\nif __name__ == \"__main__\":\n\
+          \    # Configure the client\n    config = ntnx_security_py_client.Configuration()\n\
+          \    # IPv4/IPv6 address or FQDN of the cluster\n    config.host = \"localhost\"\
+          \n    # Port to which to connect to\n    config.port = 9440\n    # Max retry\
+          \ attempts while reconnecting on a loss of connection\n    config.max_retry_attempts\
+          \ = 3\n    # Backoff factor to use during retry attempts\n    config.backoff_factor\
+          \ = 3\n    # UserName to connect to the cluster\n    config.username = \"\
+          username\"\n    # Password to connect to the cluster\n    config.password\
+          \ = \"password\"\n    # Please add authorization information here if needed.\n\
+          \    client = ntnx_security_py_client.ApiClient(configuration=config)\n\
+          \    approval_policies_api = ntnx_security_py_client.ApprovalPoliciesApi(api_client=client)\n\
+          \    securedPolicyList = [ntnx_security_py_client.SecuredPolicy()]\n\n \
+          \   # SecuredPolicy object initializations here...\n    securedPolicyList[0].policy_ext_id\
+          \ = \"B8aB9561-dfef-2C7b-c07E-d3DAda90DFf3\"   # required field\n    securedPolicyList[0].policy_type\
+          \ = ntnx_security_py_client.PolicyType._UNKNOWN   # required field\n   \
+          \ \n    ext_id = \"4bAeD8c4-fcFc-BCEc-FDf7-d7cEB6f3FEdf\"\n\n\n    try:\n\
+          \        api_response = approval_policies_api.associate_policies(extId=ext_id,\
+          \ body=securedPolicyList)\n        print(api_response)\n    except ntnx_security_py_client.rest.ApiException\
+          \ as e:\n        print(e)\n\n"
+      - lang: Go
+        source: "\npackage main\n\nimport (\n    \"fmt\"\n    \"time\"\n    \"github.com/nutanix/ntnx-api-golang-clients/security-go-client/v4/api\"\
+          \n    \"github.com/nutanix/ntnx-api-golang-clients/security-go-client/v4/client\"\
+          \n    import1 \"github.com/nutanix/ntnx-api-golang-clients/security-go-client/v4/models/security/v4/management\"\
+          \n    import2 \"github.com/nutanix/ntnx-api-golang-clients/security-go-client/v4/models/prism/v4/config\"\
+          \n)\n\nvar (\n    ApiClientInstance *client.ApiClient\n    ApprovalPoliciesApiInstance\
+          \ *api.ApprovalPoliciesApi\n)\n\nfunc main() {\n    ApiClientInstance =\
+          \ client.NewApiClient()\n    // IPv4/IPv6 address or FQDN of the cluster\n\
+          \    ApiClientInstance.Host = \"localhost\"\n    // Port to which to connect\
+          \ to\n    ApiClientInstance.Port = 9440\n    // Interval in ms to use during\
+          \ retry attempts\n    ApiClientInstance.RetryInterval = 5 * time.Second\n\
+          \    // Max retry attempts while reconnecting on a loss of connection\n\
+          \    ApiClientInstance.MaxRetryAttempts = 5\n    // UserName to connect\
+          \ to the cluster\n    ApiClientInstance.Username = \"username\"\n    //\
+          \ Password to connect to the cluster\n    ApiClientInstance.Password = \"\
+          password\"\n    // Please add authorization information here if needed.\n\
+          \    ApprovalPoliciesApiInstance = api.NewApprovalPoliciesApi(ApiClientInstance)\n\
+          \n    securedPolicyList := []import1.SecuredPolicy {import1.NewSecuredPolicy()}\n\
+          \n    // SecuredPolicy object initializations here...\n\n    \n    extId\
+          \ := \"ceC2eE9b-Dac8-5EC7-E96e-0BD7bEF3BBF5\"\n\n\n    response, error :=\
+          \ ApprovalPoliciesApiInstance.AssociatePolicies(&extId, securedPolicyList)\n\
+          \    if error != nil {\n        fmt.Println(error)\n        return\n   \
+          \ }\n    data, _ := response.GetData().(import2.TaskReference)\n    fmt.Println(data)\n\
+          \n}\n\n"
+      - lang: cURL
+        source: |2+
+
+          curl --request POST \
+               --url "https://{pc-ip}:9440/api/security/v4.0.b1/management/approval-policies/F6C9cCEe-Db04-AcFb-5c91-ef2aAfCE59Ab/$action/associate-policies" \
+               --header 'Accept: application/json' \
+                        --header 'Content-Type: application/json' \
+               --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+                        --data [{"policyExtId":"string","policyType":"$UNKNOWN","$objectType":"security.v4.management.SecuredPolicy"}] \
+
+      - lang: Wget
+        source: |2
+
+
+          wget --verbose \
+               --method POST \
+               --header 'Accept: application/json' \
+                   --header 'Content-Type: application/json' \
+          --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+                   --body-data [{"policyExtId":"string","policyType":"$UNKNOWN","$objectType":"security.v4.management.SecuredPolicy"}] \
+          - "https://{pc-ip}:9440/api/security/v4.0.b1/management/approval-policies/A1aF44c0-aCb5-3c9B-Aae9-38BFFbFfB7be/$action/associate-policies"
+  /security/v4.0.b1/report/stig-summaries:
+    get:
+      tags:
+      - STIGs
+      summary: Fetch the aggregate report of STIG scan
+      description: Fetch the current number of issues found by STIG for each cluster.
+      operationId: listStigSummaries
+      parameters:
+      - name: $page
+        in: query
+        description: |
+          A URL query parameter that specifies the page number of the result set. It must be a positive integer between 0 and the maximum number of pages that are available for that resource. Any number out of this range might lead to no results.
+        required: false
+        style: form
+        explode: false
+        schema:
+          minimum: 0
+          type: integer
+          description: |
+            A URL query parameter that specifies the page number of the result set. It must be a positive integer between 0 and the maximum number of pages that are available for that resource. Any number out of this range might lead to no results.
+          format: int32
+          default: 0
+      - name: $limit
+        in: query
+        description: |
+          A URL query parameter that specifies the total number of records returned in the result set.  Must be a positive integer between 1 and 100. Any number out of this range will lead to a validation error. If the limit is not provided, a default value of 50 records will be returned in the result set.
+        required: false
+        style: form
+        explode: false
+        schema:
+          maximum: 100
+          minimum: 1
+          type: integer
+          description: |
+            A URL query parameter that specifies the total number of records returned in the result set.  Must be a positive integer between 1 and 100. Any number out of this range will lead to a validation error. If the limit is not provided, a default value of 50 records will be returned in the result set.
+          format: int32
+          default: 50
+      - name: $filter
+        in: query
+        description: |
+          A URL query parameter that allows clients to filter a collection of resources. The expression specified with $filter is evaluated for each resource in the collection, and only items where the expression evaluates to true are included in the response. Expression specified with the $filter must conform to the [OData V4.01](https://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html) URL conventions.
+          For example, filter '$filter=name eq 'karbon-ntnx-1.0' would filter the result on cluster name 'karbon-ntnx1.0', filter '$filter=startswith(name, 'C')' would filter on cluster name starting with 'C'.
+          The filter can be applied to the following fields:
+          - clusterExtId
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: $orderby
+        in: query
+        description: |
+          A URL query parameter that allows clients to specify the sort criteria for the returned list of objects. Resources can be sorted in ascending order using asc or descending order using desc. If asc or desc are not specified, the resources will be sorted in ascending order by default. For example, '$orderby=templateName desc' would get all templates sorted by templateName in descending order.
+          The orderby can be applied to the following fields:
+          - clusterExtId
+          - failedCount
+          - notApplicableCount
+          - passedCount
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: $expand
+        in: query
+        description: |
+          A URL query parameter that allows clients to request related resources when a resource that satisfies a particular request is retrieved. Each expanded item is evaluated relative to the entity containing the property being expanded. Other query options can be applied to an expanded property by appending a semicolon-separated list of query options, enclosed in parentheses, to the property name. Permissible system query options are $filter, $select and $orderby. The following expansion keys are supported.
+          - cluster
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: $select
+        in: query
+        description: |
+          A URL query parameter that allows clients to request a specific set of properties for each entity or complex type. Expression specified with the $select must conform to the [OData V4.01](https://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html) URL conventions. If a $select expression consists of a single select item that is an asterisk (i.e., *), then all properties on the matching resource will be returned.
+          - clusterExtId
+          - extId
+          - failedCount
+          - links
+          - notApplicableCount
+          - passedCount
+          - tenantId
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Returns the requested aggregate report of the STIG scan.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/security.v4.0.b1.report.StigSummary'
+                additionalProperties: false
+                description: REST response for all response codes in API path /security/v4.0.b1/report/stig-summaries
+                  Get operation
+        "4XX":
+          description: Client error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/security.v4.0.b1.error.ErrorResponse'
+                additionalProperties: false
+                description: REST response for all response codes in API path /security/v4.0.b1/report/stig-summaries
+                  Get operation
+        "5XX":
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/security.v4.0.b1.error.ErrorResponse'
+                additionalProperties: false
+                description: REST response for all response codes in API path /security/v4.0.b1/report/stig-summaries
+                  Get operation
+      x-permissions:
+        deploymentList:
+        - ON_PREM
+        operationName: View Stig Summary
+        roleList:
+        - Security Dashboard Admin
+        - Security Dashboard Viewer
+        - Prism Admin
+        - Super Admin
+        - Prism Viewer
+      x-rate-limit:
+      - type: xsmall
+        count: 3
+        timeUnit: seconds
+      - type: small
+        count: 3
+        timeUnit: seconds
+      - type: large
+        count: 5
+        timeUnit: seconds
+      - type: xlarge
+        count: 10
+        timeUnit: seconds
+      x-supported-versions:
+      - product: PC
+        version: "2024.3"
+      - product: PE
+        version: "7.0"
+      x-code-samples:
+      - lang: Java
+        source: "\npackage sample;\n\nimport com.nutanix.sec.java.client.ApiClient;\n\
+          import com.nutanix.sec.java.client.api.STIGsApi;\nimport com.nutanix.dp1.sec.security.v4.report.ListStigSummariesApiResponse;\n\
+          import org.springframework.web.client.RestClientException;\n\npublic class\
+          \ JavaSdkSample {\n    public static void main(String[] args) {\n      \
+          \  // Configure the client\n        ApiClient apiClient = new ApiClient();\n\
+          \        // IPv4/IPv6 address or FQDN of the cluster\n        apiClient.setHost(\"\
+          localhost\");\n        // Port to which to connect to\n        apiClient.setPort(9440);\n\
+          \        // Interval in ms to use during retry attempts\n        apiClient.setRetryInterval(5000);\n\
+          \        // Max retry attempts while reconnecting on a loss of connection\n\
+          \        apiClient.setMaxRetryAttempts(5);\n        // UserName to connect\
+          \ to the cluster\n        String username = \"username\";\n        // Password\
+          \ to connect to the cluster\n        String password = \"password\";\n \
+          \       apiClient.setUsername(username);\n        apiClient.setPassword(password);\n\
+          \n        // Please add authorization information here if needed.\n    \
+          \    STIGsApi sTIGsApi = new STIGsApi(apiClient);\n\n        \n        int\
+          \ page = 0;\n        \n        int limit = 50;\n\n        try {\n      \
+          \      ListStigSummariesApiResponse listStigSummariesApiResponse = sTIGsApi.listStigSummaries(page,\
+          \ limit, null, null, null, null);\n            System.out.println(listStigSummariesApiResponse.toString());\n\
+          \n        } catch (RestClientException ex) {\n            System.out.println(ex.getMessage());\n\
+          \        }\n    }\n}\n"
+      - lang: JavaScript
+        source: |2
+
+          import { ApiClient, STIGsApi } from "@nutanix-api/security-js-client";
+
+          // Configure the client
+          let apiClientInstance = new ApiClient();
+          // IPv4/IPv6 address or FQDN of the cluster
+          apiClientInstance.host = 'localhost';
+          // Port to which to connect to
+          apiClientInstance.port = '9440';
+          // Max retry attempts while reconnecting on a loss of connection
+          apiClientInstance.maxRetryAttempts = 5;
+          // Interval in ms to use during retry attempts
+          apiClientInstance.retryInterval = 5000;
+          // UserName to connect to the cluster
+          apiClientInstance.username = 'username';
+          // Password to connect to the cluster
+          apiClientInstance.password = 'password';
+          // Please add authorization information here if needed.
+          let sTIGsApi = new STIGsApi(apiClientInstance);
+
+          function sample() {
+
+
+              // Construct Optional Parameters
+              var opts = {};
+              opts["$page"] = 0;
+              opts["$limit"] = 50;
+              opts["$filter"] = "string_sample_data";
+              opts["$orderby"] = "string_sample_data";
+              opts["$expand"] = "string_sample_data";
+              opts["$select"] = "string_sample_data";
+
+
+
+
+              sTIGsApi.listStigSummaries(opts).then(({data, response}) => {
+                  console.log(`API returned the following status code: ${response.status}`);
+                  console.log(data.getData());
+              }).catch((error) => {
+                  console.log(`Error is: ${error}`);
+              });
+
+          }
+          sample()
+      - lang: Python
+        source: "\nimport ntnx_security_py_client\n\nif __name__ == \"__main__\":\n\
+          \    # Configure the client\n    config = ntnx_security_py_client.Configuration()\n\
+          \    # IPv4/IPv6 address or FQDN of the cluster\n    config.host = \"localhost\"\
+          \n    # Port to which to connect to\n    config.port = 9440\n    # Max retry\
+          \ attempts while reconnecting on a loss of connection\n    config.max_retry_attempts\
+          \ = 3\n    # Backoff factor to use during retry attempts\n    config.backoff_factor\
+          \ = 3\n    # UserName to connect to the cluster\n    config.username = \"\
+          username\"\n    # Password to connect to the cluster\n    config.password\
+          \ = \"password\"\n    # Please add authorization information here if needed.\n\
+          \    client = ntnx_security_py_client.ApiClient(configuration=config)\n\
+          \    s_ti_gs_api = ntnx_security_py_client.STIGsApi(api_client=client)\n\
+          \    \n    page = 0\n    \n    limit = 50\n\n\n    try:\n        api_response\
+          \ = s_ti_gs_api.list_stig_summaries(_page=page, _limit=limit)\n        print(api_response)\n\
+          \    except ntnx_security_py_client.rest.ApiException as e:\n        print(e)\n\
+          \n"
+      - lang: Go
+        source: "\npackage main\n\nimport (\n    \"fmt\"\n    \"time\"\n    \"github.com/nutanix/ntnx-api-golang-clients/security-go-client/v4/api\"\
+          \n    \"github.com/nutanix/ntnx-api-golang-clients/security-go-client/v4/client\"\
+          \n    import1 \"github.com/nutanix/ntnx-api-golang-clients/security-go-client/v4/models/security/v4/report\"\
+          \n)\n\nvar (\n    ApiClientInstance *client.ApiClient\n    STIGsApiInstance\
+          \ *api.STIGsApi\n)\n\nfunc main() {\n    ApiClientInstance = client.NewApiClient()\n\
+          \    // IPv4/IPv6 address or FQDN of the cluster\n    ApiClientInstance.Host\
+          \ = \"localhost\"\n    // Port to which to connect to\n    ApiClientInstance.Port\
+          \ = 9440\n    // Interval in ms to use during retry attempts\n    ApiClientInstance.RetryInterval\
+          \ = 5 * time.Second\n    // Max retry attempts while reconnecting on a loss\
+          \ of connection\n    ApiClientInstance.MaxRetryAttempts = 5\n    // UserName\
+          \ to connect to the cluster\n    ApiClientInstance.Username = \"username\"\
+          \n    // Password to connect to the cluster\n    ApiClientInstance.Password\
+          \ = \"password\"\n    // Please add authorization information here if needed.\n\
+          \    STIGsApiInstance = api.NewSTIGsApi(ApiClientInstance)\n\n    \n   \
+          \ page_ := 0\n    \n    limit_ := 50\n\n\n    response, error := STIGsApiInstance.ListStigSummaries(&page_,\
+          \ &limit_, nil, nil, nil, nil)\n    if error != nil {\n        fmt.Println(error)\n\
+          \        return\n    }\n    data, _ := response.GetData().([]import1.StigSummary)\n\
+          \    fmt.Println(data)\n\n}\n\n"
+      - lang: cURL
+        source: |2+
+
+          curl --request GET \
+               --url "https://{pc-ip}:9440/api/security/v4.0.b1/report/stig-summaries?$filter=string_sample_data&$limit=50&$orderby=string_sample_data&$expand=string_sample_data&$page=0&$select=string_sample_data" \
+               --header 'Accept: application/json' \
+               --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+
+      - lang: Wget
+        source: |2
+
+
+          wget --verbose \
+               --method GET \
+               --header 'Accept: application/json' \
+          --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+          - "https://{pc-ip}:9440/api/security/v4.0.b1/report/stig-summaries?$filter=string_sample_data&$limit=50&$orderby=string_sample_data&$expand=string_sample_data&$page=0&$select=string_sample_data"
+  /security/v4.0.b1/report/stigs:
+    get:
+      tags:
+      - STIGs
+      summary: Get the STIG controls details
+      description: Fetch the STIG controls details for STIG rules on each cluster.
+      operationId: listStigs
+      parameters:
+      - name: $page
+        in: query
+        description: |
+          A URL query parameter that specifies the page number of the result set. It must be a positive integer between 0 and the maximum number of pages that are available for that resource. Any number out of this range might lead to no results.
+        required: false
+        style: form
+        explode: false
+        schema:
+          minimum: 0
+          type: integer
+          description: |
+            A URL query parameter that specifies the page number of the result set. It must be a positive integer between 0 and the maximum number of pages that are available for that resource. Any number out of this range might lead to no results.
+          format: int32
+          default: 0
+      - name: $limit
+        in: query
+        description: |
+          A URL query parameter that specifies the total number of records returned in the result set.  Must be a positive integer between 1 and 100. Any number out of this range will lead to a validation error. If the limit is not provided, a default value of 50 records will be returned in the result set.
+        required: false
+        style: form
+        explode: false
+        schema:
+          maximum: 100
+          minimum: 1
+          type: integer
+          description: |
+            A URL query parameter that specifies the total number of records returned in the result set.  Must be a positive integer between 1 and 100. Any number out of this range will lead to a validation error. If the limit is not provided, a default value of 50 records will be returned in the result set.
+          format: int32
+          default: 50
+      - name: $filter
+        in: query
+        description: |
+          A URL query parameter that allows clients to filter a collection of resources. The expression specified with $filter is evaluated for each resource in the collection, and only items where the expression evaluates to true are included in the response. Expression specified with the $filter must conform to the [OData V4.01](https://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html) URL conventions.
+          For example, filter '$filter=name eq 'karbon-ntnx-1.0' would filter the result on cluster name 'karbon-ntnx1.0', filter '$filter=startswith(name, 'C')' would filter on cluster name starting with 'C'.
+          The filter can be applied to the following fields:
+          - severity
+          - status
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: $orderby
+        in: query
+        description: |
+          A URL query parameter that allows clients to specify the sort criteria for the returned list of objects. Resources can be sorted in ascending order using asc or descending order using desc. If asc or desc are not specified, the resources will be sorted in ascending order by default. For example, '$orderby=templateName desc' would get all templates sorted by templateName in descending order.
+          The orderby can be applied to the following fields:
+          - severity
+          - stigVersion
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: $select
+        in: query
+        description: |
+          A URL query parameter that allows clients to request a specific set of properties for each entity or complex type. Expression specified with the $select must conform to the [OData V4.01](https://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html) URL conventions. If a $select expression consists of a single select item that is an asterisk (i.e., *), then all properties on the matching resource will be returned.
+          - affectedClusters
+          - benchmarkId
+          - comments
+          - extId
+          - fixText
+          - identifiers
+          - links
+          - ruleId
+          - severity
+          - status
+          - stigVersion
+          - tenantId
+          - title
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Returns the STIG controls details.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/security.v4.0.b1.report.Stig'
+                additionalProperties: false
+                description: REST response for all response codes in API path /security/v4.0.b1/report/stigs
+                  Get operation
+        "4XX":
+          description: Client error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/security.v4.0.b1.error.ErrorResponse'
+                additionalProperties: false
+                description: REST response for all response codes in API path /security/v4.0.b1/report/stigs
+                  Get operation
+        "5XX":
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/security.v4.0.b1.error.ErrorResponse'
+                additionalProperties: false
+                description: REST response for all response codes in API path /security/v4.0.b1/report/stigs
+                  Get operation
+      x-permissions:
+        deploymentList:
+        - ON_PREM
+        operationName: View Stig
+        roleList:
+        - Security Dashboard Admin
+        - Security Dashboard Viewer
+        - Prism Admin
+        - Super Admin
+        - Prism Viewer
+      x-rate-limit:
+      - type: xsmall
+        count: 3
+        timeUnit: seconds
+      - type: small
+        count: 3
+        timeUnit: seconds
+      - type: large
+        count: 5
+        timeUnit: seconds
+      - type: xlarge
+        count: 10
+        timeUnit: seconds
+      x-supported-versions:
+      - product: PC
+        version: "2024.3"
+      - product: PE
+        version: "7.0"
+      x-code-samples:
+      - lang: Java
+        source: "\npackage sample;\n\nimport com.nutanix.sec.java.client.ApiClient;\n\
+          import com.nutanix.sec.java.client.api.STIGsApi;\nimport com.nutanix.dp1.sec.security.v4.report.ListStigsApiResponse;\n\
+          import org.springframework.web.client.RestClientException;\n\npublic class\
+          \ JavaSdkSample {\n    public static void main(String[] args) {\n      \
+          \  // Configure the client\n        ApiClient apiClient = new ApiClient();\n\
+          \        // IPv4/IPv6 address or FQDN of the cluster\n        apiClient.setHost(\"\
+          localhost\");\n        // Port to which to connect to\n        apiClient.setPort(9440);\n\
+          \        // Interval in ms to use during retry attempts\n        apiClient.setRetryInterval(5000);\n\
+          \        // Max retry attempts while reconnecting on a loss of connection\n\
+          \        apiClient.setMaxRetryAttempts(5);\n        // UserName to connect\
+          \ to the cluster\n        String username = \"username\";\n        // Password\
+          \ to connect to the cluster\n        String password = \"password\";\n \
+          \       apiClient.setUsername(username);\n        apiClient.setPassword(password);\n\
+          \n        // Please add authorization information here if needed.\n    \
+          \    STIGsApi sTIGsApi = new STIGsApi(apiClient);\n\n        \n        int\
+          \ page = 0;\n        \n        int limit = 50;\n\n        try {\n      \
+          \      ListStigsApiResponse listStigsApiResponse = sTIGsApi.listStigs(page,\
+          \ limit, null, null, null);\n            System.out.println(listStigsApiResponse.toString());\n\
+          \n        } catch (RestClientException ex) {\n            System.out.println(ex.getMessage());\n\
+          \        }\n    }\n}\n"
+      - lang: JavaScript
+        source: |2
+
+          import { ApiClient, STIGsApi } from "@nutanix-api/security-js-client";
+
+          // Configure the client
+          let apiClientInstance = new ApiClient();
+          // IPv4/IPv6 address or FQDN of the cluster
+          apiClientInstance.host = 'localhost';
+          // Port to which to connect to
+          apiClientInstance.port = '9440';
+          // Max retry attempts while reconnecting on a loss of connection
+          apiClientInstance.maxRetryAttempts = 5;
+          // Interval in ms to use during retry attempts
+          apiClientInstance.retryInterval = 5000;
+          // UserName to connect to the cluster
+          apiClientInstance.username = 'username';
+          // Password to connect to the cluster
+          apiClientInstance.password = 'password';
+          // Please add authorization information here if needed.
+          let sTIGsApi = new STIGsApi(apiClientInstance);
+
+          function sample() {
+
+
+              // Construct Optional Parameters
+              var opts = {};
+              opts["$page"] = 0;
+              opts["$limit"] = 50;
+              opts["$filter"] = "string_sample_data";
+              opts["$orderby"] = "string_sample_data";
+              opts["$select"] = "string_sample_data";
+
+
+
+
+              sTIGsApi.listStigs(opts).then(({data, response}) => {
+                  console.log(`API returned the following status code: ${response.status}`);
+                  console.log(data.getData());
+              }).catch((error) => {
+                  console.log(`Error is: ${error}`);
+              });
+
+          }
+          sample()
+      - lang: Python
+        source: "\nimport ntnx_security_py_client\n\nif __name__ == \"__main__\":\n\
+          \    # Configure the client\n    config = ntnx_security_py_client.Configuration()\n\
+          \    # IPv4/IPv6 address or FQDN of the cluster\n    config.host = \"localhost\"\
+          \n    # Port to which to connect to\n    config.port = 9440\n    # Max retry\
+          \ attempts while reconnecting on a loss of connection\n    config.max_retry_attempts\
+          \ = 3\n    # Backoff factor to use during retry attempts\n    config.backoff_factor\
+          \ = 3\n    # UserName to connect to the cluster\n    config.username = \"\
+          username\"\n    # Password to connect to the cluster\n    config.password\
+          \ = \"password\"\n    # Please add authorization information here if needed.\n\
+          \    client = ntnx_security_py_client.ApiClient(configuration=config)\n\
+          \    s_ti_gs_api = ntnx_security_py_client.STIGsApi(api_client=client)\n\
+          \    \n    page = 0\n    \n    limit = 50\n\n\n    try:\n        api_response\
+          \ = s_ti_gs_api.list_stigs(_page=page, _limit=limit)\n        print(api_response)\n\
+          \    except ntnx_security_py_client.rest.ApiException as e:\n        print(e)\n\
+          \n"
+      - lang: Go
+        source: "\npackage main\n\nimport (\n    \"fmt\"\n    \"time\"\n    \"github.com/nutanix/ntnx-api-golang-clients/security-go-client/v4/api\"\
+          \n    \"github.com/nutanix/ntnx-api-golang-clients/security-go-client/v4/client\"\
+          \n    import1 \"github.com/nutanix/ntnx-api-golang-clients/security-go-client/v4/models/security/v4/report\"\
+          \n)\n\nvar (\n    ApiClientInstance *client.ApiClient\n    STIGsApiInstance\
+          \ *api.STIGsApi\n)\n\nfunc main() {\n    ApiClientInstance = client.NewApiClient()\n\
+          \    // IPv4/IPv6 address or FQDN of the cluster\n    ApiClientInstance.Host\
+          \ = \"localhost\"\n    // Port to which to connect to\n    ApiClientInstance.Port\
+          \ = 9440\n    // Interval in ms to use during retry attempts\n    ApiClientInstance.RetryInterval\
+          \ = 5 * time.Second\n    // Max retry attempts while reconnecting on a loss\
+          \ of connection\n    ApiClientInstance.MaxRetryAttempts = 5\n    // UserName\
+          \ to connect to the cluster\n    ApiClientInstance.Username = \"username\"\
+          \n    // Password to connect to the cluster\n    ApiClientInstance.Password\
+          \ = \"password\"\n    // Please add authorization information here if needed.\n\
+          \    STIGsApiInstance = api.NewSTIGsApi(ApiClientInstance)\n\n    \n   \
+          \ page_ := 0\n    \n    limit_ := 50\n\n\n    response, error := STIGsApiInstance.ListStigs(&page_,\
+          \ &limit_, nil, nil, nil)\n    if error != nil {\n        fmt.Println(error)\n\
+          \        return\n    }\n    data, _ := response.GetData().([]import1.Stig)\n\
+          \    fmt.Println(data)\n\n}\n\n"
+      - lang: cURL
+        source: |2+
+
+          curl --request GET \
+               --url "https://{pc-ip}:9440/api/security/v4.0.b1/report/stigs?$filter=string_sample_data&$limit=50&$orderby=string_sample_data&$page=0&$select=string_sample_data" \
+               --header 'Accept: application/json' \
+               --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+
+      - lang: Wget
+        source: |2
+
+
+          wget --verbose \
+               --method GET \
+               --header 'Accept: application/json' \
+          --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+          - "https://{pc-ip}:9440/api/security/v4.0.b1/report/stigs?$filter=string_sample_data&$limit=50&$orderby=string_sample_data&$page=0&$select=string_sample_data"
+components:
+  schemas:
+    security.v4.0.b1.config.HardeningVisibilitySetting:
+      title: Contains hardening settings visibility settings.
+      description: Contains the configuration for PC UI visibility status of all hardening
+        settings.
+      allOf:
+      - $ref: '#/components/schemas/common.v1.0.response.ExternalizableAbstractModel'
+      - type: object
+        properties:
+          isHighStrengthPasswordVisible:
+            type: boolean
+            description: Represents the visibility of high strength password state.
+            example: false
+          isAideVisible:
+            type: boolean
+            description: Represents the visibility of aide service state.
+            example: false
+          isScmaVisible:
+            type: boolean
+            description: Represents the visibility of security configuration management
+              automation state.
+            example: false
+          isSecureBootVisible:
+            type: boolean
+            description: Represents the visibility of host secure boot state.
+            example: false
+          isNetworkSegmentationVisible:
+            type: boolean
+            description: Represents the visibility of network segmentation state.
+            example: true
+          isClusterLockdownVisible:
+            type: boolean
+            description: Represents the visibility of cluster lockdown state.
+            example: true
+          isLogForwardingVisible:
+            type: boolean
+            description: Represents the visibility of log forwarding state.
+            example: true
+          isDefenseConsentBannerVisible:
+            type: boolean
+            description: Represents the visibility of banner state.
+            example: false
+        additionalProperties: false
+    security.v4.0.b1.config.UpdateHardeningVisibilitySettingApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/security.v4.0.b1.error.AppMessage'
+          - $ref: '#/components/schemas/security.v4.0.b1.error.ErrorResponse'
+      additionalProperties: false
+      description: REST response for all response codes in API path /security/v4.0.b1/config/hardening-visibility-setting
+        Put operation
+    security.v4.0.b1.error.AppMessage:
+      type: object
+      properties:
+        message:
+          type: string
+          description: The message string.
+        severity:
+          $ref: '#/components/schemas/common.v1.0.config.MessageSeverity'
+        code:
+          type: string
+          description: "The code associated with this message.This string is typically\
+            \ prefixed by the namespace the endpoint belongs to. For example: VMM-40000"
+        locale:
+          type: string
+          description: Locale for this message. The default locale would be 'en-US'.
+          default: en_US
+        errorGroup:
+          type: string
+          description: The error group associated with this message of severity ERROR.
+        argumentsMap:
+          type: object
+          additionalProperties:
+            type: string
+          description: The map of argument name to value.
+      additionalProperties: false
+      description: Message with associated severity describing status of the current
+        operation.
+      x-platform-generated: true
+    security.v4.0.b1.config.HardeningStatus:
+      title: Contains hardening settings status.
+      description: Contains status of all the hardening settings for a cluster.
+      allOf:
+      - $ref: '#/components/schemas/common.v1.0.response.ExternalizableAbstractModel'
+      - type: object
+        properties:
+          clusterExtId:
+            pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+            type: string
+            description: UUID for the cluster.
+            readOnly: true
+            example: 021c91f2-0990-435b-b315-6ec559c3f590
+          isHighStrengthPasswordEnabled:
+            type: boolean
+            description: Represents whether high strength password is enabled on a
+              cluster.
+            example: true
+          isAideEnabled:
+            type: boolean
+            description: Represents whether aide service is enabled on a cluster.
+            example: false
+          isSecureBootEnabled:
+            type: boolean
+            description: Represents whether host secure boot is enabled on a cluster.
+            readOnly: true
+            example: true
+          isClusterLockdownEnabled:
+            type: boolean
+            description: Represents whether cluster lockdown mode is enabled on a
+              cluster.
+            readOnly: true
+            example: false
+          isLogForwardingEnabled:
+            type: boolean
+            description: Represents whether log forwarding is enabled on a cluster.
+            readOnly: true
+            example: true
+          scmaSchedule:
+            $ref: '#/components/schemas/security.v4.0.b1.config.Schedule'
+          ahvScmaSchedule:
+            $ref: '#/components/schemas/security.v4.0.b1.config.Schedule'
+          isAhvDefenseConsentBannerEnabled:
+            type: boolean
+            description: Represents whether AHV defense knowledge consent banner is
+              enabled on the hypervisor.
+            example: true
+          isCvmDefenseConsentBannerEnabled:
+            type: boolean
+            description: Represents whether Nutanix CVM defense knowledge consent
+              banner is enabled.
+            example: false
+          isNetworkSegmentationEnabled:
+            type: boolean
+            description: Represents the network segmentation settings on a cluster.
+            readOnly: true
+            example: false
+        additionalProperties: false
+    security.v4.0.b1.config.Schedule:
+      title: Contains possible values for a scheduling a task.
+      type: string
+      description: Contains possible values for a scheduling a task.
+      enum:
+      - HOURLY
+      - DAILY
+      - WEEKLY
+      - MONTHLY
+      - $UNKNOWN
+      - $REDACTED
+      x-enumDescriptions:
+        WEEKLY: Per week schedule
+        DAILY: Per day schedule
+        MONTHLY: Per month schedule
+        $UNKNOWN: |
+          Unknown value.
+        $REDACTED: |
+          Redacted value.
+        HOURLY: Per hour schedule
+    security.v4.0.b1.common.Cluster:
+      title: Cluster model object.
+      type: object
+      properties:
+        clusterExtId:
+          type: string
+          description: UUID for the cluster.
+          example: 00062580-3db7-41bf-0000-000000024c27
+        clusterName:
+          type: string
+          description: Human readable name for the cluster.
+          example: auto_cluster_qms_trovi_e9dbf4b19b27
+      additionalProperties: false
+    security.v4.0.b1.config.UpdateHardeningStatusesApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+        data:
+          required:
+          - $objectType
+          properties:
+            $objectType:
+              type: string
+              example: prism.v4.config.TaskReference
+          oneOf:
+          - $ref: '#/components/schemas/prism.v4.0.config.TaskReference'
+          - $ref: '#/components/schemas/security.v4.0.b1.error.ErrorResponse'
+      additionalProperties: false
+      description: "REST response for all response codes in API path /security/v4.0.b1/config/hardening-statuses/{extId}\
+        \ Put operation"
+    security.v4.0.b1.config.SystemUserPassword:
+      title: Password information for system user.
+      description: Contains information about system user password.
+      allOf:
+      - $ref: '#/components/schemas/common.v1.0.response.ExternalizableAbstractModel'
+      - type: object
+        properties:
+          username:
+            maxLength: 199
+            type: string
+            description: System user name.
+            example: admin
+          clusterExtId:
+            pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+            type: string
+            description: UUID for the cluster.
+            readOnly: true
+            example: 6ca80a3d-baf0-4c7c-bab4-9207344734bc
+          lastUpdateTime:
+            type: string
+            description: Timestamp of last password change.
+            format: date-time
+            readOnly: true
+            example: 2009-09-23T14:30:00-07:00
+          expiryDate:
+            type: string
+            description: Expiry of a new password.
+            format: date-time
+            example: 2009-09-23T14:30:00-07:00
+          passwordStatus:
+            $ref: '#/components/schemas/security.v4.0.b1.config.PasswordStatus'
+          systemType:
+            $ref: '#/components/schemas/security.v4.0.b1.config.SystemType'
+          hasHspInUse:
+            type: boolean
+            description: Shows if high strength password is in use or not.
+            example: true
+        additionalProperties: false
+    security.v4.0.b1.config.PasswordStatus:
+      title: Password status types.
+      type: string
+      description: Contains possible values of password status.
+      enum:
+      - DEFAULT
+      - SECURE
+      - NOPASSWD
+      - MULTIPLE_ISSUES
+      - $UNKNOWN
+      - $REDACTED
+      x-enumDescriptions:
+        MULTIPLE_ISSUES: Some of the user accounts have default password or no password
+          set.
+        SECURE: Secure password is set.
+        NOPASSWD: No password is set.
+        $UNKNOWN: |
+          Unknown value.
+        DEFAULT: Default password is set.
+        $REDACTED: |
+          Redacted value.
+    security.v4.0.b1.config.SystemType:
+      title: System product type
+      type: string
+      description: Contains supported variants of system products.
+      enum:
+      - PC
+      - AOS
+      - AHV
+      - IPMI
+      - $UNKNOWN
+      - $REDACTED
+      x-enumDescriptions:
+        IPMI: Product is of type IPMI
+        PC: Product is of type Prism Central
+        AOS: Product is of type AOS
+        $UNKNOWN: |
+          Unknown value.
+        $REDACTED: |
+          Redacted value.
+        AHV: Product is of type AHV
+    security.v4.0.b1.config.VerifyPasswordSpec:
+      title: Verify password specifications.
+      required:
+      - currentPassword
+      type: object
+      properties:
+        currentPassword:
+          maxLength: 199
+          minLength: 8
+          type: string
+          description: Existing password of a user account.
+          format: password
+          example: '*************'
+      additionalProperties: false
+      description: Contains all required information for password verification operation.
+    security.v4.0.b1.config.VerifySystemUserPasswordApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+        data:
+          required:
+          - $objectType
+          properties:
+            $objectType:
+              type: string
+              example: security.v4.config.VerifyPassword
+          oneOf:
+          - $ref: '#/components/schemas/security.v4.0.b1.config.VerifyPassword'
+          - $ref: '#/components/schemas/security.v4.0.b1.error.ErrorResponse'
+      additionalProperties: false
+      description: "REST response for all response codes in API path /security/v4.0.b1/config/system-user-passwords/{extId}/$action/verify-password\
+        \ Post operation"
+    security.v4.0.b1.config.VerifyPassword:
+      title: Password verification result.
+      description: Password verification result for an user account.
+      allOf:
+      - $ref: '#/components/schemas/common.v1.0.response.ExternalizableAbstractModel'
+      - type: object
+        properties:
+          verificationStatus:
+            $ref: '#/components/schemas/security.v4.0.b1.config.PasswordVerificationStatus'
+        additionalProperties: false
+    security.v4.0.b1.config.PasswordVerificationStatus:
+      title: Password verification status.
+      type: string
+      description: Verification status of the verify password operation.
+      enum:
+      - VERIFIED
+      - NOT_VERIFIED
+      - ACCOUNT_LOCKED
+      - $UNKNOWN
+      - $REDACTED
+      x-enumDescriptions:
+        NOT_VERIFIED: Password verification failure.
+        ACCOUNT_LOCKED: Account is locked due to multiple failed attempts.
+        $UNKNOWN: |
+          Unknown value.
+        VERIFIED: Successful password verification.
+        $REDACTED: |
+          Redacted value.
+    security.v4.0.b1.config.ChangePasswordSpec:
+      title: Change password specifications.
+      required:
+      - newPassword
+      type: object
+      properties:
+        currentPassword:
+          maxLength: 199
+          minLength: 8
+          type: string
+          description: Existing password of a user account.
+          format: password
+          example: '************'
+        newPassword:
+          maxLength: 199
+          minLength: 8
+          type: string
+          description: New password for a user account
+          format: password
+          example: '**************'
+      additionalProperties: false
+      description: Contains all required specifications for password change operation.
+    security.v4.0.b1.config.ChangeSystemUserPasswordApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+        data:
+          required:
+          - $objectType
+          properties:
+            $objectType:
+              type: string
+              example: prism.v4.config.TaskReference
+          oneOf:
+          - $ref: '#/components/schemas/prism.v4.0.config.TaskReference'
+          - $ref: '#/components/schemas/security.v4.0.b1.error.ErrorResponse'
+      additionalProperties: false
+      description: "REST response for all response codes in API path /security/v4.0.b1/config/system-user-passwords/{extId}/$action/change-password\
+        \ Post operation"
+    security.v4.0.b1.config.PublicKey:
+      title: Public key information.
+      description: Display model to encapsulate cluster public key information.
+      allOf:
+      - $ref: '#/components/schemas/common.v1.0.response.ExternalizableAbstractModel'
+      - required:
+        - clusterExtId
+        - key
+        - name
+        type: object
+        properties:
+          name:
+            maxLength: 20
+            minLength: 3
+            type: string
+            description: The name of public key.
+            example: custom-external-key
+          key:
+            type: string
+            description: The ssh key string information.
+            example: |
+              ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDSZDGv42SOSgU+tCEj4Daa8FF5ZYox0UWD6hPLJCRnuRrTM7ytnQR4pCrKpRLtOJRHl6zGrPnbB2QkKY5+FFT7fBWT4QsvAD2331Af6lT/YrMYUrAiRK6tGOdUsQI4vB8Z7+LgWuXwySAunTjCsb1AAeAz8WLWF+fxrA05XQ4TjYJRJtPtodn1mtzKNcsh9NEcJWxOsdJbF1tRO2x6KXayT2OrfYI94NKKtXT/Giat8QPj4F8HJwJ6xh+AG3x8+VN6mUqWUmXszi03qL9QBr8EXnJFpUpL7+DTX6AstMvmY4yGJi4p4IrfcIQegfaDc4iDg1EuP3iq2NdRy/GrRO6N
+          clusterExtId:
+            pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+            type: string
+            description: UUID for the cluster.
+            example: 3d0d2019-7c55-43b3-8e24-379f69120593
+        additionalProperties: false
+    security.v4.0.b1.config.AddPublicKeyApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+        data:
+          required:
+          - $objectType
+          properties:
+            $objectType:
+              type: string
+              example: prism.v4.config.TaskReference
+          oneOf:
+          - $ref: '#/components/schemas/prism.v4.0.config.TaskReference'
+          - $ref: '#/components/schemas/security.v4.0.b1.error.ErrorResponse'
+      additionalProperties: false
+      description: REST response for all response codes in API path /security/v4.0.b1/config/public-keys
+        Post operation
+    security.v4.0.b1.config.DeletePublicKeyApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+        data:
+          required:
+          - $objectType
+          properties:
+            $objectType:
+              type: string
+              example: prism.v4.config.TaskReference
+          oneOf:
+          - $ref: '#/components/schemas/prism.v4.0.config.TaskReference'
+          - $ref: '#/components/schemas/security.v4.0.b1.error.ErrorResponse'
+      additionalProperties: false
+      description: "REST response for all response codes in API path /security/v4.0.b1/config/public-keys/{extId}\
+        \ Delete operation"
+    security.v4.0.b1.management.ListApprovalPoliciesApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/security.v4.0.b1.management.ApprovalPolicy'
+          - $ref: '#/components/schemas/security.v4.0.b1.error.ErrorResponse'
+      additionalProperties: false
+      description: REST response for all response codes in API path /security/v4.0.b1/management/approval-policies
+        Get operation
+    security.v4.0.b1.management.ApprovalPolicy:
+      title: Approval policy details.
+      description: Specification of the configured approval policy.
+      allOf:
+      - $ref: '#/components/schemas/common.v1.0.response.ExternalizableAbstractModel'
+      - required:
+        - approverGroups
+        - name
+        type: object
+        properties:
+          name:
+            maxLength: 199
+            minLength: 4
+            type: string
+            description: Name of the approval policy.
+            example: Platinum Approval Policy
+          description:
+            maxLength: 499
+            minLength: 0
+            type: string
+            description: Description of the approval policy.
+            example: This policy is for platinum snapshots
+          approverGroups:
+            maxItems: 10
+            minItems: 1
+            type: array
+            description: List of approver sets.
+            items:
+              $ref: '#/components/schemas/security.v4.0.b1.management.ApproverGroup'
+          securedPolicies:
+            maxItems: 100
+            minItems: 0
+            type: array
+            description: List of secured policies.
+            readOnly: true
+            items:
+              $ref: '#/components/schemas/security.v4.0.b1.management.SecuredPolicy'
+          lastUpdatedBy:
+            type: string
+            description: The user who last updated the approval policy.
+            readOnly: true
+            example: admin
+          lastUpdateTime:
+            type: string
+            description: The timestamp of the last update of the approval policy.
+            format: date-time
+            readOnly: true
+            example: 2009-09-23T14:30:00-07:00
+          isUpdatePending:
+            type: boolean
+            description: Current update status of the approval request update.
+            readOnly: true
+            example: true
+        additionalProperties: false
+    security.v4.0.b1.management.CreateApprovalPolicyApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+        data:
+          required:
+          - $objectType
+          properties:
+            $objectType:
+              type: string
+              example: prism.v4.config.TaskReference
+          oneOf:
+          - $ref: '#/components/schemas/prism.v4.0.config.TaskReference'
+          - $ref: '#/components/schemas/security.v4.0.b1.error.ErrorResponse'
+      additionalProperties: false
+      description: REST response for all response codes in API path /security/v4.0.b1/management/approval-policies
+        Post operation
+    security.v4.0.b1.management.ApproverGroup:
+      title: Approver set details.
+      required:
+      - approvers
+      - expiryHours
+      - name
+      type: object
+      properties:
+        name:
+          maxLength: 199
+          type: string
+          description: Name of the approver set.
+          example: Platinum Approvers
+        expiryHours:
+          type: integer
+          description: Number of hours until approval request expires.
+          example: 3
+        approvers:
+          maxItems: 10
+          minItems: 3
+          type: array
+          description: List of approvers.
+          items:
+            $ref: '#/components/schemas/iam.v4.0.authn.User'
+      additionalProperties: false
+      description: Contains confuguration of an approver set.
+    security.v4.0.b1.management.SecuredPolicy:
+      title: Secured policy details.
+      required:
+      - policyExtId
+      - policyType
+      type: object
+      properties:
+        policyExtId:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+          description: External identifier of the policy associated with an approval
+            policy.
+          example: dfc2ef2e-faee-418d-bdea-c65b83836208
+        policyType:
+          $ref: '#/components/schemas/security.v4.0.b1.management.PolicyType'
+      additionalProperties: false
+      description: Contains all the required information for secured protection policy.
+    security.v4.0.b1.management.PolicyType:
+      title: Type of the policy to be protected.
+      type: string
+      description: Type of the policy to be protected by the approval policy.
+      enum:
+      - PROTECTION_POLICY
+      - $UNKNOWN
+      - $REDACTED
+      x-enumDescriptions:
+        PROTECTION_POLICY: Policy having type protection policy.
+        $UNKNOWN: |
+          Unknown value.
+        $REDACTED: |
+          Redacted value.
+    security.v4.0.b1.management.GetApprovalPolicyApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+        data:
+          required:
+          - $objectType
+          properties:
+            $objectType:
+              type: string
+              example: security.v4.management.ApprovalPolicy
+          oneOf:
+          - $ref: '#/components/schemas/security.v4.0.b1.management.ApprovalPolicy'
+          - $ref: '#/components/schemas/security.v4.0.b1.error.ErrorResponse'
+      additionalProperties: false
+      description: "REST response for all response codes in API path /security/v4.0.b1/management/approval-policies/{extId}\
+        \ Get operation"
+    security.v4.0.b1.management.UpdateApprovalPolicyApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+        data:
+          required:
+          - $objectType
+          properties:
+            $objectType:
+              type: string
+              example: prism.v4.config.TaskReference
+          oneOf:
+          - $ref: '#/components/schemas/prism.v4.0.config.TaskReference'
+          - $ref: '#/components/schemas/security.v4.0.b1.error.ErrorResponse'
+      additionalProperties: false
+      description: "REST response for all response codes in API path /security/v4.0.b1/management/approval-policies/{extId}\
+        \ Put operation"
+    security.v4.0.b1.management.SecurityValidationSpec:
+      title: Specifications required to trigger a security validation job.
+      required:
+      - eventType
+      - requesterExtId
+      - securedEntityExtId
+      - securedEntityName
+      - securedEntityType
+      type: object
+      properties:
+        securedEntityType:
+          $ref: '#/components/schemas/security.v4.0.b1.management.SecuredEntityType'
+        securedEntityName:
+          maxLength: 199
+          minLength: 4
+          type: string
+          description: Name of the secured entity.
+          example: Platinum Recovery Point
+        securedEntityExtId:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+          description: UUID of the secured entity.
+          example: 01273b10-7822-4f7f-ae45-534e07b1cef6
+        eventType:
+          $ref: '#/components/schemas/security.v4.0.b1.management.EventType'
+        securedPolicyExtId:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+          description: UUID of secured policy
+          example: b10cff56-d4d7-44ec-be61-2c636f77c8ef
+        securedEntityLocation:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+          description: Location of the secured entity.
+          example: 90c023ba-c228-47f4-9387-17ebf26a8667
+        requesterExtId:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+          description: IAM UUID of the requester.
+          example: 3263238c-8715-4bcd-8b2f-3aba6f1dc8b7
+        fullyQualifiedSecuredEntityName:
+          maxLength: 199
+          type: string
+          description: Qualified entity type. For example dataprotection:config:recovery-point
+          example: datapolicies:config:protection-policies
+      additionalProperties: false
+      description: Specifications required to trigger a security validation job.
+    security.v4.0.b1.management.TriggerApprovalPolicyValidationApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+        data:
+          required:
+          - $objectType
+          properties:
+            $objectType:
+              type: string
+              example: prism.v4.config.TaskReference
+          oneOf:
+          - $ref: '#/components/schemas/prism.v4.0.config.TaskReference'
+          - $ref: '#/components/schemas/security.v4.0.b1.error.ErrorResponse'
+      additionalProperties: false
+      description: REST response for all response codes in API path /security/v4.0.b1/management/$action/trigger-approval-policy-validation
+        Post operation
+    security.v4.0.b1.management.SecuredEntityType:
+      title: "Type of secured entity, for example, Recovery Point."
+      type: string
+      description: "Type of secured entity, for example, Recovery Point."
+      enum:
+      - RECOVERY_POINT
+      - APPROVAL_POLICY
+      - $UNKNOWN
+      - $REDACTED
+      x-enumDescriptions:
+        RECOVERY_POINT: Secured entity of type Recovery Point.
+        APPROVAL_POLICY: Secured entity of type Approval Policy.
+        $UNKNOWN: |
+          Unknown value.
+        $REDACTED: |
+          Redacted value.
+    security.v4.0.b1.management.EventType:
+      title: "Type of event, for example, delete."
+      type: string
+      description: "Type of event, for example, delete."
+      enum:
+      - DELETE
+      - UPDATE
+      - $UNKNOWN
+      - $REDACTED
+      x-enumDescriptions:
+        DELETE: Event of type delete.
+        UPDATE: Event of type update.
+        $UNKNOWN: |
+          Unknown value.
+        $REDACTED: |
+          Redacted value.
+    security.v4.0.b1.management.AssociatePoliciesApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+        data:
+          required:
+          - $objectType
+          properties:
+            $objectType:
+              type: string
+              example: prism.v4.config.TaskReference
+          oneOf:
+          - $ref: '#/components/schemas/prism.v4.0.config.TaskReference'
+          - $ref: '#/components/schemas/security.v4.0.b1.error.ErrorResponse'
+      additionalProperties: false
+      description: "REST response for all response codes in API path /security/v4.0.b1/management/approval-policies/{extId}/$action/associate-policies\
+        \ Post operation"
+    security.v4.0.b1.management.TriggerScanApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+        data:
+          required:
+          - $objectType
+          properties:
+            $objectType:
+              type: string
+              example: prism.v4.config.TaskReference
+          oneOf:
+          - $ref: '#/components/schemas/prism.v4.0.config.TaskReference'
+          - $ref: '#/components/schemas/security.v4.0.b1.error.ErrorResponse'
+      additionalProperties: false
+      description: REST response for all response codes in API path /security/v4.0.b1/management/$action/trigger-scan
+        Post operation
+    security.v4.0.b1.report.ListStigSummariesApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/security.v4.0.b1.report.StigSummary'
+          - $ref: '#/components/schemas/security.v4.0.b1.error.ErrorResponse'
+      additionalProperties: false
+      description: REST response for all response codes in API path /security/v4.0.b1/report/stig-summaries
+        Get operation
+    security.v4.0.b1.report.StigSummary:
+      title: Cluster STIG summary.
+      description: Cluster STIG summary.
+      allOf:
+      - $ref: '#/components/schemas/common.v1.0.response.ExternalizableAbstractModel'
+      - type: object
+        properties:
+          clusterExtId:
+            pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+            type: string
+            description: UUID for the cluster.
+            readOnly: true
+            example: 12c88b97-96e2-4cfc-b38f-5f91fd697dc0
+          passedCount:
+            type: integer
+            description: Count of total resources in the cluster.
+            readOnly: true
+            example: 288
+          failedCount:
+            type: integer
+            description: Count of resources with failed STIG tests.
+            readOnly: true
+            example: 41
+          notApplicableCount:
+            type: integer
+            description: Count of resources with STIG test not applicable.
+            readOnly: true
+            example: 46
+        additionalProperties: false
+    security.v4.0.b1.report.ListStigsApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/security.v4.0.b1.report.Stig'
+          - $ref: '#/components/schemas/security.v4.0.b1.error.ErrorResponse'
+      additionalProperties: false
+      description: REST response for all response codes in API path /security/v4.0.b1/report/stigs
+        Get operation
+    security.v4.0.b1.report.Stig:
+      title: Contains information of a specific STIG.
+      description: Contains information of a specific STIG.
+      allOf:
+      - $ref: '#/components/schemas/common.v1.0.response.ExternalizableAbstractModel'
+      - type: object
+        properties:
+          title:
+            maxLength: 199
+            type: string
+            description: Title of the STIG control.
+            readOnly: true
+            example: RHEL 8 must disable kernel dumps unless needed.
+          ruleId:
+            pattern: "^SV-\\d{6}r\\d{6}_rule$"
+            type: string
+            description: Rule ID of the STIG control.
+            readOnly: true
+            example: SV-230284r627750_rule
+          stigVersion:
+            pattern: "^RHEL-\\d{2}-\\d{6}$"
+            type: string
+            description: STIG ID of the control.
+            readOnly: true
+            example: RHEL-08-010470
+          identifiers:
+            type: array
+            description: Additional identifiers used to describe this control.
+            readOnly: true
+            items:
+              maxLength: 199
+              type: string
+              example: V-230284
+          affectedClusters:
+            type: array
+            description: List of clusters that failed the STIG control.
+            readOnly: true
+            items:
+              pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+              type: string
+              example: 38b51541-934e-4754-9030-907a8dc20c60
+          severity:
+            $ref: '#/components/schemas/security.v4.0.b1.report.Severity'
+          status:
+            $ref: '#/components/schemas/security.v4.0.b1.report.StigStatus'
+          comments:
+            maxLength: 499
+            type: string
+            description: The comments to explain why a STIG rule applies or does not
+              apply to the cluster.
+            readOnly: true
+            example: |
+              Skipping this check due to its long runtime. This check typically exceeds acceptable execution time limits and impacts overall performance. Ensure this check is performed manually or through an alternative method.
+          fixText:
+            maxLength: 499
+            type: string
+            description: The command/steps to fix the STIG rule failure.
+            readOnly: true
+            example: |
+              Remove any found \".shosts\" files from the system.\n\n$ sudo rm /[path]/[to]/[file]/.shosts
+          benchmarkId:
+            pattern: ^RHEL_\d+_V\d+R\d+$
+            type: string
+            description: Benchmark ID of the STIG rules.
+            readOnly: true
+            example: RHEL_8_V1R11
+        additionalProperties: false
+    security.v4.0.b1.report.Severity:
+      title: Contains possible types of severity.
+      type: string
+      description: Contains possible values for the severity level of a vulnerability.
+      enum:
+      - CRITICAL
+      - HIGH
+      - MEDIUM
+      - LOW
+      - $UNKNOWN
+      - $REDACTED
+      x-enumDescriptions:
+        HIGH: Severity level high.
+        MEDIUM: Severity level medium.
+        LOW: Severity level low.
+        $UNKNOWN: |
+          Unknown value.
+        CRITICAL: Severity level critical.
+        $REDACTED: |
+          Redacted value.
+    security.v4.0.b1.report.StigStatus:
+      title: Applicability status of the STIG rules.
+      type: string
+      description: Indicates if any clusters have failed a STIG control.
+      enum:
+      - APPLICABLE
+      - NOT_APPLICABLE
+      - NEEDS_REVIEW
+      - $UNKNOWN
+      - $REDACTED
+      x-enumDescriptions:
+        NOT_APPLICABLE: STIG is not applicable.
+        NEEDS_REVIEW: STIG application needs a review.
+        $UNKNOWN: |
+          Unknown value.
+        $REDACTED: |
+          Redacted value.
+        APPLICABLE: STIG is applicable.
+    security.v4.0.b1.report.Summary:
+      title: Security summary for a single cluster
+      description: Number of security related issues for a single cluster
+      allOf:
+      - $ref: '#/components/schemas/common.v1.0.response.ExternalizableAbstractModel'
+      - type: object
+        properties:
+          clusterExtId:
+            pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+            type: string
+            description: UUID for the cluster.
+            readOnly: true
+            example: 193be467-5986-4362-927c-5c48e617ad8e
+          securityHardeningSummary:
+            $ref: '#/components/schemas/security.v4.0.b1.report.IssueSummary'
+          stigSummary:
+            $ref: '#/components/schemas/security.v4.0.b1.report.IssueSummary'
+          vulnerabilitiesSummary:
+            $ref: '#/components/schemas/security.v4.0.b1.report.IssueSummary'
+          passwordSummary:
+            $ref: '#/components/schemas/security.v4.0.b1.report.IssueSummary'
+          trendType:
+            $ref: '#/components/schemas/security.v4.0.b1.common.Timescale'
+          lastRefreshTime:
+            type: string
+            description: The date the dashboard information was last refreshed
+            format: date-time
+            example: 2009-09-23T14:30:00-07:00
+        additionalProperties: false
+    security.v4.0.b1.report.IssueSummary:
+      title: Object that has the security summary for a single cluster
+      type: object
+      properties:
+        currentIssueCount:
+          type: integer
+          description: The number of current issues for a type
+          example: 36
+        trend:
+          maxItems: 31
+          minItems: 0
+          type: array
+          description: Historical data containing how many issues were present and
+            when
+          items:
+            $ref: '#/components/schemas/security.v4.0.b1.report.TrendValue'
+      additionalProperties: false
+      description: Object that has the security summary for a single cluster
+    security.v4.0.b1.common.Timescale:
+      title: Contains possible values of time.
+      type: string
+      description: Contains potential different duration of time.
+      enum:
+      - DAY
+      - WEEK
+      - MONTH
+      - QUARTER
+      - YEAR
+      - $UNKNOWN
+      - $REDACTED
+      x-enumDescriptions:
+        MONTH: Time duration spanning over a month.
+        QUARTER: Time duration spanning over a quater of a year.
+        YEAR: Time duration spanning over a year.
+        WEEK: Time duration spanning over a week.
+        $UNKNOWN: |
+          Unknown value.
+        DAY: Time duration spanning over a day.
+        $REDACTED: |
+          Redacted value.
+    security.v4.0.b1.report.TrendValue:
+      title: Historical data containing how many issues were present and when
+      type: object
+      properties:
+        trend:
+          type: integer
+          description: The number of previous issues at that date
+          example: 41
+        trendDate:
+          type: string
+          description: Date value for trends
+          format: date-time
+          example: 2009-09-23T14:30:00-07:00
+      additionalProperties: false
+      description: Historical data containing how many issues were present and when
+    security.v4.0.b1.report.VulnerabilitySummary:
+      title: Cluster vulnerability report
+      description: Cluster vulnerability report
+      allOf:
+      - $ref: '#/components/schemas/common.v1.0.response.ExternalizableAbstractModel'
+      - type: object
+        properties:
+          clusterExtId:
+            pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+            type: string
+            description: UUID for the cluster.
+            readOnly: true
+            example: 8760a6e2-74a1-49cb-b8ef-77920853408d
+          installedVersion:
+            maxLength: 199
+            type: string
+            description: AOS version on that cluster
+            readOnly: true
+            example: "7.0"
+          cveIds:
+            maxItems: 1024
+            minItems: 0
+            type: array
+            description: The CVE ids associated with this CESA
+            readOnly: true
+            items:
+              maxLength: 199
+              type: string
+              example: CVE-2019-1234
+          softwareType:
+            $ref: '#/components/schemas/security.v4.0.b1.report.SoftwareType'
+        additionalProperties: false
+    security.v4.0.b1.report.SoftwareType:
+      title: Contains possible different types of Nutanix software
+      type: string
+      description: "Type of nutanix software, such as PC, PE, AFS, etc."
+      enum:
+      - PC
+      - AOS
+      - AHV
+      - $UNKNOWN
+      - $REDACTED
+      x-enumDescriptions:
+        PC: Software Type Prism Central
+        AOS: Software Type Prism Element
+        $UNKNOWN: |
+          Unknown value.
+        $REDACTED: |
+          Redacted value.
+        AHV: Software Type AHV
+    security.v4.0.b1.report.Vulnerability:
+      title: Vulnerability information
+      description: Contains all relevant information for a vulnerability
+      allOf:
+      - $ref: '#/components/schemas/common.v1.0.response.ExternalizableAbstractModel'
+      - type: object
+        properties:
+          cesaId:
+            maxLength: 199
+            type: string
+            description: The CESA id
+            readOnly: true
+            example: CESA-2021:2147
+          cveIds:
+            maxItems: 1024
+            minItems: 0
+            type: array
+            readOnly: true
+            items:
+              maxLength: 199
+              type: string
+              description: The CVE ids associated with this CESA
+              example: CVE-2019-5678
+          isCritical:
+            type: boolean
+            description: If the vulnerability is critical or not
+            readOnly: true
+            example: false
+          description:
+            maxLength: 499
+            type: string
+            description: The short description of the vulnerability
+            readOnly: true
+          fixVersions:
+            maxItems: 50
+            minItems: 0
+            type: array
+            readOnly: true
+            items:
+              maxLength: 199
+              type: string
+              description: The AOS versions where the vulnerability was fixed
+              example: 6.0.1
+          severity:
+            $ref: '#/components/schemas/security.v4.0.b1.report.Severity'
+          nxvdVersion:
+            maxLength: 199
+            type: string
+            description: Version of NXVD data used to calculate vulnerabilities
+            readOnly: true
+            example: 2024.03.1
+          nxvdCreatedTime:
+            type: string
+            description: Date of creation of NXVD data used to calculate vulnerabilities
+            format: date-time
+            readOnly: true
+            example: 2009-09-23T14:30:00-07:00
+        additionalProperties: false
+    common.v1.0.response.ExternalizableAbstractModel:
+      description: |
+        A model that represents an object instance that is accessible through an API endpoint.  Instances of this type get an extId field that contains the globally unique identifier for that instance.  Externally accessible instances are always tenant aware and, therefore, extend the TenantAwareModel
+      allOf:
+      - $ref: '#/components/schemas/common.v1.0.config.TenantAwareModel'
+      - type: object
+        properties:
+          extId:
+            pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+            type: string
+            description: |
+              A globally unique identifier of an instance that is suitable for external consumption.
+            nullable: true
+            readOnly: true
+            example: 4311c6c0-15f3-4d88-8732-aa70626b7072
+          links:
+            maxItems: 20
+            minItems: 0
+            type: array
+            description: |
+              A HATEOAS style link for the response.  Each link contains a user-friendly name identifying the link and an address for retrieving the particular resource.
+            readOnly: true
+            items:
+              $ref: '#/components/schemas/common.v1.0.response.ApiLink'
+        additionalProperties: false
+    common.v1.0.config.TenantAwareModel:
+      type: object
+      properties:
+        tenantId:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+          description: |
+            A globally unique identifier that represents the tenant that owns this entity. The system automatically assigns it, and it and is immutable from an API consumer perspective (some use cases may cause this Id to change - For instance, a use case may require the transfer of ownership of the entity, but these cases are handled automatically on the server).
+          readOnly: true
+          example: bd54400f-25a5-4c78-90fb-aebebb6c586c
+      additionalProperties: false
+      description: |
+        A model base class whose instances are bound to a specific tenant.  This model adds a tenantId to the base model class that it extends and is automatically set by the server.
+    common.v1.0.response.ApiLink:
+      type: object
+      properties:
+        href:
+          type: string
+          description: |
+            The URL at which the entity described by the link can be accessed.
+        rel:
+          type: string
+          description: |
+            A name that identifies the relationship of the link to the object that is returned by the URL.  The unique value of "self" identifies the URL for the object.
+      additionalProperties: false
+      description: |
+        A HATEOAS style link for the response.  Each link contains a user-friendly name identifying the link and an address for retrieving the particular resource.
+    iam.v4.0.authn.User:
+      required:
+      - userType
+      - username
+      description: Information of the user.
+      allOf:
+      - $ref: '#/components/schemas/common.v1.0.response.ExternalizableAbstractModel'
+      - type: object
+        properties:
+          username:
+            maxLength: 255
+            minLength: 1
+            pattern: "^[^<>;'()&+%\\/\\\\\"`]*$"
+            type: string
+            description: Identifier of the user.
+          userType:
+            $ref: '#/components/schemas/iam.v4.0.authn.UserType'
+          idpId:
+            pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+            type: string
+            description: Identifier of the IDP for the user.
+            example: 669a816c-b3d0-4116-bde5-dadd00335951
+          displayName:
+            maxLength: 255
+            minLength: 1
+            pattern: "^[^<>;'()&+%\\/\\\\\"`]*$"
+            type: string
+            description: "Display name of the user. For LDAP and SAML users, this\
+              \ is set from AD config."
+          firstName:
+            maxLength: 255
+            minLength: 1
+            pattern: "^[^<>;'()&+%\\/\\\\\"`]*$"
+            type: string
+            description: First name of the user.
+          middleInitial:
+            maxLength: 255
+            minLength: 1
+            pattern: "^[^<>;'()&+%\\/\\\\\"`]*$"
+            type: string
+            description: Middle name of the user.
+          lastName:
+            maxLength: 255
+            minLength: 1
+            pattern: "^[^<>;'()&+%\\/\\\\\"`]*$"
+            type: string
+            description: Last name of the user.
+          emailId:
+            maxLength: 255
+            pattern: "^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,5})$"
+            type: string
+            description: Email ID of the user.
+            example: john.doe@example.com
+          locale:
+            type: string
+            description: Default locale of the user.
+          region:
+            type: string
+            description: Default region of the user.
+          password:
+            type: string
+            description: Password of the user.
+            writeOnly: true
+          isForceResetPasswordEnabled:
+            type: boolean
+            description: Flag to force the user to reset password.
+            example: true
+          additionalAttributes:
+            maxItems: 10
+            minItems: 0
+            type: array
+            description: Indicates additional attributes of the user.
+            items:
+              $ref: '#/components/schemas/common.v1.0.config.KVPair'
+          status:
+            $ref: '#/components/schemas/iam.v4.0.authn.UserStatusType'
+          bucketsAccessKeys:
+            maxItems: 5
+            minItems: 0
+            type: array
+            description: Bucket access keys for the user.
+            readOnly: true
+            items:
+              $ref: '#/components/schemas/iam.v4.0.authn.BucketsAccessKey'
+          lastLoginTime:
+            type: string
+            description: The last successful login time for the user.
+            format: date-time
+            readOnly: true
+            example: 2009-09-23T14:30:00-07:00
+          createdTime:
+            type: string
+            description: Creation time of the user.
+            format: date-time
+            readOnly: true
+            example: 2009-09-23T14:30:00-07:00
+          lastUpdatedTime:
+            type: string
+            description: The last updated time for the user.
+            format: date-time
+            readOnly: true
+            example: 2009-09-23T14:30:00-07:00
+          createdBy:
+            pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+            type: string
+            description: User or Service who created the user.
+            readOnly: true
+            example: cb18871e-2f5a-40c3-be58-755eb46453ad
+          lastUpdatedBy:
+            pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+            type: string
+            description: Last updated by this user ID.
+            readOnly: true
+            example: abe1e57b-7b7a-42ba-9563-11a0beda5d9d
+          description:
+            type: string
+            description: Description of the user.
+            readOnly: false
+          creationType:
+            $ref: '#/components/schemas/iam.v4.0.authn.CreationType'
+        additionalProperties: false
+    common.v1.0.config.KVPair:
+      type: object
+      properties:
+        name:
+          maxLength: 128
+          minLength: 3
+          type: string
+          description: |
+            The key of the key-value pair.
+        value:
+          description: The value associated with the key for this key-value pair
+          oneOf:
+          - type: string
+            description: |
+              A string value in a key-value pair.
+          - type: integer
+            description: |
+              An integer value in a key-value pair.
+            example: 74
+          - type: boolean
+            description: |
+              An boolean value in a key-value pair.
+            example: true
+          - maxItems: 100
+            minItems: 0
+            type: array
+            description: |
+              A value in a key-value pair that represents a list of strings.
+            items:
+              type: string
+          - type: object
+            additionalProperties:
+              type: string
+            description: |
+              A value in a key-value pair that represents a map of string keys and values.
+          - maxItems: 20
+            minItems: 0
+            type: array
+            description: |
+              A value in a key-value pair that represents an array of maps of string keys and values.
+            items:
+              $ref: '#/components/schemas/common.v1.0.config.MapOfStringWrapper'
+          - maxItems: 100
+            minItems: 0
+            type: array
+            description: |
+              A value in a key-value pair that represents a list of integers.
+            items:
+              type: integer
+              example: 79
+      additionalProperties: false
+      description: |
+        A map describing a set of keys and their corresponding values.
+    common.v1.0.config.MapOfStringWrapper:
+      type: object
+      properties:
+        map:
+          type: object
+          additionalProperties:
+            type: string
+          description: |
+            A map with string keys and values.
+      additionalProperties: false
+      description: |
+        A wrapper schema containing a map with string keys and values.
+    iam.v4.0.authn.UserType:
+      type: string
+      description: "User type like SAML user or local user, and so on."
+      enum:
+      - LOCAL
+      - SAML
+      - LDAP
+      - EXTERNAL
+      - SERVICE_ACCOUNT
+      - $UNKNOWN
+      - $REDACTED
+      x-enumDescriptions:
+        SERVICE_ACCOUNT: "User stored locally in IAM and is used by customer applications,\
+          \ scripts and internal services."
+        LDAP: User belonging to a directory service (OpenLDAP/AD).
+        EXTERNAL: User not stored locally nor belonging to any IDP or directory service.
+        LOCAL: User stored locally in IAM.
+        SAML: User belonging to a SAML IDP.
+        $UNKNOWN: |
+          Unknown value.
+        $REDACTED: |
+          Redacted value.
+    iam.v4.0.authn.UserStatusType:
+      type: string
+      description: Status of the user.
+      enum:
+      - ACTIVE
+      - INACTIVE
+      - $UNKNOWN
+      - $REDACTED
+      x-enumDescriptions:
+        ACTIVE: Denotes that the local user is active.
+        INACTIVE: Denotes that the local user is inactive and needs to be reactivated.
+        $UNKNOWN: |
+          Unknown value.
+        $REDACTED: |
+          Redacted value.
+    iam.v4.0.authn.BucketsAccessKey:
+      description: Information of bucket access key.
+      allOf:
+      - $ref: '#/components/schemas/common.v1.0.response.ExternalizableAbstractModel'
+      - required:
+        - accessKeyName
+        type: object
+        properties:
+          accessKeyName:
+            maxLength: 255
+            minLength: 1
+            pattern: "^[^<>;'()&+%\\/\\\\\"`]*$"
+            type: string
+            description: Name of the bucket access key.
+          secretAccessKey:
+            type: string
+            description: "This represents secret access key, which will be returned\
+              \ only during access key creation."
+            readOnly: true
+          userId:
+            pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+            type: string
+            description: User identifier who owns the bucket access key.
+            readOnly: true
+            example: 1cd8730b-5321-4afd-9311-ddd12ee5d8c5
+          createdTime:
+            type: string
+            description: Creation time for the bucket access key.
+            format: date-time
+            readOnly: true
+            example: 2009-09-23T14:30:00-07:00
+          lastUpdatedBy:
+            pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+            type: string
+            description: Entity that updated the buckets access key.
+            readOnly: true
+            example: b22b31c5-460c-40c1-9441-7c81f6dececf
+          assignedTo:
+            maxLength: 255
+            minLength: 3
+            type: string
+            description: External client to whom this key is allocated.
+          creationType:
+            $ref: '#/components/schemas/iam.v4.0.authn.CreationType'
+          expiryTime:
+            type: string
+            description: The expiry time of the buckets access Key.
+            format: date-time
+            example: 2009-09-23T14:30:00-07:00
+          status:
+            $ref: '#/components/schemas/iam.v4.0.authn.BucketsAccessKeyStatusType'
+          createdBy:
+            pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+            type: string
+            description: Service account user who created the buckets access key.
+            readOnly: true
+            example: bbf0e796-da2f-4eb4-a6e6-bfc74c51a9bf
+          lastUpdatedTime:
+            type: string
+            description: Creation time for the bucket access key.
+            format: date-time
+            readOnly: true
+            example: 2009-09-23T14:30:00-07:00
+        additionalProperties: false
+    iam.v4.0.authn.CreationType:
+      type: string
+      description: The creation mechanism of this entity.
+      enum:
+      - PREDEFINED
+      - USERDEFINED
+      - SERVICEDEFINED
+      - $UNKNOWN
+      - $REDACTED
+      x-enumDescriptions:
+        PREDEFINED: Predefined creator workflow type is for entity created by the
+          system.
+        SERVICEDEFINED: Servicedefined creator workflow type is for entity created
+          by the service.
+        USERDEFINED: Userdefined creator workflow type is for entity created by the
+          users.
+        $UNKNOWN: |
+          Unknown value.
+        $REDACTED: |
+          Redacted value.
+    iam.v4.0.authn.BucketsAccessKeyStatusType:
+      type: string
+      description: "The status of the buckets access key, that is, valid, expired\
+        \ or revoked."
+      enum:
+      - VALID
+      - REVOKED
+      - EXPIRED
+      - $UNKNOWN
+      - $REDACTED
+      x-enumDescriptions:
+        REVOKED: Buckets access key is revoked.
+        VALID: Buckets access key is valid.
+        EXPIRED: Buckets access key is expired.
+        $UNKNOWN: |
+          Unknown value.
+        $REDACTED: |
+          Redacted value.
+    security.v4.0.b1.error.ErrorResponse:
+      type: object
+      properties:
+        error:
+          oneOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/security.v4.0.b1.error.AppMessage'
+          - $ref: '#/components/schemas/security.v4.0.b1.error.SchemaValidationError'
+      additionalProperties: false
+      description: An error response indicates that the operation has failed either
+        due to a client error(4XX) or server error(5XX). Please look at the HTTP status
+        code and namespace specific error code and error message for further details.
+      x-platform-generated: true
+    security.v4.0.b1.error.MessageSeverity:
+      type: string
+      description: Enum schema MessageSeverity
+      enum:
+      - INFO
+      - WARNING
+      - ERROR
+      - $UNKNOWN
+      - $REDACTED
+      x-platform-generated: true
+      x-codegen-hint:
+        $any:
+        - type: entity-identifier
+          properties:
+            identifiers:
+            - value: $UNKNOWN
+              index: 201
+            - value: $REDACTED
+              index: 202
+            - value: INFO
+              index: 203
+            - value: WARNING
+              index: 204
+            - value: ERROR
+              index: 205
+    security.v4.0.b1.error.SchemaValidationError:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          description: Timestamp of the response.
+          format: date-time
+          example: 2009-09-23T14:30:00-07:00
+        statusCode:
+          type: integer
+          description: The HTTP status code of the response.
+          example: 22
+        error:
+          type: string
+          description: The generic error message for the response.
+        path:
+          type: string
+          description: API path on which the request was made.
+        validationErrorMessages:
+          type: array
+          description: List of validation error messages
+          items:
+            $ref: '#/components/schemas/security.v4.0.b1.error.SchemaValidationErrorMessage'
+      additionalProperties: false
+      description: This schema is generated from SchemaValidationError.java
+      x-platform-generated: true
+    security.v4.0.b1.error.SchemaValidationErrorMessage:
+      type: object
+      properties:
+        location:
+          type: string
+          description: "The part of the request that failed validation. Validation\
+            \ can fail for path, query parameters, and request body."
+        message:
+          type: string
+          description: The detailed message for the validation error.
+        attributePath:
+          type: string
+          description: The path of the attribute that failed validation in the schema.
+      additionalProperties: false
+      description: This schema is generated from SchemaValidationErrorMessage.java
+      x-platform-generated: true
+    common.v1.0.response.ApiResponseMetadata:
+      type: object
+      properties:
+        flags:
+          maxItems: 20
+          minItems: 0
+          type: array
+          description: |
+            An array of flags that may indicate the status of the response. For example, a flag with the name 'isPaginated' and value 'false', indicates that the response is not paginated.
+          items:
+            $ref: '#/components/schemas/common.v1.0.config.Flag'
+        links:
+          maxItems: 20
+          minItems: 0
+          type: array
+          description: |
+            An array of HATEOAS style links for the response that may also include pagination links for list operations.
+          items:
+            $ref: '#/components/schemas/common.v1.0.response.ApiLink'
+        totalAvailableResults:
+          type: integer
+          description: |
+            The total number of entities that are available on the server for this type.
+          format: int32
+          example: 26
+        messages:
+          maxItems: 20
+          minItems: 0
+          type: array
+          description: |
+            Information, Warning or Error messages that might provide additional contextual information related to the operation.
+          items:
+            $ref: '#/components/schemas/common.v1.0.config.Message'
+        extraInfo:
+          maxItems: 20
+          minItems: 0
+          type: array
+          description: |
+            An array of entity-specific metadata
+          items:
+            $ref: '#/components/schemas/common.v1.0.config.KVPair'
+      additionalProperties: false
+      description: |
+        The metadata associated with an API response. This value is always present and minimally contains the self-link for the API request that produced this response. It also contains pagination data for the paginated requests.
+    common.v1.0.config.Flag:
+      type: object
+      properties:
+        name:
+          maxLength: 128
+          minLength: 3
+          type: string
+          description: |
+            Name of the flag.
+        value:
+          type: boolean
+          description: |
+            Value of the flag.
+          default: false
+      additionalProperties: false
+      description: |
+        Many entities in the Nutanix APIs carry flags.  This object captures all the flags associated with that entity through this object.  The field that hosts this type of object must have an attribute called x-bounded-map-keys that tells which flags are actually present for that entity.
+    common.v1.0.config.Message:
+      type: object
+      properties:
+        code:
+          type: string
+          description: |
+            A code that uniquely identifies a message.
+        message:
+          type: string
+          description: |
+            The description of the message.
+        locale:
+          type: string
+          description: |
+            The locale for the message description.
+          default: en_US
+        severity:
+          $ref: '#/components/schemas/common.v1.0.config.MessageSeverity'
+      additionalProperties: false
+    common.v1.0.config.MessageSeverity:
+      type: string
+      description: |
+        The message severity.
+      enum:
+      - INFO
+      - WARNING
+      - ERROR
+      - $UNKNOWN
+      - $REDACTED
+      x-enumDescriptions:
+        ERROR: |
+          Error indicating failed completion.
+        INFO: |
+          Information about successful completion.
+        $UNKNOWN: |
+          Unknown value.
+        WARNING: |
+          Warning indicating future error.
+        $REDACTED: |
+          Redacted value.
+    prism.v4.0.config.TaskReference:
+      type: object
+      properties:
+        extId:
+          pattern: "^[a-zA-Z0-9/+]*={0,2}:[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"
+          type: string
+          description: A globally unique identifier of a task.
+          example: QmFzZTY0RW5jb2RlZA==:1ebb58ed-e1f8-4415-9f6f-43731f344073
+      additionalProperties: false
+      description: A reference to a task tracking an asynchronous operation. The status
+        of the task can be queried by making a GET request to the task URI provided
+        in the metadata section of the API response.
+  securitySchemes:
+    basicAuthScheme:
+      type: http
+      scheme: basic
+    apiKeyAuthScheme:
+      type: apiKey
+      name: X-ntnx-api-key
+      in: header

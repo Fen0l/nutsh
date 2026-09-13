@@ -1,0 +1,1823 @@
+[
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "6ba638e5-befc-467f-5833-f4f60e059fc4",
+    "operationType": "INVENTORY",
+    "startTime": "2026-07-16T14:57:16.875935Z",
+    "endTime": "2026-07-16T15:07:37.093071Z",
+    "operationStatus": "SUCCEEDED",
+    "frameworkVersion": "3.3.74044",
+    "clusterName": "clusterName-374e2484",
+    "clusterExtId": "000656bb-5516-939c-0000-00000001c1ce"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "017dfdfc-08a9-4124-7c37-546f176c3361",
+    "operationInfo": {
+      "$objectType": "lifecycle.v4.resources.UpgradeInfo",
+      "componentDetails": [
+        {
+          "$objectType": "lifecycle.v4.resources.ComponentDetails",
+          "extId": "aa329586-94f3-4740-b0cd-6267b5980e83",
+          "groupUuid": "0fabb7e6-41c3-48f6-8b49-1cc0c6b06a11",
+          "entityClass": "Hypervisor",
+          "entityModel": "AHV hypervisor",
+          "entityType": "SOFTWARE",
+          "entityVersion": "el8.nutanix.20230302.100187",
+          "locationInfo": {
+            "uuid": "40e34298-61e8-4e6d-8922-8caa22bb5c7f",
+            "$objectType": "lifecycle.v4.common.LocationInfo",
+            "locationType": "NODE"
+          },
+          "upgradedVersion": "10.0.1.6",
+          "upgradeStatus": "SUCCEEDED"
+        }
+      ]
+    },
+    "operationType": "UPGRADE",
+    "startTime": "2026-07-16T15:10:30.371798Z",
+    "endTime": "2026-07-16T16:42:01.308528Z",
+    "operationStatus": "SUCCEEDED",
+    "frameworkVersion": "3.3.1.1.79152",
+    "clusterName": "clusterName-374e2484",
+    "clusterExtId": "000656bb-5516-939c-0000-00000001c1ce"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "fe626eae-69bb-4422-496b-71fdd91a33c4",
+    "operationType": "INVENTORY",
+    "startTime": "2026-07-17T07:11:51.490768Z",
+    "endTime": "2026-07-17T07:19:59.939114Z",
+    "operationStatus": "SUCCEEDED",
+    "frameworkVersion": "3.3.1.1.79152",
+    "clusterName": "clusterName-374e2484",
+    "clusterExtId": "000656bb-5516-939c-0000-00000001c1ce"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "2eda00fd-745e-4309-4487-d0d49115cd71",
+    "operationInfo": {
+      "$objectType": "lifecycle.v4.resources.UpgradeInfo",
+      "componentDetails": [
+        {
+          "$objectType": "lifecycle.v4.resources.ComponentDetails",
+          "extId": "aa329586-94f3-4740-b0cd-6267b5980e83",
+          "groupUuid": "567c3b38-ba60-4668-914a-82e7d6bc2e1d",
+          "entityClass": "Hypervisor",
+          "entityModel": "AHV hypervisor",
+          "entityType": "SOFTWARE",
+          "entityVersion": "10.0.1.6",
+          "locationInfo": {
+            "uuid": "40e34298-61e8-4e6d-8922-8caa22bb5c7f",
+            "$objectType": "lifecycle.v4.common.LocationInfo",
+            "locationType": "NODE"
+          },
+          "upgradedVersion": "11.0",
+          "upgradeStatus": "SUCCEEDED"
+        }
+      ]
+    },
+    "operationType": "UPGRADE",
+    "startTime": "2026-07-17T08:19:55.214162Z",
+    "endTime": "2026-07-17T09:21:42.741545Z",
+    "operationStatus": "SUCCEEDED",
+    "frameworkVersion": "3.3.1.1.79152",
+    "clusterName": "clusterName-374e2484",
+    "clusterExtId": "000656bb-5516-939c-0000-00000001c1ce"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "b1fc3c7f-a5ea-5434-a906-29046c3f179c",
+    "operationType": "INVENTORY",
+    "startTime": "2026-07-17T08:22:35.613281Z",
+    "endTime": "2026-07-17T08:26:40.94752Z",
+    "operationStatus": "SUCCEEDED",
+    "frameworkVersion": "3.3.1.77998",
+    "clusterName": "clusterName-782ea7e4",
+    "userInfo": {
+      "$objectType": "lifecycle.v4.resources.UserInfo",
+      "userName": "userName-da328454",
+      "userUuid": "00000000-0000-0000-0000-000000000000"
+    },
+    "clusterExtId": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "35e8ec84-9f1d-5664-899d-79cad84313ca",
+    "operationInfo": {
+      "$objectType": "lifecycle.v4.resources.UpgradeInfo",
+      "componentDetails": [
+        {
+          "$objectType": "lifecycle.v4.resources.ComponentDetails",
+          "extId": "514e5e2f-f8ab-45ee-b4e2-85af955c601d",
+          "entityClass": "Core Cluster",
+          "entityModel": "NCC",
+          "entityType": "SOFTWARE",
+          "entityVersion": "5.3.1",
+          "locationInfo": {
+            "uuid": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b",
+            "$objectType": "lifecycle.v4.common.LocationInfo",
+            "locationType": "CLUSTER",
+            "locationName": "locationName-782ea7e4"
+          },
+          "upgradedVersion": "5.3.1.1",
+          "upgradeStatus": "SUCCEEDED"
+        },
+        {
+          "extId": "decc0ef1-c92f-4eec-a2f0-0cfa6f754326",
+          "entityClass": "PC Core Cluster",
+          "entityModel": "Security Dashboard CVE Data",
+          "entityType": "SOFTWARE",
+          "entityVersion": "2024.03.1",
+          "locationInfo": {
+            "uuid": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b",
+            "$objectType": "lifecycle.v4.common.LocationInfo",
+            "locationType": "PC",
+            "locationName": "locationName-782ea7e4"
+          },
+          "upgradedVersion": "2026.07.1",
+          "upgradeStatus": "SUCCEEDED"
+        }
+      ]
+    },
+    "operationType": "UPGRADE",
+    "startTime": "2026-07-17T08:28:06.605712Z",
+    "endTime": "2026-07-17T08:34:16.100572Z",
+    "operationStatus": "SUCCEEDED",
+    "frameworkVersion": "3.3.1.1.79152",
+    "clusterName": "clusterName-782ea7e4",
+    "userInfo": {
+      "$objectType": "lifecycle.v4.resources.UserInfo",
+      "userName": "userName-da328454",
+      "userUuid": "00000000-0000-0000-0000-000000000000"
+    },
+    "clusterExtId": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "e3f67448-fc22-57f1-8052-f5d3e245718f",
+    "operationType": "INVENTORY",
+    "startTime": "2026-07-17T08:36:24.633157Z",
+    "endTime": "2026-07-17T08:38:33.163887Z",
+    "operationStatus": "SUCCEEDED",
+    "frameworkVersion": "3.3.1.1.79152",
+    "clusterName": "clusterName-782ea7e4",
+    "userInfo": {
+      "$objectType": "lifecycle.v4.resources.UserInfo",
+      "userName": "userName-da328454",
+      "userUuid": "00000000-0000-0000-0000-000000000000"
+    },
+    "clusterExtId": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "42cbebb2-9d33-5f5f-b7ed-13b5c1fefd89",
+    "operationInfo": {
+      "$objectType": "lifecycle.v4.resources.UpgradeInfo",
+      "componentDetails": [
+        {
+          "$objectType": "lifecycle.v4.resources.ComponentDetails",
+          "extId": "94a05f8f-9809-48e3-90b9-0443adb980aa",
+          "groupUuid": "f3a9f463-1ac3-4b53-b62e-1b54e306def5",
+          "entityClass": "PC Service",
+          "entityModel": "Marketplace Bundle",
+          "entityType": "SOFTWARE",
+          "entityVersion": "4.3.3",
+          "locationInfo": {
+            "uuid": "cf21584c-5e39-4208-a975-c28007cfb7d7",
+            "$objectType": "lifecycle.v4.common.LocationInfo",
+            "locationType": "NODE"
+          },
+          "upgradedVersion": "4.3.5",
+          "upgradeStatus": "SUCCEEDED"
+        }
+      ]
+    },
+    "operationType": "UPGRADE",
+    "startTime": "2026-07-17T08:39:14.156725Z",
+    "endTime": "2026-07-17T08:41:05.532727Z",
+    "operationStatus": "SUCCEEDED",
+    "frameworkVersion": "3.3.1.1.79152",
+    "clusterName": "clusterName-782ea7e4",
+    "userInfo": {
+      "$objectType": "lifecycle.v4.resources.UserInfo",
+      "userName": "userName-da328454",
+      "userUuid": "00000000-0000-0000-0000-000000000000"
+    },
+    "clusterExtId": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "7ed697d2-2f6d-4159-7ba7-edf05a094ca8",
+    "operationType": "INVENTORY",
+    "startTime": "2026-07-18T03:02:47.824758Z",
+    "endTime": "2026-07-18T03:07:04.306917Z",
+    "operationStatus": "SUCCEEDED",
+    "frameworkVersion": "3.3.1.1.79152",
+    "clusterName": "clusterName-374e2484",
+    "clusterExtId": "000656bb-5516-939c-0000-00000001c1ce"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "23214c07-79d3-4b7f-7769-e31fdb9f5f47",
+    "operationInfo": {
+      "$objectType": "lifecycle.v4.resources.UpgradeInfo",
+      "componentDetails": [
+        {
+          "$objectType": "lifecycle.v4.resources.ComponentDetails",
+          "extId": "ef34c61a-9c69-492b-8b74-573619204ae4",
+          "entityClass": "Core Cluster",
+          "entityModel": "NCC",
+          "entityType": "SOFTWARE",
+          "entityVersion": "5.3.0",
+          "locationInfo": {
+            "uuid": "000656bb-5516-939c-0000-00000001c1ce",
+            "$objectType": "lifecycle.v4.common.LocationInfo",
+            "locationType": "CLUSTER",
+            "locationName": "locationName-374e2484"
+          },
+          "upgradedVersion": "5.3.1.1",
+          "upgradeStatus": "SUCCEEDED"
+        }
+      ]
+    },
+    "operationType": "UPGRADE",
+    "startTime": "2026-07-18T03:07:09.413671Z",
+    "endTime": "2026-07-18T03:13:42.271384Z",
+    "operationStatus": "SUCCEEDED",
+    "frameworkVersion": "3.3.1.1.79152",
+    "clusterName": "clusterName-374e2484",
+    "clusterExtId": "000656bb-5516-939c-0000-00000001c1ce"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "b9e7a87c-ec30-4ce7-4e15-184d3336becf",
+    "operationType": "INVENTORY",
+    "startTime": "2026-07-19T03:02:48.046366Z",
+    "endTime": "2026-07-19T03:06:58.197741Z",
+    "operationStatus": "SUCCEEDED",
+    "frameworkVersion": "3.3.1.1.79152",
+    "clusterName": "clusterName-374e2484",
+    "clusterExtId": "000656bb-5516-939c-0000-00000001c1ce"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "0c1268d9-fef7-41a0-67a3-c822f99e170b",
+    "operationType": "INVENTORY",
+    "startTime": "2026-07-20T03:02:48.266124Z",
+    "endTime": "2026-07-20T03:07:00.548614Z",
+    "operationStatus": "SUCCEEDED",
+    "frameworkVersion": "3.3.1.1.79152",
+    "clusterName": "clusterName-374e2484",
+    "clusterExtId": "000656bb-5516-939c-0000-00000001c1ce"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "dc2b4252-5b92-4429-603b-6d51582cad32",
+    "operationType": "INVENTORY",
+    "startTime": "2026-07-21T03:02:48.496758Z",
+    "endTime": "2026-07-21T03:07:02.838185Z",
+    "operationStatus": "SUCCEEDED",
+    "frameworkVersion": "3.3.1.1.79152",
+    "clusterName": "clusterName-374e2484",
+    "clusterExtId": "000656bb-5516-939c-0000-00000001c1ce"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "5b972409-0e14-4b92-4e06-5365b7742f47",
+    "operationType": "INVENTORY",
+    "startTime": "2026-07-22T03:02:48.72628Z",
+    "endTime": "2026-07-22T03:07:02.195566Z",
+    "operationStatus": "SUCCEEDED",
+    "frameworkVersion": "3.3.1.1.79152",
+    "clusterName": "clusterName-374e2484",
+    "clusterExtId": "000656bb-5516-939c-0000-00000001c1ce"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "834f8017-27cf-4c73-674f-bba20231d5a7",
+    "operationType": "INVENTORY",
+    "startTime": "2026-07-23T03:02:48.953514Z",
+    "endTime": "2026-07-23T03:09:59.518129Z",
+    "operationStatus": "SUCCEEDED",
+    "frameworkVersion": "3.3.1.1.79152",
+    "clusterName": "clusterName-374e2484",
+    "clusterExtId": "000656bb-5516-939c-0000-00000001c1ce"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "c7cc50c3-6d13-452c-7477-36c668d50745",
+    "operationType": "INVENTORY",
+    "startTime": "2026-07-24T03:05:39.183878Z",
+    "endTime": "2026-07-24T03:09:24.837527Z",
+    "operationStatus": "SUCCEEDED",
+    "compatibilityBundleVersion": "pm.2026.28792",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-374e2484",
+    "clusterExtId": "000656bb-5516-939c-0000-00000001c1ce"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "0e95bbea-4082-4d8f-5e4f-70f31a8419c3",
+    "operationType": "INVENTORY",
+    "startTime": "2026-07-25T03:05:39.408874Z",
+    "endTime": "2026-07-25T03:09:34.684964Z",
+    "operationStatus": "SUCCEEDED",
+    "compatibilityBundleVersion": "pm.2026.28792",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-374e2484",
+    "clusterExtId": "000656bb-5516-939c-0000-00000001c1ce"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "a498178a-7470-4b36-7f66-60b8e6a69cb9",
+    "operationType": "INVENTORY",
+    "startTime": "2026-07-26T03:05:39.629064Z",
+    "endTime": "2026-07-26T03:09:30.489149Z",
+    "operationStatus": "SUCCEEDED",
+    "compatibilityBundleVersion": "pm.2026.28792",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-374e2484",
+    "clusterExtId": "000656bb-5516-939c-0000-00000001c1ce"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "b63c769d-5423-4bf3-6ba3-97fde55c1252",
+    "operationType": "INVENTORY",
+    "startTime": "2026-07-27T03:05:39.85377Z",
+    "endTime": "2026-07-27T03:09:30.571147Z",
+    "operationStatus": "SUCCEEDED",
+    "compatibilityBundleVersion": "pm.2026.28792",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-374e2484",
+    "clusterExtId": "000656bb-5516-939c-0000-00000001c1ce"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "1fca1136-2b29-5d72-82f5-e3bdbfe6002a",
+    "operationType": "INVENTORY",
+    "startTime": "2026-07-27T11:51:37.41227Z",
+    "endTime": "2026-07-27T11:56:24.219902Z",
+    "operationStatus": "SUCCEEDED",
+    "frameworkVersion": "3.3.1.1.79152",
+    "clusterName": "clusterName-782ea7e4",
+    "userInfo": {
+      "$objectType": "lifecycle.v4.resources.UserInfo",
+      "userName": "userName-f945369e",
+      "userUuid": "08f0dcd1-3a70-57a1-b84b-97d8e7b270fc"
+    },
+    "clusterExtId": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "74f1e7f0-12ca-54bf-bce3-50b51fd1ab21",
+    "operationInfo": {
+      "$objectType": "lifecycle.v4.resources.UploadInfo",
+      "name": "name-07edba54",
+      "type": "SOFTWARE"
+    },
+    "operationType": "UPLOAD",
+    "startTime": "2026-07-27T12:40:24.489814Z",
+    "endTime": "2026-07-27T12:49:36.953301Z",
+    "operationStatus": "SUCCEEDED",
+    "compatibilityBundleVersion": "pm.2026.28792",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-782ea7e4",
+    "userInfo": {
+      "$objectType": "lifecycle.v4.resources.UserInfo",
+      "userName": "userName-f945369e",
+      "userUuid": "08f0dcd1-3a70-57a1-b84b-97d8e7b270fc"
+    },
+    "clusterExtId": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "372ee421-ed0c-547d-a2b6-94c1ebcc28fb",
+    "operationInfo": {
+      "$objectType": "lifecycle.v4.resources.UpgradeInfo",
+      "componentDetails": [
+        {
+          "$objectType": "lifecycle.v4.resources.ComponentDetails",
+          "extId": "afa56f60-e1dd-45c6-beed-417cedada93c",
+          "entityClass": "PC Core Cluster",
+          "entityModel": "PC",
+          "entityType": "SOFTWARE",
+          "entityVersion": "pc.7.5.1.8",
+          "locationInfo": {
+            "uuid": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b",
+            "$objectType": "lifecycle.v4.common.LocationInfo",
+            "locationType": "PC",
+            "locationName": "locationName-782ea7e4"
+          },
+          "upgradedVersion": "pc.7.6",
+          "upgradeStatus": "QUEUED"
+        }
+      ]
+    },
+    "operationType": "UPGRADE",
+    "startTime": "2026-07-27T13:00:21.432017Z",
+    "endTime": "2026-07-27T13:08:29.484679Z",
+    "operationStatus": "FAILED",
+    "compatibilityBundleVersion": "pm.2026.28792",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-782ea7e4",
+    "userInfo": {
+      "$objectType": "lifecycle.v4.resources.UserInfo",
+      "userName": "userName-f945369e",
+      "userUuid": "08f0dcd1-3a70-57a1-b84b-97d8e7b270fc"
+    },
+    "clusterExtId": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "9233e7c9-5291-4ca2-55ff-89a37d0921d9",
+    "operationType": "INVENTORY",
+    "startTime": "2026-07-28T03:05:40.083095Z",
+    "endTime": "2026-07-28T03:09:32.16557Z",
+    "operationStatus": "SUCCEEDED",
+    "compatibilityBundleVersion": "pm.2026.28792",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-374e2484",
+    "clusterExtId": "000656bb-5516-939c-0000-00000001c1ce"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "773212e6-462a-4221-6e55-ee4624b9295f",
+    "operationType": "INVENTORY",
+    "startTime": "2026-07-29T03:05:40.305408Z",
+    "endTime": "2026-07-29T03:09:32.186688Z",
+    "operationStatus": "SUCCEEDED",
+    "compatibilityBundleVersion": "pm.2026.28899",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-374e2484",
+    "clusterExtId": "000656bb-5516-939c-0000-00000001c1ce"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "ce9e193f-2d25-5eaa-a349-bc06ce49fba9",
+    "operationType": "INVENTORY",
+    "startTime": "2026-07-29T07:03:52.502027Z",
+    "endTime": "2026-07-29T07:06:37.222537Z",
+    "operationStatus": "SUCCEEDED",
+    "compatibilityBundleVersion": "pm.2026.28792",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-782ea7e4",
+    "userInfo": {
+      "$objectType": "lifecycle.v4.resources.UserInfo",
+      "userName": "userName-da328454",
+      "userUuid": "00000000-0000-0000-0000-000000000000"
+    },
+    "clusterExtId": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "24b96054-bf8b-53a7-8043-9b7c9d1d70a7",
+    "operationInfo": {
+      "$objectType": "lifecycle.v4.resources.UpgradeInfo",
+      "componentDetails": [
+        {
+          "$objectType": "lifecycle.v4.resources.ComponentDetails",
+          "extId": "a4f8346a-040b-4ff0-95ac-c7c535623da2",
+          "groupUuid": "aa1e0925-c79f-43be-95b7-01b5b7b8db0c",
+          "entityClass": "PC Service",
+          "entityModel": "MSP",
+          "entityType": "SOFTWARE",
+          "entityVersion": "3.0.1.8",
+          "locationInfo": {
+            "uuid": "cf21584c-5e39-4208-a975-c28007cfb7d7",
+            "$objectType": "lifecycle.v4.common.LocationInfo",
+            "locationType": "NODE"
+          },
+          "upgradedVersion": "3.1.0.0",
+          "upgradeStatus": "QUEUED"
+        },
+        {
+          "extId": "afa56f60-e1dd-45c6-beed-417cedada93c",
+          "entityClass": "PC Core Cluster",
+          "entityModel": "PC",
+          "entityType": "SOFTWARE",
+          "entityVersion": "pc.7.5.1.8",
+          "locationInfo": {
+            "uuid": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b",
+            "$objectType": "lifecycle.v4.common.LocationInfo",
+            "locationType": "PC",
+            "locationName": "locationName-782ea7e4"
+          },
+          "upgradedVersion": "pc.7.6",
+          "upgradeStatus": "QUEUED"
+        }
+      ]
+    },
+    "operationType": "UPGRADE",
+    "startTime": "2026-07-29T07:09:32.257436Z",
+    "endTime": "2026-07-29T07:26:15.419764Z",
+    "operationStatus": "FAILED",
+    "compatibilityBundleVersion": "pm.2026.28916",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-782ea7e4",
+    "userInfo": {
+      "$objectType": "lifecycle.v4.resources.UserInfo",
+      "userName": "userName-da328454",
+      "userUuid": "00000000-0000-0000-0000-000000000000"
+    },
+    "clusterExtId": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "2edfb33e-bd82-5a43-b174-7d85ae9664e9",
+    "operationInfo": {
+      "$objectType": "lifecycle.v4.resources.UpgradeInfo",
+      "componentDetails": [
+        {
+          "$objectType": "lifecycle.v4.resources.ComponentDetails",
+          "extId": "a4f8346a-040b-4ff0-95ac-c7c535623da2",
+          "groupUuid": "aa1e0925-c79f-43be-95b7-01b5b7b8db0c",
+          "entityClass": "PC Service",
+          "entityModel": "MSP",
+          "entityType": "SOFTWARE",
+          "entityVersion": "3.0.1.8",
+          "locationInfo": {
+            "uuid": "cf21584c-5e39-4208-a975-c28007cfb7d7",
+            "$objectType": "lifecycle.v4.common.LocationInfo",
+            "locationType": "NODE"
+          },
+          "upgradedVersion": "3.1.0.0",
+          "upgradeStatus": "QUEUED"
+        },
+        {
+          "extId": "afa56f60-e1dd-45c6-beed-417cedada93c",
+          "entityClass": "PC Core Cluster",
+          "entityModel": "PC",
+          "entityType": "SOFTWARE",
+          "entityVersion": "pc.7.5.1.8",
+          "locationInfo": {
+            "uuid": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b",
+            "$objectType": "lifecycle.v4.common.LocationInfo",
+            "locationType": "PC",
+            "locationName": "locationName-782ea7e4"
+          },
+          "upgradedVersion": "pc.7.6",
+          "upgradeStatus": "QUEUED"
+        }
+      ]
+    },
+    "operationType": "UPGRADE",
+    "startTime": "2026-07-29T07:27:57.9681Z",
+    "endTime": "2026-07-29T07:35:07.528573Z",
+    "operationStatus": "FAILED",
+    "compatibilityBundleVersion": "pm.2026.28916",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-782ea7e4",
+    "userInfo": {
+      "$objectType": "lifecycle.v4.resources.UserInfo",
+      "userName": "userName-da328454",
+      "userUuid": "00000000-0000-0000-0000-000000000000"
+    },
+    "clusterExtId": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "5e0a7248-0b25-5c79-8c01-bc1a02c13a7a",
+    "operationInfo": {
+      "$objectType": "lifecycle.v4.resources.UpgradeInfo",
+      "componentDetails": [
+        {
+          "$objectType": "lifecycle.v4.resources.ComponentDetails",
+          "extId": "afa56f60-e1dd-45c6-beed-417cedada93c",
+          "entityClass": "PC Core Cluster",
+          "entityModel": "PC",
+          "entityType": "SOFTWARE",
+          "entityVersion": "pc.7.5.1.8",
+          "locationInfo": {
+            "uuid": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b",
+            "$objectType": "lifecycle.v4.common.LocationInfo",
+            "locationType": "PC",
+            "locationName": "locationName-782ea7e4"
+          },
+          "upgradedVersion": "pc.7.6",
+          "upgradeStatus": "QUEUED"
+        }
+      ]
+    },
+    "operationType": "UPGRADE",
+    "startTime": "2026-07-29T07:59:05.204793Z",
+    "endTime": "2026-07-29T08:06:10.912959Z",
+    "operationStatus": "FAILED",
+    "compatibilityBundleVersion": "pm.2026.28916",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-782ea7e4",
+    "userInfo": {
+      "$objectType": "lifecycle.v4.resources.UserInfo",
+      "userName": "userName-da328454",
+      "userUuid": "00000000-0000-0000-0000-000000000000"
+    },
+    "clusterExtId": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "5cdcd156-0a78-5bbb-8c07-ce532cc12ff0",
+    "operationType": "INVENTORY",
+    "startTime": "2026-07-29T08:27:48.08309Z",
+    "endTime": "2026-07-29T08:30:45.463897Z",
+    "operationStatus": "SUCCEEDED",
+    "compatibilityBundleVersion": "pm.2026.28916",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-782ea7e4",
+    "userInfo": {
+      "$objectType": "lifecycle.v4.resources.UserInfo",
+      "userName": "userName-da328454",
+      "userUuid": "00000000-0000-0000-0000-000000000000"
+    },
+    "clusterExtId": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "f4edc2e5-7997-57bb-819c-5dce0b65bd3b",
+    "operationInfo": {
+      "$objectType": "lifecycle.v4.resources.UpgradeInfo",
+      "componentDetails": [
+        {
+          "$objectType": "lifecycle.v4.resources.ComponentDetails",
+          "extId": "afa56f60-e1dd-45c6-beed-417cedada93c",
+          "entityClass": "PC Core Cluster",
+          "entityModel": "PC",
+          "entityType": "SOFTWARE",
+          "entityVersion": "pc.7.5.1.8",
+          "locationInfo": {
+            "uuid": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b",
+            "$objectType": "lifecycle.v4.common.LocationInfo",
+            "locationType": "PC",
+            "locationName": "locationName-782ea7e4"
+          },
+          "upgradedVersion": "pc.7.6",
+          "upgradeStatus": "QUEUED"
+        }
+      ]
+    },
+    "operationType": "UPGRADE",
+    "startTime": "2026-07-29T08:32:02.727507Z",
+    "endTime": "2026-07-29T08:39:01.110795Z",
+    "operationStatus": "FAILED",
+    "compatibilityBundleVersion": "pm.2026.28916",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-782ea7e4",
+    "userInfo": {
+      "$objectType": "lifecycle.v4.resources.UserInfo",
+      "userName": "userName-da328454",
+      "userUuid": "00000000-0000-0000-0000-000000000000"
+    },
+    "clusterExtId": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "93d6f6ce-24db-551c-80bd-3178dc1278a3",
+    "operationInfo": {
+      "$objectType": "lifecycle.v4.resources.UpgradeInfo",
+      "componentDetails": [
+        {
+          "$objectType": "lifecycle.v4.resources.ComponentDetails",
+          "extId": "afa56f60-e1dd-45c6-beed-417cedada93c",
+          "entityClass": "PC Core Cluster",
+          "entityModel": "PC",
+          "entityType": "SOFTWARE",
+          "entityVersion": "pc.7.5.1.8",
+          "locationInfo": {
+            "uuid": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b",
+            "$objectType": "lifecycle.v4.common.LocationInfo",
+            "locationType": "PC",
+            "locationName": "locationName-782ea7e4"
+          },
+          "upgradedVersion": "pc.7.6",
+          "upgradeStatus": "QUEUED"
+        }
+      ]
+    },
+    "operationType": "UPGRADE",
+    "startTime": "2026-07-29T08:57:52.264211Z",
+    "endTime": "2026-07-29T09:04:52.064173Z",
+    "operationStatus": "FAILED",
+    "compatibilityBundleVersion": "pm.2026.28916",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-782ea7e4",
+    "userInfo": {
+      "$objectType": "lifecycle.v4.resources.UserInfo",
+      "userName": "userName-da328454",
+      "userUuid": "00000000-0000-0000-0000-000000000000"
+    },
+    "clusterExtId": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "2f131a7f-47e4-5e38-b0b1-259e0d0178fc",
+    "operationType": "INVENTORY",
+    "startTime": "2026-07-29T09:14:13.274766Z",
+    "endTime": "2026-07-29T09:16:52.100629Z",
+    "operationStatus": "SUCCEEDED",
+    "compatibilityBundleVersion": "pm.2026.28916",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-782ea7e4",
+    "userInfo": {
+      "$objectType": "lifecycle.v4.resources.UserInfo",
+      "userName": "userName-da328454",
+      "userUuid": "00000000-0000-0000-0000-000000000000"
+    },
+    "clusterExtId": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "2cd5bfc4-1feb-5495-ac99-efb65d1a1719",
+    "operationInfo": {
+      "$objectType": "lifecycle.v4.resources.UpgradeInfo",
+      "componentDetails": [
+        {
+          "$objectType": "lifecycle.v4.resources.ComponentDetails",
+          "extId": "afa56f60-e1dd-45c6-beed-417cedada93c",
+          "entityClass": "PC Core Cluster",
+          "entityModel": "PC",
+          "entityType": "SOFTWARE",
+          "entityVersion": "pc.7.5.1.8",
+          "locationInfo": {
+            "uuid": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b",
+            "$objectType": "lifecycle.v4.common.LocationInfo",
+            "locationType": "PC",
+            "locationName": "locationName-782ea7e4"
+          },
+          "upgradedVersion": "pc.7.6",
+          "upgradeStatus": "QUEUED"
+        }
+      ]
+    },
+    "operationType": "UPGRADE",
+    "startTime": "2026-07-29T09:25:37.270311Z",
+    "endTime": "2026-07-29T09:32:40.528086Z",
+    "operationStatus": "FAILED",
+    "compatibilityBundleVersion": "pm.2026.28916",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-782ea7e4",
+    "userInfo": {
+      "$objectType": "lifecycle.v4.resources.UserInfo",
+      "userName": "userName-da328454",
+      "userUuid": "00000000-0000-0000-0000-000000000000"
+    },
+    "clusterExtId": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "9dcb4bea-807c-5a88-ae73-31be804c0cf7",
+    "operationType": "INVENTORY",
+    "startTime": "2026-07-29T10:49:50.507524Z",
+    "endTime": "2026-07-29T10:50:31.367835Z",
+    "operationStatus": "FAILED",
+    "compatibilityBundleVersion": "pm.2026.28916",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-782ea7e4",
+    "userInfo": {
+      "$objectType": "lifecycle.v4.resources.UserInfo",
+      "userName": "userName-da328454",
+      "userUuid": "00000000-0000-0000-0000-000000000000"
+    },
+    "clusterExtId": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "e605e9e7-8147-556d-81c4-68a7f08e3258",
+    "operationType": "INVENTORY",
+    "startTime": "2026-07-29T11:24:18.065237Z",
+    "endTime": "2026-07-29T11:29:14.442101Z",
+    "operationStatus": "SUCCEEDED",
+    "compatibilityBundleVersion": "pm.2026.28916",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-374e2484",
+    "userInfo": {
+      "$objectType": "lifecycle.v4.resources.UserInfo",
+      "userName": "userName-da328454",
+      "userUuid": "00000000-0000-0000-0000-000000000000"
+    },
+    "clusterExtId": "000656bb-5516-939c-0000-00000001c1ce"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "73c6bd06-9440-5130-8a9e-c94924bb3a68",
+    "operationType": "INVENTORY",
+    "startTime": "2026-07-29T11:24:31.185656Z",
+    "endTime": "2026-07-29T11:25:04.679565Z",
+    "operationStatus": "FAILED",
+    "compatibilityBundleVersion": "pm.2026.28981",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-782ea7e4",
+    "userInfo": {
+      "$objectType": "lifecycle.v4.resources.UserInfo",
+      "userName": "userName-da328454",
+      "userUuid": "00000000-0000-0000-0000-000000000000"
+    },
+    "clusterExtId": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "c6904fca-1377-40ef-6478-da44994d66fe",
+    "operationInfo": {
+      "$objectType": "lifecycle.v4.resources.UpgradeInfo",
+      "componentDetails": [
+        {
+          "$objectType": "lifecycle.v4.resources.ComponentDetails",
+          "extId": "aa329586-94f3-4740-b0cd-6267b5980e83",
+          "groupUuid": "edbbcc88-fbf2-4f22-a275-27f68cfd75e3",
+          "entityClass": "Hypervisor",
+          "entityModel": "AHV hypervisor",
+          "entityType": "SOFTWARE",
+          "entityVersion": "11.0",
+          "locationInfo": {
+            "uuid": "40e34298-61e8-4e6d-8922-8caa22bb5c7f",
+            "$objectType": "lifecycle.v4.common.LocationInfo",
+            "locationType": "NODE"
+          },
+          "upgradedVersion": "11.2",
+          "upgradeStatus": "SUCCEEDED"
+        }
+      ]
+    },
+    "operationType": "UPGRADE",
+    "startTime": "2026-07-29T11:30:59.859563Z",
+    "endTime": "2026-07-29T12:12:33.490331Z",
+    "operationStatus": "SUCCEEDED",
+    "compatibilityBundleVersion": "pm.2026.28981",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-374e2484",
+    "clusterExtId": "000656bb-5516-939c-0000-00000001c1ce"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "343f2719-21c6-4399-4597-0fa48d5413ac",
+    "operationType": "INVENTORY",
+    "startTime": "2026-07-30T03:01:01.725455Z",
+    "endTime": "2026-07-30T03:04:26.97418Z",
+    "operationStatus": "SUCCEEDED",
+    "compatibilityBundleVersion": "pm.2026.28981",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-374e2484",
+    "clusterExtId": "000656bb-5516-939c-0000-00000001c1ce"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "059680e2-3987-4ceb-4295-aca8b4201049",
+    "operationType": "INVENTORY",
+    "startTime": "2026-07-31T03:01:01.97059Z",
+    "endTime": "2026-07-31T03:02:22.509994Z",
+    "operationStatus": "FAILED",
+    "compatibilityBundleVersion": "pm.2026.29015",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-374e2484",
+    "clusterExtId": "000656bb-5516-939c-0000-00000001c1ce"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "6efaf75c-546b-5f1e-8d08-965d0166440f",
+    "operationType": "INVENTORY",
+    "startTime": "2026-07-31T07:06:15.455944Z",
+    "endTime": "2026-07-31T07:07:42.308016Z",
+    "operationStatus": "FAILED",
+    "compatibilityBundleVersion": "pm.2026.28981",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-782ea7e4",
+    "userInfo": {
+      "$objectType": "lifecycle.v4.resources.UserInfo",
+      "userName": "userName-da328454",
+      "userUuid": "00000000-0000-0000-0000-000000000000"
+    },
+    "clusterExtId": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "0b9d9973-f9cd-59e6-8130-07123a2caa97",
+    "operationType": "INVENTORY",
+    "startTime": "2026-07-31T07:09:04.120524Z",
+    "endTime": "2026-07-31T07:10:24.611908Z",
+    "operationStatus": "FAILED",
+    "compatibilityBundleVersion": "pm.2026.29015",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-782ea7e4",
+    "userInfo": {
+      "$objectType": "lifecycle.v4.resources.UserInfo",
+      "userName": "userName-da328454",
+      "userUuid": "00000000-0000-0000-0000-000000000000"
+    },
+    "clusterExtId": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "29ced6bd-91a4-4a8f-4167-0672b362fff1",
+    "operationType": "INVENTORY",
+    "startTime": "2026-08-01T03:01:03.103554Z",
+    "endTime": "2026-08-01T03:04:00.6445Z",
+    "operationStatus": "SUCCEEDED",
+    "compatibilityBundleVersion": "pm.2026.29015",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-374e2484",
+    "clusterExtId": "000656bb-5516-939c-0000-00000001c1ce"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "ddd721cc-2730-4a34-706b-604805925b99",
+    "operationType": "INVENTORY",
+    "startTime": "2026-08-02T03:01:03.328787Z",
+    "endTime": "2026-08-02T03:04:01.403671Z",
+    "operationStatus": "SUCCEEDED",
+    "compatibilityBundleVersion": "pm.2026.29015",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-374e2484",
+    "clusterExtId": "000656bb-5516-939c-0000-00000001c1ce"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "7957257c-b62b-469c-58ca-2979fcf11807",
+    "operationType": "INVENTORY",
+    "startTime": "2026-08-03T03:01:03.561182Z",
+    "endTime": "2026-08-03T03:03:58.150441Z",
+    "operationStatus": "SUCCEEDED",
+    "compatibilityBundleVersion": "pm.2026.29015",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-374e2484",
+    "clusterExtId": "000656bb-5516-939c-0000-00000001c1ce"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "d5f040d5-2cc6-496c-5261-e260a86d306e",
+    "operationType": "INVENTORY",
+    "startTime": "2026-08-04T03:01:03.803251Z",
+    "endTime": "2026-08-04T03:04:12.010636Z",
+    "operationStatus": "SUCCEEDED",
+    "compatibilityBundleVersion": "pm.2026.29015",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-374e2484",
+    "clusterExtId": "000656bb-5516-939c-0000-00000001c1ce"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "bb3d766f-4a0c-5eb5-90b1-6fbfec769c2c",
+    "operationType": "INVENTORY",
+    "startTime": "2026-08-04T15:10:59.229933Z",
+    "endTime": "2026-08-04T15:11:24.437942Z",
+    "operationStatus": "FAILED",
+    "compatibilityBundleVersion": "pm.2026.29015",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-782ea7e4",
+    "userInfo": {
+      "$objectType": "lifecycle.v4.resources.UserInfo",
+      "userName": "userName-f945369e",
+      "userUuid": "08f0dcd1-3a70-57a1-b84b-97d8e7b270fc"
+    },
+    "clusterExtId": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "ba095e79-dc95-5bad-a911-4227249a8731",
+    "operationType": "INVENTORY",
+    "startTime": "2026-08-04T16:28:47.160851Z",
+    "endTime": "2026-08-04T16:29:12.95912Z",
+    "operationStatus": "FAILED",
+    "compatibilityBundleVersion": "pm.2026.29217",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-782ea7e4",
+    "userInfo": {
+      "$objectType": "lifecycle.v4.resources.UserInfo",
+      "userName": "userName-f945369e",
+      "userUuid": "08f0dcd1-3a70-57a1-b84b-97d8e7b270fc"
+    },
+    "clusterExtId": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "bdc53b23-1749-5f56-b45a-9e23c5ce2d33",
+    "operationType": "INVENTORY",
+    "startTime": "2026-08-04T16:32:05.882874Z",
+    "endTime": "2026-08-04T16:32:43.945327Z",
+    "operationStatus": "FAILED",
+    "compatibilityBundleVersion": "pm.2026.29217",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-782ea7e4",
+    "userInfo": {
+      "$objectType": "lifecycle.v4.resources.UserInfo",
+      "userName": "userName-f945369e",
+      "userUuid": "08f0dcd1-3a70-57a1-b84b-97d8e7b270fc"
+    },
+    "clusterExtId": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "82a7e82a-b416-581d-a0f4-a34a149ca858",
+    "operationType": "INVENTORY",
+    "startTime": "2026-08-04T16:35:09.520206Z",
+    "endTime": "2026-08-04T16:35:46.13852Z",
+    "operationStatus": "FAILED",
+    "compatibilityBundleVersion": "pm.2026.29217",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-782ea7e4",
+    "userInfo": {
+      "$objectType": "lifecycle.v4.resources.UserInfo",
+      "userName": "userName-f945369e",
+      "userUuid": "08f0dcd1-3a70-57a1-b84b-97d8e7b270fc"
+    },
+    "clusterExtId": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "323638c1-9851-558d-b0ca-a32a5aca71bd",
+    "operationType": "INVENTORY",
+    "startTime": "2026-08-04T16:42:09.858414Z",
+    "endTime": "2026-08-04T16:42:48.2662Z",
+    "operationStatus": "FAILED",
+    "compatibilityBundleVersion": "pm.2026.29217",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-782ea7e4",
+    "userInfo": {
+      "$objectType": "lifecycle.v4.resources.UserInfo",
+      "userName": "userName-f945369e",
+      "userUuid": "08f0dcd1-3a70-57a1-b84b-97d8e7b270fc"
+    },
+    "clusterExtId": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "097620d3-1287-5d38-b4ab-62793bedaf95",
+    "operationType": "INVENTORY",
+    "startTime": "2026-08-04T16:44:31.619652Z",
+    "endTime": "2026-08-04T16:45:10.493896Z",
+    "operationStatus": "FAILED",
+    "compatibilityBundleVersion": "pm.2026.29217",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-782ea7e4",
+    "userInfo": {
+      "$objectType": "lifecycle.v4.resources.UserInfo",
+      "userName": "userName-f945369e",
+      "userUuid": "08f0dcd1-3a70-57a1-b84b-97d8e7b270fc"
+    },
+    "clusterExtId": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "75dd3058-f1a3-584e-9f5d-567eb4c4d836",
+    "operationType": "INVENTORY",
+    "startTime": "2026-08-04T17:32:38.108947Z",
+    "endTime": "2026-08-04T17:33:18.404376Z",
+    "operationStatus": "FAILED",
+    "compatibilityBundleVersion": "pm.2026.29217",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-782ea7e4",
+    "userInfo": {
+      "$objectType": "lifecycle.v4.resources.UserInfo",
+      "userName": "userName-f945369e",
+      "userUuid": "08f0dcd1-3a70-57a1-b84b-97d8e7b270fc"
+    },
+    "clusterExtId": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "992571ce-a14c-52d1-afe3-259517ee3b03",
+    "operationType": "INVENTORY",
+    "startTime": "2026-08-04T17:38:40.759382Z",
+    "endTime": "2026-08-04T17:39:20.431984Z",
+    "operationStatus": "FAILED",
+    "compatibilityBundleVersion": "pm.2026.29217",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-782ea7e4",
+    "userInfo": {
+      "$objectType": "lifecycle.v4.resources.UserInfo",
+      "userName": "userName-f945369e",
+      "userUuid": "08f0dcd1-3a70-57a1-b84b-97d8e7b270fc"
+    },
+    "clusterExtId": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "27efa972-2b61-5611-b8fa-3edff9ccca0a",
+    "operationType": "INVENTORY",
+    "startTime": "2026-08-04T17:48:15.971468Z",
+    "endTime": "2026-08-04T17:48:54.972634Z",
+    "operationStatus": "FAILED",
+    "compatibilityBundleVersion": "pm.2026.29217",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-782ea7e4",
+    "userInfo": {
+      "$objectType": "lifecycle.v4.resources.UserInfo",
+      "userName": "userName-f945369e",
+      "userUuid": "08f0dcd1-3a70-57a1-b84b-97d8e7b270fc"
+    },
+    "clusterExtId": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "1e309fc5-86ba-562e-becc-bc9e99d5d632",
+    "operationType": "INVENTORY",
+    "startTime": "2026-08-04T17:49:19.572156Z",
+    "endTime": "2026-08-04T18:05:17.510862Z",
+    "operationStatus": "FAILED",
+    "compatibilityBundleVersion": "pm.2026.29217",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-782ea7e4",
+    "userInfo": {
+      "$objectType": "lifecycle.v4.resources.UserInfo",
+      "userName": "userName-f945369e",
+      "userUuid": "08f0dcd1-3a70-57a1-b84b-97d8e7b270fc"
+    },
+    "clusterExtId": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "cd148a5a-4010-488e-4890-fbc9097cc62e",
+    "operationType": "INVENTORY",
+    "startTime": "2026-08-05T03:01:03.951036Z",
+    "endTime": "2026-08-05T03:03:56.682673Z",
+    "operationStatus": "SUCCEEDED",
+    "compatibilityBundleVersion": "pm.2026.29196",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-374e2484",
+    "clusterExtId": "000656bb-5516-939c-0000-00000001c1ce"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "e5391379-7247-46e5-7850-faa84c609d82",
+    "operationType": "INVENTORY",
+    "startTime": "2026-08-06T03:20:21.98661Z",
+    "endTime": "2026-08-06T03:23:13.743935Z",
+    "operationStatus": "SUCCEEDED",
+    "compatibilityBundleVersion": "pm.2026.29217",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-374e2484",
+    "clusterExtId": "000656bb-5516-939c-0000-00000001c1ce"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "b7d4ffd8-fa8b-5925-a08b-3722c3c19dc7",
+    "operationType": "INVENTORY",
+    "startTime": "2026-08-06T06:36:16.934988Z",
+    "endTime": "2026-08-06T06:36:58.792471Z",
+    "operationStatus": "FAILED",
+    "compatibilityBundleVersion": "pm.2026.29217",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-782ea7e4",
+    "userInfo": {
+      "$objectType": "lifecycle.v4.resources.UserInfo",
+      "userName": "userName-f945369e",
+      "userUuid": "08f0dcd1-3a70-57a1-b84b-97d8e7b270fc"
+    },
+    "clusterExtId": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "7c033046-8ea5-508f-a358-98f8daf238b6",
+    "operationType": "INVENTORY",
+    "startTime": "2026-08-06T06:48:11.876046Z",
+    "endTime": "2026-08-06T06:48:50.313649Z",
+    "operationStatus": "FAILED",
+    "compatibilityBundleVersion": "pm.2026.29263",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-782ea7e4",
+    "userInfo": {
+      "$objectType": "lifecycle.v4.resources.UserInfo",
+      "userName": "userName-f945369e",
+      "userUuid": "08f0dcd1-3a70-57a1-b84b-97d8e7b270fc"
+    },
+    "clusterExtId": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "460df653-021c-56e7-aa5a-cd3376f84ae2",
+    "operationType": "INVENTORY",
+    "startTime": "2026-08-06T06:49:48.158484Z",
+    "endTime": "2026-08-06T06:50:27.816263Z",
+    "operationStatus": "FAILED",
+    "compatibilityBundleVersion": "pm.2026.29263",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-782ea7e4",
+    "userInfo": {
+      "$objectType": "lifecycle.v4.resources.UserInfo",
+      "userName": "userName-f945369e",
+      "userUuid": "08f0dcd1-3a70-57a1-b84b-97d8e7b270fc"
+    },
+    "clusterExtId": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "f1c6e43e-50b1-507d-97cc-fef48fe7713d",
+    "operationType": "INVENTORY",
+    "startTime": "2026-08-06T06:54:53.968915Z",
+    "endTime": "2026-08-06T06:55:33.204618Z",
+    "operationStatus": "FAILED",
+    "compatibilityBundleVersion": "pm.2026.29263",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-782ea7e4",
+    "userInfo": {
+      "$objectType": "lifecycle.v4.resources.UserInfo",
+      "userName": "userName-f945369e",
+      "userUuid": "08f0dcd1-3a70-57a1-b84b-97d8e7b270fc"
+    },
+    "clusterExtId": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "7f5e7dac-8bf0-5513-83c7-840d86a06c13",
+    "operationType": "INVENTORY",
+    "startTime": "2026-08-06T07:04:34.99594Z",
+    "endTime": "2026-08-06T07:05:14.160177Z",
+    "operationStatus": "FAILED",
+    "compatibilityBundleVersion": "pm.2026.29263",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-782ea7e4",
+    "userInfo": {
+      "$objectType": "lifecycle.v4.resources.UserInfo",
+      "userName": "userName-f945369e",
+      "userUuid": "08f0dcd1-3a70-57a1-b84b-97d8e7b270fc"
+    },
+    "clusterExtId": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "9472248a-e8db-5e10-bb30-319d86bc32a2",
+    "operationType": "INVENTORY",
+    "startTime": "2026-08-06T07:45:43.850025Z",
+    "endTime": "2026-08-06T07:46:09.640687Z",
+    "operationStatus": "FAILED",
+    "compatibilityBundleVersion": "pm.2026.29263",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-782ea7e4",
+    "userInfo": {
+      "$objectType": "lifecycle.v4.resources.UserInfo",
+      "userName": "userName-f945369e",
+      "userUuid": "08f0dcd1-3a70-57a1-b84b-97d8e7b270fc"
+    },
+    "clusterExtId": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "e9f30473-2e2f-50fd-949b-3da544f0f6b0",
+    "operationType": "INVENTORY",
+    "startTime": "2026-08-06T07:48:04.542017Z",
+    "endTime": "2026-08-06T07:48:29.186847Z",
+    "operationStatus": "FAILED",
+    "compatibilityBundleVersion": "pm.2026.29263",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-782ea7e4",
+    "userInfo": {
+      "$objectType": "lifecycle.v4.resources.UserInfo",
+      "userName": "userName-f945369e",
+      "userUuid": "08f0dcd1-3a70-57a1-b84b-97d8e7b270fc"
+    },
+    "clusterExtId": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "6dbf14c2-b178-5e67-a1c1-e1dd38107b68",
+    "operationType": "INVENTORY",
+    "startTime": "2026-08-06T07:53:17.606106Z",
+    "endTime": "2026-08-06T07:53:42.341855Z",
+    "operationStatus": "FAILED",
+    "compatibilityBundleVersion": "pm.2026.29263",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-782ea7e4",
+    "userInfo": {
+      "$objectType": "lifecycle.v4.resources.UserInfo",
+      "userName": "userName-f945369e",
+      "userUuid": "08f0dcd1-3a70-57a1-b84b-97d8e7b270fc"
+    },
+    "clusterExtId": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "6a812661-503f-5ce7-96a2-76927831a23e",
+    "operationType": "INVENTORY",
+    "startTime": "2026-08-06T07:56:25.819849Z",
+    "endTime": "2026-08-06T07:56:51.329312Z",
+    "operationStatus": "FAILED",
+    "compatibilityBundleVersion": "pm.2026.29263",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-782ea7e4",
+    "userInfo": {
+      "$objectType": "lifecycle.v4.resources.UserInfo",
+      "userName": "userName-f945369e",
+      "userUuid": "08f0dcd1-3a70-57a1-b84b-97d8e7b270fc"
+    },
+    "clusterExtId": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "28a2f819-e8a2-5242-85e1-d8dbcff9121f",
+    "operationType": "INVENTORY",
+    "startTime": "2026-08-06T08:04:16.834501Z",
+    "endTime": "2026-08-06T08:06:11.123889Z",
+    "operationStatus": "SUCCEEDED",
+    "compatibilityBundleVersion": "pm.2026.29263",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-782ea7e4",
+    "userInfo": {
+      "$objectType": "lifecycle.v4.resources.UserInfo",
+      "userName": "userName-f945369e",
+      "userUuid": "08f0dcd1-3a70-57a1-b84b-97d8e7b270fc"
+    },
+    "clusterExtId": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "d1908db4-fe14-5b27-92ca-78ae68df3e91",
+    "operationInfo": {
+      "$objectType": "lifecycle.v4.resources.UpgradeInfo",
+      "componentDetails": [
+        {
+          "$objectType": "lifecycle.v4.resources.ComponentDetails",
+          "extId": "decc0ef1-c92f-4eec-a2f0-0cfa6f754326",
+          "entityClass": "PC Core Cluster",
+          "entityModel": "Security Dashboard CVE Data",
+          "entityType": "SOFTWARE",
+          "entityVersion": "2024.03.1",
+          "locationInfo": {
+            "uuid": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b",
+            "$objectType": "lifecycle.v4.common.LocationInfo",
+            "locationType": "PC",
+            "locationName": "locationName-782ea7e4"
+          },
+          "upgradedVersion": "2026.07.1",
+          "upgradeStatus": "SUCCEEDED"
+        },
+        {
+          "extId": "94a05f8f-9809-48e3-90b9-0443adb980aa",
+          "groupUuid": "f6480f92-3e31-411d-bd34-e8e2b99f1376",
+          "entityClass": "PC Service",
+          "entityModel": "Marketplace Bundle",
+          "entityType": "SOFTWARE",
+          "entityVersion": "4.4.0",
+          "locationInfo": {
+            "uuid": "cf21584c-5e39-4208-a975-c28007cfb7d7",
+            "$objectType": "lifecycle.v4.common.LocationInfo",
+            "locationType": "NODE"
+          },
+          "upgradedVersion": "4.4.1",
+          "upgradeStatus": "SUCCEEDED"
+        }
+      ]
+    },
+    "operationType": "UPGRADE",
+    "startTime": "2026-08-06T08:07:02.787558Z",
+    "endTime": "2026-08-06T08:08:44.554709Z",
+    "operationStatus": "SUCCEEDED",
+    "compatibilityBundleVersion": "pm.2026.29263",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-782ea7e4",
+    "userInfo": {
+      "$objectType": "lifecycle.v4.resources.UserInfo",
+      "userName": "userName-f945369e",
+      "userUuid": "08f0dcd1-3a70-57a1-b84b-97d8e7b270fc"
+    },
+    "clusterExtId": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "9abec498-4afa-40eb-54ea-477aa557516e",
+    "operationType": "INVENTORY",
+    "startTime": "2026-08-07T03:20:22.235131Z",
+    "endTime": "2026-08-07T03:23:10.928848Z",
+    "operationStatus": "SUCCEEDED",
+    "compatibilityBundleVersion": "pm.2026.29263",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-374e2484",
+    "clusterExtId": "000656bb-5516-939c-0000-00000001c1ce"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "0133d316-ea32-4a71-75d1-20690ce04f8d",
+    "operationType": "INVENTORY",
+    "startTime": "2026-08-08T03:20:22.482295Z",
+    "endTime": "2026-08-08T03:23:11.770884Z",
+    "operationStatus": "SUCCEEDED",
+    "compatibilityBundleVersion": "pm.2026.29263",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-374e2484",
+    "clusterExtId": "000656bb-5516-939c-0000-00000001c1ce"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "4cf53df4-5908-4457-45f8-07d092c4958c",
+    "operationType": "INVENTORY",
+    "startTime": "2026-08-09T03:20:22.737446Z",
+    "endTime": "2026-08-09T03:23:12.912111Z",
+    "operationStatus": "SUCCEEDED",
+    "compatibilityBundleVersion": "pm.2026.29263",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-374e2484",
+    "clusterExtId": "000656bb-5516-939c-0000-00000001c1ce"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "f5267f5f-c8d4-4ddb-4258-aa5d818f7467",
+    "operationType": "INVENTORY",
+    "startTime": "2026-08-10T03:20:22.997217Z",
+    "endTime": "2026-08-10T03:23:19.17487Z",
+    "operationStatus": "SUCCEEDED",
+    "compatibilityBundleVersion": "pm.2026.29263",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-374e2484",
+    "clusterExtId": "000656bb-5516-939c-0000-00000001c1ce"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "cf54b8cf-8437-41ff-7b98-a671da82a483",
+    "operationType": "INVENTORY",
+    "startTime": "2026-08-11T03:20:23.270761Z",
+    "endTime": "2026-08-11T03:23:13.632916Z",
+    "operationStatus": "SUCCEEDED",
+    "compatibilityBundleVersion": "pm.2026.29263",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-374e2484",
+    "clusterExtId": "000656bb-5516-939c-0000-00000001c1ce"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "c65e6df0-88fd-46da-6002-16748a445449",
+    "operationType": "INVENTORY",
+    "startTime": "2026-08-12T03:20:23.515041Z",
+    "endTime": "2026-08-12T03:23:13.734642Z",
+    "operationStatus": "SUCCEEDED",
+    "compatibilityBundleVersion": "pm.2026.29263",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-374e2484",
+    "clusterExtId": "000656bb-5516-939c-0000-00000001c1ce"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "4c34e51c-0edf-4929-428d-7aab69a2a24a",
+    "operationInfo": {
+      "$objectType": "lifecycle.v4.resources.UpgradeInfo",
+      "componentDetails": [
+        {
+          "$objectType": "lifecycle.v4.resources.ComponentDetails",
+          "extId": "514e5e2f-f8ab-45ee-b4e2-85af955c601d",
+          "entityClass": "Core Cluster",
+          "entityModel": "NCC",
+          "entityType": "SOFTWARE",
+          "entityVersion": "6.0.0",
+          "locationInfo": {
+            "uuid": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b",
+            "$objectType": "lifecycle.v4.common.LocationInfo",
+            "locationType": "CLUSTER",
+            "locationName": "locationName-782ea7e4"
+          },
+          "upgradedVersion": "6.0.0.1",
+          "upgradeStatus": "SUCCEEDED"
+        }
+      ]
+    },
+    "operationType": "UPGRADE",
+    "startTime": "2026-08-13T03:05:51.154649Z",
+    "endTime": "2026-08-13T03:11:20.12728Z",
+    "operationStatus": "SUCCEEDED",
+    "compatibilityBundleVersion": "pm.2026.29443",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-782ea7e4",
+    "clusterExtId": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "32d7eca0-e9a2-4029-5a4b-f923c00de49d",
+    "operationType": "INVENTORY",
+    "startTime": "2026-08-13T03:20:23.81424Z",
+    "endTime": "2026-08-13T03:23:20.964134Z",
+    "operationStatus": "SUCCEEDED",
+    "compatibilityBundleVersion": "pm.2026.29379",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-374e2484",
+    "clusterExtId": "000656bb-5516-939c-0000-00000001c1ce"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "33d6cc4c-3404-4840-53b8-e9354086d255",
+    "operationInfo": {
+      "$objectType": "lifecycle.v4.resources.UpgradeInfo",
+      "componentDetails": [
+        {
+          "$objectType": "lifecycle.v4.resources.ComponentDetails",
+          "extId": "ef34c61a-9c69-492b-8b74-573619204ae4",
+          "entityClass": "Core Cluster",
+          "entityModel": "NCC",
+          "entityType": "SOFTWARE",
+          "entityVersion": "6.0.0",
+          "locationInfo": {
+            "uuid": "000656bb-5516-939c-0000-00000001c1ce",
+            "$objectType": "lifecycle.v4.common.LocationInfo",
+            "locationType": "CLUSTER",
+            "locationName": "locationName-374e2484"
+          },
+          "upgradedVersion": "6.0.0.1",
+          "upgradeStatus": "SUCCEEDED"
+        }
+      ]
+    },
+    "operationType": "UPGRADE",
+    "startTime": "2026-08-13T03:23:26.050101Z",
+    "endTime": "2026-08-13T03:28:12.551353Z",
+    "operationStatus": "SUCCEEDED",
+    "compatibilityBundleVersion": "pm.2026.29443",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-374e2484",
+    "clusterExtId": "000656bb-5516-939c-0000-00000001c1ce"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "16ef1b48-dba8-40f1-7124-e029cf024b5c",
+    "operationType": "INVENTORY",
+    "startTime": "2026-08-14T03:20:24.088076Z",
+    "endTime": "2026-08-14T03:23:17.58833Z",
+    "operationStatus": "SUCCEEDED",
+    "compatibilityBundleVersion": "pm.2026.29443",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-374e2484",
+    "clusterExtId": "000656bb-5516-939c-0000-00000001c1ce"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "ccc1ec49-9f45-4fc4-5027-ff5d37e7785d",
+    "operationType": "INVENTORY",
+    "startTime": "2026-08-15T03:20:24.379666Z",
+    "endTime": "2026-08-15T03:23:13.093708Z",
+    "operationStatus": "SUCCEEDED",
+    "compatibilityBundleVersion": "pm.2026.29462",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-374e2484",
+    "clusterExtId": "000656bb-5516-939c-0000-00000001c1ce"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "364a5d9f-d007-4dd5-6430-1af269d2d9bc",
+    "operationType": "INVENTORY",
+    "startTime": "2026-08-16T03:20:24.644738Z",
+    "endTime": "2026-08-16T03:23:12.575258Z",
+    "operationStatus": "SUCCEEDED",
+    "compatibilityBundleVersion": "pm.2026.29462",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-374e2484",
+    "clusterExtId": "000656bb-5516-939c-0000-00000001c1ce"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "3454cace-e4f5-43b0-4501-97a6f52869b3",
+    "operationType": "INVENTORY",
+    "startTime": "2026-08-17T03:20:24.907284Z",
+    "endTime": "2026-08-17T03:23:13.497533Z",
+    "operationStatus": "SUCCEEDED",
+    "compatibilityBundleVersion": "pm.2026.29462",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-374e2484",
+    "clusterExtId": "000656bb-5516-939c-0000-00000001c1ce"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "f7cebdc6-2fc0-47f5-6315-e350a305cdfc",
+    "operationType": "INVENTORY",
+    "startTime": "2026-08-18T03:20:25.385694Z",
+    "endTime": "2026-08-18T03:23:15.949122Z",
+    "operationStatus": "SUCCEEDED",
+    "compatibilityBundleVersion": "pm.2026.29462",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-374e2484",
+    "clusterExtId": "000656bb-5516-939c-0000-00000001c1ce"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "e72eef02-6d7e-4602-5b5f-1716324dd108",
+    "operationType": "INVENTORY",
+    "startTime": "2026-08-19T03:20:25.665177Z",
+    "endTime": "2026-08-19T03:23:15.920625Z",
+    "operationStatus": "SUCCEEDED",
+    "compatibilityBundleVersion": "pm.2026.29528",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-374e2484",
+    "clusterExtId": "000656bb-5516-939c-0000-00000001c1ce"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "5a855f94-feb5-45e8-66c0-3177b38bf528",
+    "operationType": "INVENTORY",
+    "startTime": "2026-08-20T03:20:25.927014Z",
+    "endTime": "2026-08-20T03:23:15.960376Z",
+    "operationStatus": "SUCCEEDED",
+    "compatibilityBundleVersion": "pm.2026.29528",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-374e2484",
+    "clusterExtId": "000656bb-5516-939c-0000-00000001c1ce"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "12eb9708-aeaf-4baa-5c9e-a559e383f0cd",
+    "operationType": "INVENTORY",
+    "startTime": "2026-08-21T03:20:26.227549Z",
+    "endTime": "2026-08-21T03:23:14.878547Z",
+    "operationStatus": "SUCCEEDED",
+    "compatibilityBundleVersion": "pm.2026.29528",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-374e2484",
+    "clusterExtId": "000656bb-5516-939c-0000-00000001c1ce"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "a78d6b02-3041-44ba-45e8-fce7205e2752",
+    "operationType": "INVENTORY",
+    "startTime": "2026-08-22T03:20:26.498176Z",
+    "endTime": "2026-08-22T03:23:17.059125Z",
+    "operationStatus": "SUCCEEDED",
+    "compatibilityBundleVersion": "pm.2026.29528",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-374e2484",
+    "clusterExtId": "000656bb-5516-939c-0000-00000001c1ce"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "276b99c0-fd50-4322-518c-9876af70c66f",
+    "operationType": "INVENTORY",
+    "startTime": "2026-08-23T03:20:26.789182Z",
+    "endTime": "2026-08-23T03:23:16.35926Z",
+    "operationStatus": "SUCCEEDED",
+    "compatibilityBundleVersion": "pm.2026.29528",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-374e2484",
+    "clusterExtId": "000656bb-5516-939c-0000-00000001c1ce"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "3153fd98-7c73-47a7-4b10-a29d5c8ecb82",
+    "operationType": "INVENTORY",
+    "startTime": "2026-08-24T03:20:27.117899Z",
+    "endTime": "2026-08-24T03:23:18.234875Z",
+    "operationStatus": "SUCCEEDED",
+    "compatibilityBundleVersion": "pm.2026.29528",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-374e2484",
+    "clusterExtId": "000656bb-5516-939c-0000-00000001c1ce"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "f83d6a7a-b384-4bae-6b56-58a187fe964d",
+    "operationType": "INVENTORY",
+    "startTime": "2026-08-25T03:20:27.390551Z",
+    "endTime": "2026-08-25T03:23:22.036534Z",
+    "operationStatus": "SUCCEEDED",
+    "compatibilityBundleVersion": "pm.2026.29528",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-374e2484",
+    "clusterExtId": "000656bb-5516-939c-0000-00000001c1ce"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "e45d2b14-f14d-4227-4042-6854f91e53b3",
+    "operationType": "INVENTORY",
+    "startTime": "2026-08-26T03:20:27.671689Z",
+    "endTime": "2026-08-26T03:23:17.021461Z",
+    "operationStatus": "SUCCEEDED",
+    "compatibilityBundleVersion": "pm.2026.29682",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-374e2484",
+    "clusterExtId": "000656bb-5516-939c-0000-00000001c1ce"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "8c77c9e9-fab6-4106-4ebb-2be343058eb6",
+    "operationType": "INVENTORY",
+    "startTime": "2026-08-27T03:20:27.951823Z",
+    "endTime": "2026-08-27T03:23:20.07182Z",
+    "operationStatus": "SUCCEEDED",
+    "compatibilityBundleVersion": "pm.2026.29682",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-374e2484",
+    "clusterExtId": "000656bb-5516-939c-0000-00000001c1ce"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "e88cd68b-354c-42e8-5e89-82d731d1ebf8",
+    "operationType": "INVENTORY",
+    "startTime": "2026-08-28T03:20:28.241122Z",
+    "endTime": "2026-08-28T03:23:18.660564Z",
+    "operationStatus": "SUCCEEDED",
+    "compatibilityBundleVersion": "pm.2026.29796",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-374e2484",
+    "clusterExtId": "000656bb-5516-939c-0000-00000001c1ce"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "3d375f48-ef98-5339-9201-34bff54458f2",
+    "operationInfo": {
+      "$objectType": "lifecycle.v4.resources.UpgradeInfo",
+      "componentDetails": [
+        {
+          "$objectType": "lifecycle.v4.resources.ComponentDetails",
+          "extId": "94a05f8f-9809-48e3-90b9-0443adb980aa",
+          "groupUuid": "e2c09c69-576e-4de2-95a7-0c5021159f79",
+          "entityClass": "PC Service",
+          "entityModel": "Marketplace Bundle",
+          "entityType": "SOFTWARE",
+          "entityVersion": "4.4.1",
+          "locationInfo": {
+            "uuid": "cf21584c-5e39-4208-a975-c28007cfb7d7",
+            "$objectType": "lifecycle.v4.common.LocationInfo",
+            "locationType": "NODE"
+          },
+          "upgradedVersion": "4.4.3",
+          "upgradeStatus": "SUCCEEDED"
+        }
+      ]
+    },
+    "operationType": "UPGRADE",
+    "startTime": "2026-08-28T12:46:13.617356Z",
+    "endTime": "2026-08-28T12:47:43.280158Z",
+    "operationStatus": "SUCCEEDED",
+    "compatibilityBundleVersion": "pm.2026.29796",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-782ea7e4",
+    "userInfo": {
+      "$objectType": "lifecycle.v4.resources.UserInfo",
+      "userName": "userName-f945369e",
+      "userUuid": "08f0dcd1-3a70-57a1-b84b-97d8e7b270fc"
+    },
+    "clusterExtId": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "c54f71c5-94b7-4906-77d3-af716ee2d07c",
+    "operationType": "INVENTORY",
+    "startTime": "2026-08-29T03:20:28.521037Z",
+    "endTime": "2026-08-29T03:23:18.787246Z",
+    "operationStatus": "SUCCEEDED",
+    "compatibilityBundleVersion": "pm.2026.29796",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-374e2484",
+    "clusterExtId": "000656bb-5516-939c-0000-00000001c1ce"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "6d5325b7-827e-4688-7e0f-650d34e55331",
+    "operationType": "INVENTORY",
+    "startTime": "2026-08-30T03:20:28.801879Z",
+    "endTime": "2026-08-30T03:23:17.667742Z",
+    "operationStatus": "SUCCEEDED",
+    "compatibilityBundleVersion": "pm.2026.29796",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-374e2484",
+    "clusterExtId": "000656bb-5516-939c-0000-00000001c1ce"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "21d2534d-c4da-4ca2-700d-6ba857185ee5",
+    "operationType": "INVENTORY",
+    "startTime": "2026-08-31T03:20:29.094683Z",
+    "endTime": "2026-08-31T03:23:18.333803Z",
+    "operationStatus": "SUCCEEDED",
+    "compatibilityBundleVersion": "pm.2026.29796",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-374e2484",
+    "clusterExtId": "000656bb-5516-939c-0000-00000001c1ce"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "bd60ac0c-1965-4ffb-470e-108bb835a08b",
+    "operationType": "INVENTORY",
+    "startTime": "2026-09-01T03:20:29.376523Z",
+    "endTime": "2026-09-01T03:25:38.999757Z",
+    "operationStatus": "SUCCEEDED",
+    "compatibilityBundleVersion": "pm.2026.29796",
+    "frameworkVersion": "3.4.87030",
+    "clusterName": "clusterName-374e2484",
+    "clusterExtId": "000656bb-5516-939c-0000-00000001c1ce"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "523ab887-8e02-450f-5975-1935a11b6c9c",
+    "operationType": "INVENTORY",
+    "startTime": "2026-09-02T03:22:41.858365Z",
+    "endTime": "2026-09-02T03:25:36.502007Z",
+    "operationStatus": "SUCCEEDED",
+    "compatibilityBundleVersion": "pm.2026.29977",
+    "frameworkVersion": "3.4.0.1.90933",
+    "clusterName": "clusterName-374e2484",
+    "clusterExtId": "000656bb-5516-939c-0000-00000001c1ce"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "412cf67a-8fd3-48a9-4957-386caf97b937",
+    "operationType": "INVENTORY",
+    "startTime": "2026-09-03T03:22:42.156785Z",
+    "endTime": "2026-09-03T03:25:36.366286Z",
+    "operationStatus": "SUCCEEDED",
+    "compatibilityBundleVersion": "pm.2026.30007",
+    "frameworkVersion": "3.4.0.1.90933",
+    "clusterName": "clusterName-374e2484",
+    "clusterExtId": "000656bb-5516-939c-0000-00000001c1ce"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "bd0d26e7-3061-46b4-7e59-e25a2ff22ece",
+    "operationType": "INVENTORY",
+    "startTime": "2026-09-04T03:22:42.448156Z",
+    "endTime": "2026-09-04T03:25:39.445266Z",
+    "operationStatus": "SUCCEEDED",
+    "compatibilityBundleVersion": "pm.2026.30042",
+    "frameworkVersion": "3.4.0.1.90933",
+    "clusterName": "clusterName-374e2484",
+    "clusterExtId": "000656bb-5516-939c-0000-00000001c1ce"
+  }
+]

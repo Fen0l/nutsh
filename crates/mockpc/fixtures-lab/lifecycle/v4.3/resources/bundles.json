@@ -1,0 +1,156 @@
+[
+  {
+    "$objectType": "lifecycle.v4.resources.Bundle",
+    "extId": "2b99c220-cfdd-4ef4-827c-2fd985b848a4",
+    "name": "name-6ddca5e8",
+    "sizeBytes": 5644926515,
+    "type": "SOFTWARE",
+    "images": [
+      {
+        "$objectType": "lifecycle.v4.resources.Image",
+        "extId": "65300dbd-2187-4435-8834-112e0a2eb40d",
+        "files": [
+          {
+            "fileLocationId": "572c4561-e150-4f4f-a38b-a822ff270688",
+            "$objectType": "lifecycle.v4.resources.ImageFile",
+            "name": "name-6c480b54",
+            "sizeBytes": 5643493477,
+            "checksumType": "SHASUM",
+            "checksum": "ea36759b378e3bf2926c3db1ffca1e01f84ca88380fecb63e70296faab1ebf30"
+          },
+          {
+            "fileLocationId": "57c16450-ead9-4dbc-98f1-5d4735703460",
+            "name": "name-c5ae33a6",
+            "sizeBytes": 8301,
+            "checksumType": "SHASUM",
+            "checksum": "649783262d0fa39418f9bb3c16fca3a9810e23d1dee229a18b9cad1a948e3e98"
+          }
+        ],
+        "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+        "isStub": false,
+        "entityClass": "Core Cluster",
+        "entityModel": "AOS",
+        "entityVersion": "7.0",
+        "releaseNotes": "https://portal.nutanix.com/#/page/docs/details?targetId=Release-Notes-AOS-v7_0:Release-Notes-AOS-v7_0"
+      }
+    ],
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "createdTime": "2024-12-05T10:05:14.820588Z"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Bundle",
+    "extId": "b7ca5419-4860-45f2-a167-21b1b637e4bd",
+    "name": "name-04442d1f",
+    "sizeBytes": 6185520386,
+    "type": "SOFTWARE",
+    "images": [
+      {
+        "$objectType": "lifecycle.v4.resources.Image",
+        "extId": "a98681e6-73f6-4707-b0cf-dc553da8d554",
+        "files": [
+          {
+            "fileLocationId": "b8609823-1329-4119-84d6-982c6f3a4732",
+            "$objectType": "lifecycle.v4.resources.ImageFile",
+            "name": "name-a82cd2db",
+            "sizeBytes": 6183918150,
+            "checksumType": "SHASUM",
+            "checksum": "c638375e68249564f32ee3f241078c2482b529ef88ff67b4d0c72dbb233e73a3"
+          },
+          {
+            "fileLocationId": "6357f5a9-f355-4239-94ca-e10aa215eca2",
+            "name": "name-b993e01b",
+            "sizeBytes": 9272,
+            "checksumType": "SHASUM",
+            "checksum": "cae01d1925e9728be575029504fc984f903cd5337ec5fe8e02e0a1d3636805d9"
+          }
+        ],
+        "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+        "isStub": false,
+        "entityClass": "Core Cluster",
+        "entityModel": "AOS",
+        "entityVersion": "7.3",
+        "releaseNotes": "https://portal.nutanix.com/#/page/docs/details?targetId=Release-Notes-AOS-v7_3:Release-Notes-AOS-v7_3"
+      }
+    ],
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "createdTime": "2025-06-24T20:17:43.935229Z"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Bundle",
+    "extId": "4237ea92-39e0-4f6e-b6bc-142c2a1ea3c5",
+    "name": "name-e1b62acd",
+    "sizeBytes": 6197261730,
+    "type": "SOFTWARE",
+    "images": [
+      {
+        "$objectType": "lifecycle.v4.resources.Image",
+        "extId": "9b0142f7-bf1f-46b1-80a0-74a8b8536ce6",
+        "files": [
+          {
+            "fileLocationId": "dc5793b8-ee13-49f1-a477-1c56d235d34e",
+            "$objectType": "lifecycle.v4.resources.ImageFile",
+            "name": "name-3adfeafc",
+            "sizeBytes": 6195652698,
+            "checksumType": "SHASUM",
+            "checksum": "8af7c11fadaf170f93116082858bb5ed50ca78adf254f582676f100d6912d117"
+          },
+          {
+            "fileLocationId": "ad0a9bd8-7839-4404-b814-d5e71e30c766",
+            "name": "name-1991e41e",
+            "sizeBytes": 9863,
+            "checksumType": "SHASUM",
+            "checksum": "9acde8a5b9a27286a88200b60d49c2cd8c231f4936f66d9412a00101ef20d036"
+          }
+        ],
+        "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+        "isStub": false,
+        "entityClass": "Core Cluster",
+        "entityModel": "AOS",
+        "entityVersion": "7.3.0.6",
+        "releaseNotes": "https://portal.nutanix.com/#/page/docs/details?targetId=Release-Notes-AOS-v7_3_0_6:Release-Notes-AOS-v7_3_0_6"
+      }
+    ],
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "createdTime": "2025-09-10T10:26:53.355763Z"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Bundle",
+    "extId": "32fcbbe3-c0f0-43eb-89bf-da5e3b6394c2",
+    "name": "name-45a59e56",
+    "sizeBytes": 841421955,
+    "type": "SOFTWARE",
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "createdTime": "2025-12-10T16:55:50.512615Z"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Bundle",
+    "extId": "e40731ae-4e57-4e17-8c60-8b185293d228",
+    "name": "name-45a59e56",
+    "sizeBytes": 841421955,
+    "type": "SOFTWARE",
+    "images": [
+      {
+        "$objectType": "lifecycle.v4.resources.Image",
+        "extId": "8b0b77a4-8a05-4bb8-856a-d1a398d7bc19",
+        "files": [
+          {
+            "fileLocationId": "e9de97dd-94ca-49c9-84c3-aa709f5c1daa",
+            "$objectType": "lifecycle.v4.resources.ImageFile",
+            "name": "name-958a0d26",
+            "sizeBytes": 888143872,
+            "checksumType": "SHASUM",
+            "checksum": "64fe917dbc75039e7376bc92df6a8b54d33606963f39b952eeb9518669ba4bcb"
+          }
+        ],
+        "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+        "isStub": false,
+        "entityClass": "Hypervisor",
+        "entityModel": "AHV hypervisor",
+        "entityVersion": "11.0",
+        "releaseNotes": "https://portal.nutanix.com/page/documents/details/?targetId=Release-Notes-AHV-v11.0:Release-Notes-AHV-v11.0"
+      }
+    ],
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "createdTime": "2025-12-11T11:41:02.801464Z"
+  }
+]

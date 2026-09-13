@@ -1,0 +1,28 @@
+[
+  {
+    "$objectType": "vmm.v4.ahv.policies.VmAntiAffinityPolicy",
+    "extId": "242347bc-26e9-4a23-494c-d60dcffa49ba",
+    "createTime": "2025-04-21T18:04:04.589407Z",
+    "updateTime": "2026-08-04T13:51:04.091013Z",
+    "numCompliantVms": 0,
+    "numNonCompliantVms": 0,
+    "numPendingVms": 0,
+    "name": "name-4a5f5604",
+    "description": "description-4177cee0",
+    "createdBy": {
+      "$objectType": "vmm.v4.ahv.policies.UserReference",
+      "extId": "00000000-0000-0000-0000-000000000000"
+    },
+    "updatedBy": {
+      "$objectType": "vmm.v4.ahv.policies.UserReference",
+      "extId": "00000000-0000-0000-0000-000000000000"
+    },
+    "categories": [
+      {
+        "$objectType": "vmm.v4.ahv.policies.CategoryReference",
+        "extId": "71bfd882-88b3-3850-993e-2baa241ce5c3"
+      }
+    ],
+    "projectExtId": "00000000-0000-0000-0000-000000000000"
+  }
+]

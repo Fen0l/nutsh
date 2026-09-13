@@ -1,0 +1,26 @@
+---
+source: crates/tui/tests/contexts.rs
+expression: "app.snapshot(100, 23).unwrap()"
+---
+╭ nutsh ─────────────────────────────────────────────────────────────────╮
+│Context:    no session                                                  │       clusters -  hosts -
+│Config:     -                                                           │         vms -  on/off -/-
+│Cluster:    -                                                           │           alerts ⚠ -  ✖ -
+│Kind:       Contexts                                                    │         tasks ▶ - running
+│Count:      1 context                                                   │
+╰────────────────────────────────────────────────────────────────────────╯          v0.0.2-beta1 · -
+   NAME           HOST                     USER       CLUSTER        FLAGS              PASSWORD
+>* lab            pc.lab.example           admin      -              insecure           stored
+                    ╭ add context ─────────────────────────────────────────────╮
+                    │▸ name       █                                            │
+                    │  host                                                    │
+                    │  port       9440                                         │
+                    │  username                                                │
+                    │  password                                                │
+                    │  cluster                                                 │
+                    │  insecure   [ ]                                          │
+                    │  read-only  [ ]                                          │
+                    ╰──────────────────────────────────────────────────────────╯
+
+
+ tab next  shift-tab previous  space toggle  enter submit  esc cancel

@@ -1,0 +1,150 @@
+[
+  {
+    "$objectType": "networking.v4.config.RoutingPolicy",
+    "extId": "d37933a0-12b8-4821-97a6-55db82fba177",
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "08f0dcd1-3a70-57a1-b84b-97d8e7b270fc",
+      "ownerUserName": "ownerUserName-59acbb2c",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000",
+      "projectName": "projectName-57a4a4a3"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-bfb107d5",
+    "priority": 10,
+    "policies": [
+      {
+        "$objectType": "networking.v4.config.RoutingPolicyRule",
+        "policyMatch": {
+          "$objectType": "networking.v4.config.RoutingPolicyMatchCondition",
+          "source": {
+            "$objectType": "networking.v4.config.AddressTypeObject",
+            "addressType": "ANY"
+          },
+          "destination": {
+            "$objectType": "networking.v4.config.AddressTypeObject",
+            "addressType": "ANY"
+          },
+          "protocolType": "ANY"
+        },
+        "policyAction": {
+          "$objectType": "networking.v4.config.RoutingPolicyAction",
+          "actionType": "PERMIT"
+        },
+        "isBidirectional": false
+      }
+    ],
+    "vpcExtId": "eda2819a-4db1-4a2f-970b-bb79982adddd"
+  },
+  {
+    "$objectType": "networking.v4.config.RoutingPolicy",
+    "extId": "d7b0e63d-a81e-48ab-81fa-f1dd91c5e3a6",
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "00000000-0000-0000-0000-000000000000",
+      "ownerUserName": "ownerUserName-da328454",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000",
+      "projectName": "projectName-57a4a4a3"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-bfb107d5",
+    "priority": 10,
+    "policies": [
+      {
+        "$objectType": "networking.v4.config.RoutingPolicyRule",
+        "policyMatch": {
+          "$objectType": "networking.v4.config.RoutingPolicyMatchCondition",
+          "source": {
+            "$objectType": "networking.v4.config.AddressTypeObject",
+            "addressType": "ANY"
+          },
+          "destination": {
+            "$objectType": "networking.v4.config.AddressTypeObject",
+            "addressType": "ANY"
+          },
+          "protocolType": "ANY"
+        },
+        "policyAction": {
+          "$objectType": "networking.v4.config.RoutingPolicyAction",
+          "actionType": "PERMIT"
+        },
+        "isBidirectional": false
+      }
+    ],
+    "vpcExtId": "76754f2f-36ba-4a75-be21-97b4249bdddc"
+  },
+  {
+    "$objectType": "networking.v4.config.RoutingPolicy",
+    "extId": "25932626-07b7-45be-ae08-5725088e7017",
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "08f0dcd1-3a70-57a1-b84b-97d8e7b270fc",
+      "ownerUserName": "ownerUserName-59acbb2c",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000",
+      "projectName": "projectName-57a4a4a3"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-2b09133a",
+    "priority": 1,
+    "policies": [
+      {
+        "$objectType": "networking.v4.config.RoutingPolicyRule",
+        "policyMatch": {
+          "$objectType": "networking.v4.config.RoutingPolicyMatchCondition",
+          "source": {
+            "$objectType": "networking.v4.config.AddressTypeObject",
+            "addressType": "ANY"
+          },
+          "destination": {
+            "$objectType": "networking.v4.config.AddressTypeObject",
+            "addressType": "ANY"
+          },
+          "protocolType": "ANY"
+        },
+        "policyAction": {
+          "$objectType": "networking.v4.config.RoutingPolicyAction",
+          "actionType": "DENY"
+        },
+        "isBidirectional": false
+      }
+    ],
+    "vpcExtId": "eda2819a-4db1-4a2f-970b-bb79982adddd"
+  },
+  {
+    "$objectType": "networking.v4.config.RoutingPolicy",
+    "extId": "c245e8a0-7e28-44cf-aa7b-cd5c07021ba9",
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "00000000-0000-0000-0000-000000000000",
+      "ownerUserName": "ownerUserName-da328454",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000",
+      "projectName": "projectName-57a4a4a3"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-2b09133a",
+    "priority": 1,
+    "policies": [
+      {
+        "$objectType": "networking.v4.config.RoutingPolicyRule",
+        "policyMatch": {
+          "$objectType": "networking.v4.config.RoutingPolicyMatchCondition",
+          "source": {
+            "$objectType": "networking.v4.config.AddressTypeObject",
+            "addressType": "ANY"
+          },
+          "destination": {
+            "$objectType": "networking.v4.config.AddressTypeObject",
+            "addressType": "ANY"
+          },
+          "protocolType": "ANY"
+        },
+        "policyAction": {
+          "$objectType": "networking.v4.config.RoutingPolicyAction",
+          "actionType": "DENY"
+        },
+        "isBidirectional": false
+      }
+    ],
+    "vpcExtId": "76754f2f-36ba-4a75-be21-97b4249bdddc"
+  }
+]

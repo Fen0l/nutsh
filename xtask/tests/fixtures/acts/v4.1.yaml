@@ -1,0 +1,542 @@
+openapi: 3.0.1
+info:
+  title: acts
+  version: "4.1"
+paths:
+  /acts/v4.1/config/machines:
+    get:
+      parameters:
+        - name: $page
+          in: query
+        - name: $limit
+          in: query
+      x-rate-limit:
+        - type: xsmall
+          count: 30
+          timeUnit: seconds
+        - type: Large
+          count: 60
+          timeUnit: minutes
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/acts.v4.1.config.Machine'
+    post:
+      parameters:
+        - name: NTNX-Request-Id
+          in: header
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/acts.v4.1.config.MachineSpec'
+      responses:
+        '202':
+          description: accepted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/prism.v4.2.config.TaskReference'
+  /acts/v4.1/config/machines/{extId}:
+    get:
+      parameters:
+        - name: extId
+          in: path
+          required: true
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/acts.v4.1.config.Machine'
+    put:
+      parameters:
+        - name: extId
+          in: path
+          required: true
+        - name: If-Match
+          in: header
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/acts.v4.1.config.Machine'
+      responses:
+        '202':
+          description: accepted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/prism.v4.2.config.TaskReference'
+    delete:
+      parameters:
+        - name: extId
+          in: path
+          required: true
+      responses:
+        '202':
+          description: accepted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/prism.v4.2.config.TaskReference'
+  /acts/v4.1/config/machines/{extId}/$actions/start:
+    post:
+      parameters:
+        - name: extId
+          in: path
+          required: true
+      x-rate-limit:
+        - type: default
+          count: 3
+          timeUnit: seconds
+        - count: 2
+          timeUnit: seconds
+        - type: xlarge
+          count: 60
+          timeUnit: minutes
+      responses:
+        '202':
+          description: accepted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/prism.v4.2.config.TaskReference'
+  /acts/v4.1/config/machines/{extId}/$actions/clone:
+    post:
+      parameters:
+        - name: extId
+          in: path
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/acts.v4.1.config.CloneSpec'
+      responses:
+        '202':
+          description: accepted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    oneOf:
+                      - $ref: '#/components/schemas/prism.v4.2.config.TaskReference'
+                      - $ref: '#/components/schemas/acts.v4.1.error.ErrorResponse'
+  /acts/v4.1/config/machines/{extId}/$actions/quiesce:
+    post:
+      parameters:
+        - name: extId
+          in: path
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/acts.v4.1.config.QuiesceSpec'
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/acts.v4.1.error.AppMessage'
+  /acts/v4.1/config/machines/{extId}/$actions/ping:
+    post:
+      parameters:
+        - name: extId
+          in: path
+          required: true
+      responses:
+        '204':
+          description: no content
+  /acts/v4.1/config/racks:
+    get:
+      parameters:
+        - name: $limit
+          in: query
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/acts.v4.1.config.Rack'
+  /acts/v4.1/config/racks/{extId}:
+    get:
+      parameters:
+        - name: extId
+          in: path
+          required: true
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/acts.v4.1.config.Rack'
+  /acts/v4.1/config/racks/{rackExtId}/racks:
+    get:
+      parameters:
+        - name: rackExtId
+          in: path
+          required: true
+        - name: $limit
+          in: query
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/acts.v4.1.config.Rack'
+  /acts/v4.1/config/nodes:
+    get:
+      parameters:
+        - name: $limit
+          in: query
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/acts.v4.1.config.Node'
+  /acts/v4.1/config/racks/{rackExtId}/nodes:
+    get:
+      parameters:
+        - name: rackExtId
+          in: path
+          required: true
+        - name: $limit
+          in: query
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/acts.v4.1.config.Node'
+  /acts/v4.1/config/racks/{rackExtId}/nodes/{extId}:
+    get:
+      parameters:
+        - name: rackExtId
+          in: path
+          required: true
+        - name: extId
+          in: path
+          required: true
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/acts.v4.1.config.Node'
+  /acts/v4.1/config/racks/{rackExtId}/nodes/{extId}/$actions/park:
+    post:
+      parameters:
+        - name: rackExtId
+          in: path
+          required: true
+        - name: extId
+          in: path
+          required: true
+      responses:
+        '202':
+          description: accepted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/prism.v4.2.config.TaskReference'
+  /acts/v4.1/operations/racks/{rackExtId}/nodes/{extId}/$actions/service:
+    post:
+      parameters:
+        - name: rackExtId
+          in: path
+          required: true
+        - name: extId
+          in: path
+          required: true
+        - name: NTNX-Request-Id
+          in: header
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/acts.v4.1.operations.ServiceSpec'
+      responses:
+        '202':
+          description: accepted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/prism.v4.2.config.TaskReference'
+  /acts/v4.1/config/bays/{bayExtId}/slots:
+    get:
+      parameters:
+        - name: bayExtId
+          in: path
+          required: true
+        - name: $limit
+          in: query
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/acts.v4.1.config.Slot'
+  /acts/v4.1/config/bays/{bayExtId}/slots/{extId}:
+    get:
+      parameters:
+        - name: bayExtId
+          in: path
+          required: true
+        - name: extId
+          in: path
+          required: true
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/acts.v4.1.config.Slot'
+  /acts/v4.1/config/trays/{trayExtId}/slots:
+    get:
+      parameters:
+        - name: trayExtId
+          in: path
+          required: true
+        - name: $limit
+          in: query
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/acts.v4.1.config.Slot'
+  /acts/v4.1/config/trays/{trayExtId}/slots/{extId}:
+    get:
+      parameters:
+        - name: trayExtId
+          in: path
+          required: true
+        - name: extId
+          in: path
+          required: true
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/acts.v4.1.config.Slot'
+  /acts/v4.1/operations/bays/{bayExtId}/slots/{extId}/$actions/eject:
+    post:
+      parameters:
+        - name: bayExtId
+          in: path
+          required: true
+        - name: extId
+          in: path
+          required: true
+      responses:
+        '202':
+          description: accepted
+components:
+  schemas:
+    acts.v4.1.config.Machine:
+      type: object
+      properties:
+        extId:
+          type: string
+          readOnly: true
+        name:
+          type: string
+        powerState:
+          type: string
+          enum: [ON, OFF]
+    acts.v4.1.config.MachineSpec:
+      type: object
+      required:
+        - name
+      properties:
+        extId:
+          type: string
+          readOnly: true
+        links:
+          type: array
+          readOnly: true
+          items:
+            type: object
+        name:
+          type: string
+        memoryBytes:
+          type: integer
+          format: int64
+    acts.v4.1.config.CloneSpec:
+      type: object
+      properties:
+        name:
+          type: string
+        isPoweredOn:
+          type: boolean
+        mode:
+          type: string
+          enum: [FAST, FULL]
+        rack:
+          $ref: '#/components/schemas/acts.v4.1.config.RackReference'
+        disks:
+          type: array
+          items:
+            $ref: '#/components/schemas/acts.v4.1.config.DiskSpec'
+        tags:
+          type: array
+          items:
+            type: string
+    acts.v4.1.config.QuiesceSpec:
+      type: object
+      required:
+        - timeoutSeconds
+      properties:
+        timeoutSeconds:
+          type: integer
+    acts.v4.1.config.DiskSpec:
+      type: object
+      required:
+        - sizeBytes
+      properties:
+        sizeBytes:
+          type: integer
+    acts.v4.1.config.RackReference:
+      type: object
+      properties:
+        extId:
+          type: string
+    acts.v4.1.operations.ServiceSpec:
+      type: object
+      required:
+        - reason
+      properties:
+        reason:
+          type: string
+    acts.v4.1.config.Rack:
+      type: object
+      properties:
+        extId:
+          type: string
+        name:
+          type: string
+    acts.v4.1.config.Node:
+      type: object
+      properties:
+        extId:
+          type: string
+        hostName:
+          type: string
+    acts.v4.1.config.Slot:
+      type: object
+      properties:
+        extId:
+          type: string
+        name:
+          type: string
+    acts.v4.1.error.AppMessage:
+      type: object
+      properties:
+        message:
+          type: string
+    acts.v4.1.error.ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            type: object

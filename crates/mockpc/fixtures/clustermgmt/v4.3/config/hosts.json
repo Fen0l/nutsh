@@ -1,0 +1,23 @@
+[
+  {
+    "$objectType": "clustermgmt.v4.r0.b2.config.Host",
+    "extId": "7b2f2f70-0f6a-4b58-9f9b-000000000020",
+    "hostName": "ahv-node-1",
+    "hostType": "HYPER_CONVERGED",
+    "maintenanceState": "NORMAL",
+    "cluster": { "uuid": "0006158a-2f0d-4d5a-8e2d-000000000010", "name": "lab-cluster" },
+    "hypervisor": {
+      "type": "AHV",
+      "fullName": "Nutanix 20230302.101026",
+      "externalAddress": { "ipv4": { "value": "203.0.113.101", "prefixLength": 32 } },
+      "state": "ACPI_STATE_S0"
+    },
+    "controllerVm": {
+      "externalAddress": { "ipv4": { "value": "203.0.113.201", "prefixLength": 32 } },
+      "id": 5
+    },
+    "numberOfCpuCores": 32,
+    "memorySizeBytes": 274877906944,
+    "nodeStatus": "NORMAL"
+  }
+]

@@ -1,0 +1,2120 @@
+[
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "1a9aabeb-d1d4-420d-8a3f-2904fa62047a",
+    "targetVersion": "11.2",
+    "lastUpdatedTime": "2026-08-05T07:36:56.024Z",
+    "groupUuid": "da441560-a449-43bf-a91e-238925cf79cf",
+    "availableVersions": [
+      {
+        "$objectType": "lifecycle.v4.resources.AvailableVersion",
+        "version": "11.2.0.2",
+        "status": "AVAILABLE",
+        "isEnabled": true,
+        "availableVersionUuid": "24e0bf9c-376a-4d34-b3da-2937feeccb47",
+        "order": 145,
+        "releaseNotes": "https://portal.nutanix.com/page/documents/details/?targetId=Release-Notes-AHV-v203.0.113.1:Release-Notes-AHV-v203.0.113.1",
+        "customMessage": "{}",
+        "groupUuid": "da441560-a449-43bf-a91e-238925cf79cf",
+        "dependencies": [
+          {
+            "$objectType": "lifecycle.v4.resources.DependentEntity",
+            "dependentVersions": [
+              {
+                "value": [
+                  "203.0.113.179"
+                ],
+                "$objectType": "common.v1.config.KVPair",
+                "name": "name-03427570"
+              }
+            ],
+            "entityClass": "Core Cluster",
+            "entityModel": "AOS",
+            "entityVersion": "7.6.0.6"
+          }
+        ],
+        "isImagePresent": true
+      }
+    ],
+    "entityClass": "Hypervisor",
+    "entityModel": "AHV hypervisor",
+    "entityType": "SOFTWARE",
+    "entityVersion": "11.2",
+    "locationInfo": {
+      "uuid": "44e477e6-edcf-4722-b35b-88deb3a160ef",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "3e444a42-0edd-4273-956f-4b71ee5dcf2c",
+    "targetVersion": "LM.2026.3.6",
+    "groupUuid": "fa956eda-f718-4c67-9ad4-e7c0546ffa23",
+    "entityClass": "LICENSING SERVICE",
+    "entityModel": "Licensing",
+    "entityType": "SOFTWARE",
+    "entityVersion": "LM.2026.3.6",
+    "locationInfo": {
+      "uuid": "9cad7457-dc26-4839-bfce-2aa79a0f54c7",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "PC"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "d52e19a5-e5fb-45b0-a5d9-74424bb98d41",
+    "targetVersion": "LM.2026.3.6",
+    "groupUuid": "fa956eda-f718-4c67-9ad4-e7c0546ffa23",
+    "entityClass": "LICENSING SERVICE",
+    "entityModel": "Licensing",
+    "entityType": "SOFTWARE",
+    "entityVersion": "LM.2026.3.6",
+    "locationInfo": {
+      "uuid": "44e477e6-edcf-4722-b35b-88deb3a160ef",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "PC"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "68989698-7004-4ea2-a754-5d7e369206c1",
+    "targetVersion": "11.2",
+    "lastUpdatedTime": "2026-08-05T08:01:16.566407Z",
+    "groupUuid": "da441560-a449-43bf-a91e-238925cf79cf",
+    "availableVersions": [
+      {
+        "$objectType": "lifecycle.v4.resources.AvailableVersion",
+        "version": "11.2.0.2",
+        "status": "AVAILABLE",
+        "isEnabled": true,
+        "availableVersionUuid": "c380d03e-b727-45de-9567-b0930d906b0c",
+        "order": 145,
+        "releaseNotes": "https://portal.nutanix.com/page/documents/details/?targetId=Release-Notes-AHV-v203.0.113.1:Release-Notes-AHV-v203.0.113.1",
+        "customMessage": "{}",
+        "groupUuid": "da441560-a449-43bf-a91e-238925cf79cf",
+        "dependencies": [
+          {
+            "$objectType": "lifecycle.v4.resources.DependentEntity",
+            "dependentVersions": [
+              {
+                "value": [
+                  "203.0.113.179"
+                ],
+                "$objectType": "common.v1.config.KVPair",
+                "name": "name-03427570"
+              }
+            ],
+            "entityClass": "Core Cluster",
+            "entityModel": "AOS",
+            "entityVersion": "7.6.0.6"
+          }
+        ],
+        "isImagePresent": true
+      }
+    ],
+    "entityClass": "Hypervisor",
+    "entityModel": "AHV hypervisor",
+    "entityType": "SOFTWARE",
+    "entityVersion": "11.2",
+    "locationInfo": {
+      "uuid": "9cad7457-dc26-4839-bfce-2aa79a0f54c7",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "0707312a-1dd3-4632-89a4-b552022d3726",
+    "targetVersion": "LM.2026.3.6",
+    "groupUuid": "fa956eda-f718-4c67-9ad4-e7c0546ffa23",
+    "entityClass": "LICENSING SERVICE",
+    "entityModel": "Licensing",
+    "entityType": "SOFTWARE",
+    "entityVersion": "LM.2026.3.6",
+    "locationInfo": {
+      "uuid": "38521854-c20d-41ff-8348-41c53db66e38",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "PC"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "d32541d2-3057-4104-8855-9dd5268fd158",
+    "targetVersion": "11.2",
+    "lastUpdatedTime": "2026-08-05T09:33:27.811703Z",
+    "groupUuid": "da441560-a449-43bf-a91e-238925cf79cf",
+    "availableVersions": [
+      {
+        "$objectType": "lifecycle.v4.resources.AvailableVersion",
+        "version": "11.2.0.2",
+        "status": "AVAILABLE",
+        "isEnabled": true,
+        "availableVersionUuid": "138f63b3-0d2d-4771-ac19-f5009d4431db",
+        "order": 145,
+        "releaseNotes": "https://portal.nutanix.com/page/documents/details/?targetId=Release-Notes-AHV-v203.0.113.1:Release-Notes-AHV-v203.0.113.1",
+        "customMessage": "{}",
+        "groupUuid": "da441560-a449-43bf-a91e-238925cf79cf",
+        "dependencies": [
+          {
+            "$objectType": "lifecycle.v4.resources.DependentEntity",
+            "dependentVersions": [
+              {
+                "value": [
+                  "203.0.113.179"
+                ],
+                "$objectType": "common.v1.config.KVPair",
+                "name": "name-03427570"
+              }
+            ],
+            "entityClass": "Core Cluster",
+            "entityModel": "AOS",
+            "entityVersion": "7.6.0.6"
+          }
+        ],
+        "isImagePresent": true
+      }
+    ],
+    "entityClass": "Hypervisor",
+    "entityModel": "AHV hypervisor",
+    "entityType": "SOFTWARE",
+    "entityVersion": "11.2",
+    "locationInfo": {
+      "uuid": "38521854-c20d-41ff-8348-41c53db66e38",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "1e97d303-3933-48b2-b37e-7d8b2feb2f06",
+    "targetVersion": "7.6.0",
+    "groupUuid": "f2be1187-e6fb-4f27-8030-ecc5c0040859",
+    "entityClass": "Flow",
+    "entityModel": "Flow Network Security PE",
+    "entityType": "SOFTWARE",
+    "entityVersion": "7.6.0",
+    "locationInfo": {
+      "uuid": "9cad7457-dc26-4839-bfce-2aa79a0f54c7",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "5689c11a-28cb-4736-aadc-282f153c8f0f",
+    "targetVersion": "7.6.0",
+    "groupUuid": "f2be1187-e6fb-4f27-8030-ecc5c0040859",
+    "entityClass": "Flow",
+    "entityModel": "Flow Network Security PE",
+    "entityType": "SOFTWARE",
+    "entityVersion": "7.6.0",
+    "locationInfo": {
+      "uuid": "44e477e6-edcf-4722-b35b-88deb3a160ef",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "0ffe928f-c6b4-40d2-905a-c78bb5c96880",
+    "targetVersion": "7.6.0",
+    "groupUuid": "f2be1187-e6fb-4f27-8030-ecc5c0040859",
+    "entityClass": "Flow",
+    "entityModel": "Flow Network Security PE",
+    "entityType": "SOFTWARE",
+    "entityVersion": "7.6.0",
+    "locationInfo": {
+      "uuid": "38521854-c20d-41ff-8348-41c53db66e38",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "dd59358b-8549-460d-b991-5f5bf0edebff",
+    "targetVersion": "6.0.0.1",
+    "lastUpdatedTime": "2026-08-13T01:37:30.779474Z",
+    "entityClass": "Core Cluster",
+    "entityModel": "NCC",
+    "entityType": "SOFTWARE",
+    "entityVersion": "6.0.0.1",
+    "locationInfo": {
+      "uuid": "0006237e-c983-e712-0000-00000001c1d0",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "CLUSTER"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "47edafe5-615c-4f60-ba81-e8a979c9602b",
+    "targetVersion": "2.20",
+    "groupUuid": "5b3a0980-24a3-4c71-b8ae-ae60af32e645",
+    "entityClass": "Cluster Service",
+    "entityModel": "Foundation Platforms",
+    "entityType": "SOFTWARE",
+    "entityVersion": "2.20",
+    "locationInfo": {
+      "uuid": "9cad7457-dc26-4839-bfce-2aa79a0f54c7",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "4226d518-3ad6-4d24-ba7a-d62f317fac79",
+    "targetVersion": "2.20",
+    "groupUuid": "5b3a0980-24a3-4c71-b8ae-ae60af32e645",
+    "entityClass": "Cluster Service",
+    "entityModel": "Foundation Platforms",
+    "entityType": "SOFTWARE",
+    "entityVersion": "2.20",
+    "locationInfo": {
+      "uuid": "44e477e6-edcf-4722-b35b-88deb3a160ef",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "152a583f-4b84-4cf1-8bed-7f61f01191fb",
+    "targetVersion": "2.20",
+    "groupUuid": "5b3a0980-24a3-4c71-b8ae-ae60af32e645",
+    "entityClass": "Cluster Service",
+    "entityModel": "Foundation Platforms",
+    "entityType": "SOFTWARE",
+    "entityVersion": "2.20",
+    "locationInfo": {
+      "uuid": "38521854-c20d-41ff-8348-41c53db66e38",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "bafcff99-bf65-4357-84a1-063bce439679",
+    "targetVersion": "security_aos.2022.9",
+    "groupUuid": "d9f9d2c1-0ee9-429d-bf8a-85a1ac5f21bb",
+    "entityClass": "Cluster Service",
+    "entityModel": "Security AOS",
+    "entityType": "SOFTWARE",
+    "entityVersion": "security_aos.2022.9",
+    "locationInfo": {
+      "uuid": "9cad7457-dc26-4839-bfce-2aa79a0f54c7",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "6a992b4b-a5fd-4830-b3c6-aacc25e9db14",
+    "targetVersion": "security_aos.2022.9",
+    "groupUuid": "d9f9d2c1-0ee9-429d-bf8a-85a1ac5f21bb",
+    "entityClass": "Cluster Service",
+    "entityModel": "Security AOS",
+    "entityType": "SOFTWARE",
+    "entityVersion": "security_aos.2022.9",
+    "locationInfo": {
+      "uuid": "44e477e6-edcf-4722-b35b-88deb3a160ef",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "ee72720b-bd92-4961-b188-8642d5cdd5d4",
+    "targetVersion": "security_aos.2022.9",
+    "groupUuid": "d9f9d2c1-0ee9-429d-bf8a-85a1ac5f21bb",
+    "entityClass": "Cluster Service",
+    "entityModel": "Security AOS",
+    "entityType": "SOFTWARE",
+    "entityVersion": "security_aos.2022.9",
+    "locationInfo": {
+      "uuid": "38521854-c20d-41ff-8348-41c53db66e38",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "bd5b3636-8ccf-4ae4-a3b7-44c9b25fb45d",
+    "targetVersion": "55.00.00.00",
+    "entityClass": "HBA Driver (CVM)",
+    "entityModel": "mpt3sas",
+    "entityType": "FIRMWARE",
+    "entityVersion": "55.00.00.00",
+    "locationInfo": {
+      "uuid": "9cad7457-dc26-4839-bfce-2aa79a0f54c7",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hardwareVendor": "Supermicro",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "edb2ddb8-6c9e-4f19-b292-4f2ae37069db",
+    "targetVersion": "55.00.00.00",
+    "entityClass": "HBA Driver (CVM)",
+    "entityModel": "mpt3sas",
+    "entityType": "FIRMWARE",
+    "entityVersion": "55.00.00.00",
+    "locationInfo": {
+      "uuid": "44e477e6-edcf-4722-b35b-88deb3a160ef",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hardwareVendor": "Supermicro",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "9b1d6f7a-33c4-46f2-880b-bbbbc1e37226",
+    "targetVersion": "55.00.00.00",
+    "entityClass": "HBA Driver (CVM)",
+    "entityModel": "mpt3sas",
+    "entityType": "FIRMWARE",
+    "entityVersion": "55.00.00.00",
+    "locationInfo": {
+      "uuid": "38521854-c20d-41ff-8348-41c53db66e38",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hardwareVendor": "Supermicro",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "988da5d5-3a53-44db-b5b2-d0139988dd51",
+    "targetVersion": "7.6",
+    "availableVersions": [
+      {
+        "$objectType": "lifecycle.v4.resources.AvailableVersion",
+        "version": "7.6.0.6",
+        "status": "AVAILABLE",
+        "isEnabled": true,
+        "availableVersionUuid": "0b43e836-207b-435e-a6fc-1bce2a97303a",
+        "order": 19,
+        "releaseNotes": "https://portal.nutanix.com/#/page/docs/details?targetId=Release-Notes-AOS-v7_6_0_6:Release-Notes-AOS-v7_6_0_6",
+        "releaseDate": "2026-08-31",
+        "isImagePresent": true
+      }
+    ],
+    "entityClass": "Core Cluster",
+    "entityModel": "AOS",
+    "entityType": "SOFTWARE",
+    "entityVersion": "7.6",
+    "locationInfo": {
+      "uuid": "0006237e-c983-e712-0000-00000001c1d0",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "CLUSTER"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "6111ac35-9f09-4db3-8138-c601640182b4",
+    "targetVersion": "5.11",
+    "entityClass": "Core Cluster",
+    "entityModel": "Foundation",
+    "entityType": "SOFTWARE",
+    "entityVersion": "5.11",
+    "locationInfo": {
+      "uuid": "0006237e-c983-e712-0000-00000001c1d0",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "CLUSTER"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "b468fcc1-eb5c-4210-a547-6abcc751e592",
+    "targetVersion": "5.3.0.3",
+    "lastUpdatedTime": "2026-08-05T07:23:58.497466Z",
+    "entityClass": "Core Cluster",
+    "entityModel": "FSM",
+    "entityType": "SOFTWARE",
+    "entityVersion": "5.3.0.3",
+    "locationInfo": {
+      "uuid": "0006237e-c983-e712-0000-00000001c1d0",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "CLUSTER"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "5dd9a08e-a3d5-4b9e-9651-cc8fd9e00c5d",
+    "targetVersion": "25.10-1.2.2",
+    "entityClass": "NIC Driver (CVM)",
+    "entityModel": "mlx5_core",
+    "entityType": "FIRMWARE",
+    "entityVersion": "25.10-1.2.2",
+    "locationInfo": {
+      "uuid": "44e477e6-edcf-4722-b35b-88deb3a160ef",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hardwareVendor": "Supermicro",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "862d5734-f3ad-4543-b0f4-d250f3039a11",
+    "targetVersion": "4.0-0",
+    "entityClass": "NIC Driver (CVM)",
+    "entityModel": "mlx4_en",
+    "entityType": "FIRMWARE",
+    "entityVersion": "4.0-0",
+    "locationInfo": {
+      "uuid": "44e477e6-edcf-4722-b35b-88deb3a160ef",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hardwareVendor": "Supermicro",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "2b91c8bf-e3a7-44f7-b1d5-efc8d64ffdcc",
+    "targetVersion": "4.0-0",
+    "entityClass": "NIC Driver (CVM)",
+    "entityModel": "mlx4_core",
+    "entityType": "FIRMWARE",
+    "entityVersion": "4.0-0",
+    "locationInfo": {
+      "uuid": "44e477e6-edcf-4722-b35b-88deb3a160ef",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hardwareVendor": "Supermicro",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "7e0eb796-1b9c-431e-bc2c-b03f8808b71e",
+    "targetVersion": "25.10-1.2.2",
+    "entityClass": "NIC Driver (CVM)",
+    "entityModel": "mlx5_core",
+    "entityType": "FIRMWARE",
+    "entityVersion": "25.10-1.2.2",
+    "locationInfo": {
+      "uuid": "9cad7457-dc26-4839-bfce-2aa79a0f54c7",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hardwareVendor": "Supermicro",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "21ee8238-706d-42dc-9d3a-ea3e7ad3dfd6",
+    "targetVersion": "4.0-0",
+    "entityClass": "NIC Driver (CVM)",
+    "entityModel": "mlx4_en",
+    "entityType": "FIRMWARE",
+    "entityVersion": "4.0-0",
+    "locationInfo": {
+      "uuid": "9cad7457-dc26-4839-bfce-2aa79a0f54c7",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hardwareVendor": "Supermicro",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "845cffc3-cba5-4e37-af71-d02dea6e6f1d",
+    "targetVersion": "4.0-0",
+    "entityClass": "NIC Driver (CVM)",
+    "entityModel": "mlx4_core",
+    "entityType": "FIRMWARE",
+    "entityVersion": "4.0-0",
+    "locationInfo": {
+      "uuid": "9cad7457-dc26-4839-bfce-2aa79a0f54c7",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hardwareVendor": "Supermicro",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "69e2d873-546d-48bf-8645-fbf7b9c69fc4",
+    "targetVersion": "25.10-1.2.2",
+    "entityClass": "NIC Driver (CVM)",
+    "entityModel": "mlx5_core",
+    "entityType": "FIRMWARE",
+    "entityVersion": "25.10-1.2.2",
+    "locationInfo": {
+      "uuid": "38521854-c20d-41ff-8348-41c53db66e38",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hardwareVendor": "Supermicro",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "0482564f-3b22-4950-b082-1f839b85e7ca",
+    "targetVersion": "4.0-0",
+    "entityClass": "NIC Driver (CVM)",
+    "entityModel": "mlx4_en",
+    "entityType": "FIRMWARE",
+    "entityVersion": "4.0-0",
+    "locationInfo": {
+      "uuid": "38521854-c20d-41ff-8348-41c53db66e38",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hardwareVendor": "Supermicro",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "a28b3121-1e4b-4b88-bad9-1c8bcbf16bdc",
+    "targetVersion": "4.0-0",
+    "entityClass": "NIC Driver (CVM)",
+    "entityModel": "mlx4_core",
+    "entityType": "FIRMWARE",
+    "entityVersion": "4.0-0",
+    "locationInfo": {
+      "uuid": "38521854-c20d-41ff-8348-41c53db66e38",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hardwareVendor": "Supermicro",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "c9278a25-fd6d-4292-b3c2-4736a880d03a",
+    "targetVersion": "6.3.4",
+    "entityClass": "NIC Driver",
+    "entityModel": "ixgbe",
+    "entityType": "FIRMWARE",
+    "entityVersion": "6.3.4",
+    "locationInfo": {
+      "uuid": "44e477e6-edcf-4722-b35b-88deb3a160ef",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hardwareVendor": "Supermicro",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "37c3c08b-8dfb-4ea6-a452-c95a23a081cd",
+    "targetVersion": "2.28.16",
+    "entityClass": "NIC Driver",
+    "entityModel": "i40e",
+    "entityType": "FIRMWARE",
+    "entityVersion": "2.28.16",
+    "locationInfo": {
+      "uuid": "44e477e6-edcf-4722-b35b-88deb3a160ef",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hardwareVendor": "Supermicro",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "a4c3a0ec-6458-489e-9329-668ee9e23dbc",
+    "targetVersion": "25.10-1.2.2",
+    "entityClass": "NIC Driver",
+    "entityModel": "mlx5_core",
+    "entityType": "FIRMWARE",
+    "entityVersion": "25.10-1.2.2",
+    "locationInfo": {
+      "uuid": "44e477e6-edcf-4722-b35b-88deb3a160ef",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hardwareVendor": "Supermicro",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "d7a75fca-a5a2-4bfe-b30c-5bc2c3518412",
+    "targetVersion": "5.19.10",
+    "entityClass": "NIC Driver",
+    "entityModel": "igb",
+    "entityType": "FIRMWARE",
+    "entityVersion": "5.19.10",
+    "locationInfo": {
+      "uuid": "44e477e6-edcf-4722-b35b-88deb3a160ef",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hardwareVendor": "Supermicro",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "1f054ee6-978d-47c8-9154-49b0d84dec9d",
+    "targetVersion": "4.0-0",
+    "entityClass": "NIC Driver",
+    "entityModel": "mlx4_en",
+    "entityType": "FIRMWARE",
+    "entityVersion": "4.0-0",
+    "locationInfo": {
+      "uuid": "44e477e6-edcf-4722-b35b-88deb3a160ef",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hardwareVendor": "Supermicro",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "19ff7490-496f-4958-b8a8-58952a84770e",
+    "targetVersion": "1.10.3-234.0.154.0",
+    "entityClass": "NIC Driver",
+    "entityModel": "bnxt_en",
+    "entityType": "FIRMWARE",
+    "entityVersion": "1.10.3-234.0.154.0",
+    "locationInfo": {
+      "uuid": "44e477e6-edcf-4722-b35b-88deb3a160ef",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hardwareVendor": "Supermicro",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "ea212901-d374-4130-ab51-0efcb7095fde",
+    "targetVersion": "2.4.5",
+    "entityClass": "NIC Driver",
+    "entityModel": "ice",
+    "entityType": "FIRMWARE",
+    "entityVersion": "2.4.5",
+    "locationInfo": {
+      "uuid": "44e477e6-edcf-4722-b35b-88deb3a160ef",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hardwareVendor": "Supermicro",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "2d0479d4-e2a2-43c6-bc27-ed1580979f18",
+    "targetVersion": "N2010121",
+    "deviceId": "PHDW8082002S240E",
+    "entityClass": "Host Boot Device - M2 Drives",
+    "entityModel": "INTEL SSDSCKJB24",
+    "entityType": "FIRMWARE",
+    "entityVersion": "N2010121",
+    "locationInfo": {
+      "uuid": "44e477e6-edcf-4722-b35b-88deb3a160ef",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hardwareVendor": "Supermicro",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "a844a7a8-a4c6-4967-8fd1-5bb7c9e85810",
+    "targetVersion": "N2010121",
+    "deviceId": "PHDW808303GB240E",
+    "entityClass": "Host Boot Device - M2 Drives",
+    "entityModel": "INTEL SSDSCKJB24",
+    "entityType": "FIRMWARE",
+    "entityVersion": "N2010121",
+    "locationInfo": {
+      "uuid": "44e477e6-edcf-4722-b35b-88deb3a160ef",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hardwareVendor": "Supermicro",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "3653f05b-c8e7-47c4-8a83-6e3073efe098",
+    "targetVersion": "GXT5404Q",
+    "deviceId": "{\"name-bfe30729\": 6, \"name-6a004807\": \"S2TVNX0K508932\", \"name-b55c06d6\": 1}",
+    "entityDetails": [
+      {
+        "value": "6",
+        "$objectType": "common.v1.config.KVPair",
+        "name": "name-bfe30729"
+      },
+      {
+        "value": "S2TVNX0K508932",
+        "name": "name-6a004807"
+      },
+      {
+        "value": "1",
+        "name": "name-b55c06d6"
+      }
+    ],
+    "entityClass": "SATA Drives",
+    "entityModel": "MZ7LM1T9HMJP",
+    "entityType": "FIRMWARE",
+    "entityVersion": "GXT5404Q",
+    "locationInfo": {
+      "uuid": "9cad7457-dc26-4839-bfce-2aa79a0f54c7",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hardwareVendor": "Supermicro",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "c93300ff-a7ec-4c7b-ac13-23044de18efc",
+    "targetVersion": "GXM5304Q",
+    "deviceId": "{\"name-bfe30729\": 6, \"name-6a004807\": \"S3F6NX0K502830\", \"name-b55c06d6\": 1}",
+    "entityDetails": [
+      {
+        "value": "6",
+        "$objectType": "common.v1.config.KVPair",
+        "name": "name-bfe30729"
+      },
+      {
+        "value": "S3F6NX0K502830",
+        "name": "name-6a004807"
+      },
+      {
+        "value": "1",
+        "name": "name-b55c06d6"
+      }
+    ],
+    "entityClass": "SATA Drives",
+    "entityModel": "MZ7KM1T9HMJP",
+    "entityType": "FIRMWARE",
+    "entityVersion": "GXM5304Q",
+    "locationInfo": {
+      "uuid": "9cad7457-dc26-4839-bfce-2aa79a0f54c7",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hardwareVendor": "Supermicro",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "5266b6ab-24de-4a14-886b-e98c74ec6770",
+    "targetVersion": "GXM5304Q",
+    "deviceId": "{\"name-bfe30729\": 6, \"name-6a004807\": \"S3F6NX0K502827\", \"name-b55c06d6\": 1}",
+    "entityDetails": [
+      {
+        "value": "6",
+        "$objectType": "common.v1.config.KVPair",
+        "name": "name-bfe30729"
+      },
+      {
+        "value": "S3F6NX0K502827",
+        "name": "name-6a004807"
+      },
+      {
+        "value": "1",
+        "name": "name-b55c06d6"
+      }
+    ],
+    "entityClass": "SATA Drives",
+    "entityModel": "MZ7KM1T9HMJP",
+    "entityType": "FIRMWARE",
+    "entityVersion": "GXM5304Q",
+    "locationInfo": {
+      "uuid": "9cad7457-dc26-4839-bfce-2aa79a0f54c7",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hardwareVendor": "Supermicro",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "b6a1602a-ee60-4918-9a55-ded81f5348fd",
+    "targetVersion": "GXT5404Q",
+    "deviceId": "{\"name-bfe30729\": 6, \"name-6a004807\": \"S2TVNX0K508671\", \"name-b55c06d6\": 1}",
+    "entityDetails": [
+      {
+        "value": "6",
+        "$objectType": "common.v1.config.KVPair",
+        "name": "name-bfe30729"
+      },
+      {
+        "value": "S2TVNX0K508671",
+        "name": "name-6a004807"
+      },
+      {
+        "value": "1",
+        "name": "name-b55c06d6"
+      }
+    ],
+    "entityClass": "SATA Drives",
+    "entityModel": "MZ7LM1T9HMJP",
+    "entityType": "FIRMWARE",
+    "entityVersion": "GXT5404Q",
+    "locationInfo": {
+      "uuid": "9cad7457-dc26-4839-bfce-2aa79a0f54c7",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hardwareVendor": "Supermicro",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "32e3958e-b16b-44e0-8313-ec6a51253aa4",
+    "targetVersion": "GXM5304Q",
+    "deviceId": "{\"name-bfe30729\": 6, \"name-6a004807\": \"S3F6NX0K406933\", \"name-b55c06d6\": 1}",
+    "entityDetails": [
+      {
+        "value": "6",
+        "$objectType": "common.v1.config.KVPair",
+        "name": "name-bfe30729"
+      },
+      {
+        "value": "S3F6NX0K406933",
+        "name": "name-6a004807"
+      },
+      {
+        "value": "1",
+        "name": "name-b55c06d6"
+      }
+    ],
+    "entityClass": "SATA Drives",
+    "entityModel": "MZ7KM1T9HMJP",
+    "entityType": "FIRMWARE",
+    "entityVersion": "GXM5304Q",
+    "locationInfo": {
+      "uuid": "9cad7457-dc26-4839-bfce-2aa79a0f54c7",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hardwareVendor": "Supermicro",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "f95e702d-a6ae-4a8a-bc08-8c548c87c69a",
+    "targetVersion": "GXM5304Q",
+    "deviceId": "{\"name-bfe30729\": 6, \"name-6a004807\": \"S3F6NX0K406970\", \"name-b55c06d6\": 1}",
+    "entityDetails": [
+      {
+        "value": "6",
+        "$objectType": "common.v1.config.KVPair",
+        "name": "name-bfe30729"
+      },
+      {
+        "value": "S3F6NX0K406970",
+        "name": "name-6a004807"
+      },
+      {
+        "value": "1",
+        "name": "name-b55c06d6"
+      }
+    ],
+    "entityClass": "SATA Drives",
+    "entityModel": "MZ7KM1T9HMJP",
+    "entityType": "FIRMWARE",
+    "entityVersion": "GXM5304Q",
+    "locationInfo": {
+      "uuid": "9cad7457-dc26-4839-bfce-2aa79a0f54c7",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hardwareVendor": "Supermicro",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "3cb20859-07a1-4cee-b62c-b23d0feba988",
+    "targetVersion": "GXT5404Q",
+    "deviceId": "{\"name-bfe30729\": 5, \"name-6a004807\": \"S2TVNX0K508672\", \"name-b55c06d6\": 1}",
+    "entityDetails": [
+      {
+        "value": "5",
+        "$objectType": "common.v1.config.KVPair",
+        "name": "name-bfe30729"
+      },
+      {
+        "value": "S2TVNX0K508672",
+        "name": "name-6a004807"
+      },
+      {
+        "value": "1",
+        "name": "name-b55c06d6"
+      }
+    ],
+    "entityClass": "SATA Drives",
+    "entityModel": "MZ7LM1T9HMJP",
+    "entityType": "FIRMWARE",
+    "entityVersion": "GXT5404Q",
+    "locationInfo": {
+      "uuid": "44e477e6-edcf-4722-b35b-88deb3a160ef",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hardwareVendor": "Supermicro",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "cca75348-81ae-441b-b306-5c0e21a22d6c",
+    "targetVersion": "GXT5404Q",
+    "deviceId": "{\"name-bfe30729\": 5, \"name-6a004807\": \"S2TVNX0K405399\", \"name-b55c06d6\": 1}",
+    "entityDetails": [
+      {
+        "value": "5",
+        "$objectType": "common.v1.config.KVPair",
+        "name": "name-bfe30729"
+      },
+      {
+        "value": "S2TVNX0K405399",
+        "name": "name-6a004807"
+      },
+      {
+        "value": "1",
+        "name": "name-b55c06d6"
+      }
+    ],
+    "entityClass": "SATA Drives",
+    "entityModel": "MZ7LM1T9HMJP",
+    "entityType": "FIRMWARE",
+    "entityVersion": "GXT5404Q",
+    "locationInfo": {
+      "uuid": "44e477e6-edcf-4722-b35b-88deb3a160ef",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hardwareVendor": "Supermicro",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "e78d0ede-854d-4789-8db2-2a522f4693c8",
+    "targetVersion": "GXT5404Q",
+    "deviceId": "{\"name-bfe30729\": 5, \"name-6a004807\": \"S2TVNX0K405308\", \"name-b55c06d6\": 1}",
+    "entityDetails": [
+      {
+        "value": "5",
+        "$objectType": "common.v1.config.KVPair",
+        "name": "name-bfe30729"
+      },
+      {
+        "value": "S2TVNX0K405308",
+        "name": "name-6a004807"
+      },
+      {
+        "value": "1",
+        "name": "name-b55c06d6"
+      }
+    ],
+    "entityClass": "SATA Drives",
+    "entityModel": "MZ7LM1T9HMJP",
+    "entityType": "FIRMWARE",
+    "entityVersion": "GXT5404Q",
+    "locationInfo": {
+      "uuid": "44e477e6-edcf-4722-b35b-88deb3a160ef",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hardwareVendor": "Supermicro",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "5b6a2fc2-86b1-47a8-9f73-0c651f3575c8",
+    "targetVersion": "GXT5404Q",
+    "deviceId": "{\"name-bfe30729\": 5, \"name-6a004807\": \"S2TVNX0K405350\", \"name-b55c06d6\": 1}",
+    "entityDetails": [
+      {
+        "value": "5",
+        "$objectType": "common.v1.config.KVPair",
+        "name": "name-bfe30729"
+      },
+      {
+        "value": "S2TVNX0K405350",
+        "name": "name-6a004807"
+      },
+      {
+        "value": "1",
+        "name": "name-b55c06d6"
+      }
+    ],
+    "entityClass": "SATA Drives",
+    "entityModel": "MZ7LM1T9HMJP",
+    "entityType": "FIRMWARE",
+    "entityVersion": "GXT5404Q",
+    "locationInfo": {
+      "uuid": "44e477e6-edcf-4722-b35b-88deb3a160ef",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hardwareVendor": "Supermicro",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "2a96cdb3-91ce-4309-8f0d-7b3780e0d120",
+    "targetVersion": "GXT5404Q",
+    "deviceId": "{\"name-bfe30729\": 5, \"name-6a004807\": \"S2TVNX0K508845\", \"name-b55c06d6\": 1}",
+    "entityDetails": [
+      {
+        "value": "5",
+        "$objectType": "common.v1.config.KVPair",
+        "name": "name-bfe30729"
+      },
+      {
+        "value": "S2TVNX0K508845",
+        "name": "name-6a004807"
+      },
+      {
+        "value": "1",
+        "name": "name-b55c06d6"
+      }
+    ],
+    "entityClass": "SATA Drives",
+    "entityModel": "MZ7LM1T9HMJP",
+    "entityType": "FIRMWARE",
+    "entityVersion": "GXT5404Q",
+    "locationInfo": {
+      "uuid": "44e477e6-edcf-4722-b35b-88deb3a160ef",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hardwareVendor": "Supermicro",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "227925a0-788e-43ff-a57a-4493fc09cf46",
+    "targetVersion": "MPTFW-16.00.10.00-IT",
+    "deviceId": "{\"total_sas_sata_disk_count\": 6, \"unique_device_id\": 1}",
+    "entityClass": "HBAs",
+    "entityModel": "LSI Logic SAS3008 HBA on X11 Skylake",
+    "entityType": "FIRMWARE",
+    "entityVersion": "MPTFW-16.00.10.00-IT",
+    "locationInfo": {
+      "uuid": "9cad7457-dc26-4839-bfce-2aa79a0f54c7",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hardwareVendor": "Supermicro",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "da364b37-c59e-4971-877a-1b571c14647b",
+    "targetVersion": "MPTFW-16.00.10.00-IT",
+    "deviceId": "{\"total_sas_sata_disk_count\": 5, \"unique_device_id\": 1}",
+    "entityClass": "HBAs",
+    "entityModel": "LSI Logic SAS3008 HBA on X11 Skylake",
+    "entityType": "FIRMWARE",
+    "entityVersion": "MPTFW-16.00.10.00-IT",
+    "locationInfo": {
+      "uuid": "44e477e6-edcf-4722-b35b-88deb3a160ef",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hardwareVendor": "Supermicro",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "70df328d-5d9e-4556-8efb-0138edadf6df",
+    "targetVersion": "GXM5304Q",
+    "deviceId": "{\"name-bfe30729\": 6, \"name-6a004807\": \"S3F6NX0K406980\", \"name-b55c06d6\": 1}",
+    "entityDetails": [
+      {
+        "value": "6",
+        "$objectType": "common.v1.config.KVPair",
+        "name": "name-bfe30729"
+      },
+      {
+        "value": "S3F6NX0K406980",
+        "name": "name-6a004807"
+      },
+      {
+        "value": "1",
+        "name": "name-b55c06d6"
+      }
+    ],
+    "entityClass": "SATA Drives",
+    "entityModel": "MZ7KM1T9HMJP",
+    "entityType": "FIRMWARE",
+    "entityVersion": "GXM5304Q",
+    "locationInfo": {
+      "uuid": "38521854-c20d-41ff-8348-41c53db66e38",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hardwareVendor": "Supermicro",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "ff9925c1-33f7-41eb-8205-a0b5d0452805",
+    "targetVersion": "GXM5304Q",
+    "deviceId": "{\"name-bfe30729\": 6, \"name-6a004807\": \"S3F6NX0K406921\", \"name-b55c06d6\": 1}",
+    "entityDetails": [
+      {
+        "value": "6",
+        "$objectType": "common.v1.config.KVPair",
+        "name": "name-bfe30729"
+      },
+      {
+        "value": "S3F6NX0K406921",
+        "name": "name-6a004807"
+      },
+      {
+        "value": "1",
+        "name": "name-b55c06d6"
+      }
+    ],
+    "entityClass": "SATA Drives",
+    "entityModel": "MZ7KM1T9HMJP",
+    "entityType": "FIRMWARE",
+    "entityVersion": "GXM5304Q",
+    "locationInfo": {
+      "uuid": "38521854-c20d-41ff-8348-41c53db66e38",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hardwareVendor": "Supermicro",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "eb8ff08f-188c-4c8b-8ff1-49ba56f4e109",
+    "targetVersion": "GXT5404Q",
+    "deviceId": "{\"name-bfe30729\": 6, \"name-6a004807\": \"S2TVNX0K405548\", \"name-b55c06d6\": 1}",
+    "entityDetails": [
+      {
+        "value": "6",
+        "$objectType": "common.v1.config.KVPair",
+        "name": "name-bfe30729"
+      },
+      {
+        "value": "S2TVNX0K405548",
+        "name": "name-6a004807"
+      },
+      {
+        "value": "1",
+        "name": "name-b55c06d6"
+      }
+    ],
+    "entityClass": "SATA Drives",
+    "entityModel": "MZ7LM1T9HMJP",
+    "entityType": "FIRMWARE",
+    "entityVersion": "GXT5404Q",
+    "locationInfo": {
+      "uuid": "38521854-c20d-41ff-8348-41c53db66e38",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hardwareVendor": "Supermicro",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "a5d74a63-9162-49ad-9623-2c63e7b190e0",
+    "targetVersion": "GXT5404Q",
+    "deviceId": "{\"name-bfe30729\": 6, \"name-6a004807\": \"S2TVNX0K405371\", \"name-b55c06d6\": 1}",
+    "entityDetails": [
+      {
+        "value": "6",
+        "$objectType": "common.v1.config.KVPair",
+        "name": "name-bfe30729"
+      },
+      {
+        "value": "S2TVNX0K405371",
+        "name": "name-6a004807"
+      },
+      {
+        "value": "1",
+        "name": "name-b55c06d6"
+      }
+    ],
+    "entityClass": "SATA Drives",
+    "entityModel": "MZ7LM1T9HMJP",
+    "entityType": "FIRMWARE",
+    "entityVersion": "GXT5404Q",
+    "locationInfo": {
+      "uuid": "38521854-c20d-41ff-8348-41c53db66e38",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hardwareVendor": "Supermicro",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "242a074e-6e82-4876-abfe-cf57ab16f3be",
+    "targetVersion": "GXT5404Q",
+    "deviceId": "{\"name-bfe30729\": 6, \"name-6a004807\": \"S2TVNX0K405357\", \"name-b55c06d6\": 1}",
+    "entityDetails": [
+      {
+        "value": "6",
+        "$objectType": "common.v1.config.KVPair",
+        "name": "name-bfe30729"
+      },
+      {
+        "value": "S2TVNX0K405357",
+        "name": "name-6a004807"
+      },
+      {
+        "value": "1",
+        "name": "name-b55c06d6"
+      }
+    ],
+    "entityClass": "SATA Drives",
+    "entityModel": "MZ7LM1T9HMJP",
+    "entityType": "FIRMWARE",
+    "entityVersion": "GXT5404Q",
+    "locationInfo": {
+      "uuid": "38521854-c20d-41ff-8348-41c53db66e38",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hardwareVendor": "Supermicro",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "0f244ac3-4571-4305-89e7-f489f9b9df4d",
+    "targetVersion": "GXT5404Q",
+    "deviceId": "{\"name-bfe30729\": 6, \"name-6a004807\": \"S2TVNX0K405543\", \"name-b55c06d6\": 1}",
+    "entityDetails": [
+      {
+        "value": "6",
+        "$objectType": "common.v1.config.KVPair",
+        "name": "name-bfe30729"
+      },
+      {
+        "value": "S2TVNX0K405543",
+        "name": "name-6a004807"
+      },
+      {
+        "value": "1",
+        "name": "name-b55c06d6"
+      }
+    ],
+    "entityClass": "SATA Drives",
+    "entityModel": "MZ7LM1T9HMJP",
+    "entityType": "FIRMWARE",
+    "entityVersion": "GXT5404Q",
+    "locationInfo": {
+      "uuid": "38521854-c20d-41ff-8348-41c53db66e38",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hardwareVendor": "Supermicro",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "f9d2e92a-6e43-48e2-878f-10be8a3fccd4",
+    "targetVersion": "MPTFW-16.00.10.00-IT",
+    "deviceId": "{\"total_sas_sata_disk_count\": 6, \"unique_device_id\": 1}",
+    "entityClass": "HBAs",
+    "entityModel": "LSI Logic SAS3008 HBA on X11 Skylake",
+    "entityType": "FIRMWARE",
+    "entityVersion": "MPTFW-16.00.10.00-IT",
+    "locationInfo": {
+      "uuid": "38521854-c20d-41ff-8348-41c53db66e38",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hardwareVendor": "Supermicro",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "63153f77-eeef-431f-990d-80f210575dc8",
+    "targetVersion": "6.3.4",
+    "entityClass": "NIC Driver",
+    "entityModel": "ixgbe",
+    "entityType": "FIRMWARE",
+    "entityVersion": "6.3.4",
+    "locationInfo": {
+      "uuid": "9cad7457-dc26-4839-bfce-2aa79a0f54c7",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hardwareVendor": "Supermicro",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "02a863e8-82cb-42be-8516-1406501f5819",
+    "targetVersion": "2.28.16",
+    "entityClass": "NIC Driver",
+    "entityModel": "i40e",
+    "entityType": "FIRMWARE",
+    "entityVersion": "2.28.16",
+    "locationInfo": {
+      "uuid": "9cad7457-dc26-4839-bfce-2aa79a0f54c7",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hardwareVendor": "Supermicro",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "bd59005f-a843-4090-ac34-a09e0cf892a3",
+    "targetVersion": "25.10-1.2.2",
+    "entityClass": "NIC Driver",
+    "entityModel": "mlx5_core",
+    "entityType": "FIRMWARE",
+    "entityVersion": "25.10-1.2.2",
+    "locationInfo": {
+      "uuid": "9cad7457-dc26-4839-bfce-2aa79a0f54c7",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hardwareVendor": "Supermicro",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "987e07ca-ce8a-47da-a2d8-1b07726f9a25",
+    "targetVersion": "5.19.10",
+    "entityClass": "NIC Driver",
+    "entityModel": "igb",
+    "entityType": "FIRMWARE",
+    "entityVersion": "5.19.10",
+    "locationInfo": {
+      "uuid": "9cad7457-dc26-4839-bfce-2aa79a0f54c7",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hardwareVendor": "Supermicro",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "3eb5978a-8838-4cc9-9798-79f5879b4ee6",
+    "targetVersion": "4.0-0",
+    "entityClass": "NIC Driver",
+    "entityModel": "mlx4_en",
+    "entityType": "FIRMWARE",
+    "entityVersion": "4.0-0",
+    "locationInfo": {
+      "uuid": "9cad7457-dc26-4839-bfce-2aa79a0f54c7",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hardwareVendor": "Supermicro",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "6c0221ff-17d9-47ca-8198-187e4538780d",
+    "targetVersion": "1.10.3-234.0.154.0",
+    "entityClass": "NIC Driver",
+    "entityModel": "bnxt_en",
+    "entityType": "FIRMWARE",
+    "entityVersion": "1.10.3-234.0.154.0",
+    "locationInfo": {
+      "uuid": "9cad7457-dc26-4839-bfce-2aa79a0f54c7",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hardwareVendor": "Supermicro",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "791fd4bb-8dad-47dd-adec-ec41ae04ba54",
+    "targetVersion": "2.4.5",
+    "entityClass": "NIC Driver",
+    "entityModel": "ice",
+    "entityType": "FIRMWARE",
+    "entityVersion": "2.4.5",
+    "locationInfo": {
+      "uuid": "9cad7457-dc26-4839-bfce-2aa79a0f54c7",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hardwareVendor": "Supermicro",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "2dc335ba-7aaf-4887-af6b-5aa7820151eb",
+    "targetVersion": "N2010121",
+    "deviceId": "PHDW808400T4240E",
+    "entityClass": "Host Boot Device - M2 Drives",
+    "entityModel": "INTEL SSDSCKJB24",
+    "entityType": "FIRMWARE",
+    "entityVersion": "N2010121",
+    "locationInfo": {
+      "uuid": "9cad7457-dc26-4839-bfce-2aa79a0f54c7",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hardwareVendor": "Supermicro",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "e8a8656a-38ba-4e6c-9bcf-203a2068f67d",
+    "targetVersion": "N2010121",
+    "deviceId": "PHDW808301Z3240E",
+    "entityClass": "Host Boot Device - M2 Drives",
+    "entityModel": "INTEL SSDSCKJB24",
+    "entityType": "FIRMWARE",
+    "entityVersion": "N2010121",
+    "locationInfo": {
+      "uuid": "9cad7457-dc26-4839-bfce-2aa79a0f54c7",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hardwareVendor": "Supermicro",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "af815f1e-1cc1-40fd-a2d5-e7fce5901d11",
+    "targetVersion": "6.3.4",
+    "entityClass": "NIC Driver",
+    "entityModel": "ixgbe",
+    "entityType": "FIRMWARE",
+    "entityVersion": "6.3.4",
+    "locationInfo": {
+      "uuid": "38521854-c20d-41ff-8348-41c53db66e38",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hardwareVendor": "Supermicro",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "895eb7a3-9b92-44b5-962c-12aeec83aefc",
+    "targetVersion": "2.28.16",
+    "entityClass": "NIC Driver",
+    "entityModel": "i40e",
+    "entityType": "FIRMWARE",
+    "entityVersion": "2.28.16",
+    "locationInfo": {
+      "uuid": "38521854-c20d-41ff-8348-41c53db66e38",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hardwareVendor": "Supermicro",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "b3515485-2ec3-40a7-a27f-596c866d5f06",
+    "targetVersion": "25.10-1.2.2",
+    "entityClass": "NIC Driver",
+    "entityModel": "mlx5_core",
+    "entityType": "FIRMWARE",
+    "entityVersion": "25.10-1.2.2",
+    "locationInfo": {
+      "uuid": "38521854-c20d-41ff-8348-41c53db66e38",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hardwareVendor": "Supermicro",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "ea86a10a-e886-43fd-9ef3-941572333f1c",
+    "targetVersion": "5.19.10",
+    "entityClass": "NIC Driver",
+    "entityModel": "igb",
+    "entityType": "FIRMWARE",
+    "entityVersion": "5.19.10",
+    "locationInfo": {
+      "uuid": "38521854-c20d-41ff-8348-41c53db66e38",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hardwareVendor": "Supermicro",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "e8d46675-a472-4428-9ee7-93fb7452433d",
+    "targetVersion": "4.0-0",
+    "entityClass": "NIC Driver",
+    "entityModel": "mlx4_en",
+    "entityType": "FIRMWARE",
+    "entityVersion": "4.0-0",
+    "locationInfo": {
+      "uuid": "38521854-c20d-41ff-8348-41c53db66e38",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hardwareVendor": "Supermicro",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "b184348a-9742-47b5-848a-41b814439e5d",
+    "targetVersion": "1.10.3-234.0.154.0",
+    "entityClass": "NIC Driver",
+    "entityModel": "bnxt_en",
+    "entityType": "FIRMWARE",
+    "entityVersion": "1.10.3-234.0.154.0",
+    "locationInfo": {
+      "uuid": "38521854-c20d-41ff-8348-41c53db66e38",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hardwareVendor": "Supermicro",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "cd86287d-5a86-4dd1-be69-7e1bb0dd1464",
+    "targetVersion": "2.4.5",
+    "entityClass": "NIC Driver",
+    "entityModel": "ice",
+    "entityType": "FIRMWARE",
+    "entityVersion": "2.4.5",
+    "locationInfo": {
+      "uuid": "38521854-c20d-41ff-8348-41c53db66e38",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hardwareVendor": "Supermicro",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "3d4a3e46-49f8-4302-90ef-79f9eb4f13c1",
+    "targetVersion": "N2010121",
+    "deviceId": "PHDW808302U4240E",
+    "entityClass": "Host Boot Device - M2 Drives",
+    "entityModel": "INTEL SSDSCKJB24",
+    "entityType": "FIRMWARE",
+    "entityVersion": "N2010121",
+    "locationInfo": {
+      "uuid": "38521854-c20d-41ff-8348-41c53db66e38",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hardwareVendor": "Supermicro",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "006ed0f1-2365-41c9-adf7-bad5d9e6c23c",
+    "targetVersion": "N2010121",
+    "deviceId": "PHDW808400T7240E",
+    "entityClass": "Host Boot Device - M2 Drives",
+    "entityModel": "INTEL SSDSCKJB24",
+    "entityType": "FIRMWARE",
+    "entityVersion": "N2010121",
+    "locationInfo": {
+      "uuid": "38521854-c20d-41ff-8348-41c53db66e38",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "hardwareVendor": "Supermicro",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "acb94728-c8fc-469a-a19d-90e5e0490fc5",
+    "targetVersion": "11.2",
+    "lastUpdatedTime": "2026-08-05T07:42:54.40185Z",
+    "groupUuid": "c54404e2-7728-49ae-b03d-13bb8bb9580a",
+    "entityClass": "Hypervisor",
+    "entityModel": "AHV hypervisor",
+    "entityType": "SOFTWARE",
+    "entityVersion": "11.2",
+    "locationInfo": {
+      "uuid": "0a505ef2-ede4-467c-941f-d39d73bdf1c9",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "e9fe999a-3248-472a-8601-16179d3aaab3",
+    "targetVersion": "11.2",
+    "lastUpdatedTime": "2026-08-05T08:21:39.248203Z",
+    "groupUuid": "c54404e2-7728-49ae-b03d-13bb8bb9580a",
+    "entityClass": "Hypervisor",
+    "entityModel": "AHV hypervisor",
+    "entityType": "SOFTWARE",
+    "entityVersion": "11.2",
+    "locationInfo": {
+      "uuid": "db7c8f4b-541d-4db7-b9f7-4e24cad11d84",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "6bc20d6f-8a39-4861-a62b-4ea963604ea4",
+    "targetVersion": "11.2",
+    "lastUpdatedTime": "2026-08-05T07:22:04.75595Z",
+    "groupUuid": "c54404e2-7728-49ae-b03d-13bb8bb9580a",
+    "entityClass": "Hypervisor",
+    "entityModel": "AHV hypervisor",
+    "entityType": "SOFTWARE",
+    "entityVersion": "11.2",
+    "locationInfo": {
+      "uuid": "422ac3ad-bb71-4c47-83f9-7367f1b7da90",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "6f86a667-40d4-4d99-90af-0d48d167a492",
+    "targetVersion": "11.2",
+    "lastUpdatedTime": "2026-08-05T07:59:59.380788Z",
+    "groupUuid": "c54404e2-7728-49ae-b03d-13bb8bb9580a",
+    "entityClass": "Hypervisor",
+    "entityModel": "AHV hypervisor",
+    "entityType": "SOFTWARE",
+    "entityVersion": "11.2",
+    "locationInfo": {
+      "uuid": "73e903d6-2b8a-46e3-877c-b6bbb347bb4a",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "6d69905e-0cec-41e0-978d-d3532f198464",
+    "targetVersion": "5.3.5",
+    "availableVersions": [
+      {
+        "$objectType": "lifecycle.v4.resources.AvailableVersion",
+        "version": "5.4",
+        "status": "AVAILABLE",
+        "isEnabled": true,
+        "availableVersionUuid": "3d8e5e2d-8f66-4f6f-a2c3-e5edab6e7636",
+        "order": 25,
+        "releaseNotes": "https://portal.nutanix.com/page/documents/details?targetId=Release-Notes-Files-v5_4:Release-Notes-Files-v5_4",
+        "customMessage": "{}",
+        "isImagePresent": true
+      }
+    ],
+    "entityClass": "Core Cluster",
+    "entityModel": "FSM",
+    "entityType": "SOFTWARE",
+    "entityVersion": "5.3.5",
+    "locationInfo": {
+      "uuid": "000623f4-7174-ae2a-0000-00000001c1da",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "CLUSTER"
+    },
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "d9711e43-723b-4ffa-b5c9-45fda98de21b",
+    "targetVersion": "2.20",
+    "groupUuid": "6eb3d746-5118-4f63-a9d5-daeb3f9c4038",
+    "entityClass": "Cluster Service",
+    "entityModel": "Foundation Platforms",
+    "entityType": "SOFTWARE",
+    "entityVersion": "2.20",
+    "locationInfo": {
+      "uuid": "422ac3ad-bb71-4c47-83f9-7367f1b7da90",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "05d89d51-def7-406f-9598-3783f4de5b85",
+    "targetVersion": "2.20",
+    "groupUuid": "6eb3d746-5118-4f63-a9d5-daeb3f9c4038",
+    "entityClass": "Cluster Service",
+    "entityModel": "Foundation Platforms",
+    "entityType": "SOFTWARE",
+    "entityVersion": "2.20",
+    "locationInfo": {
+      "uuid": "0a505ef2-ede4-467c-941f-d39d73bdf1c9",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "66fb072c-88da-4d66-9e67-a1fd527f9e10",
+    "targetVersion": "2.20",
+    "groupUuid": "6eb3d746-5118-4f63-a9d5-daeb3f9c4038",
+    "entityClass": "Cluster Service",
+    "entityModel": "Foundation Platforms",
+    "entityType": "SOFTWARE",
+    "entityVersion": "2.20",
+    "locationInfo": {
+      "uuid": "db7c8f4b-541d-4db7-b9f7-4e24cad11d84",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "c9e89c22-f2ba-4043-878a-472040bb0ba2",
+    "targetVersion": "2.20",
+    "groupUuid": "6eb3d746-5118-4f63-a9d5-daeb3f9c4038",
+    "entityClass": "Cluster Service",
+    "entityModel": "Foundation Platforms",
+    "entityType": "SOFTWARE",
+    "entityVersion": "2.20",
+    "locationInfo": {
+      "uuid": "73e903d6-2b8a-46e3-877c-b6bbb347bb4a",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "846821c0-b8ed-41fb-9d34-58ef19a53916",
+    "targetVersion": "security_aos.2022.9",
+    "groupUuid": "9f6ed245-4d3f-4923-b056-0099a19d8f1e",
+    "entityClass": "Cluster Service",
+    "entityModel": "Security AOS",
+    "entityType": "SOFTWARE",
+    "entityVersion": "security_aos.2022.9",
+    "locationInfo": {
+      "uuid": "422ac3ad-bb71-4c47-83f9-7367f1b7da90",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "50022d4f-d8d0-4fa3-9685-a8e6550a2cc5",
+    "targetVersion": "security_aos.2022.9",
+    "groupUuid": "9f6ed245-4d3f-4923-b056-0099a19d8f1e",
+    "entityClass": "Cluster Service",
+    "entityModel": "Security AOS",
+    "entityType": "SOFTWARE",
+    "entityVersion": "security_aos.2022.9",
+    "locationInfo": {
+      "uuid": "db7c8f4b-541d-4db7-b9f7-4e24cad11d84",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "8868e91c-8d05-454a-98f5-aba0e9658444",
+    "targetVersion": "security_aos.2022.9",
+    "groupUuid": "9f6ed245-4d3f-4923-b056-0099a19d8f1e",
+    "entityClass": "Cluster Service",
+    "entityModel": "Security AOS",
+    "entityType": "SOFTWARE",
+    "entityVersion": "security_aos.2022.9",
+    "locationInfo": {
+      "uuid": "0a505ef2-ede4-467c-941f-d39d73bdf1c9",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "11d34e22-2779-4e6b-9a11-8d6a342acc88",
+    "targetVersion": "LM.2026.3.6",
+    "groupUuid": "06862ce3-aea9-43d0-946d-4a4d24a7d722",
+    "entityClass": "LICENSING SERVICE",
+    "entityModel": "Licensing",
+    "entityType": "SOFTWARE",
+    "entityVersion": "LM.2026.3.6",
+    "locationInfo": {
+      "uuid": "db7c8f4b-541d-4db7-b9f7-4e24cad11d84",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "PC"
+    },
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "cb9714b9-771e-42aa-b2df-6b8acc17f196",
+    "targetVersion": "LM.2026.3.6",
+    "groupUuid": "06862ce3-aea9-43d0-946d-4a4d24a7d722",
+    "entityClass": "LICENSING SERVICE",
+    "entityModel": "Licensing",
+    "entityType": "SOFTWARE",
+    "entityVersion": "LM.2026.3.6",
+    "locationInfo": {
+      "uuid": "422ac3ad-bb71-4c47-83f9-7367f1b7da90",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "PC"
+    },
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "53c3c561-30eb-40ff-bd3a-c5288eafd129",
+    "targetVersion": "LM.2026.3.6",
+    "groupUuid": "06862ce3-aea9-43d0-946d-4a4d24a7d722",
+    "entityClass": "LICENSING SERVICE",
+    "entityModel": "Licensing",
+    "entityType": "SOFTWARE",
+    "entityVersion": "LM.2026.3.6",
+    "locationInfo": {
+      "uuid": "0a505ef2-ede4-467c-941f-d39d73bdf1c9",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "PC"
+    },
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "974bec7a-4694-4587-b3e8-e8d57dcf5c0d",
+    "targetVersion": "security_aos.2022.9",
+    "groupUuid": "9f6ed245-4d3f-4923-b056-0099a19d8f1e",
+    "entityClass": "Cluster Service",
+    "entityModel": "Security AOS",
+    "entityType": "SOFTWARE",
+    "entityVersion": "security_aos.2022.9",
+    "locationInfo": {
+      "uuid": "73e903d6-2b8a-46e3-877c-b6bbb347bb4a",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "81392eeb-e211-4f65-bf73-9eca84e408d8",
+    "targetVersion": "LM.2026.3.6",
+    "groupUuid": "06862ce3-aea9-43d0-946d-4a4d24a7d722",
+    "entityClass": "LICENSING SERVICE",
+    "entityModel": "Licensing",
+    "entityType": "SOFTWARE",
+    "entityVersion": "LM.2026.3.6",
+    "locationInfo": {
+      "uuid": "73e903d6-2b8a-46e3-877c-b6bbb347bb4a",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "PC"
+    },
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "32da80b2-24db-42af-906e-9230ae468143",
+    "targetVersion": "N2010121",
+    "deviceId": "PHDW808303H4240E",
+    "entityClass": "Host Boot Device - M2 Drives",
+    "entityModel": "INTEL SSDSCKJB24",
+    "entityType": "FIRMWARE",
+    "entityVersion": "N2010121",
+    "locationInfo": {
+      "uuid": "422ac3ad-bb71-4c47-83f9-7367f1b7da90",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "hardwareVendor": "Supermicro",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "c98ff381-f581-4eb8-8efc-d055881b588a",
+    "targetVersion": "N2010121",
+    "deviceId": "PHDW80820023240E",
+    "entityClass": "Host Boot Device - M2 Drives",
+    "entityModel": "INTEL SSDSCKJB24",
+    "entityType": "FIRMWARE",
+    "entityVersion": "N2010121",
+    "locationInfo": {
+      "uuid": "422ac3ad-bb71-4c47-83f9-7367f1b7da90",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "hardwareVendor": "Supermicro",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "167b0182-2917-4c4c-bdb6-06735477eccc",
+    "targetVersion": "7.6",
+    "availableVersions": [
+      {
+        "$objectType": "lifecycle.v4.resources.AvailableVersion",
+        "version": "7.6.0.6",
+        "status": "AVAILABLE",
+        "isEnabled": false,
+        "availableVersionUuid": "bcb92c31-a011-441f-b428-836d245b7003",
+        "order": 19,
+        "disablementReason": "Entity version: 203.0.113.1 is not compatible on atleast one of the nodes in the cluster. Refer Compatibility Matrix and Hardware Platform End of Life on the Nutanix Portal for more information. Refer KB 000013338 for details.",
+        "releaseNotes": "https://portal.nutanix.com/#/page/docs/details?targetId=Release-Notes-AOS-v7_6_0_6:Release-Notes-AOS-v7_6_0_6",
+        "releaseDate": "2026-08-31",
+        "isImagePresent": true
+      }
+    ],
+    "entityClass": "Core Cluster",
+    "entityModel": "AOS",
+    "entityType": "SOFTWARE",
+    "entityVersion": "7.6",
+    "locationInfo": {
+      "uuid": "000623f4-7174-ae2a-0000-00000001c1da",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "CLUSTER"
+    },
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "b86c5815-74fe-4cd4-8f6d-53387f49f5ee",
+    "targetVersion": "5.11",
+    "entityClass": "Core Cluster",
+    "entityModel": "Foundation",
+    "entityType": "SOFTWARE",
+    "entityVersion": "5.11",
+    "locationInfo": {
+      "uuid": "000623f4-7174-ae2a-0000-00000001c1da",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "CLUSTER"
+    },
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "hasPreviousInventoryFailed": false
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "3de1f590-181c-47b9-8eb9-c337fc971a45",
+    "targetVersion": "6.3.4",
+    "entityClass": "NIC Driver",
+    "entityModel": "ixgbe",
+    "entityType": "FIRMWARE",
+    "entityVersion": "6.3.4",
+    "locationInfo": {
+      "uuid": "422ac3ad-bb71-4c47-83f9-7367f1b7da90",
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "hardwareVendor": "Supermicro",
+    "hasPreviousInventoryFailed": false
+  }
+]

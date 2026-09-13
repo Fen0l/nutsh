@@ -1,0 +1,204 @@
+[
+  {
+    "$objectType": "networking.v4.config.FloatingIp",
+    "extId": "5c8dea2c-b9eb-4d55-b8fd-ba7c294ad6f5",
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "08f0dcd1-3a70-57a1-b84b-97d8e7b270fc",
+      "ownerUserName": "ownerUserName-59acbb2c",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "floatingIp": {
+      "$objectType": "networking.v4.config.FloatingIPAddress",
+      "ipv4": {
+        "$objectType": "networking.v4.config.FloatingIPv4Address",
+        "value": "198.51.100.14"
+      }
+    },
+    "externalSubnetReference": "5b659f96-4168-451b-b5b1-8c57eca90957",
+    "associationStatus": "NOT_ASSOCIATED"
+  },
+  {
+    "$objectType": "networking.v4.config.FloatingIp",
+    "extId": "6af05428-f7ce-4db8-9a62-6e623d250dda",
+    "association": {
+      "vpcReference": "e3794f39-2ddd-4b4b-92dd-37c403776378",
+      "$objectType": "networking.v4.config.VmNicAssociation",
+      "vmNicReference": "f8981617-5ec1-4d43-97c1-cd356d8170af",
+      "privateIp": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "198.51.100.68"
+        }
+      }
+    },
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "08f0dcd1-3a70-57a1-b84b-97d8e7b270fc",
+      "ownerUserName": "ownerUserName-59acbb2c",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "floatingIp": {
+      "$objectType": "networking.v4.config.FloatingIPAddress",
+      "ipv4": {
+        "$objectType": "networking.v4.config.FloatingIPv4Address",
+        "value": "203.0.113.71"
+      }
+    },
+    "externalSubnetReference": "5b659f96-4168-451b-b5b1-8c57eca90957",
+    "associationStatus": "ASSOCIATED_TO_VNIC"
+  },
+  {
+    "$objectType": "networking.v4.config.FloatingIp",
+    "extId": "96f70e4d-1dd4-4079-946a-1a800a72e19f",
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "00000000-0000-0000-0000-000000000000",
+      "ownerUserName": "ownerUserName-da328454",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "floatingIp": {
+      "$objectType": "networking.v4.config.FloatingIPAddress",
+      "ipv4": {
+        "$objectType": "networking.v4.config.FloatingIPv4Address",
+        "value": "203.0.113.55"
+      }
+    },
+    "externalSubnetReference": "5b659f96-4168-451b-b5b1-8c57eca90957",
+    "associationStatus": "NOT_ASSOCIATED"
+  },
+  {
+    "$objectType": "networking.v4.config.FloatingIp",
+    "extId": "2969b89f-86f5-4624-b6f1-d7a3aa789949",
+    "association": {
+      "vpcReference": "e3794f39-2ddd-4b4b-92dd-37c403776378",
+      "$objectType": "networking.v4.config.LoadBalancerSessionAssociation",
+      "loadBalancerSessionReference": "d7c6cdc6-f360-4de7-8d18-f2e402789af4",
+      "privateIp": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "203.0.113.151"
+        }
+      }
+    },
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "08f0dcd1-3a70-57a1-b84b-97d8e7b270fc",
+      "ownerUserName": "ownerUserName-59acbb2c",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "floatingIp": {
+      "$objectType": "networking.v4.config.FloatingIPAddress",
+      "ipv4": {
+        "$objectType": "networking.v4.config.FloatingIPv4Address",
+        "value": "198.51.100.194"
+      }
+    },
+    "externalSubnetReference": "5b659f96-4168-451b-b5b1-8c57eca90957",
+    "associationStatus": "ASSOCIATED_TO_LOAD_BALANCER_SESSION"
+  },
+  {
+    "$objectType": "networking.v4.config.FloatingIp",
+    "extId": "5d8c19fa-b51f-413f-8b51-a10dfa0145dd",
+    "association": {
+      "vpcReference": "e3794f39-2ddd-4b4b-92dd-37c403776378",
+      "$objectType": "networking.v4.config.LoadBalancerSessionAssociation",
+      "loadBalancerSessionReference": "88b38e9d-35e8-4034-9c63-802289c0a646",
+      "privateIp": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "203.0.113.213"
+        }
+      }
+    },
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "08f0dcd1-3a70-57a1-b84b-97d8e7b270fc",
+      "ownerUserName": "ownerUserName-59acbb2c",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "floatingIp": {
+      "$objectType": "networking.v4.config.FloatingIPAddress",
+      "ipv4": {
+        "$objectType": "networking.v4.config.FloatingIPv4Address",
+        "value": "203.0.113.235"
+      }
+    },
+    "externalSubnetReference": "5b659f96-4168-451b-b5b1-8c57eca90957",
+    "associationStatus": "ASSOCIATED_TO_LOAD_BALANCER_SESSION"
+  },
+  {
+    "$objectType": "networking.v4.config.FloatingIp",
+    "extId": "9e1f0571-a7bb-433f-8d5f-7c9aac22338c",
+    "association": {
+      "vpcReference": "e3794f39-2ddd-4b4b-92dd-37c403776378",
+      "$objectType": "networking.v4.config.VmNicAssociation",
+      "vmNicReference": "cf879d4c-94b9-4918-ad09-6e1915f1d302",
+      "privateIp": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "198.51.100.222"
+        }
+      }
+    },
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "08f0dcd1-3a70-57a1-b84b-97d8e7b270fc",
+      "ownerUserName": "ownerUserName-59acbb2c",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "floatingIp": {
+      "$objectType": "networking.v4.config.FloatingIPAddress",
+      "ipv4": {
+        "$objectType": "networking.v4.config.FloatingIPv4Address",
+        "value": "198.51.100.30"
+      }
+    },
+    "externalSubnetReference": "5b659f96-4168-451b-b5b1-8c57eca90957",
+    "associationStatus": "ASSOCIATED_TO_VNIC"
+  },
+  {
+    "$objectType": "networking.v4.config.FloatingIp",
+    "extId": "6595c905-96f2-4657-8f68-587863955927",
+    "association": {
+      "vpcReference": "8b92d2d0-c022-4de0-aaec-220b8cc62e73",
+      "$objectType": "networking.v4.config.VmNicAssociation",
+      "vmNicReference": "ebc51cc4-1d08-4c89-9811-b81f28f0c5fd",
+      "privateIp": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "198.51.100.174"
+        }
+      }
+    },
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "00000000-0000-0000-0000-000000000000",
+      "ownerUserName": "ownerUserName-da328454",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000",
+      "projectName": "projectName-57a4a4a3"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-fad5986c",
+    "floatingIp": {
+      "$objectType": "networking.v4.config.FloatingIPAddress",
+      "ipv4": {
+        "$objectType": "networking.v4.config.FloatingIPv4Address",
+        "value": "198.51.100.88"
+      }
+    },
+    "externalSubnetReference": "5b659f96-4168-451b-b5b1-8c57eca90957",
+    "associationStatus": "ASSOCIATED_TO_VNIC"
+  }
+]

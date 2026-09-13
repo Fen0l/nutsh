@@ -1,0 +1,1145 @@
+[
+  {
+    "$objectType": "networking.v4.config.Subnet",
+    "extId": "8369eaa1-4a18-43a2-acdc-d178ad1d5757",
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "08f0dcd1-3a70-57a1-b84b-97d8e7b270fc",
+      "ownerUserName": "ownerUserName-59acbb2c",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-b4ae7f66",
+    "subnetType": "OVERLAY",
+    "ipConfig": [
+      {
+        "$objectType": "networking.v4.config.IPConfig",
+        "ipv4": {
+          "$objectType": "networking.v4.config.IPv4Config",
+          "ipSubnet": {
+            "$objectType": "networking.v4.config.IPv4Subnet",
+            "ip": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "203.0.113.137",
+              "prefixLength": 32
+            },
+            "prefixLength": 24
+          },
+          "defaultGatewayIp": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "198.51.100.96",
+            "prefixLength": 32
+          }
+        }
+      }
+    ],
+    "vpcReference": "f0faa1a5-b5a0-4aaa-8d70-881114dea04c",
+    "isExternal": false,
+    "isAdvancedNetworking": true,
+    "hypervisorType": "acropolis"
+  },
+  {
+    "$objectType": "networking.v4.config.Subnet",
+    "extId": "940265b6-7a6e-480e-a044-f371898dfb45",
+    "clusterReferenceList": [
+      "0006237e-c983-e712-0000-00000001c1d0"
+    ],
+    "sharedWithProjects": [
+      "29133675-2a74-47e7-b8cd-c031676870c9"
+    ],
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "00000000-0000-0000-0000-000000000000",
+      "ownerUserName": "ownerUserName-da328454",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-a43d09bb",
+    "subnetType": "VLAN",
+    "networkId": 52,
+    "clusterReference": "0006237e-c983-e712-0000-00000001c1d0",
+    "virtualSwitchReference": "23b46b55-f004-42f1-b48b-e6b2c2166adf",
+    "isExternal": false,
+    "isAdvancedNetworking": true,
+    "hypervisorType": "acropolis"
+  },
+  {
+    "$objectType": "networking.v4.config.Subnet",
+    "extId": "724a9c48-e5cf-481b-be55-e19d34634e84",
+    "clusterReferenceList": [
+      "0006237e-c983-e712-0000-00000001c1d0"
+    ],
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "08f0dcd1-3a70-57a1-b84b-97d8e7b270fc",
+      "ownerUserName": "ownerUserName-59acbb2c",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-41a94699",
+    "subnetType": "VLAN",
+    "networkId": 52,
+    "clusterReference": "0006237e-c983-e712-0000-00000001c1d0",
+    "virtualSwitchReference": "23b46b55-f004-42f1-b48b-e6b2c2166adf",
+    "isExternal": false,
+    "isAdvancedNetworking": true,
+    "hypervisorType": "acropolis"
+  },
+  {
+    "$objectType": "networking.v4.config.Subnet",
+    "extId": "942bc8ba-c76d-4079-8061-5ed2721ee362",
+    "clusterReferenceList": [
+      "0006237e-c983-e712-0000-00000001c1d0"
+    ],
+    "sharedWithProjects": [
+      "29133675-2a74-47e7-b8cd-c031676870c9"
+    ],
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "00000000-0000-0000-0000-000000000000",
+      "ownerUserName": "ownerUserName-da328454",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-a43d13ed",
+    "subnetType": "VLAN",
+    "networkId": 54,
+    "clusterReference": "0006237e-c983-e712-0000-00000001c1d0",
+    "virtualSwitchReference": "23b46b55-f004-42f1-b48b-e6b2c2166adf",
+    "isExternal": false,
+    "bridgeName": "bridgeName-136f7b9f",
+    "isAdvancedNetworking": false,
+    "hypervisorType": "acropolis"
+  },
+  {
+    "$objectType": "networking.v4.config.Subnet",
+    "extId": "de617d22-fc80-4346-8992-471d77a546d9",
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "00000000-0000-0000-0000-000000000000",
+      "ownerUserName": "ownerUserName-da328454",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-1d9dd973",
+    "subnetType": "OVERLAY",
+    "ipConfig": [
+      {
+        "$objectType": "networking.v4.config.IPConfig",
+        "ipv4": {
+          "$objectType": "networking.v4.config.IPv4Config",
+          "ipSubnet": {
+            "$objectType": "networking.v4.config.IPv4Subnet",
+            "ip": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "203.0.113.79",
+              "prefixLength": 32
+            },
+            "prefixLength": 24
+          },
+          "defaultGatewayIp": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "198.51.100.38",
+            "prefixLength": 32
+          }
+        }
+      }
+    ],
+    "vpcReference": "f0faa1a5-b5a0-4aaa-8d70-881114dea04c",
+    "isExternal": false,
+    "isAdvancedNetworking": true,
+    "hypervisorType": "acropolis"
+  },
+  {
+    "$objectType": "networking.v4.config.Subnet",
+    "extId": "f1c89eb8-9822-4801-8190-04164cca5660",
+    "clusterReferenceList": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "00000000-0000-0000-0000-000000000000",
+      "ownerUserName": "ownerUserName-da328454",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-e93fa404",
+    "subnetType": "VLAN",
+    "networkId": 52,
+    "clusterReference": "000623f4-7174-ae2a-0000-00000001c1da",
+    "virtualSwitchReference": "3cc06321-377f-4d60-a19d-98db546a6819",
+    "isExternal": false,
+    "isAdvancedNetworking": true,
+    "hypervisorType": "acropolis"
+  },
+  {
+    "$objectType": "networking.v4.config.Subnet",
+    "extId": "7e0a2e0f-c342-490b-969e-d908289127e8",
+    "clusterReferenceList": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "00000000-0000-0000-0000-000000000000",
+      "ownerUserName": "ownerUserName-da328454",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-e93fa09e",
+    "subnetType": "VLAN",
+    "networkId": 54,
+    "clusterReference": "000623f4-7174-ae2a-0000-00000001c1da",
+    "virtualSwitchReference": "3cc06321-377f-4d60-a19d-98db546a6819",
+    "isExternal": false,
+    "bridgeName": "bridgeName-136f7b9f",
+    "isAdvancedNetworking": false,
+    "hypervisorType": "acropolis"
+  },
+  {
+    "$objectType": "networking.v4.config.Subnet",
+    "extId": "100d397d-fb42-4197-a4d0-5516a82a0518",
+    "clusterReferenceList": [
+      "0006237e-c983-e712-0000-00000001c1d0"
+    ],
+    "sharedWithProjects": [
+      "29133675-2a74-47e7-b8cd-c031676870c9",
+      "20ffe794-e371-44e3-831b-0183cacfea0f"
+    ],
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "00000000-0000-0000-0000-000000000000",
+      "ownerUserName": "ownerUserName-da328454",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-0a5e5d3f",
+    "subnetType": "VLAN",
+    "networkId": 54,
+    "dhcpOptions": {
+      "$objectType": "networking.v4.config.DhcpOptions",
+      "domainNameServers": [
+        {
+          "$objectType": "common.v1.config.IPAddress",
+          "ipv4": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "198.51.100.146",
+            "prefixLength": 32
+          }
+        }
+      ],
+      "domainName": "domainName-2e4759fb",
+      "searchDomains": [
+        "searchDomains-2e4759fb"
+      ]
+    },
+    "ipConfig": [
+      {
+        "$objectType": "networking.v4.config.IPConfig",
+        "ipv4": {
+          "$objectType": "networking.v4.config.IPv4Config",
+          "ipSubnet": {
+            "$objectType": "networking.v4.config.IPv4Subnet",
+            "ip": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "203.0.113.79",
+              "prefixLength": 32
+            },
+            "prefixLength": 24
+          },
+          "defaultGatewayIp": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "198.51.100.38",
+            "prefixLength": 32
+          },
+          "dhcpServerAddress": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "198.51.100.108",
+            "prefixLength": 32
+          },
+          "poolList": [
+            {
+              "$objectType": "networking.v4.config.IPv4Pool",
+              "startIp": {
+                "$objectType": "common.v1.config.IPv4Address",
+                "value": "203.0.113.131",
+                "prefixLength": 32
+              },
+              "endIp": {
+                "$objectType": "common.v1.config.IPv4Address",
+                "value": "198.51.100.74",
+                "prefixLength": 32
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "clusterReference": "0006237e-c983-e712-0000-00000001c1d0",
+    "virtualSwitchReference": "23b46b55-f004-42f1-b48b-e6b2c2166adf",
+    "isExternal": false,
+    "bridgeName": "bridgeName-136f7b9f",
+    "isAdvancedNetworking": false,
+    "hypervisorType": "acropolis"
+  },
+  {
+    "$objectType": "networking.v4.config.Subnet",
+    "extId": "111c0401-65c5-412a-911f-c8073ea09eb8",
+    "clusterReferenceList": [
+      "0006237e-c983-e712-0000-00000001c1d0"
+    ],
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "08f0dcd1-3a70-57a1-b84b-97d8e7b270fc",
+      "ownerUserName": "ownerUserName-59acbb2c",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-0d698930",
+    "subnetType": "VLAN",
+    "networkId": 54,
+    "dhcpOptions": {
+      "$objectType": "networking.v4.config.DhcpOptions",
+      "domainNameServers": [
+        {
+          "$objectType": "common.v1.config.IPAddress",
+          "ipv4": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "198.51.100.146",
+            "prefixLength": 32
+          }
+        }
+      ],
+      "domainName": "domainName-2e4759fb",
+      "searchDomains": [
+        "searchDomains-2e4759fb"
+      ]
+    },
+    "ipConfig": [
+      {
+        "$objectType": "networking.v4.config.IPConfig",
+        "ipv4": {
+          "$objectType": "networking.v4.config.IPv4Config",
+          "ipSubnet": {
+            "$objectType": "networking.v4.config.IPv4Subnet",
+            "ip": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "203.0.113.79",
+              "prefixLength": 32
+            },
+            "prefixLength": 24
+          },
+          "defaultGatewayIp": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "198.51.100.38",
+            "prefixLength": 32
+          },
+          "dhcpServerAddress": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "198.51.100.108",
+            "prefixLength": 32
+          },
+          "poolList": [
+            {
+              "$objectType": "networking.v4.config.IPv4Pool",
+              "startIp": {
+                "$objectType": "common.v1.config.IPv4Address",
+                "value": "203.0.113.115",
+                "prefixLength": 32
+              },
+              "endIp": {
+                "$objectType": "common.v1.config.IPv4Address",
+                "value": "203.0.113.215",
+                "prefixLength": 32
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "clusterReference": "0006237e-c983-e712-0000-00000001c1d0",
+    "virtualSwitchReference": "23b46b55-f004-42f1-b48b-e6b2c2166adf",
+    "isExternal": false,
+    "isAdvancedNetworking": true,
+    "hypervisorType": "acropolis"
+  },
+  {
+    "$objectType": "networking.v4.config.Subnet",
+    "extId": "d616c63b-0c2b-4cb3-8ac3-c9addda52c16",
+    "clusterReferenceList": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "00000000-0000-0000-0000-000000000000",
+      "ownerUserName": "ownerUserName-da328454",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000",
+      "projectName": "projectName-57a4a4a3"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-ba2c0990",
+    "description": "[redacted]",
+    "subnetType": "VLAN",
+    "networkId": 52,
+    "clusterReference": "000623f4-7174-ae2a-0000-00000001c1da",
+    "virtualSwitchReference": "3cc06321-377f-4d60-a19d-98db546a6819",
+    "isExternal": false,
+    "bridgeName": "bridgeName-136f7b9f",
+    "isAdvancedNetworking": false,
+    "hypervisorType": "acropolis"
+  },
+  {
+    "$objectType": "networking.v4.config.Subnet",
+    "extId": "d7b87ecb-9d0b-4e79-9622-8d27c2be170b",
+    "clusterReferenceList": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "00000000-0000-0000-0000-000000000000",
+      "ownerUserName": "ownerUserName-da328454",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000",
+      "projectName": "projectName-57a4a4a3"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-e68d2712",
+    "description": "[redacted]",
+    "subnetType": "VLAN",
+    "networkId": 64,
+    "ipConfig": [
+      {
+        "$objectType": "networking.v4.config.IPConfig",
+        "ipv4": {
+          "$objectType": "networking.v4.config.IPv4Config",
+          "ipSubnet": {
+            "$objectType": "networking.v4.config.IPv4Subnet",
+            "ip": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "198.51.100.102",
+              "prefixLength": 32
+            },
+            "prefixLength": 24
+          },
+          "defaultGatewayIp": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "203.0.113.143",
+            "prefixLength": 32
+          },
+          "poolList": [
+            {
+              "$objectType": "networking.v4.config.IPv4Pool",
+              "startIp": {
+                "$objectType": "common.v1.config.IPv4Address",
+                "value": "198.51.100.4",
+                "prefixLength": 32
+              },
+              "endIp": {
+                "$objectType": "common.v1.config.IPv4Address",
+                "value": "198.51.100.86",
+                "prefixLength": 32
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "clusterReference": "000623f4-7174-ae2a-0000-00000001c1da",
+    "virtualSwitchReference": "3cc06321-377f-4d60-a19d-98db546a6819",
+    "isNatEnabled": false,
+    "isExternal": true,
+    "isAdvancedNetworking": true,
+    "hypervisorType": "acropolis",
+    "isConnected": true
+  },
+  {
+    "$objectType": "networking.v4.config.Subnet",
+    "extId": "94da1621-2268-4233-8aaf-edc097dbd1a1",
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "00000000-0000-0000-0000-000000000000",
+      "ownerUserName": "ownerUserName-da328454",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000",
+      "projectName": "projectName-57a4a4a3"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-40c0d6cc",
+    "description": "[redacted]",
+    "subnetType": "OVERLAY",
+    "ipConfig": [
+      {
+        "$objectType": "networking.v4.config.IPConfig",
+        "ipv4": {
+          "$objectType": "networking.v4.config.IPv4Config",
+          "ipSubnet": {
+            "$objectType": "networking.v4.config.IPv4Subnet",
+            "ip": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "198.51.100.114",
+              "prefixLength": 32
+            },
+            "prefixLength": 24
+          },
+          "defaultGatewayIp": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "203.0.113.155",
+            "prefixLength": 32
+          },
+          "poolList": [
+            {
+              "$objectType": "networking.v4.config.IPv4Pool",
+              "startIp": {
+                "$objectType": "common.v1.config.IPv4Address",
+                "value": "198.51.100.156",
+                "prefixLength": 32
+              },
+              "endIp": {
+                "$objectType": "common.v1.config.IPv4Address",
+                "value": "203.0.113.139",
+                "prefixLength": 32
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "vpcReference": "8b92d2d0-c022-4de0-aaec-220b8cc62e73",
+    "isExternal": false,
+    "isAdvancedNetworking": true,
+    "hypervisorType": "acropolis",
+    "isConnected": true
+  },
+  {
+    "$objectType": "networking.v4.config.Subnet",
+    "extId": "3761be49-8f69-4ee5-88b0-714a8a8a77fb",
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "00000000-0000-0000-0000-000000000000",
+      "ownerUserName": "ownerUserName-da328454",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000",
+      "projectName": "projectName-57a4a4a3"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-40c0d87f",
+    "description": "[redacted]",
+    "subnetType": "OVERLAY",
+    "ipConfig": [
+      {
+        "$objectType": "networking.v4.config.IPConfig",
+        "ipv4": {
+          "$objectType": "networking.v4.config.IPv4Config",
+          "ipSubnet": {
+            "$objectType": "networking.v4.config.IPv4Subnet",
+            "ip": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "203.0.113.119",
+              "prefixLength": 32
+            },
+            "prefixLength": 24
+          },
+          "defaultGatewayIp": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "198.51.100.78",
+            "prefixLength": 32
+          },
+          "poolList": [
+            {
+              "$objectType": "networking.v4.config.IPv4Pool",
+              "startIp": {
+                "$objectType": "common.v1.config.IPv4Address",
+                "value": "203.0.113.171",
+                "prefixLength": 32
+              },
+              "endIp": {
+                "$objectType": "common.v1.config.IPv4Address",
+                "value": "198.51.100.156",
+                "prefixLength": 32
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "vpcReference": "8b92d2d0-c022-4de0-aaec-220b8cc62e73",
+    "isExternal": false,
+    "isAdvancedNetworking": true,
+    "hypervisorType": "acropolis",
+    "isConnected": true
+  },
+  {
+    "$objectType": "networking.v4.config.Subnet",
+    "extId": "19417eb9-6d2f-4a22-a6c8-087360b5281b",
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "00000000-0000-0000-0000-000000000000",
+      "ownerUserName": "ownerUserName-da328454",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000",
+      "projectName": "projectName-57a4a4a3"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-fbe8ffef",
+    "subnetType": "OVERLAY",
+    "ipConfig": [
+      {
+        "$objectType": "networking.v4.config.IPConfig",
+        "ipv4": {
+          "$objectType": "networking.v4.config.IPv4Config",
+          "ipSubnet": {
+            "$objectType": "networking.v4.config.IPv4Subnet",
+            "ip": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "198.51.100.88",
+              "prefixLength": 32
+            },
+            "prefixLength": 24
+          },
+          "defaultGatewayIp": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "203.0.113.129",
+            "prefixLength": 32
+          },
+          "poolList": [
+            {
+              "$objectType": "networking.v4.config.IPv4Pool",
+              "startIp": {
+                "$objectType": "common.v1.config.IPv4Address",
+                "value": "198.51.100.6",
+                "prefixLength": 32
+              },
+              "endIp": {
+                "$objectType": "common.v1.config.IPv4Address",
+                "value": "203.0.113.135",
+                "prefixLength": 32
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "vpcReference": "8b92d2d0-c022-4de0-aaec-220b8cc62e73",
+    "isExternal": false,
+    "isAdvancedNetworking": true,
+    "hypervisorType": "acropolis"
+  },
+  {
+    "$objectType": "networking.v4.config.Subnet",
+    "extId": "7dafbb29-1921-42c8-ae9f-2ea08fa934e3",
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "08f0dcd1-3a70-57a1-b84b-97d8e7b270fc",
+      "ownerUserName": "ownerUserName-59acbb2c",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-fbe8ffef",
+    "subnetType": "OVERLAY",
+    "ipConfig": [
+      {
+        "$objectType": "networking.v4.config.IPConfig",
+        "ipv4": {
+          "$objectType": "networking.v4.config.IPv4Config",
+          "ipSubnet": {
+            "$objectType": "networking.v4.config.IPv4Subnet",
+            "ip": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "198.51.100.88",
+              "prefixLength": 32
+            },
+            "prefixLength": 24
+          },
+          "defaultGatewayIp": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "203.0.113.129",
+            "prefixLength": 32
+          },
+          "poolList": [
+            {
+              "$objectType": "networking.v4.config.IPv4Pool",
+              "startIp": {
+                "$objectType": "common.v1.config.IPv4Address",
+                "value": "198.51.100.6",
+                "prefixLength": 32
+              },
+              "endIp": {
+                "$objectType": "common.v1.config.IPv4Address",
+                "value": "203.0.113.135",
+                "prefixLength": 32
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "vpcReference": "4ac60872-f02e-4ef9-b7d1-3108edb05579",
+    "isExternal": false,
+    "isAdvancedNetworking": true,
+    "hypervisorType": "acropolis"
+  },
+  {
+    "$objectType": "networking.v4.config.Subnet",
+    "extId": "6f8d7777-7575-4bcf-b498-1740e117c218",
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "08f0dcd1-3a70-57a1-b84b-97d8e7b270fc",
+      "ownerUserName": "ownerUserName-59acbb2c",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-4da3f98b",
+    "subnetType": "OVERLAY",
+    "dhcpOptions": {
+      "$objectType": "networking.v4.config.DhcpOptions",
+      "domainNameServers": [
+        {
+          "$objectType": "common.v1.config.IPAddress",
+          "ipv4": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "198.51.100.146",
+            "prefixLength": 32
+          }
+        }
+      ],
+      "domainName": "domainName-d7b7bae3",
+      "searchDomains": [
+        "searchDomains-d7b7bae3"
+      ]
+    },
+    "ipConfig": [
+      {
+        "$objectType": "networking.v4.config.IPConfig",
+        "ipv4": {
+          "$objectType": "networking.v4.config.IPv4Config",
+          "ipSubnet": {
+            "$objectType": "networking.v4.config.IPv4Subnet",
+            "ip": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "198.51.100.42",
+              "prefixLength": 32
+            },
+            "prefixLength": 24
+          },
+          "defaultGatewayIp": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "203.0.113.83",
+            "prefixLength": 32
+          },
+          "dhcpServerAddress": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "203.0.113.83",
+            "prefixLength": 32
+          },
+          "poolList": [
+            {
+              "$objectType": "networking.v4.config.IPv4Pool",
+              "startIp": {
+                "$objectType": "common.v1.config.IPv4Address",
+                "value": "203.0.113.211",
+                "prefixLength": 32
+              },
+              "endIp": {
+                "$objectType": "common.v1.config.IPv4Address",
+                "value": "198.51.100.50",
+                "prefixLength": 32
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "vpcReference": "e3794f39-2ddd-4b4b-92dd-37c403776378",
+    "isExternal": false,
+    "isAdvancedNetworking": true,
+    "hypervisorType": "acropolis"
+  },
+  {
+    "$objectType": "networking.v4.config.Subnet",
+    "extId": "5b659f96-4168-451b-b5b1-8c57eca90957",
+    "clusterReferenceList": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "08f0dcd1-3a70-57a1-b84b-97d8e7b270fc",
+      "ownerUserName": "ownerUserName-59acbb2c",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-8b7c4dbb",
+    "subnetType": "VLAN",
+    "networkId": 52,
+    "ipConfig": [
+      {
+        "$objectType": "networking.v4.config.IPConfig",
+        "ipv4": {
+          "$objectType": "networking.v4.config.IPv4Config",
+          "ipSubnet": {
+            "$objectType": "networking.v4.config.IPv4Subnet",
+            "ip": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "203.0.113.137",
+              "prefixLength": 32
+            },
+            "prefixLength": 24
+          },
+          "defaultGatewayIp": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "198.51.100.96",
+            "prefixLength": 32
+          },
+          "poolList": [
+            {
+              "$objectType": "networking.v4.config.IPv4Pool",
+              "startIp": {
+                "$objectType": "common.v1.config.IPv4Address",
+                "value": "203.0.113.235",
+                "prefixLength": 32
+              },
+              "endIp": {
+                "$objectType": "common.v1.config.IPv4Address",
+                "value": "198.51.100.30",
+                "prefixLength": 32
+              }
+            },
+            {
+              "startIp": {
+                "$objectType": "common.v1.config.IPv4Address",
+                "value": "198.51.100.88",
+                "prefixLength": 32
+              },
+              "endIp": {
+                "$objectType": "common.v1.config.IPv4Address",
+                "value": "203.0.113.71",
+                "prefixLength": 32
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "clusterReference": "000623f4-7174-ae2a-0000-00000001c1da",
+    "virtualSwitchReference": "3cc06321-377f-4d60-a19d-98db546a6819",
+    "isNatEnabled": true,
+    "isExternal": true,
+    "isAdvancedNetworking": true
+  },
+  {
+    "$objectType": "networking.v4.config.Subnet",
+    "extId": "1deced97-1c74-4d9d-91b0-b61bff0ed358",
+    "clusterReferenceList": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "00000000-0000-0000-0000-000000000000",
+      "ownerUserName": "ownerUserName-da328454",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-91396598",
+    "subnetType": "VLAN",
+    "networkId": 52,
+    "dhcpOptions": {
+      "$objectType": "networking.v4.config.DhcpOptions",
+      "domainNameServers": [
+        {
+          "$objectType": "common.v1.config.IPAddress",
+          "ipv4": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "198.51.100.146",
+            "prefixLength": 32
+          }
+        }
+      ],
+      "domainName": "domainName-2e4759fb",
+      "searchDomains": [
+        "searchDomains-2e4759fb"
+      ]
+    },
+    "ipConfig": [
+      {
+        "$objectType": "networking.v4.config.IPConfig",
+        "ipv4": {
+          "$objectType": "networking.v4.config.IPv4Config",
+          "ipSubnet": {
+            "$objectType": "networking.v4.config.IPv4Subnet",
+            "ip": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "203.0.113.137",
+              "prefixLength": 32
+            },
+            "prefixLength": 24
+          },
+          "defaultGatewayIp": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "198.51.100.96",
+            "prefixLength": 32
+          },
+          "dhcpServerAddress": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "198.51.100.88",
+            "prefixLength": 32
+          },
+          "poolList": [
+            {
+              "$objectType": "networking.v4.config.IPv4Pool",
+              "startIp": {
+                "$objectType": "common.v1.config.IPv4Address",
+                "value": "203.0.113.219",
+                "prefixLength": 32
+              },
+              "endIp": {
+                "$objectType": "common.v1.config.IPv4Address",
+                "value": "203.0.113.207",
+                "prefixLength": 32
+              }
+            },
+            {
+              "startIp": {
+                "$objectType": "common.v1.config.IPv4Address",
+                "value": "198.51.100.216",
+                "prefixLength": 32
+              },
+              "endIp": {
+                "$objectType": "common.v1.config.IPv4Address",
+                "value": "203.0.113.77",
+                "prefixLength": 32
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "clusterReference": "000623f4-7174-ae2a-0000-00000001c1da",
+    "virtualSwitchReference": "3cc06321-377f-4d60-a19d-98db546a6819",
+    "isExternal": false,
+    "bridgeName": "bridgeName-136f7b9f",
+    "isAdvancedNetworking": false,
+    "hypervisorType": "acropolis"
+  },
+  {
+    "$objectType": "networking.v4.config.Subnet",
+    "extId": "719b2872-c69e-4b59-a472-992d71c60524",
+    "clusterReferenceList": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "reservedIpAddresses": [
+      {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "203.0.113.115",
+          "prefixLength": 32
+        }
+      }
+    ],
+    "sharedWithProjects": [
+      "43d3f951-12b9-4323-98e9-62bb91da1136"
+    ],
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "08f0dcd1-3a70-57a1-b84b-97d8e7b270fc",
+      "ownerUserName": "ownerUserName-59acbb2c",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-3e19a815",
+    "subnetType": "VLAN",
+    "networkId": 54,
+    "dhcpOptions": {
+      "$objectType": "networking.v4.config.DhcpOptions",
+      "domainNameServers": [
+        {
+          "$objectType": "common.v1.config.IPAddress",
+          "ipv4": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "198.51.100.146",
+            "prefixLength": 32
+          }
+        }
+      ],
+      "domainName": "domainName-2e4759fb",
+      "searchDomains": [
+        "searchDomains-2e4759fb"
+      ]
+    },
+    "ipConfig": [
+      {
+        "$objectType": "networking.v4.config.IPConfig",
+        "ipv4": {
+          "$objectType": "networking.v4.config.IPv4Config",
+          "ipSubnet": {
+            "$objectType": "networking.v4.config.IPv4Subnet",
+            "ip": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "203.0.113.79",
+              "prefixLength": 32
+            },
+            "prefixLength": 24
+          },
+          "defaultGatewayIp": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "198.51.100.38",
+            "prefixLength": 32
+          },
+          "dhcpServerAddress": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "198.51.100.108",
+            "prefixLength": 32
+          },
+          "poolList": [
+            {
+              "$objectType": "networking.v4.config.IPv4Pool",
+              "startIp": {
+                "$objectType": "common.v1.config.IPv4Address",
+                "value": "203.0.113.115",
+                "prefixLength": 32
+              },
+              "endIp": {
+                "$objectType": "common.v1.config.IPv4Address",
+                "value": "203.0.113.215",
+                "prefixLength": 32
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "clusterReference": "000623f4-7174-ae2a-0000-00000001c1da",
+    "virtualSwitchReference": "3cc06321-377f-4d60-a19d-98db546a6819",
+    "isExternal": false,
+    "isAdvancedNetworking": true,
+    "hypervisorType": "acropolis"
+  },
+  {
+    "$objectType": "networking.v4.config.Subnet",
+    "extId": "54a4ba91-3ca4-44e2-8e07-c563089aff04",
+    "clusterReferenceList": [
+      "0006237e-c983-e712-0000-00000001c1d0"
+    ],
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "00000000-0000-0000-0000-000000000000",
+      "ownerUserName": "ownerUserName-da328454",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000",
+      "projectName": "projectName-57a4a4a3"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-40c4f366",
+    "description": "[redacted]",
+    "subnetType": "VLAN",
+    "networkId": 142,
+    "ipConfig": [
+      {
+        "$objectType": "networking.v4.config.IPConfig",
+        "ipv4": {
+          "$objectType": "networking.v4.config.IPv4Config",
+          "ipSubnet": {
+            "$objectType": "networking.v4.config.IPv4Subnet",
+            "ip": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "203.0.113.61",
+              "prefixLength": 32
+            },
+            "prefixLength": 20
+          },
+          "defaultGatewayIp": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "198.51.100.20",
+            "prefixLength": 32
+          },
+          "dhcpServerAddress": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "198.51.100.232",
+            "prefixLength": 32
+          },
+          "poolList": [
+            {
+              "$objectType": "networking.v4.config.IPv4Pool",
+              "startIp": {
+                "$objectType": "common.v1.config.IPv4Address",
+                "value": "203.0.113.51",
+                "prefixLength": 32
+              },
+              "endIp": {
+                "$objectType": "common.v1.config.IPv4Address",
+                "value": "203.0.113.81",
+                "prefixLength": 32
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "clusterReference": "0006237e-c983-e712-0000-00000001c1d0",
+    "virtualSwitchReference": "23b46b55-f004-42f1-b48b-e6b2c2166adf",
+    "isExternal": false,
+    "bridgeName": "bridgeName-136f7b9f",
+    "isAdvancedNetworking": false,
+    "hypervisorType": "acropolis"
+  },
+  {
+    "$objectType": "networking.v4.config.Subnet",
+    "extId": "9219c14d-c351-4aca-b171-6fbc59d3107a",
+    "clusterReferenceList": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "00000000-0000-0000-0000-000000000000",
+      "ownerUserName": "ownerUserName-da328454",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000",
+      "projectName": "projectName-57a4a4a3"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-a24372e3",
+    "description": "[redacted]",
+    "subnetType": "VLAN",
+    "networkId": 142,
+    "ipConfig": [
+      {
+        "$objectType": "networking.v4.config.IPConfig",
+        "ipv4": {
+          "$objectType": "networking.v4.config.IPv4Config",
+          "ipSubnet": {
+            "$objectType": "networking.v4.config.IPv4Subnet",
+            "ip": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "203.0.113.61",
+              "prefixLength": 32
+            },
+            "prefixLength": 20
+          },
+          "defaultGatewayIp": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "198.51.100.20",
+            "prefixLength": 32
+          },
+          "dhcpServerAddress": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "198.51.100.232",
+            "prefixLength": 32
+          },
+          "poolList": [
+            {
+              "$objectType": "networking.v4.config.IPv4Pool",
+              "startIp": {
+                "$objectType": "common.v1.config.IPv4Address",
+                "value": "198.51.100.118",
+                "prefixLength": 32
+              },
+              "endIp": {
+                "$objectType": "common.v1.config.IPv4Address",
+                "value": "198.51.100.60",
+                "prefixLength": 32
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "clusterReference": "000623f4-7174-ae2a-0000-00000001c1da",
+    "virtualSwitchReference": "3cc06321-377f-4d60-a19d-98db546a6819",
+    "isExternal": false,
+    "bridgeName": "bridgeName-136f7b9f",
+    "isAdvancedNetworking": false,
+    "hypervisorType": "acropolis"
+  }
+]

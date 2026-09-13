@@ -1,0 +1,242 @@
+[
+  {
+    "$objectType": "clustermgmt.v4.ahv.config.PcieDevice",
+    "extId": "127476d4-1e58-5c69-9239-70e5e8324f24",
+    "clusterExtId": "000656bb-5516-939c-0000-00000001c1ce",
+    "hostExtId": "7998b8db-390a-4de5-ba41-58229f23beef",
+    "description": "description-44f863b6",
+    "maxPartitions": 0,
+    "state": "HOST_USED",
+    "configuration": {
+      "vendorId": 32902,
+      "deviceId": 5475,
+      "subSystemVendorId": 5593,
+      "subSystemId": 2336,
+      "classId": 2,
+      "subClassId": 0,
+      "progIFace": 0,
+      "$objectType": "clustermgmt.v4.ahv.config.PcieDeviceConfiguration"
+    },
+    "type": "NETWORK_CONTROLLER"
+  },
+  {
+    "$objectType": "clustermgmt.v4.ahv.config.PcieDevice",
+    "extId": "1a19d767-b63d-5fbf-a43a-4ec9daefbd94",
+    "clusterExtId": "000656bb-5516-939c-0000-00000001c1ce",
+    "hostExtId": "7998b8db-390a-4de5-ba41-58229f23beef",
+    "description": "description-d59b14dc",
+    "maxPartitions": 0,
+    "state": "HOST_USED",
+    "configuration": {
+      "vendorId": 32902,
+      "deviceId": 4347,
+      "subSystemVendorId": 32902,
+      "subSystemId": 12,
+      "classId": 2,
+      "subClassId": 0,
+      "progIFace": 0,
+      "$objectType": "clustermgmt.v4.ahv.config.PcieDeviceConfiguration"
+    },
+    "type": "NETWORK_CONTROLLER"
+  },
+  {
+    "$objectType": "clustermgmt.v4.ahv.config.PcieDevice",
+    "extId": "1a9847ec-65d0-52ff-9341-f85e2164e746",
+    "clusterExtId": "000656bb-5516-939c-0000-00000001c1ce",
+    "hostExtId": "f0490cf9-3011-49cd-8a53-4e8bde071ab5",
+    "description": "description-d59b14dc",
+    "maxPartitions": 0,
+    "state": "HOST_USED",
+    "configuration": {
+      "vendorId": 32902,
+      "deviceId": 4347,
+      "subSystemVendorId": 32902,
+      "subSystemId": 12,
+      "classId": 2,
+      "subClassId": 0,
+      "progIFace": 0,
+      "$objectType": "clustermgmt.v4.ahv.config.PcieDeviceConfiguration"
+    },
+    "type": "NETWORK_CONTROLLER"
+  },
+  {
+    "$objectType": "clustermgmt.v4.ahv.config.PcieDevice",
+    "extId": "297548b3-e891-52bc-9ddf-5b857efa5a07",
+    "clusterExtId": "000656bb-5516-939c-0000-00000001c1ce",
+    "hostExtId": "40e34298-61e8-4e6d-8922-8caa22bb5c7f",
+    "description": "description-44f863b6",
+    "maxPartitions": 0,
+    "state": "HOST_USED",
+    "configuration": {
+      "vendorId": 32902,
+      "deviceId": 5475,
+      "subSystemVendorId": 5593,
+      "subSystemId": 2336,
+      "classId": 2,
+      "subClassId": 0,
+      "progIFace": 0,
+      "$objectType": "clustermgmt.v4.ahv.config.PcieDeviceConfiguration"
+    },
+    "type": "NETWORK_CONTROLLER"
+  },
+  {
+    "$objectType": "clustermgmt.v4.ahv.config.PcieDevice",
+    "extId": "788201bc-23f2-5b0e-a723-7442a58d408a",
+    "clusterExtId": "000656bb-5516-939c-0000-00000001c1ce",
+    "hostExtId": "7998b8db-390a-4de5-ba41-58229f23beef",
+    "description": "description-d59b14dc",
+    "maxPartitions": 0,
+    "state": "HOST_USED",
+    "configuration": {
+      "vendorId": 32902,
+      "deviceId": 4347,
+      "subSystemVendorId": 32902,
+      "subSystemId": 12,
+      "classId": 2,
+      "subClassId": 0,
+      "progIFace": 0,
+      "$objectType": "clustermgmt.v4.ahv.config.PcieDeviceConfiguration"
+    },
+    "type": "NETWORK_CONTROLLER"
+  },
+  {
+    "$objectType": "clustermgmt.v4.ahv.config.PcieDevice",
+    "extId": "7dec054e-d3b1-5dda-a200-d7e951060ad0",
+    "clusterExtId": "000656bb-5516-939c-0000-00000001c1ce",
+    "hostExtId": "7998b8db-390a-4de5-ba41-58229f23beef",
+    "description": "description-44f863b6",
+    "maxPartitions": 0,
+    "state": "HOST_USED",
+    "configuration": {
+      "vendorId": 32902,
+      "deviceId": 5475,
+      "subSystemVendorId": 5593,
+      "subSystemId": 2336,
+      "classId": 2,
+      "subClassId": 0,
+      "progIFace": 0,
+      "$objectType": "clustermgmt.v4.ahv.config.PcieDeviceConfiguration"
+    },
+    "type": "NETWORK_CONTROLLER"
+  },
+  {
+    "$objectType": "clustermgmt.v4.ahv.config.PcieDevice",
+    "extId": "80a1260e-edd4-5f66-afe0-ffb8af26fb67",
+    "clusterExtId": "000656bb-5516-939c-0000-00000001c1ce",
+    "hostExtId": "f0490cf9-3011-49cd-8a53-4e8bde071ab5",
+    "description": "description-d59b14dc",
+    "maxPartitions": 0,
+    "state": "HOST_USED",
+    "configuration": {
+      "vendorId": 32902,
+      "deviceId": 4347,
+      "subSystemVendorId": 32902,
+      "subSystemId": 12,
+      "classId": 2,
+      "subClassId": 0,
+      "progIFace": 0,
+      "$objectType": "clustermgmt.v4.ahv.config.PcieDeviceConfiguration"
+    },
+    "type": "NETWORK_CONTROLLER"
+  },
+  {
+    "$objectType": "clustermgmt.v4.ahv.config.PcieDevice",
+    "extId": "96ebe1a1-f67a-5d5c-ae8f-93ed2034e33c",
+    "clusterExtId": "000656bb-5516-939c-0000-00000001c1ce",
+    "hostExtId": "40e34298-61e8-4e6d-8922-8caa22bb5c7f",
+    "description": "description-44f863b6",
+    "maxPartitions": 0,
+    "state": "HOST_USED",
+    "configuration": {
+      "vendorId": 32902,
+      "deviceId": 5475,
+      "subSystemVendorId": 5593,
+      "subSystemId": 2336,
+      "classId": 2,
+      "subClassId": 0,
+      "progIFace": 0,
+      "$objectType": "clustermgmt.v4.ahv.config.PcieDeviceConfiguration"
+    },
+    "type": "NETWORK_CONTROLLER"
+  },
+  {
+    "$objectType": "clustermgmt.v4.ahv.config.PcieDevice",
+    "extId": "aab2ff46-5ace-594c-ac63-b4894138892b",
+    "clusterExtId": "000656bb-5516-939c-0000-00000001c1ce",
+    "hostExtId": "f0490cf9-3011-49cd-8a53-4e8bde071ab5",
+    "description": "description-44f863b6",
+    "maxPartitions": 0,
+    "state": "HOST_USED",
+    "configuration": {
+      "vendorId": 32902,
+      "deviceId": 5475,
+      "subSystemVendorId": 5593,
+      "subSystemId": 2336,
+      "classId": 2,
+      "subClassId": 0,
+      "progIFace": 0,
+      "$objectType": "clustermgmt.v4.ahv.config.PcieDeviceConfiguration"
+    },
+    "type": "NETWORK_CONTROLLER"
+  },
+  {
+    "$objectType": "clustermgmt.v4.ahv.config.PcieDevice",
+    "extId": "dbb64e30-503c-54b7-8920-530b77603d2d",
+    "clusterExtId": "000656bb-5516-939c-0000-00000001c1ce",
+    "hostExtId": "f0490cf9-3011-49cd-8a53-4e8bde071ab5",
+    "description": "description-44f863b6",
+    "maxPartitions": 0,
+    "state": "HOST_USED",
+    "configuration": {
+      "vendorId": 32902,
+      "deviceId": 5475,
+      "subSystemVendorId": 5593,
+      "subSystemId": 2336,
+      "classId": 2,
+      "subClassId": 0,
+      "progIFace": 0,
+      "$objectType": "clustermgmt.v4.ahv.config.PcieDeviceConfiguration"
+    },
+    "type": "NETWORK_CONTROLLER"
+  },
+  {
+    "$objectType": "clustermgmt.v4.ahv.config.PcieDevice",
+    "extId": "e029a545-ad29-5034-a715-430857498cb2",
+    "clusterExtId": "000656bb-5516-939c-0000-00000001c1ce",
+    "hostExtId": "40e34298-61e8-4e6d-8922-8caa22bb5c7f",
+    "description": "description-d59b14dc",
+    "maxPartitions": 0,
+    "state": "HOST_USED",
+    "configuration": {
+      "vendorId": 32902,
+      "deviceId": 4347,
+      "subSystemVendorId": 32902,
+      "subSystemId": 12,
+      "classId": 2,
+      "subClassId": 0,
+      "progIFace": 0,
+      "$objectType": "clustermgmt.v4.ahv.config.PcieDeviceConfiguration"
+    },
+    "type": "NETWORK_CONTROLLER"
+  },
+  {
+    "$objectType": "clustermgmt.v4.ahv.config.PcieDevice",
+    "extId": "e0ba8fe7-1306-59af-bd7e-33bc44588c95",
+    "clusterExtId": "000656bb-5516-939c-0000-00000001c1ce",
+    "hostExtId": "40e34298-61e8-4e6d-8922-8caa22bb5c7f",
+    "description": "description-d59b14dc",
+    "maxPartitions": 0,
+    "state": "HOST_USED",
+    "configuration": {
+      "vendorId": 32902,
+      "deviceId": 4347,
+      "subSystemVendorId": 32902,
+      "subSystemId": 12,
+      "classId": 2,
+      "subClassId": 0,
+      "progIFace": 0,
+      "$objectType": "clustermgmt.v4.ahv.config.PcieDeviceConfiguration"
+    },
+    "type": "NETWORK_CONTROLLER"
+  }
+]

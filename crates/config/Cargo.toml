@@ -1,0 +1,32 @@
+[package]
+name = "nutsh-config"
+description = "Config file, contexts, and secret storage for nutsh"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+
+[lints]
+workspace = true
+
+[features]
+default = []
+# Linux Secret Service over D-Bus. Needs libdbus headers at build time and a running daemon;
+# does not work under WSL. Off by default: the file store is used instead.
+linux-keyring = ["dep:keyring-core", "dep:dbus-secret-service-keyring-store"]
+
+[dependencies]
+serde.workspace = true
+thiserror.workspace = true
+toml.workspace = true
+
+[target.'cfg(target_os = "linux")'.dependencies]
+keyring-core = { version = "1", optional = true }
+dbus-secret-service-keyring-store = { version = "1", optional = true, features = ["crypto-rust"] }
+
+[target.'cfg(target_os = "macos")'.dependencies]
+keyring-core = "1"
+apple-native-keyring-store = { version = "1", features = ["keychain"] }
+
+[dev-dependencies]
+tempfile = "3"

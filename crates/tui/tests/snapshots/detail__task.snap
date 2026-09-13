@@ -1,0 +1,40 @@
+---
+source: crates/tui/tests/detail.rs
+expression: "app.snapshot(120, 36).unwrap()"
+---
+╭ nutsh ─────────────────────────────────────────────────────────────────────────────────────╮
+│Context:    -                                                    ⏎ drill        y detail    │       clusters 3  hosts 7
+│PC:         127.0.0.1:PORT  pc.7.6                              S sort         w wide      │     vms 100  on/off 100/0
+│Cluster:    <all>                                               ←→ columns     ^r refresh   │       alerts ⚠ 100  ✖ 100
+│Kind:       Monitoring › Tasks                                  ^t every       ^x stop      │       tasks ▶ 100 running
+│Count:      100                                                  a actions     ^c quit      │
+╰────────────────────────────────────────────────────────────────────────────────────────────╯     v0.0.2-beta1 · pc.7.6
+╭ nutsh ───────────────╮┌Tasks · EntityUnprotect───────────────────────────────────────────────────────────────────────┐
+│  ▸ Dashboard         ││WHAT ─────────────────────────────────────────────────────────────────────────────────────────│
+│  ▸ Compute & Storage ││         Operation Entityunprotect                   Description [redacted]                   │
+│  ▸ Network & Security││            Status SUCCEEDED                            Progress 100%                         │
+│  ▸ Data Protection   ││        Cancelable ✗                                       Owner name-f6921adc                │
+│  ▸ Hardware          ││TIMING ───────────────────────────────────────────────────────────────────────────────────────│
+│  ▾ Monitoring        ││           Created 0s                                    Started 0s                           │
+│      Overview        ││         Completed 0s                                    Updated 0s                           │
+│      Alerts          ││ENTITIES ─────────────────────────────────────────────────────────────────────────────────────│
+│      Events          ││          Entities 1                                        Name name-21a58d36                │
+│    • Tasks [100]     ││              Type volumes:config:volume-group                                                │
+│      Audits          ││          Clusters name-277ed708                                                              │
+│      Alert Policies  ││HIERARCHY ────────────────────────────────────────────────────────────────────────────────────│
+│      Reports         ││            Parent -                                        Root -                            │
+│  ▸ Policies          ││          Subtasks 0                                       Steps -                            │
+│  ▸ Admin Center      ││ACTIONS ──────────────────────────────────────────────────────────────────────────────────────│
+│  ▸ Contexts          ││                 c Cancel task · not cancelable                                               │
+│  ▸ Settings          ││                                                                                              │
+│  ─── by namespace ───││                                                                                              │
+│  ▸ aiops             ││                                                                                              │
+│  ▸ clustermgmt       ││                                                                                              │
+│  ▸ dataprotection    ││                                                                                              │
+│  ▸ files             ││                                                                                              │
+│  ▸ iam               ││                                                                                              │
+│  ▸ licensing         ││                                                                                              │
+│  ▸ lifecycle         ││                                                                                              │
+╰───────────────── ↓11 ╯└──────────────────────────────────────────────────────────────────────────────────────────────┘
+ j/k:scroll  g/G:top/bottom  a:actions  Y:yaml  J:json  esc:back
+[meter]          ● live

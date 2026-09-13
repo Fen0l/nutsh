@@ -1,0 +1,26 @@
+[
+  {
+    "$objectType": "clustermgmt.v4.config.StorageContainer",
+    "containerExtId": "5f6e7d8c-0000-4000-8000-000000000201",
+    "clusterExtId": "0006158a-2f0d-4d5a-8e2d-000000000010",
+    "clusterName": "prod-01",
+    "name": "default-container",
+    "maxCapacityBytes": 27547883375270,
+    "replicationFactor": 2,
+    "erasureCode": "OFF",
+    "isCompressionEnabled": true,
+    "isMarkedForRemoval": false
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.StorageContainer",
+    "containerExtId": "5f6e7d8c-0000-4000-8000-000000000202",
+    "clusterExtId": "0006158a-2f0d-4d5a-8e2d-000000000010",
+    "clusterName": "prod-01",
+    "name": "images",
+    "maxCapacityBytes": 5497558138880,
+    "replicationFactor": 2,
+    "erasureCode": "ON",
+    "isCompressionEnabled": false,
+    "isMarkedForRemoval": false
+  }
+]

@@ -1,0 +1,137 @@
+[
+  {
+    "$objectType": "licensing.v4.config.Entitlement",
+    "extId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "isMulticluster": false,
+    "isRegistered": true,
+    "name": "name-277ed708",
+    "type": "NUTANIX",
+    "isDeleted": false,
+    "details": [
+      {
+        "$objectType": "licensing.v4.config.EntitlementDetail",
+        "name": "name-a31d1e0e",
+        "type": "NUS",
+        "category": "PRO",
+        "subCategory": "$UNKNOWN",
+        "meter": "$UNKNOWN",
+        "quantity": 0.0,
+        "earliestExpiryDate": "2026-12-10",
+        "scope": "$UNKNOWN",
+        "isDeleted": false
+      },
+      {
+        "name": "name-03ef38d4",
+        "type": "NKPFS",
+        "category": "ULTIMATE",
+        "subCategory": "$UNKNOWN",
+        "meter": "CORES",
+        "quantity": 96.0,
+        "earliestExpiryDate": "2026-12-10",
+        "scope": "$UNKNOWN",
+        "isDeleted": false
+      },
+      {
+        "name": "name-47d36db4",
+        "type": "NKPFS",
+        "category": "NDB",
+        "subCategory": "ADDON",
+        "meter": "CORES",
+        "quantity": 10.0,
+        "earliestExpiryDate": "2026-12-10",
+        "scope": "$UNKNOWN",
+        "isDeleted": false
+      },
+      {
+        "name": "name-ac3e5884",
+        "type": "NCM",
+        "category": "ULTIMATE",
+        "subCategory": "$UNKNOWN",
+        "meter": "CORES",
+        "quantity": 96.0,
+        "earliestExpiryDate": "2026-12-10",
+        "scope": "$UNKNOWN",
+        "isDeleted": false
+      }
+    ]
+  },
+  {
+    "$objectType": "licensing.v4.config.Entitlement",
+    "extId": "0006237e-c983-e712-0000-00000001c1d0",
+    "isMulticluster": false,
+    "isRegistered": true,
+    "name": "name-d2b6bd1b",
+    "type": "NUTANIX",
+    "isDeleted": false,
+    "details": [
+      {
+        "$objectType": "licensing.v4.config.EntitlementDetail",
+        "name": "name-a31d1e0e",
+        "type": "NUS",
+        "category": "PRO",
+        "subCategory": "$UNKNOWN",
+        "meter": "$UNKNOWN",
+        "quantity": 0.0,
+        "earliestExpiryDate": "2026-12-10",
+        "scope": "$UNKNOWN",
+        "isDeleted": false
+      },
+      {
+        "name": "name-ac3e5884",
+        "type": "NCM",
+        "category": "ULTIMATE",
+        "subCategory": "$UNKNOWN",
+        "meter": "CORES",
+        "quantity": 72.0,
+        "earliestExpiryDate": "2026-12-10",
+        "scope": "$UNKNOWN",
+        "isDeleted": false
+      },
+      {
+        "name": "name-47d36db4",
+        "type": "NKPFS",
+        "category": "NDB",
+        "subCategory": "ADDON",
+        "meter": "CORES",
+        "quantity": 10.0,
+        "earliestExpiryDate": "2026-12-10",
+        "scope": "$UNKNOWN",
+        "isDeleted": false
+      },
+      {
+        "name": "name-03ef38d4",
+        "type": "NKPFS",
+        "category": "ULTIMATE",
+        "subCategory": "$UNKNOWN",
+        "meter": "CORES",
+        "quantity": 72.0,
+        "earliestExpiryDate": "2026-12-10",
+        "scope": "$UNKNOWN",
+        "isDeleted": false
+      }
+    ]
+  },
+  {
+    "$objectType": "licensing.v4.config.Entitlement",
+    "extId": "36feb6ab-2508-4451-8c73-bed665e94892",
+    "isMulticluster": true,
+    "isRegistered": false,
+    "name": "name-651a0b9a",
+    "type": "NUTANIX",
+    "isDeleted": false,
+    "details": [
+      {
+        "$objectType": "licensing.v4.config.EntitlementDetail",
+        "name": "name-a31d1e0e",
+        "type": "NUS",
+        "category": "PRO",
+        "subCategory": "$UNKNOWN",
+        "meter": "TIB",
+        "quantity": 10.0,
+        "earliestExpiryDate": "2026-12-10",
+        "scope": "$UNKNOWN",
+        "isDeleted": false
+      }
+    ]
+  }
+]

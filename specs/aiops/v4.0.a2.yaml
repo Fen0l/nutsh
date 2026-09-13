@@ -1,0 +1,1710 @@
+openapi: 3.0.1
+info:
+  title: Nutanix Aiops Versioned APIs
+  description: "Manage infrastructure on-premises and in the cloud seamlessly through\
+    \ AIOps features such as Analysis, Reporting, Capacity Planning, What if Analysis,\
+    \ VM Rightsizing, Troubleshooting, App Discovery, Broad Observability, and Ops\
+    \ Automation through Playbooks."
+  version: 4.0.3-alpha-2
+  x-repo-name: aiops
+  x-logo:
+    altText: Aiops Logo
+    url: https://developers.nutanix.com/api/v1/namespaces/aiops/images/aiops-logo-img.svg
+servers:
+- url: "https://{pc-ip}:9440/api"
+security:
+- basicAuthScheme: []
+paths:
+  /aiops/v4.0.a2/stats/sources:
+    get:
+      tags:
+      - Stats
+      summary: Returns a list of available sources and their UUIDs. These UUIDs can
+        be used in other APIs to get entity types and their metrics.
+      description: Returns a list of available sources.
+      operationId: getSourcesV4
+      responses:
+        "200":
+          description: Successfully returns all the sources.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/aiops.v4.r0.a2.stats.Source'
+                additionalProperties: false
+                description: REST response for all response codes in API path /aiops/v4.0.a2/stats/sources
+                  Get operation
+        "4XX":
+          description: Client error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/aiops.v4.r0.a2.error.ErrorResponse'
+                additionalProperties: false
+                description: REST response for all response codes in API path /aiops/v4.0.a2/stats/sources
+                  Get operation
+        "5XX":
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/aiops.v4.r0.a2.error.ErrorResponse'
+                additionalProperties: false
+                description: REST response for all response codes in API path /aiops/v4.0.a2/stats/sources
+                  Get operation
+      x-permissions:
+        deploymentList:
+        - ON_PREM
+        operationName: View_Stats
+        roleList:
+        - Prism Admin
+        - Prism Viewer
+        - Internal Super Admin
+        - Super Admin
+      x-code-samples:
+      - lang: Java
+        source: |2
+
+          package sample;
+
+          import com.nutanix.aio.java.client.ApiClient;
+          import com.nutanix.aio.java.client.api.StatsApi;
+          import com.nutanix.dp1.aio.aiops.v4.stats.SourceListApiResponse;
+
+          public class JavaSdkSample {
+              public static void main(String[] args) {
+                  // Configure the client
+                  ApiClient apiClient = new ApiClient();
+                  // IPv4/IPv6 address or FQDN of the cluster
+                  apiClient.setHost("localhost");
+                  // Port to which to connect to
+                  apiClient.setPort(9440);
+                  // Interval in ms to use during retry attempts
+                  apiClient.setRetryInterval(5000);
+                  // Max retry attempts while reconnecting on a loss of connection
+                  apiClient.setMaxRetryAttempts(5);
+                  // UserName to connect to the cluster
+                  String username = "username";
+                  // Password to connect to the cluster
+                  String password = "password";
+                  apiClient.setUsername(username);
+                  apiClient.setPassword(password);
+
+                  // Please add authorization information here if needed.
+                  StatsApi statsApi = new StatsApi(apiClient);
+
+
+                  try {
+                      SourceListApiResponse sourceListApiResponse = statsApi.getSourcesV4();
+                      System.out.println(sourceListApiResponse.toString());
+                  } catch (RestClientException ex) {
+                      System.out.println(ex.getMessage());
+                  }
+              }
+          }
+      - lang: JavaScript
+        source: |2
+
+          import ApiClient from "@nutanix/aiops-js-client/dist/lib/ApiClient";
+          import StatsApi from "@nutanix/aiops-js-client/dist/lib/apis/stats-endpoints";
+          // Configure the client
+          let apiClientInstance = new ApiClient();
+          // IPv4/IPv6 address or FQDN of the cluster
+          apiClientInstance.host = 'localhost';
+          // Port to which to connect to
+          apiClientInstance.port = '9440';
+          // Max retry attempts while reconnecting on a loss of connection
+          apiClientInstance.maxRetryAttempts = 5;
+          // Interval in ms to use during retry attempts
+          apiClientInstance.retryInterval = 5000;
+          // UserName to connect to the cluster
+          apiClientInstance.username = 'username';
+          // Password to connect to the cluster
+          apiClientInstance.password = 'password';
+          // Please add authorization information here if needed.
+          let statsApi = new StatsApi(apiClientInstance);
+
+          function sample() {
+
+              statsApi.getSourcesV4().then(({data, response}) => {
+                  console.log(`API returned the following status code: ${response.status}`);
+                  console.log(data.getData());
+              }).catch((error) => {
+                  console.log(`Error is: ${error}`);
+              });
+          }
+          sample()
+      - lang: Python
+        source: |2
+
+          import ntnx_aiops_py_client
+
+          if __name__ == "__main__":
+              # Configure the client
+              config = ntnx_aiops_py_client.Configuration()
+              # IPv4/IPv6 address or FQDN of the cluster
+              config.host = "localhost"
+              # Port to which to connect to
+              config.port = 9440
+              # Max retry attempts while reconnecting on a loss of connection
+              config.max_retry_attempts = 3
+              # Backoff factor to use during retry attempts
+              config.backoff_factor = 3
+              # UserName to connect to the cluster
+              config.username = "username"
+              # Password to connect to the cluster
+              config.password = "password"
+              # Please add authorization information here if needed.
+              client = ntnx_aiops_py_client.ApiClient(configuration=config)
+              stats_api = ntnx_aiops_py_client.StatsApi(api_client=client)
+
+              try:
+                  api_response = stats_api.get_sources_v4()
+                  print(api_response)
+              except ntnx_aiops_py_client.rest.ApiException as e:
+                  print(e)
+      - lang: Go
+        source: |2+
+
+          package main
+
+          import (
+              "fmt"
+              "github.com/nutanix/ntnx-api-golang-clients/aiops-go-client/v4/api"
+              "github.com/nutanix/ntnx-api-golang-clients/aiops-go-client/v4/client"
+              import1 "github.com/nutanix/ntnx-api-golang-clients/aiops-go-client/v4/models/aiops/v4/stats"
+          )
+
+          var (
+              ApiClientInstance *client.ApiClient
+              StatsApiInstance *api.StatsApi
+          )
+
+          func main() {
+              ApiClientInstance = client.NewApiClient()
+              // IPv4/IPv6 address or FQDN of the cluster
+              ApiClientInstance.Host = "localhost"
+              // Port to which to connect to
+              ApiClientInstance.Port = 9440
+              // Interval in ms to use during retry attempts
+              ApiClientInstance.RetryInterval = 5000
+              // Max retry attempts while reconnecting on a loss of connection
+              ApiClientInstance.MaxRetryAttempts = 5
+              // UserName to connect to the cluster
+              ApiClientInstance.Username = "username"
+              // Password to connect to the cluster
+              ApiClientInstance.Password = "password"
+              // Please add authorization information here if needed.
+              StatsApiInstance = api.NewStatsApi(ApiClientInstance)
+
+
+              response, error := StatsApiInstance.GetSourcesV4()
+              if error != nil {
+                  fmt.Println(error)
+                  return
+              }
+              data, _ := response.GetData().([]import1.Source)
+              fmt.Println(data)
+          }
+
+      - lang: cURL
+        source: |2
+
+          curl --request GET \
+               --url "https://{pc-ip}:9440/api/aiops/v4.0.a2/stats/sources" \
+               --header 'Accept: application/json' \
+               --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+      - lang: Wget
+        source: |2
+
+          wget --verbose \
+               --method GET \
+               --header 'Accept: application/json' \
+               --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+               - "https://{pc-ip}:9440/api/aiops/v4.0.a2/stats/sources"
+  /aiops/v4.0.a2/stats/sources/{extId}/entity-types:
+    get:
+      tags:
+      - Stats
+      summary: Returns a list of available entity types and their UUIDs for a given
+        source. These UUIDs can be used in other APIs to get entity metrics and descriptors.
+      description: Returns a list of available entity types for a given source.
+      operationId: getEntityTypesV4
+      parameters:
+      - name: extId
+        in: path
+        description: The UUID of a source.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+      responses:
+        "200":
+          description: Successfully returns all the entity types.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/aiops.v4.r0.a2.stats.EntityType'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /aiops/v4.0.a2/stats/sources/{extId}/entity-types\
+                  \ Get operation"
+        "4XX":
+          description: Client error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/aiops.v4.r0.a2.error.ErrorResponse'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /aiops/v4.0.a2/stats/sources/{extId}/entity-types\
+                  \ Get operation"
+        "5XX":
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/aiops.v4.r0.a2.error.ErrorResponse'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /aiops/v4.0.a2/stats/sources/{extId}/entity-types\
+                  \ Get operation"
+      x-permissions:
+        deploymentList:
+        - ON_PREM
+        operationName: View_Stats
+        roleList:
+        - Prism Admin
+        - Prism Viewer
+        - Internal Super Admin
+        - Super Admin
+      x-code-samples:
+      - lang: Java
+        source: |2
+
+          package sample;
+
+          import com.nutanix.aio.java.client.ApiClient;
+          import com.nutanix.aio.java.client.api.StatsApi;
+          import com.nutanix.dp1.aio.aiops.v4.stats.EntityTypeListApiResponse;
+
+          public class JavaSdkSample {
+              public static void main(String[] args) {
+                  // Configure the client
+                  ApiClient apiClient = new ApiClient();
+                  // IPv4/IPv6 address or FQDN of the cluster
+                  apiClient.setHost("localhost");
+                  // Port to which to connect to
+                  apiClient.setPort(9440);
+                  // Interval in ms to use during retry attempts
+                  apiClient.setRetryInterval(5000);
+                  // Max retry attempts while reconnecting on a loss of connection
+                  apiClient.setMaxRetryAttempts(5);
+                  // UserName to connect to the cluster
+                  String username = "username";
+                  // Password to connect to the cluster
+                  String password = "password";
+                  apiClient.setUsername(username);
+                  apiClient.setPassword(password);
+
+                  // Please add authorization information here if needed.
+                  StatsApi statsApi = new StatsApi(apiClient);
+
+                  String extId = "3e4E9bb9-EDFE-0A9f-f1d7-47c5ffC8B62c";
+
+                  try {
+                      EntityTypeListApiResponse entityTypeListApiResponse = statsApi.getEntityTypesV4(extId);
+                      System.out.println(entityTypeListApiResponse.toString());
+                  } catch (RestClientException ex) {
+                      System.out.println(ex.getMessage());
+                  }
+              }
+          }
+      - lang: JavaScript
+        source: |2
+
+          import ApiClient from "@nutanix/aiops-js-client/dist/lib/ApiClient";
+          import StatsApi from "@nutanix/aiops-js-client/dist/lib/apis/stats-endpoints";
+          // Configure the client
+          let apiClientInstance = new ApiClient();
+          // IPv4/IPv6 address or FQDN of the cluster
+          apiClientInstance.host = 'localhost';
+          // Port to which to connect to
+          apiClientInstance.port = '9440';
+          // Max retry attempts while reconnecting on a loss of connection
+          apiClientInstance.maxRetryAttempts = 5;
+          // Interval in ms to use during retry attempts
+          apiClientInstance.retryInterval = 5000;
+          // UserName to connect to the cluster
+          apiClientInstance.username = 'username';
+          // Password to connect to the cluster
+          apiClientInstance.password = 'password';
+          // Please add authorization information here if needed.
+          let statsApi = new StatsApi(apiClientInstance);
+
+          function sample() {
+              let extId = "2Ff923A3-aCD0-F0DA-AFaB-B3B85Bf9d986";
+
+              statsApi.getEntityTypesV4(extId).then(({data, response}) => {
+                  console.log(`API returned the following status code: ${response.status}`);
+                  console.log(data.getData());
+              }).catch((error) => {
+                  console.log(`Error is: ${error}`);
+              });
+          }
+          sample()
+      - lang: Python
+        source: |2
+
+          import ntnx_aiops_py_client
+
+          if __name__ == "__main__":
+              # Configure the client
+              config = ntnx_aiops_py_client.Configuration()
+              # IPv4/IPv6 address or FQDN of the cluster
+              config.host = "localhost"
+              # Port to which to connect to
+              config.port = 9440
+              # Max retry attempts while reconnecting on a loss of connection
+              config.max_retry_attempts = 3
+              # Backoff factor to use during retry attempts
+              config.backoff_factor = 3
+              # UserName to connect to the cluster
+              config.username = "username"
+              # Password to connect to the cluster
+              config.password = "password"
+              # Please add authorization information here if needed.
+              client = ntnx_aiops_py_client.ApiClient(configuration=config)
+              stats_api = ntnx_aiops_py_client.StatsApi(api_client=client)
+              ext_id = "ACc2111a-Ac57-0624-Dbae-eaec0eF35F5a"
+
+              try:
+                  api_response = stats_api.get_entity_types_v4(extId=ext_id)
+                  print(api_response)
+              except ntnx_aiops_py_client.rest.ApiException as e:
+                  print(e)
+      - lang: Go
+        source: |2+
+
+          package main
+
+          import (
+              "fmt"
+              "github.com/nutanix/ntnx-api-golang-clients/aiops-go-client/v4/api"
+              "github.com/nutanix/ntnx-api-golang-clients/aiops-go-client/v4/client"
+              import1 "github.com/nutanix/ntnx-api-golang-clients/aiops-go-client/v4/models/aiops/v4/stats"
+          )
+
+          var (
+              ApiClientInstance *client.ApiClient
+              StatsApiInstance *api.StatsApi
+          )
+
+          func main() {
+              ApiClientInstance = client.NewApiClient()
+              // IPv4/IPv6 address or FQDN of the cluster
+              ApiClientInstance.Host = "localhost"
+              // Port to which to connect to
+              ApiClientInstance.Port = 9440
+              // Interval in ms to use during retry attempts
+              ApiClientInstance.RetryInterval = 5000
+              // Max retry attempts while reconnecting on a loss of connection
+              ApiClientInstance.MaxRetryAttempts = 5
+              // UserName to connect to the cluster
+              ApiClientInstance.Username = "username"
+              // Password to connect to the cluster
+              ApiClientInstance.Password = "password"
+              // Please add authorization information here if needed.
+              StatsApiInstance = api.NewStatsApi(ApiClientInstance)
+
+              extId := "fF6cC6B5-8e97-F88E-BE1E-23dDC2E2aaDa"
+
+              response, error := StatsApiInstance.GetEntityTypesV4(&extId)
+              if error != nil {
+                  fmt.Println(error)
+                  return
+              }
+              data, _ := response.GetData().([]import1.EntityType)
+              fmt.Println(data)
+          }
+
+      - lang: cURL
+        source: |2
+
+          curl --request GET \
+               --url "https://{pc-ip}:9440/api/aiops/v4.0.a2/stats/sources/D8BfADEc-6c8c-8DBa-ff07-a3ce7cC3d7F7/entity-types" \
+               --header 'Accept: application/json' \
+               --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+      - lang: Wget
+        source: |2
+
+          wget --verbose \
+               --method GET \
+               --header 'Accept: application/json' \
+               --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+               - "https://{pc-ip}:9440/api/aiops/v4.0.a2/stats/sources/daac1baA-DfdB-9c3B-cAA8-CBaC88dbeAd8/entity-types"
+  /aiops/v4.0.a2/stats/sources/{sourceExtId}/entities/{extId}:
+    get:
+      tags:
+      - Stats
+      summary: Returns a list of various attributes and metrics (time series data)
+        that are available for a given entity type.
+      description: Returns attribute/metric data for the selected entities.
+      operationId: getEntityMetricsV4
+      parameters:
+      - name: sourceExtId
+        in: path
+        description: The UUID of a source.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+      - name: extId
+        in: path
+        description: The UUID of an entity type.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+      - name: $page
+        in: query
+        description: |
+          A URL query parameter that specifies the page number of the result set.  Must be a positive integer between 0 and the maximum number of pages that are available for that resource. Any number out of this range will lead to no results being returned.
+        required: false
+        style: form
+        explode: false
+        schema:
+          minimum: 0
+          type: integer
+          description: |
+            A URL query parameter that specifies the page number of the result set.  Must be a positive integer between 0 and the maximum number of pages that are available for that resource. Any number out of this range will lead to no results being returned.
+          format: int32
+          default: 0
+      - name: $limit
+        in: query
+        description: |
+          A URL query parameter that specifies the total number of records returned in the result set.  Must be a positive integer between 1 and 100. Any number out of this range will lead to a validation error. If the limit is not provided a default value of 50 records will be returned in the result set.
+        required: false
+        style: form
+        explode: false
+        schema:
+          maximum: 100
+          minimum: 1
+          type: integer
+          description: |
+            A URL query parameter that specifies the total number of records returned in the result set.  Must be a positive integer between 1 and 100. Any number out of this range will lead to a validation error. If the limit is not provided a default value of 50 records will be returned in the result set.
+          format: int32
+          default: 50
+      - name: $startTime
+        in: query
+        description: |
+          The start time of the period for which stats should be reported. The value should be in extended ISO-8601 format. For example, start time of 2022-04-23T01:23:45.678+09:00 would consider all stats starting at 1:23:45.678 on the 23rd of April 2022. Details around ISO-8601 format can be found at https://www.iso.org/standard/70907.html
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          description: |
+            The start time of the period for which stats should be reported. The value should be in extended ISO-8601 format. For example, start time of 2022-04-23T01:23:45.678+09:00 would consider all stats starting at 1:23:45.678 on the 23rd of April 2022. Details around ISO-8601 format can be found at https://www.iso.org/standard/70907.html
+      - name: $endTime
+        in: query
+        description: |
+          The end time of the period for which stats should be reported. The value should be in extended ISO-8601 format. For example, end time of 2022-04-23T013:23:45.678+09:00 would consider all stats till 13:23:45 .678 on the 23rd of April 2022. Details around ISO-8601 format can be found at https://www.iso.org/standard/70907.html
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: string
+          description: |
+            The end time of the period for which stats should be reported. The value should be in extended ISO-8601 format. For example, end time of 2022-04-23T013:23:45.678+09:00 would consider all stats till 13:23:45 .678 on the 23rd of April 2022. Details around ISO-8601 format can be found at https://www.iso.org/standard/70907.html
+      - name: $samplingInterval
+        in: query
+        description: |
+          The sampling interval in seconds at which statistical data should be collected For example, do you want performance statistics every 30 seconds? Every 60 seconds?
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: integer
+          description: |
+            The sampling interval in seconds at which statistical data should be collected For example, do you want performance statistics every 30 seconds? Every 60 seconds?
+      - name: $statType
+        in: query
+        required: false
+        style: form
+        explode: false
+        schema:
+          $ref: '#/components/schemas/common.v1.r0.a3.stats.DownSamplingOperator'
+      - name: $filter
+        in: query
+        description: |
+          A URL query parameter that allows clients to filter a collection of resources. The expression specified with $filter is evaluated for each resource in the collection, and only items where the expression evaluates to true are included in the response. Expression specified with the $filter must conform to the OData V4.01 URL conventions.
+          For example, filter '$filter=name eq 'karbon-ntnx-1.0' would filter result on cluster name karbon-ntnx1.0, filter '$filter=startswith(name, 'C')' would filter on cluster name starting with C.
+          The filter can be applied on the following fields:
+          - extId
+          - metrics/name
+          - metrics/timeSeries/values/value
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: $orderby
+        in: query
+        description: |
+          A URL query parameter that allows clients to specify the sort criteria for the returned list of objects. Resources can be sorted in ascending order using asc or descending order using desc. If asc or desc are not specified the resources will be sorted in ascending order by default. For example, '$orderby=templateName desc' would get all templates sorted by templateName in desc order.
+          The orderby can be applied to the following fields:
+          - extId
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Successfully returns all the entities.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/aiops.v4.r0.a2.stats.Entity'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /aiops/v4.0.a2/stats/sources/{sourceExtId}/entities/{extId}\
+                  \ Get operation"
+        "4XX":
+          description: Client error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/aiops.v4.r0.a2.error.ErrorResponse'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /aiops/v4.0.a2/stats/sources/{sourceExtId}/entities/{extId}\
+                  \ Get operation"
+        "5XX":
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/aiops.v4.r0.a2.error.ErrorResponse'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /aiops/v4.0.a2/stats/sources/{sourceExtId}/entities/{extId}\
+                  \ Get operation"
+      x-permissions:
+        deploymentList:
+        - ON_PREM
+        operationName: View_Stats
+        roleList:
+        - Prism Admin
+        - Prism Viewer
+        - Internal Super Admin
+        - Super Admin
+      x-code-samples:
+      - lang: Java
+        source: |2
+
+          package sample;
+
+          import com.nutanix.aio.java.client.ApiClient;
+          import com.nutanix.aio.java.client.api.StatsApi;
+          import com.nutanix.dp1.aio.aiops.v4.stats.EntityListApiResponse;
+
+          public class JavaSdkSample {
+              public static void main(String[] args) {
+                  // Configure the client
+                  ApiClient apiClient = new ApiClient();
+                  // IPv4/IPv6 address or FQDN of the cluster
+                  apiClient.setHost("localhost");
+                  // Port to which to connect to
+                  apiClient.setPort(9440);
+                  // Interval in ms to use during retry attempts
+                  apiClient.setRetryInterval(5000);
+                  // Max retry attempts while reconnecting on a loss of connection
+                  apiClient.setMaxRetryAttempts(5);
+                  // UserName to connect to the cluster
+                  String username = "username";
+                  // Password to connect to the cluster
+                  String password = "password";
+                  apiClient.setUsername(username);
+                  apiClient.setPassword(password);
+
+                  // Please add authorization information here if needed.
+                  StatsApi statsApi = new StatsApi(apiClient);
+
+                  int page = 0;
+                  int limit = 50;
+                  int samplingInterval = 1;
+                  Object statType = SOME_RAW_DATA;
+
+                  try {
+                      EntityListApiResponse entityListApiResponse = statsApi.getEntityMetricsV4(page, limit, null, null, samplingInterval, statType, null, null);
+                      System.out.println(entityListApiResponse.toString());
+                  } catch (RestClientException ex) {
+                      System.out.println(ex.getMessage());
+                  }
+              }
+          }
+      - lang: JavaScript
+        source: |2
+
+          import ApiClient from "@nutanix/aiops-js-client/dist/lib/ApiClient";
+          import StatsApi from "@nutanix/aiops-js-client/dist/lib/apis/stats-endpoints";
+          // Configure the client
+          let apiClientInstance = new ApiClient();
+          // IPv4/IPv6 address or FQDN of the cluster
+          apiClientInstance.host = 'localhost';
+          // Port to which to connect to
+          apiClientInstance.port = '9440';
+          // Max retry attempts while reconnecting on a loss of connection
+          apiClientInstance.maxRetryAttempts = 5;
+          // Interval in ms to use during retry attempts
+          apiClientInstance.retryInterval = 5000;
+          // UserName to connect to the cluster
+          apiClientInstance.username = 'username';
+          // Password to connect to the cluster
+          apiClientInstance.password = 'password';
+          // Please add authorization information here if needed.
+          let statsApi = new StatsApi(apiClientInstance);
+
+          function sample() {
+              //Construct List Options
+              var listOptions = new Object();
+              listOptions.page = 0;
+              listOptions.limit = 50;
+              listOptions.samplingInterval = 1;
+              listOptions.statType = SOME_RAW_DATA;
+
+              statsApi.getEntityMetricsV4(listOptions).then(({data, response}) => {
+                  console.log(`API returned the following status code: ${response.status}`);
+                  console.log(data.getData());
+              }).catch((error) => {
+                  console.log(`Error is: ${error}`);
+              });
+          }
+          sample()
+      - lang: Python
+        source: |2
+
+          import ntnx_aiops_py_client
+
+          if __name__ == "__main__":
+              # Configure the client
+              config = ntnx_aiops_py_client.Configuration()
+              # IPv4/IPv6 address or FQDN of the cluster
+              config.host = "localhost"
+              # Port to which to connect to
+              config.port = 9440
+              # Max retry attempts while reconnecting on a loss of connection
+              config.max_retry_attempts = 3
+              # Backoff factor to use during retry attempts
+              config.backoff_factor = 3
+              # UserName to connect to the cluster
+              config.username = "username"
+              # Password to connect to the cluster
+              config.password = "password"
+              # Please add authorization information here if needed.
+              client = ntnx_aiops_py_client.ApiClient(configuration=config)
+              stats_api = ntnx_aiops_py_client.StatsApi(api_client=client)
+              page = 0
+              limit = 50
+              sampling_interval = 1
+              stat_type = SOME_RAW_DATA
+
+              try:
+                  api_response = stats_api.get_entity_metrics_v4(_page=page, _limit=limit, _samplingInterval=sampling_interval, _statType=stat_type)
+                  print(api_response)
+              except ntnx_aiops_py_client.rest.ApiException as e:
+                  print(e)
+      - lang: Go
+        source: |2+
+
+          package main
+
+          import (
+              "fmt"
+              "github.com/nutanix/ntnx-api-golang-clients/aiops-go-client/v4/api"
+              "github.com/nutanix/ntnx-api-golang-clients/aiops-go-client/v4/client"
+              import1 "github.com/nutanix/ntnx-api-golang-clients/aiops-go-client/v4/models/aiops/v4/stats"
+          )
+
+          var (
+              ApiClientInstance *client.ApiClient
+              StatsApiInstance *api.StatsApi
+          )
+
+          func main() {
+              ApiClientInstance = client.NewApiClient()
+              // IPv4/IPv6 address or FQDN of the cluster
+              ApiClientInstance.Host = "localhost"
+              // Port to which to connect to
+              ApiClientInstance.Port = 9440
+              // Interval in ms to use during retry attempts
+              ApiClientInstance.RetryInterval = 5000
+              // Max retry attempts while reconnecting on a loss of connection
+              ApiClientInstance.MaxRetryAttempts = 5
+              // UserName to connect to the cluster
+              ApiClientInstance.Username = "username"
+              // Password to connect to the cluster
+              ApiClientInstance.Password = "password"
+              // Please add authorization information here if needed.
+              StatsApiInstance = api.NewStatsApi(ApiClientInstance)
+
+              page := 0
+              limit := 50
+              samplingInterval := 1
+              statType := SOME_RAW_DATA
+
+              response, error := StatsApiInstance.GetEntityMetricsV4(&page, &limit, nil, nil, &samplingInterval, &statType, nil, nil)
+              if error != nil {
+                  fmt.Println(error)
+                  return
+              }
+              data, _ := response.GetData().([]import1.Entity)
+              fmt.Println(data)
+          }
+
+      - lang: cURL
+        source: |2
+
+          curl --request GET \
+               --url "https://{pc-ip}:9440/api/aiops/v4.0.a2/stats/sources/{sourceExtId}/entities/{extId}?$startTime=string_sample_data&$filter=string_sample_data&$limit=50&$orderby=string_sample_data&$statType=SOME_RAW_DATA&$endTime=string_sample_data&$page=0&$samplingInterval=1" \
+               --header 'Accept: application/json' \
+               --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+      - lang: Wget
+        source: |2
+
+          wget --verbose \
+               --method GET \
+               --header 'Accept: application/json' \
+               --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+               - "https://{pc-ip}:9440/api/aiops/v4.0.a2/stats/sources/{sourceExtId}/entities/{extId}?$startTime=string_sample_data&$filter=string_sample_data&$limit=50&$orderby=string_sample_data&$statType=SOME_RAW_DATA&$endTime=string_sample_data&$page=0&$samplingInterval=1"
+  /aiops/v4.0.a2/stats/sources/{extId}/entity-descriptors:
+    get:
+      tags:
+      - Stats
+      summary: Returns metadata information available for entity and metrics for given
+        entities.
+      description: Returns entity and metrics descriptors.
+      operationId: getEntityDescriptorsV4
+      parameters:
+      - name: extId
+        in: path
+        description: The UUID of a source.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+      - name: $page
+        in: query
+        description: |
+          A URL query parameter that specifies the page number of the result set.  Must be a positive integer between 0 and the maximum number of pages that are available for that resource. Any number out of this range will lead to no results being returned.
+        required: false
+        style: form
+        explode: false
+        schema:
+          minimum: 0
+          type: integer
+          description: |
+            A URL query parameter that specifies the page number of the result set.  Must be a positive integer between 0 and the maximum number of pages that are available for that resource. Any number out of this range will lead to no results being returned.
+          format: int32
+          default: 0
+      - name: $limit
+        in: query
+        description: |
+          A URL query parameter that specifies the total number of records returned in the result set.  Must be a positive integer between 1 and 100. Any number out of this range will lead to a validation error. If the limit is not provided a default value of 50 records will be returned in the result set.
+        required: false
+        style: form
+        explode: false
+        schema:
+          maximum: 100
+          minimum: 1
+          type: integer
+          description: |
+            A URL query parameter that specifies the total number of records returned in the result set.  Must be a positive integer between 1 and 100. Any number out of this range will lead to a validation error. If the limit is not provided a default value of 50 records will be returned in the result set.
+          format: int32
+          default: 50
+      - name: $filter
+        in: query
+        description: |
+          A URL query parameter that allows clients to filter a collection of resources. The expression specified with $filter is evaluated for each resource in the collection, and only items where the expression evaluates to true are included in the response. Expression specified with the $filter must conform to the OData V4.01 URL conventions.
+          For example, filter '$filter=name eq 'karbon-ntnx-1.0' would filter result on cluster name karbon-ntnx1.0, filter '$filter=startswith(name, 'C')' would filter on cluster name starting with C.
+          The filter can be applied on the following fields:
+          - entityType
+          - metrics/name
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Successfully returns all entity descriptors.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/aiops.v4.r0.a2.stats.EntityDescriptor'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /aiops/v4.0.a2/stats/sources/{extId}/entity-descriptors\
+                  \ Get operation"
+        "4XX":
+          description: Client error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/aiops.v4.r0.a2.error.ErrorResponse'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /aiops/v4.0.a2/stats/sources/{extId}/entity-descriptors\
+                  \ Get operation"
+        "5XX":
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/aiops.v4.r0.a2.error.ErrorResponse'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /aiops/v4.0.a2/stats/sources/{extId}/entity-descriptors\
+                  \ Get operation"
+      x-permissions:
+        deploymentList:
+        - ON_PREM
+        operationName: View_Stats
+        roleList:
+        - Prism Admin
+        - Prism Viewer
+        - Internal Super Admin
+        - Super Admin
+      x-code-samples:
+      - lang: Java
+        source: |2
+
+          package sample;
+
+          import com.nutanix.aio.java.client.ApiClient;
+          import com.nutanix.aio.java.client.api.StatsApi;
+          import com.nutanix.dp1.aio.aiops.v4.stats.EntityDescriptorListApiResponse;
+
+          public class JavaSdkSample {
+              public static void main(String[] args) {
+                  // Configure the client
+                  ApiClient apiClient = new ApiClient();
+                  // IPv4/IPv6 address or FQDN of the cluster
+                  apiClient.setHost("localhost");
+                  // Port to which to connect to
+                  apiClient.setPort(9440);
+                  // Interval in ms to use during retry attempts
+                  apiClient.setRetryInterval(5000);
+                  // Max retry attempts while reconnecting on a loss of connection
+                  apiClient.setMaxRetryAttempts(5);
+                  // UserName to connect to the cluster
+                  String username = "username";
+                  // Password to connect to the cluster
+                  String password = "password";
+                  apiClient.setUsername(username);
+                  apiClient.setPassword(password);
+
+                  // Please add authorization information here if needed.
+                  StatsApi statsApi = new StatsApi(apiClient);
+
+                  int page = 0;
+                  int limit = 50;
+
+                  try {
+                      EntityDescriptorListApiResponse entityDescriptorListApiResponse = statsApi.getEntityDescriptorsV4(page, limit, null);
+                      System.out.println(entityDescriptorListApiResponse.toString());
+                  } catch (RestClientException ex) {
+                      System.out.println(ex.getMessage());
+                  }
+              }
+          }
+      - lang: JavaScript
+        source: |2
+
+          import ApiClient from "@nutanix/aiops-js-client/dist/lib/ApiClient";
+          import StatsApi from "@nutanix/aiops-js-client/dist/lib/apis/stats-endpoints";
+          // Configure the client
+          let apiClientInstance = new ApiClient();
+          // IPv4/IPv6 address or FQDN of the cluster
+          apiClientInstance.host = 'localhost';
+          // Port to which to connect to
+          apiClientInstance.port = '9440';
+          // Max retry attempts while reconnecting on a loss of connection
+          apiClientInstance.maxRetryAttempts = 5;
+          // Interval in ms to use during retry attempts
+          apiClientInstance.retryInterval = 5000;
+          // UserName to connect to the cluster
+          apiClientInstance.username = 'username';
+          // Password to connect to the cluster
+          apiClientInstance.password = 'password';
+          // Please add authorization information here if needed.
+          let statsApi = new StatsApi(apiClientInstance);
+
+          function sample() {
+              //Construct List Options
+              var listOptions = new Object();
+              listOptions.page = 0;
+              listOptions.limit = 50;
+
+              statsApi.getEntityDescriptorsV4(listOptions).then(({data, response}) => {
+                  console.log(`API returned the following status code: ${response.status}`);
+                  console.log(data.getData());
+              }).catch((error) => {
+                  console.log(`Error is: ${error}`);
+              });
+          }
+          sample()
+      - lang: Python
+        source: |2
+
+          import ntnx_aiops_py_client
+
+          if __name__ == "__main__":
+              # Configure the client
+              config = ntnx_aiops_py_client.Configuration()
+              # IPv4/IPv6 address or FQDN of the cluster
+              config.host = "localhost"
+              # Port to which to connect to
+              config.port = 9440
+              # Max retry attempts while reconnecting on a loss of connection
+              config.max_retry_attempts = 3
+              # Backoff factor to use during retry attempts
+              config.backoff_factor = 3
+              # UserName to connect to the cluster
+              config.username = "username"
+              # Password to connect to the cluster
+              config.password = "password"
+              # Please add authorization information here if needed.
+              client = ntnx_aiops_py_client.ApiClient(configuration=config)
+              stats_api = ntnx_aiops_py_client.StatsApi(api_client=client)
+              page = 0
+              limit = 50
+
+              try:
+                  api_response = stats_api.get_entity_descriptors_v4(_page=page, _limit=limit)
+                  print(api_response)
+              except ntnx_aiops_py_client.rest.ApiException as e:
+                  print(e)
+      - lang: Go
+        source: |2+
+
+          package main
+
+          import (
+              "fmt"
+              "github.com/nutanix/ntnx-api-golang-clients/aiops-go-client/v4/api"
+              "github.com/nutanix/ntnx-api-golang-clients/aiops-go-client/v4/client"
+              import1 "github.com/nutanix/ntnx-api-golang-clients/aiops-go-client/v4/models/aiops/v4/stats"
+          )
+
+          var (
+              ApiClientInstance *client.ApiClient
+              StatsApiInstance *api.StatsApi
+          )
+
+          func main() {
+              ApiClientInstance = client.NewApiClient()
+              // IPv4/IPv6 address or FQDN of the cluster
+              ApiClientInstance.Host = "localhost"
+              // Port to which to connect to
+              ApiClientInstance.Port = 9440
+              // Interval in ms to use during retry attempts
+              ApiClientInstance.RetryInterval = 5000
+              // Max retry attempts while reconnecting on a loss of connection
+              ApiClientInstance.MaxRetryAttempts = 5
+              // UserName to connect to the cluster
+              ApiClientInstance.Username = "username"
+              // Password to connect to the cluster
+              ApiClientInstance.Password = "password"
+              // Please add authorization information here if needed.
+              StatsApiInstance = api.NewStatsApi(ApiClientInstance)
+
+              page := 0
+              limit := 50
+
+              response, error := StatsApiInstance.GetEntityDescriptorsV4(&page, &limit, nil)
+              if error != nil {
+                  fmt.Println(error)
+                  return
+              }
+              data, _ := response.GetData().([]import1.EntityDescriptor)
+              fmt.Println(data)
+          }
+
+      - lang: cURL
+        source: |2
+
+          curl --request GET \
+               --url "https://{pc-ip}:9440/api/aiops/v4.0.a2/stats/sources/{extId}/entity-descriptors?$filter=string_sample_data&$limit=50&$page=0" \
+               --header 'Accept: application/json' \
+               --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+      - lang: Wget
+        source: |2
+
+          wget --verbose \
+               --method GET \
+               --header 'Accept: application/json' \
+               --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+               - "https://{pc-ip}:9440/api/aiops/v4.0.a2/stats/sources/{extId}/entity-descriptors?$filter=string_sample_data&$limit=50&$page=0"
+components:
+  schemas:
+    aiops.v4.r0.a2.stats.SourceListApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/aiops.v4.r0.a2.stats.Source'
+          - $ref: '#/components/schemas/aiops.v4.r0.a2.error.ErrorResponse'
+      additionalProperties: false
+      description: REST response for all response codes in API path /aiops/v4.0.a2/stats/sources
+        Get operation
+    aiops.v4.r0.a2.stats.Source:
+      allOf:
+      - $ref: '#/components/schemas/common.v1.r0.a3.response.ExternalizableAbstractModel'
+      - type: object
+        properties:
+          sourceName:
+            type: string
+            description: Source name for the vendors. For example 'nutanix'.
+        additionalProperties: false
+    aiops.v4.r0.a2.stats.EntityTypeListApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/aiops.v4.r0.a2.stats.EntityType'
+          - $ref: '#/components/schemas/aiops.v4.r0.a2.error.ErrorResponse'
+      additionalProperties: false
+      description: "REST response for all response codes in API path /aiops/v4.0.a2/stats/sources/{extId}/entity-types\
+        \ Get operation"
+    aiops.v4.r0.a2.stats.EntityType:
+      allOf:
+      - $ref: '#/components/schemas/common.v1.r0.a3.response.ExternalizableAbstractModel'
+      - type: object
+        properties:
+          entityTypeName:
+            type: string
+            description: "Entity type of the data supported for a given source. For\
+              \ example VM, cluster etc."
+        additionalProperties: false
+    aiops.v4.r0.a2.stats.EntityListApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/aiops.v4.r0.a2.stats.Entity'
+          - $ref: '#/components/schemas/aiops.v4.r0.a2.error.ErrorResponse'
+      additionalProperties: false
+      description: "REST response for all response codes in API path /aiops/v4.0.a2/stats/sources/{sourceExtId}/entities/{extId}\
+        \ Get operation"
+    aiops.v4.r0.a2.stats.Entity:
+      allOf:
+      - $ref: '#/components/schemas/common.v1.r0.a3.response.ExternalizableAbstractModel'
+      - type: object
+        properties:
+          entityType:
+            type: string
+            description: "Entity type of the data supported for a given source. For\
+              \ example VM, cluster etc."
+          source:
+            type: string
+            description: Source name for the vendors. For example 'nutanix'.
+          parents:
+            maxItems: 5
+            minItems: 0
+            type: array
+            description: Parent entity types for the given entity.
+            items:
+              $ref: '#/components/schemas/aiops.v4.r0.a2.stats.Entity'
+          metrics:
+            maxItems: 100
+            type: array
+            description: Metrics data for the entity.
+            items:
+              $ref: '#/components/schemas/aiops.v4.r0.a2.stats.Metric'
+        additionalProperties: false
+    aiops.v4.r0.a2.stats.Metric:
+      type: object
+      properties:
+        name:
+          maxLength: 50
+          type: string
+        timeSeries:
+          $ref: '#/components/schemas/aiops.v4.r0.a2.stats.TimeSeries'
+      additionalProperties: false
+    aiops.v4.r0.a2.stats.TimeSeries:
+      type: object
+      properties:
+        samplingIntervalSecs:
+          type: integer
+          description: The interval value is used to resample the queried time series
+            data by using down_sampling_operator operator. The default is 86400 seconds.
+        values:
+          maxItems: 2880
+          type: array
+          items:
+            $ref: '#/components/schemas/aiops.v4.r0.a2.stats.Point'
+      additionalProperties: false
+    aiops.v4.r0.a2.stats.Point:
+      type: object
+      properties:
+        value:
+          type: object
+          description: "The data point value at the specified timestamp, this value\
+            \ can either be an integer, boolean, string, double, or a list of these\
+            \ types."
+          oneOf:
+          - $ref: '#/components/schemas/aiops.v4.r0.a2.stats.StrVal'
+          - $ref: '#/components/schemas/aiops.v4.r0.a2.stats.BoolVal'
+          - $ref: '#/components/schemas/aiops.v4.r0.a2.stats.IntVal'
+          - $ref: '#/components/schemas/aiops.v4.r0.a2.stats.DoubleVal'
+          - $ref: '#/components/schemas/aiops.v4.r0.a2.stats.StrList'
+          - $ref: '#/components/schemas/aiops.v4.r0.a2.stats.BoolList'
+          - $ref: '#/components/schemas/aiops.v4.r0.a2.stats.IntList'
+          - $ref: '#/components/schemas/aiops.v4.r0.a2.stats.DoubleList'
+        timestamp:
+          type: string
+          description: The timestamp of the metric value.
+          format: date-time
+      additionalProperties: false
+    aiops.v4.r0.a2.stats.StrVal:
+      required:
+      - strValue
+      type: object
+      properties:
+        strValue:
+          type: string
+      additionalProperties: false
+    aiops.v4.r0.a2.stats.BoolVal:
+      required:
+      - boolValue
+      type: object
+      properties:
+        boolValue:
+          type: boolean
+      additionalProperties: false
+    aiops.v4.r0.a2.stats.IntVal:
+      required:
+      - intValue
+      type: object
+      properties:
+        intValue:
+          type: integer
+          format: int64
+      additionalProperties: false
+    aiops.v4.r0.a2.stats.DoubleVal:
+      required:
+      - doubleValue
+      type: object
+      properties:
+        doubleValue:
+          type: number
+          format: double
+      additionalProperties: false
+    aiops.v4.r0.a2.stats.StrList:
+      required:
+      - strList
+      type: object
+      properties:
+        strList:
+          maxItems: 100
+          type: array
+          items:
+            type: string
+      additionalProperties: false
+    aiops.v4.r0.a2.stats.BoolList:
+      required:
+      - boolList
+      type: object
+      properties:
+        boolList:
+          maxItems: 100
+          type: array
+          items:
+            type: boolean
+      additionalProperties: false
+    aiops.v4.r0.a2.stats.IntList:
+      required:
+      - intList
+      type: object
+      properties:
+        intList:
+          maxItems: 100
+          type: array
+          items:
+            type: integer
+            format: int64
+      additionalProperties: false
+    aiops.v4.r0.a2.stats.DoubleList:
+      required:
+      - doubleList
+      type: object
+      properties:
+        doubleList:
+          maxItems: 100
+          type: array
+          items:
+            type: number
+            format: double
+      additionalProperties: false
+    common.v1.r0.a3.stats.DownSamplingOperator:
+      type: string
+      description: "The operator to use while performing down-sampling on stats data.\
+        \ Allowed values are SUM, MIN, MAX, AVG, COUNT and LAST."
+      enum:
+      - $UNKNOWN
+      - $REDACTED
+      - SUM
+      - MIN
+      - MAX
+      - AVG
+      - COUNT
+      - LAST
+    common.v1.r0.a3.response.ApiResponseMetadata:
+      type: object
+      properties:
+        flags:
+          type: array
+          description: |
+            An array of flags that may indicate the status of the response. For example a flag with name isPaginated and value false indicates that the response is not paginated.
+          items:
+            $ref: '#/components/schemas/common.v1.r0.a3.config.Flag'
+        links:
+          type: array
+          description: |
+            An array of HATEOAS style links for the response that may also include pagination links for list operations.
+          items:
+            $ref: '#/components/schemas/common.v1.r0.a3.response.ApiLink'
+        totalAvailableResults:
+          type: integer
+          description: |
+            The total number of entities that are available on the server for this type.
+          format: int32
+        messages:
+          type: array
+          description: |
+            Information, Warning or Error messages that might provide additional contextual information related to the operation.
+          items:
+            $ref: '#/components/schemas/common.v1.r0.a3.config.Message'
+        extraInfo:
+          type: array
+          description: |
+            An array of entity-specific metadata
+          items:
+            $ref: '#/components/schemas/common.v1.r0.a3.config.KVPair'
+      additionalProperties: false
+      description: |
+        The metadata associated with an API response. This value is always present and minimally contains the self-link for the API request that produced this response. It also contains pagination data for the paginated requests.
+    common.v1.r0.a3.response.ExternalizableAbstractModel:
+      description: |
+        A model that represents an object instance that is accessible through an API endpoint.  Instances of this type get an extId field that contains the globally unique identifier for that instance.  Externally accessible instances are always tenant aware and therefore extend the TenantAwareModel
+      allOf:
+      - $ref: '#/components/schemas/common.v1.r0.a3.config.TenantAwareModel'
+      - type: object
+        properties:
+          extId:
+            pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+            type: string
+            description: |
+              A globally unique identifier of an instance that is suitable for external consumption.
+            nullable: true
+          links:
+            type: array
+            description: |
+              A HATEOAS style link for the response.  Each link contains a user friendly name identifying the link and an address for retrieving the particular resource.
+            readOnly: true
+            items:
+              $ref: '#/components/schemas/common.v1.r0.a3.response.ApiLink'
+        additionalProperties: false
+    common.v1.r0.a3.config.TenantAwareModel:
+      type: object
+      properties:
+        tenantId:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+          description: |
+            A globally unique identifier that represents the tenant that owns this entity.  It is automatically assigned by the system and is immutable from an API consumer perspective (some use cases may cause this Id to change - for instance a use case may require the transfer of ownership of the entity, but these cases are handled automatically on the server).
+          readOnly: true
+      additionalProperties: false
+      description: |
+        A model base class whose instances are bound to a specific tenant.  This model adds a tenantId to the base model class that it extends and is automatically set by the server.
+    common.v1.r0.a3.response.ApiLink:
+      type: object
+      properties:
+        href:
+          type: string
+          description: |
+            The URL at which the entity described by the link can be accessed.
+        rel:
+          type: string
+          description: |
+            A name that identifies the relationship of the link to the object that is returned by the URL.  The unique value of "self" identifies the URL for the object.
+      additionalProperties: false
+      description: |
+        A HATEOAS style link for the response.  Each link contains a user friendly name identifying the link and an address for retrieving the particular resource.
+    common.v1.r0.a3.config.Flag:
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: boolean
+          default: false
+      additionalProperties: false
+      description: |
+        Many entities in the Nutanix APIs carry flags.  This object captures all the flags associated with that entity through this object.  The field that hosts this type of object must have an attribute called x-bounded-map-keys that tells which flags are actually present for that entity.
+    common.v1.r0.a3.config.Message:
+      type: object
+      properties:
+        code:
+          type: string
+          description: |
+            A code that uniquely identifies a message.
+        message:
+          type: string
+          description: |
+            The description of the message.
+        locale:
+          type: string
+          description: |
+            The locale for the message description.
+          default: en_US
+        severity:
+          $ref: '#/components/schemas/common.v1.r0.a3.config.MessageSeverity'
+      additionalProperties: false
+    common.v1.r0.a3.config.KVPair:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The key of this key-value pair
+        value:
+          description: The value associated with the key for this key-value pair
+          oneOf:
+          - type: string
+          - type: integer
+          - type: boolean
+          - type: array
+            items:
+              type: string
+          - type: object
+            additionalProperties:
+              type: string
+      additionalProperties: false
+      description: |
+        A map describing a set of keys and their corresponding values.
+    common.v1.r0.a3.config.MessageSeverity:
+      type: string
+      description: |
+        The message severity.
+      enum:
+      - $UNKNOWN
+      - $REDACTED
+      - INFO
+      - WARNING
+      - ERROR
+    aiops.v4.r0.a2.stats.EntityDescriptorListApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/aiops.v4.r0.a2.stats.EntityDescriptor'
+          - $ref: '#/components/schemas/aiops.v4.r0.a2.error.ErrorResponse'
+      additionalProperties: false
+      description: "REST response for all response codes in API path /aiops/v4.0.a2/stats/sources/{extId}/entity-descriptors\
+        \ Get operation"
+    aiops.v4.r0.a2.stats.EntityDescriptor:
+      allOf:
+      - $ref: '#/components/schemas/common.v1.r0.a3.response.ExternalizableAbstractModel'
+      - type: object
+        properties:
+          entityType:
+            type: string
+            description: "Entity type of the data supported for a given source. For\
+              \ example VM, cluster etc."
+          source:
+            type: string
+            description: Source name for the vendors. For example 'nutanix'.
+          displayName:
+            type: string
+            description: Readable name for the entity.
+          parents:
+            maxItems: 5
+            minItems: 0
+            type: array
+            description: Parent entity types for the given entity.
+            items:
+              $ref: '#/components/schemas/aiops.v4.r0.a2.stats.EntityDescriptor'
+          metrics:
+            maxItems: 100
+            type: array
+            items:
+              $ref: '#/components/schemas/aiops.v4.r0.a2.stats.MetricDescriptor'
+        additionalProperties: false
+    aiops.v4.r0.a2.stats.MetricDescriptor:
+      type: object
+      properties:
+        isAttribute:
+          type: boolean
+          description: Indicates whether it is an attribute or not.
+        isAttributePersistedAsTimeSeries:
+          type: boolean
+          description: Indicator to specify whether the attribute should be persisted
+            as time series data or not.
+        name:
+          type: string
+          description: Name of the metric.
+        displayName:
+          type: string
+          description: Readable name for the entity.
+        valueType:
+          $ref: '#/components/schemas/aiops.v4.r0.a2.stats.ValueType'
+        valueRange:
+          $ref: '#/components/schemas/aiops.v4.r0.a2.stats.ValueRange'
+        defaultValue:
+          type: string
+          description: Default value of the metric.
+        unit:
+          type: string
+          description: Unit for the metric.
+        deprecation:
+          $ref: '#/components/schemas/aiops.v4.r0.a2.stats.DeprecationModel'
+        samplingIntervalSecs:
+          type: integer
+          description: The interval value is used to resample the queried time series
+            data by using down_sampling_operator operator. The default is 86400 seconds.
+        downsamplingOperator:
+          $ref: '#/components/schemas/common.v1.r0.a3.stats.DownSamplingOperator'
+        additionalProperties:
+          maxItems: 100
+          type: array
+          description: "Additional properties for metric descriptor definition. Like\
+            \ anomaly metric, alert metric and search UI metric."
+          items:
+            $ref: '#/components/schemas/common.v1.r0.a3.config.KVPair'
+      additionalProperties: false
+    aiops.v4.r0.a2.stats.ValueType:
+      type: string
+      description: Data type of the values for the metric.
+      enum:
+      - $UNKNOWN
+      - $REDACTED
+      - BOOL
+      - INT
+      - DOUBLE
+      - STRING
+      - BOOL_LIST
+      - INT_LIST
+      - DOUBLE_LIST
+      - STRING_LIST
+      x-enumDescriptions:
+        STRING_LIST: Value is a list of strings.
+        BOOL: Value is boolean.
+        STRING: Value is string.
+        DOUBLE_LIST: Value is a list of doubles.
+        DOUBLE: Value is double.
+        INT: Value is integer.
+        BOOL_LIST: Value is a list of booleans.
+        INT_LIST: Value is a list of integers.
+    aiops.v4.r0.a2.stats.ValueRange:
+      type: object
+      properties:
+        min:
+          type: number
+          format: double
+        max:
+          type: number
+          format: double
+      additionalProperties: false
+      description: Range of the values for the metric.
+    aiops.v4.r0.a2.stats.DeprecationModel:
+      type: object
+      properties:
+        deprecatedVersion:
+          type: string
+          description: Deprecated after the version.
+        deprecatedDate:
+          type: string
+          description: Deprecated after the date.
+        deprecatedBy:
+          type: string
+          description: Represents the deprecation name of the attribute.
+        deprecatedReason:
+          type: string
+          description: Represents the reason for the deprecation.
+      additionalProperties: false
+      description: An abstract representation of an object which has the deprecated
+        information.
+    aiops.v4.r0.a2.error.ErrorResponse:
+      type: object
+      properties:
+        error:
+          oneOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/aiops.v4.r0.a2.error.AppMessage'
+          - $ref: '#/components/schemas/aiops.v4.r0.a2.error.SchemaValidationError'
+      additionalProperties: false
+      description: This schema is auto-generated by the Open API Dev Platform as REST
+        response for 4xx and 5xx error responses.
+    aiops.v4.r0.a2.error.AppMessage:
+      type: object
+      properties:
+        message:
+          type: string
+        severity:
+          $ref: '#/components/schemas/common.v1.r0.a3.config.MessageSeverity'
+        code:
+          type: string
+        locale:
+          type: string
+          description: The locale for the message description.
+          default: en_US
+        errorGroup:
+          type: string
+        argumentsMap:
+          type: object
+          additionalProperties:
+            type: string
+      additionalProperties: false
+      description: This schema is generated from AppMessage.java
+    aiops.v4.r0.a2.error.MessageSeverity:
+      type: string
+      description: Enum schema MessageSeverity
+      enum:
+      - $UNKNOWN
+      - $REDACTED
+      - INFO
+      - WARNING
+      - ERROR
+      x-codegen-hint:
+        $any:
+        - type: entity-identifier
+          properties:
+            identifiers:
+            - value: $UNKNOWN
+              index: 201
+            - value: $REDACTED
+              index: 202
+            - value: INFO
+              index: 203
+            - value: WARNING
+              index: 204
+            - value: ERROR
+              index: 205
+    aiops.v4.r0.a2.error.SchemaValidationError:
+      type: object
+      properties:
+        timestamp:
+          type: string
+        statusCode:
+          type: integer
+        error:
+          type: string
+        path:
+          type: string
+        validationErrorMessages:
+          type: array
+          items:
+            $ref: '#/components/schemas/aiops.v4.r0.a2.error.SchemaValidationErrorMessage'
+      additionalProperties: false
+      description: This schema is generated from SchemaValidationError.java
+    aiops.v4.r0.a2.error.SchemaValidationErrorMessage:
+      type: object
+      properties:
+        location:
+          type: string
+        message:
+          type: string
+        attributePath:
+          type: string
+      additionalProperties: false
+      description: This schema is generated from SchemaValidationErrorMessage.java
+  securitySchemes:
+    basicAuthScheme:
+      type: http
+      scheme: basic

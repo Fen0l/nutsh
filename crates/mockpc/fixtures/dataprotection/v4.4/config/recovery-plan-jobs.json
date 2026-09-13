@@ -1,0 +1,23 @@
+[
+  {
+    "$objectType": "dataprotection.v4.config.RecoveryPlanJob",
+    "extId": "a9b8c7d6-0000-4000-8000-000000000701",
+    "name": "failover-test-04",
+    "actionType": "TEST_FAILOVER",
+    "status": "SUCCEEDED",
+    "percentageComplete": 100,
+    "startTime": "2026-09-05T07:00:00Z",
+    "endTime": "2026-09-05T07:12:00Z",
+    "recoveryPlanExtId": "d5e6f708-0000-4000-8000-000000000601"
+  },
+  {
+    "$objectType": "dataprotection.v4.config.RecoveryPlanJob",
+    "extId": "a9b8c7d6-0000-4000-8000-000000000702",
+    "name": "failover-test-03",
+    "actionType": "PLANNED_FAILOVER",
+    "status": "FAILED",
+    "percentageComplete": 40,
+    "startTime": "2026-09-03T10:00:00Z",
+    "recoveryPlanExtId": "d5e6f708-0000-4000-8000-000000000602"
+  }
+]

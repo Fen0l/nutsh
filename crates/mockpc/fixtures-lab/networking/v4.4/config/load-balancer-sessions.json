@@ -1,0 +1,107 @@
+[
+  {
+    "$objectType": "networking.v4.config.LoadBalancerSession",
+    "extId": "88b38e9d-35e8-4034-9c63-802289c0a646",
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "08f0dcd1-3a70-57a1-b84b-97d8e7b270fc",
+      "ownerUserName": "ownerUserName-59acbb2c"
+    },
+    "name": "name-0b169974",
+    "vpcReference": "e3794f39-2ddd-4b4b-92dd-37c403776378",
+    "listener": {
+      "$objectType": "networking.v4.config.Listener",
+      "virtualIP": {
+        "$objectType": "networking.v4.config.VirtualIP",
+        "subnetReference": "6f8d7777-7575-4bcf-b498-1740e117c218",
+        "assignmentType": "DYNAMIC",
+        "ipAddress": {
+          "$objectType": "common.v1.config.IPAddress",
+          "ipv4": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "203.0.113.213",
+            "prefixLength": 32
+          }
+        }
+      },
+      "protocol": "TCP",
+      "portRanges": [
+        {
+          "$objectType": "networking.v4.config.PortRange",
+          "startPort": 22,
+          "endPort": 22
+        }
+      ]
+    },
+    "targetsConfig": {
+      "$objectType": "networking.v4.config.Target",
+      "nicTargets": [
+        {
+          "vmReference": "cfcb30f1-5e32-4566-7d77-e27bd236c73c",
+          "$objectType": "networking.v4.config.NicTarget",
+          "virtualNicReference": "f8981617-5ec1-4d43-97c1-cd356d8170af",
+          "port": 22,
+          "health": "HEALTHY"
+        },
+        {
+          "vmReference": "dfcada3a-359b-4fb2-5e82-e7f1bf5318e8",
+          "virtualNicReference": "5a0c0305-9ad2-4c78-a305-f23558b01ee0",
+          "port": 22,
+          "health": "UNHEALTHY"
+        }
+      ]
+    },
+    "healthCheckConfig": {
+      "$objectType": "networking.v4.config.HealthCheck",
+      "intervalSecs": 5,
+      "timeoutSecs": 2,
+      "successThreshold": 3,
+      "failureThreshold": 3
+    }
+  },
+  {
+    "$objectType": "networking.v4.config.LoadBalancerSession",
+    "extId": "d7c6cdc6-f360-4de7-8d18-f2e402789af4",
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "08f0dcd1-3a70-57a1-b84b-97d8e7b270fc",
+      "ownerUserName": "ownerUserName-59acbb2c"
+    },
+    "name": "name-ce45f3aa",
+    "vpcReference": "e3794f39-2ddd-4b4b-92dd-37c403776378",
+    "listener": {
+      "$objectType": "networking.v4.config.Listener",
+      "virtualIP": {
+        "$objectType": "networking.v4.config.VirtualIP",
+        "subnetReference": "6f8d7777-7575-4bcf-b498-1740e117c218",
+        "assignmentType": "DYNAMIC",
+        "ipAddress": {
+          "$objectType": "common.v1.config.IPAddress",
+          "ipv4": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "203.0.113.151",
+            "prefixLength": 32
+          }
+        }
+      },
+      "protocol": "TCP",
+      "portRanges": [
+        {
+          "$objectType": "networking.v4.config.PortRange",
+          "startPort": 22,
+          "endPort": 22
+        }
+      ]
+    },
+    "targetsConfig": {
+      "$objectType": "networking.v4.config.Target"
+    },
+    "healthCheckConfig": {
+      "$objectType": "networking.v4.config.HealthCheck",
+      "intervalSecs": 5,
+      "timeoutSecs": 2,
+      "successThreshold": 3,
+      "failureThreshold": 3
+    }
+  }
+]

@@ -1,0 +1,61 @@
+[
+  {
+    "$objectType": "iam.v4.authz.Role",
+    "extId": "2b7c8d90-0000-4000-8000-000000000701",
+    "displayName": "Prism Admin",
+    "description": "everything but tenancy",
+    "clientName": "Prism",
+    "isSystemDefined": true,
+    "operations": [
+      "2b7c8d90-0000-4000-8000-000000000801",
+      "2b7c8d90-0000-4000-8000-000000000802",
+      "2b7c8d90-0000-4000-8000-000000000803"
+    ],
+    "accessibleClients": ["Prism", "Cluster Management", "Virtual Machine Management"],
+    "accessibleClientsCount": 3,
+    "accessibleEntityTypes": ["Cluster", "AHV VM", "Host"],
+    "accessibleEntityTypesCount": 182,
+    "assignedUsersCount": 1,
+    "assignedUserGroupsCount": 0,
+    "createdTime": "2026-01-04T10:00:00Z",
+    "lastUpdatedTime": "2026-01-04T10:00:00Z"
+  },
+  {
+    "$objectType": "iam.v4.authz.Role",
+    "extId": "2b7c8d90-0000-4000-8000-000000000702",
+    "displayName": "Prism Viewer",
+    "description": "read-only across the fleet",
+    "clientName": "Prism",
+    "isSystemDefined": true,
+    "operations": [
+      "2b7c8d90-0000-4000-8000-000000000801",
+      "2b7c8d90-0000-4000-8000-000000000802"
+    ],
+    "accessibleClients": ["Prism", "Cluster Management"],
+    "accessibleClientsCount": 2,
+    "accessibleEntityTypes": ["Cluster", "Host"],
+    "accessibleEntityTypesCount": 176,
+    "assignedUsersCount": 2,
+    "assignedUserGroupsCount": 1,
+    "createdTime": "2026-01-04T10:00:00Z",
+    "lastUpdatedTime": "2026-01-04T10:00:00Z"
+  },
+  {
+    "$objectType": "iam.v4.authz.Role",
+    "extId": "2b7c8d90-0000-4000-8000-000000000703",
+    "displayName": "lab-operator",
+    "description": "power actions on the example VMs and nothing else",
+    "clientName": "Identity and Access Management",
+    "isSystemDefined": false,
+    "operations": ["2b7c8d90-0000-4000-8000-000000000801"],
+    "accessibleClients": ["Virtual Machine Management"],
+    "accessibleClientsCount": 1,
+    "accessibleEntityTypes": ["AHV VM"],
+    "accessibleEntityTypesCount": 12,
+    "assignedUsersCount": 1,
+    "assignedUserGroupsCount": 0,
+    "createdBy": "2b7c8d90-0000-4000-8000-000000000601",
+    "createdTime": "2026-03-11T14:00:00Z",
+    "lastUpdatedTime": "2026-08-20T09:05:00Z"
+  }
+]

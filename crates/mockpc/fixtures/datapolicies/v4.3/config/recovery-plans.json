@@ -1,0 +1,18 @@
+[
+  {
+    "$objectType": "datapolicies.v4.config.RecoveryPlan",
+    "extId": "d5e6f708-0000-4000-8000-000000000601",
+    "name": "dr-tier1",
+    "isProtectionPausedPostFailover": false,
+    "primaryLocation": { "domainManagerExtId": "18b7c9d0-4e1a-4c2b-9f3d-000000000030" },
+    "recoveryLocation": { "domainManagerExtId": "8f4d1c92-0000-4000-8000-000000000401" }
+  },
+  {
+    "$objectType": "datapolicies.v4.config.RecoveryPlan",
+    "extId": "d5e6f708-0000-4000-8000-000000000602",
+    "name": "dr-tier2",
+    "isProtectionPausedPostFailover": false,
+    "primaryLocation": { "domainManagerExtId": "18b7c9d0-4e1a-4c2b-9f3d-000000000030" },
+    "recoveryLocation": { "domainManagerExtId": "8f4d1c92-0000-4000-8000-000000000401" }
+  }
+]

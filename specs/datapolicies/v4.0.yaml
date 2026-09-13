@@ -1,0 +1,2013 @@
+openapi: 3.0.1
+info:
+  title: Nutanix Data Policies APIs
+  description: Manage Policies for Disaster Recovery and Storage.
+  version: "4.0"
+  x-logo:
+    altText: Data Policies Logo
+    url: https://developers.nutanix.com/api/v1/namespaces/datapolicies/images/datapolicies-logo-img.svg
+  x-repo-name: datapolicies
+servers:
+- url: "https://{pc-ip}:9440/api"
+security:
+- basicAuthScheme: []
+- apiKeyAuthScheme: []
+tags:
+- name: ProtectionPolicies
+  description: "A protection policy automates the process of creating and replicating\
+    \ recovery points.\n  When a protection policy is configured to create local recovery\
+    \ points, the request includes:<br>\n    - The recovery point objective<br> \n\
+    \    - The retention policy<br>\n    - The entities that need to be protected\
+    \ by specifying the categories in which they are tagged.<br>\n  To automate recovery\
+    \ point replication, you can also specify the replication location(s).\n"
+  x-displayName: Protection Policies
+paths:
+  /datapolicies/v4.0/config/protection-policies:
+    get:
+      tags:
+      - ProtectionPolicies
+      summary: List protection policies
+      description: "List the protection policies defined on the system. This operation\
+        \ supports filtering, sorting, selection and pagination. "
+      operationId: listProtectionPolicies
+      parameters:
+      - name: $page
+        in: query
+        description: |
+          A URL query parameter that specifies the page number of the result set. It must be a positive integer between 0 and the maximum number of pages that are available for that resource. Any number out of this range might lead to no results.
+        required: false
+        style: form
+        explode: false
+        schema:
+          minimum: 0
+          type: integer
+          description: |
+            A URL query parameter that specifies the page number of the result set. It must be a positive integer between 0 and the maximum number of pages that are available for that resource. Any number out of this range might lead to no results.
+          format: int32
+          default: 0
+      - name: $limit
+        in: query
+        description: |
+          A URL query parameter that specifies the total number of records returned in the result set.  Must be a positive integer between 1 and 100. Any number out of this range will lead to a validation error. If the limit is not provided, a default value of 50 records will be returned in the result set.
+        required: false
+        style: form
+        explode: false
+        schema:
+          maximum: 100
+          minimum: 1
+          type: integer
+          description: |
+            A URL query parameter that specifies the total number of records returned in the result set.  Must be a positive integer between 1 and 100. Any number out of this range will lead to a validation error. If the limit is not provided, a default value of 50 records will be returned in the result set.
+          format: int32
+          default: 50
+      - name: $filter
+        in: query
+        description: |
+          A URL query parameter that allows clients to filter a collection of resources. The expression specified with $filter is evaluated for each resource in the collection, and only items where the expression evaluates to true are included in the response. Expression specified with the $filter must conform to the [OData V4.01](https://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html) URL conventions.
+          For example, filter '$filter=name eq 'karbon-ntnx-1.0' would filter the result on cluster name 'karbon-ntnx1.0', filter '$filter=startswith(name, 'C')' would filter on cluster name starting with 'C'.
+          The filter can be applied to the following fields:
+          - extId
+          - name
+          - ownerExtId
+          - replicationLocations/domainManagerExtId
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: $orderby
+        in: query
+        description: |
+          A URL query parameter that allows clients to specify the sort criteria for the returned list of objects. Resources can be sorted in ascending order using asc or descending order using desc. If asc or desc are not specified, the resources will be sorted in ascending order by default. For example, '$orderby=templateName desc' would get all templates sorted by templateName in descending order.
+          The orderby can be applied to the following fields:
+          - name
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: $select
+        in: query
+        description: |
+          A URL query parameter that allows clients to request a specific set of properties for each entity or complex type. Expression specified with the $select must conform to the [OData V4.01](https://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html) URL conventions. If a $select expression consists of a single select item that is an asterisk (i.e., *), then all properties on the matching resource will be returned.
+          - extId
+          - name
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: The request is processed.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/datapolicies.v4.0.config.ProtectionPolicy'
+                additionalProperties: false
+                description: REST response for all response codes in API path /datapolicies/v4.0/config/protection-policies
+                  Get operation
+        "4XX":
+          description: Client error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/datapolicies.v4.0.error.ErrorResponse'
+                additionalProperties: false
+                description: REST response for all response codes in API path /datapolicies/v4.0/config/protection-policies
+                  Get operation
+        "5XX":
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/datapolicies.v4.0.error.ErrorResponse'
+                additionalProperties: false
+                description: REST response for all response codes in API path /datapolicies/v4.0/config/protection-policies
+                  Get operation
+      x-permissions:
+        deploymentList:
+        - ON_PREM
+        - CLOUD
+        operationName: View Protection Policy
+        roleList:
+        - Prism Admin
+        - Prism Viewer
+        - Super Admin
+        - Disaster Recovery Admin
+        - Disaster Recovery Viewer
+      x-rate-limit:
+      - type: xsmall
+        count: 2
+        timeUnit: seconds
+      - type: small
+        count: 2
+        timeUnit: seconds
+      - type: large
+        count: 2
+        timeUnit: seconds
+      - type: xlarge
+        count: 2
+        timeUnit: seconds
+      x-supported-versions:
+      - product: PC
+        version: "2024.3"
+      - product: PE
+        version: "7.0"
+      x-code-samples:
+      - lang: Java
+        source: "\npackage sample;\n\nimport com.nutanix.dpo.java.client.ApiClient;\n\
+          import com.nutanix.dpo.java.client.api.ProtectionPoliciesApi;\nimport com.nutanix.dp1.dpo.datapolicies.v4.config.ListProtectionPoliciesApiResponse;\n\
+          import org.springframework.web.client.RestClientException;\n\npublic class\
+          \ JavaSdkSample {\n    public static void main(String[] args) {\n      \
+          \  // Configure the client\n        ApiClient apiClient = new ApiClient();\n\
+          \        // IPv4/IPv6 address or FQDN of the cluster\n        apiClient.setHost(\"\
+          localhost\");\n        // Port to which to connect to\n        apiClient.setPort(9440);\n\
+          \        // Interval in ms to use during retry attempts\n        apiClient.setRetryInterval(5000);\n\
+          \        // Max retry attempts while reconnecting on a loss of connection\n\
+          \        apiClient.setMaxRetryAttempts(5);\n        // UserName to connect\
+          \ to the cluster\n        String username = \"username\";\n        // Password\
+          \ to connect to the cluster\n        String password = \"password\";\n \
+          \       apiClient.setUsername(username);\n        apiClient.setPassword(password);\n\
+          \n        // Please add authorization information here if needed.\n    \
+          \    ProtectionPoliciesApi protectionPoliciesApi = new ProtectionPoliciesApi(apiClient);\n\
+          \n        \n        int page = 0;\n        \n        int limit = 50;\n\n\
+          \        try {\n            ListProtectionPoliciesApiResponse listProtectionPoliciesApiResponse\
+          \ = protectionPoliciesApi.listProtectionPolicies(page, limit, null, null,\
+          \ null);\n            System.out.println(listProtectionPoliciesApiResponse.toString());\n\
+          \n        } catch (RestClientException ex) {\n            System.out.println(ex.getMessage());\n\
+          \        }\n    }\n}\n"
+      - lang: JavaScript
+        source: |2
+
+          import { ApiClient, ProtectionPoliciesApi } from "@nutanix-api/datapolicies-js-client";
+
+          // Configure the client
+          let apiClientInstance = new ApiClient();
+          // IPv4/IPv6 address or FQDN of the cluster
+          apiClientInstance.host = 'localhost';
+          // Port to which to connect to
+          apiClientInstance.port = '9440';
+          // Max retry attempts while reconnecting on a loss of connection
+          apiClientInstance.maxRetryAttempts = 5;
+          // Interval in ms to use during retry attempts
+          apiClientInstance.retryInterval = 5000;
+          // UserName to connect to the cluster
+          apiClientInstance.username = 'username';
+          // Password to connect to the cluster
+          apiClientInstance.password = 'password';
+          // Please add authorization information here if needed.
+          let protectionPoliciesApi = new ProtectionPoliciesApi(apiClientInstance);
+
+          function sample() {
+
+
+              // Construct Optional Parameters
+              var opts = {};
+              opts["$page"] = 0;
+              opts["$limit"] = 50;
+              opts["$filter"] = "string_sample_data";
+              opts["$orderby"] = "string_sample_data";
+              opts["$select"] = "string_sample_data";
+
+
+
+
+              protectionPoliciesApi.listProtectionPolicies(opts).then(({data, response}) => {
+                  console.log(`API returned the following status code: ${response.status}`);
+                  console.log(data.getData());
+              }).catch((error) => {
+                  console.log(`Error is: ${error}`);
+              });
+
+          }
+          sample()
+      - lang: Python
+        source: "\nimport ntnx_datapolicies_py_client\n\nif __name__ == \"__main__\"\
+          :\n    # Configure the client\n    config = ntnx_datapolicies_py_client.Configuration()\n\
+          \    # IPv4/IPv6 address or FQDN of the cluster\n    config.host = \"localhost\"\
+          \n    # Port to which to connect to\n    config.port = 9440\n    # Max retry\
+          \ attempts while reconnecting on a loss of connection\n    config.max_retry_attempts\
+          \ = 3\n    # Backoff factor to use during retry attempts\n    config.backoff_factor\
+          \ = 3\n    # UserName to connect to the cluster\n    config.username = \"\
+          username\"\n    # Password to connect to the cluster\n    config.password\
+          \ = \"password\"\n    # Please add authorization information here if needed.\n\
+          \    client = ntnx_datapolicies_py_client.ApiClient(configuration=config)\n\
+          \    protection_policies_api = ntnx_datapolicies_py_client.ProtectionPoliciesApi(api_client=client)\n\
+          \    \n    page = 0\n    \n    limit = 50\n\n\n    try:\n        api_response\
+          \ = protection_policies_api.list_protection_policies(_page=page, _limit=limit)\n\
+          \        print(api_response)\n    except ntnx_datapolicies_py_client.rest.ApiException\
+          \ as e:\n        print(e)\n\n"
+      - lang: Go
+        source: "\npackage main\n\nimport (\n    \"fmt\"\n    \"time\"\n    \"github.com/nutanix/ntnx-api-golang-clients/datapolicies-go-client/v4/api\"\
+          \n    \"github.com/nutanix/ntnx-api-golang-clients/datapolicies-go-client/v4/client\"\
+          \n    import1 \"github.com/nutanix/ntnx-api-golang-clients/datapolicies-go-client/v4/models/datapolicies/v4/config\"\
+          \n)\n\nvar (\n    ApiClientInstance *client.ApiClient\n    ProtectionPoliciesApiInstance\
+          \ *api.ProtectionPoliciesApi\n)\n\nfunc main() {\n    ApiClientInstance\
+          \ = client.NewApiClient()\n    // IPv4/IPv6 address or FQDN of the cluster\n\
+          \    ApiClientInstance.Host = \"localhost\"\n    // Port to which to connect\
+          \ to\n    ApiClientInstance.Port = 9440\n    // Interval in ms to use during\
+          \ retry attempts\n    ApiClientInstance.RetryInterval = 5 * time.Second\n\
+          \    // Max retry attempts while reconnecting on a loss of connection\n\
+          \    ApiClientInstance.MaxRetryAttempts = 5\n    // UserName to connect\
+          \ to the cluster\n    ApiClientInstance.Username = \"username\"\n    //\
+          \ Password to connect to the cluster\n    ApiClientInstance.Password = \"\
+          password\"\n    // Please add authorization information here if needed.\n\
+          \    ProtectionPoliciesApiInstance = api.NewProtectionPoliciesApi(ApiClientInstance)\n\
+          \n    \n    page_ := 0\n    \n    limit_ := 50\n\n\n    response, error\
+          \ := ProtectionPoliciesApiInstance.ListProtectionPolicies(&page_, &limit_,\
+          \ nil, nil, nil)\n    if error != nil {\n        fmt.Println(error)\n  \
+          \      return\n    }\n    data, _ := response.GetData().([]import1.ProtectionPolicy)\n\
+          \    fmt.Println(data)\n\n}\n\n"
+      - lang: cURL
+        source: |2+
+
+          curl --request GET \
+               --url "https://{pc-ip}:9440/api/datapolicies/v4.0/config/protection-policies?$filter=string_sample_data&$limit=50&$orderby=string_sample_data&$page=0&$select=string_sample_data" \
+               --header 'Accept: application/json' \
+               --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+
+      - lang: Wget
+        source: |2
+
+
+          wget --verbose \
+               --method GET \
+               --header 'Accept: application/json' \
+          --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+          - "https://{pc-ip}:9440/api/datapolicies/v4.0/config/protection-policies?$filter=string_sample_data&$limit=50&$orderby=string_sample_data&$page=0&$select=string_sample_data"
+    post:
+      tags:
+      - ProtectionPolicies
+      summary: Create a protection policy
+      description: |
+        Creates a protection policy to automate the recovery point creation and replication process.
+      operationId: createProtectionPolicy
+      parameters:
+      - name: NTNX-Request-Id
+        in: header
+        description: |
+          A unique identifier that is associated with each request. The provided value must be opaque and preferably in Universal Unique Identifier (UUID) format. This identifier is also used as an idempotence token for safely retrying requests in case of network errors. All the supported Nutanix API clients add this auto-generated request identifier to each request.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+          example: e1d6456d-f4e6-448e-ac61-b1cb95226fc7
+      requestBody:
+        description: "A protection policy automates the process of creating and replicating\
+          \ recovery points. When a protection policy is configured to create local\
+          \ recovery points, the request includes:<br> - The recovery point objective<br>\
+          \ - The retention policy<br> - The entities that need to be protected by\
+          \ specifying the categories in which they are tagged.<br> To automate recovery\
+          \ point replication, you can also specify the replication location(s). Only\
+          \ users with legacy roles, such as admin, can create a Cross-AZ protection\
+          \ policy."
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/datapolicies.v4.0.config.ProtectionPolicy'
+        required: true
+      responses:
+        "202":
+          description: Returns the task ID corresponding to the protection policy
+            create request.
+          headers:
+            Location:
+              style: simple
+              explode: false
+              schema:
+                pattern: "^((http[s]?):\\/)?\\/?([^:\\/\\s]+)((\\/\\w+)*(:[0-9]+)*?\\\
+                  /)([\\w\\-\\.]+[^#?\\s]+)(.*)?(#[\\w\\-]+)?$"
+                type: string
+                description: Indicates the target of a redirection or the URL of a
+                  newly created resource.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/prism.v4.0.config.TaskReference'
+                additionalProperties: false
+                description: REST response for all response codes in API path /datapolicies/v4.0/config/protection-policies
+                  Post operation
+        "4XX":
+          description: Client error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/datapolicies.v4.0.error.ErrorResponse'
+                additionalProperties: false
+                description: REST response for all response codes in API path /datapolicies/v4.0/config/protection-policies
+                  Post operation
+        "5XX":
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/datapolicies.v4.0.error.ErrorResponse'
+                additionalProperties: false
+                description: REST response for all response codes in API path /datapolicies/v4.0/config/protection-policies
+                  Post operation
+      x-permissions:
+        deploymentList:
+        - ON_PREM
+        - CLOUD
+        operationName: Create Protection Policy
+        roleList:
+        - Account Owner
+        - Administrator
+        - Prism Admin
+        - Super Admin
+        - Disaster Recovery Admin
+      x-rate-limit:
+      - type: xsmall
+        count: 2
+        timeUnit: seconds
+      - type: small
+        count: 2
+        timeUnit: seconds
+      - type: large
+        count: 2
+        timeUnit: seconds
+      - type: xlarge
+        count: 2
+        timeUnit: seconds
+      x-supported-versions:
+      - product: PC
+        version: "2024.3"
+      - product: PE
+        version: "7.0"
+      x-code-samples:
+      - lang: Java
+        source: |2
+
+          package sample;
+
+          import com.nutanix.dpo.java.client.ApiClient;
+          import com.nutanix.dpo.java.client.api.ProtectionPoliciesApi;
+          import com.nutanix.dp1.dpo.datapolicies.v4.config.ProtectionPolicy;
+          import com.nutanix.dp1.dpo.datapolicies.v4.config.CreateProtectionPolicyApiResponse;
+          import org.springframework.web.client.RestClientException;
+
+          public class JavaSdkSample {
+              public static void main(String[] args) {
+                  // Configure the client
+                  ApiClient apiClient = new ApiClient();
+                  // IPv4/IPv6 address or FQDN of the cluster
+                  apiClient.setHost("localhost");
+                  // Port to which to connect to
+                  apiClient.setPort(9440);
+                  // Interval in ms to use during retry attempts
+                  apiClient.setRetryInterval(5000);
+                  // Max retry attempts while reconnecting on a loss of connection
+                  apiClient.setMaxRetryAttempts(5);
+                  // UserName to connect to the cluster
+                  String username = "username";
+                  // Password to connect to the cluster
+                  String password = "password";
+                  apiClient.setUsername(username);
+                  apiClient.setPassword(password);
+
+                  // Please add authorization information here if needed.
+                  ProtectionPoliciesApi protectionPoliciesApi = new ProtectionPoliciesApi(apiClient);
+
+                  ProtectionPolicy protectionPolicy = new ProtectionPolicy();
+
+                  // ProtectionPolicy object initializations here...
+                  protectionPolicy.setName("Protection_Policy_1");  // required field
+                  protectionPolicy.setReplicationConfigurations(new ArrayList<>());  // required field
+                  protectionPolicy.setReplicationLocations(new ArrayList<>());  // required field
+
+                  try {
+                      CreateProtectionPolicyApiResponse createProtectionPolicyApiResponse = protectionPoliciesApi.createProtectionPolicy(protectionPolicy);
+                      System.out.println(createProtectionPolicyApiResponse.toString());
+
+                  } catch (RestClientException ex) {
+                      System.out.println(ex.getMessage());
+                  }
+              }
+          }
+      - lang: JavaScript
+        source: |2
+
+          import { ApiClient, ProtectionPoliciesApi, ProtectionPolicy } from "@nutanix-api/datapolicies-js-client";
+
+          // Configure the client
+          let apiClientInstance = new ApiClient();
+          // IPv4/IPv6 address or FQDN of the cluster
+          apiClientInstance.host = 'localhost';
+          // Port to which to connect to
+          apiClientInstance.port = '9440';
+          // Max retry attempts while reconnecting on a loss of connection
+          apiClientInstance.maxRetryAttempts = 5;
+          // Interval in ms to use during retry attempts
+          apiClientInstance.retryInterval = 5000;
+          // UserName to connect to the cluster
+          apiClientInstance.username = 'username';
+          // Password to connect to the cluster
+          apiClientInstance.password = 'password';
+          // Please add authorization information here if needed.
+          let protectionPoliciesApi = new ProtectionPoliciesApi(apiClientInstance);
+
+          function sample() {
+              let protectionPolicy = new ProtectionPolicy();
+
+              // ProtectionPolicy object initializations here...
+              protectionPolicy.setName("Protection_Policy_1");  // required field
+              protectionPolicy.setReplicationConfigurations([]);  // required field
+              protectionPolicy.setReplicationLocations([]);  // required field
+
+
+
+
+
+
+              protectionPoliciesApi.createProtectionPolicy(protectionPolicy).then(({data, response}) => {
+                  console.log(`API returned the following status code: ${response.status}`);
+                  console.log(data.getData());
+              }).catch((error) => {
+                  console.log(`Error is: ${error}`);
+              });
+
+          }
+          sample()
+      - lang: Python
+        source: |2+
+
+          import ntnx_datapolicies_py_client
+
+          if __name__ == "__main__":
+              # Configure the client
+              config = ntnx_datapolicies_py_client.Configuration()
+              # IPv4/IPv6 address or FQDN of the cluster
+              config.host = "localhost"
+              # Port to which to connect to
+              config.port = 9440
+              # Max retry attempts while reconnecting on a loss of connection
+              config.max_retry_attempts = 3
+              # Backoff factor to use during retry attempts
+              config.backoff_factor = 3
+              # UserName to connect to the cluster
+              config.username = "username"
+              # Password to connect to the cluster
+              config.password = "password"
+              # Please add authorization information here if needed.
+              client = ntnx_datapolicies_py_client.ApiClient(configuration=config)
+              protection_policies_api = ntnx_datapolicies_py_client.ProtectionPoliciesApi(api_client=client)
+              protectionPolicy = ntnx_datapolicies_py_client.ProtectionPolicy()
+
+              # ProtectionPolicy object initializations here...
+              protectionPolicy.name = "Protection_Policy_1"  # required field
+              protectionPolicy.replication_configurations = []  # required field
+              protectionPolicy.replication_locations = []  # required field
+
+
+              try:
+                  api_response = protection_policies_api.create_protection_policy(body=protectionPolicy)
+                  print(api_response)
+              except ntnx_datapolicies_py_client.rest.ApiException as e:
+                  print(e)
+
+      - lang: Go
+        source: |2+
+
+          package main
+
+          import (
+              "fmt"
+              "time"
+              "github.com/nutanix/ntnx-api-golang-clients/datapolicies-go-client/v4/api"
+              "github.com/nutanix/ntnx-api-golang-clients/datapolicies-go-client/v4/client"
+              import1 "github.com/nutanix/ntnx-api-golang-clients/datapolicies-go-client/v4/models/datapolicies/v4/config"
+              import2 "github.com/nutanix/ntnx-api-golang-clients/datapolicies-go-client/v4/models/prism/v4/config"
+          )
+
+          var (
+              ApiClientInstance *client.ApiClient
+              ProtectionPoliciesApiInstance *api.ProtectionPoliciesApi
+          )
+
+          func main() {
+              ApiClientInstance = client.NewApiClient()
+              // IPv4/IPv6 address or FQDN of the cluster
+              ApiClientInstance.Host = "localhost"
+              // Port to which to connect to
+              ApiClientInstance.Port = 9440
+              // Interval in ms to use during retry attempts
+              ApiClientInstance.RetryInterval = 5 * time.Second
+              // Max retry attempts while reconnecting on a loss of connection
+              ApiClientInstance.MaxRetryAttempts = 5
+              // UserName to connect to the cluster
+              ApiClientInstance.Username = "username"
+              // Password to connect to the cluster
+              ApiClientInstance.Password = "password"
+              // Please add authorization information here if needed.
+              ProtectionPoliciesApiInstance = api.NewProtectionPoliciesApi(ApiClientInstance)
+
+              protectionPolicy := import1.NewProtectionPolicy()
+
+              // ProtectionPolicy object initializations here...
+
+
+
+              response, error := ProtectionPoliciesApiInstance.CreateProtectionPolicy(protectionPolicy)
+              if error != nil {
+                  fmt.Println(error)
+                  return
+              }
+              data, _ := response.GetData().(import2.TaskReference)
+              fmt.Println(data)
+
+          }
+
+      - lang: cURL
+        source: |2+
+
+          curl --request POST \
+               --url "https://{pc-ip}:9440/api/datapolicies/v4.0/config/protection-policies" \
+               --header 'Accept: application/json' \
+                        --header 'Content-Type: application/json' \
+                        --header 'NTNX-Request-Id: 3fa85f64-5717-4562-b3fc-2c963f66afa6' \
+               --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+                        --data {"tenantId":"string","extId":"string","links":[{"href":"string","rel":"string","$objectType":"common.v1.response.ApiLink"}],"name":"Protection_Policy_1","description":"Protectionpolicywithlinearretentionandreplication","replicationLocations":[{"label":"location_pc1","domainManagerExtId":"string","replicationSubLocation":{"clusterExtIds":["string"],"$objectType":"datapolicies.v4.config.NutanixCluster"},"isPrimary":true,"$objectType":"datapolicies.v4.config.ReplicationLocation"}],"replicationConfigurations":[{"sourceLocationLabel":"location_pc1","remoteLocationLabel":"location_pc2","schedule":{"recoveryPointType":"$UNKNOWN","recoveryPointObjectiveTimeSeconds":0,"retention":{"local":0,"remote":0,"$objectType":"datapolicies.v4.config.LinearRetention"},"startTime":"01h:00m","syncReplicationAutoSuspendTimeoutSeconds":0,"$objectType":"datapolicies.v4.config.Schedule"},"$objectType":"datapolicies.v4.config.ReplicationConfiguration"}],"categoryIds":["string"],"isApprovalPolicyNeeded":true,"ownerExtId":"string","$objectType":"datapolicies.v4.config.ProtectionPolicy"} \
+
+      - lang: Wget
+        source: |2
+
+
+          wget --verbose \
+               --method POST \
+               --header 'Accept: application/json' \
+                   --header 'Content-Type: application/json' \
+                   --header 'NTNX-Request-Id: 3fa85f64-5717-4562-b3fc-2c963f66afa6' \
+          --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+                   --body-data {"tenantId":"string","extId":"string","links":[{"href":"string","rel":"string","$objectType":"common.v1.response.ApiLink"}],"name":"Protection_Policy_1","description":"Protectionpolicywithlinearretentionandreplication","replicationLocations":[{"label":"location_pc1","domainManagerExtId":"string","replicationSubLocation":{"clusterExtIds":["string"],"$objectType":"datapolicies.v4.config.NutanixCluster"},"isPrimary":true,"$objectType":"datapolicies.v4.config.ReplicationLocation"}],"replicationConfigurations":[{"sourceLocationLabel":"location_pc1","remoteLocationLabel":"location_pc2","schedule":{"recoveryPointType":"$UNKNOWN","recoveryPointObjectiveTimeSeconds":0,"retention":{"local":0,"remote":0,"$objectType":"datapolicies.v4.config.LinearRetention"},"startTime":"01h:00m","syncReplicationAutoSuspendTimeoutSeconds":0,"$objectType":"datapolicies.v4.config.Schedule"},"$objectType":"datapolicies.v4.config.ReplicationConfiguration"}],"categoryIds":["string"],"isApprovalPolicyNeeded":true,"ownerExtId":"string","$objectType":"datapolicies.v4.config.ProtectionPolicy"} \
+          - "https://{pc-ip}:9440/api/datapolicies/v4.0/config/protection-policies"
+  /datapolicies/v4.0/config/protection-policies/{extId}:
+    get:
+      tags:
+      - ProtectionPolicies
+      summary: Get a protection policy
+      description: Fetches the protection policy identified by an external identifier.
+      operationId: getProtectionPolicyById
+      parameters:
+      - name: extId
+        in: path
+        description: The external identifier of the protection policy.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+          example: cd71d88e-29f1-4755-bb6c-d260a9420024
+      responses:
+        "200":
+          description: Returns the requested protection policy.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/datapolicies.v4.0.config.ProtectionPolicy'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /datapolicies/v4.0/config/protection-policies/{extId}\
+                  \ Get operation"
+        "4XX":
+          description: Client error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/datapolicies.v4.0.error.ErrorResponse'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /datapolicies/v4.0/config/protection-policies/{extId}\
+                  \ Get operation"
+        "5XX":
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/datapolicies.v4.0.error.ErrorResponse'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /datapolicies/v4.0/config/protection-policies/{extId}\
+                  \ Get operation"
+      x-permissions:
+        deploymentList:
+        - ON_PREM
+        - CLOUD
+        operationName: View Protection Policy
+        roleList:
+        - Prism Admin
+        - Prism Viewer
+        - Super Admin
+        - Disaster Recovery Admin
+        - Disaster Recovery Viewer
+      x-rate-limit:
+      - type: xsmall
+        count: 2
+        timeUnit: seconds
+      - type: small
+        count: 2
+        timeUnit: seconds
+      - type: large
+        count: 2
+        timeUnit: seconds
+      - type: xlarge
+        count: 2
+        timeUnit: seconds
+      x-supported-versions:
+      - product: PC
+        version: "2024.3"
+      - product: PE
+        version: "7.0"
+      x-code-samples:
+      - lang: Java
+        source: "\npackage sample;\n\nimport com.nutanix.dpo.java.client.ApiClient;\n\
+          import com.nutanix.dpo.java.client.api.ProtectionPoliciesApi;\nimport com.nutanix.dp1.dpo.datapolicies.v4.config.GetProtectionPolicyApiResponse;\n\
+          import org.springframework.web.client.RestClientException;\n\npublic class\
+          \ JavaSdkSample {\n    public static void main(String[] args) {\n      \
+          \  // Configure the client\n        ApiClient apiClient = new ApiClient();\n\
+          \        // IPv4/IPv6 address or FQDN of the cluster\n        apiClient.setHost(\"\
+          localhost\");\n        // Port to which to connect to\n        apiClient.setPort(9440);\n\
+          \        // Interval in ms to use during retry attempts\n        apiClient.setRetryInterval(5000);\n\
+          \        // Max retry attempts while reconnecting on a loss of connection\n\
+          \        apiClient.setMaxRetryAttempts(5);\n        // UserName to connect\
+          \ to the cluster\n        String username = \"username\";\n        // Password\
+          \ to connect to the cluster\n        String password = \"password\";\n \
+          \       apiClient.setUsername(username);\n        apiClient.setPassword(password);\n\
+          \n        // Please add authorization information here if needed.\n    \
+          \    ProtectionPoliciesApi protectionPoliciesApi = new ProtectionPoliciesApi(apiClient);\n\
+          \n        \n        String extId = \"3aCFBcD1-BA75-E5ec-DaAc-7f8F35c8D8Bf\"\
+          ;\n\n        try {\n            GetProtectionPolicyApiResponse getProtectionPolicyApiResponse\
+          \ = protectionPoliciesApi.getProtectionPolicyById(extId);\n            System.out.println(getProtectionPolicyApiResponse.toString());\n\
+          \n        } catch (RestClientException ex) {\n            System.out.println(ex.getMessage());\n\
+          \        }\n    }\n}\n"
+      - lang: JavaScript
+        source: "\nimport { ApiClient, ProtectionPoliciesApi } from \"@nutanix-api/datapolicies-js-client\"\
+          ;\n\n// Configure the client\nlet apiClientInstance = new ApiClient();\n\
+          // IPv4/IPv6 address or FQDN of the cluster\napiClientInstance.host = 'localhost';\n\
+          // Port to which to connect to\napiClientInstance.port = '9440';\n// Max\
+          \ retry attempts while reconnecting on a loss of connection\napiClientInstance.maxRetryAttempts\
+          \ = 5;\n// Interval in ms to use during retry attempts\napiClientInstance.retryInterval\
+          \ = 5000;\n// UserName to connect to the cluster\napiClientInstance.username\
+          \ = 'username';\n// Password to connect to the cluster\napiClientInstance.password\
+          \ = 'password';\n// Please add authorization information here if needed.\n\
+          let protectionPoliciesApi = new ProtectionPoliciesApi(apiClientInstance);\n\
+          \nfunction sample() {\n\n    \n    let extId = \"FfC8eaa3-C911-d95b-a925-92aA14443D77\"\
+          ;\n\n\n\n\n\n    protectionPoliciesApi.getProtectionPolicyById(extId).then(({data,\
+          \ response}) => {\n        console.log(`API returned the following status\
+          \ code: ${response.status}`);\n        console.log(data.getData());\n  \
+          \  }).catch((error) => {\n        console.log(`Error is: ${error}`);\n \
+          \   });\n\n}\nsample()\n"
+      - lang: Python
+        source: "\nimport ntnx_datapolicies_py_client\n\nif __name__ == \"__main__\"\
+          :\n    # Configure the client\n    config = ntnx_datapolicies_py_client.Configuration()\n\
+          \    # IPv4/IPv6 address or FQDN of the cluster\n    config.host = \"localhost\"\
+          \n    # Port to which to connect to\n    config.port = 9440\n    # Max retry\
+          \ attempts while reconnecting on a loss of connection\n    config.max_retry_attempts\
+          \ = 3\n    # Backoff factor to use during retry attempts\n    config.backoff_factor\
+          \ = 3\n    # UserName to connect to the cluster\n    config.username = \"\
+          username\"\n    # Password to connect to the cluster\n    config.password\
+          \ = \"password\"\n    # Please add authorization information here if needed.\n\
+          \    client = ntnx_datapolicies_py_client.ApiClient(configuration=config)\n\
+          \    protection_policies_api = ntnx_datapolicies_py_client.ProtectionPoliciesApi(api_client=client)\n\
+          \    \n    ext_id = \"AFC08Fa3-C12c-Cbef-225A-6E3Dc49c1bDB\"\n\n\n    try:\n\
+          \        api_response = protection_policies_api.get_protection_policy_by_id(extId=ext_id)\n\
+          \        print(api_response)\n    except ntnx_datapolicies_py_client.rest.ApiException\
+          \ as e:\n        print(e)\n\n"
+      - lang: Go
+        source: "\npackage main\n\nimport (\n    \"fmt\"\n    \"time\"\n    \"github.com/nutanix/ntnx-api-golang-clients/datapolicies-go-client/v4/api\"\
+          \n    \"github.com/nutanix/ntnx-api-golang-clients/datapolicies-go-client/v4/client\"\
+          \n    import1 \"github.com/nutanix/ntnx-api-golang-clients/datapolicies-go-client/v4/models/datapolicies/v4/config\"\
+          \n)\n\nvar (\n    ApiClientInstance *client.ApiClient\n    ProtectionPoliciesApiInstance\
+          \ *api.ProtectionPoliciesApi\n)\n\nfunc main() {\n    ApiClientInstance\
+          \ = client.NewApiClient()\n    // IPv4/IPv6 address or FQDN of the cluster\n\
+          \    ApiClientInstance.Host = \"localhost\"\n    // Port to which to connect\
+          \ to\n    ApiClientInstance.Port = 9440\n    // Interval in ms to use during\
+          \ retry attempts\n    ApiClientInstance.RetryInterval = 5 * time.Second\n\
+          \    // Max retry attempts while reconnecting on a loss of connection\n\
+          \    ApiClientInstance.MaxRetryAttempts = 5\n    // UserName to connect\
+          \ to the cluster\n    ApiClientInstance.Username = \"username\"\n    //\
+          \ Password to connect to the cluster\n    ApiClientInstance.Password = \"\
+          password\"\n    // Please add authorization information here if needed.\n\
+          \    ProtectionPoliciesApiInstance = api.NewProtectionPoliciesApi(ApiClientInstance)\n\
+          \n    \n    extId := \"d5bFFcaF-CFDD-Ff3c-db3c-DA8abC9D2Dcc\"\n\n\n    response,\
+          \ error := ProtectionPoliciesApiInstance.GetProtectionPolicyById(&extId)\n\
+          \    if error != nil {\n        fmt.Println(error)\n        return\n   \
+          \ }\n    data, _ := response.GetData().(import1.ProtectionPolicy)\n    fmt.Println(data)\n\
+          \n}\n\n"
+      - lang: cURL
+        source: |2+
+
+          curl --request GET \
+               --url "https://{pc-ip}:9440/api/datapolicies/v4.0/config/protection-policies/4CCdfCdE-2fBe-fDdb-CFAe-E2B4Ed5aABac" \
+               --header 'Accept: application/json' \
+               --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+
+      - lang: Wget
+        source: |2
+
+
+          wget --verbose \
+               --method GET \
+               --header 'Accept: application/json' \
+          --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+          - "https://{pc-ip}:9440/api/datapolicies/v4.0/config/protection-policies/5bAA6bdD-b9Fa-44dF-4Fad-0F42A2F2d036"
+    put:
+      tags:
+      - ProtectionPolicies
+      summary: Update a protection policy
+      description: Updates the protection policy identified by an external identifier.
+      operationId: updateProtectionPolicyById
+      parameters:
+      - name: extId
+        in: path
+        description: The external identifier of the protection policy.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+          example: 02da9cec-b6ec-4f2a-9323-e3c4ed63921d
+      - name: If-Match
+        in: header
+        description: "The If-Match request header makes the request conditional. When\
+          \ not provided, the server will respond with  an HTTP-428 (Precondition\
+          \ Required) response code indicating that the server requires the request\
+          \ to be conditional. The server will allow the successful completion of\
+          \ PUT and PATCH operations, if the resource matches the ETag value returned\
+          \ to the response of a GET operation. If the conditional does not match,\
+          \ then an HTTP-412 (Precondition Failed) response will be returned."
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: NTNX-Request-Id
+        in: header
+        description: |
+          A unique identifier that is associated with each request. The provided value must be opaque and preferably in Universal Unique Identifier (UUID) format. This identifier is also used as an idempotence token for safely retrying requests in case of network errors. All the supported Nutanix API clients add this auto-generated request identifier to each request.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+          example: dcbbdbe7-268b-4591-821e-9c9d114e9275
+      requestBody:
+        description: Updated protection policy identified by an external identifier.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/datapolicies.v4.0.config.ProtectionPolicy'
+        required: true
+      responses:
+        "202":
+          description: Returns task ID corresponding to the protection policy update
+            request.
+          headers:
+            Location:
+              style: simple
+              explode: false
+              schema:
+                pattern: "^((http[s]?):\\/)?\\/?([^:\\/\\s]+)((\\/\\w+)*(:[0-9]+)*?\\\
+                  /)([\\w\\-\\.]+[^#?\\s]+)(.*)?(#[\\w\\-]+)?$"
+                type: string
+                description: Indicates the target of a redirection or the URL of a
+                  newly created resource.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/prism.v4.0.config.TaskReference'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /datapolicies/v4.0/config/protection-policies/{extId}\
+                  \ Put operation"
+        "4XX":
+          description: Client error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/datapolicies.v4.0.error.ErrorResponse'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /datapolicies/v4.0/config/protection-policies/{extId}\
+                  \ Put operation"
+        "5XX":
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/datapolicies.v4.0.error.ErrorResponse'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /datapolicies/v4.0/config/protection-policies/{extId}\
+                  \ Put operation"
+      x-permissions:
+        deploymentList:
+        - ON_PREM
+        - CLOUD
+        operationName: Update Protection Policy
+        roleList:
+        - Account Owner
+        - Administrator
+        - Prism Admin
+        - Super Admin
+        - Disaster Recovery Admin
+      x-rate-limit:
+      - type: xsmall
+        count: 1
+        timeUnit: seconds
+      - type: small
+        count: 1
+        timeUnit: seconds
+      - type: large
+        count: 1
+        timeUnit: seconds
+      - type: xlarge
+        count: 1
+        timeUnit: seconds
+      x-supported-versions:
+      - product: PC
+        version: "2024.3"
+      - product: PE
+        version: "7.0"
+      x-code-samples:
+      - lang: Java
+        source: "\npackage sample;\n\nimport com.nutanix.dpo.java.client.ApiClient;\n\
+          import com.nutanix.dpo.java.client.api.ProtectionPoliciesApi;\nimport com.nutanix.dp1.dpo.datapolicies.v4.config.ProtectionPolicy;\n\
+          import com.nutanix.dp1.dpo.datapolicies.v4.config.GetProtectionPolicyApiResponse;\n\
+          import com.nutanix.dp1.dpo.datapolicies.v4.config.UpdateProtectionPolicyApiResponse;\n\
+          import org.springframework.web.client.RestClientException;\nimport java.util.HashMap;\n\
+          import org.apache.http.HttpHeaders;\n\npublic class JavaSdkSample {\n  \
+          \  public static void main(String[] args) {\n        // Configure the client\n\
+          \        ApiClient apiClient = new ApiClient();\n        // IPv4/IPv6 address\
+          \ or FQDN of the cluster\n        apiClient.setHost(\"localhost\");\n  \
+          \      // Port to which to connect to\n        apiClient.setPort(9440);\n\
+          \        // Interval in ms to use during retry attempts\n        apiClient.setRetryInterval(5000);\n\
+          \        // Max retry attempts while reconnecting on a loss of connection\n\
+          \        apiClient.setMaxRetryAttempts(5);\n        // UserName to connect\
+          \ to the cluster\n        String username = \"username\";\n        // Password\
+          \ to connect to the cluster\n        String password = \"password\";\n \
+          \       apiClient.setUsername(username);\n        apiClient.setPassword(password);\n\
+          \n        // Please add authorization information here if needed.\n    \
+          \    ProtectionPoliciesApi protectionPoliciesApi = new ProtectionPoliciesApi(apiClient);\n\
+          \n        ProtectionPolicy protectionPolicy = new ProtectionPolicy();\n\n\
+          \        // ProtectionPolicy object initializations here...\n        protectionPolicy.setName(\"\
+          Protection_Policy_1\");  // required field\n        protectionPolicy.setReplicationConfigurations(new\
+          \ ArrayList<>());  // required field\n        protectionPolicy.setReplicationLocations(new\
+          \ ArrayList<>());  // required field\n        \n        String extId = \"\
+          744E8ac8-EDFE-ce2b-2eaE-c3Ca1eb71Be8\";\n\n        // perform GET call\n\
+          \        GetProtectionPolicyApiResponse getResponse = null;\n        try\
+          \ {\n            getResponse = protectionPoliciesApi.getProtectionPolicyById(extId);\n\
+          \        } catch(RestClientException ex) {\n            System.out.println(ex.getMessage());\n\
+          \        }\n        // Extract E-Tag Header\n        String eTag = ApiClient.getEtag(getResponse);\n\
+          \        // initialize/change parameters for update\n        HashMap<String,\
+          \ Object> opts = new HashMap<>();\n        opts.put(HttpHeaders.IF_MATCH,\
+          \ eTag);\n        try {\n            UpdateProtectionPolicyApiResponse updateProtectionPolicyApiResponse\
+          \ = protectionPoliciesApi.updateProtectionPolicyById(extId, protectionPolicy,\
+          \ opts);\n            System.out.println(updateProtectionPolicyApiResponse.toString());\n\
+          \n        } catch (RestClientException ex) {\n            System.out.println(ex.getMessage());\n\
+          \        }\n    }\n}\n"
+      - lang: JavaScript
+        source: "\nimport { ApiClient, ProtectionPoliciesApi, ProtectionPolicy, GetProtectionPolicyApiResponse\
+          \ } from \"@nutanix-api/datapolicies-js-client\";\n\n// Configure the client\n\
+          let apiClientInstance = new ApiClient();\n// IPv4/IPv6 address or FQDN of\
+          \ the cluster\napiClientInstance.host = 'localhost';\n// Port to which to\
+          \ connect to\napiClientInstance.port = '9440';\n// Max retry attempts while\
+          \ reconnecting on a loss of connection\napiClientInstance.maxRetryAttempts\
+          \ = 5;\n// Interval in ms to use during retry attempts\napiClientInstance.retryInterval\
+          \ = 5000;\n// UserName to connect to the cluster\napiClientInstance.username\
+          \ = 'username';\n// Password to connect to the cluster\napiClientInstance.password\
+          \ = 'password';\n// Please add authorization information here if needed.\n\
+          let protectionPoliciesApi = new ProtectionPoliciesApi(apiClientInstance);\n\
+          \nfunction sample() {\n    let protectionPolicy = new ProtectionPolicy();\n\
+          \n    // ProtectionPolicy object initializations here...\n    protectionPolicy.setName(\"\
+          Protection_Policy_1\");  // required field\n    protectionPolicy.setReplicationConfigurations([]);\
+          \  // required field\n    protectionPolicy.setReplicationLocations([]);\
+          \  // required field\n\n    \n    let extId = \"dEDb6E4D-5f44-18a5-bbc6-fafF5CFCDf5F\"\
+          ;\n\n\n    // Perform Get call\n    protectionPoliciesApi.getProtectionPolicyById(extId).then(({data,\
+          \ response}) => {\n        console.log(`API returned the following status\
+          \ code: ${response.status}`);\n        // Extract E-Tag Header\n       \
+          \ let etagValue = ApiClient.getEtag(data);\n\n        protectionPoliciesApi.updateProtectionPolicyById(extId,\
+          \ protectionPolicy, {\"If-Match\" : etagValue}).then(({data, response})\
+          \ => {\n            console.log(`API returned the following status code:\
+          \ ${response.status}`);\n            console.log(data.getData());\n    \
+          \    }).catch((error) => {\n            console.log(`Error is: ${error}`);\n\
+          \        });\n    });\n\n}\nsample()\n"
+      - lang: Python
+        source: "\nimport ntnx_datapolicies_py_client\n\nif __name__ == \"__main__\"\
+          :\n    # Configure the client\n    config = ntnx_datapolicies_py_client.Configuration()\n\
+          \    # IPv4/IPv6 address or FQDN of the cluster\n    config.host = \"localhost\"\
+          \n    # Port to which to connect to\n    config.port = 9440\n    # Max retry\
+          \ attempts while reconnecting on a loss of connection\n    config.max_retry_attempts\
+          \ = 3\n    # Backoff factor to use during retry attempts\n    config.backoff_factor\
+          \ = 3\n    # UserName to connect to the cluster\n    config.username = \"\
+          username\"\n    # Password to connect to the cluster\n    config.password\
+          \ = \"password\"\n    # Please add authorization information here if needed.\n\
+          \    client = ntnx_datapolicies_py_client.ApiClient(configuration=config)\n\
+          \    protection_policies_api = ntnx_datapolicies_py_client.ProtectionPoliciesApi(api_client=client)\n\
+          \    protectionPolicy = ntnx_datapolicies_py_client.ProtectionPolicy()\n\
+          \n    # ProtectionPolicy object initializations here...\n    protectionPolicy.name\
+          \ = \"Protection_Policy_1\"  # required field\n    protectionPolicy.replication_configurations\
+          \ = []  # required field\n    protectionPolicy.replication_locations = []\
+          \  # required field\n    \n    ext_id = \"fddE0cba-2edD-afbc-0Fcd-Fa26Ff02CFAA\"\
+          \n\n    try:\n        api_response = protection_policies_api.get_protection_policy_by_id(extId=ext_id)\n\
+          \    except ntnx_datapolicies_py_client.rest.ApiException as e:\n      \
+          \  print(e)\n    # Extract E-Tag Header\n    etag_value = ntnx_datapolicies_py_client.ApiClient.get_etag(api_response)\n\
+          \n    try:\n        api_response = protection_policies_api.update_protection_policy_by_id(extId=ext_id,\
+          \ body=protectionPolicy, if_match=etag_value)\n        print(api_response)\n\
+          \    except ntnx_datapolicies_py_client.rest.ApiException as e:\n      \
+          \  print(e)\n\n"
+      - lang: Go
+        source: "\npackage main\n\nimport (\n    \"fmt\"\n    \"time\"\n    \"github.com/nutanix/ntnx-api-golang-clients/datapolicies-go-client/v4/api\"\
+          \n    \"github.com/nutanix/ntnx-api-golang-clients/datapolicies-go-client/v4/client\"\
+          \n    import1 \"github.com/nutanix/ntnx-api-golang-clients/datapolicies-go-client/v4/models/datapolicies/v4/config\"\
+          \n    import2 \"github.com/nutanix/ntnx-api-golang-clients/datapolicies-go-client/v4/models/prism/v4/config\"\
+          \n)\n\nvar (\n    ApiClientInstance *client.ApiClient\n    ProtectionPoliciesApiInstance\
+          \ *api.ProtectionPoliciesApi\n)\n\nfunc main() {\n    ApiClientInstance\
+          \ = client.NewApiClient()\n    // IPv4/IPv6 address or FQDN of the cluster\n\
+          \    ApiClientInstance.Host = \"localhost\"\n    // Port to which to connect\
+          \ to\n    ApiClientInstance.Port = 9440\n    // Interval in ms to use during\
+          \ retry attempts\n    ApiClientInstance.RetryInterval = 5 * time.Second\n\
+          \    // Max retry attempts while reconnecting on a loss of connection\n\
+          \    ApiClientInstance.MaxRetryAttempts = 5\n    // UserName to connect\
+          \ to the cluster\n    ApiClientInstance.Username = \"username\"\n    //\
+          \ Password to connect to the cluster\n    ApiClientInstance.Password = \"\
+          password\"\n    // Please add authorization information here if needed.\n\
+          \    ProtectionPoliciesApiInstance = api.NewProtectionPoliciesApi(ApiClientInstance)\n\
+          \n    protectionPolicy := import1.NewProtectionPolicy()\n\n    // ProtectionPolicy\
+          \ object initializations here...\n\n    \n    extId := \"8dcCeB7b-BB6A-5eD3-bf6f-dF14cCB8E4d2\"\
+          \n\n    getResponse, err := ProtectionPoliciesApiInstance.GetProtectionPolicyById(&extId)\n\
+          \    if err != nil {\n        fmt.Println(err)\n        return\n    }\n\n\
+          \    // Extract E-Tag Header\n    etagValue := ApiClientInstance.GetEtag(getResponse)\n\
+          \n    args := make(map[string] interface{})\n    args[\"If-Match\"] = etagValue\n\
+          \n    response, error := ProtectionPoliciesApiInstance.UpdateProtectionPolicyById(&extId,\
+          \ protectionPolicy, args)\n    if error != nil {\n        fmt.Println(error)\n\
+          \        return\n    }\n    data, _ := response.GetData().(import2.TaskReference)\n\
+          \    fmt.Println(data)\n\n}\n\n"
+      - lang: cURL
+        source: |2+
+
+          curl --request PUT \
+               --url "https://{pc-ip}:9440/api/datapolicies/v4.0/config/protection-policies/869ceA98-Ed70-EaA1-18FF-B3eEEAbcec2D" \
+               --header 'Accept: application/json' \
+                        --header 'Content-Type: application/json' \
+                        --header 'If-Match: string_sample_data' \
+                        --header 'NTNX-Request-Id: 3fa85f64-5717-4562-b3fc-2c963f66afa6' \
+               --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+                        --data {"tenantId":"string","extId":"string","links":[{"href":"string","rel":"string","$objectType":"common.v1.response.ApiLink"}],"name":"Protection_Policy_1","description":"Protectionpolicywithlinearretentionandreplication","replicationLocations":[{"label":"location_pc1","domainManagerExtId":"string","replicationSubLocation":{"clusterExtIds":["string"],"$objectType":"datapolicies.v4.config.NutanixCluster"},"isPrimary":true,"$objectType":"datapolicies.v4.config.ReplicationLocation"}],"replicationConfigurations":[{"sourceLocationLabel":"location_pc1","remoteLocationLabel":"location_pc2","schedule":{"recoveryPointType":"$UNKNOWN","recoveryPointObjectiveTimeSeconds":0,"retention":{"local":0,"remote":0,"$objectType":"datapolicies.v4.config.LinearRetention"},"startTime":"01h:00m","syncReplicationAutoSuspendTimeoutSeconds":0,"$objectType":"datapolicies.v4.config.Schedule"},"$objectType":"datapolicies.v4.config.ReplicationConfiguration"}],"categoryIds":["string"],"isApprovalPolicyNeeded":true,"ownerExtId":"string","$objectType":"datapolicies.v4.config.ProtectionPolicy"} \
+
+      - lang: Wget
+        source: |2
+
+
+          wget --verbose \
+               --method PUT \
+               --header 'Accept: application/json' \
+                   --header 'Content-Type: application/json' \
+                   --header 'If-Match: string_sample_data' \
+                   --header 'NTNX-Request-Id: 3fa85f64-5717-4562-b3fc-2c963f66afa6' \
+          --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+                   --body-data {"tenantId":"string","extId":"string","links":[{"href":"string","rel":"string","$objectType":"common.v1.response.ApiLink"}],"name":"Protection_Policy_1","description":"Protectionpolicywithlinearretentionandreplication","replicationLocations":[{"label":"location_pc1","domainManagerExtId":"string","replicationSubLocation":{"clusterExtIds":["string"],"$objectType":"datapolicies.v4.config.NutanixCluster"},"isPrimary":true,"$objectType":"datapolicies.v4.config.ReplicationLocation"}],"replicationConfigurations":[{"sourceLocationLabel":"location_pc1","remoteLocationLabel":"location_pc2","schedule":{"recoveryPointType":"$UNKNOWN","recoveryPointObjectiveTimeSeconds":0,"retention":{"local":0,"remote":0,"$objectType":"datapolicies.v4.config.LinearRetention"},"startTime":"01h:00m","syncReplicationAutoSuspendTimeoutSeconds":0,"$objectType":"datapolicies.v4.config.Schedule"},"$objectType":"datapolicies.v4.config.ReplicationConfiguration"}],"categoryIds":["string"],"isApprovalPolicyNeeded":true,"ownerExtId":"string","$objectType":"datapolicies.v4.config.ProtectionPolicy"} \
+          - "https://{pc-ip}:9440/api/datapolicies/v4.0/config/protection-policies/CdEcD25A-1cFE-fB6D-DBAf-adBa40cf25C9"
+    delete:
+      tags:
+      - ProtectionPolicies
+      summary: Delete a protection policy
+      description: Deletes the protection policy identified by an external identifier.
+      operationId: deleteProtectionPolicyById
+      parameters:
+      - name: extId
+        in: path
+        description: The external identifier of the protection policy.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+          example: 8e620006-a551-4c25-ac24-72abb7ff82c8
+      - name: NTNX-Request-Id
+        in: header
+        description: |
+          A unique identifier that is associated with each request. The provided value must be opaque and preferably in Universal Unique Identifier (UUID) format. This identifier is also used as an idempotence token for safely retrying requests in case of network errors. All the supported Nutanix API clients add this auto-generated request identifier to each request.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+          example: 1d65a224-36f2-41ae-b343-ccc6507c45de
+      responses:
+        "202":
+          description: Returns task ID corresponding to the protection policy delete
+            request.
+          headers:
+            Location:
+              style: simple
+              explode: false
+              schema:
+                pattern: "^((http[s]?):\\/)?\\/?([^:\\/\\s]+)((\\/\\w+)*(:[0-9]+)*?\\\
+                  /)([\\w\\-\\.]+[^#?\\s]+)(.*)?(#[\\w\\-]+)?$"
+                type: string
+                description: Indicates the target of a redirection or the URL of a
+                  newly created resource.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/prism.v4.0.config.TaskReference'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /datapolicies/v4.0/config/protection-policies/{extId}\
+                  \ Delete operation"
+        "4XX":
+          description: Client error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/datapolicies.v4.0.error.ErrorResponse'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /datapolicies/v4.0/config/protection-policies/{extId}\
+                  \ Delete operation"
+        "5XX":
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/datapolicies.v4.0.error.ErrorResponse'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /datapolicies/v4.0/config/protection-policies/{extId}\
+                  \ Delete operation"
+      x-permissions:
+        deploymentList:
+        - ON_PREM
+        - CLOUD
+        operationName: Delete Protection Policy
+        roleList:
+        - Account Owner
+        - Administrator
+        - Prism Admin
+        - Super Admin
+        - Disaster Recovery Admin
+      x-rate-limit:
+      - type: xsmall
+        count: 2
+        timeUnit: seconds
+      - type: small
+        count: 2
+        timeUnit: seconds
+      - type: large
+        count: 2
+        timeUnit: seconds
+      - type: xlarge
+        count: 2
+        timeUnit: seconds
+      x-supported-versions:
+      - product: PC
+        version: "2024.3"
+      - product: PE
+        version: "7.0"
+      x-code-samples:
+      - lang: Java
+        source: "\npackage sample;\n\nimport com.nutanix.dpo.java.client.ApiClient;\n\
+          import com.nutanix.dpo.java.client.api.ProtectionPoliciesApi;\nimport com.nutanix.dp1.dpo.datapolicies.v4.config.DeleteProtectionPolicyApiResponse;\n\
+          import org.springframework.web.client.RestClientException;\n\npublic class\
+          \ JavaSdkSample {\n    public static void main(String[] args) {\n      \
+          \  // Configure the client\n        ApiClient apiClient = new ApiClient();\n\
+          \        // IPv4/IPv6 address or FQDN of the cluster\n        apiClient.setHost(\"\
+          localhost\");\n        // Port to which to connect to\n        apiClient.setPort(9440);\n\
+          \        // Interval in ms to use during retry attempts\n        apiClient.setRetryInterval(5000);\n\
+          \        // Max retry attempts while reconnecting on a loss of connection\n\
+          \        apiClient.setMaxRetryAttempts(5);\n        // UserName to connect\
+          \ to the cluster\n        String username = \"username\";\n        // Password\
+          \ to connect to the cluster\n        String password = \"password\";\n \
+          \       apiClient.setUsername(username);\n        apiClient.setPassword(password);\n\
+          \n        // Please add authorization information here if needed.\n    \
+          \    ProtectionPoliciesApi protectionPoliciesApi = new ProtectionPoliciesApi(apiClient);\n\
+          \n        \n        String extId = \"93dCEBfB-Bbe5-ABaF-E4AC-BEd3DaD79bdE\"\
+          ;\n\n        try {\n            DeleteProtectionPolicyApiResponse deleteProtectionPolicyApiResponse\
+          \ = protectionPoliciesApi.deleteProtectionPolicyById(extId);\n         \
+          \   System.out.println(deleteProtectionPolicyApiResponse.toString());\n\n\
+          \        } catch (RestClientException ex) {\n            System.out.println(ex.getMessage());\n\
+          \        }\n    }\n}\n"
+      - lang: JavaScript
+        source: "\nimport { ApiClient, ProtectionPoliciesApi } from \"@nutanix-api/datapolicies-js-client\"\
+          ;\n\n// Configure the client\nlet apiClientInstance = new ApiClient();\n\
+          // IPv4/IPv6 address or FQDN of the cluster\napiClientInstance.host = 'localhost';\n\
+          // Port to which to connect to\napiClientInstance.port = '9440';\n// Max\
+          \ retry attempts while reconnecting on a loss of connection\napiClientInstance.maxRetryAttempts\
+          \ = 5;\n// Interval in ms to use during retry attempts\napiClientInstance.retryInterval\
+          \ = 5000;\n// UserName to connect to the cluster\napiClientInstance.username\
+          \ = 'username';\n// Password to connect to the cluster\napiClientInstance.password\
+          \ = 'password';\n// Please add authorization information here if needed.\n\
+          let protectionPoliciesApi = new ProtectionPoliciesApi(apiClientInstance);\n\
+          \nfunction sample() {\n\n    \n    let extId = \"E7EDC5BE-beEf-C50B-aDEd-82FEf3Ac9A21\"\
+          ;\n\n\n\n\n\n    protectionPoliciesApi.deleteProtectionPolicyById(extId).then(({data,\
+          \ response}) => {\n        console.log(`API returned the following status\
+          \ code: ${response.status}`);\n        console.log(data.getData());\n  \
+          \  }).catch((error) => {\n        console.log(`Error is: ${error}`);\n \
+          \   });\n\n}\nsample()\n"
+      - lang: Python
+        source: "\nimport ntnx_datapolicies_py_client\n\nif __name__ == \"__main__\"\
+          :\n    # Configure the client\n    config = ntnx_datapolicies_py_client.Configuration()\n\
+          \    # IPv4/IPv6 address or FQDN of the cluster\n    config.host = \"localhost\"\
+          \n    # Port to which to connect to\n    config.port = 9440\n    # Max retry\
+          \ attempts while reconnecting on a loss of connection\n    config.max_retry_attempts\
+          \ = 3\n    # Backoff factor to use during retry attempts\n    config.backoff_factor\
+          \ = 3\n    # UserName to connect to the cluster\n    config.username = \"\
+          username\"\n    # Password to connect to the cluster\n    config.password\
+          \ = \"password\"\n    # Please add authorization information here if needed.\n\
+          \    client = ntnx_datapolicies_py_client.ApiClient(configuration=config)\n\
+          \    protection_policies_api = ntnx_datapolicies_py_client.ProtectionPoliciesApi(api_client=client)\n\
+          \    \n    ext_id = \"d5AdbfCB-Ffe6-bfc6-Acc7-1E2Be5ed4c5c\"\n\n\n    try:\n\
+          \        api_response = protection_policies_api.delete_protection_policy_by_id(extId=ext_id)\n\
+          \        print(api_response)\n    except ntnx_datapolicies_py_client.rest.ApiException\
+          \ as e:\n        print(e)\n\n"
+      - lang: Go
+        source: "\npackage main\n\nimport (\n    \"fmt\"\n    \"time\"\n    \"github.com/nutanix/ntnx-api-golang-clients/datapolicies-go-client/v4/api\"\
+          \n    \"github.com/nutanix/ntnx-api-golang-clients/datapolicies-go-client/v4/client\"\
+          \n    import1 \"github.com/nutanix/ntnx-api-golang-clients/datapolicies-go-client/v4/models/prism/v4/config\"\
+          \n)\n\nvar (\n    ApiClientInstance *client.ApiClient\n    ProtectionPoliciesApiInstance\
+          \ *api.ProtectionPoliciesApi\n)\n\nfunc main() {\n    ApiClientInstance\
+          \ = client.NewApiClient()\n    // IPv4/IPv6 address or FQDN of the cluster\n\
+          \    ApiClientInstance.Host = \"localhost\"\n    // Port to which to connect\
+          \ to\n    ApiClientInstance.Port = 9440\n    // Interval in ms to use during\
+          \ retry attempts\n    ApiClientInstance.RetryInterval = 5 * time.Second\n\
+          \    // Max retry attempts while reconnecting on a loss of connection\n\
+          \    ApiClientInstance.MaxRetryAttempts = 5\n    // UserName to connect\
+          \ to the cluster\n    ApiClientInstance.Username = \"username\"\n    //\
+          \ Password to connect to the cluster\n    ApiClientInstance.Password = \"\
+          password\"\n    // Please add authorization information here if needed.\n\
+          \    ProtectionPoliciesApiInstance = api.NewProtectionPoliciesApi(ApiClientInstance)\n\
+          \n    \n    extId := \"Ba63Ae7d-AFaa-Dd88-abEC-a50Cc12Ea8B9\"\n\n\n    response,\
+          \ error := ProtectionPoliciesApiInstance.DeleteProtectionPolicyById(&extId)\n\
+          \    if error != nil {\n        fmt.Println(error)\n        return\n   \
+          \ }\n    data, _ := response.GetData().(import1.TaskReference)\n    fmt.Println(data)\n\
+          \n}\n\n"
+      - lang: cURL
+        source: |2+
+
+          curl --request DELETE \
+               --url "https://{pc-ip}:9440/api/datapolicies/v4.0/config/protection-policies/6f4D8f3d-b79A-5d83-3aBb-EFcddEaCe9EB" \
+               --header 'Accept: application/json' \
+                        --header 'NTNX-Request-Id: 3fa85f64-5717-4562-b3fc-2c963f66afa6' \
+               --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+
+      - lang: Wget
+        source: |2
+
+
+          wget --verbose \
+               --method DELETE \
+               --header 'Accept: application/json' \
+                   --header 'NTNX-Request-Id: 3fa85f64-5717-4562-b3fc-2c963f66afa6' \
+          --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+          - "https://{pc-ip}:9440/api/datapolicies/v4.0/config/protection-policies/Cdb5Ddaa-dc8e-aa0d-eE5c-ccc24CeBa6CF"
+components:
+  schemas:
+    datapolicies.v4.0.config.ListProtectionPoliciesApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/datapolicies.v4.0.config.ProtectionPolicy'
+          - $ref: '#/components/schemas/datapolicies.v4.0.error.ErrorResponse'
+      additionalProperties: false
+      description: REST response for all response codes in API path /datapolicies/v4.0/config/protection-policies
+        Get operation
+    datapolicies.v4.0.config.ProtectionPolicy:
+      title: Protection policy.
+      description: "A protection policy automates the process of creating and replicating\
+        \ recovery points. When a protection policy is configured to create local\
+        \ recovery points, the request includes:<br> - The recovery point objective<br>\
+        \ - The retention policy<br> - The entities that need to be protected by specifying\
+        \ the categories in which they are tagged.<br> To automate recovery point\
+        \ replication, you can also specify the replication location(s). Only users\
+        \ with legacy roles, such as admin, can create a Cross-AZ protection policy."
+      allOf:
+      - $ref: '#/components/schemas/common.v1.0.response.ExternalizableAbstractModel'
+      - required:
+        - name
+        - replicationConfigurations
+        - replicationLocations
+        type: object
+        properties:
+          name:
+            maxLength: 256
+            type: string
+            description: Name of the protection policy.
+            example: Protection_Policy_1
+          description:
+            maxLength: 1000
+            type: string
+            description: Description of the protection policy.
+            example: Protection policy with linear retention and replication
+          replicationLocations:
+            maxItems: 3
+            minItems: 1
+            type: array
+            description: Indicates all the locations participating in the protection
+              policy. You can specify up to 3 replication locations.
+            items:
+              $ref: '#/components/schemas/datapolicies.v4.0.config.ReplicationLocation'
+          replicationConfigurations:
+            maxItems: 6
+            minItems: 1
+            type: array
+            description: Specifies the connections between various replication locations
+              and its schedule. Connections from both source-to-target and target-to-source
+              should be specified.
+            items:
+              $ref: '#/components/schemas/datapolicies.v4.0.config.ReplicationConfiguration'
+          categoryIds:
+            maxItems: 10
+            minItems: 1
+            type: array
+            description: Specifies the list of external identifiers of categories
+              that must be added to the protection policy. This policy will protect
+              any VM or volume group associated with this category.
+            items:
+              pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+              type: string
+              example: f0f57e6a-8999-4cbc-9137-cd9269744292
+          isApprovalPolicyNeeded:
+            type: boolean
+            description: "Manual deletion of recovery points created by this policy\
+              \ can be driven through a multi-party authorization workflow. Hence,\
+              \ multiple approvers would be required to grant approvals for the delete\
+              \ operation."
+            readOnly: true
+            example: true
+          ownerExtId:
+            pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+            type: string
+            description: External identifier of the owner of the protection policy.
+            readOnly: true
+            example: c7fe41eb-45d0-4927-80cf-149713adc2f5
+        additionalProperties: false
+    datapolicies.v4.0.config.CreateProtectionPolicyApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+        data:
+          required:
+          - $objectType
+          properties:
+            $objectType:
+              type: string
+              example: prism.v4.config.TaskReference
+          oneOf:
+          - $ref: '#/components/schemas/prism.v4.0.config.TaskReference'
+          - $ref: '#/components/schemas/datapolicies.v4.0.error.ErrorResponse'
+      additionalProperties: false
+      description: REST response for all response codes in API path /datapolicies/v4.0/config/protection-policies
+        Post operation
+    datapolicies.v4.0.config.ReplicationLocation:
+      title: Replication locations.
+      required:
+      - domainManagerExtId
+      - label
+      type: object
+      properties:
+        label:
+          maxLength: 1000
+          type: string
+          description: This is a unique user defined label of the replication location.
+            It is used to identify the location in the replication configurations.
+          example: location_pc1
+        domainManagerExtId:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+          description: External identifier of the domain manager.
+          example: 08533bd5-5cf4-4cb9-b565-064fec63bfa6
+        replicationSubLocation:
+          required:
+          - $objectType
+          properties:
+            $objectType:
+              type: string
+              example: datapolicies.v4.config.NutanixCluster
+          description: Specifies the replication sublocations where recovery points
+            can be created or replicated.
+          oneOf:
+          - $ref: '#/components/schemas/datapolicies.v4.0.config.NutanixCluster'
+        isPrimary:
+          type: boolean
+          description: One of the locations must be specified as the primary location.
+            All the other locations must be connected to the primary location.
+          example: true
+      additionalProperties: false
+      description: Indicates all the locations participating in the protection policy.
+        You can specify up to 3 replication locations.
+    datapolicies.v4.0.config.ReplicationConfiguration:
+      title: Replication configuration.
+      required:
+      - schedule
+      - sourceLocationLabel
+      type: object
+      properties:
+        sourceLocationLabel:
+          maxLength: 1000
+          type: string
+          description: "Label of the source location from the replication locations\
+            \ list, where the entity is running. The location of type MST can not\
+            \ be specified as the replication source."
+          example: location_pc1
+        remoteLocationLabel:
+          maxLength: 1000
+          type: string
+          description: "Label of the source location from the replication locations\
+            \ list, where the entity will be replicated."
+          example: location_pc2
+        schedule:
+          $ref: '#/components/schemas/datapolicies.v4.0.config.Schedule'
+      additionalProperties: false
+      description: Specifies the connections between various replication locations
+        and its schedule. Connections from both source-to-target and target-to-source
+        should be specified.
+    datapolicies.v4.0.config.NutanixCluster:
+      title: Cluster ExtIds.
+      type: object
+      properties:
+        clusterExtIds:
+          maxItems: 200
+          minItems: 1
+          type: array
+          description: "List of Prism Element cluster external identifiers whose associated\
+            \ VMs and volume groups are protected. Only the primary location can have\
+            \ multiple clusters configured, while the other locations can specify\
+            \ only one cluster. Clusters must be specified for replication within\
+            \ the same Prism Central and cannot be specified for an MST type location.\
+            \ All clusters are considered if the cluster external identifier list\
+            \ is empty."
+          items:
+            pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+            type: string
+            example: c017e6d1-5d76-4c8c-82ff-a5e40b151acd
+      additionalProperties: false
+      description: "List of Prism Element cluster external identifiers whose associated\
+        \ VMs and volume groups are protected. Only the primary location can have\
+        \ multiple clusters configured, while the other locations can specify only\
+        \ one cluster. Clusters must be specified for replication within the same\
+        \ Prism Central and cannot be specified for an MST type location. All clusters\
+        \ are considered if the cluster external identifier list is empty."
+    datapolicies.v4.0.config.Schedule:
+      title: Schedule for protection.
+      required:
+      - recoveryPointObjectiveTimeSeconds
+      type: object
+      properties:
+        recoveryPointType:
+          $ref: '#/components/schemas/dataprotection.v4.0.common.RecoveryPointType'
+        recoveryPointObjectiveTimeSeconds:
+          minimum: 0
+          type: integer
+          description: "The Recovery point objective of the schedule in seconds and\
+            \ specified in multiple of 60 seconds. Only following RPO values can be\
+            \ provided for rollup retention type:<br> Minute(s): 1, 2, 3, 4, 5, 6,\
+            \ 10, 12, 15 <br> Hour(s): 1, 2, 3, 4, 6, 8, 12 <br> Day(s): 1 <br> Week(s):\
+            \ 1, 2"
+          example: 44
+        retention:
+          required:
+          - $objectType
+          properties:
+            $objectType:
+              type: string
+              example: datapolicies.v4.config.LinearRetention
+          description: Specifies the retention policy for the recovery point schedule.
+          oneOf:
+          - $ref: '#/components/schemas/datapolicies.v4.0.config.LinearRetention'
+          - $ref: '#/components/schemas/datapolicies.v4.0.config.AutoRollupRetention'
+        startTime:
+          pattern: "^(0[0-9]|1[0-9]|2[0-3])h:[0-5][0-9]m$"
+          type: string
+          description: "Represents the protection start time for the new entities\
+            \ added to the policy after the policy is created in h:m format. The values\
+            \ must be between 00h:00m and 23h:59m and in UTC timezone. It specifies\
+            \ the time when the first snapshot is taken and replicated for any entity\
+            \ added to the policy. If this is not specified, the snapshot is taken\
+            \ immediately and replicated for any new entity added to the policy."
+          example: 01h:00m
+        syncReplicationAutoSuspendTimeoutSeconds:
+          maximum: 300
+          type: integer
+          description: "Auto suspend timeout if there is a connection failure between\
+            \ locations for synchronous replication. If this value is not set, then\
+            \ the policy will not be suspended."
+          example: 87
+      additionalProperties: false
+      description: Schedule for protection. The schedule specifies the recovery point
+        objective and the retention policy for the participating locations.
+    datapolicies.v4.0.config.LinearRetention:
+      title: Linear retention.
+      required:
+      - local
+      type: object
+      properties:
+        local:
+          type: integer
+          description: Specifies the number of recovery points to retain on the local
+            location.
+          example: 3
+        remote:
+          type: integer
+          description: Specifies the number of recovery points to retain on the remote
+            location.
+          example: 3
+      additionalProperties: false
+      description: "A simple retention scheme for the policy. If you set the retention\
+        \ number to n, the policy retains the n recent recovery points."
+    datapolicies.v4.0.config.AutoRollupRetention:
+      title: Auto rollup retention.
+      required:
+      - local
+      type: object
+      properties:
+        local:
+          $ref: '#/components/schemas/datapolicies.v4.0.config.AutoRollupRetentionDetails'
+        remote:
+          $ref: '#/components/schemas/datapolicies.v4.0.config.AutoRollupRetentionDetails'
+      additionalProperties: false
+      description: "Maintains a rolling window of recovery points for every schedule,\
+        \ starting with the hourly schedule and ending with the schedule created for\
+        \ the specified retention period. For example, if the retention period is\
+        \ 4 weeks, at any given time, you will have 24 of the latest hourly recovery\
+        \ points, 7 of the latest daily recovery points, and 4 of the latest weekly\
+        \ recovery points."
+    datapolicies.v4.0.config.AutoRollupRetentionDetails:
+      required:
+      - frequency
+      - snapshotIntervalType
+      type: object
+      properties:
+        snapshotIntervalType:
+          $ref: '#/components/schemas/datapolicies.v4.0.config.SnapshotIntervalType'
+        frequency:
+          maximum: 24
+          minimum: 1
+          type: integer
+          description: "Multiplier to 'snapshotIntervalType'. For example, if 'snapshotIntervalType'\
+            \ is 'YEARLY' and 'multiple' is 5, then 5 years worth of rollup snapshots\
+            \ will be retained."
+          example: 13
+      additionalProperties: false
+      description: Specifies the auto rollup retention details.
+    datapolicies.v4.0.config.SnapshotIntervalType:
+      title: Snapshot interval period.
+      type: string
+      description: Snapshot interval period.
+      enum:
+      - HOURLY
+      - DAILY
+      - WEEKLY
+      - MONTHLY
+      - YEARLY
+      - $UNKNOWN
+      - $REDACTED
+      x-enumDescriptions:
+        YEARLY: Specifies the number of latest yearly recovery points to retain.
+        WEEKLY: Specifies the number of latest weekly recovery points to retain.
+        DAILY: Specifies the number of latest daily recovery points to retain.
+        MONTHLY: Specifies the number of latest monthly recovery points to retain.
+        $UNKNOWN: |
+          Unknown value.
+        $REDACTED: |
+          Redacted value.
+        HOURLY: Specifies the number of latest hourly recovery points to retain.
+    datapolicies.v4.0.config.GetProtectionPolicyApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+        data:
+          required:
+          - $objectType
+          properties:
+            $objectType:
+              type: string
+              example: datapolicies.v4.config.ProtectionPolicy
+          oneOf:
+          - $ref: '#/components/schemas/datapolicies.v4.0.config.ProtectionPolicy'
+          - $ref: '#/components/schemas/datapolicies.v4.0.error.ErrorResponse'
+      additionalProperties: false
+      description: "REST response for all response codes in API path /datapolicies/v4.0/config/protection-policies/{extId}\
+        \ Get operation"
+    datapolicies.v4.0.config.UpdateProtectionPolicyApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+        data:
+          required:
+          - $objectType
+          properties:
+            $objectType:
+              type: string
+              example: prism.v4.config.TaskReference
+          oneOf:
+          - $ref: '#/components/schemas/prism.v4.0.config.TaskReference'
+          - $ref: '#/components/schemas/datapolicies.v4.0.error.ErrorResponse'
+      additionalProperties: false
+      description: "REST response for all response codes in API path /datapolicies/v4.0/config/protection-policies/{extId}\
+        \ Put operation"
+    datapolicies.v4.0.config.DeleteProtectionPolicyApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+        data:
+          required:
+          - $objectType
+          properties:
+            $objectType:
+              type: string
+              example: prism.v4.config.TaskReference
+          oneOf:
+          - $ref: '#/components/schemas/prism.v4.0.config.TaskReference'
+          - $ref: '#/components/schemas/datapolicies.v4.0.error.ErrorResponse'
+      additionalProperties: false
+      description: "REST response for all response codes in API path /datapolicies/v4.0/config/protection-policies/{extId}\
+        \ Delete operation"
+    common.v1.0.response.ExternalizableAbstractModel:
+      description: |
+        A model that represents an object instance that is accessible through an API endpoint.  Instances of this type get an extId field that contains the globally unique identifier for that instance.  Externally accessible instances are always tenant aware and, therefore, extend the TenantAwareModel
+      allOf:
+      - $ref: '#/components/schemas/common.v1.0.config.TenantAwareModel'
+      - type: object
+        properties:
+          extId:
+            pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+            type: string
+            description: |
+              A globally unique identifier of an instance that is suitable for external consumption.
+            nullable: true
+            readOnly: true
+            example: 3c5e8ea2-b877-4caa-8f78-88afdb6782e9
+          links:
+            maxItems: 20
+            minItems: 0
+            type: array
+            description: |
+              A HATEOAS style link for the response.  Each link contains a user-friendly name identifying the link and an address for retrieving the particular resource.
+            readOnly: true
+            items:
+              $ref: '#/components/schemas/common.v1.0.response.ApiLink'
+        additionalProperties: false
+    dataprotection.v4.0.common.RecoveryPointType:
+      type: string
+      description: Type of the Recovery point.
+      enum:
+      - CRASH_CONSISTENT
+      - APPLICATION_CONSISTENT
+      - $UNKNOWN
+      - $REDACTED
+      x-enumDescriptions:
+        $UNKNOWN: |
+          Unknown value.
+        CRASH_CONSISTENT: Crash-consistent Recovery points capture all the VM and
+          application level details.
+        $REDACTED: |
+          Redacted value.
+        APPLICATION_CONSISTENT: Application-consistent Recovery points can capture
+          all the data stored in the memory and also the in-progress transaction details.
+    common.v1.0.config.TenantAwareModel:
+      type: object
+      properties:
+        tenantId:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+          description: |
+            A globally unique identifier that represents the tenant that owns this entity. The system automatically assigns it, and it and is immutable from an API consumer perspective (some use cases may cause this Id to change - For instance, a use case may require the transfer of ownership of the entity, but these cases are handled automatically on the server).
+          readOnly: true
+          example: 057bca40-e1ab-4b12-b37b-f2c9c051742b
+      additionalProperties: false
+      description: |
+        A model base class whose instances are bound to a specific tenant.  This model adds a tenantId to the base model class that it extends and is automatically set by the server.
+    common.v1.0.response.ApiLink:
+      type: object
+      properties:
+        href:
+          type: string
+          description: |
+            The URL at which the entity described by the link can be accessed.
+        rel:
+          type: string
+          description: |
+            A name that identifies the relationship of the link to the object that is returned by the URL.  The unique value of "self" identifies the URL for the object.
+      additionalProperties: false
+      description: |
+        A HATEOAS style link for the response.  Each link contains a user-friendly name identifying the link and an address for retrieving the particular resource.
+    datapolicies.v4.0.error.ErrorResponse:
+      type: object
+      properties:
+        error:
+          oneOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/datapolicies.v4.0.error.AppMessage'
+          - $ref: '#/components/schemas/datapolicies.v4.0.error.SchemaValidationError'
+      additionalProperties: false
+      description: An error response indicates that the operation has failed either
+        due to a client error(4XX) or server error(5XX). Please look at the HTTP status
+        code and namespace specific error code and error message for further details.
+      x-platform-generated: true
+    datapolicies.v4.0.error.AppMessage:
+      type: object
+      properties:
+        message:
+          type: string
+          description: The message string.
+        severity:
+          $ref: '#/components/schemas/common.v1.0.config.MessageSeverity'
+        code:
+          type: string
+          description: "The code associated with this message.This string is typically\
+            \ prefixed by the namespace the endpoint belongs to. For example: VMM-40000"
+        locale:
+          type: string
+          description: Locale for this message. The default locale would be 'en-US'.
+          default: en_US
+        errorGroup:
+          type: string
+          description: The error group associated with this message of severity ERROR.
+        argumentsMap:
+          type: object
+          additionalProperties:
+            type: string
+          description: The map of argument name to value.
+      additionalProperties: false
+      description: Message with associated severity describing status of the current
+        operation.
+      x-platform-generated: true
+    datapolicies.v4.0.error.MessageSeverity:
+      type: string
+      description: Enum schema MessageSeverity
+      enum:
+      - INFO
+      - WARNING
+      - ERROR
+      - $UNKNOWN
+      - $REDACTED
+      x-platform-generated: true
+      x-codegen-hint:
+        $any:
+        - type: entity-identifier
+          properties:
+            identifiers:
+            - value: $UNKNOWN
+              index: 201
+            - value: $REDACTED
+              index: 202
+            - value: INFO
+              index: 203
+            - value: WARNING
+              index: 204
+            - value: ERROR
+              index: 205
+    datapolicies.v4.0.error.SchemaValidationError:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          description: Timestamp of the response.
+          format: date-time
+          example: 2009-09-23T14:30:00-07:00
+        statusCode:
+          type: integer
+          description: The HTTP status code of the response.
+          example: 41
+        error:
+          type: string
+          description: The generic error message for the response.
+        path:
+          type: string
+          description: API path on which the request was made.
+        validationErrorMessages:
+          type: array
+          description: List of validation error messages
+          items:
+            $ref: '#/components/schemas/datapolicies.v4.0.error.SchemaValidationErrorMessage'
+      additionalProperties: false
+      description: This schema is generated from SchemaValidationError.java
+      x-platform-generated: true
+    datapolicies.v4.0.error.SchemaValidationErrorMessage:
+      type: object
+      properties:
+        location:
+          type: string
+          description: "The part of the request that failed validation. Validation\
+            \ can fail for path, query parameters, and request body."
+        message:
+          type: string
+          description: The detailed message for the validation error.
+        attributePath:
+          type: string
+          description: The path of the attribute that failed validation in the schema.
+      additionalProperties: false
+      description: This schema is generated from SchemaValidationErrorMessage.java
+      x-platform-generated: true
+    common.v1.0.response.ApiResponseMetadata:
+      type: object
+      properties:
+        flags:
+          maxItems: 20
+          minItems: 0
+          type: array
+          description: |
+            An array of flags that may indicate the status of the response. For example, a flag with the name 'isPaginated' and value 'false', indicates that the response is not paginated.
+          items:
+            $ref: '#/components/schemas/common.v1.0.config.Flag'
+        links:
+          maxItems: 20
+          minItems: 0
+          type: array
+          description: |
+            An array of HATEOAS style links for the response that may also include pagination links for list operations.
+          items:
+            $ref: '#/components/schemas/common.v1.0.response.ApiLink'
+        totalAvailableResults:
+          type: integer
+          description: |
+            The total number of entities that are available on the server for this type.
+          format: int32
+          example: 74
+        messages:
+          maxItems: 20
+          minItems: 0
+          type: array
+          description: |
+            Information, Warning or Error messages that might provide additional contextual information related to the operation.
+          items:
+            $ref: '#/components/schemas/common.v1.0.config.Message'
+        extraInfo:
+          maxItems: 20
+          minItems: 0
+          type: array
+          description: |
+            An array of entity-specific metadata
+          items:
+            $ref: '#/components/schemas/common.v1.0.config.KVPair'
+      additionalProperties: false
+      description: |
+        The metadata associated with an API response. This value is always present and minimally contains the self-link for the API request that produced this response. It also contains pagination data for the paginated requests.
+    prism.v4.0.config.TaskReference:
+      type: object
+      properties:
+        extId:
+          pattern: "^[a-zA-Z0-9/+]*={0,2}:[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"
+          type: string
+          description: A globally unique identifier of a task.
+          example: QmFzZTY0RW5jb2RlZA==:a2e08eaa-3fed-4991-bf16-38ac655e2df1
+      additionalProperties: false
+      description: A reference to a task tracking an asynchronous operation. The status
+        of the task can be queried by making a GET request to the task URI provided
+        in the metadata section of the API response.
+    common.v1.0.config.Flag:
+      type: object
+      properties:
+        name:
+          maxLength: 128
+          minLength: 3
+          type: string
+          description: |
+            Name of the flag.
+        value:
+          type: boolean
+          description: |
+            Value of the flag.
+          default: false
+      additionalProperties: false
+      description: |
+        Many entities in the Nutanix APIs carry flags.  This object captures all the flags associated with that entity through this object.  The field that hosts this type of object must have an attribute called x-bounded-map-keys that tells which flags are actually present for that entity.
+    common.v1.0.config.Message:
+      type: object
+      properties:
+        code:
+          type: string
+          description: |
+            A code that uniquely identifies a message.
+        message:
+          type: string
+          description: |
+            The description of the message.
+        locale:
+          type: string
+          description: |
+            The locale for the message description.
+          default: en_US
+        severity:
+          $ref: '#/components/schemas/common.v1.0.config.MessageSeverity'
+      additionalProperties: false
+    common.v1.0.config.KVPair:
+      type: object
+      properties:
+        name:
+          maxLength: 128
+          minLength: 3
+          type: string
+          description: |
+            The key of the key-value pair.
+        value:
+          description: The value associated with the key for this key-value pair
+          oneOf:
+          - type: string
+            description: |
+              A string value in a key-value pair.
+          - type: integer
+            description: |
+              An integer value in a key-value pair.
+            example: 79
+          - type: boolean
+            description: |
+              An boolean value in a key-value pair.
+            example: true
+          - maxItems: 100
+            minItems: 0
+            type: array
+            description: |
+              A value in a key-value pair that represents a list of strings.
+            items:
+              type: string
+          - type: object
+            additionalProperties:
+              type: string
+            description: |
+              A value in a key-value pair that represents a map of string keys and values.
+          - maxItems: 20
+            minItems: 0
+            type: array
+            description: |
+              A value in a key-value pair that represents an array of maps of string keys and values.
+            items:
+              $ref: '#/components/schemas/common.v1.0.config.MapOfStringWrapper'
+          - maxItems: 100
+            minItems: 0
+            type: array
+            description: |
+              A value in a key-value pair that represents a list of integers.
+            items:
+              type: integer
+              example: 22
+      additionalProperties: false
+      description: |
+        A map describing a set of keys and their corresponding values.
+    common.v1.0.config.MessageSeverity:
+      type: string
+      description: |
+        The message severity.
+      enum:
+      - INFO
+      - WARNING
+      - ERROR
+      - $UNKNOWN
+      - $REDACTED
+      x-enumDescriptions:
+        ERROR: |
+          Error indicating failed completion.
+        INFO: |
+          Information about successful completion.
+        $UNKNOWN: |
+          Unknown value.
+        WARNING: |
+          Warning indicating future error.
+        $REDACTED: |
+          Redacted value.
+    common.v1.0.config.MapOfStringWrapper:
+      type: object
+      properties:
+        map:
+          type: object
+          additionalProperties:
+            type: string
+          description: |
+            A map with string keys and values.
+      additionalProperties: false
+      description: |
+        A wrapper schema containing a map with string keys and values.
+  securitySchemes:
+    basicAuthScheme:
+      type: http
+      scheme: basic
+    apiKeyAuthScheme:
+      type: apiKey
+      name: X-ntnx-api-key
+      in: header

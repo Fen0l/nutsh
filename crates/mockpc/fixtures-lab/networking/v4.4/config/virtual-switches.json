@@ -1,0 +1,141 @@
+[
+  {
+    "$objectType": "networking.v4.config.VirtualSwitch",
+    "extId": "23b46b55-f004-42f1-b48b-e6b2c2166adf",
+    "hasDeploymentError": false,
+    "hasUpdateInProgress": false,
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "00000000-0000-0000-0000-000000000000",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-4f05891a",
+    "description": "description-cc00b343",
+    "isDefault": true,
+    "mtu": 1500,
+    "bondMode": "BALANCE_TCP",
+    "clusters": [
+      {
+        "$objectType": "networking.v4.config.Cluster",
+        "extId": "0006237e-c983-e712-0000-00000001c1d0",
+        "hosts": [
+          {
+            "internalBridgeName": "internalBridgeName-136f7b9f",
+            "routeTable": 1000,
+            "$objectType": "networking.v4.config.Host",
+            "extId": "38521854-c20d-41ff-8348-41c53db66e38",
+            "hostNics": [
+              "eth0",
+              "eth1",
+              "eth2",
+              "eth3"
+            ],
+            "activeUplink": "eth2"
+          },
+          {
+            "internalBridgeName": "internalBridgeName-136f7b9f",
+            "routeTable": 1000,
+            "extId": "9cad7457-dc26-4839-bfce-2aa79a0f54c7",
+            "hostNics": [
+              "eth0",
+              "eth1",
+              "eth2",
+              "eth3"
+            ],
+            "activeUplink": "eth2"
+          },
+          {
+            "internalBridgeName": "internalBridgeName-136f7b9f",
+            "routeTable": 1000,
+            "extId": "44e477e6-edcf-4722-b35b-88deb3a160ef",
+            "hostNics": [
+              "eth0",
+              "eth1",
+              "eth2",
+              "eth3"
+            ],
+            "activeUplink": "eth2"
+          }
+        ],
+        "vlanIdentifier": 74
+      }
+    ],
+    "ownerType": "PE"
+  },
+  {
+    "$objectType": "networking.v4.config.VirtualSwitch",
+    "extId": "3cc06321-377f-4d60-a19d-98db546a6819",
+    "hasDeploymentError": true,
+    "hasUpdateInProgress": false,
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "00000000-0000-0000-0000-000000000000",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-4f05891a",
+    "description": "description-cc00b343",
+    "isDefault": true,
+    "mtu": 1500,
+    "bondMode": "BALANCE_TCP",
+    "clusters": [
+      {
+        "$objectType": "networking.v4.config.Cluster",
+        "extId": "000623f4-7174-ae2a-0000-00000001c1da",
+        "hosts": [
+          {
+            "internalBridgeName": "internalBridgeName-136f7b9f",
+            "routeTable": 1000,
+            "$objectType": "networking.v4.config.Host",
+            "extId": "73e903d6-2b8a-46e3-877c-b6bbb347bb4a",
+            "hostNics": [
+              "eth0",
+              "eth1",
+              "eth2",
+              "eth3"
+            ],
+            "activeUplink": "eth3"
+          },
+          {
+            "internalBridgeName": "internalBridgeName-136f7b9f",
+            "routeTable": 1000,
+            "extId": "db7c8f4b-541d-4db7-b9f7-4e24cad11d84",
+            "hostNics": [
+              "eth0",
+              "eth1",
+              "eth2",
+              "eth3"
+            ],
+            "activeUplink": "eth3"
+          },
+          {
+            "internalBridgeName": "internalBridgeName-136f7b9f",
+            "routeTable": 1000,
+            "extId": "422ac3ad-bb71-4c47-83f9-7367f1b7da90",
+            "hostNics": [
+              "eth0",
+              "eth1",
+              "eth2",
+              "eth3"
+            ],
+            "activeUplink": "eth2"
+          },
+          {
+            "internalBridgeName": "internalBridgeName-136f7b9f",
+            "routeTable": 1000,
+            "extId": "0a505ef2-ede4-467c-941f-d39d73bdf1c9",
+            "hostNics": [
+              "eth0",
+              "eth1",
+              "eth2",
+              "eth3"
+            ],
+            "activeUplink": "eth2"
+          }
+        ]
+      }
+    ],
+    "ownerType": "PE"
+  }
+]

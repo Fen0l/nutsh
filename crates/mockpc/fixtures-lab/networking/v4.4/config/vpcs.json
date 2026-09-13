@@ -1,0 +1,303 @@
+[
+  {
+    "$objectType": "networking.v4.config.Vpc",
+    "extId": "8b92d2d0-c022-4de0-aaec-220b8cc62e73",
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "00000000-0000-0000-0000-000000000000",
+      "ownerUserName": "ownerUserName-da328454",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000",
+      "projectName": "projectName-57a4a4a3"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-430d2937",
+    "description": "description-650429b8",
+    "vpcType": "REGULAR",
+    "commonDhcpOptions": {
+      "$objectType": "networking.v4.config.VpcDhcpOptions"
+    },
+    "externalSubnets": [
+      {
+        "activeGatewayNodes": [
+          {
+            "$objectType": "networking.v4.config.GatewayNodeReference",
+            "nodeId": "73e903d6-2b8a-46e3-877c-b6bbb347bb4a",
+            "nodeIpAddress": {
+              "$objectType": "common.v1.config.IPAddress",
+              "ipv4": {
+                "$objectType": "common.v1.config.IPv4Address",
+                "value": "203.0.113.97",
+                "prefixLength": 32
+              }
+            }
+          },
+          {
+            "nodeId": "422ac3ad-bb71-4c47-83f9-7367f1b7da90",
+            "nodeIpAddress": {
+              "$objectType": "common.v1.config.IPAddress",
+              "ipv4": {
+                "$objectType": "common.v1.config.IPv4Address",
+                "value": "198.51.100.56",
+                "prefixLength": 32
+              }
+            }
+          }
+        ],
+        "$objectType": "networking.v4.config.ExternalSubnet",
+        "subnetReference": "5b659f96-4168-451b-b5b1-8c57eca90957",
+        "externalIps": [
+          {
+            "$objectType": "common.v1.config.IPAddress",
+            "ipv4": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "203.0.113.219",
+              "prefixLength": 32
+            }
+          },
+          {
+            "ipv4": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "203.0.113.71",
+              "prefixLength": 32
+            }
+          }
+        ],
+        "activeGatewayCount": 2
+      },
+      {
+        "activeGatewayNodes": [
+          {
+            "$objectType": "networking.v4.config.GatewayNodeReference",
+            "nodeId": "db7c8f4b-541d-4db7-b9f7-4e24cad11d84",
+            "nodeIpAddress": {
+              "$objectType": "common.v1.config.IPAddress",
+              "ipv4": {
+                "$objectType": "common.v1.config.IPv4Address",
+                "value": "198.51.100.228",
+                "prefixLength": 32
+              }
+            }
+          },
+          {
+            "nodeId": "422ac3ad-bb71-4c47-83f9-7367f1b7da90",
+            "nodeIpAddress": {
+              "$objectType": "common.v1.config.IPAddress",
+              "ipv4": {
+                "$objectType": "common.v1.config.IPv4Address",
+                "value": "198.51.100.56",
+                "prefixLength": 32
+              }
+            }
+          }
+        ],
+        "subnetReference": "d7b87ecb-9d0b-4e79-9622-8d27c2be170b",
+        "externalIps": [
+          {
+            "$objectType": "common.v1.config.IPAddress",
+            "ipv4": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "198.51.100.86",
+              "prefixLength": 32
+            }
+          },
+          {
+            "ipv4": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "198.51.100.4",
+              "prefixLength": 32
+            }
+          }
+        ],
+        "activeGatewayCount": 2
+      }
+    ],
+    "externallyRoutablePrefixes": [
+      {
+        "$objectType": "networking.v4.config.IPSubnet",
+        "ipv4": {
+          "$objectType": "networking.v4.config.IPv4Subnet",
+          "ip": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "198.51.100.114",
+            "prefixLength": 32
+          },
+          "prefixLength": 24
+        }
+      }
+    ],
+    "scope": "VMS",
+    "supportedMultipleExternalSubnetType": "ONLY_NONAT"
+  },
+  {
+    "$objectType": "networking.v4.config.Vpc",
+    "extId": "4ac60872-f02e-4ef9-b7d1-3108edb05579",
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "08f0dcd1-3a70-57a1-b84b-97d8e7b270fc",
+      "ownerUserName": "ownerUserName-59acbb2c",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-e5e7a58b",
+    "vpcType": "TRANSIT",
+    "commonDhcpOptions": {
+      "$objectType": "networking.v4.config.VpcDhcpOptions",
+      "domainNameServers": [
+        {
+          "$objectType": "common.v1.config.IPAddress",
+          "ipv4": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "198.51.100.146",
+            "prefixLength": 32
+          }
+        }
+      ]
+    },
+    "externalSubnets": [
+      {
+        "activeGatewayNodes": [
+          {
+            "$objectType": "networking.v4.config.GatewayNodeReference",
+            "nodeId": "422ac3ad-bb71-4c47-83f9-7367f1b7da90",
+            "nodeIpAddress": {
+              "$objectType": "common.v1.config.IPAddress",
+              "ipv4": {
+                "$objectType": "common.v1.config.IPv4Address",
+                "value": "198.51.100.56",
+                "prefixLength": 32
+              }
+            }
+          },
+          {
+            "nodeId": "73e903d6-2b8a-46e3-877c-b6bbb347bb4a",
+            "nodeIpAddress": {
+              "$objectType": "common.v1.config.IPAddress",
+              "ipv4": {
+                "$objectType": "common.v1.config.IPv4Address",
+                "value": "203.0.113.97",
+                "prefixLength": 32
+              }
+            }
+          }
+        ],
+        "$objectType": "networking.v4.config.ExternalSubnet",
+        "subnetReference": "5b659f96-4168-451b-b5b1-8c57eca90957",
+        "externalIps": [
+          {
+            "$objectType": "common.v1.config.IPAddress",
+            "ipv4": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "198.51.100.6",
+              "prefixLength": 32
+            }
+          },
+          {
+            "ipv4": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "203.0.113.47",
+              "prefixLength": 32
+            }
+          }
+        ],
+        "activeGatewayCount": 2
+      }
+    ],
+    "scope": "VMS",
+    "supportedMultipleExternalSubnetType": "NONE"
+  },
+  {
+    "$objectType": "networking.v4.config.Vpc",
+    "extId": "e3794f39-2ddd-4b4b-92dd-37c403776378",
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "08f0dcd1-3a70-57a1-b84b-97d8e7b270fc",
+      "ownerUserName": "ownerUserName-59acbb2c",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-e8a0acdc",
+    "vpcType": "REGULAR",
+    "commonDhcpOptions": {
+      "$objectType": "networking.v4.config.VpcDhcpOptions",
+      "domainNameServers": [
+        {
+          "$objectType": "common.v1.config.IPAddress",
+          "ipv4": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "198.51.100.146",
+            "prefixLength": 32
+          }
+        }
+      ]
+    },
+    "externalSubnets": [
+      {
+        "activeGatewayNodes": [
+          {
+            "$objectType": "networking.v4.config.GatewayNodeReference",
+            "nodeId": "422ac3ad-bb71-4c47-83f9-7367f1b7da90",
+            "nodeIpAddress": {
+              "$objectType": "common.v1.config.IPAddress",
+              "ipv4": {
+                "$objectType": "common.v1.config.IPv4Address",
+                "value": "198.51.100.56",
+                "prefixLength": 32
+              }
+            }
+          },
+          {
+            "nodeId": "73e903d6-2b8a-46e3-877c-b6bbb347bb4a",
+            "nodeIpAddress": {
+              "$objectType": "common.v1.config.IPAddress",
+              "ipv4": {
+                "$objectType": "common.v1.config.IPv4Address",
+                "value": "203.0.113.97",
+                "prefixLength": 32
+              }
+            }
+          }
+        ],
+        "$objectType": "networking.v4.config.ExternalSubnet",
+        "subnetReference": "5b659f96-4168-451b-b5b1-8c57eca90957",
+        "externalIps": [
+          {
+            "$objectType": "common.v1.config.IPAddress",
+            "ipv4": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "203.0.113.153",
+              "prefixLength": 32
+            }
+          },
+          {
+            "ipv4": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "198.51.100.112",
+              "prefixLength": 32
+            }
+          }
+        ],
+        "activeGatewayCount": 2
+      }
+    ],
+    "scope": "VMS",
+    "supportedMultipleExternalSubnetType": "NONE"
+  },
+  {
+    "$objectType": "networking.v4.config.Vpc",
+    "extId": "f0faa1a5-b5a0-4aaa-8d70-881114dea04c",
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "00000000-0000-0000-0000-000000000000",
+      "ownerUserName": "ownerUserName-da328454",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-ec2335cf",
+    "vpcType": "REGULAR",
+    "commonDhcpOptions": {
+      "$objectType": "networking.v4.config.VpcDhcpOptions"
+    },
+    "scope": "VMS",
+    "supportedMultipleExternalSubnetType": "NONE"
+  }
+]

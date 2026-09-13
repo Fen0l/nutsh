@@ -1,0 +1,3625 @@
+openapi: 3.0.1
+info:
+  title: Nutanix Clustermgmt Versioned APIs
+  description: Manage Hosts, Clusters and other Infrastructure.
+  version: 4.0.1-alpha-1
+  x-repo-name: clustermgmt
+  x-logo:
+    altText: Clustermgmt Logo
+    url: https://developers.nutanix.com/api/v1/namespaces/clustermgmt/images/clustermgmt-logo-img.svg
+servers:
+- url: https://{pc-ip}:9440/api
+security:
+- basicAuthScheme: []
+paths:
+  /clustermgmt/v4.0.a1/config/cluster/{clusterExtId}:
+    get:
+      tags:
+      - Cluster
+      summary: Get cluster entity
+      description: Get cluster entity
+      operationId: getCluster
+      parameters:
+      - name: clusterExtId
+        in: path
+        description: Cluster UUID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          pattern: ^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$
+          type: string
+      responses:
+        200:
+          description: The requested Cluster entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.GetClusterResponse'
+        4XX:
+          description: Client error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.GetClusterResponse'
+        5XX:
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.GetClusterResponse'
+      x-code-samples:
+      - lang: Java
+        source: "\npackage sample;\n\nimport com.nutanix.clu.java.client.ApiClient;\n\
+          import com.nutanix.clu.java.client.api.ClusterApi;\nimport com.nutanix.dp1.clu.clustermgmt.v4.config.GetClusterResponse;\n\
+          \npublic class JavaSdkSample {\n\tpublic static void main(String[] args)\
+          \ {\n\t\tApiClient client = new ApiClient();\n\t\tclient.setHost(\"localhost\"\
+          );\n\t\tclient.setPort(9440);\n\t\tclient.setRetryInterval(100);\n\t\tclient.setMaxRetryAttempts(2);\n\
+          \t\tclient.setUsername(\"username\");\n\t\tclient.setPassword(\"password\"\
+          );\n\n\t\tClusterApi clusterApi = new ClusterApi(client);\n\n\t\tString\
+          \ clusterExtId = \"^F5fD5cbD-bcEe-9BA4-d5E4-1a4ceafC386A$\";\n\t\tGetClusterResponse\
+          \ getClusterResponse = clusterApi.getCluster(clusterExtId);\n\t}\n}\n"
+      - lang: JavaScript
+        source: |2
+
+          import ApiClient from "@nutanix/clustermgmt-js-client/src/ApiClient";
+          import ClusterApi from "@nutanix/clustermgmt-js-client/src/apis/Cluster-endpoints";
+          import GetClusterResponse from "@nutanix/clustermgmt-js-client/src/models/clustermgmt/v4/config/GetClusterResponse";
+
+          let apiClientInstance = new ApiClient();
+          apiClientInstance.maxRetryAttempts = 2;
+          apiClientInstance.retryInterval = 500;
+          apiClientInstance.host = 'localhost'
+          apiClientInstance.port = '9440';
+          apiClientInstance.username = 'username';
+          apiClientInstance.password = 'password';
+          let clusterApi = new ClusterApi(apiClientInstance);
+
+          function sample() {
+              let clusterExtId = "^8e5FcAFA-aCDA-cF5b-b12D-D6EaD87f7dc4$";
+
+              clusterApi.getCluster(clusterExtId).then(({data, response}) =>
+                  console.log(response.status);
+                  console.log(data.getData());
+                  done();
+              }).catch((error) => {
+                  console.log(error);
+                  done(error);
+              });
+          }
+      - lang: Python
+        source: |2
+
+          import ntnx_clustermgmt_py_client
+
+          if __name__ == "__main__":
+              config = ntnx_clustermgmt_py_client.configuration.Configuration()
+              config.host = "localhost"
+              config.port = 9440
+              config.max_retry_attempts = 1
+              config.backoff_factor = 3
+              config.username = "username"
+              config.password = "password"
+              client = ntnx_clustermgmt_py_client.ApiClient(configuration=config)
+              clusterApi = ntnx_clustermgmt_py_client.ClusterApi(api_client=client)
+              clusterExtId = "^Ef1bDCB9-BDE4-bf1d-2CC9-aaeeacECC7ca$"
+              api_response = clusterApi.get_cluster(clusterExtId)
+      - lang: Go
+        source: |2+
+
+          package main
+
+          import {
+              "fmt"
+              "nutanix/clustermgmt-go-client/v4/api"
+              "nutanix/clustermgmt-go-client/v4/client"
+          }
+
+          var (
+              ApiClientInstance *client.ApiClient
+              ClusterApiInstance *api.ClusterApi
+          )
+
+          func main() {
+              ApiClientInstance = client.NewApiClient()
+              ApiClientInstance.Host = "localhost"
+              ApiClientInstance.Port = 9440
+              ApiClientInstance.RetryInterval = 100
+              ApiClientInstance.MaxRetryAttempts = 2
+              ApiClientInstance.AllowVersionNegotiation = true
+              ApiClientInstance.Username = "username"
+              ApiClientInstance.Password = "password"
+
+              ClusterApiInstance = api.ClusterApi(ApiClientInstance)
+
+              clusterExtId := "^1eb2eafB-Bd1e-0588-bd04-bFE2EcBCEa01$"
+
+              response, _ := ClusterApiInstance.GetCluster(clusterExtId)
+              fmt.Println(response)
+          }
+
+      - lang: cURL
+        source: |2
+
+          curl --request GET \
+               --url "https://{pc-ip}:9440/api/clustermgmt/v4.0.a1/config/cluster/^f0C5D3aC-CfD2-0daD-aA8A-DADff8cce5F0$" \
+               --header 'Accept: application/json' \
+      - lang: Wget
+        source: |2
+
+          wget --verbose \
+               --method GET \
+               --header 'Accept: application/json' \
+               - "https://{pc-ip}:9440/api/clustermgmt/v4.0.a1/config/cluster/^A0A4ff62-Ffa9-6ef3-aFD0-D33CCabe56ef$"
+  /clustermgmt/v4.0.a1/config/clusters:
+    get:
+      tags:
+      - Cluster
+      summary: Get cluster entities
+      description: Get cluster entities
+      operationId: getClusters
+      parameters:
+      - name: $page
+        in: query
+        description: |
+          A URL query parameter that specifies the page number of the result set.  Must be a positive integer between 0 and the maximum number of pages that are available for that resource.  Any number out of this range will be set to its nearest bound.  In other words, a page number of less than 0 would be set to 0 and a page number greater than the total available pages would be set to the last page.
+        required: false
+        style: form
+        explode: false
+        schema:
+          minimum: 0
+          type: integer
+          description: |
+            A URL query parameter that specifies the page number of the result set.  Must be a positive integer between 0 and the maximum number of pages that are available for that resource.  Any number out of this range will be set to its nearest bound.  In other words, a page number of less than 0 would be set to 0 and a page number greater than the total available pages would be set to the last page.
+          format: int32
+          default: 0
+      - name: $limit
+        in: query
+        description: |
+          A URL query parameter that specifies the total number of records returned in the result set.  Must be a positive integer between 0 and 100. Any number out of this range will be set to the default maximum number of records, which is 100.
+        required: false
+        style: form
+        explode: false
+        schema:
+          maximum: 100
+          type: integer
+          description: |
+            A URL query parameter that specifies the total number of records returned in the result set.  Must be a positive integer between 0 and 100. Any number out of this range will be set to the default maximum number of records, which is 100.
+          format: int32
+          default: 50
+      - name: $filter
+        in: query
+        description: |
+          A URL query parameter that allows clients to filter a collection of resources. The expression specified with $filter is evaluated for each resource in the collection, and only items where the expression evaluates to true are included in the response. Expression specified with the $filter must conform to the OData V4.01 URL conventions.
+          The filter can be applied on the following fields:
+          - extId
+          - name
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: $orderby
+        in: query
+        description: |
+          A URL query parameter that allows clients to specify the sort criteria for the returned list of objects. Resources can be sorted in ascending order using asc or descending order using desc. If asc or desc are not specified the resources will be sorted in ascending order by default. For example, 'orderby=templateName desc' would get all templates sorted by templateName in desc order.
+          The orderby can be applied to the following fields:
+          - name
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: The requested Cluster entities
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.GetClustersResponse'
+        4XX:
+          description: Client error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.GetClustersResponse'
+        5XX:
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.GetClustersResponse'
+      x-code-samples:
+      - lang: Java
+        source: "\npackage sample;\n\nimport com.nutanix.clu.java.client.ApiClient;\n\
+          import com.nutanix.clu.java.client.api.ClusterApi;\nimport com.nutanix.dp1.clu.clustermgmt.v4.config.GetClustersResponse;\n\
+          \npublic class JavaSdkSample {\n\tpublic static void main(String[] args)\
+          \ {\n\t\tApiClient client = new ApiClient();\n\t\tclient.setHost(\"localhost\"\
+          );\n\t\tclient.setPort(9440);\n\t\tclient.setRetryInterval(100);\n\t\tclient.setMaxRetryAttempts(2);\n\
+          \t\tclient.setUsername(\"username\");\n\t\tclient.setPassword(\"password\"\
+          );\n\n\t\tClusterApi clusterApi = new ClusterApi(client);\n\n\t\tint $page\
+          \ = 0;\n\t\tint $limit = 50;\n\t\tString $filter = \"string_sample_data\"\
+          ;\n\t\tString $orderby = \"string_sample_data\";\n\t\tGetClustersResponse\
+          \ getClustersResponse = clusterApi.getClusters($page, $limit, $filter, $orderby);\n\
+          \t}\n}\n"
+      - lang: JavaScript
+        source: |2
+
+          import ApiClient from "@nutanix/clustermgmt-js-client/src/ApiClient";
+          import ClusterApi from "@nutanix/clustermgmt-js-client/src/apis/Cluster-endpoints";
+          import GetClustersResponse from "@nutanix/clustermgmt-js-client/src/models/clustermgmt/v4/config/GetClustersResponse";
+
+          let apiClientInstance = new ApiClient();
+          apiClientInstance.maxRetryAttempts = 2;
+          apiClientInstance.retryInterval = 500;
+          apiClientInstance.host = 'localhost'
+          apiClientInstance.port = '9440';
+          apiClientInstance.username = 'username';
+          apiClientInstance.password = 'password';
+          let clusterApi = new ClusterApi(apiClientInstance);
+
+          function sample() {
+              let $page = 0;
+              let $limit = 50;
+              let $filter = "string_sample_data";
+              let $orderby = "string_sample_data";
+
+              clusterApi.getClusters($page, $limit, $filter, $orderby).then(({data, response}) =>
+                  console.log(response.status);
+                  console.log(data.getData());
+                  done();
+              }).catch((error) => {
+                  console.log(error);
+                  done(error);
+              });
+          }
+      - lang: Python
+        source: |2
+
+          import ntnx_clustermgmt_py_client
+
+          if __name__ == "__main__":
+              config = ntnx_clustermgmt_py_client.configuration.Configuration()
+              config.host = "localhost"
+              config.port = 9440
+              config.max_retry_attempts = 1
+              config.backoff_factor = 3
+              config.username = "username"
+              config.password = "password"
+              client = ntnx_clustermgmt_py_client.ApiClient(configuration=config)
+              clusterApi = ntnx_clustermgmt_py_client.ClusterApi(api_client=client)
+              $page = 0
+              $limit = 50
+              $filter = "string_sample_data"
+              $orderby = "string_sample_data"
+              api_response = clusterApi.get_clusters($page, $limit, $filter, $orderby)
+      - lang: Go
+        source: |2+
+
+          package main
+
+          import {
+              "fmt"
+              "nutanix/clustermgmt-go-client/v4/api"
+              "nutanix/clustermgmt-go-client/v4/client"
+          }
+
+          var (
+              ApiClientInstance *client.ApiClient
+              ClusterApiInstance *api.ClusterApi
+          )
+
+          func main() {
+              ApiClientInstance = client.NewApiClient()
+              ApiClientInstance.Host = "localhost"
+              ApiClientInstance.Port = 9440
+              ApiClientInstance.RetryInterval = 100
+              ApiClientInstance.MaxRetryAttempts = 2
+              ApiClientInstance.AllowVersionNegotiation = true
+              ApiClientInstance.Username = "username"
+              ApiClientInstance.Password = "password"
+
+              ClusterApiInstance = api.ClusterApi(ApiClientInstance)
+
+              $page := 0
+              $limit := 50
+              $filter := "string_sample_data"
+              $orderby := "string_sample_data"
+
+              response, _ := ClusterApiInstance.GetClusters($page, $limit, $filter, $orderby)
+              fmt.Println(response)
+          }
+
+      - lang: cURL
+        source: |2
+
+          curl --request GET \
+               --url "https://{pc-ip}:9440/api/clustermgmt/v4.0.a1/config/clusters?$filter=string_sample_data&$limit=50&$orderby=string_sample_data&$page=0" \
+               --header 'Accept: application/json' \
+      - lang: Wget
+        source: |2
+
+          wget --verbose \
+               --method GET \
+               --header 'Accept: application/json' \
+               - "https://{pc-ip}:9440/api/clustermgmt/v4.0.a1/config/clusters?$filter=string_sample_data&$limit=50&$orderby=string_sample_data&$page=0"
+  /clustermgmt/v4.0.a1/config/cluster/{clusterExtId}/snmp:
+    get:
+      tags:
+      - Cluster
+      summary: Get SNMP information
+      description: Get SNMP information
+      operationId: getSnmp
+      parameters:
+      - name: clusterExtId
+        in: path
+        description: Cluster UUID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          pattern: ^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$
+          type: string
+      responses:
+        200:
+          description: The requested SNMP configuration
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.GetSnmpResponse'
+        4XX:
+          description: Client error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.GetSnmpResponse'
+        5XX:
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.GetSnmpResponse'
+      x-code-samples:
+      - lang: Java
+        source: "\npackage sample;\n\nimport com.nutanix.clu.java.client.ApiClient;\n\
+          import com.nutanix.clu.java.client.api.ClusterApi;\nimport com.nutanix.dp1.clu.clustermgmt.v4.config.GetSnmpResponse;\n\
+          \npublic class JavaSdkSample {\n\tpublic static void main(String[] args)\
+          \ {\n\t\tApiClient client = new ApiClient();\n\t\tclient.setHost(\"localhost\"\
+          );\n\t\tclient.setPort(9440);\n\t\tclient.setRetryInterval(100);\n\t\tclient.setMaxRetryAttempts(2);\n\
+          \t\tclient.setUsername(\"username\");\n\t\tclient.setPassword(\"password\"\
+          );\n\n\t\tClusterApi clusterApi = new ClusterApi(client);\n\n\t\tString\
+          \ clusterExtId = \"^fF96B9eD-CC39-93D1-d36e-CDCbEEFdE2aD$\";\n\t\tGetSnmpResponse\
+          \ getSnmpResponse = clusterApi.getSnmp(clusterExtId);\n\t}\n}\n"
+      - lang: JavaScript
+        source: |2
+
+          import ApiClient from "@nutanix/clustermgmt-js-client/src/ApiClient";
+          import ClusterApi from "@nutanix/clustermgmt-js-client/src/apis/Cluster-endpoints";
+          import GetSnmpResponse from "@nutanix/clustermgmt-js-client/src/models/clustermgmt/v4/config/GetSnmpResponse";
+
+          let apiClientInstance = new ApiClient();
+          apiClientInstance.maxRetryAttempts = 2;
+          apiClientInstance.retryInterval = 500;
+          apiClientInstance.host = 'localhost'
+          apiClientInstance.port = '9440';
+          apiClientInstance.username = 'username';
+          apiClientInstance.password = 'password';
+          let clusterApi = new ClusterApi(apiClientInstance);
+
+          function sample() {
+              let clusterExtId = "^c90cBAaA-aDAb-cff8-efDC-aFd279Cd8f40$";
+
+              clusterApi.getSnmp(clusterExtId).then(({data, response}) =>
+                  console.log(response.status);
+                  console.log(data.getData());
+                  done();
+              }).catch((error) => {
+                  console.log(error);
+                  done(error);
+              });
+          }
+      - lang: Python
+        source: |2
+
+          import ntnx_clustermgmt_py_client
+
+          if __name__ == "__main__":
+              config = ntnx_clustermgmt_py_client.configuration.Configuration()
+              config.host = "localhost"
+              config.port = 9440
+              config.max_retry_attempts = 1
+              config.backoff_factor = 3
+              config.username = "username"
+              config.password = "password"
+              client = ntnx_clustermgmt_py_client.ApiClient(configuration=config)
+              clusterApi = ntnx_clustermgmt_py_client.ClusterApi(api_client=client)
+              clusterExtId = "^6b3F1c2c-bb7B-FDaf-ABA0-CaAE1CaA2a6c$"
+              api_response = clusterApi.get_snmp(clusterExtId)
+      - lang: Go
+        source: |2+
+
+          package main
+
+          import {
+              "fmt"
+              "nutanix/clustermgmt-go-client/v4/api"
+              "nutanix/clustermgmt-go-client/v4/client"
+          }
+
+          var (
+              ApiClientInstance *client.ApiClient
+              ClusterApiInstance *api.ClusterApi
+          )
+
+          func main() {
+              ApiClientInstance = client.NewApiClient()
+              ApiClientInstance.Host = "localhost"
+              ApiClientInstance.Port = 9440
+              ApiClientInstance.RetryInterval = 100
+              ApiClientInstance.MaxRetryAttempts = 2
+              ApiClientInstance.AllowVersionNegotiation = true
+              ApiClientInstance.Username = "username"
+              ApiClientInstance.Password = "password"
+
+              ClusterApiInstance = api.ClusterApi(ApiClientInstance)
+
+              clusterExtId := "^9A1E8Ebf-f5CC-d9e9-eC3e-fA0AfefdaFa0$"
+
+              response, _ := ClusterApiInstance.GetSnmp(clusterExtId)
+              fmt.Println(response)
+          }
+
+      - lang: cURL
+        source: |2
+
+          curl --request GET \
+               --url "https://{pc-ip}:9440/api/clustermgmt/v4.0.a1/config/cluster/^752F4b51-7bb1-D1fd-BCEB-EfbEAEEBe5E1$/snmp" \
+               --header 'Accept: application/json' \
+      - lang: Wget
+        source: |2
+
+          wget --verbose \
+               --method GET \
+               --header 'Accept: application/json' \
+               - "https://{pc-ip}:9440/api/clustermgmt/v4.0.a1/config/cluster/^Ac57af6A-DFd1-C6Ad-7bF6-7FcAea6F8Cca$/snmp"
+  /clustermgmt/v4.0.a1/config/cluster/{clusterExtId}/rsyslog:
+    get:
+      tags:
+      - Cluster
+      summary: Get RSYSLOG Servers configuration details
+      description: Get RSYSLOG Servers configuration details
+      operationId: getRsyslogServers
+      parameters:
+      - name: clusterExtId
+        in: path
+        description: Cluster UUID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          pattern: ^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$
+          type: string
+      responses:
+        200:
+          description: The requested RSYSLOG configuration
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.GetRsyslogServersResponse'
+        4XX:
+          description: Client error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.GetRsyslogServersResponse'
+        5XX:
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.GetRsyslogServersResponse'
+      x-code-samples:
+      - lang: Java
+        source: "\npackage sample;\n\nimport com.nutanix.clu.java.client.ApiClient;\n\
+          import com.nutanix.clu.java.client.api.ClusterApi;\nimport com.nutanix.dp1.clu.clustermgmt.v4.config.GetRsyslogServersResponse;\n\
+          \npublic class JavaSdkSample {\n\tpublic static void main(String[] args)\
+          \ {\n\t\tApiClient client = new ApiClient();\n\t\tclient.setHost(\"localhost\"\
+          );\n\t\tclient.setPort(9440);\n\t\tclient.setRetryInterval(100);\n\t\tclient.setMaxRetryAttempts(2);\n\
+          \t\tclient.setUsername(\"username\");\n\t\tclient.setPassword(\"password\"\
+          );\n\n\t\tClusterApi clusterApi = new ClusterApi(client);\n\n\t\tString\
+          \ clusterExtId = \"^dF053D40-FB41-edFF-Cc7A-0EeeEDA81dBC$\";\n\t\tGetRsyslogServersResponse\
+          \ getRsyslogServersResponse = clusterApi.getRsyslogServers(clusterExtId);\n\
+          \t}\n}\n"
+      - lang: JavaScript
+        source: |2
+
+          import ApiClient from "@nutanix/clustermgmt-js-client/src/ApiClient";
+          import ClusterApi from "@nutanix/clustermgmt-js-client/src/apis/Cluster-endpoints";
+          import GetRsyslogServersResponse from "@nutanix/clustermgmt-js-client/src/models/clustermgmt/v4/config/GetRsyslogServersResponse";
+
+          let apiClientInstance = new ApiClient();
+          apiClientInstance.maxRetryAttempts = 2;
+          apiClientInstance.retryInterval = 500;
+          apiClientInstance.host = 'localhost'
+          apiClientInstance.port = '9440';
+          apiClientInstance.username = 'username';
+          apiClientInstance.password = 'password';
+          let clusterApi = new ClusterApi(apiClientInstance);
+
+          function sample() {
+              let clusterExtId = "^22fE2e0F-9Af4-Be8b-12eD-AFEaF8bAbc0b$";
+
+              clusterApi.getRsyslogServers(clusterExtId).then(({data, response}) =>
+                  console.log(response.status);
+                  console.log(data.getData());
+                  done();
+              }).catch((error) => {
+                  console.log(error);
+                  done(error);
+              });
+          }
+      - lang: Python
+        source: |2
+
+          import ntnx_clustermgmt_py_client
+
+          if __name__ == "__main__":
+              config = ntnx_clustermgmt_py_client.configuration.Configuration()
+              config.host = "localhost"
+              config.port = 9440
+              config.max_retry_attempts = 1
+              config.backoff_factor = 3
+              config.username = "username"
+              config.password = "password"
+              client = ntnx_clustermgmt_py_client.ApiClient(configuration=config)
+              clusterApi = ntnx_clustermgmt_py_client.ClusterApi(api_client=client)
+              clusterExtId = "^bbc7C861-1C8a-b7A7-6176-c18FBCBBb3E0$"
+              api_response = clusterApi.get_rsyslog_servers(clusterExtId)
+      - lang: Go
+        source: |2+
+
+          package main
+
+          import {
+              "fmt"
+              "nutanix/clustermgmt-go-client/v4/api"
+              "nutanix/clustermgmt-go-client/v4/client"
+          }
+
+          var (
+              ApiClientInstance *client.ApiClient
+              ClusterApiInstance *api.ClusterApi
+          )
+
+          func main() {
+              ApiClientInstance = client.NewApiClient()
+              ApiClientInstance.Host = "localhost"
+              ApiClientInstance.Port = 9440
+              ApiClientInstance.RetryInterval = 100
+              ApiClientInstance.MaxRetryAttempts = 2
+              ApiClientInstance.AllowVersionNegotiation = true
+              ApiClientInstance.Username = "username"
+              ApiClientInstance.Password = "password"
+
+              ClusterApiInstance = api.ClusterApi(ApiClientInstance)
+
+              clusterExtId := "^1b8Cd1f7-be3f-CD81-cc8e-EAcecE364C0f$"
+
+              response, _ := ClusterApiInstance.GetRsyslogServers(clusterExtId)
+              fmt.Println(response)
+          }
+
+      - lang: cURL
+        source: |2
+
+          curl --request GET \
+               --url "https://{pc-ip}:9440/api/clustermgmt/v4.0.a1/config/cluster/^BaC1bCCD-Dca8-5669-6622-CabbBdA3dFDC$/rsyslog" \
+               --header 'Accept: application/json' \
+      - lang: Wget
+        source: |2
+
+          wget --verbose \
+               --method GET \
+               --header 'Accept: application/json' \
+               - "https://{pc-ip}:9440/api/clustermgmt/v4.0.a1/config/cluster/^fAAffdfC-a093-65E9-cDcF-c4dBCeEd1Dcb$/rsyslog"
+  /clustermgmt/v4.0.a1/config/cluster/{clusterExtId}/rackable-units:
+    get:
+      tags:
+      - Cluster
+      summary: Get rackable unit entities of a cluster
+      description: Get rackable unit entities of a cluster
+      operationId: getRackableUnits
+      parameters:
+      - name: clusterExtId
+        in: path
+        description: Cluster UUID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          pattern: ^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$
+          type: string
+      responses:
+        200:
+          description: The requested rackable unit entities
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.GetRackableUnitsResponse'
+        4XX:
+          description: Client error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.GetRackableUnitsResponse'
+        5XX:
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.GetRackableUnitsResponse'
+      x-code-samples:
+      - lang: Java
+        source: "\npackage sample;\n\nimport com.nutanix.clu.java.client.ApiClient;\n\
+          import com.nutanix.clu.java.client.api.ClusterApi;\nimport com.nutanix.dp1.clu.clustermgmt.v4.config.GetRackableUnitsResponse;\n\
+          \npublic class JavaSdkSample {\n\tpublic static void main(String[] args)\
+          \ {\n\t\tApiClient client = new ApiClient();\n\t\tclient.setHost(\"localhost\"\
+          );\n\t\tclient.setPort(9440);\n\t\tclient.setRetryInterval(100);\n\t\tclient.setMaxRetryAttempts(2);\n\
+          \t\tclient.setUsername(\"username\");\n\t\tclient.setPassword(\"password\"\
+          );\n\n\t\tClusterApi clusterApi = new ClusterApi(client);\n\n\t\tString\
+          \ clusterExtId = \"^89A97eFe-BCED-F3E6-9f7e-192Db3C7Bcfa$\";\n\t\tGetRackableUnitsResponse\
+          \ getRackableUnitsResponse = clusterApi.getRackableUnits(clusterExtId);\n\
+          \t}\n}\n"
+      - lang: JavaScript
+        source: |2
+
+          import ApiClient from "@nutanix/clustermgmt-js-client/src/ApiClient";
+          import ClusterApi from "@nutanix/clustermgmt-js-client/src/apis/Cluster-endpoints";
+          import GetRackableUnitsResponse from "@nutanix/clustermgmt-js-client/src/models/clustermgmt/v4/config/GetRackableUnitsResponse";
+
+          let apiClientInstance = new ApiClient();
+          apiClientInstance.maxRetryAttempts = 2;
+          apiClientInstance.retryInterval = 500;
+          apiClientInstance.host = 'localhost'
+          apiClientInstance.port = '9440';
+          apiClientInstance.username = 'username';
+          apiClientInstance.password = 'password';
+          let clusterApi = new ClusterApi(apiClientInstance);
+
+          function sample() {
+              let clusterExtId = "^Ce81Bb6a-cc9E-8B90-9FEC-D8ebd4dCa0bA$";
+
+              clusterApi.getRackableUnits(clusterExtId).then(({data, response}) =>
+                  console.log(response.status);
+                  console.log(data.getData());
+                  done();
+              }).catch((error) => {
+                  console.log(error);
+                  done(error);
+              });
+          }
+      - lang: Python
+        source: |2
+
+          import ntnx_clustermgmt_py_client
+
+          if __name__ == "__main__":
+              config = ntnx_clustermgmt_py_client.configuration.Configuration()
+              config.host = "localhost"
+              config.port = 9440
+              config.max_retry_attempts = 1
+              config.backoff_factor = 3
+              config.username = "username"
+              config.password = "password"
+              client = ntnx_clustermgmt_py_client.ApiClient(configuration=config)
+              clusterApi = ntnx_clustermgmt_py_client.ClusterApi(api_client=client)
+              clusterExtId = "^118b5E4a-4ba7-5dBd-2eaE-52cbBDFbAC11$"
+              api_response = clusterApi.get_rackable_units(clusterExtId)
+      - lang: Go
+        source: |2+
+
+          package main
+
+          import {
+              "fmt"
+              "nutanix/clustermgmt-go-client/v4/api"
+              "nutanix/clustermgmt-go-client/v4/client"
+          }
+
+          var (
+              ApiClientInstance *client.ApiClient
+              ClusterApiInstance *api.ClusterApi
+          )
+
+          func main() {
+              ApiClientInstance = client.NewApiClient()
+              ApiClientInstance.Host = "localhost"
+              ApiClientInstance.Port = 9440
+              ApiClientInstance.RetryInterval = 100
+              ApiClientInstance.MaxRetryAttempts = 2
+              ApiClientInstance.AllowVersionNegotiation = true
+              ApiClientInstance.Username = "username"
+              ApiClientInstance.Password = "password"
+
+              ClusterApiInstance = api.ClusterApi(ApiClientInstance)
+
+              clusterExtId := "^dAEe11BC-Cfbb-1378-aeE7-dCccD13D3Dcc$"
+
+              response, _ := ClusterApiInstance.GetRackableUnits(clusterExtId)
+              fmt.Println(response)
+          }
+
+      - lang: cURL
+        source: |2
+
+          curl --request GET \
+               --url "https://{pc-ip}:9440/api/clustermgmt/v4.0.a1/config/cluster/^2cfb46bf-D6cD-3b6b-4Bd4-58ab7bfeDabD$/rackable-units" \
+               --header 'Accept: application/json' \
+      - lang: Wget
+        source: |2
+
+          wget --verbose \
+               --method GET \
+               --header 'Accept: application/json' \
+               - "https://{pc-ip}:9440/api/clustermgmt/v4.0.a1/config/cluster/^cfEBDfbf-E0dE-f389-BcCb-56C3Bcfeb476$/rackable-units"
+  /clustermgmt/v4.0.a1/config/cluster/{clusterExtId}/rackable-unit/{rackableUnitExtId}:
+    get:
+      tags:
+      - Cluster
+      summary: Get rackable unit entity
+      description: Get rackable unit entity
+      operationId: getRackableUnit
+      parameters:
+      - name: clusterExtId
+        in: path
+        description: Cluster UUID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          pattern: ^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$
+          type: string
+      - name: rackableUnitExtId
+        in: path
+        description: Rackable unit UUID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          pattern: ^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$
+          type: string
+      responses:
+        200:
+          description: The requested rackable unit entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.GetRackableUnitResponse'
+        4XX:
+          description: Client error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.GetRackableUnitResponse'
+        5XX:
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.GetRackableUnitResponse'
+      x-code-samples:
+      - lang: Java
+        source: "\npackage sample;\n\nimport com.nutanix.clu.java.client.ApiClient;\n\
+          import com.nutanix.clu.java.client.api.ClusterApi;\nimport com.nutanix.dp1.clu.clustermgmt.v4.config.GetRackableUnitResponse;\n\
+          \npublic class JavaSdkSample {\n\tpublic static void main(String[] args)\
+          \ {\n\t\tApiClient client = new ApiClient();\n\t\tclient.setHost(\"localhost\"\
+          );\n\t\tclient.setPort(9440);\n\t\tclient.setRetryInterval(100);\n\t\tclient.setMaxRetryAttempts(2);\n\
+          \t\tclient.setUsername(\"username\");\n\t\tclient.setPassword(\"password\"\
+          );\n\n\t\tClusterApi clusterApi = new ClusterApi(client);\n\n\t\tString\
+          \ clusterExtId = \"^5c91CbA8-fD03-e302-CbdB-F74cbCEE6BFC$\";\n\t\tString\
+          \ rackableUnitExtId = \"^7B5dAaBb-C3C0-9cA1-0b73-fCb9F7E16Ed0$\";\n\t\t\
+          GetRackableUnitResponse getRackableUnitResponse = clusterApi.getRackableUnit(clusterExtId,\
+          \ rackableUnitExtId);\n\t}\n}\n"
+      - lang: JavaScript
+        source: |2
+
+          import ApiClient from "@nutanix/clustermgmt-js-client/src/ApiClient";
+          import ClusterApi from "@nutanix/clustermgmt-js-client/src/apis/Cluster-endpoints";
+          import GetRackableUnitResponse from "@nutanix/clustermgmt-js-client/src/models/clustermgmt/v4/config/GetRackableUnitResponse";
+
+          let apiClientInstance = new ApiClient();
+          apiClientInstance.maxRetryAttempts = 2;
+          apiClientInstance.retryInterval = 500;
+          apiClientInstance.host = 'localhost'
+          apiClientInstance.port = '9440';
+          apiClientInstance.username = 'username';
+          apiClientInstance.password = 'password';
+          let clusterApi = new ClusterApi(apiClientInstance);
+
+          function sample() {
+              let clusterExtId = "^ff2BDFda-eDeE-CFca-8e3d-96bF8fc74fC2$";
+              let rackableUnitExtId = "^C5da759D-dEFF-017f-bAeA-cD27BddFd0c0$";
+
+              clusterApi.getRackableUnit(clusterExtId, rackableUnitExtId).then(({data, response}) =>
+                  console.log(response.status);
+                  console.log(data.getData());
+                  done();
+              }).catch((error) => {
+                  console.log(error);
+                  done(error);
+              });
+          }
+      - lang: Python
+        source: |2
+
+          import ntnx_clustermgmt_py_client
+
+          if __name__ == "__main__":
+              config = ntnx_clustermgmt_py_client.configuration.Configuration()
+              config.host = "localhost"
+              config.port = 9440
+              config.max_retry_attempts = 1
+              config.backoff_factor = 3
+              config.username = "username"
+              config.password = "password"
+              client = ntnx_clustermgmt_py_client.ApiClient(configuration=config)
+              clusterApi = ntnx_clustermgmt_py_client.ClusterApi(api_client=client)
+              clusterExtId = "^dCebbaBE-421f-92a6-9EFd-cF8c6DCCe1cb$"
+              rackableUnitExtId = "^3EDEbace-Ab5C-49df-Cfbe-f6d4eCDE2Cca$"
+              api_response = clusterApi.get_rackable_unit(clusterExtId, rackableUnitExtId)
+      - lang: Go
+        source: |2+
+
+          package main
+
+          import {
+              "fmt"
+              "nutanix/clustermgmt-go-client/v4/api"
+              "nutanix/clustermgmt-go-client/v4/client"
+          }
+
+          var (
+              ApiClientInstance *client.ApiClient
+              ClusterApiInstance *api.ClusterApi
+          )
+
+          func main() {
+              ApiClientInstance = client.NewApiClient()
+              ApiClientInstance.Host = "localhost"
+              ApiClientInstance.Port = 9440
+              ApiClientInstance.RetryInterval = 100
+              ApiClientInstance.MaxRetryAttempts = 2
+              ApiClientInstance.AllowVersionNegotiation = true
+              ApiClientInstance.Username = "username"
+              ApiClientInstance.Password = "password"
+
+              ClusterApiInstance = api.ClusterApi(ApiClientInstance)
+
+              clusterExtId := "^B4a170ea-Fed9-BbDe-7Eea-2b9dc51AD7aD$"
+              rackableUnitExtId := "^a296bF8E-2dAF-F1dD-Aaa0-bc42fa878BcC$"
+
+              response, _ := ClusterApiInstance.GetRackableUnit(clusterExtId, rackableUnitExtId)
+              fmt.Println(response)
+          }
+
+      - lang: cURL
+        source: |2
+
+          curl --request GET \
+               --url "https://{pc-ip}:9440/api/clustermgmt/v4.0.a1/config/cluster/^eCd9EdCe-Cf7f-DAbC-ABDA-bFAdFc0d17eF$/rackable-unit/^BdBDd9fE-1aFd-DFBc-EcCf-aA0bDC01fEC9$" \
+               --header 'Accept: application/json' \
+      - lang: Wget
+        source: |2
+
+          wget --verbose \
+               --method GET \
+               --header 'Accept: application/json' \
+               - "https://{pc-ip}:9440/api/clustermgmt/v4.0.a1/config/cluster/^FbfFacbc-Defe-6eDf-d40d-5eA59cAd533a$/rackable-unit/^3F4df3C2-F4Ab-bbEc-f19D-92dF3BfdC88f$"
+  /clustermgmt/v4.0.a1/config/cluster/{clusterExtId}/domain-fault-tolerance-status:
+    get:
+      tags:
+      - Cluster
+      summary: Get Domain Fault tolerance status
+      description: Get Domain Fault tolerance status
+      operationId: getDomainFaultToleranceStatus
+      parameters:
+      - name: clusterExtId
+        in: path
+        description: Cluster UUID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          pattern: ^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$
+          type: string
+      responses:
+        200:
+          description: The requested Domain Fault tolerance status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.GetDomainFaultToleranceResponse'
+        4XX:
+          description: Client error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.GetDomainFaultToleranceResponse'
+        5XX:
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.GetDomainFaultToleranceResponse'
+      x-code-samples:
+      - lang: Java
+        source: "\npackage sample;\n\nimport com.nutanix.clu.java.client.ApiClient;\n\
+          import com.nutanix.clu.java.client.api.ClusterApi;\nimport com.nutanix.dp1.clu.clustermgmt.v4.config.GetDomainFaultToleranceResponse;\n\
+          \npublic class JavaSdkSample {\n\tpublic static void main(String[] args)\
+          \ {\n\t\tApiClient client = new ApiClient();\n\t\tclient.setHost(\"localhost\"\
+          );\n\t\tclient.setPort(9440);\n\t\tclient.setRetryInterval(100);\n\t\tclient.setMaxRetryAttempts(2);\n\
+          \t\tclient.setUsername(\"username\");\n\t\tclient.setPassword(\"password\"\
+          );\n\n\t\tClusterApi clusterApi = new ClusterApi(client);\n\n\t\tString\
+          \ clusterExtId = \"^180AE8bA-6D19-EfaD-5c86-20CfBc9BA5fd$\";\n\t\tGetDomainFaultToleranceResponse\
+          \ getDomainFaultToleranceResponse = clusterApi.getDomainFaultToleranceStatus(clusterExtId);\n\
+          \t}\n}\n"
+      - lang: JavaScript
+        source: |2
+
+          import ApiClient from "@nutanix/clustermgmt-js-client/src/ApiClient";
+          import ClusterApi from "@nutanix/clustermgmt-js-client/src/apis/Cluster-endpoints";
+          import GetDomainFaultToleranceResponse from "@nutanix/clustermgmt-js-client/src/models/clustermgmt/v4/config/GetDomainFaultToleranceResponse";
+
+          let apiClientInstance = new ApiClient();
+          apiClientInstance.maxRetryAttempts = 2;
+          apiClientInstance.retryInterval = 500;
+          apiClientInstance.host = 'localhost'
+          apiClientInstance.port = '9440';
+          apiClientInstance.username = 'username';
+          apiClientInstance.password = 'password';
+          let clusterApi = new ClusterApi(apiClientInstance);
+
+          function sample() {
+              let clusterExtId = "^fEEBec0b-1DfF-6DDb-dD1a-7d9fEae77DFD$";
+
+              clusterApi.getDomainFaultToleranceStatus(clusterExtId).then(({data, response}) =>
+                  console.log(response.status);
+                  console.log(data.getData());
+                  done();
+              }).catch((error) => {
+                  console.log(error);
+                  done(error);
+              });
+          }
+      - lang: Python
+        source: |2
+
+          import ntnx_clustermgmt_py_client
+
+          if __name__ == "__main__":
+              config = ntnx_clustermgmt_py_client.configuration.Configuration()
+              config.host = "localhost"
+              config.port = 9440
+              config.max_retry_attempts = 1
+              config.backoff_factor = 3
+              config.username = "username"
+              config.password = "password"
+              client = ntnx_clustermgmt_py_client.ApiClient(configuration=config)
+              clusterApi = ntnx_clustermgmt_py_client.ClusterApi(api_client=client)
+              clusterExtId = "^e8bAFcbD-22F6-Ca6e-96d1-a4A66eAa57bB$"
+              api_response = clusterApi.get_domain_fault_tolerance_status(clusterExtId)
+      - lang: Go
+        source: |2+
+
+          package main
+
+          import {
+              "fmt"
+              "nutanix/clustermgmt-go-client/v4/api"
+              "nutanix/clustermgmt-go-client/v4/client"
+          }
+
+          var (
+              ApiClientInstance *client.ApiClient
+              ClusterApiInstance *api.ClusterApi
+          )
+
+          func main() {
+              ApiClientInstance = client.NewApiClient()
+              ApiClientInstance.Host = "localhost"
+              ApiClientInstance.Port = 9440
+              ApiClientInstance.RetryInterval = 100
+              ApiClientInstance.MaxRetryAttempts = 2
+              ApiClientInstance.AllowVersionNegotiation = true
+              ApiClientInstance.Username = "username"
+              ApiClientInstance.Password = "password"
+
+              ClusterApiInstance = api.ClusterApi(ApiClientInstance)
+
+              clusterExtId := "^37C7fF83-D940-e9fc-1f27-aC2ea303f3CF$"
+
+              response, _ := ClusterApiInstance.GetDomainFaultToleranceStatus(clusterExtId)
+              fmt.Println(response)
+          }
+
+      - lang: cURL
+        source: |2
+
+          curl --request GET \
+               --url "https://{pc-ip}:9440/api/clustermgmt/v4.0.a1/config/cluster/^Cc0c02b0-ffbd-fECb-3C8e-C51d9f5be0Ff$/domain-fault-tolerance-status" \
+               --header 'Accept: application/json' \
+      - lang: Wget
+        source: |2
+
+          wget --verbose \
+               --method GET \
+               --header 'Accept: application/json' \
+               - "https://{pc-ip}:9440/api/clustermgmt/v4.0.a1/config/cluster/^DCaBce6b-86e6-aBd9-FC2c-Dcb43a1fB9bd$/domain-fault-tolerance-status"
+  /clustermgmt/v4.0.a1/config/cluster/{clusterExtId}/host/{hostExtId}:
+    get:
+      tags:
+      - Cluster
+      summary: Get host entity
+      description: Get host entity
+      operationId: getHost
+      parameters:
+      - name: clusterExtId
+        in: path
+        description: Cluster UUID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          pattern: ^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$
+          type: string
+      - name: hostExtId
+        in: path
+        description: Host UUID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          pattern: ^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$
+          type: string
+      responses:
+        200:
+          description: The requested Host entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.GetHostResponse'
+        4XX:
+          description: Client error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.GetHostResponse'
+        5XX:
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.GetHostResponse'
+      x-code-samples:
+      - lang: Java
+        source: "\npackage sample;\n\nimport com.nutanix.clu.java.client.ApiClient;\n\
+          import com.nutanix.clu.java.client.api.ClusterApi;\nimport com.nutanix.dp1.clu.clustermgmt.v4.config.GetHostResponse;\n\
+          \npublic class JavaSdkSample {\n\tpublic static void main(String[] args)\
+          \ {\n\t\tApiClient client = new ApiClient();\n\t\tclient.setHost(\"localhost\"\
+          );\n\t\tclient.setPort(9440);\n\t\tclient.setRetryInterval(100);\n\t\tclient.setMaxRetryAttempts(2);\n\
+          \t\tclient.setUsername(\"username\");\n\t\tclient.setPassword(\"password\"\
+          );\n\n\t\tClusterApi clusterApi = new ClusterApi(client);\n\n\t\tString\
+          \ clusterExtId = \"^dCDb6b4c-c2DD-099E-73dA-b802FfeFf9Cb$\";\n\t\tString\
+          \ hostExtId = \"^0b7DB58C-7c8f-BCAd-E063-5D7afEB8cAC6$\";\n\t\tGetHostResponse\
+          \ getHostResponse = clusterApi.getHost(clusterExtId, hostExtId);\n\t}\n\
+          }\n"
+      - lang: JavaScript
+        source: |2
+
+          import ApiClient from "@nutanix/clustermgmt-js-client/src/ApiClient";
+          import ClusterApi from "@nutanix/clustermgmt-js-client/src/apis/Cluster-endpoints";
+          import GetHostResponse from "@nutanix/clustermgmt-js-client/src/models/clustermgmt/v4/config/GetHostResponse";
+
+          let apiClientInstance = new ApiClient();
+          apiClientInstance.maxRetryAttempts = 2;
+          apiClientInstance.retryInterval = 500;
+          apiClientInstance.host = 'localhost'
+          apiClientInstance.port = '9440';
+          apiClientInstance.username = 'username';
+          apiClientInstance.password = 'password';
+          let clusterApi = new ClusterApi(apiClientInstance);
+
+          function sample() {
+              let clusterExtId = "^aADDC17D-A683-F6Cb-bE82-bBDd5fFceEcc$";
+              let hostExtId = "^89bCdFEC-dfFc-94EE-ad7F-cCEdf5CABA7e$";
+
+              clusterApi.getHost(clusterExtId, hostExtId).then(({data, response}) =>
+                  console.log(response.status);
+                  console.log(data.getData());
+                  done();
+              }).catch((error) => {
+                  console.log(error);
+                  done(error);
+              });
+          }
+      - lang: Python
+        source: |2
+
+          import ntnx_clustermgmt_py_client
+
+          if __name__ == "__main__":
+              config = ntnx_clustermgmt_py_client.configuration.Configuration()
+              config.host = "localhost"
+              config.port = 9440
+              config.max_retry_attempts = 1
+              config.backoff_factor = 3
+              config.username = "username"
+              config.password = "password"
+              client = ntnx_clustermgmt_py_client.ApiClient(configuration=config)
+              clusterApi = ntnx_clustermgmt_py_client.ClusterApi(api_client=client)
+              clusterExtId = "^8DF6072b-CA1d-FdEa-5fBB-bF0a7b99C377$"
+              hostExtId = "^e6cFe0Bb-4f6b-07bf-9FBd-Cacd8baeBaB1$"
+              api_response = clusterApi.get_host(clusterExtId, hostExtId)
+      - lang: Go
+        source: |2+
+
+          package main
+
+          import {
+              "fmt"
+              "nutanix/clustermgmt-go-client/v4/api"
+              "nutanix/clustermgmt-go-client/v4/client"
+          }
+
+          var (
+              ApiClientInstance *client.ApiClient
+              ClusterApiInstance *api.ClusterApi
+          )
+
+          func main() {
+              ApiClientInstance = client.NewApiClient()
+              ApiClientInstance.Host = "localhost"
+              ApiClientInstance.Port = 9440
+              ApiClientInstance.RetryInterval = 100
+              ApiClientInstance.MaxRetryAttempts = 2
+              ApiClientInstance.AllowVersionNegotiation = true
+              ApiClientInstance.Username = "username"
+              ApiClientInstance.Password = "password"
+
+              ClusterApiInstance = api.ClusterApi(ApiClientInstance)
+
+              clusterExtId := "^C0AfB6ba-eeab-D3Fb-18bB-9FDA1b501dfB$"
+              hostExtId := "^Ba5ac272-70CA-e9B0-C2Dc-df8aC5ad9eDE$"
+
+              response, _ := ClusterApiInstance.GetHost(clusterExtId, hostExtId)
+              fmt.Println(response)
+          }
+
+      - lang: cURL
+        source: |2
+
+          curl --request GET \
+               --url "https://{pc-ip}:9440/api/clustermgmt/v4.0.a1/config/cluster/^CbA5F24f-b0Be-BfAF-daFA-b91cb6d0f54a$/host/^A4f1E9A4-CC49-e20f-1d6E-bBEaeAFaDdde$" \
+               --header 'Accept: application/json' \
+      - lang: Wget
+        source: |2
+
+          wget --verbose \
+               --method GET \
+               --header 'Accept: application/json' \
+               - "https://{pc-ip}:9440/api/clustermgmt/v4.0.a1/config/cluster/^6B6adEf6-eea2-7AB9-ECCA-F4EecFb821dF$/host/^c9d4Ce07-6b9C-Dfc8-F3a7-28dB1ebc4a3B$"
+  /clustermgmt/v4.0.a1/config/cluster/{clusterExtId}/hosts:
+    get:
+      tags:
+      - Cluster
+      summary: Get host entities of a cluster
+      description: Get host entities of a cluster
+      operationId: getHosts
+      parameters:
+      - name: clusterExtId
+        in: path
+        description: Cluster UUID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          pattern: ^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$
+          type: string
+      - name: $page
+        in: query
+        description: |
+          A URL query parameter that specifies the page number of the result set.  Must be a positive integer between 0 and the maximum number of pages that are available for that resource.  Any number out of this range will be set to its nearest bound.  In other words, a page number of less than 0 would be set to 0 and a page number greater than the total available pages would be set to the last page.
+        required: false
+        style: form
+        explode: false
+        schema:
+          minimum: 0
+          type: integer
+          description: |
+            A URL query parameter that specifies the page number of the result set.  Must be a positive integer between 0 and the maximum number of pages that are available for that resource.  Any number out of this range will be set to its nearest bound.  In other words, a page number of less than 0 would be set to 0 and a page number greater than the total available pages would be set to the last page.
+          format: int32
+          default: 0
+      - name: $limit
+        in: query
+        description: |
+          A URL query parameter that specifies the total number of records returned in the result set.  Must be a positive integer between 0 and 100. Any number out of this range will be set to the default maximum number of records, which is 100.
+        required: false
+        style: form
+        explode: false
+        schema:
+          maximum: 100
+          type: integer
+          description: |
+            A URL query parameter that specifies the total number of records returned in the result set.  Must be a positive integer between 0 and 100. Any number out of this range will be set to the default maximum number of records, which is 100.
+          format: int32
+          default: 50
+      - name: $filter
+        in: query
+        description: |
+          A URL query parameter that allows clients to filter a collection of resources. The expression specified with $filter is evaluated for each resource in the collection, and only items where the expression evaluates to true are included in the response. Expression specified with the $filter must conform to the OData V4.01 URL conventions.
+          The filter can be applied on the following fields:
+          - bootTimeUsecs
+          - cpuCapacityHz
+          - cpuFrequencyHz
+          - cpuModel
+          - defaultVhdContainerId
+          - defaultVhdContainerUuid
+          - defaultVhdLocation
+          - defaultVmContainerId
+          - defaultVmContainerUuid
+          - defaultVmLocation
+          - gpuDriverVersion
+          - hostName
+          - memorySizeBytes
+          - numberOfCpuCores
+          - numberOfCpuSockets
+          - numberOfCpuThreads
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: $orderby
+        in: query
+        description: |
+          A URL query parameter that allows clients to specify the sort criteria for the returned list of objects. Resources can be sorted in ascending order using asc or descending order using desc. If asc or desc are not specified the resources will be sorted in ascending order by default. For example, 'orderby=templateName desc' would get all templates sorted by templateName in desc order.
+          The orderby can be applied to the following fields:
+          - hostName
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: The requested Host entities
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.GetHostsResponse'
+        4XX:
+          description: Client error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.GetHostsResponse'
+        5XX:
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.GetHostsResponse'
+      x-code-samples:
+      - lang: Java
+        source: "\npackage sample;\n\nimport com.nutanix.clu.java.client.ApiClient;\n\
+          import com.nutanix.clu.java.client.api.ClusterApi;\nimport com.nutanix.dp1.clu.clustermgmt.v4.config.GetHostsResponse;\n\
+          \npublic class JavaSdkSample {\n\tpublic static void main(String[] args)\
+          \ {\n\t\tApiClient client = new ApiClient();\n\t\tclient.setHost(\"localhost\"\
+          );\n\t\tclient.setPort(9440);\n\t\tclient.setRetryInterval(100);\n\t\tclient.setMaxRetryAttempts(2);\n\
+          \t\tclient.setUsername(\"username\");\n\t\tclient.setPassword(\"password\"\
+          );\n\n\t\tClusterApi clusterApi = new ClusterApi(client);\n\n\t\tString\
+          \ clusterExtId = \"^03aC141D-aC4a-aeB8-9265-5CFFB4bd97BA$\";\n\t\tint $page\
+          \ = 0;\n\t\tint $limit = 50;\n\t\tString $filter = \"string_sample_data\"\
+          ;\n\t\tString $orderby = \"string_sample_data\";\n\t\tGetHostsResponse getHostsResponse\
+          \ = clusterApi.getHosts(clusterExtId, $page, $limit, $filter, $orderby);\n\
+          \t}\n}\n"
+      - lang: JavaScript
+        source: |2
+
+          import ApiClient from "@nutanix/clustermgmt-js-client/src/ApiClient";
+          import ClusterApi from "@nutanix/clustermgmt-js-client/src/apis/Cluster-endpoints";
+          import GetHostsResponse from "@nutanix/clustermgmt-js-client/src/models/clustermgmt/v4/config/GetHostsResponse";
+
+          let apiClientInstance = new ApiClient();
+          apiClientInstance.maxRetryAttempts = 2;
+          apiClientInstance.retryInterval = 500;
+          apiClientInstance.host = 'localhost'
+          apiClientInstance.port = '9440';
+          apiClientInstance.username = 'username';
+          apiClientInstance.password = 'password';
+          let clusterApi = new ClusterApi(apiClientInstance);
+
+          function sample() {
+              let clusterExtId = "^7fbAaBd6-EEbb-FC6e-e0Ee-aAf1CB67c87d$";
+              let $page = 0;
+              let $limit = 50;
+              let $filter = "string_sample_data";
+              let $orderby = "string_sample_data";
+
+              clusterApi.getHosts(clusterExtId, $page, $limit, $filter, $orderby).then(({data, response}) =>
+                  console.log(response.status);
+                  console.log(data.getData());
+                  done();
+              }).catch((error) => {
+                  console.log(error);
+                  done(error);
+              });
+          }
+      - lang: Python
+        source: |2
+
+          import ntnx_clustermgmt_py_client
+
+          if __name__ == "__main__":
+              config = ntnx_clustermgmt_py_client.configuration.Configuration()
+              config.host = "localhost"
+              config.port = 9440
+              config.max_retry_attempts = 1
+              config.backoff_factor = 3
+              config.username = "username"
+              config.password = "password"
+              client = ntnx_clustermgmt_py_client.ApiClient(configuration=config)
+              clusterApi = ntnx_clustermgmt_py_client.ClusterApi(api_client=client)
+              clusterExtId = "^Fd2f1ceA-C5A4-CDaC-Aeaa-4feE58de4A5a$"
+              $page = 0
+              $limit = 50
+              $filter = "string_sample_data"
+              $orderby = "string_sample_data"
+              api_response = clusterApi.get_hosts(clusterExtId, $page, $limit, $filter, $orderby)
+      - lang: Go
+        source: |2+
+
+          package main
+
+          import {
+              "fmt"
+              "nutanix/clustermgmt-go-client/v4/api"
+              "nutanix/clustermgmt-go-client/v4/client"
+          }
+
+          var (
+              ApiClientInstance *client.ApiClient
+              ClusterApiInstance *api.ClusterApi
+          )
+
+          func main() {
+              ApiClientInstance = client.NewApiClient()
+              ApiClientInstance.Host = "localhost"
+              ApiClientInstance.Port = 9440
+              ApiClientInstance.RetryInterval = 100
+              ApiClientInstance.MaxRetryAttempts = 2
+              ApiClientInstance.AllowVersionNegotiation = true
+              ApiClientInstance.Username = "username"
+              ApiClientInstance.Password = "password"
+
+              ClusterApiInstance = api.ClusterApi(ApiClientInstance)
+
+              clusterExtId := "^d9c6dFD7-fdB6-Bc6C-EE90-ea6AEfA0Badd$"
+              $page := 0
+              $limit := 50
+              $filter := "string_sample_data"
+              $orderby := "string_sample_data"
+
+              response, _ := ClusterApiInstance.GetHosts(clusterExtId, $page, $limit, $filter, $orderby)
+              fmt.Println(response)
+          }
+
+      - lang: cURL
+        source: |2
+
+          curl --request GET \
+               --url "https://{pc-ip}:9440/api/clustermgmt/v4.0.a1/config/cluster/^197aeC1D-BFbf-BC68-fff9-B8AeeCaC6fbD$/hosts?$filter=string_sample_data&$limit=50&$orderby=string_sample_data&$page=0" \
+               --header 'Accept: application/json' \
+      - lang: Wget
+        source: |2
+
+          wget --verbose \
+               --method GET \
+               --header 'Accept: application/json' \
+               - "https://{pc-ip}:9440/api/clustermgmt/v4.0.a1/config/cluster/^9aDF2AD6-fe9C-aab2-FCF2-bAeDcE4Bb7D0$/hosts?$filter=string_sample_data&$limit=50&$orderby=string_sample_data&$page=0"
+  /clustermgmt/v4.0.a1/config/cluster/{clusterExtId}/host/{hostExtId}/host-gpus:
+    get:
+      tags:
+      - Cluster
+      summary: Get host GPUs on a particular host
+      description: Get host GPUs on a particular host
+      operationId: getHostGpus
+      parameters:
+      - name: clusterExtId
+        in: path
+        description: Cluster UUID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          pattern: ^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$
+          type: string
+      - name: hostExtId
+        in: path
+        description: Host UUID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          pattern: ^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$
+          type: string
+      - name: $page
+        in: query
+        description: |
+          A URL query parameter that specifies the page number of the result set.  Must be a positive integer between 0 and the maximum number of pages that are available for that resource.  Any number out of this range will be set to its nearest bound.  In other words, a page number of less than 0 would be set to 0 and a page number greater than the total available pages would be set to the last page.
+        required: false
+        style: form
+        explode: false
+        schema:
+          minimum: 0
+          type: integer
+          description: |
+            A URL query parameter that specifies the page number of the result set.  Must be a positive integer between 0 and the maximum number of pages that are available for that resource.  Any number out of this range will be set to its nearest bound.  In other words, a page number of less than 0 would be set to 0 and a page number greater than the total available pages would be set to the last page.
+          format: int32
+          default: 0
+      - name: $limit
+        in: query
+        description: |
+          A URL query parameter that specifies the total number of records returned in the result set.  Must be a positive integer between 0 and 100. Any number out of this range will be set to the default maximum number of records, which is 100.
+        required: false
+        style: form
+        explode: false
+        schema:
+          maximum: 100
+          type: integer
+          description: |
+            A URL query parameter that specifies the total number of records returned in the result set.  Must be a positive integer between 0 and 100. Any number out of this range will be set to the default maximum number of records, which is 100.
+          format: int32
+          default: 50
+      - name: $filter
+        in: query
+        description: |
+          A URL query parameter that allows clients to filter a collection of resources. The expression specified with $filter is evaluated for each resource in the collection, and only items where the expression evaluates to true are included in the response. Expression specified with the $filter must conform to the OData V4.01 URL conventions.
+          The filter can be applied on the following fields:
+          - numberOfVgpusAllocated
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: $orderby
+        in: query
+        description: |
+          A URL query parameter that allows clients to specify the sort criteria for the returned list of objects. Resources can be sorted in ascending order using asc or descending order using desc. If asc or desc are not specified the resources will be sorted in ascending order by default. For example, 'orderby=templateName desc' would get all templates sorted by templateName in desc order.
+          The orderby can be applied to the following fields:
+          - numberOfVgpusAllocated
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: The requested Host GPU entities of host
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.GetHostGpusResponse'
+        4XX:
+          description: Client error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.GetHostGpusResponse'
+        5XX:
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.GetHostGpusResponse'
+      x-code-samples:
+      - lang: Java
+        source: "\npackage sample;\n\nimport com.nutanix.clu.java.client.ApiClient;\n\
+          import com.nutanix.clu.java.client.api.ClusterApi;\nimport com.nutanix.dp1.clu.clustermgmt.v4.config.GetHostGpusResponse;\n\
+          \npublic class JavaSdkSample {\n\tpublic static void main(String[] args)\
+          \ {\n\t\tApiClient client = new ApiClient();\n\t\tclient.setHost(\"localhost\"\
+          );\n\t\tclient.setPort(9440);\n\t\tclient.setRetryInterval(100);\n\t\tclient.setMaxRetryAttempts(2);\n\
+          \t\tclient.setUsername(\"username\");\n\t\tclient.setPassword(\"password\"\
+          );\n\n\t\tClusterApi clusterApi = new ClusterApi(client);\n\n\t\tString\
+          \ clusterExtId = \"^ad474c68-D9C4-C57f-9bf3-CAeFFBE8acEB$\";\n\t\tString\
+          \ hostExtId = \"^Ba68b1E6-bdeE-0bB8-b24F-ca1FD4dBFBab$\";\n\t\tint $page\
+          \ = 0;\n\t\tint $limit = 50;\n\t\tString $filter = \"string_sample_data\"\
+          ;\n\t\tString $orderby = \"string_sample_data\";\n\t\tGetHostGpusResponse\
+          \ getHostGpusResponse = clusterApi.getHostGpus(clusterExtId, hostExtId,\
+          \ $page, $limit, $filter, $orderby);\n\t}\n}\n"
+      - lang: JavaScript
+        source: |2
+
+          import ApiClient from "@nutanix/clustermgmt-js-client/src/ApiClient";
+          import ClusterApi from "@nutanix/clustermgmt-js-client/src/apis/Cluster-endpoints";
+          import GetHostGpusResponse from "@nutanix/clustermgmt-js-client/src/models/clustermgmt/v4/config/GetHostGpusResponse";
+
+          let apiClientInstance = new ApiClient();
+          apiClientInstance.maxRetryAttempts = 2;
+          apiClientInstance.retryInterval = 500;
+          apiClientInstance.host = 'localhost'
+          apiClientInstance.port = '9440';
+          apiClientInstance.username = 'username';
+          apiClientInstance.password = 'password';
+          let clusterApi = new ClusterApi(apiClientInstance);
+
+          function sample() {
+              let clusterExtId = "^dDfBCd6D-9bbb-23A3-EBe6-9d3d0AD4Eebd$";
+              let hostExtId = "^90097fcb-5Fd6-CFdF-8Db6-2F96B4BaA08D$";
+              let $page = 0;
+              let $limit = 50;
+              let $filter = "string_sample_data";
+              let $orderby = "string_sample_data";
+
+              clusterApi.getHostGpus(clusterExtId, hostExtId, $page, $limit, $filter, $orderby).then(({data, response}) =>
+                  console.log(response.status);
+                  console.log(data.getData());
+                  done();
+              }).catch((error) => {
+                  console.log(error);
+                  done(error);
+              });
+          }
+      - lang: Python
+        source: |2
+
+          import ntnx_clustermgmt_py_client
+
+          if __name__ == "__main__":
+              config = ntnx_clustermgmt_py_client.configuration.Configuration()
+              config.host = "localhost"
+              config.port = 9440
+              config.max_retry_attempts = 1
+              config.backoff_factor = 3
+              config.username = "username"
+              config.password = "password"
+              client = ntnx_clustermgmt_py_client.ApiClient(configuration=config)
+              clusterApi = ntnx_clustermgmt_py_client.ClusterApi(api_client=client)
+              clusterExtId = "^1CFbe586-dafE-FFef-caDC-dC8EDFcef8fe$"
+              hostExtId = "^Dca5aD2c-ddc9-dED4-cfc0-9C2f6FaDA811$"
+              $page = 0
+              $limit = 50
+              $filter = "string_sample_data"
+              $orderby = "string_sample_data"
+              api_response = clusterApi.get_host_gpus(clusterExtId, hostExtId, $page, $limit, $filter, $orderby)
+      - lang: Go
+        source: |2+
+
+          package main
+
+          import {
+              "fmt"
+              "nutanix/clustermgmt-go-client/v4/api"
+              "nutanix/clustermgmt-go-client/v4/client"
+          }
+
+          var (
+              ApiClientInstance *client.ApiClient
+              ClusterApiInstance *api.ClusterApi
+          )
+
+          func main() {
+              ApiClientInstance = client.NewApiClient()
+              ApiClientInstance.Host = "localhost"
+              ApiClientInstance.Port = 9440
+              ApiClientInstance.RetryInterval = 100
+              ApiClientInstance.MaxRetryAttempts = 2
+              ApiClientInstance.AllowVersionNegotiation = true
+              ApiClientInstance.Username = "username"
+              ApiClientInstance.Password = "password"
+
+              ClusterApiInstance = api.ClusterApi(ApiClientInstance)
+
+              clusterExtId := "^85da17A0-CFaC-aeAD-aeD0-eBBf2CDCAc8d$"
+              hostExtId := "^A6a9cAa4-AFCe-4Fa7-F95f-d592f5Ae00AF$"
+              $page := 0
+              $limit := 50
+              $filter := "string_sample_data"
+              $orderby := "string_sample_data"
+
+              response, _ := ClusterApiInstance.GetHostGpus(clusterExtId, hostExtId, $page, $limit, $filter, $orderby)
+              fmt.Println(response)
+          }
+
+      - lang: cURL
+        source: |2
+
+          curl --request GET \
+               --url "https://{pc-ip}:9440/api/clustermgmt/v4.0.a1/config/cluster/^ecdD674D-9FCB-EDA6-6B7C-bbeACb8aFF0f$/host/^fae9C51E-cd01-fbD8-a5e6-8abA623EeEFf$/host-gpus?$filter=string_sample_data&$limit=50&$orderby=string_sample_data&$page=0" \
+               --header 'Accept: application/json' \
+      - lang: Wget
+        source: |2
+
+          wget --verbose \
+               --method GET \
+               --header 'Accept: application/json' \
+               - "https://{pc-ip}:9440/api/clustermgmt/v4.0.a1/config/cluster/^cb6A2c38-BBde-7bFD-b1f9-fC9e9aBeF8a4$/host/^AFDCc46e-7330-9C4F-4DAf-8e6DFCb6faED$/host-gpus?$filter=string_sample_data&$limit=50&$orderby=string_sample_data&$page=0"
+  /clustermgmt/v4.0.a1/config/cluster/{clusterExtId}/host-gpus:
+    get:
+      tags:
+      - Cluster
+      summary: Get all host GPUs of a cluster
+      description: Get all host GPUs of a cluster
+      operationId: getHostGpusOfCluster
+      parameters:
+      - name: clusterExtId
+        in: path
+        description: Cluster UUID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          pattern: ^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$
+          type: string
+      - name: $page
+        in: query
+        description: |
+          A URL query parameter that specifies the page number of the result set.  Must be a positive integer between 0 and the maximum number of pages that are available for that resource.  Any number out of this range will be set to its nearest bound.  In other words, a page number of less than 0 would be set to 0 and a page number greater than the total available pages would be set to the last page.
+        required: false
+        style: form
+        explode: false
+        schema:
+          minimum: 0
+          type: integer
+          description: |
+            A URL query parameter that specifies the page number of the result set.  Must be a positive integer between 0 and the maximum number of pages that are available for that resource.  Any number out of this range will be set to its nearest bound.  In other words, a page number of less than 0 would be set to 0 and a page number greater than the total available pages would be set to the last page.
+          format: int32
+          default: 0
+      - name: $limit
+        in: query
+        description: |
+          A URL query parameter that specifies the total number of records returned in the result set.  Must be a positive integer between 0 and 100. Any number out of this range will be set to the default maximum number of records, which is 100.
+        required: false
+        style: form
+        explode: false
+        schema:
+          maximum: 100
+          type: integer
+          description: |
+            A URL query parameter that specifies the total number of records returned in the result set.  Must be a positive integer between 0 and 100. Any number out of this range will be set to the default maximum number of records, which is 100.
+          format: int32
+          default: 50
+      - name: $filter
+        in: query
+        description: |
+          A URL query parameter that allows clients to filter a collection of resources. The expression specified with $filter is evaluated for each resource in the collection, and only items where the expression evaluates to true are included in the response. Expression specified with the $filter must conform to the OData V4.01 URL conventions.
+          The filter can be applied on the following fields:
+          - numberOfVgpusAllocated
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: $orderby
+        in: query
+        description: |
+          A URL query parameter that allows clients to specify the sort criteria for the returned list of objects. Resources can be sorted in ascending order using asc or descending order using desc. If asc or desc are not specified the resources will be sorted in ascending order by default. For example, 'orderby=templateName desc' would get all templates sorted by templateName in desc order.
+          The orderby can be applied to the following fields:
+          - numberOfVgpusAllocated
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: The requested Host GPU entities in a cluster
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.GetClusterHostGpusResponse'
+        4XX:
+          description: Client error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.GetClusterHostGpusResponse'
+        5XX:
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.GetClusterHostGpusResponse'
+      x-code-samples:
+      - lang: Java
+        source: "\npackage sample;\n\nimport com.nutanix.clu.java.client.ApiClient;\n\
+          import com.nutanix.clu.java.client.api.ClusterApi;\nimport com.nutanix.dp1.clu.clustermgmt.v4.config.GetClusterHostGpusResponse;\n\
+          \npublic class JavaSdkSample {\n\tpublic static void main(String[] args)\
+          \ {\n\t\tApiClient client = new ApiClient();\n\t\tclient.setHost(\"localhost\"\
+          );\n\t\tclient.setPort(9440);\n\t\tclient.setRetryInterval(100);\n\t\tclient.setMaxRetryAttempts(2);\n\
+          \t\tclient.setUsername(\"username\");\n\t\tclient.setPassword(\"password\"\
+          );\n\n\t\tClusterApi clusterApi = new ClusterApi(client);\n\n\t\tString\
+          \ clusterExtId = \"^aAfaBBfA-ddED-ED5b-E9cA-ce2Fe1e37Ca6$\";\n\t\tint $page\
+          \ = 0;\n\t\tint $limit = 50;\n\t\tString $filter = \"string_sample_data\"\
+          ;\n\t\tString $orderby = \"string_sample_data\";\n\t\tGetClusterHostGpusResponse\
+          \ getClusterHostGpusResponse = clusterApi.getHostGpusOfCluster(clusterExtId,\
+          \ $page, $limit, $filter, $orderby);\n\t}\n}\n"
+      - lang: JavaScript
+        source: |2
+
+          import ApiClient from "@nutanix/clustermgmt-js-client/src/ApiClient";
+          import ClusterApi from "@nutanix/clustermgmt-js-client/src/apis/Cluster-endpoints";
+          import GetClusterHostGpusResponse from "@nutanix/clustermgmt-js-client/src/models/clustermgmt/v4/config/GetClusterHostGpusResponse";
+
+          let apiClientInstance = new ApiClient();
+          apiClientInstance.maxRetryAttempts = 2;
+          apiClientInstance.retryInterval = 500;
+          apiClientInstance.host = 'localhost'
+          apiClientInstance.port = '9440';
+          apiClientInstance.username = 'username';
+          apiClientInstance.password = 'password';
+          let clusterApi = new ClusterApi(apiClientInstance);
+
+          function sample() {
+              let clusterExtId = "^253e27Fc-aA95-4c24-ADAe-f2CF5845fAfF$";
+              let $page = 0;
+              let $limit = 50;
+              let $filter = "string_sample_data";
+              let $orderby = "string_sample_data";
+
+              clusterApi.getHostGpusOfCluster(clusterExtId, $page, $limit, $filter, $orderby).then(({data, response}) =>
+                  console.log(response.status);
+                  console.log(data.getData());
+                  done();
+              }).catch((error) => {
+                  console.log(error);
+                  done(error);
+              });
+          }
+      - lang: Python
+        source: |2
+
+          import ntnx_clustermgmt_py_client
+
+          if __name__ == "__main__":
+              config = ntnx_clustermgmt_py_client.configuration.Configuration()
+              config.host = "localhost"
+              config.port = 9440
+              config.max_retry_attempts = 1
+              config.backoff_factor = 3
+              config.username = "username"
+              config.password = "password"
+              client = ntnx_clustermgmt_py_client.ApiClient(configuration=config)
+              clusterApi = ntnx_clustermgmt_py_client.ClusterApi(api_client=client)
+              clusterExtId = "^d1EECA2d-02Ad-eec1-d3dF-5acda1C0fa35$"
+              $page = 0
+              $limit = 50
+              $filter = "string_sample_data"
+              $orderby = "string_sample_data"
+              api_response = clusterApi.get_host_gpus_of_cluster(clusterExtId, $page, $limit, $filter, $orderby)
+      - lang: Go
+        source: |2+
+
+          package main
+
+          import {
+              "fmt"
+              "nutanix/clustermgmt-go-client/v4/api"
+              "nutanix/clustermgmt-go-client/v4/client"
+          }
+
+          var (
+              ApiClientInstance *client.ApiClient
+              ClusterApiInstance *api.ClusterApi
+          )
+
+          func main() {
+              ApiClientInstance = client.NewApiClient()
+              ApiClientInstance.Host = "localhost"
+              ApiClientInstance.Port = 9440
+              ApiClientInstance.RetryInterval = 100
+              ApiClientInstance.MaxRetryAttempts = 2
+              ApiClientInstance.AllowVersionNegotiation = true
+              ApiClientInstance.Username = "username"
+              ApiClientInstance.Password = "password"
+
+              ClusterApiInstance = api.ClusterApi(ApiClientInstance)
+
+              clusterExtId := "^C3bdE9f9-0c8e-Baf0-501e-f1CC8cDeCbeD$"
+              $page := 0
+              $limit := 50
+              $filter := "string_sample_data"
+              $orderby := "string_sample_data"
+
+              response, _ := ClusterApiInstance.GetHostGpusOfCluster(clusterExtId, $page, $limit, $filter, $orderby)
+              fmt.Println(response)
+          }
+
+      - lang: cURL
+        source: |2
+
+          curl --request GET \
+               --url "https://{pc-ip}:9440/api/clustermgmt/v4.0.a1/config/cluster/^87EB69A8-D1Bc-E6ff-C68F-CbE1ADAE89Da$/host-gpus?$filter=string_sample_data&$limit=50&$orderby=string_sample_data&$page=0" \
+               --header 'Accept: application/json' \
+      - lang: Wget
+        source: |2
+
+          wget --verbose \
+               --method GET \
+               --header 'Accept: application/json' \
+               - "https://{pc-ip}:9440/api/clustermgmt/v4.0.a1/config/cluster/^Aa7dA18C-84e3-e8CF-0AaD-78DBDCdDdFf5$/host-gpus?$filter=string_sample_data&$limit=50&$orderby=string_sample_data&$page=0"
+  /clustermgmt/v4.0.a1/config/cluster/{clusterExtId}/gpu-profiles:
+    get:
+      tags:
+      - Cluster
+      summary: Get GPU profiles
+      description: Get GPU profiles
+      operationId: getGpuProfiles
+      parameters:
+      - name: clusterExtId
+        in: path
+        description: Cluster UUID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          pattern: ^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$
+          type: string
+      responses:
+        200:
+          description: The requested GPU profiles in a cluster
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.GetGpuProfilesResponse'
+        4XX:
+          description: Client error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.GetGpuProfilesResponse'
+        5XX:
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.GetGpuProfilesResponse'
+      x-code-samples:
+      - lang: Java
+        source: "\npackage sample;\n\nimport com.nutanix.clu.java.client.ApiClient;\n\
+          import com.nutanix.clu.java.client.api.ClusterApi;\nimport com.nutanix.dp1.clu.clustermgmt.v4.config.GetGpuProfilesResponse;\n\
+          \npublic class JavaSdkSample {\n\tpublic static void main(String[] args)\
+          \ {\n\t\tApiClient client = new ApiClient();\n\t\tclient.setHost(\"localhost\"\
+          );\n\t\tclient.setPort(9440);\n\t\tclient.setRetryInterval(100);\n\t\tclient.setMaxRetryAttempts(2);\n\
+          \t\tclient.setUsername(\"username\");\n\t\tclient.setPassword(\"password\"\
+          );\n\n\t\tClusterApi clusterApi = new ClusterApi(client);\n\n\t\tString\
+          \ clusterExtId = \"^1d2DefFb-cFBD-A7e6-adEe-Cd1BFcCBaADB$\";\n\t\tGetGpuProfilesResponse\
+          \ getGpuProfilesResponse = clusterApi.getGpuProfiles(clusterExtId);\n\t\
+          }\n}\n"
+      - lang: JavaScript
+        source: |2
+
+          import ApiClient from "@nutanix/clustermgmt-js-client/src/ApiClient";
+          import ClusterApi from "@nutanix/clustermgmt-js-client/src/apis/Cluster-endpoints";
+          import GetGpuProfilesResponse from "@nutanix/clustermgmt-js-client/src/models/clustermgmt/v4/config/GetGpuProfilesResponse";
+
+          let apiClientInstance = new ApiClient();
+          apiClientInstance.maxRetryAttempts = 2;
+          apiClientInstance.retryInterval = 500;
+          apiClientInstance.host = 'localhost'
+          apiClientInstance.port = '9440';
+          apiClientInstance.username = 'username';
+          apiClientInstance.password = 'password';
+          let clusterApi = new ClusterApi(apiClientInstance);
+
+          function sample() {
+              let clusterExtId = "^9B9b0Cb5-DF7e-22Af-b611-AFee66f0Bbe3$";
+
+              clusterApi.getGpuProfiles(clusterExtId).then(({data, response}) =>
+                  console.log(response.status);
+                  console.log(data.getData());
+                  done();
+              }).catch((error) => {
+                  console.log(error);
+                  done(error);
+              });
+          }
+      - lang: Python
+        source: |2
+
+          import ntnx_clustermgmt_py_client
+
+          if __name__ == "__main__":
+              config = ntnx_clustermgmt_py_client.configuration.Configuration()
+              config.host = "localhost"
+              config.port = 9440
+              config.max_retry_attempts = 1
+              config.backoff_factor = 3
+              config.username = "username"
+              config.password = "password"
+              client = ntnx_clustermgmt_py_client.ApiClient(configuration=config)
+              clusterApi = ntnx_clustermgmt_py_client.ClusterApi(api_client=client)
+              clusterExtId = "^e3a9dCE2-f42F-dEEF-114C-0beff2b2ECf8$"
+              api_response = clusterApi.get_gpu_profiles(clusterExtId)
+      - lang: Go
+        source: |2+
+
+          package main
+
+          import {
+              "fmt"
+              "nutanix/clustermgmt-go-client/v4/api"
+              "nutanix/clustermgmt-go-client/v4/client"
+          }
+
+          var (
+              ApiClientInstance *client.ApiClient
+              ClusterApiInstance *api.ClusterApi
+          )
+
+          func main() {
+              ApiClientInstance = client.NewApiClient()
+              ApiClientInstance.Host = "localhost"
+              ApiClientInstance.Port = 9440
+              ApiClientInstance.RetryInterval = 100
+              ApiClientInstance.MaxRetryAttempts = 2
+              ApiClientInstance.AllowVersionNegotiation = true
+              ApiClientInstance.Username = "username"
+              ApiClientInstance.Password = "password"
+
+              ClusterApiInstance = api.ClusterApi(ApiClientInstance)
+
+              clusterExtId := "^e7AB5dff-E0Ab-e264-BBb2-C92837B22e2b$"
+
+              response, _ := ClusterApiInstance.GetGpuProfiles(clusterExtId)
+              fmt.Println(response)
+          }
+
+      - lang: cURL
+        source: |2
+
+          curl --request GET \
+               --url "https://{pc-ip}:9440/api/clustermgmt/v4.0.a1/config/cluster/^791Ae6e9-eccE-BBC1-acdF-de13B163c36c$/gpu-profiles" \
+               --header 'Accept: application/json' \
+      - lang: Wget
+        source: |2
+
+          wget --verbose \
+               --method GET \
+               --header 'Accept: application/json' \
+               - "https://{pc-ip}:9440/api/clustermgmt/v4.0.a1/config/cluster/^1C7ceC9B-28a2-aCB6-b7DE-FDDE21dE58bC$/gpu-profiles"
+  /clustermgmt/v4.0.a1/config/cluster/{clusterExtId}/host/{hostExtId}/host-gpu/{hostGpuExtId}:
+    get:
+      tags:
+      - Cluster
+      summary: Get host GPU
+      description: Get host GPU
+      operationId: getHostGpu
+      parameters:
+      - name: clusterExtId
+        in: path
+        description: Cluster UUID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          pattern: ^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$
+          type: string
+      - name: hostExtId
+        in: path
+        description: Host UUID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          pattern: ^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$
+          type: string
+      - name: hostGpuExtId
+        in: path
+        description: Host GPU UUID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          pattern: ^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$
+          type: string
+      responses:
+        200:
+          description: The requested Host GPU entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.GetHostGpuResponse'
+        4XX:
+          description: Client error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.GetHostGpuResponse'
+        5XX:
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.GetHostGpuResponse'
+      x-code-samples:
+      - lang: Java
+        source: "\npackage sample;\n\nimport com.nutanix.clu.java.client.ApiClient;\n\
+          import com.nutanix.clu.java.client.api.ClusterApi;\nimport com.nutanix.dp1.clu.clustermgmt.v4.config.GetHostGpuResponse;\n\
+          \npublic class JavaSdkSample {\n\tpublic static void main(String[] args)\
+          \ {\n\t\tApiClient client = new ApiClient();\n\t\tclient.setHost(\"localhost\"\
+          );\n\t\tclient.setPort(9440);\n\t\tclient.setRetryInterval(100);\n\t\tclient.setMaxRetryAttempts(2);\n\
+          \t\tclient.setUsername(\"username\");\n\t\tclient.setPassword(\"password\"\
+          );\n\n\t\tClusterApi clusterApi = new ClusterApi(client);\n\n\t\tString\
+          \ clusterExtId = \"^ffdBaac4-ebA6-EFcd-BFd3-a4Ed94bdc47f$\";\n\t\tString\
+          \ hostExtId = \"^AcFa0Bea-53eA-7393-C8df-E87f8eEEfAF8$\";\n\t\tString hostGpuExtId\
+          \ = \"^dd9E9B8E-F0ef-f50E-A5F6-becbaFB24eeA$\";\n\t\tGetHostGpuResponse\
+          \ getHostGpuResponse = clusterApi.getHostGpu(clusterExtId, hostExtId, hostGpuExtId);\n\
+          \t}\n}\n"
+      - lang: JavaScript
+        source: |2
+
+          import ApiClient from "@nutanix/clustermgmt-js-client/src/ApiClient";
+          import ClusterApi from "@nutanix/clustermgmt-js-client/src/apis/Cluster-endpoints";
+          import GetHostGpuResponse from "@nutanix/clustermgmt-js-client/src/models/clustermgmt/v4/config/GetHostGpuResponse";
+
+          let apiClientInstance = new ApiClient();
+          apiClientInstance.maxRetryAttempts = 2;
+          apiClientInstance.retryInterval = 500;
+          apiClientInstance.host = 'localhost'
+          apiClientInstance.port = '9440';
+          apiClientInstance.username = 'username';
+          apiClientInstance.password = 'password';
+          let clusterApi = new ClusterApi(apiClientInstance);
+
+          function sample() {
+              let clusterExtId = "^a0FBB9Bf-aBAa-CdbE-37dE-F2Bdf3cCF01d$";
+              let hostExtId = "^26DbabAe-Cb2D-6f1d-CfAE-9Adf32FF32aD$";
+              let hostGpuExtId = "^EA4eceC4-E39b-dECA-4BCf-aBBcfBE5eEEf$";
+
+              clusterApi.getHostGpu(clusterExtId, hostExtId, hostGpuExtId).then(({data, response}) =>
+                  console.log(response.status);
+                  console.log(data.getData());
+                  done();
+              }).catch((error) => {
+                  console.log(error);
+                  done(error);
+              });
+          }
+      - lang: Python
+        source: |2
+
+          import ntnx_clustermgmt_py_client
+
+          if __name__ == "__main__":
+              config = ntnx_clustermgmt_py_client.configuration.Configuration()
+              config.host = "localhost"
+              config.port = 9440
+              config.max_retry_attempts = 1
+              config.backoff_factor = 3
+              config.username = "username"
+              config.password = "password"
+              client = ntnx_clustermgmt_py_client.ApiClient(configuration=config)
+              clusterApi = ntnx_clustermgmt_py_client.ClusterApi(api_client=client)
+              clusterExtId = "^d7affdEd-1dCD-daEc-b937-EFeCCcdAdE3f$"
+              hostExtId = "^EcAe5Db8-66e1-Fa90-4e6b-A8eD8Ad7B7C2$"
+              hostGpuExtId = "^7BaaEa9C-DB2A-a69B-94aa-5d8406f0DFEA$"
+              api_response = clusterApi.get_host_gpu(clusterExtId, hostExtId, hostGpuExtId)
+      - lang: Go
+        source: |2+
+
+          package main
+
+          import {
+              "fmt"
+              "nutanix/clustermgmt-go-client/v4/api"
+              "nutanix/clustermgmt-go-client/v4/client"
+          }
+
+          var (
+              ApiClientInstance *client.ApiClient
+              ClusterApiInstance *api.ClusterApi
+          )
+
+          func main() {
+              ApiClientInstance = client.NewApiClient()
+              ApiClientInstance.Host = "localhost"
+              ApiClientInstance.Port = 9440
+              ApiClientInstance.RetryInterval = 100
+              ApiClientInstance.MaxRetryAttempts = 2
+              ApiClientInstance.AllowVersionNegotiation = true
+              ApiClientInstance.Username = "username"
+              ApiClientInstance.Password = "password"
+
+              ClusterApiInstance = api.ClusterApi(ApiClientInstance)
+
+              clusterExtId := "^Bd2DCeDc-cdbB-caAc-2EFe-d11439BBeBE1$"
+              hostExtId := "^Afa9ea8E-Fb8E-42dE-Bc0D-deCca966DC1b$"
+              hostGpuExtId := "^50a94Cb8-92C2-F5a6-bbdD-727E1c7baeBD$"
+
+              response, _ := ClusterApiInstance.GetHostGpu(clusterExtId, hostExtId, hostGpuExtId)
+              fmt.Println(response)
+          }
+
+      - lang: cURL
+        source: |2
+
+          curl --request GET \
+               --url "https://{pc-ip}:9440/api/clustermgmt/v4.0.a1/config/cluster/^FeFE8f1b-a96A-c44E-aAFE-e03D14DeedED$/host/^974EFfe2-b7bC-AC1B-6AFE-bBB1Ade5EAdd$/host-gpu/^3cde6A6D-ccB3-eaa7-1dA2-b79ab3eBcD1E$" \
+               --header 'Accept: application/json' \
+      - lang: Wget
+        source: |2
+
+          wget --verbose \
+               --method GET \
+               --header 'Accept: application/json' \
+               - "https://{pc-ip}:9440/api/clustermgmt/v4.0.a1/config/cluster/^9fCd4CEb-daeE-e9Cf-BdEb-AaaF3DeF05E9$/host/^9a35704E-A3AF-eFd8-e2e5-3a7AdDbAF68f$/host-gpu/^7Eb136c9-6b45-EDaf-6D5f-Cc7BecDFAafa$"
+components:
+  schemas:
+    clustermgmt.v4.r0.a1.config.GetClusterResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.ClusterEntity'
+          - $ref: '#/components/schemas/clustermgmt.v4.r0.a1.error.ErrorResponse'
+      additionalProperties: false
+      description: REST response for all response codes in api path /clustermgmt/v4.0.a1/config/cluster/{clusterExtId}
+        Get operation
+    clustermgmt.v4.r0.a1.config.ClusterEntity:
+      allOf:
+      - $ref: '#/components/schemas/common.v1.r0.a3.response.ExternalizableAbstractModel'
+      - type: object
+        properties:
+          name:
+            type: string
+            description: Cluster name
+          nodes:
+            $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.NodeReference'
+          config:
+            $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.ClusterConfigReference'
+          network:
+            $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.ClusterNetworkReference'
+        additionalProperties: false
+        description: Cluster entity with its attributes
+    clustermgmt.v4.r0.a1.config.NodeReference:
+      type: object
+      properties:
+        numberOfNodes:
+          type: integer
+          description: Number of nodes in a cluster
+          format: int32
+        nodeList:
+          type: array
+          description: List of nodes in a cluster
+          items:
+            $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.NodeListItemReference'
+      additionalProperties: false
+      description: Node reference for a cluster
+    clustermgmt.v4.r0.a1.config.ClusterConfigReference:
+      type: object
+      properties:
+        incarnationId:
+          type: integer
+          description: Cluster incarnation Id
+          format: int64
+        buildInfo:
+          $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.BuildReference'
+        hypervisorTypes:
+          type: array
+          description: Hypervisor type
+          items:
+            $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.HypervisorType'
+        clusterFunction:
+          type: array
+          description: Cluster function
+          items:
+            $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.ClusterFunctionRef'
+        timezone:
+          type: string
+          description: Time zone on a cluster
+        authorizedPublicKeyList:
+          type: array
+          description: Public ssh key details
+          items:
+            $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.PublicKey'
+        redundancyFactor:
+          type: integer
+          description: Redundancy factor of a cluster
+          format: int64
+        clusterSoftwareMap:
+          type: array
+          description: Cluster software version details
+          items:
+            $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.SoftwareMapReference'
+        clusterArch:
+          $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.ClusterArchReference'
+        faultToleranceState:
+          $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.FaultToleranceState'
+        remoteSupport:
+          type: boolean
+          description: Remote support status
+        operationMode:
+          $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.OperationMode'
+        isLts:
+          type: boolean
+          description: Indicates whether the release is categorized as Long-term or
+            not
+        passwordRemoteLoginEnabled:
+          type: boolean
+          description: Password ssh into cluster is enabled or not
+      additionalProperties: false
+      description: Cluster configuration details
+    clustermgmt.v4.r0.a1.config.ClusterNetworkReference:
+      type: object
+      properties:
+        externalAddress:
+          $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.IpAddresses'
+        externalDataServiceIp:
+          type: string
+          description: Cluster external data service IP
+        externalSubnet:
+          type: string
+          description: Cluster external subnet address
+        internalSubnet:
+          type: string
+          description: Cluster internal subnet address
+        nfsSubnetWhitelist:
+          type: array
+          description: NFS subnet whitelist addresses
+          items:
+            type: string
+        nameServerIpList:
+          type: array
+          description: Name servers on a cluster
+          items:
+            type: string
+        ntpServerIpList:
+          type: array
+          description: NTP servers on a cluster
+          items:
+            type: string
+        smtpServer:
+          $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.SmtpServerRef'
+        masqueradingIp:
+          type: string
+          description: Cluster NAT or proxy IP that maps to a local IP
+        masqueradingPort:
+          type: integer
+          description: The port to connect to the cluster when using masquerading
+            IP
+          format: int32
+        managementServer:
+          $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.ManagementServerRef'
+      additionalProperties: false
+      description: Network details of a cluster
+    clustermgmt.v4.r0.a1.config.NodeListItemReference:
+      type: object
+      properties:
+        controllerVmIp:
+          type: string
+          description: Controller VM IP
+        nodeUuid:
+          pattern: ^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$
+          type: string
+          description: UUID of a node
+        hostIp:
+          type: string
+          description: Host IP address
+      additionalProperties: false
+      description: List of nodes in a cluster
+    clustermgmt.v4.r0.a1.config.BuildReference:
+      type: object
+      properties:
+        buildType:
+          type: string
+          description: Software build type
+        version:
+          type: string
+          description: Software version
+        fullVersion:
+          type: string
+          description: Full name of software version
+        commitId:
+          type: string
+          description: Commit Id used for version
+        shortCommitId:
+          type: string
+          description: Short commit Id used for version
+      additionalProperties: false
+      description: Build information details
+    clustermgmt.v4.r0.a1.config.HypervisorType:
+      type: string
+      description: Hypervisor type
+      enum:
+      - $UNKNOWN
+      - $REDACTED
+      - AHV
+      - ESX
+      - HYPERV
+      - XEN
+      - NULLTYPE
+    clustermgmt.v4.r0.a1.config.ClusterFunctionRef:
+      type: string
+      description: Cluster function
+      enum:
+      - $UNKNOWN
+      - $REDACTED
+      - AOS
+      - PRISM_CENTRAL
+      - CLOUD_DATA_GATEWAY
+      - AFS
+      - WITNESS
+      - XI_PORTAL
+      - ONE_NODE
+      - TWO_NODE
+    clustermgmt.v4.r0.a1.config.PublicKey:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Ssh key name
+        key:
+          type: string
+          description: Ssh key value
+      additionalProperties: false
+      description: Public ssh key details
+    clustermgmt.v4.r0.a1.config.SoftwareMapReference:
+      type: object
+      properties:
+        softwareType:
+          $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.SoftwareTypeRef'
+        version:
+          type: string
+          description: Software version
+      additionalProperties: false
+      description: Cluster software version details
+    clustermgmt.v4.r0.a1.config.ClusterArchReference:
+      type: string
+      description: Cluster arch
+      enum:
+      - $UNKNOWN
+      - $REDACTED
+      - X86_64
+      - PPC64LE
+    clustermgmt.v4.r0.a1.config.FaultToleranceState:
+      type: object
+      properties:
+        currentMaxFaultTolerance:
+          type: integer
+          description: Maximum fault tolerance that is supported currently
+          format: int32
+        desiredMaxFaultTolerance:
+          type: integer
+          description: Desired Maximum fault tolerance
+          format: int32
+        domainAwarenessLevel:
+          $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.DomainAwarenessLevel'
+      additionalProperties: false
+      description: Fault tolerant state of cluster
+    clustermgmt.v4.r0.a1.config.OperationMode:
+      type: string
+      description: Cluster operation mode
+      enum:
+      - $UNKNOWN
+      - $REDACTED
+      - NORMAL
+      - READ-ONLY
+      - STAND-ALONE
+      - SWITCH-TO-TWO-NODE
+      - OVERRIDE
+    clustermgmt.v4.r0.a1.config.SoftwareTypeRef:
+      type: string
+      description: Software type
+      enum:
+      - $UNKNOWN
+      - $REDACTED
+      - NOS
+      - NCC
+      - PRISM_CENTRAL
+    clustermgmt.v4.r0.a1.config.DomainAwarenessLevel:
+      type: string
+      description: Domain awareness level
+      enum:
+      - $UNKNOWN
+      - $REDACTED
+      - NODE
+      - BLOCK
+      - RACK
+    clustermgmt.v4.r0.a1.config.IpAddresses:
+      type: object
+      properties:
+        ipv4:
+          type: string
+          description: IPV4 address
+        ipv6:
+          type: string
+          description: IPV6 address
+      additionalProperties: false
+      description: IPV4 and IPV6 details
+    clustermgmt.v4.r0.a1.config.SmtpServerRef:
+      type: object
+      properties:
+        emailAddress:
+          type: string
+          description: SMTP Email address
+        server:
+          $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.SmtpNetwork'
+        type:
+          $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.SmtpType'
+      additionalProperties: false
+      description: SMTP servers on a cluster
+    clustermgmt.v4.r0.a1.config.ManagementServerRef:
+      type: object
+      properties:
+        ip:
+          type: string
+          description: Management server IP address
+        type:
+          $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.ManagementServerType'
+        drsEnabled:
+          type: boolean
+          description: Indicates whether it is DRS enabled or not
+        isRegistered:
+          type: boolean
+          description: Indicates whether it is registered or not
+        inUse:
+          type: boolean
+          description: Indicates whether the host is managed by an entity or not
+      additionalProperties: false
+      description: Management server information
+    clustermgmt.v4.r0.a1.config.SmtpNetwork:
+      type: object
+      properties:
+        ipAddress:
+          $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.IpAddresses'
+        port:
+          type: integer
+          description: SMTP port
+          format: int32
+        username:
+          type: string
+          description: SMTP server user name
+        password:
+          type: string
+          description: SMTP server password
+      additionalProperties: false
+      description: SMTP network details
+    clustermgmt.v4.r0.a1.config.SmtpType:
+      type: string
+      description: Type of SMTP server
+      enum:
+      - $UNKNOWN
+      - $REDACTED
+      - PLAIN
+      - STARTTLS
+      - SSL
+    clustermgmt.v4.r0.a1.config.ManagementServerType:
+      type: string
+      description: Management server type
+      enum:
+      - $UNKNOWN
+      - $REDACTED
+      - VCENTER
+    clustermgmt.v4.r0.a1.config.GetClustersResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.ClusterEntity'
+          - $ref: '#/components/schemas/clustermgmt.v4.r0.a1.error.ErrorResponse'
+      additionalProperties: false
+      description: REST response for all response codes in api path /clustermgmt/v4.0.a1/config/clusters
+        Get operation
+    clustermgmt.v4.r0.a1.config.GetSnmpResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.SnmpConfig'
+          - $ref: '#/components/schemas/clustermgmt.v4.r0.a1.error.ErrorResponse'
+      additionalProperties: false
+      description: REST response for all response codes in api path /clustermgmt/v4.0.a1/config/cluster/{clusterExtId}/snmp
+        Get operation
+    clustermgmt.v4.r0.a1.config.SnmpConfig:
+      type: object
+      properties:
+        status:
+          type: boolean
+          description: SNMP status
+        users:
+          type: array
+          description: SNMP user information
+          items:
+            $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.SnmpUser'
+        transports:
+          type: array
+          description: SNMP transport details
+          items:
+            $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.SnmpTransport'
+        traps:
+          type: array
+          description: SNMP trap details
+          items:
+            $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.SnmpTrap'
+      additionalProperties: false
+      description: SNMP information
+    clustermgmt.v4.r0.a1.config.SnmpUser:
+      type: object
+      properties:
+        username:
+          type: string
+          description: SNMP user name
+        authType:
+          $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.SnmpAuthType'
+        authKey:
+          type: string
+          description: SNMP user authentication key
+        privType:
+          $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.SnmpPrivType'
+        privKey:
+          type: string
+          description: SNMP user encryption key
+      additionalProperties: false
+      description: SNMP user information
+    clustermgmt.v4.r0.a1.config.SnmpTransport:
+      type: object
+      properties:
+        protocol:
+          $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.SnmpProtocol'
+        port:
+          type: integer
+          description: SNMP port
+          format: int32
+      additionalProperties: false
+      description: SNMP transport details
+    clustermgmt.v4.r0.a1.config.SnmpTrap:
+      type: object
+      properties:
+        address:
+          type: string
+          description: SNMP trap address
+        username:
+          type: string
+          description: SNMP user name
+        protocol:
+          $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.SnmpProtocol'
+        port:
+          type: integer
+          description: SNMP port
+          format: int32
+        inform:
+          type: boolean
+          description: SNMP information status
+        engineId:
+          type: string
+          description: SNMP engine Id
+        version:
+          $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.SnmpTrapVersion'
+        recieverName:
+          type: string
+          description: SNMP receiver name
+        communityString:
+          type: string
+          description: Plaintext community string for SNMP version 2.0
+      additionalProperties: false
+      description: SNMP trap details
+    clustermgmt.v4.r0.a1.config.SnmpAuthType:
+      type: string
+      description: SNMP user authentication type
+      enum:
+      - $UNKNOWN
+      - $REDACTED
+      - MD5
+      - SHA
+    clustermgmt.v4.r0.a1.config.SnmpPrivType:
+      type: string
+      description: SNMP user encryption type
+      enum:
+      - $UNKNOWN
+      - $REDACTED
+      - DES
+      - AES
+    clustermgmt.v4.r0.a1.config.SnmpProtocol:
+      type: string
+      description: SNMP protocol type
+      enum:
+      - $UNKNOWN
+      - $REDACTED
+      - UDP
+      - UDP6
+      - TCP
+      - TCP6
+    clustermgmt.v4.r0.a1.config.SnmpTrapVersion:
+      type: string
+      description: SNMP version
+      enum:
+      - $UNKNOWN
+      - $REDACTED
+      - V2
+      - V3
+    clustermgmt.v4.r0.a1.config.GetRsyslogServersResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.RsyslogServer'
+          - $ref: '#/components/schemas/clustermgmt.v4.r0.a1.error.ErrorResponse'
+      additionalProperties: false
+      description: REST response for all response codes in api path /clustermgmt/v4.0.a1/config/cluster/{clusterExtId}/rsyslog
+        Get operation
+    clustermgmt.v4.r0.a1.config.RsyslogServer:
+      type: object
+      properties:
+        serverName:
+          type: string
+          description: RSYSLOG server name
+        ipAddress:
+          type: string
+          description: RSYSLOG server IP address
+        port:
+          type: integer
+          description: RSYSLOG server port
+          format: int32
+        networkProtocol:
+          $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.RsyslogNetworkProtocol'
+        modules:
+          type: array
+          description: List of modules registered to RSYSLOG server
+          items:
+            $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.RsyslogModuleItem'
+      additionalProperties: false
+      description: RSYSLOG Server
+    clustermgmt.v4.r0.a1.config.RsyslogNetworkProtocol:
+      type: string
+      description: RSYSLOG server protocol type
+      enum:
+      - $UNKNOWN
+      - $REDACTED
+      - UDP
+      - TCP
+      - RELP
+    clustermgmt.v4.r0.a1.config.RsyslogModuleItem:
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.RsyslogModuleName'
+        logSeverityLevel:
+          $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.RsyslogModuleLogSeverityLevel'
+        monitor:
+          type: boolean
+          description: Option to log monitor files for a module
+      additionalProperties: false
+      description: RSYSLOG Module information
+    clustermgmt.v4.r0.a1.config.RsyslogModuleName:
+      type: string
+      description: RSYSLOG module name
+      enum:
+      - $UNKNOWN
+      - $REDACTED
+      - CASSANDRA
+      - CEREBRO
+      - CURATOR
+      - GENESIS
+      - PRISM
+      - STARGATE
+      - SYSLOG_MODULE
+      - ZOOKEEPER
+      - UHARA
+      - LAZAN
+      - API_AUDIT
+      - AUDIT
+      - CALM
+      - EPSILON
+      - ACROPOLIS
+      - MINERVA_CVM
+      - FLOW
+      - FLOW_SERVICE_LOGS
+      - LCM
+      - APLOS
+    clustermgmt.v4.r0.a1.config.RsyslogModuleLogSeverityLevel:
+      type: string
+      description: RSYSLOG module log severity level
+      enum:
+      - $UNKNOWN
+      - $REDACTED
+      - EMERGENCY
+      - ALERT
+      - CRITICAL
+      - ERROR
+      - WARNING
+      - NOTICE
+      - INFO
+      - DEBUG
+    clustermgmt.v4.r0.a1.config.GetRackableUnitsResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.RackableUnit'
+          - $ref: '#/components/schemas/clustermgmt.v4.r0.a1.error.ErrorResponse'
+      additionalProperties: false
+      description: REST response for all response codes in api path /clustermgmt/v4.0.a1/config/cluster/{clusterExtId}/rackable-units
+        Get operation
+    clustermgmt.v4.r0.a1.config.RackableUnit:
+      description: Rackable Unit configuration
+      allOf:
+      - $ref: '#/components/schemas/common.v1.r0.a3.response.ExternalizableAbstractModel'
+      - type: object
+        properties:
+          id:
+            type: integer
+            description: Rackable unit Id
+            format: int64
+          serial:
+            type: string
+            description: Rackable unit serial name
+          model:
+            $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.RackableUnitModel'
+          modelName:
+            type: string
+            description: Rackable unit model name
+          nodes:
+            type: array
+            description: List of node information registered to the block
+            items:
+              $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.RackableUnitNode'
+          rack:
+            $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.RackReference'
+        additionalProperties: false
+    clustermgmt.v4.r0.a1.config.RackableUnitModel:
+      type: string
+      description: Rackable unit model type
+      enum:
+      - $UNKNOWN
+      - $REDACTED
+      - DESKTOP
+      - NX2000
+      - NX3000
+      - NX3050
+      - NX6050
+      - NX6070
+      - NX1050
+      - NX3060
+      - NX6060
+      - NX6080
+      - NX6020
+      - NX7110
+      - NX1020
+      - NX9040
+      - USELAYOUT
+      - NULLVALUE
+    clustermgmt.v4.r0.a1.config.RackableUnitNode:
+      type: object
+      properties:
+        uuid:
+          pattern: ^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$
+          type: string
+          description: UUID of a node
+        svmId:
+          type: integer
+          description: Controller VM Id
+          format: int64
+        position:
+          type: integer
+          description: Position of a node in a rackable unit
+          format: int32
+      additionalProperties: false
+      description: Node information registered to this rackable unit
+    clustermgmt.v4.r0.a1.config.RackReference:
+      type: object
+      properties:
+        uuid:
+          pattern: ^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$
+          type: string
+          description: Cluster entity with its attributes
+        id:
+          type: integer
+          description: Cluster entity with its attributes
+          format: int64
+      additionalProperties: false
+      description: Rack reference for the block
+    clustermgmt.v4.r0.a1.config.GetRackableUnitResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.RackableUnit'
+          - $ref: '#/components/schemas/clustermgmt.v4.r0.a1.error.ErrorResponse'
+      additionalProperties: false
+      description: REST response for all response codes in api path /clustermgmt/v4.0.a1/config/cluster/{clusterExtId}/rackable-unit/{rackableUnitExtId}
+        Get operation
+    clustermgmt.v4.r0.a1.config.GetDomainFaultToleranceResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.DomainFaultTolerance'
+          - $ref: '#/components/schemas/clustermgmt.v4.r0.a1.error.ErrorResponse'
+      additionalProperties: false
+      description: REST response for all response codes in api path /clustermgmt/v4.0.a1/config/cluster/{clusterExtId}/domain-fault-tolerance-status
+        Get operation
+    clustermgmt.v4.r0.a1.config.DomainFaultTolerance:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.DomainType'
+        componentStatus:
+          type: array
+          description: List of components in a domain
+          items:
+            $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.ComponentFaultTolerance'
+      additionalProperties: false
+      description: Domain Fault tolerance configuration
+    clustermgmt.v4.r0.a1.config.DomainType:
+      type: string
+      description: Type of domain
+      enum:
+      - $UNKNOWN
+      - $REDACTED
+      - DEPRECATED_RACKABLE_UNIT
+      - DEPRECATED_NODE
+      - DEPRECATED_DISK
+      - CUSTOM
+      - DISK
+      - NODE
+      - RACKABLE_UNIT
+      - RACK
+      - CLUSTER
+    clustermgmt.v4.r0.a1.config.ComponentFaultTolerance:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.ComponentType'
+        maxFaultsTolerated:
+          type: integer
+          description: Maximum fault tolerance
+          format: int32
+        lastUpdatesSecs:
+          type: integer
+          description: Time of last update
+          format: int64
+        underComputation:
+          type: boolean
+          description: Indicates whether the tolerance computation is in progress
+            or not
+        detailMessage:
+          $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.ToleranceMessage'
+      additionalProperties: false
+      description: Fault tolerance information of a component
+    clustermgmt.v4.r0.a1.config.ComponentType:
+      type: string
+      description: Type of component
+      enum:
+      - $UNKNOWN
+      - $REDACTED
+      - EXTENT_GROUP_REPLICAS
+      - OPLOG_EPISODES
+      - CASSANDRA_RING
+      - ZOOKEPER_INSTANCES
+      - FREE_SPACE
+      - STATIC_CONFIG
+      - ERASURE_CODE_STRIP_SIZE
+      - STARGATE_HEALTH
+    clustermgmt.v4.r0.a1.config.ToleranceMessage:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Message Id
+        attributeList:
+          type: array
+          description: List of tolerance message attributes
+          items:
+            $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.AttributeItem'
+      additionalProperties: false
+      description: Message contains the component domain fault tolerance text details
+    clustermgmt.v4.r0.a1.config.AttributeItem:
+      type: object
+      properties:
+        attribute:
+          type: string
+          description: Tolerance message attribute key
+        value:
+          type: string
+          description: Tolerance message attribute value
+      additionalProperties: false
+      description: Attribute item information
+    clustermgmt.v4.r0.a1.config.GetHostResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.HostEntity'
+          - $ref: '#/components/schemas/clustermgmt.v4.r0.a1.error.ErrorResponse'
+      additionalProperties: false
+      description: REST response for all response codes in api path /clustermgmt/v4.0.a1/config/cluster/{clusterExtId}/host/{hostExtId}
+        Get operation
+    clustermgmt.v4.r0.a1.config.HostEntity:
+      description: Host entity with its attributes
+      allOf:
+      - $ref: '#/components/schemas/common.v1.r0.a3.response.ExternalizableAbstractModel'
+      - type: object
+        properties:
+          hostName:
+            type: string
+            description: Name of the host
+          hostType:
+            $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.HostTypeEnum'
+          hypervisor:
+            $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.HypervisorReference'
+          cluster:
+            $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.ClusterReference'
+          controllerVm:
+            $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.ControllerVmReference'
+          disk:
+            type: array
+            description: Disks attached to host
+            items:
+              $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.DiskReference'
+          isDegraded:
+            type: boolean
+            description: Node degraded status
+          isSecureBooted:
+            type: boolean
+            description: Secure boot status
+          isHardwareVirtualized:
+            type: boolean
+            description: Indicates whether the hardware is virtualized or not
+          hasCsr:
+            type: boolean
+            description: Certificate signing request status
+          keyManagementDeviceToCertStatus:
+            type: array
+            description: Mapping of key management device to certificate status list
+            items:
+              $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.KeyManagementDeviceToCertStatus'
+          numberOfCpuCores:
+            type: integer
+            description: Number of CPU cores
+            format: int64
+          numberOfCpuThreads:
+            type: integer
+            description: Number of CPU threads
+            format: int64
+          numberOfCpuSockets:
+            type: integer
+            description: Number of CPU sockets
+            format: int64
+          cpuCapacityHz:
+            type: integer
+            description: CPU capacity in Hz
+            format: int64
+          cpuFrequencyHz:
+            type: integer
+            description: CPU frequency in Hz
+            format: int64
+          cpuModel:
+            type: string
+            description: CPU model name
+          hostNicsIdList:
+            type: array
+            description: Host NICs Id
+            items:
+              type: string
+          gpuDriverVersion:
+            type: string
+            description: GPU driver version
+          gpuList:
+            type: array
+            description: GPU attached list
+            items:
+              type: string
+          defaultVhdLocation:
+            type: string
+            description: Default VHD location
+          defaultVhdContainerId:
+            type: string
+            description: Default VHD container Id
+          defaultVhdContainerUuid:
+            type: string
+            description: Default VHD container UUID
+          defaultVmLocation:
+            type: string
+            description: Default VM location
+          defaultVmContainerId:
+            type: string
+            description: Default VM container Id
+          defaultVmContainerUuid:
+            type: string
+            description: Default VM container UUID
+          rebootPending:
+            type: boolean
+            description: Reboot pending status
+          failoverClusterFqdn:
+            type: string
+            description: Failover cluster FQDN
+          failoverClusterNodeStatus:
+            type: string
+            description: Failover cluster node status
+          bootTimeUsecs:
+            type: integer
+            description: Boot time in secs
+            format: int64
+          memorySizeBytes:
+            type: integer
+            description: Memory size in bytes
+            format: int64
+        additionalProperties: false
+    clustermgmt.v4.r0.a1.config.HostTypeEnum:
+      type: string
+      description: Type of the host
+      enum:
+      - $UNKNOWN
+      - $REDACTED
+      - HYPER_CONVERGED
+      - COMPUTE_ONLY
+    clustermgmt.v4.r0.a1.config.HypervisorReference:
+      type: object
+      properties:
+        externalAddress:
+          $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.IpAddresses'
+        userName:
+          type: string
+          description: Hypervisor user name
+        fullName:
+          type: string
+          description: Hypervisor full name
+        type:
+          $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.HypervisorType'
+        numberOfVms:
+          type: integer
+          description: Number of VMs
+          format: int64
+        state:
+          $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.HypervisorState'
+        acropolisConnectionState:
+          $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.AcropolisConnectionState'
+      additionalProperties: false
+      description: Hypervisor reference of a node
+    clustermgmt.v4.r0.a1.config.ClusterReference:
+      type: object
+      properties:
+        uuid:
+          pattern: ^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$
+          type: string
+          description: Cluster UUID
+        name:
+          type: string
+          description: Cluster name
+      additionalProperties: false
+      description: Cluster reference of a node
+    clustermgmt.v4.r0.a1.config.ControllerVmReference:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Controller VM Id
+          format: int64
+        externalAddress:
+          $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.IpAddresses'
+        backplaneAddress:
+          type: string
+          description: Backplane address
+        rdmaBackplaneAddress:
+          type: array
+          description: RDMA backplane address
+          items:
+            type: string
+        ipmi:
+          $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.IpmiReference'
+        natIp:
+          type: string
+          description: NAT IP address
+        natPort:
+          type: integer
+          description: NAT port
+        maintenanceMode:
+          type: boolean
+          description: Maintenance mode status
+        rackableUnitUuid:
+          pattern: ^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$
+          type: string
+          description: Rackable unit UUID
+      additionalProperties: false
+      description: Host entity with its attributes
+    clustermgmt.v4.r0.a1.config.DiskReference:
+      type: object
+      properties:
+        uuid:
+          pattern: ^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$
+          type: string
+          description: Disk UUID
+        id:
+          type: integer
+          description: Disk Id
+          format: int64
+        mountPath:
+          type: string
+          description: Disk mount path
+        size:
+          type: integer
+          description: Disk size
+          format: int64
+        serialId:
+          type: string
+          description: Disk serial Id
+        storageTier:
+          $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.StorageTierReference'
+      additionalProperties: false
+      description: Disk details attached to a host
+    clustermgmt.v4.r0.a1.config.KeyManagementDeviceToCertStatus:
+      type: object
+      properties:
+        keyManagementServerName:
+          type: string
+          description: Key management server name
+        status:
+          type: boolean
+          description: Certificate status
+      additionalProperties: false
+      description: Mapping of key management device to certificate status list
+    clustermgmt.v4.r0.a1.config.HypervisorState:
+      type: string
+      description: Hypervisor state
+      enum:
+      - $UNKNOWN
+      - $REDACTED
+      - ACROPOLIS-NORMAL
+      - ENTERING-MAINTENANCE-MODE
+      - ENTERED-MAINTENANCE-MODE
+      - RESERVED-FOR-HA-FAILOVER
+      - ENTERING-MAINTENANCE-MODE-FROM-HA-FAILOVER
+      - RESERVING-FOR-HA-FAILOVER
+      - HA-FAILOVER-SOURCE
+      - HA-FAILOVER-TARGET
+      - HA-HEALING-SOURCE
+      - HA-HEALING-TARGET
+    clustermgmt.v4.r0.a1.config.AcropolisConnectionState:
+      type: string
+      description: Status of Acropolis connection to hypervisor
+      enum:
+      - $UNKNOWN
+      - $REDACTED
+      - CONNECTED
+      - DISCONNECTED
+    clustermgmt.v4.r0.a1.config.IpmiReference:
+      type: object
+      properties:
+        ip:
+          type: string
+          description: IPMI IP address
+        username:
+          type: string
+          description: IPMI username
+      additionalProperties: false
+      description: IPMI reference
+    clustermgmt.v4.r0.a1.config.StorageTierReference:
+      type: string
+      description: Disk storage Tier type
+      enum:
+      - $UNKNOWN
+      - $REDACTED
+      - PCIE_SSD
+      - SATA_SSD
+      - HDD
+    clustermgmt.v4.r0.a1.config.GetHostsResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.HostEntity'
+          - $ref: '#/components/schemas/clustermgmt.v4.r0.a1.error.ErrorResponse'
+      additionalProperties: false
+      description: REST response for all response codes in api path /clustermgmt/v4.0.a1/config/cluster/{clusterExtId}/hosts
+        Get operation
+    clustermgmt.v4.r0.a1.config.GetHostGpusResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.HostGpuEntity'
+          - $ref: '#/components/schemas/clustermgmt.v4.r0.a1.error.ErrorResponse'
+      additionalProperties: false
+      description: REST response for all response codes in api path /clustermgmt/v4.0.a1/config/cluster/{clusterExtId}/host/{hostExtId}/host-gpus
+        Get operation
+    clustermgmt.v4.r0.a1.config.HostGpuEntity:
+      description: Host GPU details
+      allOf:
+      - $ref: '#/components/schemas/common.v1.r0.a3.response.ExternalizableAbstractModel'
+      - type: object
+        properties:
+          nodeUuid:
+            pattern: ^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$
+            type: string
+            description: UUID of a node
+          nodeId:
+            type: string
+            description: Controller VM Id
+          clusterUuid:
+            pattern: ^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$
+            type: string
+            description: Cluster UUID
+          clusterName:
+            type: string
+            description: Cluster name
+          numberOfVgpusAllocated:
+            type: integer
+            description: Number of vGPUs allocated
+            format: int64
+          config:
+            $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.GpuConfig'
+        additionalProperties: false
+    clustermgmt.v4.r0.a1.config.GpuConfig:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.GpuType'
+        deviceId:
+          type: string
+          description: Device Id
+        deviceName:
+          type: string
+          description: Device name
+        vendorName:
+          type: string
+          description: Vendor name
+        inUse:
+          type: boolean
+          description: GPU in use
+        sbdf:
+          type: string
+          description: SBDF address
+        numaNode:
+          type: string
+          description: NUMA node
+        assignable:
+          type: integer
+          description: GPU assignable
+          format: int64
+        fraction:
+          type: integer
+          description: GPU fraction
+          format: int64
+        guestDriverVersion:
+          type: string
+          description: Guest driver version
+        licenseList:
+          type: array
+          description: GPU license list
+          items:
+            type: string
+        mode:
+          $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.GpuMode'
+        numberOfVirtualDisplayHeads:
+          type: integer
+          description: Number of virtual display heads
+          format: int64
+        frameBufferSizeBytes:
+          type: integer
+          description: Frame buffer size in bytes
+          format: int64
+        maxResolution:
+          type: string
+          description: Maximum resolution
+      additionalProperties: false
+      description: GPU configuration details
+    clustermgmt.v4.r0.a1.config.GpuType:
+      type: string
+      description: GPU type
+      enum:
+      - $UNKNOWN
+      - $REDACTED
+      - PASS_THROUGH_GRAPHICS
+      - PASS_THROUGH_COMPUTE
+      - VIRTUAL
+    clustermgmt.v4.r0.a1.config.GpuMode:
+      type: string
+      description: GPU mode
+      enum:
+      - $UNKNOWN
+      - $REDACTED
+      - UNUSED
+      - USED_FOR_PASSTHROUGH
+      - USED_FOR_VIRTUAL
+    clustermgmt.v4.r0.a1.config.GetClusterHostGpusResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.HostGpuEntity'
+          - $ref: '#/components/schemas/clustermgmt.v4.r0.a1.error.ErrorResponse'
+      additionalProperties: false
+      description: REST response for all response codes in api path /clustermgmt/v4.0.a1/config/cluster/{clusterExtId}/host-gpus
+        Get operation
+    clustermgmt.v4.r0.a1.config.GetGpuProfilesResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.GpuProfile'
+          - $ref: '#/components/schemas/clustermgmt.v4.r0.a1.error.ErrorResponse'
+      additionalProperties: false
+      description: REST response for all response codes in api path /clustermgmt/v4.0.a1/config/cluster/{clusterExtId}/gpu-profiles
+        Get operation
+    clustermgmt.v4.r0.a1.config.GpuProfile:
+      type: object
+      properties:
+        deviceId:
+          type: string
+          description: Device Id
+        gpuConfig:
+          $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.GpuConfig'
+        allocatedVmUuids:
+          type: array
+          description: List of UUIDs of virtual machines with an allocated GPU belonging
+            to this profile
+          items:
+            type: string
+      additionalProperties: false
+      description: GPU Profile
+    clustermgmt.v4.r0.a1.config.GetHostGpuResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - $ref: '#/components/schemas/clustermgmt.v4.r0.a1.config.HostGpuEntity'
+          - $ref: '#/components/schemas/clustermgmt.v4.r0.a1.error.ErrorResponse'
+      additionalProperties: false
+      description: REST response for all response codes in api path /clustermgmt/v4.0.a1/config/cluster/{clusterExtId}/host/{hostExtId}/host-gpu/{hostGpuExtId}
+        Get operation
+    common.v1.r0.a3.response.ExternalizableAbstractModel:
+      description: |
+        A model that represents an object instance that is accessible through an API endpoint.  Instances of this type get an extId field that contains the globally unique identifier for that instance.  Externally accessible instances are always tenant aware and therefore extend the TenantAwareModel
+      allOf:
+      - $ref: '#/components/schemas/common.v1.r0.a3.config.TenantAwareModel'
+      - type: object
+        properties:
+          extId:
+            pattern: ^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$
+            type: string
+            description: |
+              A globally unique identifier of an instance that is suitable for external consumption.
+            nullable: true
+          links:
+            type: array
+            description: |
+              A HATEOAS style link for the response.  Each link contains a user friendly name identifying the link and an address for retrieving the particular resource.
+            items:
+              $ref: '#/components/schemas/common.v1.r0.a3.response.ApiLink'
+        additionalProperties: false
+    common.v1.r0.a3.config.TenantAwareModel:
+      type: object
+      properties:
+        tenantId:
+          pattern: ^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$
+          type: string
+          description: |
+            A globally unique identifier that represents the tenant that owns this entity.  It is automatically assigned by the system and is immutable from an API consumer perspective (some use cases may cause this Id to change - for instance a use case may require the transfer of ownership of the entity, but these cases are handled automatically on the server).
+          readOnly: true
+      additionalProperties: false
+      description: |
+        A model base class whose instances are bound to a specific tenant.  This model adds a tenantId to the base model class that it extends and is automatically set by the server.
+    common.v1.r0.a3.response.ApiLink:
+      type: object
+      properties:
+        href:
+          type: string
+          description: |
+            The URL at which the entity described by this link can be accessed.
+        rel:
+          type: string
+          description: |
+            A name that identifies the relationship of this link to the object that is returned by the URL.  The special value of "self" identifies the URL for the object.
+      additionalProperties: false
+      description: |
+        A HATEOAS style link for the response.  Each link contains a user friendly name identifying the link and an address for retrieving the particular resource.
+    clustermgmt.v4.r0.a1.error.ErrorResponse:
+      type: object
+      properties:
+        error:
+          oneOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/clustermgmt.v4.r0.a1.error.AppMessage'
+          - $ref: '#/components/schemas/clustermgmt.v4.r0.a1.error.SchemaValidationError'
+      additionalProperties: false
+      description: This schema is auto-generated by the Open API Dev Platform as REST
+        response for 4xx and 5xx error responses.
+    clustermgmt.v4.r0.a1.error.AppMessage:
+      type: object
+      properties:
+        message:
+          type: string
+        severity:
+          $ref: '#/components/schemas/common.v1.r0.a3.config.MessageSeverity'
+        code:
+          type: string
+        locale:
+          type: string
+          description: The locale for the message description.
+          default: en_US
+        errorGroup:
+          type: string
+        argumentsMap:
+          type: object
+          additionalProperties:
+            type: string
+      additionalProperties: false
+      description: This schema is generated from AppMessage.java
+    clustermgmt.v4.r0.a1.error.MessageSeverity:
+      type: string
+      description: Enum schema MessageSeverity
+      enum:
+      - $UNKNOWN
+      - $REDACTED
+      - INFO
+      - WARNING
+      - ERROR
+      x-codegen-hint:
+        $any:
+        - type: entity-identifier
+          properties:
+            identifiers:
+            - value: $UNKNOWN
+              index: 201
+            - value: $REDACTED
+              index: 202
+            - value: INFO
+              index: 203
+            - value: WARNING
+              index: 204
+            - value: ERROR
+              index: 205
+    clustermgmt.v4.r0.a1.error.SchemaValidationError:
+      type: object
+      properties:
+        timestamp:
+          type: string
+        statusCode:
+          type: integer
+        error:
+          type: string
+        path:
+          type: string
+        validationErrorMessages:
+          type: array
+          items:
+            $ref: '#/components/schemas/clustermgmt.v4.r0.a1.error.SchemaValidationErrorMessage'
+      additionalProperties: false
+      description: This schema is generated from SchemaValidationError.java
+    clustermgmt.v4.r0.a1.error.SchemaValidationErrorMessage:
+      type: object
+      properties:
+        location:
+          type: string
+        message:
+          type: string
+        attributePath:
+          type: string
+      additionalProperties: false
+      description: This schema is generated from SchemaValidationErrorMessage.java
+    common.v1.r0.a3.response.ApiResponseMetadata:
+      type: object
+      properties:
+        flags:
+          type: array
+          items:
+            $ref: '#/components/schemas/common.v1.r0.a3.config.Flag'
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/common.v1.r0.a3.response.ApiLink'
+        totalAvailableResults:
+          type: integer
+          format: int32
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/common.v1.r0.a3.config.Message'
+        extraInfo:
+          type: array
+          description: An array of entity specific metadata
+          items:
+            $ref: '#/components/schemas/common.v1.r0.a3.config.KVPair'
+      additionalProperties: false
+      description: |
+        The metadata associated with an API response. Always present and minimally contains the self link for the API request that produced this response.  Also contains pagination data for paginated requests.
+    common.v1.r0.a3.config.Flag:
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: boolean
+          default: false
+      additionalProperties: false
+      description: |
+        Many entities in the Nutanix APIs carry flags.  This object captures all the flags associated with that entity through this object.  The field that hosts this type of an object must have an attribute called x-bounded-map-keys that tells which flags are actually present for that entity.
+    common.v1.r0.a3.config.Message:
+      type: object
+      properties:
+        code:
+          type: string
+          description: |
+            A code that uniquely identifies a message.
+        message:
+          type: string
+        locale:
+          type: string
+          description: |
+            The locale for the message description.
+          default: en_US
+        severity:
+          $ref: '#/components/schemas/common.v1.r0.a3.config.MessageSeverity'
+      additionalProperties: false
+    common.v1.r0.a3.config.KVPair:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The key of this key value pair
+        value:
+          description: The value associated with the key for this key-value pair
+          oneOf:
+          - type: string
+          - type: integer
+      additionalProperties: false
+      description: |
+        A map describing a set of keys and their corresponding values.
+    common.v1.r0.a3.config.MessageSeverity:
+      type: string
+      description: |
+        The message severity.
+      enum:
+      - $UNKNOWN
+      - $REDACTED
+      - INFO
+      - WARNING
+      - ERROR
+  securitySchemes:
+    basicAuthScheme:
+      type: http
+      scheme: basic

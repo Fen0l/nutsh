@@ -1,0 +1,258 @@
+[
+  {
+    "$objectType": "vmm.v4.content.Template",
+    "extId": "7b2168dc-068b-4765-b777-962a71014611",
+    "createTime": "2025-11-18T22:13:44.434462Z",
+    "updateTime": "2025-11-18T22:13:44.434462Z",
+    "templateName": "templateName-16f7b451",
+    "templateVersionSpec": {
+      "$objectType": "vmm.v4.content.TemplateVersionSpec",
+      "extId": "b6ada7b1-8571-4c6c-b5e9-84d9c9093dac",
+      "createTime": "2025-11-18T22:13:44.405705Z",
+      "clusterLocationExtIds": [
+        "0006237e-c983-e712-0000-00000001c1d0"
+      ],
+      "versionName": "versionName-faf64603",
+      "versionDescription": "Created from VM: templateName-16f7b451",
+      "vmSpec": {
+        "$objectType": "vmm.v4.ahv.config.Vm",
+        "numSockets": 8,
+        "numCoresPerSocket": 1,
+        "numThreadsPerCore": 1,
+        "memorySizeBytes": 17179869184,
+        "hardwareClockTimezone": "UTC",
+        "disks": [
+          {
+            "$objectType": "vmm.v4.ahv.config.Disk",
+            "backingInfo": {
+              "$objectType": "vmm.v4.ahv.config.VmDisk",
+              "diskSizeBytes": 107374182400,
+              "dataSource": {
+                "reference": {
+                  "$objectType": "vmm.v4.ahv.config.ImageReference",
+                  "imageExtId": "cab82966-e9aa-4bda-a274-8a3fb6e365ed"
+                },
+                "$objectType": "vmm.v4.ahv.config.DataSource"
+              }
+            }
+          }
+        ],
+        "nics": [
+          {
+            "$objectType": "vmm.v4.ahv.config.Nic",
+            "nicBackingInfo": {
+              "$objectType": "vmm.v4.ahv.config.VirtualEthernetNic",
+              "isConnected": true,
+              "numQueues": 1
+            },
+            "nicNetworkInfo": {
+              "$objectType": "vmm.v4.ahv.config.VirtualEthernetNicNetworkInfo",
+              "nicType": "NORMAL_NIC",
+              "vlanMode": "ACCESS"
+            }
+          }
+        ]
+      },
+      "createdBy": {
+        "$objectType": "vmm.v4.content.TemplateUser",
+        "extId": "08f0dcd1-3a70-57a1-b84b-97d8e7b270fc",
+        "username": "username-59acbb2c"
+      },
+      "isActiveVersion": true,
+      "isGcOverrideEnabled": true
+    },
+    "createdBy": {
+      "$objectType": "vmm.v4.content.TemplateUser",
+      "extId": "08f0dcd1-3a70-57a1-b84b-97d8e7b270fc",
+      "username": "username-59acbb2c"
+    },
+    "updatedBy": {
+      "$objectType": "vmm.v4.content.TemplateUser",
+      "extId": "08f0dcd1-3a70-57a1-b84b-97d8e7b270fc",
+      "username": "username-59acbb2c"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000"
+  },
+  {
+    "$objectType": "vmm.v4.content.Template",
+    "extId": "189a16f5-9290-4475-a9c6-53edcd64f30c",
+    "createTime": "2025-07-22T12:21:03.97635Z",
+    "updateTime": "2025-07-22T12:27:02.352694Z",
+    "templateName": "templateName-4f389d3b",
+    "templateVersionSpec": {
+      "$objectType": "vmm.v4.content.TemplateVersionSpec",
+      "extId": "a89e8f0a-9b0c-456a-ad97-9a3944990b67",
+      "createTime": "2025-07-22T12:27:02.311053Z",
+      "clusterLocationExtIds": [
+        "0006237e-c983-e712-0000-00000001c1d0"
+      ],
+      "versionName": "versionName-8008300e",
+      "versionDescription": "test cloudinit",
+      "vmSpec": {
+        "$objectType": "vmm.v4.ahv.config.Vm",
+        "numSockets": 2,
+        "numCoresPerSocket": 2,
+        "numThreadsPerCore": 1,
+        "memorySizeBytes": 17179869184,
+        "hardwareClockTimezone": "UTC",
+        "disks": [
+          {
+            "$objectType": "vmm.v4.ahv.config.Disk",
+            "backingInfo": {
+              "$objectType": "vmm.v4.ahv.config.VmDisk",
+              "diskSizeBytes": 107374182400
+            }
+          },
+          {
+            "backingInfo": {
+              "$objectType": "vmm.v4.ahv.config.VmDisk",
+              "diskSizeBytes": 16106127360
+            }
+          },
+          {
+            "backingInfo": {
+              "$objectType": "vmm.v4.ahv.config.VmDisk",
+              "diskSizeBytes": 32212254720
+            }
+          },
+          {
+            "backingInfo": {
+              "$objectType": "vmm.v4.ahv.config.VmDisk",
+              "diskSizeBytes": 32212254720
+            }
+          },
+          {
+            "backingInfo": {
+              "$objectType": "vmm.v4.ahv.config.VmDisk",
+              "diskSizeBytes": 16106127360
+            }
+          }
+        ],
+        "nics": [
+          {
+            "$objectType": "vmm.v4.ahv.config.Nic",
+            "nicBackingInfo": {
+              "$objectType": "vmm.v4.ahv.config.VirtualEthernetNic",
+              "isConnected": true,
+              "numQueues": 1
+            },
+            "nicNetworkInfo": {
+              "$objectType": "vmm.v4.ahv.config.VirtualEthernetNicNetworkInfo",
+              "nicType": "NORMAL_NIC",
+              "vlanMode": "ACCESS"
+            }
+          }
+        ]
+      },
+      "createdBy": {
+        "$objectType": "vmm.v4.content.TemplateUser",
+        "extId": "08f0dcd1-3a70-57a1-b84b-97d8e7b270fc",
+        "username": "username-59acbb2c"
+      },
+      "isActiveVersion": true,
+      "isGcOverrideEnabled": true
+    },
+    "createdBy": {
+      "$objectType": "vmm.v4.content.TemplateUser",
+      "extId": "08f0dcd1-3a70-57a1-b84b-97d8e7b270fc",
+      "username": "username-59acbb2c"
+    },
+    "updatedBy": {
+      "$objectType": "vmm.v4.content.TemplateUser",
+      "extId": "08f0dcd1-3a70-57a1-b84b-97d8e7b270fc",
+      "username": "username-59acbb2c"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000"
+  },
+  {
+    "$objectType": "vmm.v4.content.Template",
+    "extId": "427aa50d-dd56-42ed-995a-5dba6d8620f1",
+    "createTime": "2025-07-21T11:09:20.914579Z",
+    "updateTime": "2025-07-21T11:09:20.914579Z",
+    "templateName": "templateName-fd04c070",
+    "templateVersionSpec": {
+      "$objectType": "vmm.v4.content.TemplateVersionSpec",
+      "extId": "2df40fc5-4fa9-4e10-b219-8882009e5689",
+      "createTime": "2025-07-21T11:09:20.881584Z",
+      "clusterLocationExtIds": [
+        "0006237e-c983-e712-0000-00000001c1d0"
+      ],
+      "versionName": "versionName-faf64603",
+      "versionDescription": "Created from VM: Template",
+      "vmSpec": {
+        "$objectType": "vmm.v4.ahv.config.Vm",
+        "numSockets": 2,
+        "numCoresPerSocket": 2,
+        "numThreadsPerCore": 1,
+        "memorySizeBytes": 17179869184,
+        "hardwareClockTimezone": "UTC",
+        "disks": [
+          {
+            "$objectType": "vmm.v4.ahv.config.Disk",
+            "backingInfo": {
+              "$objectType": "vmm.v4.ahv.config.VmDisk",
+              "diskSizeBytes": 107374182400
+            }
+          },
+          {
+            "backingInfo": {
+              "$objectType": "vmm.v4.ahv.config.VmDisk",
+              "diskSizeBytes": 16106127360
+            }
+          },
+          {
+            "backingInfo": {
+              "$objectType": "vmm.v4.ahv.config.VmDisk",
+              "diskSizeBytes": 32212254720
+            }
+          },
+          {
+            "backingInfo": {
+              "$objectType": "vmm.v4.ahv.config.VmDisk",
+              "diskSizeBytes": 32212254720
+            }
+          },
+          {
+            "backingInfo": {
+              "$objectType": "vmm.v4.ahv.config.VmDisk",
+              "diskSizeBytes": 16106127360
+            }
+          }
+        ],
+        "nics": [
+          {
+            "$objectType": "vmm.v4.ahv.config.Nic",
+            "nicBackingInfo": {
+              "$objectType": "vmm.v4.ahv.config.VirtualEthernetNic",
+              "isConnected": true,
+              "numQueues": 1
+            },
+            "nicNetworkInfo": {
+              "$objectType": "vmm.v4.ahv.config.VirtualEthernetNicNetworkInfo",
+              "nicType": "NORMAL_NIC",
+              "vlanMode": "ACCESS"
+            }
+          }
+        ]
+      },
+      "createdBy": {
+        "$objectType": "vmm.v4.content.TemplateUser",
+        "extId": "08f0dcd1-3a70-57a1-b84b-97d8e7b270fc",
+        "username": "username-59acbb2c"
+      },
+      "isActiveVersion": true,
+      "isGcOverrideEnabled": true
+    },
+    "createdBy": {
+      "$objectType": "vmm.v4.content.TemplateUser",
+      "extId": "08f0dcd1-3a70-57a1-b84b-97d8e7b270fc",
+      "username": "username-59acbb2c"
+    },
+    "updatedBy": {
+      "$objectType": "vmm.v4.content.TemplateUser",
+      "extId": "08f0dcd1-3a70-57a1-b84b-97d8e7b270fc",
+      "username": "username-59acbb2c"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000"
+  }
+]

@@ -1,0 +1,1100 @@
+[
+  {
+    "$objectType": "monitoring.v4.serviceability.Event",
+    "extId": "3404c865-8c7d-45dd-915c-058e96fb2e4b",
+    "eventType": "ClusterParamsAudit",
+    "classifications": [
+      "UserAction"
+    ],
+    "sourceClusterUUID": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b",
+    "creationTime": "2026-08-04T12:01:50.2425Z",
+    "message": "Cluster fqdn updated",
+    "clusterUUID": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b",
+    "parameters": [
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue"
+        },
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "paramName-d5edc5c2"
+      },
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "stringValue-2616de38"
+        },
+        "paramName": "paramName-d74dab5d"
+      },
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "stringValue-7008e2bd"
+        },
+        "paramName": "paramName-20fe3d4d"
+      },
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "stringValue-59acbb2c"
+        },
+        "paramName": "paramName-b6067bc2"
+      }
+    ],
+    "clusterName": "clusterName-782ea7e4",
+    "impactedEntities": {
+      "$objectType": "monitoring.v4.common.ImpactedEntities",
+      "clusters": [
+        "583a712d-6913-4ff8-9b49-9ffcb9a43d9b"
+      ]
+    },
+    "title": "Cluster fqdn updated"
+  },
+  {
+    "$objectType": "monitoring.v4.serviceability.Event",
+    "extId": "3b2ef8e4-429a-4a6e-b8aa-df9d1e9c302a",
+    "eventType": "ClusterParamsAudit",
+    "classifications": [
+      "UserAction"
+    ],
+    "sourceClusterUUID": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b",
+    "creationTime": "2026-08-04T12:01:50.234805Z",
+    "message": "Cluster parameters have been updated",
+    "clusterUUID": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b",
+    "parameters": [
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "stringValue-6f8221e8"
+        },
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "paramName-d5edc5c2"
+      },
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "stringValue-beae9f56"
+        },
+        "paramName": "paramName-d74dab5d"
+      },
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "stringValue-7008e2bd"
+        },
+        "paramName": "paramName-20fe3d4d"
+      },
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "stringValue-59acbb2c"
+        },
+        "paramName": "paramName-b6067bc2"
+      }
+    ],
+    "clusterName": "clusterName-782ea7e4",
+    "impactedEntities": {
+      "$objectType": "monitoring.v4.common.ImpactedEntities",
+      "clusters": [
+        "583a712d-6913-4ff8-9b49-9ffcb9a43d9b"
+      ]
+    },
+    "title": "Cluster parameters have been updated"
+  },
+  {
+    "$objectType": "monitoring.v4.serviceability.Event",
+    "extId": "47242ea5-a06d-49ca-94fe-606c882a43ef",
+    "eventType": "NTPServersAudit",
+    "classifications": [
+      "UserAction"
+    ],
+    "sourceClusterUUID": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b",
+    "creationTime": "2026-07-31T15:38:23.330549Z",
+    "message": "NTP Servers updated",
+    "clusterUUID": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b",
+    "parameters": [
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "stringValue-7e6bde18"
+        },
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "paramName-762723b4"
+      },
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "stringValue-191e0020"
+        },
+        "paramName": "paramName-ec4c88e3"
+      },
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "stringValue-da328454"
+        },
+        "paramName": "paramName-b6067bc2"
+      }
+    ],
+    "clusterName": "clusterName-782ea7e4",
+    "impactedEntities": {
+      "$objectType": "monitoring.v4.common.ImpactedEntities",
+      "clusters": [
+        "583a712d-6913-4ff8-9b49-9ffcb9a43d9b"
+      ]
+    },
+    "title": "NTP Servers updated"
+  },
+  {
+    "$objectType": "monitoring.v4.serviceability.Event",
+    "extId": "d2398cc9-3a52-4a77-ae16-edd0bc483f81",
+    "eventType": "NTPServersAudit",
+    "classifications": [
+      "UserAction"
+    ],
+    "sourceClusterUUID": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b",
+    "creationTime": "2026-07-31T15:38:14.302646Z",
+    "message": "NTP Servers updated",
+    "clusterUUID": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b",
+    "parameters": [
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "stringValue-14a32cd7"
+        },
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "paramName-762723b4"
+      },
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "stringValue-7e6bde18"
+        },
+        "paramName": "paramName-ec4c88e3"
+      },
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "stringValue-da328454"
+        },
+        "paramName": "paramName-b6067bc2"
+      }
+    ],
+    "clusterName": "clusterName-782ea7e4",
+    "impactedEntities": {
+      "$objectType": "monitoring.v4.common.ImpactedEntities",
+      "clusters": [
+        "583a712d-6913-4ff8-9b49-9ffcb9a43d9b"
+      ]
+    },
+    "title": "NTP Servers updated"
+  },
+  {
+    "$objectType": "monitoring.v4.serviceability.Event",
+    "extId": "f0d3cbd7-9767-4a6d-85f5-d3181a0c0f5f",
+    "eventType": "NTPServersAudit",
+    "classifications": [
+      "UserAction"
+    ],
+    "sourceClusterUUID": "000656bb-5516-939c-0000-00000001c1ce",
+    "creationTime": "2026-07-31T15:37:40.338906Z",
+    "message": "NTP Servers updated",
+    "clusterUUID": "000656bb-5516-939c-0000-00000001c1ce",
+    "parameters": [
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "198.51.100.146"
+        },
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "paramName-762723b4"
+      },
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "stringValue-191e0020"
+        },
+        "paramName": "paramName-ec4c88e3"
+      },
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "stringValue-da328454"
+        },
+        "paramName": "paramName-b6067bc2"
+      }
+    ],
+    "clusterName": "clusterName-374e2484",
+    "impactedEntities": {
+      "$objectType": "monitoring.v4.common.ImpactedEntities",
+      "clusters": [
+        "000656bb-5516-939c-0000-00000001c1ce"
+      ]
+    },
+    "title": "NTP Servers updated"
+  },
+  {
+    "$objectType": "monitoring.v4.serviceability.Event",
+    "extId": "68cdfbe1-9589-4518-8bbb-3042ff193466",
+    "eventType": "NTPServersAudit",
+    "classifications": [
+      "UserAction"
+    ],
+    "sourceClusterUUID": "000656bb-5516-939c-0000-00000001c1ce",
+    "creationTime": "2026-07-31T15:37:29.324218Z",
+    "message": "NTP Servers updated",
+    "clusterUUID": "000656bb-5516-939c-0000-00000001c1ce",
+    "parameters": [
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "stringValue-14a32cd7"
+        },
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "paramName-762723b4"
+      },
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "198.51.100.146"
+        },
+        "paramName": "paramName-ec4c88e3"
+      },
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "stringValue-da328454"
+        },
+        "paramName": "paramName-b6067bc2"
+      }
+    ],
+    "clusterName": "clusterName-374e2484",
+    "impactedEntities": {
+      "$objectType": "monitoring.v4.common.ImpactedEntities",
+      "clusters": [
+        "000656bb-5516-939c-0000-00000001c1ce"
+      ]
+    },
+    "title": "NTP Servers updated"
+  },
+  {
+    "$objectType": "monitoring.v4.serviceability.Event",
+    "extId": "85feb394-fe71-48df-8976-8292b53f3560",
+    "eventType": "ContainerAudit",
+    "classifications": [
+      "Storage",
+      "UserAction"
+    ],
+    "sourceClusterUUID": "000656bb-5516-939c-0000-00000001c1ce",
+    "creationTime": "2026-07-31T08:30:25.856194Z",
+    "message": "Added Storage Container {paramName-6dfe6366} to storage pool {paramName-d5841c59}",
+    "clusterUUID": "000656bb-5516-939c-0000-00000001c1ce",
+    "parameters": [
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "7bf9d72b-e467-4b32-8de7-d7617040c252"
+        },
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "paramName-ea4a8192"
+      },
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "stringValue-46d3289e"
+        },
+        "paramName": "paramName-6dfe6366"
+      },
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "e48ec410-42a9-4d94-8bb2-6b641b0c94b2"
+        },
+        "paramName": "paramName-2f240a4d"
+      },
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "stringValue-7745fd9f"
+        },
+        "paramName": "paramName-d5841c59"
+      },
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue"
+        },
+        "paramName": "paramName-56c30c9e"
+      },
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "stringValue-aae79e02"
+        },
+        "paramName": "paramName-46908a49"
+      },
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "stringValue-2ef96950"
+        },
+        "paramName": "paramName-9c4ce01c"
+      },
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "stringValue-da328454"
+        },
+        "paramName": "paramName-b6067bc2"
+      }
+    ],
+    "clusterName": "clusterName-374e2484",
+    "impactedEntities": {
+      "$objectType": "monitoring.v4.common.ImpactedEntities",
+      "clusters": [
+        "000656bb-5516-939c-0000-00000001c1ce"
+      ],
+      "containers": [
+        "7bf9d72b-e467-4b32-8de7-d7617040c252"
+      ],
+      "storagePools": [
+        "e48ec410-42a9-4d94-8bb2-6b641b0c94b2"
+      ]
+    },
+    "title": "Added Storage Container stringValue-46d3289e to storage pool stringValue-7745fd9f"
+  },
+  {
+    "$objectType": "monitoring.v4.serviceability.Event",
+    "extId": "c170930a-7194-4f13-a19d-1647405c8458",
+    "eventType": "ClusterParamsAudit",
+    "classifications": [
+      "UserAction"
+    ],
+    "sourceClusterUUID": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b",
+    "creationTime": "2026-07-17T16:11:47.252716Z",
+    "message": "Cluster parameters have been updated",
+    "clusterUUID": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b",
+    "parameters": [
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "stringValue-8d714353"
+        },
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "paramName-d5edc5c2"
+      },
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "stringValue-229ef6ab"
+        },
+        "paramName": "paramName-d74dab5d"
+      },
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "stringValue-7008e2bd"
+        },
+        "paramName": "paramName-20fe3d4d"
+      },
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "stringValue-da328454"
+        },
+        "paramName": "paramName-b6067bc2"
+      }
+    ],
+    "clusterName": "clusterName-782ea7e4",
+    "impactedEntities": {
+      "$objectType": "monitoring.v4.common.ImpactedEntities",
+      "clusters": [
+        "583a712d-6913-4ff8-9b49-9ffcb9a43d9b"
+      ]
+    },
+    "title": "Cluster parameters have been updated"
+  },
+  {
+    "$objectType": "monitoring.v4.serviceability.Event",
+    "extId": "ae16659e-4904-4868-8906-df1eb7272e37",
+    "eventType": "PrismCertificateAudit",
+    "classifications": [
+      "UserAction"
+    ],
+    "sourceClusterUUID": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b",
+    "creationTime": "2026-07-17T15:44:43.034088Z",
+    "message": "Uploaded the certificate and key.",
+    "clusterUUID": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b",
+    "parameters": [
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "stringValue-6f8a3442"
+        },
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "paramName-cc6a593e"
+      },
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "stringValue-59acbb2c"
+        },
+        "paramName": "paramName-b6067bc2"
+      }
+    ],
+    "clusterName": "clusterName-782ea7e4",
+    "impactedEntities": {
+      "$objectType": "monitoring.v4.common.ImpactedEntities",
+      "clusters": [
+        "583a712d-6913-4ff8-9b49-9ffcb9a43d9b"
+      ]
+    },
+    "title": "Uploaded the certificate and key."
+  },
+  {
+    "$objectType": "monitoring.v4.serviceability.Event",
+    "extId": "92b62989-833c-4924-b117-83b8b737fbfa",
+    "eventType": "ContainerAudit",
+    "classifications": [
+      "Storage",
+      "UserAction"
+    ],
+    "sourceClusterUUID": "000656bb-5516-939c-0000-00000001c1ce",
+    "creationTime": "2026-07-17T11:33:32.362471Z",
+    "message": "Added Storage Container {paramName-6dfe6366} to storage pool {paramName-d5841c59}",
+    "clusterUUID": "000656bb-5516-939c-0000-00000001c1ce",
+    "parameters": [
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "b8534dee-a2ee-4092-a4c6-eea5e9be9392"
+        },
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "paramName-ea4a8192"
+      },
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "stringValue-359854e9"
+        },
+        "paramName": "paramName-6dfe6366"
+      },
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "e48ec410-42a9-4d94-8bb2-6b641b0c94b2"
+        },
+        "paramName": "paramName-2f240a4d"
+      },
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "stringValue-7745fd9f"
+        },
+        "paramName": "paramName-d5841c59"
+      },
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue"
+        },
+        "paramName": "paramName-56c30c9e"
+      },
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "stringValue-05913b50"
+        },
+        "paramName": "paramName-46908a49"
+      },
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "stringValue-2ef96950"
+        },
+        "paramName": "paramName-9c4ce01c"
+      },
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "stringValue-da328454"
+        },
+        "paramName": "paramName-b6067bc2"
+      }
+    ],
+    "clusterName": "clusterName-374e2484",
+    "impactedEntities": {
+      "$objectType": "monitoring.v4.common.ImpactedEntities",
+      "clusters": [
+        "000656bb-5516-939c-0000-00000001c1ce"
+      ],
+      "containers": [
+        "b8534dee-a2ee-4092-a4c6-eea5e9be9392"
+      ],
+      "storagePools": [
+        "e48ec410-42a9-4d94-8bb2-6b641b0c94b2"
+      ]
+    },
+    "title": "Added Storage Container stringValue-359854e9 to storage pool stringValue-7745fd9f"
+  },
+  {
+    "$objectType": "monitoring.v4.serviceability.Event",
+    "extId": "bef04615-2621-407d-b14b-eaff5b24e17c",
+    "eventType": "NameServersAudit",
+    "classifications": [
+      "UserAction"
+    ],
+    "sourceClusterUUID": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b",
+    "creationTime": "2026-07-17T08:56:06.650001Z",
+    "message": "Name Servers updated",
+    "clusterUUID": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b",
+    "parameters": [
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "stringValue-679aa502"
+        },
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "paramName-9e04bde5"
+      },
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "stringValue-679aa502"
+        },
+        "paramName": "paramName-4ccf8f40"
+      },
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "stringValue-da328454"
+        },
+        "paramName": "paramName-b6067bc2"
+      }
+    ],
+    "clusterName": "clusterName-782ea7e4",
+    "impactedEntities": {
+      "$objectType": "monitoring.v4.common.ImpactedEntities",
+      "clusters": [
+        "583a712d-6913-4ff8-9b49-9ffcb9a43d9b"
+      ]
+    },
+    "title": "Name Servers updated"
+  },
+  {
+    "$objectType": "monitoring.v4.serviceability.Event",
+    "extId": "61ee0133-bd71-4859-9dbc-b7951a5cf3ce",
+    "eventType": "LicenseAudit",
+    "classifications": [
+      "UserAction"
+    ],
+    "sourceClusterUUID": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b",
+    "creationTime": "2026-07-17T08:22:26.142627Z",
+    "message": "NCM_ULTIMATE license applied to cluster with uuid- 000656bb-5516-939c-0000-00000001c1ce,NKPFS_ULTIMATE license applied to cluster with uuid- 000656bb-5516-939c-0000-00000001c1ce,NUS_PRO license applied to cluster with uuid- 000656bb-5516-939c-0000-00000001c1ce",
+    "clusterUUID": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b",
+    "parameters": [
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "stringValue-da328454"
+        },
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "paramName-b6067bc2"
+      }
+    ],
+    "operationType": "UPDATE",
+    "clusterName": "clusterName-782ea7e4",
+    "impactedEntities": {
+      "$objectType": "monitoring.v4.common.ImpactedEntities",
+      "clusters": [
+        "583a712d-6913-4ff8-9b49-9ffcb9a43d9b"
+      ]
+    },
+    "title": "NCM_ULTIMATE license applied to cluster with uuid- 000656bb-5516-939c-0000-00000001c1ce,NKPFS_ULTIMATE license applied to cluster with uuid- 000656bb-5516-939c-0000-00000001c1ce,NUS_PRO license applied to cluster with uuid- 000656bb-5516-939c-0000-00000001c1ce"
+  },
+  {
+    "$objectType": "monitoring.v4.serviceability.Event",
+    "extId": "057c035a-a72d-46d8-911d-9beb3a6a4e37",
+    "eventType": "ContainerAudit",
+    "classifications": [
+      "Storage",
+      "UserAction"
+    ],
+    "sourceClusterUUID": "000656bb-5516-939c-0000-00000001c1ce",
+    "creationTime": "2026-07-17T08:17:53.869448Z",
+    "message": "Added Storage Container {paramName-6dfe6366} to storage pool {paramName-d5841c59}",
+    "clusterUUID": "000656bb-5516-939c-0000-00000001c1ce",
+    "parameters": [
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "a85cf4ae-3c6b-49b0-b100-f1ce3dc512aa"
+        },
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "paramName-ea4a8192"
+      },
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "stringValue-4cf2b6d5"
+        },
+        "paramName": "paramName-6dfe6366"
+      },
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "e48ec410-42a9-4d94-8bb2-6b641b0c94b2"
+        },
+        "paramName": "paramName-2f240a4d"
+      },
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "stringValue-7745fd9f"
+        },
+        "paramName": "paramName-d5841c59"
+      },
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue"
+        },
+        "paramName": "paramName-56c30c9e"
+      },
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "stringValue-4a9844f0"
+        },
+        "paramName": "paramName-46908a49"
+      },
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "stringValue-2ef96950"
+        },
+        "paramName": "paramName-9c4ce01c"
+      },
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "stringValue-da328454"
+        },
+        "paramName": "paramName-b6067bc2"
+      }
+    ],
+    "clusterName": "clusterName-374e2484",
+    "impactedEntities": {
+      "$objectType": "monitoring.v4.common.ImpactedEntities",
+      "clusters": [
+        "000656bb-5516-939c-0000-00000001c1ce"
+      ],
+      "containers": [
+        "a85cf4ae-3c6b-49b0-b100-f1ce3dc512aa"
+      ],
+      "storagePools": [
+        "e48ec410-42a9-4d94-8bb2-6b641b0c94b2"
+      ]
+    },
+    "title": "Added Storage Container stringValue-4cf2b6d5 to storage pool stringValue-7745fd9f"
+  },
+  {
+    "$objectType": "monitoring.v4.serviceability.Event",
+    "extId": "a9702925-65fd-4215-bf1b-c45b34bf3d23",
+    "eventType": "PulseAudit",
+    "classifications": [
+      "UserAction"
+    ],
+    "sourceClusterUUID": "000656bb-5516-939c-0000-00000001c1ce",
+    "creationTime": "2026-07-17T08:16:49.984619Z",
+    "message": "Pulse configuration updated",
+    "clusterUUID": "000656bb-5516-939c-0000-00000001c1ce",
+    "parameters": [
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "stringValue-6cb29faa"
+        },
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "paramName-d234f5ab"
+      },
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "stringValue-c2eaa3c0"
+        },
+        "paramName": "paramName-0af8696a"
+      },
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "stringValue-98ddba46"
+        },
+        "paramName": "paramName-20fe3d4d"
+      },
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "stringValue-da328454"
+        },
+        "paramName": "paramName-b6067bc2"
+      }
+    ],
+    "clusterName": "clusterName-374e2484",
+    "impactedEntities": {
+      "$objectType": "monitoring.v4.common.ImpactedEntities",
+      "clusters": [
+        "000656bb-5516-939c-0000-00000001c1ce"
+      ]
+    },
+    "title": "Pulse configuration updated"
+  },
+  {
+    "$objectType": "monitoring.v4.serviceability.Event",
+    "extId": "4b1375af-eb48-46eb-bb1f-02e4096384fc",
+    "eventType": "MulticlusterAudit",
+    "classifications": [
+      "UserAction"
+    ],
+    "sourceClusterUUID": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b",
+    "creationTime": "2026-07-17T08:16:49.562463Z",
+    "message": "External state added for cluster lab-mewtwo",
+    "clusterUUID": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b",
+    "parameters": [
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "stringValue-da328454"
+        },
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "paramName-b6067bc2"
+      }
+    ],
+    "clusterName": "clusterName-782ea7e4",
+    "impactedEntities": {
+      "$objectType": "monitoring.v4.common.ImpactedEntities",
+      "clusters": [
+        "583a712d-6913-4ff8-9b49-9ffcb9a43d9b"
+      ]
+    },
+    "title": "External state added for cluster lab-mewtwo"
+  },
+  {
+    "$objectType": "monitoring.v4.serviceability.Event",
+    "extId": "720a3a1c-ddb2-4971-9603-d8fa2a8b256d",
+    "eventType": "NTPServersAudit",
+    "classifications": [
+      "UserAction"
+    ],
+    "sourceClusterUUID": "000656bb-5516-939c-0000-00000001c1ce",
+    "creationTime": "2026-07-17T08:07:49.594495Z",
+    "message": "NTP Servers updated",
+    "clusterUUID": "000656bb-5516-939c-0000-00000001c1ce",
+    "parameters": [
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "198.51.100.146"
+        },
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "paramName-762723b4"
+      },
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "stringValue-14a32cd7"
+        },
+        "paramName": "paramName-ec4c88e3"
+      },
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "stringValue-da328454"
+        },
+        "paramName": "paramName-b6067bc2"
+      }
+    ],
+    "clusterName": "clusterName-374e2484",
+    "impactedEntities": {
+      "$objectType": "monitoring.v4.common.ImpactedEntities",
+      "clusters": [
+        "000656bb-5516-939c-0000-00000001c1ce"
+      ]
+    },
+    "title": "NTP Servers updated"
+  },
+  {
+    "$objectType": "monitoring.v4.serviceability.Event",
+    "extId": "9bb75690-990c-4a0f-971f-c19cdc32578e",
+    "eventType": "NTPServersAudit",
+    "classifications": [
+      "UserAction"
+    ],
+    "sourceClusterUUID": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b",
+    "creationTime": "2026-07-17T08:07:41.010784Z",
+    "message": "NTP Servers updated",
+    "clusterUUID": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b",
+    "parameters": [
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "198.51.100.146"
+        },
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "paramName-762723b4"
+      },
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "stringValue-14a32cd7"
+        },
+        "paramName": "paramName-ec4c88e3"
+      },
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "stringValue-da328454"
+        },
+        "paramName": "paramName-b6067bc2"
+      }
+    ],
+    "clusterName": "clusterName-782ea7e4",
+    "impactedEntities": {
+      "$objectType": "monitoring.v4.common.ImpactedEntities",
+      "clusters": [
+        "583a712d-6913-4ff8-9b49-9ffcb9a43d9b"
+      ]
+    },
+    "title": "NTP Servers updated"
+  },
+  {
+    "$objectType": "monitoring.v4.serviceability.Event",
+    "extId": "1b557fb6-3df1-4223-80eb-a4d7b4ac4493",
+    "eventType": "PulseAudit",
+    "classifications": [
+      "UserAction"
+    ],
+    "sourceClusterUUID": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b",
+    "creationTime": "2026-07-17T07:09:46.82183Z",
+    "message": "Pulse configuration updated",
+    "clusterUUID": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b",
+    "parameters": [
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "stringValue-32880ee9"
+        },
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "paramName-d234f5ab"
+      },
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "stringValue-76a67236"
+        },
+        "paramName": "paramName-0af8696a"
+      },
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "stringValue-98ddba46"
+        },
+        "paramName": "paramName-20fe3d4d"
+      },
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "stringValue-da328454"
+        },
+        "paramName": "paramName-b6067bc2"
+      }
+    ],
+    "clusterName": "clusterName-782ea7e4",
+    "impactedEntities": {
+      "$objectType": "monitoring.v4.common.ImpactedEntities",
+      "clusters": [
+        "583a712d-6913-4ff8-9b49-9ffcb9a43d9b"
+      ]
+    },
+    "title": "Pulse configuration updated"
+  },
+  {
+    "$objectType": "monitoring.v4.serviceability.Event",
+    "extId": "1f80afc1-5f06-4285-bbdd-0e0250a4d63a",
+    "eventType": "UserAudit",
+    "classifications": [
+      "UserAction"
+    ],
+    "sourceClusterUUID": "000656bb-5516-939c-0000-00000001c1ce",
+    "creationTime": "2026-07-16T14:59:38.599842Z",
+    "message": "User admin updated",
+    "clusterUUID": "000656bb-5516-939c-0000-00000001c1ce",
+    "parameters": [
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "stringValue-da328454"
+        },
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "paramName-e0880579"
+      },
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "stringValue-67c3461a"
+        },
+        "paramName": "paramName-90e46af0"
+      },
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "stringValue-18905bc5"
+        },
+        "paramName": "paramName-3e2e0a5f"
+      },
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "stringValue-41bc356e"
+        },
+        "paramName": "paramName-9c4ce01c"
+      },
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "stringValue-da328454"
+        },
+        "paramName": "paramName-b6067bc2"
+      }
+    ],
+    "clusterName": "clusterName-374e2484",
+    "impactedEntities": {
+      "$objectType": "monitoring.v4.common.ImpactedEntities",
+      "clusters": [
+        "000656bb-5516-939c-0000-00000001c1ce"
+      ]
+    },
+    "title": "User admin updated"
+  },
+  {
+    "$objectType": "monitoring.v4.serviceability.Event",
+    "extId": "716f8c97-a2e7-4fa6-9d4d-26ee067bdd46",
+    "eventType": "ClusterLockdownAudit",
+    "classifications": [
+      "UserAction"
+    ],
+    "sourceClusterUUID": "000656bb-5516-939c-0000-00000001c1ce",
+    "creationTime": "2026-07-16T14:58:59.734636Z",
+    "message": "Public Key {paramName-23f90cfa} added to Cluster",
+    "clusterUUID": "000656bb-5516-939c-0000-00000001c1ce",
+    "parameters": [
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "stringValue-f945369e"
+        },
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "paramName-23f90cfa"
+      },
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "stringValue-da328454"
+        },
+        "paramName": "paramName-b6067bc2"
+      }
+    ],
+    "clusterName": "clusterName-374e2484",
+    "impactedEntities": {
+      "$objectType": "monitoring.v4.common.ImpactedEntities",
+      "clusters": [
+        "000656bb-5516-939c-0000-00000001c1ce"
+      ]
+    },
+    "title": "Public Key stringValue-f945369e added to Cluster"
+  },
+  {
+    "$objectType": "monitoring.v4.serviceability.Event",
+    "extId": "ebc86a6d-b424-41ac-87af-f8392d7b9ce1",
+    "eventType": "PulseAudit",
+    "classifications": [
+      "UserAction"
+    ],
+    "sourceClusterUUID": "000656bb-5516-939c-0000-00000001c1ce",
+    "creationTime": "2026-07-16T14:56:56.883724Z",
+    "message": "Pulse configuration updated",
+    "clusterUUID": "000656bb-5516-939c-0000-00000001c1ce",
+    "parameters": [
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "stringValue-32880ee9"
+        },
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "paramName-d234f5ab"
+      },
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "stringValue-76a67236"
+        },
+        "paramName": "paramName-0af8696a"
+      },
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "stringValue-98ddba46"
+        },
+        "paramName": "paramName-20fe3d4d"
+      },
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "stringValue-da328454"
+        },
+        "paramName": "paramName-b6067bc2"
+      }
+    ],
+    "clusterName": "clusterName-374e2484",
+    "impactedEntities": {
+      "$objectType": "monitoring.v4.common.ImpactedEntities",
+      "clusters": [
+        "000656bb-5516-939c-0000-00000001c1ce"
+      ]
+    },
+    "title": "Pulse configuration updated"
+  },
+  {
+    "$objectType": "monitoring.v4.serviceability.Event",
+    "extId": "cc15d3b2-11f9-4b62-a3cd-44d5c0c4ebb1",
+    "eventType": "PasswordAudit",
+    "classifications": [
+      "UserAction"
+    ],
+    "sourceClusterUUID": "000656bb-5516-939c-0000-00000001c1ce",
+    "creationTime": "2026-07-16T14:56:14.912776Z",
+    "message": "Password changed for user {paramName-e0880579}",
+    "clusterUUID": "000656bb-5516-939c-0000-00000001c1ce",
+    "parameters": [
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "stringValue-da328454"
+        },
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "paramName-e0880579"
+      },
+      {
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "stringValue-da328454"
+        },
+        "paramName": "paramName-b6067bc2"
+      }
+    ],
+    "clusterName": "clusterName-374e2484",
+    "impactedEntities": {
+      "$objectType": "monitoring.v4.common.ImpactedEntities",
+      "clusters": [
+        "000656bb-5516-939c-0000-00000001c1ce"
+      ]
+    },
+    "title": "Password changed for user admin"
+  }
+]

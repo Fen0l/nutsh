@@ -1,0 +1,16 @@
+[
+  {
+    "$objectType": "dataprotection.v4.config.RecoveryPointStore",
+    "extId": "11111111-1111-1111-1111-111111111111",
+    "name": "name-6e500bc6",
+    "bucket": {
+      "bucketName": "bucketName-6e500bc6",
+      "providerConfig": {
+        "$objectType": "common.v1.config.NutanixObjectsBucket",
+        "endPoint": "endPoint-6e500bc6"
+      },
+      "$objectType": "common.v1.config.ObjectStoreBucket",
+      "provider": "NUTANIX"
+    }
+  }
+]

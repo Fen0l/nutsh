@@ -1,0 +1,24 @@
+---
+source: crates/tui/tests/contexts.rs
+expression: frame
+---
+╭ nutsh ─────────────────────────────────────────────────────────────────╮
+│Context:    no session                                                  │       clusters -  hosts -
+│Config:     -                                                           │         vms -  on/off -/-
+│Cluster:    -                                                           │           alerts ⚠ -  ✖ -
+│Kind:       Contexts                                                    │         tasks ▶ - running
+│Count:      30 contexts                                                 │
+╰────────────────────────────────────────────────────────────────────────╯          v0.0.2-beta1 · -
+   NAME           HOST                     USER       CLUSTER        FLAGS              PASSWORD
+   ctx08          pc.lab.example           admin      -              insecure           stored
+   ctx09          pc.lab.example           admin      -              insecure           stored
+   ctx10          pc.lab.example           admin      -              insecure           stored
+   ctx11          pc.lab.example           admin      -              insecure           stored
+   ctx12          pc.lab.example           admin      -              insecure           stored
+   ctx13          pc.lab.example           admin      -              insecure           stored
+   ctx14          pc.lab.example           admin      -              insecure           stored
+>  ctx15          pc.lab.example           admin      -              insecure           stored
+(14 more)
+
+remove ctx15? y/n
+ enter connect  a add  l login  d remove  ^r reload  q quit

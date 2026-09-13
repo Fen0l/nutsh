@@ -1,0 +1,190 @@
+[
+  {
+    "$objectType": "prism.v4.config.DomainManager",
+    "extId": "36feb6ab-2508-4451-8c73-bed665e94892",
+    "isRegisteredWithHostingCluster": true,
+    "nodeExtIds": [
+      "005a7dd8-af9e-4bf3-87fc-3bdfc0dfbe7d",
+      "a8f1f82d-1ba7-4a71-b709-8c3eb7e3f7eb",
+      "c008124e-a6b0-4d72-966a-dcce359884e2"
+    ],
+    "createdTime": "2024-12-05T08:53:27.035929Z",
+    "config": {
+      "$objectType": "prism.v4.config.DomainManagerClusterConfig",
+      "buildInfo": {
+        "$objectType": "clustermgmt.v4.config.BuildInfo",
+        "version": "pc.7.6"
+      },
+      "name": "name-651a0b9a",
+      "size": "EXTRALARGE",
+      "bootstrapConfig": {
+        "$objectType": "prism.v4.config.BootstrapConfig",
+        "environmentInfo": {
+          "$objectType": "prism.v4.config.EnvironmentInfo",
+          "type": "ONPREM",
+          "providerType": "NTNX",
+          "provisioningType": "NTNX"
+        }
+      },
+      "resourceConfig": {
+        "numVcpus": 66,
+        "memorySizeBytes": 238370684928,
+        "dataDiskSizeBytes": 8053063680000,
+        "$objectType": "prism.v4.config.DomainManagerResourceConfig",
+        "containerExtIds": [
+          "e7925308-322e-47ae-a8fa-0ad14310f480"
+        ]
+      }
+    },
+    "network": {
+      "$objectType": "prism.v4.config.DomainManagerNetwork",
+      "externalAddress": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "203.0.113.153",
+          "prefixLength": 24
+        }
+      },
+      "nameServers": [
+        {
+          "$objectType": "common.v1.config.IPAddressOrFQDN",
+          "ipv4": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "198.51.100.146",
+            "prefixLength": 24
+          }
+        },
+        {
+          "ipv4": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "198.51.100.8",
+            "prefixLength": 24
+          }
+        },
+        {
+          "ipv4": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "198.51.100.218",
+            "prefixLength": 24
+          }
+        }
+      ],
+      "ntpServers": [
+        {
+          "$objectType": "common.v1.config.IPAddressOrFQDN",
+          "fqdn": {
+            "$objectType": "common.v1.config.FQDN",
+            "value": "value-b138bfa2"
+          }
+        }
+      ],
+      "externalNetworks": [
+        {
+          "ipAddresses": [
+            {
+              "$objectType": "common.v1.config.IPAddress",
+              "ipv4": {
+                "$objectType": "common.v1.config.IPv4Address",
+                "value": "203.0.113.161",
+                "prefixLength": 24
+              }
+            },
+            {
+              "ipv4": {
+                "$objectType": "common.v1.config.IPv4Address",
+                "value": "198.51.100.120",
+                "prefixLength": 24
+              }
+            },
+            {
+              "ipv4": {
+                "$objectType": "common.v1.config.IPv4Address",
+                "value": "203.0.113.169",
+                "prefixLength": 24
+              }
+            }
+          ],
+          "$objectType": "prism.v4.config.ExternalNetwork",
+          "defaultGateway": {
+            "$objectType": "common.v1.config.IPAddressOrFQDN",
+            "ipv4": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "198.51.100.38",
+              "prefixLength": 24
+            }
+          },
+          "subnetMask": {
+            "$objectType": "common.v1.config.IPAddressOrFQDN",
+            "ipv4": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "198.51.100.232",
+              "prefixLength": 24
+            }
+          },
+          "ipRanges": [
+            {
+              "$objectType": "common.v1.config.IpRange",
+              "begin": {
+                "$objectType": "common.v1.config.IPAddress",
+                "ipv4": {
+                  "$objectType": "common.v1.config.IPv4Address",
+                  "value": "203.0.113.161",
+                  "prefixLength": 24
+                }
+              },
+              "end": {
+                "$objectType": "common.v1.config.IPAddress",
+                "ipv4": {
+                  "$objectType": "common.v1.config.IPv4Address",
+                  "value": "203.0.113.161",
+                  "prefixLength": 24
+                }
+              }
+            },
+            {
+              "begin": {
+                "$objectType": "common.v1.config.IPAddress",
+                "ipv4": {
+                  "$objectType": "common.v1.config.IPv4Address",
+                  "value": "198.51.100.120",
+                  "prefixLength": 24
+                }
+              },
+              "end": {
+                "$objectType": "common.v1.config.IPAddress",
+                "ipv4": {
+                  "$objectType": "common.v1.config.IPv4Address",
+                  "value": "198.51.100.120",
+                  "prefixLength": 24
+                }
+              }
+            },
+            {
+              "begin": {
+                "$objectType": "common.v1.config.IPAddress",
+                "ipv4": {
+                  "$objectType": "common.v1.config.IPv4Address",
+                  "value": "203.0.113.169",
+                  "prefixLength": 24
+                }
+              },
+              "end": {
+                "$objectType": "common.v1.config.IPAddress",
+                "ipv4": {
+                  "$objectType": "common.v1.config.IPv4Address",
+                  "value": "203.0.113.169",
+                  "prefixLength": 24
+                }
+              }
+            }
+          ],
+          "networkExtId": "942bc8ba-c76d-4079-8061-5ed2721ee362"
+        }
+      ],
+      "capability": "IPV4"
+    },
+    "hostingClusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "shouldEnableHighAvailability": true
+  }
+]

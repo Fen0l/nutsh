@@ -1,0 +1,40 @@
+---
+source: crates/tui/tests/detail.rs
+expression: "app.snapshot(120, 36).unwrap()"
+---
+╭ nutsh ─────────────────────────────────────────────────────────────────────────────────────╮
+│Context:    -                                                    ⏎ drill        y detail    │       clusters 1  hosts 1
+│PC:         127.0.0.1:PORT  pc.2024.3                           S sort         w wide      │         vms 3  on/off 3/0
+│Cluster:    <all>                                               ←→ columns     ^r refresh   │           alerts ⚠ 2  ✖ 2
+│Kind:       Data Protection › Recovery Points                   ^t every       ^x stop      │         tasks ▶ 4 running
+│Count:      5                                                    a actions     ^c quit      │
+╰────────────────────────────────────────────────────────────────────────────────────────────╯  v0.0.2-beta1 · pc.2024.3
+╭ nutsh ───────────────╮┌Recovery Points · rp-web-01-2026-09-05────────────────────────────────────────────────────────┐
+│  ▸ Dashboard         ││IDENTITY ─────────────────────────────────────────────────────────────────────────────────────│
+│  ▸ Compute & Storage ││              Name rp-web-01-2026-09-05                                                       │
+│  ▸ Network & Security││              UUID e1f2a3b4-0000-4000-8000-000000000801                                       │
+│  ▾ Data Protection   ││            Status COMPLETE                                 Type Crash consistent             │
+│      Disaster Recover││TIMING ───────────────────────────────────────────────────────────────────────────────────────│
+│      Protection Polic││           Created 4h                                    Expires 0s                           │
+│      Recovery Plans  ││CONTENTS ─────────────────────────────────────────────────────────────────────────────────────│
+│      Recovery Plan Jo││               VMs 1                                    VM UUIDs f0000000                     │
+│    • Recovery Poi [5]││ACTIONS ──────────────────────────────────────────────────────────────────────────────────────│
+│      Recovery Point S││                   Restore                                                                    │
+│      VM Recovery Poin││                   Set expiry                                                                 │
+│      Entity Sync Poli││                   Delete recovery point                                                      │
+│  ▸ Hardware          ││─────────────────────────────────────── raw API names ────────────────────────────────────────│
+│  ▸ Monitoring        ││                   discover-cluster                                                           │
+│  ▸ Policies          ││                   replicate                                                                  │
+│  ▸ Admin Center      ││                                                                                              │
+│  ▸ Contexts          ││                                                                                              │
+│  ▸ Settings          ││                                                                                              │
+│  ─── by namespace ───││                                                                                              │
+│  ▸ aiops             ││                                                                                              │
+│  ▸ clustermgmt       ││                                                                                              │
+│  ▸ dataprotection    ││                                                                                              │
+│  ▸ files             ││                                                                                              │
+│  ▸ iam               ││                                                                                              │
+│  ▸ licensing         ││                                                                                              │
+╰───────────────── ↓12 ╯└──────────────────────────────────────────────────────────────────────────────────────────────┘
+ j/k:scroll  g/G:top/bottom  a:actions  Y:yaml  J:json  esc:back
+[meter]          ● live

@@ -1,0 +1,17 @@
+[
+  {
+    "$objectType": "prism.v4.config.DomainManager",
+    "extId": "18b7c9d0-4e1a-4c2b-9f3d-000000000030",
+    "config": {
+      "$objectType": "prism.v4.config.DomainManagerClusterConfig",
+      "name": "pc-lab",
+      "size": "SMALL",
+      "buildInfo": {
+        "$objectType": "clustermgmt.v4.config.BuildInfo",
+        "version": "pc.2024.3"
+      }
+    },
+    "isRegisteredWithHostingCluster": true,
+    "hostingClusterExtId": "0006158a-2f0d-4d5a-8e2d-000000000010"
+  }
+]

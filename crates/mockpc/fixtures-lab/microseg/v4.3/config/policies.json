@@ -1,0 +1,157 @@
+[
+  {
+    "$objectType": "microseg.v4.config.NetworkSecurityPolicy",
+    "extId": "539fb8d7-1656-4baf-9fa1-7ecabe9f6cd2",
+    "securedGroups": [
+      "70f77736-b5e8-52d0-b587-9e58afc90d3e"
+    ],
+    "lastUpdateTime": "2025-09-16T01:30:12.675-07:00",
+    "creationTime": "2026-08-01T11:53:55.036-07:00",
+    "isSystemDefined": false,
+    "createdBy": "createdBy-9a8253ee",
+    "isSharedWithAllProjects": true,
+    "name": "name-d1721bee",
+    "type": "APPLICATION",
+    "state": "MONITOR",
+    "isIpv6TrafficAllowed": false,
+    "isIpv4AddressScope": true,
+    "isIpv6AddressScope": false,
+    "isHitlogEnabled": true,
+    "scope": "GLOBAL",
+    "projectExtId": "00000000-0000-0000-0000-000000000000"
+  },
+  {
+    "$objectType": "microseg.v4.config.NetworkSecurityPolicy",
+    "extId": "246884d6-e099-5778-ab25-c48796335d3a",
+    "securedGroups": [
+      "252887b5-1462-501e-9e1d-aac971085a45"
+    ],
+    "lastUpdateTime": "2025-07-16T03:12:27.385-07:00",
+    "creationTime": "2026-08-01T11:53:54.879-07:00",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "name": "name-da4282b4",
+    "type": "QUARANTINE",
+    "description": "description-efcba098",
+    "state": "MONITOR",
+    "isIpv6TrafficAllowed": false,
+    "isIpv4AddressScope": true,
+    "isIpv6AddressScope": false,
+    "isHitlogEnabled": false,
+    "scope": "VPC_LIST",
+    "vpcReferences": [
+      "f0faa1a5-b5a0-4aaa-8d70-881114dea04c"
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.NetworkSecurityPolicy",
+    "extId": "2c04c12f-ac7a-4364-8e92-1e564ca8a991",
+    "securedGroups": [
+      "252887b5-1462-501e-9e1d-aac971085a45"
+    ],
+    "lastUpdateTime": "2025-09-17T04:19:03.155-07:00",
+    "creationTime": "2026-08-01T11:53:54.865-07:00",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "name": "name-da4282b4",
+    "type": "QUARANTINE",
+    "description": "description-efcba098",
+    "state": "MONITOR",
+    "isIpv6TrafficAllowed": false,
+    "isIpv4AddressScope": true,
+    "isIpv6AddressScope": false,
+    "isHitlogEnabled": true,
+    "scope": "ALL_VLAN",
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.NetworkSecurityPolicy",
+    "extId": "e3b1e79c-4915-4222-be48-68c7e0fbf380",
+    "securedGroups": [
+      "4c313d99-ad50-5480-ae34-6c29ee35ed92"
+    ],
+    "lastUpdateTime": "2025-09-16T11:50:17.404-07:00",
+    "creationTime": "2026-08-01T11:53:55.208-07:00",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "name": "name-fc13f0fc",
+    "type": "QUARANTINE",
+    "description": "description-c3d35755",
+    "state": "ENFORCE",
+    "isIpv6TrafficAllowed": false,
+    "isIpv4AddressScope": true,
+    "isIpv6AddressScope": true,
+    "isHitlogEnabled": true,
+    "scope": "ALL_VLAN",
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.NetworkSecurityPolicy",
+    "extId": "d6f5ae9a-17f2-4c17-b68a-c9882cf822a9",
+    "securedGroups": [
+      "2d106ed0-77e4-542c-8038-1599d0ddab32"
+    ],
+    "lastUpdateTime": "2025-11-02T14:21:36.545-08:00",
+    "creationTime": "2026-08-01T11:53:55.299-07:00",
+    "isSystemDefined": false,
+    "createdBy": "createdBy-9a8253ee",
+    "isSharedWithAllProjects": true,
+    "name": "name-0573def7",
+    "type": "SHAREDSERVICE",
+    "state": "MONITOR",
+    "isIpv6TrafficAllowed": false,
+    "isIpv4AddressScope": true,
+    "isIpv6AddressScope": false,
+    "isHitlogEnabled": true,
+    "scope": "GLOBAL",
+    "projectExtId": "00000000-0000-0000-0000-000000000000"
+  },
+  {
+    "$objectType": "microseg.v4.config.NetworkSecurityPolicy",
+    "extId": "2060d6a4-4cd6-491a-9caf-1a74115bb96d",
+    "securedGroups": [
+      "4a6c49ad-e88c-47db-801b-2b2811528a62",
+      "70f77736-b5e8-52d0-b587-9e58afc90d3e",
+      "bef8fef3-ea7e-3b6a-97ef-1c9383dddc7b"
+    ],
+    "lastUpdateTime": "2025-09-16T11:46:59.78-07:00",
+    "creationTime": "2026-08-01T11:53:55.3-07:00",
+    "isSystemDefined": false,
+    "createdBy": "createdBy-9a8253ee",
+    "isSharedWithAllProjects": true,
+    "name": "name-a9f05b01",
+    "type": "ISOLATION",
+    "state": "MONITOR",
+    "isIpv6TrafficAllowed": false,
+    "isIpv4AddressScope": true,
+    "isIpv6AddressScope": true,
+    "isHitlogEnabled": true,
+    "scope": "GLOBAL",
+    "projectExtId": "00000000-0000-0000-0000-000000000000"
+  },
+  {
+    "$objectType": "microseg.v4.config.NetworkSecurityPolicy",
+    "extId": "a1c04200-9788-4952-bdea-73add9833938",
+    "securedGroups": [
+      "0e7eee83-4313-5066-bd39-3834ac350f81",
+      "4a6c49ad-e88c-47db-801b-2b2811528a62",
+      "70f77736-b5e8-52d0-b587-9e58afc90d3e",
+      "b1d497b4-9b9c-407d-a347-ebe1a04c981a"
+    ],
+    "lastUpdateTime": "2025-11-14T01:42:02.803-08:00",
+    "creationTime": "2026-08-01T11:53:55.332-07:00",
+    "isSystemDefined": false,
+    "createdBy": "createdBy-9a8253ee",
+    "isSharedWithAllProjects": true,
+    "name": "name-e3edfc78",
+    "type": "APPLICATION",
+    "state": "MONITOR",
+    "isIpv6TrafficAllowed": false,
+    "isIpv4AddressScope": true,
+    "isIpv6AddressScope": false,
+    "isHitlogEnabled": true,
+    "scope": "GLOBAL",
+    "projectExtId": "00000000-0000-0000-0000-000000000000"
+  }
+]

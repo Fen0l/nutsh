@@ -1,0 +1,28 @@
+---
+source: crates/tui/tests/header.rs
+expression: "app.snapshot(80, 24).unwrap()"
+---
+╭ nutsh ─────────────────────────────────────────────╮
+│Context:    -                                       │       clusters 1  hosts 1
+│PC:         127.0.0.1:PORT  pc.2024.3              │         vms 3  on/off 3/0
+│Cluster:    <all>                                   │           alerts ⚠ 2  ✖ 2
+│Kind:       Compute & Storage › VMs                 │         tasks ▶ 4 running
+│Count:      3                                       │
+╰────────────────────────────────────────────────────╯  v0.0.2-beta1 · pc.2024.3
+╭ Virtual Machines [3] ────────────────────────────────────────────────────────╮
+│  NAME                    POWER  CLUSTER      HOST        IP            MEM   │
+│▌ web-01                  ON     lab-cluster  ahv-node-1  203.0.113.11  8 GiB │
+│  web-02                  OFF    lab-cluster  -           -             4 GiB │
+│  db-01                   ON     lab-cluster  ahv-node-1  -             32 GiB│
+│                                                                              │
+│                                                                              │
+│                                                                              │
+│                                                                              │
+│                                                                              │
+│                                                                              │
+│                                                                              │
+│                                                                              │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+ :palette  ^b:menu  ⇥:focus  /:filter  a:actions  ⏎:drill  esc:menu  ?:help
+[meter]          ● live

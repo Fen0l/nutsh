@@ -1,0 +1,863 @@
+[
+  {
+    "$objectType": "clustermgmt.v4.config.Host",
+    "extId": "0a505ef2-ede4-467c-941f-d39d73bdf1c9",
+    "hostName": "hostName-32bb2634",
+    "hostType": "HYPER_CONVERGED",
+    "hypervisor": {
+      "$objectType": "clustermgmt.v4.config.HypervisorReference",
+      "externalAddress": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "203.0.113.15",
+          "prefixLength": 32
+        }
+      },
+      "userName": "userName-f0c467c5",
+      "fullName": "fullName-9e3f9858",
+      "type": "AHV",
+      "numberOfVms": 13,
+      "state": "ACROPOLIS_NORMAL",
+      "acropolisConnectionState": "CONNECTED"
+    },
+    "cluster": {
+      "name": "name-277ed708",
+      "$objectType": "clustermgmt.v4.config.ClusterReference",
+      "uuid": "000623f4-7174-ae2a-0000-00000001c1da"
+    },
+    "controllerVm": {
+      "$objectType": "clustermgmt.v4.config.ControllerVmReference",
+      "externalAddress": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "198.51.100.164",
+          "prefixLength": 32
+        }
+      },
+      "backplaneAddress": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "203.0.113.233",
+          "prefixLength": 32
+        }
+      },
+      "isInMaintenanceMode": false
+    },
+    "disk": [
+      {
+        "$objectType": "clustermgmt.v4.config.DiskReference",
+        "uuid": "f981e420-3b0d-4ad8-b02d-3a427d4aae4e",
+        "mountPath": "/home/nutanix/data/stargate-storage/disks/serialId-0b44e8d9",
+        "sizeInBytes": 1749786993491,
+        "serialId": "serialId-0b44e8d9",
+        "storageTier": "SATA_SSD"
+      },
+      {
+        "uuid": "0770bd09-de24-4b54-ac0c-891a5e60bc30",
+        "mountPath": "/home/nutanix/data/stargate-storage/disks/serialId-66dcd431",
+        "sizeInBytes": 1663279211345,
+        "serialId": "serialId-66dcd431",
+        "storageTier": "SATA_SSD"
+      },
+      {
+        "uuid": "1d184217-e4fb-443d-b2a9-cbc8597fd720",
+        "mountPath": "/home/nutanix/data/stargate-storage/disks/serialId-0786e1cf",
+        "sizeInBytes": 1749786993491,
+        "serialId": "serialId-0786e1cf",
+        "storageTier": "SATA_SSD"
+      },
+      {
+        "uuid": "a1c70f80-574b-43e1-a208-543dfebe7b07",
+        "mountPath": "/home/nutanix/data/stargate-storage/disks/serialId-04003b05",
+        "sizeInBytes": 1588667906062,
+        "serialId": "serialId-04003b05",
+        "storageTier": "SATA_SSD"
+      },
+      {
+        "uuid": "96e75fde-65e7-4e74-960b-7c1074a899cf",
+        "mountPath": "/home/nutanix/data/stargate-storage/disks/serialId-021f7fbc",
+        "sizeInBytes": 1749786993491,
+        "serialId": "serialId-021f7fbc",
+        "storageTier": "SATA_SSD"
+      },
+      {
+        "uuid": "5d8a9924-ec4b-4b9c-a553-e3017617113a",
+        "mountPath": "/home/nutanix/data/stargate-storage/disks/serialId-07723ef0",
+        "sizeInBytes": 1749786993491,
+        "serialId": "serialId-07723ef0",
+        "storageTier": "SATA_SSD"
+      }
+    ],
+    "isSecureBooted": false,
+    "isHardwareVirtualized": false,
+    "hasCsr": false,
+    "numberOfCpuCores": 24,
+    "numberOfCpuThreads": 48,
+    "numberOfCpuSockets": 2,
+    "cpuFrequencyHz": 2600000000,
+    "cpuModel": "Intel(R) Xeon(R) Gold 6126 CPU @ 2.60GHz",
+    "gpuList": [
+      ""
+    ],
+    "bootTimeUsecs": 1785915718774025,
+    "memorySizeBytes": 540142952448,
+    "nodeSerial": "nodeSerial-3659057b",
+    "blockSerial": "blockSerial-2ad16d9e",
+    "blockModel": "NX-3060-G6",
+    "maintenanceState": "normal",
+    "nodeStatus": "NORMAL",
+    "ipmi": {
+      "$objectType": "clustermgmt.v4.config.IpmiReference",
+      "ip": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "203.0.113.149",
+          "prefixLength": 32
+        }
+      },
+      "username": "username-cd57cc74"
+    },
+    "rackableUnitUuid": "e4325e63-1883-48ec-a061-24f03505e1dd"
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.Host",
+    "extId": "38521854-c20d-41ff-8348-41c53db66e38",
+    "hostName": "hostName-a0df6d46",
+    "hostType": "HYPER_CONVERGED",
+    "hypervisor": {
+      "$objectType": "clustermgmt.v4.config.HypervisorReference",
+      "externalAddress": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "203.0.113.205",
+          "prefixLength": 32
+        }
+      },
+      "userName": "userName-f0c467c5",
+      "fullName": "fullName-9e3f9858",
+      "type": "AHV",
+      "numberOfVms": 7,
+      "state": "ACROPOLIS_NORMAL",
+      "acropolisConnectionState": "CONNECTED"
+    },
+    "cluster": {
+      "name": "name-d2b6bd1b",
+      "$objectType": "clustermgmt.v4.config.ClusterReference",
+      "uuid": "0006237e-c983-e712-0000-00000001c1d0"
+    },
+    "controllerVm": {
+      "$objectType": "clustermgmt.v4.config.ControllerVmReference",
+      "externalAddress": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "198.51.100.230",
+          "prefixLength": 32
+        }
+      },
+      "backplaneAddress": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "203.0.113.83",
+          "prefixLength": 32
+        }
+      },
+      "isInMaintenanceMode": false
+    },
+    "disk": [
+      {
+        "$objectType": "clustermgmt.v4.config.DiskReference",
+        "uuid": "f6c84ffe-4cb0-4ad3-b121-6408a80158ee",
+        "mountPath": "/home/nutanix/data/stargate-storage/disks/serialId-f55b3b40",
+        "sizeInBytes": 1523403421140,
+        "serialId": "serialId-f55b3b40",
+        "storageTier": "SATA_SSD"
+      },
+      {
+        "uuid": "eef6ef80-9030-4f96-9412-64c41d0de959",
+        "mountPath": "/home/nutanix/data/stargate-storage/disks/serialId-024289e9",
+        "sizeInBytes": 1684699044859,
+        "serialId": "serialId-024289e9",
+        "storageTier": "SATA_SSD"
+      },
+      {
+        "uuid": "be0727a5-9cdd-4ae4-bf38-a50f9405340e",
+        "mountPath": "/home/nutanix/data/stargate-storage/disks/serialId-0b44f30b",
+        "sizeInBytes": 1684699044859,
+        "serialId": "serialId-0b44f30b",
+        "storageTier": "SATA_SSD"
+      },
+      {
+        "uuid": "1bf1e1ef-8ae6-404b-b956-c2a8a36b702d",
+        "mountPath": "/home/nutanix/data/stargate-storage/disks/serialId-0b44e726",
+        "sizeInBytes": 1684699044859,
+        "serialId": "serialId-0b44e726",
+        "storageTier": "SATA_SSD"
+      },
+      {
+        "uuid": "ed6f5e93-63ca-419b-9120-6cacb1ce049e",
+        "mountPath": "/home/nutanix/data/stargate-storage/disks/serialId-0247e6e1",
+        "sizeInBytes": 1684699044859,
+        "serialId": "serialId-0247e6e1",
+        "storageTier": "SATA_SSD"
+      },
+      {
+        "uuid": "94ac4f28-5b7f-429a-9b67-18df5b3164f5",
+        "mountPath": "/home/nutanix/data/stargate-storage/disks/serialId-f53e5d59",
+        "sizeInBytes": 1523455555455,
+        "serialId": "serialId-f53e5d59",
+        "storageTier": "SATA_SSD"
+      }
+    ],
+    "isSecureBooted": false,
+    "isHardwareVirtualized": false,
+    "hasCsr": false,
+    "numberOfCpuCores": 24,
+    "numberOfCpuThreads": 48,
+    "numberOfCpuSockets": 2,
+    "cpuFrequencyHz": 2600000000,
+    "cpuModel": "Intel(R) Xeon(R) Gold 6126 CPU @ 2.60GHz",
+    "gpuList": [
+      ""
+    ],
+    "bootTimeUsecs": 1785922376972897,
+    "memorySizeBytes": 540142948352,
+    "nodeSerial": "nodeSerial-a685a9b3",
+    "blockSerial": "blockSerial-2ea71946",
+    "blockModel": "NX-3060-G6",
+    "maintenanceState": "normal",
+    "nodeStatus": "NORMAL",
+    "ipmi": {
+      "$objectType": "clustermgmt.v4.config.IpmiReference",
+      "ip": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "203.0.113.25",
+          "prefixLength": 32
+        }
+      },
+      "username": "username-cd57cc74"
+    },
+    "rackableUnitUuid": "45e16c0d-ede8-47b4-943a-eb0e54dc3961"
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.Host",
+    "extId": "422ac3ad-bb71-4c47-83f9-7367f1b7da90",
+    "hostName": "hostName-32bb211b",
+    "hostType": "HYPER_CONVERGED",
+    "hypervisor": {
+      "$objectType": "clustermgmt.v4.config.HypervisorReference",
+      "externalAddress": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "198.51.100.56",
+          "prefixLength": 32
+        }
+      },
+      "userName": "userName-f0c467c5",
+      "fullName": "fullName-9e3f9858",
+      "type": "AHV",
+      "numberOfVms": 15,
+      "state": "ACROPOLIS_NORMAL",
+      "acropolisConnectionState": "CONNECTED"
+    },
+    "cluster": {
+      "name": "name-277ed708",
+      "$objectType": "clustermgmt.v4.config.ClusterReference",
+      "uuid": "000623f4-7174-ae2a-0000-00000001c1da"
+    },
+    "controllerVm": {
+      "$objectType": "clustermgmt.v4.config.ControllerVmReference",
+      "externalAddress": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "203.0.113.33",
+          "prefixLength": 32
+        }
+      },
+      "backplaneAddress": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "203.0.113.61",
+          "prefixLength": 32
+        }
+      },
+      "isInMaintenanceMode": false
+    },
+    "disk": [
+      {
+        "$objectType": "clustermgmt.v4.config.DiskReference",
+        "uuid": "643723e4-9b8a-437f-aa52-132dd65baecf",
+        "mountPath": "/home/nutanix/data/stargate-storage/disks/serialId-0786edb4",
+        "sizeInBytes": 1749265697650,
+        "serialId": "serialId-0786edb4",
+        "storageTier": "SATA_SSD"
+      },
+      {
+        "uuid": "ecbdd031-fed2-48e4-b8cd-b98618111598",
+        "mountPath": "/home/nutanix/data/stargate-storage/disks/serialId-ee134036",
+        "sizeInBytes": 1588595520267,
+        "serialId": "serialId-ee134036",
+        "storageTier": "SATA_SSD"
+      },
+      {
+        "uuid": "3c1a5f54-f38b-4ad8-9c4c-83560b2388e5",
+        "mountPath": "/home/nutanix/data/stargate-storage/disks/serialId-0780c83a",
+        "sizeInBytes": 1749265697650,
+        "serialId": "serialId-0780c83a",
+        "storageTier": "SATA_SSD"
+      },
+      {
+        "uuid": "e76d3c89-6abb-4e05-9508-30d6d9466673",
+        "mountPath": "/home/nutanix/data/stargate-storage/disks/serialId-57a640e1",
+        "sizeInBytes": 1749265697650,
+        "serialId": "serialId-57a640e1",
+        "storageTier": "SATA_SSD"
+      },
+      {
+        "uuid": "d723b275-9ef0-4774-8c8b-cf791cc611fd",
+        "mountPath": "/home/nutanix/data/stargate-storage/disks/serialId-55e1ac95",
+        "sizeInBytes": 1588595520267,
+        "serialId": "serialId-55e1ac95",
+        "storageTier": "SATA_SSD"
+      },
+      {
+        "uuid": "60c6196f-07c8-4a84-a553-b2270e3d2c29",
+        "mountPath": "/home/nutanix/data/stargate-storage/disks/serialId-57a31b73",
+        "sizeInBytes": 1749265697650,
+        "serialId": "serialId-57a31b73",
+        "storageTier": "SATA_SSD"
+      }
+    ],
+    "isSecureBooted": false,
+    "isHardwareVirtualized": false,
+    "hasCsr": false,
+    "numberOfCpuCores": 24,
+    "numberOfCpuThreads": 48,
+    "numberOfCpuSockets": 2,
+    "cpuFrequencyHz": 2600000000,
+    "cpuModel": "Intel(R) Xeon(R) Gold 6126 CPU @ 2.60GHz",
+    "gpuList": [
+      ""
+    ],
+    "bootTimeUsecs": 1785914486297136,
+    "memorySizeBytes": 540142948352,
+    "nodeSerial": "nodeSerial-365903c8",
+    "blockSerial": "blockSerial-2ad16d9e",
+    "blockModel": "NX-3060-G6",
+    "maintenanceState": "normal",
+    "nodeStatus": "NORMAL",
+    "ipmi": {
+      "$objectType": "clustermgmt.v4.config.IpmiReference",
+      "ip": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "198.51.100.190",
+          "prefixLength": 32
+        }
+      },
+      "username": "username-cd57cc74"
+    },
+    "rackableUnitUuid": "e4325e63-1883-48ec-a061-24f03505e1dd"
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.Host",
+    "extId": "44e477e6-edcf-4722-b35b-88deb3a160ef",
+    "hostName": "hostName-a0df69e0",
+    "hostType": "HYPER_CONVERGED",
+    "hypervisor": {
+      "$objectType": "clustermgmt.v4.config.HypervisorReference",
+      "externalAddress": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "198.51.100.164",
+          "prefixLength": 32
+        }
+      },
+      "userName": "userName-f0c467c5",
+      "fullName": "fullName-9e3f9858",
+      "type": "AHV",
+      "numberOfVms": 6,
+      "state": "ACROPOLIS_NORMAL",
+      "acropolisConnectionState": "CONNECTED"
+    },
+    "cluster": {
+      "name": "name-d2b6bd1b",
+      "$objectType": "clustermgmt.v4.config.ClusterReference",
+      "uuid": "0006237e-c983-e712-0000-00000001c1d0"
+    },
+    "controllerVm": {
+      "$objectType": "clustermgmt.v4.config.ControllerVmReference",
+      "externalAddress": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "203.0.113.17",
+          "prefixLength": 32
+        }
+      },
+      "backplaneAddress": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "203.0.113.165",
+          "prefixLength": 32
+        }
+      },
+      "isInMaintenanceMode": false
+    },
+    "disk": [
+      {
+        "$objectType": "clustermgmt.v4.config.DiskReference",
+        "uuid": "61a31abc-3b9e-4fa1-b250-049042f145bb",
+        "mountPath": "/home/nutanix/data/stargate-storage/disks/serialId-3c69bcb7",
+        "sizeInBytes": 1657635942162,
+        "serialId": "serialId-3c69bcb7",
+        "storageTier": "SATA_SSD"
+      },
+      {
+        "uuid": "2afc1198-fff5-4474-9297-5566ece78cf6",
+        "mountPath": "/home/nutanix/data/stargate-storage/disks/serialId-023967c9",
+        "sizeInBytes": 1657635942162,
+        "serialId": "serialId-023967c9",
+        "storageTier": "SATA_SSD"
+      },
+      {
+        "uuid": "8b02710d-fc50-420d-a676-1ce39c6ef57e",
+        "mountPath": "/home/nutanix/data/stargate-storage/disks/serialId-5a32be0b",
+        "sizeInBytes": 1582751687916,
+        "serialId": "serialId-5a32be0b",
+        "storageTier": "SATA_SSD"
+      },
+      {
+        "uuid": "70cc2176-764c-4140-9c94-f59c7dab75f7",
+        "mountPath": "/home/nutanix/data/stargate-storage/disks/serialId-02428b9c",
+        "sizeInBytes": 1657635942162,
+        "serialId": "serialId-02428b9c",
+        "storageTier": "SATA_SSD"
+      },
+      {
+        "uuid": "927165f0-9b7d-4ac1-89a1-f69a6a3b3220",
+        "mountPath": "/home/nutanix/data/stargate-storage/disks/serialId-021f883b",
+        "sizeInBytes": 1582751687916,
+        "serialId": "serialId-021f883b",
+        "storageTier": "SATA_SSD"
+      }
+    ],
+    "isSecureBooted": false,
+    "isHardwareVirtualized": false,
+    "hasCsr": false,
+    "numberOfCpuCores": 24,
+    "numberOfCpuThreads": 48,
+    "numberOfCpuSockets": 2,
+    "cpuFrequencyHz": 2600000000,
+    "cpuModel": "Intel(R) Xeon(R) Gold 6126 CPU @ 2.60GHz",
+    "gpuList": [
+      ""
+    ],
+    "bootTimeUsecs": 1785915377645660,
+    "memorySizeBytes": 540142936064,
+    "nodeSerial": "nodeSerial-0021f643",
+    "blockSerial": "blockSerial-2ea71946",
+    "blockModel": "NX-3060-G6",
+    "maintenanceState": "normal",
+    "nodeStatus": "NORMAL",
+    "ipmi": {
+      "$objectType": "clustermgmt.v4.config.IpmiReference",
+      "ip": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "198.51.100.238",
+          "prefixLength": 32
+        }
+      },
+      "username": "username-cd57cc74"
+    },
+    "rackableUnitUuid": "45e16c0d-ede8-47b4-943a-eb0e54dc3961"
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.Host",
+    "extId": "73e903d6-2b8a-46e3-877c-b6bbb347bb4a",
+    "hostName": "hostName-32bb22ce",
+    "hostType": "HYPER_CONVERGED",
+    "hypervisor": {
+      "$objectType": "clustermgmt.v4.config.HypervisorReference",
+      "externalAddress": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "203.0.113.97",
+          "prefixLength": 32
+        }
+      },
+      "userName": "userName-f0c467c5",
+      "fullName": "fullName-9e3f9858",
+      "type": "AHV",
+      "numberOfVms": 9,
+      "state": "ACROPOLIS_NORMAL",
+      "acropolisConnectionState": "CONNECTED"
+    },
+    "cluster": {
+      "name": "name-277ed708",
+      "$objectType": "clustermgmt.v4.config.ClusterReference",
+      "uuid": "000623f4-7174-ae2a-0000-00000001c1da"
+    },
+    "controllerVm": {
+      "$objectType": "clustermgmt.v4.config.ControllerVmReference",
+      "externalAddress": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "198.51.100.246",
+          "prefixLength": 32
+        }
+      },
+      "backplaneAddress": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "203.0.113.143",
+          "prefixLength": 32
+        }
+      },
+      "isInMaintenanceMode": false
+    },
+    "disk": [
+      {
+        "$objectType": "clustermgmt.v4.config.DiskReference",
+        "uuid": "2fd64d7e-5a86-41b6-9938-10f9166ce19b",
+        "mountPath": "/home/nutanix/data/stargate-storage/disks/serialId-57a94b1f",
+        "sizeInBytes": 1749251024238,
+        "serialId": "serialId-57a94b1f",
+        "storageTier": "SATA_SSD"
+      },
+      {
+        "uuid": "df320046-afed-4df9-8d7d-632e8351002c",
+        "mountPath": "/home/nutanix/data/stargate-storage/disks/serialId-024284d0",
+        "sizeInBytes": 1749251024238,
+        "serialId": "serialId-024284d0",
+        "storageTier": "SATA_SSD"
+      },
+      {
+        "uuid": "353ed8cc-012b-45ad-922d-0787a689dc0e",
+        "mountPath": "/home/nutanix/data/stargate-storage/disks/serialId-57a95c1d",
+        "sizeInBytes": 1749251024238,
+        "serialId": "serialId-57a95c1d",
+        "storageTier": "SATA_SSD"
+      },
+      {
+        "uuid": "29d54a8b-c0db-4e62-9495-4bc2c56ca98f",
+        "mountPath": "/home/nutanix/data/stargate-storage/disks/serialId-0038f4f8",
+        "sizeInBytes": 1587597230894,
+        "serialId": "serialId-0038f4f8",
+        "storageTier": "SATA_SSD"
+      },
+      {
+        "uuid": "547ccac0-c5b9-4ada-9b2d-b7bcc4f419d3",
+        "mountPath": "/home/nutanix/data/stargate-storage/disks/serialId-0032ca65",
+        "sizeInBytes": 1587622470873,
+        "serialId": "serialId-0032ca65",
+        "storageTier": "SATA_SSD"
+      },
+      {
+        "uuid": "271ad738-ebf3-41d7-b154-3d36102d6899",
+        "mountPath": "/home/nutanix/data/stargate-storage/disks/serialId-0783d42b",
+        "sizeInBytes": 1749251024238,
+        "serialId": "serialId-0783d42b",
+        "storageTier": "SATA_SSD"
+      }
+    ],
+    "isSecureBooted": false,
+    "isHardwareVirtualized": false,
+    "hasCsr": false,
+    "numberOfCpuCores": 24,
+    "numberOfCpuThreads": 48,
+    "numberOfCpuSockets": 2,
+    "cpuFrequencyHz": 2600000000,
+    "cpuModel": "Intel(R) Xeon(R) Gold 6126 CPU @ 2.60GHz",
+    "gpuList": [
+      ""
+    ],
+    "bootTimeUsecs": 1785916762763948,
+    "memorySizeBytes": 269358841856,
+    "nodeSerial": "nodeSerial-3655eda5",
+    "blockSerial": "blockSerial-2ad16d9e",
+    "blockModel": "NX-3060-G6",
+    "maintenanceState": "normal",
+    "nodeStatus": "NORMAL",
+    "ipmi": {
+      "$objectType": "clustermgmt.v4.config.IpmiReference",
+      "ip": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "203.0.113.231",
+          "prefixLength": 32
+        }
+      },
+      "username": "username-cd57cc74"
+    },
+    "rackableUnitUuid": "e4325e63-1883-48ec-a061-24f03505e1dd"
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.Host",
+    "extId": "9cad7457-dc26-4839-bfce-2aa79a0f54c7",
+    "hostName": "hostName-a0df6ef9",
+    "hostType": "HYPER_CONVERGED",
+    "hypervisor": {
+      "$objectType": "clustermgmt.v4.config.HypervisorReference",
+      "externalAddress": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "198.51.100.246",
+          "prefixLength": 32
+        }
+      },
+      "userName": "userName-f0c467c5",
+      "fullName": "fullName-9e3f9858",
+      "type": "AHV",
+      "numberOfVms": 7,
+      "state": "ACROPOLIS_NORMAL",
+      "acropolisConnectionState": "CONNECTED"
+    },
+    "cluster": {
+      "name": "name-d2b6bd1b",
+      "$objectType": "clustermgmt.v4.config.ClusterReference",
+      "uuid": "0006237e-c983-e712-0000-00000001c1d0"
+    },
+    "controllerVm": {
+      "$objectType": "clustermgmt.v4.config.ControllerVmReference",
+      "externalAddress": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "203.0.113.25",
+          "prefixLength": 32
+        }
+      },
+      "backplaneAddress": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "203.0.113.75",
+          "prefixLength": 32
+        }
+      },
+      "isInMaintenanceMode": false
+    },
+    "disk": [
+      {
+        "$objectType": "clustermgmt.v4.config.DiskReference",
+        "uuid": "feac9ddd-870f-4d67-83b6-1ae27d47e5c2",
+        "mountPath": "/home/nutanix/data/stargate-storage/disks/serialId-5a32bfbe",
+        "sizeInBytes": 1683556091633,
+        "serialId": "serialId-5a32bfbe",
+        "storageTier": "SATA_SSD"
+      },
+      {
+        "uuid": "15d785db-059b-463f-b0da-8a3bfd8f7bcc",
+        "mountPath": "/home/nutanix/data/stargate-storage/disks/serialId-41b0fe92",
+        "sizeInBytes": 1599674709799,
+        "serialId": "serialId-41b0fe92",
+        "storageTier": "SATA_SSD"
+      },
+      {
+        "uuid": "39edd54f-0bcd-464c-be58-94dcdb019529",
+        "mountPath": "/home/nutanix/data/stargate-storage/disks/serialId-2eb65510",
+        "sizeInBytes": 1524213982072,
+        "serialId": "serialId-2eb65510",
+        "storageTier": "SATA_SSD"
+      },
+      {
+        "uuid": "0b379b75-b4a4-42f9-b1e1-b683a7b850c0",
+        "mountPath": "/home/nutanix/data/stargate-storage/disks/serialId-f5585817",
+        "sizeInBytes": 1610500161378,
+        "serialId": "serialId-f5585817",
+        "storageTier": "SATA_SSD"
+      },
+      {
+        "uuid": "51d53204-c798-4a9a-8d1a-9fab4a482655",
+        "mountPath": "/home/nutanix/data/stargate-storage/disks/serialId-f564898e",
+        "sizeInBytes": 1610500161378,
+        "serialId": "serialId-f564898e",
+        "storageTier": "SATA_SSD"
+      },
+      {
+        "uuid": "53c96d1f-1c84-495d-99fb-15ae5aec3102",
+        "mountPath": "/home/nutanix/data/stargate-storage/disks/serialId-2eb896cc",
+        "sizeInBytes": 1610500161378,
+        "serialId": "serialId-2eb896cc",
+        "storageTier": "SATA_SSD"
+      }
+    ],
+    "isSecureBooted": false,
+    "isHardwareVirtualized": false,
+    "hasCsr": false,
+    "numberOfCpuCores": 24,
+    "numberOfCpuThreads": 48,
+    "numberOfCpuSockets": 2,
+    "cpuFrequencyHz": 2600000000,
+    "cpuModel": "Intel(R) Xeon(R) Gold 6126 CPU @ 2.60GHz",
+    "gpuList": [
+      ""
+    ],
+    "bootTimeUsecs": 1785916847973015,
+    "memorySizeBytes": 540142948352,
+    "nodeSerial": "nodeSerial-1f1a804d",
+    "blockSerial": "blockSerial-2ea71946",
+    "blockModel": "NX-3060-G6",
+    "maintenanceState": "normal",
+    "nodeStatus": "NORMAL",
+    "ipmi": {
+      "$objectType": "clustermgmt.v4.config.IpmiReference",
+      "ip": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "198.51.100.66",
+          "prefixLength": 32
+        }
+      },
+      "username": "username-cd57cc74"
+    },
+    "rackableUnitUuid": "45e16c0d-ede8-47b4-943a-eb0e54dc3961"
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.Host",
+    "extId": "db7c8f4b-541d-4db7-b9f7-4e24cad11d84",
+    "hostName": "hostName-32bb2481",
+    "hostType": "HYPER_CONVERGED",
+    "hypervisor": {
+      "$objectType": "clustermgmt.v4.config.HypervisorReference",
+      "externalAddress": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "198.51.100.228",
+          "prefixLength": 32
+        }
+      },
+      "userName": "userName-f0c467c5",
+      "fullName": "fullName-9e3f9858",
+      "type": "AHV",
+      "numberOfVms": 19,
+      "state": "ACROPOLIS_NORMAL",
+      "acropolisConnectionState": "CONNECTED"
+    },
+    "cluster": {
+      "name": "name-277ed708",
+      "$objectType": "clustermgmt.v4.config.ClusterReference",
+      "uuid": "000623f4-7174-ae2a-0000-00000001c1da"
+    },
+    "controllerVm": {
+      "$objectType": "clustermgmt.v4.config.ControllerVmReference",
+      "externalAddress": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "203.0.113.205",
+          "prefixLength": 32
+        }
+      },
+      "backplaneAddress": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "203.0.113.151",
+          "prefixLength": 32
+        }
+      },
+      "isInMaintenanceMode": false
+    },
+    "disk": [
+      {
+        "$objectType": "clustermgmt.v4.config.DiskReference",
+        "uuid": "0323d129-73e1-42ad-b2af-a8d5928ac2c2",
+        "mountPath": "/home/nutanix/data/stargate-storage/disks/serialId-57a958b7",
+        "sizeInBytes": 1749251024238,
+        "serialId": "serialId-57a958b7",
+        "storageTier": "SATA_SSD"
+      },
+      {
+        "uuid": "864afd2b-b26b-4458-ab59-515ee4495663",
+        "mountPath": "/home/nutanix/data/stargate-storage/disks/serialId-41a298f7",
+        "sizeInBytes": 1749251024238,
+        "serialId": "serialId-41a298f7",
+        "storageTier": "SATA_SSD"
+      },
+      {
+        "uuid": "27b49c78-db50-4019-8ec0-ae26bdfcb381",
+        "mountPath": "/home/nutanix/data/stargate-storage/disks/serialId-ee1348b5",
+        "sizeInBytes": 1587584603498,
+        "serialId": "serialId-ee1348b5",
+        "storageTier": "SATA_SSD"
+      },
+      {
+        "uuid": "dc1695a0-5c35-413f-8e26-6ccc1796c97a",
+        "mountPath": "/home/nutanix/data/stargate-storage/disks/serialId-ee1352e7",
+        "sizeInBytes": 1587622470873,
+        "serialId": "serialId-ee1352e7",
+        "storageTier": "SATA_SSD"
+      },
+      {
+        "uuid": "061b3d7c-a0e1-4fb0-8b26-e994c74e9861",
+        "mountPath": "/home/nutanix/data/stargate-storage/disks/serialId-41a282e0",
+        "sizeInBytes": 1749251024238,
+        "serialId": "serialId-41a282e0",
+        "storageTier": "SATA_SSD"
+      },
+      {
+        "uuid": "0e99f0a0-7d51-4c00-a26b-325d321d1671",
+        "mountPath": "/home/nutanix/data/stargate-storage/disks/serialId-41ade86f",
+        "sizeInBytes": 1749251024238,
+        "serialId": "serialId-41ade86f",
+        "storageTier": "SATA_SSD"
+      }
+    ],
+    "isSecureBooted": false,
+    "isHardwareVirtualized": false,
+    "hasCsr": false,
+    "numberOfCpuCores": 24,
+    "numberOfCpuThreads": 48,
+    "numberOfCpuSockets": 2,
+    "cpuFrequencyHz": 2600000000,
+    "cpuModel": "Intel(R) Xeon(R) Gold 6126 CPU @ 2.60GHz",
+    "gpuList": [
+      ""
+    ],
+    "bootTimeUsecs": 1785918042529818,
+    "memorySizeBytes": 540142952448,
+    "nodeSerial": "nodeSerial-014a8f4a",
+    "blockSerial": "blockSerial-2ad16d9e",
+    "blockModel": "NX-3060-G6",
+    "maintenanceState": "normal",
+    "nodeStatus": "NORMAL",
+    "ipmi": {
+      "$objectType": "clustermgmt.v4.config.IpmiReference",
+      "ip": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "198.51.100.108",
+          "prefixLength": 32
+        }
+      },
+      "username": "username-cd57cc74"
+    },
+    "rackableUnitUuid": "e4325e63-1883-48ec-a061-24f03505e1dd"
+  }
+]

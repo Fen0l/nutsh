@@ -1,0 +1,18 @@
+---
+source: crates/tui/tests/progress.rs
+expression: frame
+---
+╭ nutsh ─────────────────────────────────────────────────────────────────────────────────────╮
+│Context:    -                                                    ⏎ drill        y detail    │       clusters -  hosts -
+│PC:         127.0.0.1:PORT  pc.2024.3                           S sort         w wide      │         vms -  on/off -/-
+│Cluster:    <all>                                               ←→ columns     ^r refresh   │           alerts ⚠ -  ✖ -
+│Kind:       Monitoring › Audits                                 ^t every       ^x stop      │         tasks ▶ - running
+│Count:      0                                                    a actions     ^c quit      │
+╰────────────────────────────────────────────────────────────────────────────────────────────╯  v0.0.2-beta1 · pc.2024.3
+╭ nutsh ─────────── ↑9 ╮╭ Audits [0] [↻ 0 rows · 0s] ──────────────────────────────────────────────────────────────────╮
+│      Tasks           ││  TITLE                                    STATUS  OPERATION  USER        SOURCE       STARTED│
+│    • Audits          ││  listing up to 500 rows…                                                                     │
+│      Alert Policies  ││                                                                                              │
+╰───────────────── ↓24 ╯╰──────────────────────────────────────────────────────────────────────────────────────────────╯
+ :palette  ^b:menu  ⇥:focus  /:filter  a:actions  ⏎:drill  esc:menu  ?:help
+[meter]       ○ syncing

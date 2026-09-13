@@ -1,0 +1,68 @@
+[
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "9f0e1d20-0000-4000-8000-000000000901",
+    "entityClass": "Hypervisor",
+    "entityModel": "AHV hypervisor",
+    "entityType": "SOFTWARE",
+    "entityVersion": "10.0.1",
+    "targetVersion": "10.0.3",
+    "entityDescription": "the hypervisor running on every node of the cluster",
+    "locationInfo": {
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "uuid": "7b2f2f70-0f6a-4b58-9f9b-000000000020",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006158a-2f0d-4d5a-8e2d-000000000010",
+    "hardwareVendor": "Nutanix",
+    "hardwareFamily": "NX",
+    "hasPreviousInventoryFailed": false,
+    "groupUuid": "9f0e1d20-0000-4000-8000-000000000911",
+    "availableVersions": [
+      {
+        "$objectType": "lifecycle.v4.resources.AvailableVersion",
+        "version": "10.0.3",
+        "status": "AVAILABLE",
+        "isEnabled": true,
+        "availableVersionUuid": "9f0e1d20-0000-4000-8000-000000000921",
+        "order": 12,
+        "isImagePresent": true
+      }
+    ],
+    "lastUpdatedTime": "2026-09-02T06:00:00Z"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "9f0e1d20-0000-4000-8000-000000000902",
+    "entityClass": "Cluster Service",
+    "entityModel": "Foundation Platforms",
+    "entityType": "SOFTWARE",
+    "entityVersion": "2.20",
+    "targetVersion": "2.20",
+    "clusterExtId": "0006158a-2f0d-4d5a-8e2d-000000000010",
+    "hardwareVendor": "Nutanix",
+    "hasPreviousInventoryFailed": false,
+    "groupUuid": "9f0e1d20-0000-4000-8000-000000000912",
+    "lastUpdatedTime": "2026-09-02T06:00:00Z"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "9f0e1d20-0000-4000-8000-000000000903",
+    "entityClass": "BIOS",
+    "entityModel": "NX-G8 BIOS",
+    "entityType": "FIRMWARE",
+    "entityVersion": "42.300",
+    "targetVersion": "42.600",
+    "locationInfo": {
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "uuid": "7b2f2f70-0f6a-4b58-9f9b-000000000020",
+      "locationType": "NODE"
+    },
+    "clusterExtId": "0006158a-2f0d-4d5a-8e2d-000000000010",
+    "hardwareVendor": "Supermicro",
+    "hardwareFamily": "NX-G8",
+    "hasPreviousInventoryFailed": true,
+    "groupUuid": "9f0e1d20-0000-4000-8000-000000000913",
+    "lastUpdatedTime": "2026-08-28T06:00:00Z"
+  }
+]

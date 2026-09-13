@@ -1,0 +1,34 @@
+[
+  {
+    "$objectType": "monitoring.v4.serviceability.UserDefinedPolicy",
+    "extId": "4f0a50d9-aa84-41c8-a10f-9cf8b0e0b411",
+    "createdBy": "createdBy-da328454",
+    "lastUpdatedTime": "2026-08-04T13:01:25.092334Z",
+    "policyId": "Af050324f-9346-403c-be90-63579271985e",
+    "title": "Low Cluster CPU Usage",
+    "description": "description-2369bd38",
+    "isEnabled": true,
+    "isAutoResolved": true,
+    "triggerConditions": [
+      {
+        "$objectType": "monitoring.v4.serviceability.TriggerCondition",
+        "conditionType": "STATIC_THRESHOLD",
+        "condition": {
+          "thresholdValue": {
+            "$objectType": "monitoring.v4.common.IntValue",
+            "intValue": 200000
+          },
+          "$objectType": "monitoring.v4.serviceability.Condition",
+          "metricName": "metricName-5277ddc5",
+          "operator": "LESS_THAN_OR_EQUAL_TO"
+        },
+        "severityLevel": "CRITICAL"
+      }
+    ],
+    "impactTypes": [
+      "PERFORMANCE"
+    ],
+    "triggerWaitPeriod": 0,
+    "entityType": "cluster"
+  }
+]

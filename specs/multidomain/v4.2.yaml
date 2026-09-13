@@ -1,0 +1,1903 @@
+openapi: 3.0.1
+info:
+  title: Nutanix Multidomain Versioned APIs
+  description: "Manage all Nutanix services running on the Nutanix Cloud Platform\
+    \ (NCP) deployed in on-prem data centers ,Nutanix Cloud Clusters (NC2) or edge\
+    \ sites."
+  version: 4.2.1
+  x-logo:
+    altText: Multi Domain Management Logo
+    url: https://developers.nutanix.com/api/v1/namespaces/multidomain/images/multidomain-logo-img.svg
+  x-repo-name: multidomain
+  x-minimum-negotiation-version: v4.2
+servers:
+- url: "https://{pc-ip}:9440/api"
+security:
+- basicAuthScheme: []
+tags:
+- name: ExternalRepositories
+  description: |
+    A repository of data that is external to AOS, accessible over a specified protocol (eg: NFSv3) -  typically identified by the IP at which the storage is available on the network and optionally a relative path from the root of the storage system.
+  x-displayName: External Repositories
+paths:
+  /multidomain/v4.2/config/external-repositories:
+    get:
+      tags:
+      - ExternalRepositories
+      summary: List External repositories.
+      description: Get all External repositories.
+      operationId: listExternalRepositories
+      parameters:
+      - name: $page
+        in: query
+        description: |
+          A URL query parameter that specifies the page number of the result set. It must be a positive integer between 0 and the maximum number of pages that are available for that resource. Any number out of this range might lead to no results.
+        required: false
+        style: form
+        explode: false
+        schema:
+          minimum: 0
+          type: integer
+          description: |
+            A URL query parameter that specifies the page number of the result set. It must be a positive integer between 0 and the maximum number of pages that are available for that resource. Any number out of this range might lead to no results.
+          format: int32
+          default: 0
+      - name: $limit
+        in: query
+        description: |
+          A URL query parameter that specifies the total number of records returned in the result set.  Must be a positive integer between 1 and 100. Any number out of this range will lead to a validation error. If the limit is not provided, a default value of 50 records will be returned in the result set.
+        required: false
+        style: form
+        explode: false
+        schema:
+          maximum: 100
+          minimum: 1
+          type: integer
+          description: |
+            A URL query parameter that specifies the total number of records returned in the result set.  Must be a positive integer between 1 and 100. Any number out of this range will lead to a validation error. If the limit is not provided, a default value of 50 records will be returned in the result set.
+          format: int32
+          default: 50
+      - name: $filter
+        in: query
+        description: |-
+          A URL query parameter that allows clients to filter a collection of resources. The expression specified with $filter is evaluated for each resource in the collection, and only items where the expression evaluates to true are included in the response. Expression specified with the $filter must conform to the [OData V4.01](https://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html) URL conventions.
+          For example, filter '$filter=name eq 'karbon-ntnx-1.0' would filter the result on cluster name 'karbon-ntnx1.0', filter '$filter=startswith(name, 'C')' would filter on cluster name starting with 'C'.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: string
+        x-odata-fields:
+        - name: name
+          example: "https://{pc-ip}:9440/api/multidomain/v4.2/config/external-repositories?$filter=name\
+            \ eq 'Database disks repository'"
+        - name: ownerExtId
+          example: "https://{pc-ip}:9440/api/multidomain/v4.2/config/external-repositories?$filter=ownerExtId\
+            \ eq '3ecb4bf8-1196-4e5e-bb33-829336487311'"
+      - name: $orderby
+        in: query
+        description: "A URL query parameter that allows clients to specify the sort\
+          \ criteria for the returned list of objects. Resources can be sorted in\
+          \ ascending order using asc or descending order using desc. If asc or desc\
+          \ are not specified, the resources will be sorted in ascending order by\
+          \ default. For example, '$orderby=templateName desc' would get all templates\
+          \ sorted by templateName in descending order."
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: string
+        x-odata-fields:
+        - name: name
+          example: "https://{pc-ip}:9440/api/multidomain/v4.2/config/external-repositories?$orderby=name"
+      - name: $select
+        in: query
+        description: "A URL query parameter that allows clients to request a specific\
+          \ set of properties for each entity or complex type. Expression specified\
+          \ with the $select must conform to the [OData V4.01](https://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html)\
+          \ URL conventions. If a $select expression consists of a single select item\
+          \ that is an asterisk (i.e., *), then all properties on the matching resource\
+          \ will be returned."
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: string
+        x-odata-fields:
+        - name: name
+          example: "https://{pc-ip}:9440/api/multidomain/v4.2/config/external-repositories?$select=name"
+      responses:
+        "200":
+          description: Paginated list of External repositories.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/multidomain.v4.2.config.ExternalRepository'
+                additionalProperties: false
+                description: REST response for all response codes in API path /multidomain/v4.2/config/external-repositories
+                  Get operation
+        "4XX":
+          description: Client error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/multidomain.v4.2.error.ErrorResponse'
+                additionalProperties: false
+                description: REST response for all response codes in API path /multidomain/v4.2/config/external-repositories
+                  Get operation
+        "5XX":
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/multidomain.v4.2.error.ErrorResponse'
+                additionalProperties: false
+                description: REST response for all response codes in API path /multidomain/v4.2/config/external-repositories
+                  Get operation
+      x-permissions:
+        operationName: View External Repository
+        roleList:
+        - name: Super Admin
+        - name: Disaster Recovery Admin
+        - name: Backup Admin
+        - name: Internal Super Admin
+        - name: Prism Admin
+        - name: Cluster Admin
+        - name: Project Manager
+      x-rate-limit:
+      - type: xsmall
+        count: 10
+        timeUnit: seconds
+      - type: Small
+        count: 10
+        timeUnit: seconds
+      - type: Large
+        count: 10
+        timeUnit: seconds
+      - type: XLarge
+        count: 10
+        timeUnit: seconds
+      x-supported-versions:
+      - product: PC
+        version: "7.5"
+      - product: PE
+        version: "7.5"
+      x-code-samples:
+      - lang: Java
+        source: "\npackage sample;\n\nimport com.nutanix.ir.java.client.ApiClient;\n\
+          import com.nutanix.ir.java.client.api.ExternalRepositoriesApi;\nimport com.nutanix.dp1.ir.multidomain.v4.config.ListExternalRepositoriesApiResponse;\n\
+          import org.springframework.web.client.RestClientException;\n\npublic class\
+          \ JavaSdkSample {\n    public static void main(String[] args) {\n      \
+          \  // Configure the client\n        ApiClient apiClient = new ApiClient();\n\
+          \        // IPv4/IPv6 address or FQDN of the cluster\n        apiClient.setHost(\"\
+          localhost\");\n        // Port to which to connect to\n        apiClient.setPort(9440);\n\
+          \        // Interval in ms to use during retry attempts\n        apiClient.setRetryInterval(5000);\n\
+          \        // Max retry attempts while reconnecting on a loss of connection\n\
+          \        apiClient.setMaxRetryAttempts(5);\n        // UserName to connect\
+          \ to the cluster\n        String username = \"username\";\n        // Password\
+          \ to connect to the cluster\n        String password = \"password\";\n \
+          \       apiClient.setUsername(username);\n        apiClient.setPassword(password);\n\
+          \n        // Please add authorization information here if needed.\n    \
+          \    ExternalRepositoriesApi externalRepositoriesApi = new ExternalRepositoriesApi(apiClient);\n\
+          \n        \n        int page = 0;\n        \n        int limit = 50;\n\n\
+          \        try {\n            ListExternalRepositoriesApiResponse listExternalRepositoriesApiResponse\
+          \ = externalRepositoriesApi.listExternalRepositories(page, limit, null,\
+          \ null, null);\n            System.out.println(listExternalRepositoriesApiResponse.toString());\n\
+          \n        } catch (RestClientException ex) {\n            System.out.println(ex.getMessage());\n\
+          \        }\n    }\n}\n"
+      - lang: JavaScript
+        source: |2
+
+          import { ApiClient, ExternalRepositoriesApi } from "@nutanix-api/multidomain-js-client";
+
+          // Configure the client
+          let apiClientInstance = new ApiClient();
+          // IPv4/IPv6 address or FQDN of the cluster
+          apiClientInstance.host = 'localhost';
+          // Port to which to connect to
+          apiClientInstance.port = '9440';
+          // Max retry attempts while reconnecting on a loss of connection
+          apiClientInstance.maxRetryAttempts = 5;
+          // Interval in ms to use during retry attempts
+          apiClientInstance.retryInterval = 5000;
+          // UserName to connect to the cluster
+          apiClientInstance.username = 'username';
+          // Password to connect to the cluster
+          apiClientInstance.password = 'password';
+          // Please add authorization information here if needed.
+          let externalRepositoriesApi = new ExternalRepositoriesApi(apiClientInstance);
+
+          function sample() {
+
+
+              // Construct Optional Parameters
+              var opts = {};
+              opts["$page"] = 0;
+              opts["$limit"] = 50;
+              opts["$filter"] = "string_sample_data";
+              opts["$orderby"] = "string_sample_data";
+              opts["$select"] = "string_sample_data";
+
+
+
+
+              externalRepositoriesApi.listExternalRepositories(opts).then(({data, response}) => {
+                  console.log(`API returned the following status code: ${response.status}`);
+                  console.log(data.getData());
+              }).catch((error) => {
+                  console.log(`Error is: ${error}`);
+              });
+
+          }
+          sample()
+      - lang: Python
+        source: "\nimport ntnx_multidomain_py_client\n\nif __name__ == \"__main__\"\
+          :\n    # Configure the client\n    config = ntnx_multidomain_py_client.Configuration()\n\
+          \    # IPv4/IPv6 address or FQDN of the cluster\n    config.host = \"localhost\"\
+          \n    # Port to which to connect to\n    config.port = 9440\n    # Max retry\
+          \ attempts while reconnecting on a loss of connection\n    config.max_retry_attempts\
+          \ = 3\n    # Backoff factor to use during retry attempts\n    config.backoff_factor\
+          \ = 3\n    # UserName to connect to the cluster\n    config.username = \"\
+          username\"\n    # Password to connect to the cluster\n    config.password\
+          \ = \"password\"\n    # Please add authorization information here if needed.\n\
+          \    client = ntnx_multidomain_py_client.ApiClient(configuration=config)\n\
+          \    external_repositories_api = ntnx_multidomain_py_client.ExternalRepositoriesApi(api_client=client)\n\
+          \    \n    page = 0\n    \n    limit = 50\n\n\n    try:\n        api_response\
+          \ = external_repositories_api.list_external_repositories(_page=page, _limit=limit)\n\
+          \        print(api_response)\n    except ntnx_multidomain_py_client.rest.ApiException\
+          \ as e:\n        print(e)\n\n"
+      - lang: Go
+        source: "\npackage main\n\nimport (\n    \"fmt\"\n    \"time\"\n    \"github.com/nutanix/ntnx-api-golang-clients/multidomain-go-client/v4/api\"\
+          \n    \"github.com/nutanix/ntnx-api-golang-clients/multidomain-go-client/v4/client\"\
+          \n    import1 \"github.com/nutanix/ntnx-api-golang-clients/multidomain-go-client/v4/models/multidomain/v4/config\"\
+          \n)\n\nvar (\n    ApiClientInstance *client.ApiClient\n    ExternalRepositoriesApiInstance\
+          \ *api.ExternalRepositoriesApi\n)\n\nfunc main() {\n    ApiClientInstance\
+          \ = client.NewApiClient()\n    // IPv4/IPv6 address or FQDN of the cluster\n\
+          \    ApiClientInstance.Host = \"localhost\"\n    // Port to which to connect\
+          \ to\n    ApiClientInstance.Port = 9440\n    // Interval in ms to use during\
+          \ retry attempts\n    ApiClientInstance.RetryInterval = 5 * time.Second\n\
+          \    // Max retry attempts while reconnecting on a loss of connection\n\
+          \    ApiClientInstance.MaxRetryAttempts = 5\n    // UserName to connect\
+          \ to the cluster\n    ApiClientInstance.Username = \"username\"\n    //\
+          \ Password to connect to the cluster\n    ApiClientInstance.Password = \"\
+          password\"\n    // Please add authorization information here if needed.\n\
+          \    ExternalRepositoriesApiInstance = api.NewExternalRepositoriesApi(ApiClientInstance)\n\
+          \n    \n    page_ := 0\n    \n    limit_ := 50\n\n\n    response, error\
+          \ := ExternalRepositoriesApiInstance.ListExternalRepositories(&page_, &limit_,\
+          \ nil, nil, nil)\n    if error != nil {\n        fmt.Println(error)\n  \
+          \      return\n    }\n    data, _ := response.GetData().([]import1.ExternalRepository)\n\
+          \    fmt.Println(data)\n\n}\n\n"
+      - lang: cURL
+        source: |2+
+
+          curl --request GET \
+               --url "https://{pc-ip}:9440/api/multidomain/v4.2/config/external-repositories?$filter=string_sample_data&$limit=50&$orderby=string_sample_data&$page=0&$select=string_sample_data" \
+               --header 'Accept: application/json' \
+               --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+
+      - lang: Wget
+        source: |2
+
+
+          wget --verbose \
+               --method GET \
+               --header 'Accept: application/json' \
+          --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+          - "https://{pc-ip}:9440/api/multidomain/v4.2/config/external-repositories?$filter=string_sample_data&$limit=50&$orderby=string_sample_data&$page=0&$select=string_sample_data"
+    post:
+      tags:
+      - ExternalRepositories
+      summary: Create an External repository.
+      description: Create an External repository.
+      operationId: createExternalRepository
+      parameters:
+      - name: NTNX-Request-Id
+        in: header
+        description: |
+          A unique identifier that is associated with each request. The provided value must be opaque and preferably in Universal Unique Identifier (UUID) format. This identifier is also used as an idempotence token for safely retrying requests in case of network errors. All the supported Nutanix API clients add this auto-generated request identifier to each request.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+          example: f138555d-2127-43eb-b6dd-a36c7623d218
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/multidomain.v4.2.config.ExternalRepository'
+        required: true
+      responses:
+        "202":
+          description: Task Id corresponding to the External repository create operation.
+          headers:
+            Location:
+              style: simple
+              explode: false
+              schema:
+                pattern: "^((http[s]?|nfs):\\/)?\\/?(([a-zA-Z0-9\\-\\.]+)|(\\d{1,3}(\\\
+                  .\\d{1,3}){3})|(\\[[0-9a-fA-F:]+\\]))(:\\d+)?(\\/[^\\s?#]*)?(\\\
+                  ?[^#\\s]*)?(#[^\\s]*)?$"
+                type: string
+                description: Indicates the target of a redirection or the URL of a
+                  newly created resource.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/prism.v4.2.config.TaskReference'
+                additionalProperties: false
+                description: REST response for all response codes in API path /multidomain/v4.2/config/external-repositories
+                  Post operation
+        "4XX":
+          description: Client error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/multidomain.v4.2.error.ErrorResponse'
+                additionalProperties: false
+                description: REST response for all response codes in API path /multidomain/v4.2/config/external-repositories
+                  Post operation
+        "5XX":
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/multidomain.v4.2.error.ErrorResponse'
+                additionalProperties: false
+                description: REST response for all response codes in API path /multidomain/v4.2/config/external-repositories
+                  Post operation
+      x-permissions:
+        operationName: Create External Repository
+        roleList:
+        - name: Super Admin
+        - name: Disaster Recovery Admin
+        - name: Backup Admin
+        - name: Internal Super Admin
+        - name: Prism Admin
+        - name: Cluster Admin
+        - name: Project Manager
+      x-rate-limit:
+      - type: xsmall
+        count: 5
+        timeUnit: seconds
+      - type: Small
+        count: 5
+        timeUnit: seconds
+      - type: Large
+        count: 5
+        timeUnit: seconds
+      - type: XLarge
+        count: 5
+        timeUnit: seconds
+      x-supported-versions:
+      - product: PC
+        version: "7.5"
+      - product: PE
+        version: "7.5"
+      x-code-samples:
+      - lang: Java
+        source: |2
+
+          package sample;
+
+          import com.nutanix.ir.java.client.ApiClient;
+          import com.nutanix.ir.java.client.api.ExternalRepositoriesApi;
+          import com.nutanix.dp1.ir.multidomain.v4.config.ExternalRepository;
+          import com.nutanix.dp1.ir.multidomain.v4.config.CreateExternalRepositoryApiResponse;
+          import org.springframework.web.client.RestClientException;
+
+          public class JavaSdkSample {
+              public static void main(String[] args) {
+                  // Configure the client
+                  ApiClient apiClient = new ApiClient();
+                  // IPv4/IPv6 address or FQDN of the cluster
+                  apiClient.setHost("localhost");
+                  // Port to which to connect to
+                  apiClient.setPort(9440);
+                  // Interval in ms to use during retry attempts
+                  apiClient.setRetryInterval(5000);
+                  // Max retry attempts while reconnecting on a loss of connection
+                  apiClient.setMaxRetryAttempts(5);
+                  // UserName to connect to the cluster
+                  String username = "username";
+                  // Password to connect to the cluster
+                  String password = "password";
+                  apiClient.setUsername(username);
+                  apiClient.setPassword(password);
+
+                  // Please add authorization information here if needed.
+                  ExternalRepositoriesApi externalRepositoriesApi = new ExternalRepositoriesApi(apiClient);
+
+                  ExternalRepository externalRepository = new ExternalRepository();
+
+                  // ExternalRepository object initializations here...
+                  externalRepository.setLocation(SOME_RAW_DATA);  // required field
+                  externalRepository.setName("Database disks repository");  // required field
+
+                  try {
+                      CreateExternalRepositoryApiResponse createExternalRepositoryApiResponse = externalRepositoriesApi.createExternalRepository(externalRepository);
+                      System.out.println(createExternalRepositoryApiResponse.toString());
+
+                  } catch (RestClientException ex) {
+                      System.out.println(ex.getMessage());
+                  }
+              }
+          }
+      - lang: JavaScript
+        source: |2
+
+          import { ApiClient, ExternalRepositoriesApi, ExternalRepository } from "@nutanix-api/multidomain-js-client";
+
+          // Configure the client
+          let apiClientInstance = new ApiClient();
+          // IPv4/IPv6 address or FQDN of the cluster
+          apiClientInstance.host = 'localhost';
+          // Port to which to connect to
+          apiClientInstance.port = '9440';
+          // Max retry attempts while reconnecting on a loss of connection
+          apiClientInstance.maxRetryAttempts = 5;
+          // Interval in ms to use during retry attempts
+          apiClientInstance.retryInterval = 5000;
+          // UserName to connect to the cluster
+          apiClientInstance.username = 'username';
+          // Password to connect to the cluster
+          apiClientInstance.password = 'password';
+          // Please add authorization information here if needed.
+          let externalRepositoriesApi = new ExternalRepositoriesApi(apiClientInstance);
+
+          function sample() {
+              let externalRepository = new ExternalRepository();
+
+              // ExternalRepository object initializations here...
+              externalRepository.setLocation(SOME_RAW_DATA);  // required field
+              externalRepository.setName("Database disks repository");  // required field
+              externalRepository = JSON.stringify(externalRepository);
+
+
+
+
+
+
+              externalRepositoriesApi.createExternalRepository(externalRepository).then(({data, response}) => {
+                  console.log(`API returned the following status code: ${response.status}`);
+                  console.log(data.getData());
+              }).catch((error) => {
+                  console.log(`Error is: ${error}`);
+              });
+
+          }
+          sample()
+      - lang: Python
+        source: |2+
+
+          import ntnx_multidomain_py_client
+
+          if __name__ == "__main__":
+              # Configure the client
+              config = ntnx_multidomain_py_client.Configuration()
+              # IPv4/IPv6 address or FQDN of the cluster
+              config.host = "localhost"
+              # Port to which to connect to
+              config.port = 9440
+              # Max retry attempts while reconnecting on a loss of connection
+              config.max_retry_attempts = 3
+              # Backoff factor to use during retry attempts
+              config.backoff_factor = 3
+              # UserName to connect to the cluster
+              config.username = "username"
+              # Password to connect to the cluster
+              config.password = "password"
+              # Please add authorization information here if needed.
+              client = ntnx_multidomain_py_client.ApiClient(configuration=config)
+              external_repositories_api = ntnx_multidomain_py_client.ExternalRepositoriesApi(api_client=client)
+              externalRepository = ntnx_multidomain_py_client.ExternalRepository()
+
+              # ExternalRepository object initializations here...
+              externalRepository.location = SOME_RAW_DATA  # required field
+              externalRepository.name = "Database disks repository"  # required field
+
+
+              try:
+                  api_response = external_repositories_api.create_external_repository(body=externalRepository)
+                  print(api_response)
+              except ntnx_multidomain_py_client.rest.ApiException as e:
+                  print(e)
+
+      - lang: Go
+        source: |2+
+
+          package main
+
+          import (
+              "fmt"
+              "time"
+              "github.com/nutanix/ntnx-api-golang-clients/multidomain-go-client/v4/api"
+              "github.com/nutanix/ntnx-api-golang-clients/multidomain-go-client/v4/client"
+              import1 "github.com/nutanix/ntnx-api-golang-clients/multidomain-go-client/v4/models/multidomain/v4/config"
+              import2 "github.com/nutanix/ntnx-api-golang-clients/multidomain-go-client/v4/models/prism/v4/config"
+          )
+
+          var (
+              ApiClientInstance *client.ApiClient
+              ExternalRepositoriesApiInstance *api.ExternalRepositoriesApi
+          )
+
+          func main() {
+              ApiClientInstance = client.NewApiClient()
+              // IPv4/IPv6 address or FQDN of the cluster
+              ApiClientInstance.Host = "localhost"
+              // Port to which to connect to
+              ApiClientInstance.Port = 9440
+              // Interval in ms to use during retry attempts
+              ApiClientInstance.RetryInterval = 5 * time.Second
+              // Max retry attempts while reconnecting on a loss of connection
+              ApiClientInstance.MaxRetryAttempts = 5
+              // UserName to connect to the cluster
+              ApiClientInstance.Username = "username"
+              // Password to connect to the cluster
+              ApiClientInstance.Password = "password"
+              // Please add authorization information here if needed.
+              ExternalRepositoriesApiInstance = api.NewExternalRepositoriesApi(ApiClientInstance)
+
+              externalRepository := import1.NewExternalRepository()
+
+              // ExternalRepository object initializations here...
+
+
+
+              response, error := ExternalRepositoriesApiInstance.CreateExternalRepository(externalRepository)
+              if error != nil {
+                  fmt.Println(error)
+                  return
+              }
+              data, _ := response.GetData().(import2.TaskReference)
+              fmt.Println(data)
+
+          }
+
+      - lang: cURL
+        source: |2+
+
+          curl --request POST \
+               --url "https://{pc-ip}:9440/api/multidomain/v4.2/config/external-repositories" \
+               --header 'Accept: application/json' \
+                        --header 'Content-Type: application/json' \
+                        --header 'NTNX-Request-Id: 3fa85f64-5717-4562-b3fc-2c963f66afa6' \
+               --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+                        --data {"tenantId":"string","extId":"string","links":[{"href":"string","rel":"string","$objectType":"common.v1.response.ApiLink"}],"name":"Databasedisksrepository","location":{"exportName":"BackupNFSServer","addresses":[{"address":{"ipv4":{"value":"string","prefixLength":32,"$objectType":"common.v1.config.IPv4Address"},"ipv6":{"value":"string","prefixLength":128,"$objectType":"common.v1.config.IPv6Address"},"fqdn":{"value":"string","$objectType":"common.v1.config.FQDN"},"$objectType":"common.v1.config.IPAddressOrFQDN"},"port":0,"$objectType":"multidomain.v4.config.NFSServerAddress"}],"$objectType":"multidomain.v4.config.NfsRepository"},"ownerExtId":"string","$objectType":"multidomain.v4.config.ExternalRepository"} \
+
+      - lang: Wget
+        source: |2
+
+
+          wget --verbose \
+               --method POST \
+               --header 'Accept: application/json' \
+                   --header 'Content-Type: application/json' \
+                   --header 'NTNX-Request-Id: 3fa85f64-5717-4562-b3fc-2c963f66afa6' \
+          --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+                   --body-data {"tenantId":"string","extId":"string","links":[{"href":"string","rel":"string","$objectType":"common.v1.response.ApiLink"}],"name":"Databasedisksrepository","location":{"exportName":"BackupNFSServer","addresses":[{"address":{"ipv4":{"value":"string","prefixLength":32,"$objectType":"common.v1.config.IPv4Address"},"ipv6":{"value":"string","prefixLength":128,"$objectType":"common.v1.config.IPv6Address"},"fqdn":{"value":"string","$objectType":"common.v1.config.FQDN"},"$objectType":"common.v1.config.IPAddressOrFQDN"},"port":0,"$objectType":"multidomain.v4.config.NFSServerAddress"}],"$objectType":"multidomain.v4.config.NfsRepository"},"ownerExtId":"string","$objectType":"multidomain.v4.config.ExternalRepository"} \
+          - "https://{pc-ip}:9440/api/multidomain/v4.2/config/external-repositories"
+    x-supported-versions:
+    - product: PC
+      version: "7.5"
+    - product: PE
+      version: "7.5"
+  /multidomain/v4.2/config/external-repositories/{extId}:
+    get:
+      tags:
+      - ExternalRepositories
+      summary: Get an External repository by id.
+      description: Get an External repository by id.
+      operationId: getExternalRepositoryById
+      parameters:
+      - name: extId
+        in: path
+        description: External Repository identifier.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+          example: bf15873b-9b8e-4cc5-9a34-d8b06adde593
+      responses:
+        "200":
+          description: Details of the queried External repository.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/multidomain.v4.2.config.ExternalRepository'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /multidomain/v4.2/config/external-repositories/{extId}\
+                  \ Get operation"
+        "4XX":
+          description: Client error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/multidomain.v4.2.error.ErrorResponse'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /multidomain/v4.2/config/external-repositories/{extId}\
+                  \ Get operation"
+        "5XX":
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/multidomain.v4.2.error.ErrorResponse'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /multidomain/v4.2/config/external-repositories/{extId}\
+                  \ Get operation"
+      x-permissions:
+        operationName: View External Repository
+        roleList:
+        - name: Super Admin
+        - name: Disaster Recovery Admin
+        - name: Backup Admin
+        - name: Internal Super Admin
+        - name: Prism Admin
+        - name: Cluster Admin
+        - name: Project Manager
+      x-rate-limit:
+      - type: xsmall
+        count: 10
+        timeUnit: seconds
+      - type: Small
+        count: 10
+        timeUnit: seconds
+      - type: Large
+        count: 10
+        timeUnit: seconds
+      - type: XLarge
+        count: 10
+        timeUnit: seconds
+      x-supported-versions:
+      - product: PC
+        version: "7.5"
+      - product: PE
+        version: "7.5"
+      x-code-samples:
+      - lang: Java
+        source: "\npackage sample;\n\nimport com.nutanix.ir.java.client.ApiClient;\n\
+          import com.nutanix.ir.java.client.api.ExternalRepositoriesApi;\nimport com.nutanix.dp1.ir.multidomain.v4.config.GetExternalRepositoryApiResponse;\n\
+          import org.springframework.web.client.RestClientException;\n\npublic class\
+          \ JavaSdkSample {\n    public static void main(String[] args) {\n      \
+          \  // Configure the client\n        ApiClient apiClient = new ApiClient();\n\
+          \        // IPv4/IPv6 address or FQDN of the cluster\n        apiClient.setHost(\"\
+          localhost\");\n        // Port to which to connect to\n        apiClient.setPort(9440);\n\
+          \        // Interval in ms to use during retry attempts\n        apiClient.setRetryInterval(5000);\n\
+          \        // Max retry attempts while reconnecting on a loss of connection\n\
+          \        apiClient.setMaxRetryAttempts(5);\n        // UserName to connect\
+          \ to the cluster\n        String username = \"username\";\n        // Password\
+          \ to connect to the cluster\n        String password = \"password\";\n \
+          \       apiClient.setUsername(username);\n        apiClient.setPassword(password);\n\
+          \n        // Please add authorization information here if needed.\n    \
+          \    ExternalRepositoriesApi externalRepositoriesApi = new ExternalRepositoriesApi(apiClient);\n\
+          \n        \n        String extId = \"FFe27C9B-fdC3-ED12-33F9-a9AB3b672cfc\"\
+          ;\n\n        try {\n            GetExternalRepositoryApiResponse getExternalRepositoryApiResponse\
+          \ = externalRepositoriesApi.getExternalRepositoryById(extId);\n        \
+          \    System.out.println(getExternalRepositoryApiResponse.toString());\n\n\
+          \        } catch (RestClientException ex) {\n            System.out.println(ex.getMessage());\n\
+          \        }\n    }\n}\n"
+      - lang: JavaScript
+        source: "\nimport { ApiClient, ExternalRepositoriesApi } from \"@nutanix-api/multidomain-js-client\"\
+          ;\n\n// Configure the client\nlet apiClientInstance = new ApiClient();\n\
+          // IPv4/IPv6 address or FQDN of the cluster\napiClientInstance.host = 'localhost';\n\
+          // Port to which to connect to\napiClientInstance.port = '9440';\n// Max\
+          \ retry attempts while reconnecting on a loss of connection\napiClientInstance.maxRetryAttempts\
+          \ = 5;\n// Interval in ms to use during retry attempts\napiClientInstance.retryInterval\
+          \ = 5000;\n// UserName to connect to the cluster\napiClientInstance.username\
+          \ = 'username';\n// Password to connect to the cluster\napiClientInstance.password\
+          \ = 'password';\n// Please add authorization information here if needed.\n\
+          let externalRepositoriesApi = new ExternalRepositoriesApi(apiClientInstance);\n\
+          \nfunction sample() {\n\n    \n    let extId = \"45AD602b-eECC-1eEF-0ef0-ebBDab3fCF2D\"\
+          ;\n\n\n\n\n\n    externalRepositoriesApi.getExternalRepositoryById(extId).then(({data,\
+          \ response}) => {\n        console.log(`API returned the following status\
+          \ code: ${response.status}`);\n        console.log(data.getData());\n  \
+          \  }).catch((error) => {\n        console.log(`Error is: ${error}`);\n \
+          \   });\n\n}\nsample()\n"
+      - lang: Python
+        source: "\nimport ntnx_multidomain_py_client\n\nif __name__ == \"__main__\"\
+          :\n    # Configure the client\n    config = ntnx_multidomain_py_client.Configuration()\n\
+          \    # IPv4/IPv6 address or FQDN of the cluster\n    config.host = \"localhost\"\
+          \n    # Port to which to connect to\n    config.port = 9440\n    # Max retry\
+          \ attempts while reconnecting on a loss of connection\n    config.max_retry_attempts\
+          \ = 3\n    # Backoff factor to use during retry attempts\n    config.backoff_factor\
+          \ = 3\n    # UserName to connect to the cluster\n    config.username = \"\
+          username\"\n    # Password to connect to the cluster\n    config.password\
+          \ = \"password\"\n    # Please add authorization information here if needed.\n\
+          \    client = ntnx_multidomain_py_client.ApiClient(configuration=config)\n\
+          \    external_repositories_api = ntnx_multidomain_py_client.ExternalRepositoriesApi(api_client=client)\n\
+          \    \n    ext_id = \"3ACb1c10-A1BD-afCc-aAB8-de8BbFCd4eeE\"\n\n\n    try:\n\
+          \        api_response = external_repositories_api.get_external_repository_by_id(extId=ext_id)\n\
+          \        print(api_response)\n    except ntnx_multidomain_py_client.rest.ApiException\
+          \ as e:\n        print(e)\n\n"
+      - lang: Go
+        source: "\npackage main\n\nimport (\n    \"fmt\"\n    \"time\"\n    \"github.com/nutanix/ntnx-api-golang-clients/multidomain-go-client/v4/api\"\
+          \n    \"github.com/nutanix/ntnx-api-golang-clients/multidomain-go-client/v4/client\"\
+          \n    import1 \"github.com/nutanix/ntnx-api-golang-clients/multidomain-go-client/v4/models/multidomain/v4/config\"\
+          \n)\n\nvar (\n    ApiClientInstance *client.ApiClient\n    ExternalRepositoriesApiInstance\
+          \ *api.ExternalRepositoriesApi\n)\n\nfunc main() {\n    ApiClientInstance\
+          \ = client.NewApiClient()\n    // IPv4/IPv6 address or FQDN of the cluster\n\
+          \    ApiClientInstance.Host = \"localhost\"\n    // Port to which to connect\
+          \ to\n    ApiClientInstance.Port = 9440\n    // Interval in ms to use during\
+          \ retry attempts\n    ApiClientInstance.RetryInterval = 5 * time.Second\n\
+          \    // Max retry attempts while reconnecting on a loss of connection\n\
+          \    ApiClientInstance.MaxRetryAttempts = 5\n    // UserName to connect\
+          \ to the cluster\n    ApiClientInstance.Username = \"username\"\n    //\
+          \ Password to connect to the cluster\n    ApiClientInstance.Password = \"\
+          password\"\n    // Please add authorization information here if needed.\n\
+          \    ExternalRepositoriesApiInstance = api.NewExternalRepositoriesApi(ApiClientInstance)\n\
+          \n    \n    extId := \"ACFfaa4E-4a6f-DCd9-b3DD-DaCA0cEdCcB8\"\n\n\n    response,\
+          \ error := ExternalRepositoriesApiInstance.GetExternalRepositoryById(&extId)\n\
+          \    if error != nil {\n        fmt.Println(error)\n        return\n   \
+          \ }\n    data, _ := response.GetData().(import1.ExternalRepository)\n  \
+          \  fmt.Println(data)\n\n}\n\n"
+      - lang: cURL
+        source: |2+
+
+          curl --request GET \
+               --url "https://{pc-ip}:9440/api/multidomain/v4.2/config/external-repositories/b34Deb0d-C1Cc-f8be-27E5-1cFcFfafdCDb" \
+               --header 'Accept: application/json' \
+               --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+
+      - lang: Wget
+        source: |2
+
+
+          wget --verbose \
+               --method GET \
+               --header 'Accept: application/json' \
+          --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+          - "https://{pc-ip}:9440/api/multidomain/v4.2/config/external-repositories/fBFC3dEa-cd93-aadE-fBED-0adF71bBC86b"
+    put:
+      tags:
+      - ExternalRepositories
+      summary: Update an External repository.
+      description: Task Id corresponding to the External repository update operation.
+      operationId: updateExternalRepositoryById
+      parameters:
+      - name: extId
+        in: path
+        description: External Repository identifier.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+          example: ee9c3548-078d-4929-a5d8-246e96b4c277
+      - name: If-Match
+        in: header
+        description: "The If-Match request header makes the request conditional. When\
+          \ not provided, the server will respond with  an HTTP-428 (Precondition\
+          \ Required) response code indicating that the server requires the request\
+          \ to be conditional. The server will allow the successful completion of\
+          \ PUT and PATCH operations, if the resource matches the ETag value returned\
+          \ to the response of a GET operation. If the conditional does not match,\
+          \ then an HTTP-412 (Precondition Failed) response will be returned."
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: string
+      - name: NTNX-Request-Id
+        in: header
+        description: |
+          A unique identifier that is associated with each request. The provided value must be opaque and preferably in Universal Unique Identifier (UUID) format. This identifier is also used as an idempotence token for safely retrying requests in case of network errors. All the supported Nutanix API clients add this auto-generated request identifier to each request.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+          example: 2e445b4a-ff11-4774-aaeb-0feb9877b9ce
+      requestBody:
+        description: Update an External repository Request Body.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/multidomain.v4.2.config.ExternalRepository'
+        required: true
+      responses:
+        "202":
+          description: Update an External repository Response.
+          headers:
+            Location:
+              style: simple
+              explode: false
+              schema:
+                pattern: "^((http[s]?|nfs):\\/)?\\/?(([a-zA-Z0-9\\-\\.]+)|(\\d{1,3}(\\\
+                  .\\d{1,3}){3})|(\\[[0-9a-fA-F:]+\\]))(:\\d+)?(\\/[^\\s?#]*)?(\\\
+                  ?[^#\\s]*)?(#[^\\s]*)?$"
+                type: string
+                description: Indicates the target of a redirection or the URL of a
+                  newly created resource.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/prism.v4.2.config.TaskReference'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /multidomain/v4.2/config/external-repositories/{extId}\
+                  \ Put operation"
+        "4XX":
+          description: Client error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/multidomain.v4.2.error.ErrorResponse'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /multidomain/v4.2/config/external-repositories/{extId}\
+                  \ Put operation"
+        "5XX":
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/multidomain.v4.2.error.ErrorResponse'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /multidomain/v4.2/config/external-repositories/{extId}\
+                  \ Put operation"
+      x-permissions:
+        operationName: Update External Repository
+        roleList:
+        - name: Super Admin
+        - name: Disaster Recovery Admin
+        - name: Backup Admin
+        - name: Internal Super Admin
+        - name: Prism Admin
+        - name: Cluster Admin
+        - name: Project Manager
+      x-rate-limit:
+      - type: xsmall
+        count: 5
+        timeUnit: seconds
+      - type: Small
+        count: 5
+        timeUnit: seconds
+      - type: Large
+        count: 5
+        timeUnit: seconds
+      - type: XLarge
+        count: 5
+        timeUnit: seconds
+      x-supported-versions:
+      - product: PC
+        version: "7.5"
+      - product: PE
+        version: "7.5"
+      x-code-samples:
+      - lang: Java
+        source: "\npackage sample;\n\nimport com.nutanix.ir.java.client.ApiClient;\n\
+          import com.nutanix.ir.java.client.api.ExternalRepositoriesApi;\nimport com.nutanix.dp1.ir.multidomain.v4.config.ExternalRepository;\n\
+          import com.nutanix.dp1.ir.multidomain.v4.config.GetExternalRepositoryApiResponse;\n\
+          import com.nutanix.dp1.ir.multidomain.v4.config.UpdateExternalRepositoryApiResponse;\n\
+          import org.springframework.web.client.RestClientException;\nimport java.util.HashMap;\n\
+          import org.apache.http.HttpHeaders;\n\npublic class JavaSdkSample {\n  \
+          \  public static void main(String[] args) {\n        // Configure the client\n\
+          \        ApiClient apiClient = new ApiClient();\n        // IPv4/IPv6 address\
+          \ or FQDN of the cluster\n        apiClient.setHost(\"localhost\");\n  \
+          \      // Port to which to connect to\n        apiClient.setPort(9440);\n\
+          \        // Interval in ms to use during retry attempts\n        apiClient.setRetryInterval(5000);\n\
+          \        // Max retry attempts while reconnecting on a loss of connection\n\
+          \        apiClient.setMaxRetryAttempts(5);\n        // UserName to connect\
+          \ to the cluster\n        String username = \"username\";\n        // Password\
+          \ to connect to the cluster\n        String password = \"password\";\n \
+          \       apiClient.setUsername(username);\n        apiClient.setPassword(password);\n\
+          \n        // Please add authorization information here if needed.\n    \
+          \    ExternalRepositoriesApi externalRepositoriesApi = new ExternalRepositoriesApi(apiClient);\n\
+          \n        ExternalRepository externalRepository = new ExternalRepository();\n\
+          \n        // ExternalRepository object initializations here...\n       \
+          \ externalRepository.setLocation(SOME_RAW_DATA);  // required field\n  \
+          \      externalRepository.setName(\"Database disks repository\");  // required\
+          \ field\n        \n        String extId = \"87bcfbca-bAda-6bbC-Fd5A-EDECaDB33e72\"\
+          ;\n\n        // perform GET call\n        GetExternalRepositoryApiResponse\
+          \ getResponse = null;\n        try {\n            getResponse = externalRepositoriesApi.getExternalRepositoryById(extId);\n\
+          \        } catch(RestClientException ex) {\n            System.out.println(ex.getMessage());\n\
+          \        }\n        // Extract E-Tag Header\n        String eTag = ApiClient.getEtag(getResponse);\n\
+          \        // initialize/change parameters for update\n        HashMap<String,\
+          \ Object> opts = new HashMap<>();\n        opts.put(HttpHeaders.IF_MATCH,\
+          \ eTag);\n        try {\n            UpdateExternalRepositoryApiResponse\
+          \ updateExternalRepositoryApiResponse = externalRepositoriesApi.updateExternalRepositoryById(extId,\
+          \ externalRepository, opts);\n            System.out.println(updateExternalRepositoryApiResponse.toString());\n\
+          \n        } catch (RestClientException ex) {\n            System.out.println(ex.getMessage());\n\
+          \        }\n    }\n}\n"
+      - lang: JavaScript
+        source: "\nimport { ApiClient, ExternalRepositoriesApi, ExternalRepository,\
+          \ GetExternalRepositoryApiResponse } from \"@nutanix-api/multidomain-js-client\"\
+          ;\n\n// Configure the client\nlet apiClientInstance = new ApiClient();\n\
+          // IPv4/IPv6 address or FQDN of the cluster\napiClientInstance.host = 'localhost';\n\
+          // Port to which to connect to\napiClientInstance.port = '9440';\n// Max\
+          \ retry attempts while reconnecting on a loss of connection\napiClientInstance.maxRetryAttempts\
+          \ = 5;\n// Interval in ms to use during retry attempts\napiClientInstance.retryInterval\
+          \ = 5000;\n// UserName to connect to the cluster\napiClientInstance.username\
+          \ = 'username';\n// Password to connect to the cluster\napiClientInstance.password\
+          \ = 'password';\n// Please add authorization information here if needed.\n\
+          let externalRepositoriesApi = new ExternalRepositoriesApi(apiClientInstance);\n\
+          \nfunction sample() {\n    let externalRepository = new ExternalRepository();\n\
+          \n    // ExternalRepository object initializations here...\n    externalRepository.setLocation(SOME_RAW_DATA);\
+          \  // required field\n    externalRepository.setName(\"Database disks repository\"\
+          );  // required field\n    externalRepository = JSON.stringify(externalRepository);\n\
+          \n    \n    let extId = \"bAFbAFDB-fA3C-Ef0E-7EeF-5F66cF55B0A1\";\n\n\n\
+          \    // Perform Get call\n    externalRepositoriesApi.getExternalRepositoryById(extId).then(({data,\
+          \ response}) => {\n        console.log(`API returned the following status\
+          \ code: ${response.status}`);\n        // Extract E-Tag Header\n       \
+          \ let etagValue = ApiClient.getEtag(data);\n        let args = {\"If-Match\"\
+          \ : etagValue};\n\n        externalRepositoriesApi.updateExternalRepositoryById(extId,\
+          \ externalRepository, args).then(({data, response}) => {\n            console.log(`API\
+          \ returned the following status code: ${response.status}`);\n          \
+          \  console.log(data.getData());\n        }).catch((error) => {\n       \
+          \     console.log(`Error is: ${error}`);\n        });\n    });\n\n}\nsample()\n"
+      - lang: Python
+        source: "\nimport ntnx_multidomain_py_client\n\nif __name__ == \"__main__\"\
+          :\n    # Configure the client\n    config = ntnx_multidomain_py_client.Configuration()\n\
+          \    # IPv4/IPv6 address or FQDN of the cluster\n    config.host = \"localhost\"\
+          \n    # Port to which to connect to\n    config.port = 9440\n    # Max retry\
+          \ attempts while reconnecting on a loss of connection\n    config.max_retry_attempts\
+          \ = 3\n    # Backoff factor to use during retry attempts\n    config.backoff_factor\
+          \ = 3\n    # UserName to connect to the cluster\n    config.username = \"\
+          username\"\n    # Password to connect to the cluster\n    config.password\
+          \ = \"password\"\n    # Please add authorization information here if needed.\n\
+          \    client = ntnx_multidomain_py_client.ApiClient(configuration=config)\n\
+          \    external_repositories_api = ntnx_multidomain_py_client.ExternalRepositoriesApi(api_client=client)\n\
+          \    externalRepository = ntnx_multidomain_py_client.ExternalRepository()\n\
+          \n    # ExternalRepository object initializations here...\n    externalRepository.location\
+          \ = SOME_RAW_DATA  # required field\n    externalRepository.name = \"Database\
+          \ disks repository\"  # required field\n    \n    ext_id = \"e5DEDfef-CBE5-0efb-9Bfa-AF5fF7DeE258\"\
+          \n\n    try:\n        api_response = external_repositories_api.get_external_repository_by_id(extId=ext_id)\n\
+          \    except ntnx_multidomain_py_client.rest.ApiException as e:\n       \
+          \ print(e)\n    # Extract E-Tag Header\n    etag_value = ntnx_multidomain_py_client.ApiClient.get_etag(api_response)\n\
+          \n    try:\n        api_response = external_repositories_api.update_external_repository_by_id(extId=ext_id,\
+          \ body=externalRepository, if_match=etag_value)\n        print(api_response)\n\
+          \    except ntnx_multidomain_py_client.rest.ApiException as e:\n       \
+          \ print(e)\n\n"
+      - lang: Go
+        source: "\npackage main\n\nimport (\n    \"fmt\"\n    \"time\"\n    \"github.com/nutanix/ntnx-api-golang-clients/multidomain-go-client/v4/api\"\
+          \n    \"github.com/nutanix/ntnx-api-golang-clients/multidomain-go-client/v4/client\"\
+          \n    import1 \"github.com/nutanix/ntnx-api-golang-clients/multidomain-go-client/v4/models/multidomain/v4/config\"\
+          \n    import2 \"github.com/nutanix/ntnx-api-golang-clients/multidomain-go-client/v4/models/prism/v4/config\"\
+          \n)\n\nvar (\n    ApiClientInstance *client.ApiClient\n    ExternalRepositoriesApiInstance\
+          \ *api.ExternalRepositoriesApi\n)\n\nfunc main() {\n    ApiClientInstance\
+          \ = client.NewApiClient()\n    // IPv4/IPv6 address or FQDN of the cluster\n\
+          \    ApiClientInstance.Host = \"localhost\"\n    // Port to which to connect\
+          \ to\n    ApiClientInstance.Port = 9440\n    // Interval in ms to use during\
+          \ retry attempts\n    ApiClientInstance.RetryInterval = 5 * time.Second\n\
+          \    // Max retry attempts while reconnecting on a loss of connection\n\
+          \    ApiClientInstance.MaxRetryAttempts = 5\n    // UserName to connect\
+          \ to the cluster\n    ApiClientInstance.Username = \"username\"\n    //\
+          \ Password to connect to the cluster\n    ApiClientInstance.Password = \"\
+          password\"\n    // Please add authorization information here if needed.\n\
+          \    ExternalRepositoriesApiInstance = api.NewExternalRepositoriesApi(ApiClientInstance)\n\
+          \n    externalRepository := import1.NewExternalRepository()\n\n    // ExternalRepository\
+          \ object initializations here...\n\n    \n    extId := \"ca82EABd-6AaD-3EF5-B3dE-bAfBbEcDBA5f\"\
+          \n\n    getResponse, err := ExternalRepositoriesApiInstance.GetExternalRepositoryById(&extId)\n\
+          \    if err != nil {\n        fmt.Println(err)\n        return\n    }\n\n\
+          \    // Extract E-Tag Header\n    etagValue := ApiClientInstance.GetEtag(getResponse)\n\
+          \n    args := make(map[string] interface{})\n    args[\"If-Match\"] = etagValue\n\
+          \n    response, error := ExternalRepositoriesApiInstance.UpdateExternalRepositoryById(&extId,\
+          \ externalRepository, args)\n    if error != nil {\n        fmt.Println(error)\n\
+          \        return\n    }\n    data, _ := response.GetData().(import2.TaskReference)\n\
+          \    fmt.Println(data)\n\n}\n\n"
+      - lang: cURL
+        source: |2+
+
+          curl --request PUT \
+               --url "https://{pc-ip}:9440/api/multidomain/v4.2/config/external-repositories/1B1FB3cB-ba9D-CFAe-FDF7-C3ccD3AdDBde" \
+               --header 'Accept: application/json' \
+                        --header 'Content-Type: application/json' \
+                        --header 'If-Match: string_sample_data' \
+                        --header 'NTNX-Request-Id: 3fa85f64-5717-4562-b3fc-2c963f66afa6' \
+               --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+                        --data {"tenantId":"string","extId":"string","links":[{"href":"string","rel":"string","$objectType":"common.v1.response.ApiLink"}],"name":"Databasedisksrepository","location":{"exportName":"BackupNFSServer","addresses":[{"address":{"ipv4":{"value":"string","prefixLength":32,"$objectType":"common.v1.config.IPv4Address"},"ipv6":{"value":"string","prefixLength":128,"$objectType":"common.v1.config.IPv6Address"},"fqdn":{"value":"string","$objectType":"common.v1.config.FQDN"},"$objectType":"common.v1.config.IPAddressOrFQDN"},"port":0,"$objectType":"multidomain.v4.config.NFSServerAddress"}],"$objectType":"multidomain.v4.config.NfsRepository"},"ownerExtId":"string","$objectType":"multidomain.v4.config.ExternalRepository"} \
+
+      - lang: Wget
+        source: |2
+
+
+          wget --verbose \
+               --method PUT \
+               --header 'Accept: application/json' \
+                   --header 'Content-Type: application/json' \
+                   --header 'If-Match: string_sample_data' \
+                   --header 'NTNX-Request-Id: 3fa85f64-5717-4562-b3fc-2c963f66afa6' \
+          --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+                   --body-data {"tenantId":"string","extId":"string","links":[{"href":"string","rel":"string","$objectType":"common.v1.response.ApiLink"}],"name":"Databasedisksrepository","location":{"exportName":"BackupNFSServer","addresses":[{"address":{"ipv4":{"value":"string","prefixLength":32,"$objectType":"common.v1.config.IPv4Address"},"ipv6":{"value":"string","prefixLength":128,"$objectType":"common.v1.config.IPv6Address"},"fqdn":{"value":"string","$objectType":"common.v1.config.FQDN"},"$objectType":"common.v1.config.IPAddressOrFQDN"},"port":0,"$objectType":"multidomain.v4.config.NFSServerAddress"}],"$objectType":"multidomain.v4.config.NfsRepository"},"ownerExtId":"string","$objectType":"multidomain.v4.config.ExternalRepository"} \
+          - "https://{pc-ip}:9440/api/multidomain/v4.2/config/external-repositories/2ccEfaba-a458-CFbE-BdF5-553a1FfaFfe4"
+    delete:
+      tags:
+      - ExternalRepositories
+      summary: Delete an External repository.
+      description: Delete an External repository by id.
+      operationId: deleteExternalRepositoryById
+      parameters:
+      - name: extId
+        in: path
+        description: External Repository identifier.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+          example: c8ea7bd8-a632-465d-a0b5-1216c2d205f9
+      - name: If-Match
+        in: header
+        description: |
+          The If-Match request header makes the request conditional. When not provided the server will respond with an HTTP 428 (Precondition Required) response code indicating that the server requires the request to be conditional. The server will allow successful completion of PUT and PATCH operations, if the resource matches the ETag value returned to the response of a GET operation. If the conditional does not match, then an HTTP 412 (Precondition Failed) response
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: string
+      - name: NTNX-Request-Id
+        in: header
+        description: |
+          A unique identifier that is associated with each request. The provided value must be opaque and preferably in Universal Unique Identifier (UUID) format. This identifier is also used as an idempotence token for safely retrying requests in case of network errors. All the supported Nutanix API clients add this auto-generated request identifier to each request.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: uuid
+          example: 5a80bb5a-87de-44ad-ba08-13a9be447a9f
+      responses:
+        "202":
+          description: Task Id corresponding to the External repository delete operation.
+          headers:
+            Location:
+              style: simple
+              explode: false
+              schema:
+                pattern: "^((http[s]?|nfs):\\/)?\\/?(([a-zA-Z0-9\\-\\.]+)|(\\d{1,3}(\\\
+                  .\\d{1,3}){3})|(\\[[0-9a-fA-F:]+\\]))(:\\d+)?(\\/[^\\s?#]*)?(\\\
+                  ?[^#\\s]*)?(#[^\\s]*)?$"
+                type: string
+                description: Indicates the target of a redirection or the URL of a
+                  newly created resource.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/prism.v4.2.config.TaskReference'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /multidomain/v4.2/config/external-repositories/{extId}\
+                  \ Delete operation"
+        "4XX":
+          description: Client error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/multidomain.v4.2.error.ErrorResponse'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /multidomain/v4.2/config/external-repositories/{extId}\
+                  \ Delete operation"
+        "5XX":
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/multidomain.v4.2.error.ErrorResponse'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /multidomain/v4.2/config/external-repositories/{extId}\
+                  \ Delete operation"
+      x-permissions:
+        operationName: Delete External Repository
+        roleList:
+        - name: Super Admin
+        - name: Disaster Recovery Admin
+        - name: Backup Admin
+        - name: Internal Super Admin
+        - name: Prism Admin
+        - name: Cluster Admin
+        - name: Project Manager
+      x-rate-limit:
+      - type: xsmall
+        count: 5
+        timeUnit: seconds
+      - type: Small
+        count: 5
+        timeUnit: seconds
+      - type: Large
+        count: 5
+        timeUnit: seconds
+      - type: XLarge
+        count: 5
+        timeUnit: seconds
+      x-supported-versions:
+      - product: PC
+        version: "7.5"
+      - product: PE
+        version: "7.5"
+      x-code-samples:
+      - lang: Java
+        source: "\npackage sample;\n\nimport com.nutanix.ir.java.client.ApiClient;\n\
+          import com.nutanix.ir.java.client.api.ExternalRepositoriesApi;\nimport com.nutanix.dp1.ir.multidomain.v4.config.GetExternalRepositoryApiResponse;\n\
+          import com.nutanix.dp1.ir.multidomain.v4.config.DeleteExternalRepositoryApiResponse;\n\
+          import org.springframework.web.client.RestClientException;\nimport java.util.HashMap;\n\
+          import org.apache.http.HttpHeaders;\n\npublic class JavaSdkSample {\n  \
+          \  public static void main(String[] args) {\n        // Configure the client\n\
+          \        ApiClient apiClient = new ApiClient();\n        // IPv4/IPv6 address\
+          \ or FQDN of the cluster\n        apiClient.setHost(\"localhost\");\n  \
+          \      // Port to which to connect to\n        apiClient.setPort(9440);\n\
+          \        // Interval in ms to use during retry attempts\n        apiClient.setRetryInterval(5000);\n\
+          \        // Max retry attempts while reconnecting on a loss of connection\n\
+          \        apiClient.setMaxRetryAttempts(5);\n        // UserName to connect\
+          \ to the cluster\n        String username = \"username\";\n        // Password\
+          \ to connect to the cluster\n        String password = \"password\";\n \
+          \       apiClient.setUsername(username);\n        apiClient.setPassword(password);\n\
+          \n        // Please add authorization information here if needed.\n    \
+          \    ExternalRepositoriesApi externalRepositoriesApi = new ExternalRepositoriesApi(apiClient);\n\
+          \n        \n        String extId = \"7f8cB42F-1Caf-D2f0-D9FB-Fb48d1d0FBaA\"\
+          ;\n\n        // perform GET call\n        GetExternalRepositoryApiResponse\
+          \ getResponse = null;\n        try {\n            getResponse = externalRepositoriesApi.getExternalRepositoryById(extId);\n\
+          \        } catch(RestClientException ex) {\n            System.out.println(ex.getMessage());\n\
+          \        }\n        // Extract E-Tag Header\n        String eTag = ApiClient.getEtag(getResponse);\n\
+          \        // initialize/change parameters for update\n        HashMap<String,\
+          \ Object> opts = new HashMap<>();\n        opts.put(HttpHeaders.IF_MATCH,\
+          \ eTag);\n        try {\n            DeleteExternalRepositoryApiResponse\
+          \ deleteExternalRepositoryApiResponse = externalRepositoriesApi.deleteExternalRepositoryById(extId,\
+          \ opts);\n            System.out.println(deleteExternalRepositoryApiResponse.toString());\n\
+          \n        } catch (RestClientException ex) {\n            System.out.println(ex.getMessage());\n\
+          \        }\n    }\n}\n"
+      - lang: JavaScript
+        source: "\nimport { ApiClient, ExternalRepositoriesApi, GetExternalRepositoryApiResponse\
+          \ } from \"@nutanix-api/multidomain-js-client\";\n\n// Configure the client\n\
+          let apiClientInstance = new ApiClient();\n// IPv4/IPv6 address or FQDN of\
+          \ the cluster\napiClientInstance.host = 'localhost';\n// Port to which to\
+          \ connect to\napiClientInstance.port = '9440';\n// Max retry attempts while\
+          \ reconnecting on a loss of connection\napiClientInstance.maxRetryAttempts\
+          \ = 5;\n// Interval in ms to use during retry attempts\napiClientInstance.retryInterval\
+          \ = 5000;\n// UserName to connect to the cluster\napiClientInstance.username\
+          \ = 'username';\n// Password to connect to the cluster\napiClientInstance.password\
+          \ = 'password';\n// Please add authorization information here if needed.\n\
+          let externalRepositoriesApi = new ExternalRepositoriesApi(apiClientInstance);\n\
+          \nfunction sample() {\n\n    \n    let extId = \"fFCaCB5F-b4Ce-DdF1-531B-24fBEB9EE2fb\"\
+          ;\n\n\n    // Perform Get call\n    externalRepositoriesApi.getExternalRepositoryById(extId).then(({data,\
+          \ response}) => {\n        console.log(`API returned the following status\
+          \ code: ${response.status}`);\n        // Extract E-Tag Header\n       \
+          \ let etagValue = ApiClient.getEtag(data);\n        let args = {\"If-Match\"\
+          \ : etagValue};\n\n        externalRepositoriesApi.deleteExternalRepositoryById(extId,\
+          \ args).then(({data, response}) => {\n            console.log(`API returned\
+          \ the following status code: ${response.status}`);\n            console.log(data.getData());\n\
+          \        }).catch((error) => {\n            console.log(`Error is: ${error}`);\n\
+          \        });\n    });\n\n}\nsample()\n"
+      - lang: Python
+        source: "\nimport ntnx_multidomain_py_client\n\nif __name__ == \"__main__\"\
+          :\n    # Configure the client\n    config = ntnx_multidomain_py_client.Configuration()\n\
+          \    # IPv4/IPv6 address or FQDN of the cluster\n    config.host = \"localhost\"\
+          \n    # Port to which to connect to\n    config.port = 9440\n    # Max retry\
+          \ attempts while reconnecting on a loss of connection\n    config.max_retry_attempts\
+          \ = 3\n    # Backoff factor to use during retry attempts\n    config.backoff_factor\
+          \ = 3\n    # UserName to connect to the cluster\n    config.username = \"\
+          username\"\n    # Password to connect to the cluster\n    config.password\
+          \ = \"password\"\n    # Please add authorization information here if needed.\n\
+          \    client = ntnx_multidomain_py_client.ApiClient(configuration=config)\n\
+          \    external_repositories_api = ntnx_multidomain_py_client.ExternalRepositoriesApi(api_client=client)\n\
+          \    \n    ext_id = \"9FbAEF2A-b3d1-98ee-448C-8bbF1FA2CBfB\"\n\n    try:\n\
+          \        api_response = external_repositories_api.get_external_repository_by_id(extId=ext_id)\n\
+          \    except ntnx_multidomain_py_client.rest.ApiException as e:\n       \
+          \ print(e)\n    # Extract E-Tag Header\n    etag_value = ntnx_multidomain_py_client.ApiClient.get_etag(api_response)\n\
+          \n    try:\n        api_response = external_repositories_api.delete_external_repository_by_id(extId=ext_id,\
+          \ if_match=etag_value)\n        print(api_response)\n    except ntnx_multidomain_py_client.rest.ApiException\
+          \ as e:\n        print(e)\n\n"
+      - lang: Go
+        source: "\npackage main\n\nimport (\n    \"fmt\"\n    \"time\"\n    \"github.com/nutanix/ntnx-api-golang-clients/multidomain-go-client/v4/api\"\
+          \n    \"github.com/nutanix/ntnx-api-golang-clients/multidomain-go-client/v4/client\"\
+          \n    import1 \"github.com/nutanix/ntnx-api-golang-clients/multidomain-go-client/v4/models/prism/v4/config\"\
+          \n)\n\nvar (\n    ApiClientInstance *client.ApiClient\n    ExternalRepositoriesApiInstance\
+          \ *api.ExternalRepositoriesApi\n)\n\nfunc main() {\n    ApiClientInstance\
+          \ = client.NewApiClient()\n    // IPv4/IPv6 address or FQDN of the cluster\n\
+          \    ApiClientInstance.Host = \"localhost\"\n    // Port to which to connect\
+          \ to\n    ApiClientInstance.Port = 9440\n    // Interval in ms to use during\
+          \ retry attempts\n    ApiClientInstance.RetryInterval = 5 * time.Second\n\
+          \    // Max retry attempts while reconnecting on a loss of connection\n\
+          \    ApiClientInstance.MaxRetryAttempts = 5\n    // UserName to connect\
+          \ to the cluster\n    ApiClientInstance.Username = \"username\"\n    //\
+          \ Password to connect to the cluster\n    ApiClientInstance.Password = \"\
+          password\"\n    // Please add authorization information here if needed.\n\
+          \    ExternalRepositoriesApiInstance = api.NewExternalRepositoriesApi(ApiClientInstance)\n\
+          \n    \n    extId := \"6Aa26FFD-eFc3-bB0F-07Ec-d0b4f20f43a4\"\n\n    getResponse,\
+          \ err := ExternalRepositoriesApiInstance.GetExternalRepositoryById(&extId)\n\
+          \    if err != nil {\n        fmt.Println(err)\n        return\n    }\n\n\
+          \    // Extract E-Tag Header\n    etagValue := ApiClientInstance.GetEtag(getResponse)\n\
+          \n    args := make(map[string] interface{})\n    args[\"If-Match\"] = etagValue\n\
+          \n    response, error := ExternalRepositoriesApiInstance.DeleteExternalRepositoryById(&extId,\
+          \ args)\n    if error != nil {\n        fmt.Println(error)\n        return\n\
+          \    }\n    data, _ := response.GetData().(import1.TaskReference)\n    fmt.Println(data)\n\
+          \n}\n\n"
+      - lang: cURL
+        source: |2+
+
+          curl --request DELETE \
+               --url "https://{pc-ip}:9440/api/multidomain/v4.2/config/external-repositories/aCBd42CE-e77d-Ab3F-fDE6-bB0bAE7E4FFF" \
+               --header 'Accept: application/json' \
+                        --header 'If-Match: string_sample_data' \
+                        --header 'NTNX-Request-Id: 3fa85f64-5717-4562-b3fc-2c963f66afa6' \
+               --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+
+      - lang: Wget
+        source: |2
+
+
+          wget --verbose \
+               --method DELETE \
+               --header 'Accept: application/json' \
+                   --header 'If-Match: string_sample_data' \
+                   --header 'NTNX-Request-Id: 3fa85f64-5717-4562-b3fc-2c963f66afa6' \
+          --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+          - "https://{pc-ip}:9440/api/multidomain/v4.2/config/external-repositories/a7EBfAEf-dE65-6FAA-C3Ac-17E7FE2Dbd6F"
+    x-supported-versions:
+    - product: PC
+      version: "7.5"
+    - product: PE
+      version: "7.5"
+components:
+  schemas:
+    multidomain.v4.2.config.ListExternalRepositoriesApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/multidomain.v4.2.config.ExternalRepository'
+          - $ref: '#/components/schemas/multidomain.v4.2.error.ErrorResponse'
+      additionalProperties: false
+      description: REST response for all response codes in API path /multidomain/v4.2/config/external-repositories
+        Get operation
+    multidomain.v4.2.config.ExternalRepository:
+      allOf:
+      - $ref: '#/components/schemas/common.v1.0.response.ExternalizableAbstractModel'
+      - required:
+        - location
+        - name
+        type: object
+        properties:
+          name:
+            maxLength: 255
+            type: string
+            description: External repository name.
+            example: Database disks repository
+          location:
+            required:
+            - $objectType
+            properties:
+              $objectType:
+                type: string
+                example: multidomain.v4.config.NfsRepository
+            description: location Details.
+            oneOf:
+            - $ref: '#/components/schemas/multidomain.v4.2.config.NfsRepository'
+          ownerExtId:
+            pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+            type: string
+            description: External identifier of the owner of the repository.
+            readOnly: true
+            example: 3ecb4bf8-1196-4e5e-bb33-829336487311
+        additionalProperties: false
+    multidomain.v4.2.config.CreateExternalRepositoryApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+        data:
+          required:
+          - $objectType
+          properties:
+            $objectType:
+              type: string
+              example: prism.v4.config.TaskReference
+          oneOf:
+          - $ref: '#/components/schemas/prism.v4.2.config.TaskReference'
+          - $ref: '#/components/schemas/multidomain.v4.2.error.ErrorResponse'
+      additionalProperties: false
+      description: REST response for all response codes in API path /multidomain/v4.2/config/external-repositories
+        Post operation
+    multidomain.v4.2.config.NfsRepository:
+      required:
+      - addresses
+      - exportName
+      type: object
+      properties:
+        exportName:
+          maxLength: 255
+          type: string
+          description: NFS repository export name details.
+          example: Backup NFS Server
+        addresses:
+          maxItems: 10
+          minItems: 1
+          type: array
+          description: List of NFS server addresses.
+          items:
+            $ref: '#/components/schemas/multidomain.v4.2.config.NFSServerAddress'
+      additionalProperties: false
+      description: NFS configuration details.
+    multidomain.v4.2.config.NFSServerAddress:
+      required:
+      - address
+      - port
+      type: object
+      properties:
+        address:
+          $ref: '#/components/schemas/common.v1.0.config.IPAddressOrFQDN'
+        port:
+          type: integer
+          description: Server port number.
+          format: int32
+          example: 44
+      additionalProperties: false
+      description: NFS server address details in FQDN:Port Number format.
+    multidomain.v4.2.config.GetExternalRepositoryApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+        data:
+          required:
+          - $objectType
+          properties:
+            $objectType:
+              type: string
+              example: multidomain.v4.config.ExternalRepository
+          oneOf:
+          - $ref: '#/components/schemas/multidomain.v4.2.config.ExternalRepository'
+          - $ref: '#/components/schemas/multidomain.v4.2.error.ErrorResponse'
+      additionalProperties: false
+      description: "REST response for all response codes in API path /multidomain/v4.2/config/external-repositories/{extId}\
+        \ Get operation"
+    multidomain.v4.2.config.UpdateExternalRepositoryApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+        data:
+          required:
+          - $objectType
+          properties:
+            $objectType:
+              type: string
+              example: prism.v4.config.TaskReference
+          oneOf:
+          - $ref: '#/components/schemas/prism.v4.2.config.TaskReference'
+          - $ref: '#/components/schemas/multidomain.v4.2.error.ErrorResponse'
+      additionalProperties: false
+      description: "REST response for all response codes in API path /multidomain/v4.2/config/external-repositories/{extId}\
+        \ Put operation"
+    multidomain.v4.2.config.DeleteExternalRepositoryApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.0.response.ApiResponseMetadata'
+        data:
+          required:
+          - $objectType
+          properties:
+            $objectType:
+              type: string
+              example: prism.v4.config.TaskReference
+          oneOf:
+          - $ref: '#/components/schemas/prism.v4.2.config.TaskReference'
+          - $ref: '#/components/schemas/multidomain.v4.2.error.ErrorResponse'
+      additionalProperties: false
+      description: "REST response for all response codes in API path /multidomain/v4.2/config/external-repositories/{extId}\
+        \ Delete operation"
+    common.v1.0.response.ExternalizableAbstractModel:
+      description: |
+        A model that represents an object instance that is accessible through an API endpoint.  Instances of this type get an extId field that contains the globally unique identifier for that instance.  Externally accessible instances are always tenant aware and, therefore, extend the TenantAwareModel
+      allOf:
+      - $ref: '#/components/schemas/common.v1.0.config.TenantAwareModel'
+      - type: object
+        properties:
+          extId:
+            pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+            type: string
+            description: |
+              A globally unique identifier of an instance that is suitable for external consumption.
+            nullable: true
+            readOnly: true
+            example: 99acc35b-9cdf-4aa5-ba10-8e9f4438ecb2
+          links:
+            maxItems: 20
+            minItems: 0
+            type: array
+            description: |
+              A HATEOAS style link for the response.  Each link contains a user-friendly name identifying the link and an address for retrieving the particular resource.
+            readOnly: true
+            items:
+              $ref: '#/components/schemas/common.v1.0.response.ApiLink'
+        additionalProperties: false
+    common.v1.0.config.IPAddressOrFQDN:
+      type: object
+      properties:
+        ipv4:
+          $ref: '#/components/schemas/common.v1.0.config.IPv4Address'
+        ipv6:
+          $ref: '#/components/schemas/common.v1.0.config.IPv6Address'
+        fqdn:
+          $ref: '#/components/schemas/common.v1.0.config.FQDN'
+      additionalProperties: false
+      description: |
+        An unique address that identifies a device on the internet or a local network in IPv4/IPv6 format or a Fully Qualified Domain Name.
+    common.v1.0.config.TenantAwareModel:
+      type: object
+      properties:
+        tenantId:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+          description: |
+            A globally unique identifier that represents the tenant that owns this entity. The system automatically assigns it, and it and is immutable from an API consumer perspective (some use cases may cause this ID to change - For instance, a use case may require the transfer of ownership of the entity, but these cases are handled automatically on the server).
+          readOnly: true
+          example: e30738d3-cd63-4a43-b299-289d86d8eb5b
+      additionalProperties: false
+      description: |
+        A model base class whose instances are bound to a specific tenant.  This model adds a tenantId to the base model class that it extends and is automatically set by the server.
+    common.v1.0.response.ApiLink:
+      type: object
+      properties:
+        href:
+          type: string
+          description: |
+            The URL at which the entity described by the link can be accessed.
+          example: string
+        rel:
+          type: string
+          description: |
+            A name that identifies the relationship of the link to the object that is returned by the URL.  The unique value of "self" identifies the URL for the object.
+          example: string
+      additionalProperties: false
+      description: |
+        A HATEOAS style link for the response.  Each link contains a user-friendly name identifying the link and an address for retrieving the particular resource.
+    common.v1.0.config.IPv4Address:
+      required:
+      - value
+      type: object
+      properties:
+        value:
+          pattern: "^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
+          type: string
+          description: |
+            The IPv4 address of the host.
+          example: 137.167.21.40
+        prefixLength:
+          maximum: 32
+          minimum: 0
+          type: integer
+          description: |
+            The prefix length of the network to which this host IPv4 address belongs.
+          format: int32
+          default: 32
+      additionalProperties: false
+      description: |
+        An unique address that identifies a device on the internet or a local network in IPv4 format.
+    common.v1.0.config.IPv6Address:
+      required:
+      - value
+      type: object
+      properties:
+        value:
+          pattern: "^(?:(?:(?:[A-Fa-f0-9]{1,4}:){6}|(?=(?:[A-Fa-f0-9]{0,4}:){0,6}(?:[0-9]{1,3}\\\
+            .){3}[0-9]{1,3}$)(([0-9a-fA-F]{1,4}:){0,5}|:)((:[0-9a-fA-F]{1,4}){1,5}:|:)|::(?:[A-Fa-f0-9]{1,4}:){5})(?:(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\\\
+            .){3}(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])|(?:[A-Fa-f0-9]{1,4}:){7}[A-Fa-f0-9]{1,4}|(?=(?:[A-Fa-f0-9]{0,4}:){0,7}[A-Fa-f0-9]{0,4}$)(([0-9a-fA-F]{1,4}:){1,7}|:)((:[0-9a-fA-F]{1,4}){1,7}|:)|(?:[A-Fa-f0-9]{1,4}:){7}:|:(:[A-Fa-f0-9]{1,4}){7})$"
+          type: string
+          description: |
+            The IPv6 address of the host.
+          example: 60b8:6004:7361:1a7d:9a64:df8d:dfd8:39c6
+        prefixLength:
+          maximum: 128
+          minimum: 0
+          type: integer
+          description: |
+            The prefix length of the network to which this host IPv6 address belongs.
+          format: int32
+          default: 128
+      additionalProperties: false
+      description: |
+        An unique address that identifies a device on the internet or a local network in IPv6 format.
+    common.v1.0.config.FQDN:
+      type: object
+      properties:
+        value:
+          pattern: "^([a-zA-Z0-9À-ÿ]+(?:-[a-zA-Z0-9À-ÿ]+)*\\.)+[a-zA-ZÀ-ÿ]{2,63}$"
+          type: string
+          description: |
+            The fully qualified domain name of the host.
+          example: string
+      additionalProperties: false
+      description: |
+        A fully qualified domain name that specifies its exact location in the tree hierarchy of the Domain Name System.
+    multidomain.v4.2.error.ErrorResponse:
+      type: object
+      properties:
+        error:
+          oneOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/multidomain.v4.2.error.AppMessage'
+          - $ref: '#/components/schemas/multidomain.v4.2.error.SchemaValidationError'
+      additionalProperties: false
+      description: An error response indicates that the operation has failed either
+        due to a client error(4XX) or server error(5XX). Please look at the HTTP status
+        code and namespace specific error code and error message for further details.
+      x-platform-generated: true
+    multidomain.v4.2.error.AppMessage:
+      type: object
+      properties:
+        message:
+          type: string
+          description: The message string.
+          example: string
+        severity:
+          $ref: '#/components/schemas/common.v1.0.config.MessageSeverity'
+        code:
+          type: string
+          description: "The code associated with this message. This string is typically\
+            \ prefixed with the namespace to which the endpoint belongs. For example:\
+            \ VMM-40000"
+          example: string
+        locale:
+          type: string
+          description: Locale for this message. The default locale would be 'en-US'.
+          default: en_US
+        errorGroup:
+          type: string
+          description: The error group associated with this message of severity ERROR.
+          example: string
+        argumentsMap:
+          type: object
+          additionalProperties:
+            type: string
+          description: The map of argument name to value.
+      additionalProperties: false
+      description: Message with associated severity describing status of the current
+        operation.
+      x-platform-generated: true
+    multidomain.v4.2.error.MessageSeverity:
+      type: string
+      description: Enum schema MessageSeverity
+      enum:
+      - INFO
+      - WARNING
+      - ERROR
+      - $UNKNOWN
+      - $REDACTED
+      x-platform-generated: true
+      x-codegen-hint:
+        $any:
+        - type: entity-identifier
+          properties:
+            identifiers:
+            - value: $UNKNOWN
+              index: 201
+            - value: $REDACTED
+              index: 202
+            - value: INFO
+              index: 203
+            - value: WARNING
+              index: 204
+            - value: ERROR
+              index: 205
+    multidomain.v4.2.error.SchemaValidationError:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          description: Timestamp of the response.
+          format: date-time
+          example: 2009-09-23T14:30:00-07:00
+        statusCode:
+          type: integer
+          description: The HTTP status code of the response.
+          example: 28
+        error:
+          type: string
+          description: The generic error message for the response.
+          example: string
+        path:
+          type: string
+          description: API path on which the request was made.
+          example: string
+        validationErrorMessages:
+          type: array
+          description: List of validation error messages
+          items:
+            $ref: '#/components/schemas/multidomain.v4.2.error.SchemaValidationErrorMessage'
+      additionalProperties: false
+      description: This schema is generated from SchemaValidationError.java
+      x-platform-generated: true
+    multidomain.v4.2.error.SchemaValidationErrorMessage:
+      type: object
+      properties:
+        location:
+          type: string
+          description: "The part of the request that failed validation. Validation\
+            \ can fail for path, query parameters, and request body."
+          example: string
+        message:
+          type: string
+          description: The detailed message for the validation error.
+          example: string
+        attributePath:
+          type: string
+          description: The path of the attribute that failed validation in the schema.
+          example: string
+      additionalProperties: false
+      description: This schema is generated from SchemaValidationErrorMessage.java
+      x-platform-generated: true
+    common.v1.0.response.ApiResponseMetadata:
+      type: object
+      properties:
+        flags:
+          maxItems: 20
+          minItems: 0
+          type: array
+          description: |
+            An array of flags that may indicate the status of the response. For example, a flag with the name 'isPaginated' and value 'false', indicates that the response is not paginated.
+          items:
+            $ref: '#/components/schemas/common.v1.0.config.Flag'
+        links:
+          maxItems: 20
+          minItems: 0
+          type: array
+          description: |
+            An array of HATEOAS style links for the response that may also include pagination links for list operations.
+          items:
+            $ref: '#/components/schemas/common.v1.0.response.ApiLink'
+        totalAvailableResults:
+          type: integer
+          description: |
+            The total number of entities that are available on the server for this type.
+          format: int32
+          example: 31
+        messages:
+          maxItems: 20
+          minItems: 0
+          type: array
+          description: |
+            Information, Warning or Error messages that might provide additional contextual information related to the operation.
+          items:
+            $ref: '#/components/schemas/common.v1.0.config.Message'
+        extraInfo:
+          maxItems: 20
+          minItems: 0
+          type: array
+          description: |
+            An array of entity-specific metadata
+          items:
+            $ref: '#/components/schemas/common.v1.0.config.KVPair'
+      additionalProperties: false
+      description: |
+        The metadata associated with an API response. This value is always present and minimally contains the self-link for the API request that produced this response. It also contains pagination data for the paginated requests.
+    prism.v4.2.config.TaskReference:
+      type: object
+      properties:
+        extId:
+          pattern: "^[a-zA-Z0-9/+]*={0,2}:[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"
+          type: string
+          description: A globally unique identifier for a task.
+          example: QmFzZTY0RW5jb2RlZA==:e060e6ff-e632-4b5f-8f81-40ff9aaeab73
+      additionalProperties: false
+      description: A reference to a task tracking an asynchronous operation. The status
+        of the task can be queried by making a GET request to the task URI provided
+        in the metadata section of the API response.
+    common.v1.0.config.Flag:
+      type: object
+      properties:
+        name:
+          maxLength: 128
+          minLength: 3
+          type: string
+          description: |
+            Name of the flag.
+          example: string
+        value:
+          type: boolean
+          description: |
+            Value of the flag.
+          default: false
+      additionalProperties: false
+      description: |
+        Many entities in the Nutanix APIs carry flags.  This object captures all the flags associated with that entity through this object.  The field that hosts this type of object must have an attribute called x-bounded-map-keys that tells which flags are actually present for that entity.
+    common.v1.0.config.Message:
+      type: object
+      properties:
+        code:
+          type: string
+          description: |
+            A code that uniquely identifies a message.
+          example: string
+        message:
+          type: string
+          description: |
+            The description of the message.
+          example: string
+        locale:
+          type: string
+          description: |
+            The locale for the message description.
+          default: en_US
+        severity:
+          $ref: '#/components/schemas/common.v1.0.config.MessageSeverity'
+      additionalProperties: false
+    common.v1.0.config.KVPair:
+      type: object
+      properties:
+        name:
+          maxLength: 128
+          minLength: 3
+          type: string
+          description: |
+            The key of the key-value pair.
+          example: string
+        value:
+          description: The value associated with the key for this key-value pair
+          oneOf:
+          - type: string
+            description: |
+              A string value in a key-value pair.
+            example: string
+          - type: integer
+            description: |
+              An integer value in a key-value pair.
+            example: 99
+          - type: boolean
+            description: |
+              An boolean value in a key-value pair.
+            example: true
+          - maxItems: 100
+            minItems: 0
+            type: array
+            description: |
+              A value in a key-value pair that represents a list of strings.
+            items:
+              type: string
+              example: string
+          - type: object
+            additionalProperties:
+              type: string
+            description: |
+              A value in a key-value pair that represents a map of string keys and values.
+          - maxItems: 20
+            minItems: 0
+            type: array
+            description: |
+              A value in a key-value pair that represents an array of maps of string keys and values.
+            items:
+              $ref: '#/components/schemas/common.v1.0.config.MapOfStringWrapper'
+          - maxItems: 100
+            minItems: 0
+            type: array
+            description: |
+              A value in a key-value pair that represents a list of integers.
+            items:
+              type: integer
+              example: 36
+      additionalProperties: false
+      description: |
+        A map describing a set of keys and their corresponding values.
+    common.v1.0.config.MessageSeverity:
+      type: string
+      description: |
+        The message severity.
+      enum:
+      - INFO
+      - WARNING
+      - ERROR
+      - $UNKNOWN
+      - $REDACTED
+      x-enumDescriptions:
+        ERROR: |
+          Error indicating failed completion.
+        INFO: |
+          Information about successful completion.
+        $UNKNOWN: |
+          Unknown value.
+        WARNING: |
+          Warning indicating future error.
+        $REDACTED: |
+          Redacted value.
+    common.v1.0.config.MapOfStringWrapper:
+      type: object
+      properties:
+        map:
+          type: object
+          additionalProperties:
+            type: string
+          description: |
+            A map with string keys and values.
+      additionalProperties: false
+      description: |
+        A wrapper schema containing a map with string keys and values.
+  securitySchemes:
+    basicAuthScheme:
+      type: http
+      scheme: basic
+    apiKeyAuthScheme:
+      type: apiKey
+      name: X-ntnx-api-key
+      in: header

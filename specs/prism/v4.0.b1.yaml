@@ -1,0 +1,3990 @@
+openapi: 3.0.1
+info:
+  title: Nutanix Prism Versioned APIs
+  description: "Manage Tasks, Category Associations and Submit Batch Operations."
+  version: 4.0.1-beta-1
+  x-logo:
+    altText: Prism Logo
+    url: https://developers.nutanix.com/api/v1/namespaces/prism/images/prism-logo-img.svg
+  x-repo-name: prism
+servers:
+- url: "https://{pc-ip}:9440/api"
+security:
+- basicAuthScheme: []
+tags:
+- name: Tasks
+  description: "Tasks are primarily a way of asynchronous execution of operations.\
+    \ Tasks record the intention, progress, and other relevant information about the\
+    \ long-running operations in a persistent manner. Users can interact with the\
+    \ tasks on the system using these APIs."
+- name: Categories
+  description: |
+    Categories are key-value pair constructs used to tag entities and policies.
+    Keys are used to group functionally similar categories.
+    Policy engines use categories to get all entities tagged to the a category, and apply policies on them.
+    Some examples are: mark vms for restoration and backup, protect volume groups based on categories,
+    allow or deny authorization to a user, to entities marked by a category,
+    logically group entities in the UI for convenience, etc.
+- name: Batches
+  description: Provides an ability to submit batches of operations that can be performed
+    asynchronously.  Status of submitted batches can be checked by querying the task
+    returned as a result of the submission. Additionally history of all submitted
+    batches in the past 90 days can be listed through a list operation. A Limit of
+    500 elements is enforced during submission of the batch.
+paths:
+  /prism/v4.0.b1/operations/$actions/batch:
+    post:
+      tags:
+      - Batches
+      summary: Submit a batch operation.
+      description: Submit a homogenous batch operation.
+      operationId: submitBatch
+      requestBody:
+        description: The request payload for the batch operation.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/prism.v4.r0.b1.operations.BatchSpec'
+        required: true
+      responses:
+        "202":
+          description: The batch request has been accepted by the server for processing.
+            Please check the task reference in the response on how to query for status
+            of the batch operation.
+          headers:
+            Location:
+              style: simple
+              explode: false
+              schema:
+                pattern: "^((http[s]?):\\/)?\\/?([^:\\/\\s]+)((\\/\\w+)*(:[0-9]+)*?\\\
+                  /)([\\w\\-\\.]+[^#?\\s]+)(.*)?(#[\\w\\-]+)?$"
+                type: string
+                description: Indicates the target of a redirection or the URL of a
+                  newly created resource.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/prism.v4.r0.b1.config.TaskReference'
+                additionalProperties: false
+                description: REST response for all response codes in API path /prism/v4.0.b1/operations/$actions/batch
+                  Post operation
+        "4XX":
+          description: Client error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/prism.v4.r0.b1.error.ErrorResponse'
+                additionalProperties: false
+                description: REST response for all response codes in API path /prism/v4.0.b1/operations/$actions/batch
+                  Post operation
+        "5XX":
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/prism.v4.r0.b1.error.ErrorResponse'
+                additionalProperties: false
+                description: REST response for all response codes in API path /prism/v4.0.b1/operations/$actions/batch
+                  Post operation
+      x-permissions:
+        deploymentList:
+        - ON_PREM
+        operationName: Submit Batch
+        roleList:
+        - Internal Super Admin
+        - Prism Admin
+        - Super Admin
+      x-code-samples:
+      - lang: Java
+        source: |2
+
+          package sample;
+
+          import com.nutanix.batch.java.client.ApiClient;
+          import com.nutanix.batch.java.client.api.BatchesApi;
+          import com.nutanix.dp1.batch.prism.v4.operations.BatchSpec;
+          import com.nutanix.dp1.batch.prism.v4.operations.SubmitBatchApiResponse;
+
+          public class JavaSdkSample {
+              public static void main(String[] args) {
+                  // Configure the client
+                  ApiClient apiClient = new ApiClient();
+                  // IPv4/IPv6 address or FQDN of the cluster
+                  apiClient.setHost("localhost");
+                  // Port to which to connect to
+                  apiClient.setPort(9440);
+                  // Interval in ms to use during retry attempts
+                  apiClient.setRetryInterval(5000);
+                  // Max retry attempts while reconnecting on a loss of connection
+                  apiClient.setMaxRetryAttempts(5);
+                  // UserName to connect to the cluster
+                  String username = "username";
+                  // Password to connect to the cluster
+                  String password = "password";
+                  apiClient.setUsername(username);
+                  apiClient.setPassword(password);
+
+                  // Please add authorization information here if needed.
+                  BatchesApi batchesApi = new BatchesApi(apiClient);
+
+                  BatchSpec batchSpec = new BatchSpec();
+
+                  // BatchSpec object initializations here...
+
+                  try {
+                      SubmitBatchApiResponse submitBatchApiResponse = batchesApi.submitBatch(batchSpec);
+                      System.out.println(submitBatchApiResponse.toString());
+                  } catch (RestClientException ex) {
+                      System.out.println(ex.getMessage());
+                  }
+              }
+          }
+      - lang: JavaScript
+        source: |2
+
+          import { ApiClient, BatchesApi, BatchSpec } from "@nutanix-api/prism-js-client";
+
+          // Configure the client
+          let apiClientInstance = new ApiClient();
+          // IPv4/IPv6 address or FQDN of the cluster
+          apiClientInstance.host = 'localhost';
+          // Port to which to connect to
+          apiClientInstance.port = '9440';
+          // Max retry attempts while reconnecting on a loss of connection
+          apiClientInstance.maxRetryAttempts = 5;
+          // Interval in ms to use during retry attempts
+          apiClientInstance.retryInterval = 5000;
+          // UserName to connect to the cluster
+          apiClientInstance.username = 'username';
+          // Password to connect to the cluster
+          apiClientInstance.password = 'password';
+          // Please add authorization information here if needed.
+          let batchesApi = new BatchesApi(apiClientInstance);
+
+          function sample() {
+              let batchSpec = new BatchSpec();
+
+              // BatchSpec object initializations here...
+
+
+
+
+
+              batchesApi.submitBatch(batchSpec).then(({data, response}) => {
+                  console.log(`API returned the following status code: ${response.status}`);
+                  console.log(data.getData());
+              }).catch((error) => {
+                  console.log(`Error is: ${error}`);
+              });
+          }
+          sample()
+      - lang: Python
+        source: |2
+
+          import ntnx_prism_py_client
+
+          if __name__ == "__main__":
+              # Configure the client
+              config = ntnx_prism_py_client.Configuration()
+              # IPv4/IPv6 address or FQDN of the cluster
+              config.host = "localhost"
+              # Port to which to connect to
+              config.port = 9440
+              # Max retry attempts while reconnecting on a loss of connection
+              config.max_retry_attempts = 3
+              # Backoff factor to use during retry attempts
+              config.backoff_factor = 3
+              # UserName to connect to the cluster
+              config.username = "username"
+              # Password to connect to the cluster
+              config.password = "password"
+              # Please add authorization information here if needed.
+              client = ntnx_prism_py_client.ApiClient(configuration=config)
+              batches_api = ntnx_prism_py_client.BatchesApi(api_client=client)
+              batchSpec = ntnx_prism_py_client.BatchSpec()
+
+              # BatchSpec object initializations here...
+
+              try:
+                  api_response = batches_api.submit_batch(body=batchSpec)
+                  print(api_response)
+              except ntnx_prism_py_client.rest.ApiException as e:
+                  print(e)
+      - lang: Go
+        source: |2+
+
+          package main
+
+          import (
+              "fmt"
+              "github.com/nutanix/ntnx-api-golang-clients/prism-go-client/v4/api"
+              "github.com/nutanix/ntnx-api-golang-clients/prism-go-client/v4/client"
+              import1 "github.com/nutanix/ntnx-api-golang-clients/prism-go-client/v4/models/prism/v4/operations"
+              import2 "github.com/nutanix/ntnx-api-golang-clients/prism-go-client/v4/models/prism/v4/config"
+          )
+
+          var (
+              ApiClientInstance *client.ApiClient
+              BatchesApiInstance *api.BatchesApi
+          )
+
+          func main() {
+              ApiClientInstance = client.NewApiClient()
+              // IPv4/IPv6 address or FQDN of the cluster
+              ApiClientInstance.Host = "localhost"
+              // Port to which to connect to
+              ApiClientInstance.Port = 9440
+              // Interval in ms to use during retry attempts
+              ApiClientInstance.RetryInterval = 5000
+              // Max retry attempts while reconnecting on a loss of connection
+              ApiClientInstance.MaxRetryAttempts = 5
+              // UserName to connect to the cluster
+              ApiClientInstance.Username = "username"
+              // Password to connect to the cluster
+              ApiClientInstance.Password = "password"
+              // Please add authorization information here if needed.
+              BatchesApiInstance = api.NewBatchesApi(ApiClientInstance)
+
+              batchSpec := import1.NewBatchSpec()
+
+              // BatchSpec object initializations here...
+
+
+
+              response, error := BatchesApiInstance.SubmitBatch(batchSpec)
+              if error != nil {
+                  fmt.Println(error)
+                  return
+              }
+              data, _ := response.GetData().(import2.TaskReference)
+              fmt.Println(data)
+          }
+
+      - lang: cURL
+        source: |2
+
+          curl --request POST \
+               --url "https://{pc-ip}:9440/api/prism/v4.0.b1/operations/$actions/batch" \
+               --header 'Accept: application/json' \
+               --header 'Content-Type: application/json' \
+               --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+               --data {"metadata":{"action":"$UNKNOWN","name":"string","uri":"string","stopOnError":true,"chunkSize":0,"$objectType":"prism.v4.operations.BatchSpecMetadata"},"payload":[{"metadata":{"headers":[{"name":"string","value":"string","$objectType":"prism.v4.operations.BatchSpecPayloadMetadataHeader"}],"path":[{"name":"string","value":"string","$objectType":"prism.v4.operations.BatchSpecPayloadMetadataPath"}],"$objectType":"prism.v4.operations.BatchSpecPayloadMetadata"},"data":{},"$objectType":"prism.v4.operations.BatchSpecPayload"}],"$objectType":"prism.v4.operations.BatchSpec"} \
+      - lang: Wget
+        source: |2
+
+          wget --verbose \
+               --method POST \
+               --header 'Accept: application/json' \
+               --header 'Content-Type: application/json' \
+               --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+               --body-data {"metadata":{"action":"$UNKNOWN","name":"string","uri":"string","stopOnError":true,"chunkSize":0,"$objectType":"prism.v4.operations.BatchSpecMetadata"},"payload":[{"metadata":{"headers":[{"name":"string","value":"string","$objectType":"prism.v4.operations.BatchSpecPayloadMetadataHeader"}],"path":[{"name":"string","value":"string","$objectType":"prism.v4.operations.BatchSpecPayloadMetadataPath"}],"$objectType":"prism.v4.operations.BatchSpecPayloadMetadata"},"data":{},"$objectType":"prism.v4.operations.BatchSpecPayload"}],"$objectType":"prism.v4.operations.BatchSpec"} \
+               - "https://{pc-ip}:9440/api/prism/v4.0.b1/operations/$actions/batch"
+  /prism/v4.0.b1/operations/batches:
+    get:
+      tags:
+      - Batches
+      summary: Get a list of all the Batches.
+      description: Query the list of Batches.
+      operationId: listBatches
+      parameters:
+      - name: $page
+        in: query
+        description: |
+          A URL query parameter that specifies the page number of the result set. It must be a positive integer between 0 and the maximum number of pages that are available for that resource. Any number out of this range might lead to no results.
+        required: false
+        style: form
+        explode: false
+        schema:
+          minimum: 0
+          type: integer
+          description: |
+            A URL query parameter that specifies the page number of the result set. It must be a positive integer between 0 and the maximum number of pages that are available for that resource. Any number out of this range might lead to no results.
+          format: int32
+          default: 0
+      - name: $limit
+        in: query
+        description: |
+          A URL query parameter that specifies the total number of records returned in the result set.  Must be a positive integer between 1 and 100. Any number out of this range will lead to a validation error. If the limit is not provided, a default value of 50 records will be returned in the result set.
+        required: false
+        style: form
+        explode: false
+        schema:
+          maximum: 100
+          minimum: 1
+          type: integer
+          description: |
+            A URL query parameter that specifies the total number of records returned in the result set.  Must be a positive integer between 1 and 100. Any number out of this range will lead to a validation error. If the limit is not provided, a default value of 50 records will be returned in the result set.
+          format: int32
+          default: 50
+      responses:
+        "200":
+          description: Paginated list of Batches.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/prism.v4.r0.b1.operations.Batch'
+                additionalProperties: false
+                description: REST response for all response codes in API path /prism/v4.0.b1/operations/batches
+                  Get operation
+        "4XX":
+          description: Client error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/prism.v4.r0.b1.error.ErrorResponse'
+                additionalProperties: false
+                description: REST response for all response codes in API path /prism/v4.0.b1/operations/batches
+                  Get operation
+        "5XX":
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/prism.v4.r0.b1.error.ErrorResponse'
+                additionalProperties: false
+                description: REST response for all response codes in API path /prism/v4.0.b1/operations/batches
+                  Get operation
+      x-permissions:
+        deploymentList:
+        - ON_PREM
+        operationName: Get Batches
+        roleList:
+        - Internal Super Admin
+        - Prism Admin
+        - Super Admin
+        - Prism Viewer
+      x-code-samples:
+      - lang: Java
+        source: |2
+
+          package sample;
+
+          import com.nutanix.batch.java.client.ApiClient;
+          import com.nutanix.batch.java.client.api.BatchesApi;
+          import com.nutanix.dp1.batch.prism.v4.operations.ListBatchesApiResponse;
+
+          public class JavaSdkSample {
+              public static void main(String[] args) {
+                  // Configure the client
+                  ApiClient apiClient = new ApiClient();
+                  // IPv4/IPv6 address or FQDN of the cluster
+                  apiClient.setHost("localhost");
+                  // Port to which to connect to
+                  apiClient.setPort(9440);
+                  // Interval in ms to use during retry attempts
+                  apiClient.setRetryInterval(5000);
+                  // Max retry attempts while reconnecting on a loss of connection
+                  apiClient.setMaxRetryAttempts(5);
+                  // UserName to connect to the cluster
+                  String username = "username";
+                  // Password to connect to the cluster
+                  String password = "password";
+                  apiClient.setUsername(username);
+                  apiClient.setPassword(password);
+
+                  // Please add authorization information here if needed.
+                  BatchesApi batchesApi = new BatchesApi(apiClient);
+
+                  int page = 0;
+                  int limit = 50;
+
+                  try {
+                      ListBatchesApiResponse listBatchesApiResponse = batchesApi.listBatches(page, limit);
+                      System.out.println(listBatchesApiResponse.toString());
+                  } catch (RestClientException ex) {
+                      System.out.println(ex.getMessage());
+                  }
+              }
+          }
+      - lang: JavaScript
+        source: |2
+
+          import { ApiClient, BatchesApi } from "@nutanix-api/prism-js-client";
+
+          // Configure the client
+          let apiClientInstance = new ApiClient();
+          // IPv4/IPv6 address or FQDN of the cluster
+          apiClientInstance.host = 'localhost';
+          // Port to which to connect to
+          apiClientInstance.port = '9440';
+          // Max retry attempts while reconnecting on a loss of connection
+          apiClientInstance.maxRetryAttempts = 5;
+          // Interval in ms to use during retry attempts
+          apiClientInstance.retryInterval = 5000;
+          // UserName to connect to the cluster
+          apiClientInstance.username = 'username';
+          // Password to connect to the cluster
+          apiClientInstance.password = 'password';
+          // Please add authorization information here if needed.
+          let batchesApi = new BatchesApi(apiClientInstance);
+
+          function sample() {
+
+
+              // Construct Optional Parameters
+              var opts = {};
+              opts["$page"] = 0;
+              opts["$limit"] = 50;
+
+
+
+              batchesApi.listBatches(opts).then(({data, response}) => {
+                  console.log(`API returned the following status code: ${response.status}`);
+                  console.log(data.getData());
+              }).catch((error) => {
+                  console.log(`Error is: ${error}`);
+              });
+          }
+          sample()
+      - lang: Python
+        source: |2
+
+          import ntnx_prism_py_client
+
+          if __name__ == "__main__":
+              # Configure the client
+              config = ntnx_prism_py_client.Configuration()
+              # IPv4/IPv6 address or FQDN of the cluster
+              config.host = "localhost"
+              # Port to which to connect to
+              config.port = 9440
+              # Max retry attempts while reconnecting on a loss of connection
+              config.max_retry_attempts = 3
+              # Backoff factor to use during retry attempts
+              config.backoff_factor = 3
+              # UserName to connect to the cluster
+              config.username = "username"
+              # Password to connect to the cluster
+              config.password = "password"
+              # Please add authorization information here if needed.
+              client = ntnx_prism_py_client.ApiClient(configuration=config)
+              batches_api = ntnx_prism_py_client.BatchesApi(api_client=client)
+              page = 0
+              limit = 50
+
+              try:
+                  api_response = batches_api.list_batches(_page=page, _limit=limit)
+                  print(api_response)
+              except ntnx_prism_py_client.rest.ApiException as e:
+                  print(e)
+      - lang: Go
+        source: |2+
+
+          package main
+
+          import (
+              "fmt"
+              "github.com/nutanix/ntnx-api-golang-clients/prism-go-client/v4/api"
+              "github.com/nutanix/ntnx-api-golang-clients/prism-go-client/v4/client"
+              import1 "github.com/nutanix/ntnx-api-golang-clients/prism-go-client/v4/models/prism/v4/operations"
+          )
+
+          var (
+              ApiClientInstance *client.ApiClient
+              BatchesApiInstance *api.BatchesApi
+          )
+
+          func main() {
+              ApiClientInstance = client.NewApiClient()
+              // IPv4/IPv6 address or FQDN of the cluster
+              ApiClientInstance.Host = "localhost"
+              // Port to which to connect to
+              ApiClientInstance.Port = 9440
+              // Interval in ms to use during retry attempts
+              ApiClientInstance.RetryInterval = 5000
+              // Max retry attempts while reconnecting on a loss of connection
+              ApiClientInstance.MaxRetryAttempts = 5
+              // UserName to connect to the cluster
+              ApiClientInstance.Username = "username"
+              // Password to connect to the cluster
+              ApiClientInstance.Password = "password"
+              // Please add authorization information here if needed.
+              BatchesApiInstance = api.NewBatchesApi(ApiClientInstance)
+
+              page_ := 0
+              limit_ := 50
+
+
+              response, error := BatchesApiInstance.ListBatches(&page_, &limit_)
+              if error != nil {
+                  fmt.Println(error)
+                  return
+              }
+              data, _ := response.GetData().([]import1.Batch)
+              fmt.Println(data)
+          }
+
+      - lang: cURL
+        source: |2
+
+          curl --request GET \
+               --url "https://{pc-ip}:9440/api/prism/v4.0.b1/operations/batches?$limit=50&$page=0" \
+               --header 'Accept: application/json' \
+               --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+      - lang: Wget
+        source: |2
+
+          wget --verbose \
+               --method GET \
+               --header 'Accept: application/json' \
+               --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+               - "https://{pc-ip}:9440/api/prism/v4.0.b1/operations/batches?$limit=50&$page=0"
+  /prism/v4.0.b1/operations/batches/{extId}:
+    get:
+      tags:
+      - Batches
+      summary: "Get a Batch identified by {extId}."
+      description: "Query the Batch identified by {extId}."
+      operationId: getBatchById
+      parameters:
+      - name: extId
+        in: path
+        description: The external identifier of the Batch.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+      responses:
+        "200":
+          description: Details of the queried Batch.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/prism.v4.r0.b1.operations.Batch'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /prism/v4.0.b1/operations/batches/{extId}\
+                  \ Get operation"
+        "4XX":
+          description: Client error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/prism.v4.r0.b1.error.ErrorResponse'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /prism/v4.0.b1/operations/batches/{extId}\
+                  \ Get operation"
+        "5XX":
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/prism.v4.r0.b1.error.ErrorResponse'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /prism/v4.0.b1/operations/batches/{extId}\
+                  \ Get operation"
+      x-permissions:
+        deploymentList:
+        - ON_PREM
+        operationName: Get Batch
+        roleList:
+        - Internal Super Admin
+        - Prism Admin
+        - Super Admin
+        - Prism Viewer
+      x-code-samples:
+      - lang: Java
+        source: |2
+
+          package sample;
+
+          import com.nutanix.batch.java.client.ApiClient;
+          import com.nutanix.batch.java.client.api.BatchesApi;
+          import com.nutanix.dp1.batch.prism.v4.operations.GetBatchApiResponse;
+
+          public class JavaSdkSample {
+              public static void main(String[] args) {
+                  // Configure the client
+                  ApiClient apiClient = new ApiClient();
+                  // IPv4/IPv6 address or FQDN of the cluster
+                  apiClient.setHost("localhost");
+                  // Port to which to connect to
+                  apiClient.setPort(9440);
+                  // Interval in ms to use during retry attempts
+                  apiClient.setRetryInterval(5000);
+                  // Max retry attempts while reconnecting on a loss of connection
+                  apiClient.setMaxRetryAttempts(5);
+                  // UserName to connect to the cluster
+                  String username = "username";
+                  // Password to connect to the cluster
+                  String password = "password";
+                  apiClient.setUsername(username);
+                  apiClient.setPassword(password);
+
+                  // Please add authorization information here if needed.
+                  BatchesApi batchesApi = new BatchesApi(apiClient);
+
+                  String extId = "eBafC4af-Fa2E-1BeF-808c-feDCB75fFaaf";
+
+                  try {
+                      GetBatchApiResponse getBatchApiResponse = batchesApi.getBatchById(extId);
+                      System.out.println(getBatchApiResponse.toString());
+                  } catch (RestClientException ex) {
+                      System.out.println(ex.getMessage());
+                  }
+              }
+          }
+      - lang: JavaScript
+        source: |2
+
+          import { ApiClient, BatchesApi } from "@nutanix-api/prism-js-client";
+
+          // Configure the client
+          let apiClientInstance = new ApiClient();
+          // IPv4/IPv6 address or FQDN of the cluster
+          apiClientInstance.host = 'localhost';
+          // Port to which to connect to
+          apiClientInstance.port = '9440';
+          // Max retry attempts while reconnecting on a loss of connection
+          apiClientInstance.maxRetryAttempts = 5;
+          // Interval in ms to use during retry attempts
+          apiClientInstance.retryInterval = 5000;
+          // UserName to connect to the cluster
+          apiClientInstance.username = 'username';
+          // Password to connect to the cluster
+          apiClientInstance.password = 'password';
+          // Please add authorization information here if needed.
+          let batchesApi = new BatchesApi(apiClientInstance);
+
+          function sample() {
+
+              let extId = "Dae2cA67-9b89-B4bf-5CfE-ebdbEf65E4A1";
+
+
+
+
+              batchesApi.getBatchById(extId).then(({data, response}) => {
+                  console.log(`API returned the following status code: ${response.status}`);
+                  console.log(data.getData());
+              }).catch((error) => {
+                  console.log(`Error is: ${error}`);
+              });
+          }
+          sample()
+      - lang: Python
+        source: |2
+
+          import ntnx_prism_py_client
+
+          if __name__ == "__main__":
+              # Configure the client
+              config = ntnx_prism_py_client.Configuration()
+              # IPv4/IPv6 address or FQDN of the cluster
+              config.host = "localhost"
+              # Port to which to connect to
+              config.port = 9440
+              # Max retry attempts while reconnecting on a loss of connection
+              config.max_retry_attempts = 3
+              # Backoff factor to use during retry attempts
+              config.backoff_factor = 3
+              # UserName to connect to the cluster
+              config.username = "username"
+              # Password to connect to the cluster
+              config.password = "password"
+              # Please add authorization information here if needed.
+              client = ntnx_prism_py_client.ApiClient(configuration=config)
+              batches_api = ntnx_prism_py_client.BatchesApi(api_client=client)
+              ext_id = "23DFeefd-Deae-bcAD-34Ab-fd5cbd7ebBcd"
+
+              try:
+                  api_response = batches_api.get_batch_by_id(extId=ext_id)
+                  print(api_response)
+              except ntnx_prism_py_client.rest.ApiException as e:
+                  print(e)
+      - lang: Go
+        source: |2+
+
+          package main
+
+          import (
+              "fmt"
+              "github.com/nutanix/ntnx-api-golang-clients/prism-go-client/v4/api"
+              "github.com/nutanix/ntnx-api-golang-clients/prism-go-client/v4/client"
+              import1 "github.com/nutanix/ntnx-api-golang-clients/prism-go-client/v4/models/prism/v4/operations"
+          )
+
+          var (
+              ApiClientInstance *client.ApiClient
+              BatchesApiInstance *api.BatchesApi
+          )
+
+          func main() {
+              ApiClientInstance = client.NewApiClient()
+              // IPv4/IPv6 address or FQDN of the cluster
+              ApiClientInstance.Host = "localhost"
+              // Port to which to connect to
+              ApiClientInstance.Port = 9440
+              // Interval in ms to use during retry attempts
+              ApiClientInstance.RetryInterval = 5000
+              // Max retry attempts while reconnecting on a loss of connection
+              ApiClientInstance.MaxRetryAttempts = 5
+              // UserName to connect to the cluster
+              ApiClientInstance.Username = "username"
+              // Password to connect to the cluster
+              ApiClientInstance.Password = "password"
+              // Please add authorization information here if needed.
+              BatchesApiInstance = api.NewBatchesApi(ApiClientInstance)
+
+              extId := "D51Dbef8-eD7B-Dce6-bA9a-5aB971c3a0c2"
+
+
+              response, error := BatchesApiInstance.GetBatchById(&extId)
+              if error != nil {
+                  fmt.Println(error)
+                  return
+              }
+              data, _ := response.GetData().(import1.Batch)
+              fmt.Println(data)
+          }
+
+      - lang: cURL
+        source: |2
+
+          curl --request GET \
+               --url "https://{pc-ip}:9440/api/prism/v4.0.b1/operations/batches/bcc173ae-b8a1-Ca88-Cab0-B0C8De2Ace3C" \
+               --header 'Accept: application/json' \
+               --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+      - lang: Wget
+        source: |2
+
+          wget --verbose \
+               --method GET \
+               --header 'Accept: application/json' \
+               --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+               - "https://{pc-ip}:9440/api/prism/v4.0.b1/operations/batches/C2EC4abb-ceeF-3f9a-97cC-CeE18DaE5B6B"
+  /prism/v4.0.b1/config/categories:
+    get:
+      tags:
+      - Categories
+      summary: |
+        List categories
+      description: |
+        Fetch a list of categories with pagination, filtering, sorting, selection and optional expansion of associated entity counts.
+      operationId: listCategories
+      parameters:
+      - name: $page
+        in: query
+        description: |
+          A URL query parameter that specifies the page number of the result set. It must be a positive integer between 0 and the maximum number of pages that are available for that resource. Any number out of this range might lead to no results.
+        required: false
+        style: form
+        explode: false
+        schema:
+          minimum: 0
+          type: integer
+          description: |
+            A URL query parameter that specifies the page number of the result set. It must be a positive integer between 0 and the maximum number of pages that are available for that resource. Any number out of this range might lead to no results.
+          format: int32
+          default: 0
+      - name: $limit
+        in: query
+        description: |
+          A URL query parameter that specifies the total number of records returned in the result set.  Must be a positive integer between 1 and 100. Any number out of this range will lead to a validation error. If the limit is not provided, a default value of 50 records will be returned in the result set.
+        required: false
+        style: form
+        explode: false
+        schema:
+          maximum: 100
+          minimum: 1
+          type: integer
+          description: |
+            A URL query parameter that specifies the total number of records returned in the result set.  Must be a positive integer between 1 and 100. Any number out of this range will lead to a validation error. If the limit is not provided, a default value of 50 records will be returned in the result set.
+          format: int32
+          default: 50
+      - name: $filter
+        in: query
+        description: |
+          A URL query parameter that allows clients to filter a collection of resources. The expression specified with $filter is evaluated for each resource in the collection, and only items where the expression evaluates to true are included in the response. Expression specified with the $filter must conform to the [OData V4.01](https://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html) URL conventions.
+          For example, filter '$filter=name eq 'karbon-ntnx-1.0' would filter the result on cluster name 'karbon-ntnx1.0', filter '$filter=startswith(name, 'C')' would filter on cluster name starting with 'C'.
+          The filter can be applied to the following fields:
+          - extId
+          - key
+          - ownerUuid
+          - type
+          - value
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: $orderby
+        in: query
+        description: |
+          A URL query parameter that allows clients to specify the sort criteria for the returned list of objects. Resources can be sorted in ascending order using asc or descending order using desc. If asc or desc are not specified, the resources will be sorted in ascending order by default. For example, '$orderby=templateName desc' would get all templates sorted by templateName in descending order.
+          The orderby can be applied to the following fields:
+          - key
+          - value
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: $expand
+        in: query
+        description: |
+          A URL query parameter that allows clients to request related resources when a resource that satisfies a particular request is retrieved. Each expanded item is evaluated relative to the entity containing the property being expanded. Other query options can be applied to an expanded property by appending a semicolon-separated list of query options, enclosed in parentheses, to the property name. Permissible system query options are $filter, $select and $orderby. The following expansion keys are supported.
+          - associations
+          - detailedAssociations
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: $select
+        in: query
+        description: |
+          A URL query parameter that allows clients to request a specific set of properties for each entity or complex type. Expression specified with the $select must conform to the [OData V4.01](https://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html) URL conventions. If a $select expression consists of a single select item that is an asterisk (i.e., *), then all properties on the matching resource will be returned.
+          - description
+          - extId
+          - key
+          - ownerUuid
+          - type
+          - value
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: |
+            The query is processed and a list of categories is returned.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/prism.v4.r0.b1.config.Category'
+                additionalProperties: false
+                description: REST response for all response codes in API path /prism/v4.0.b1/config/categories
+                  Get operation
+        "4XX":
+          description: Client error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/prism.v4.r0.b1.error.ErrorResponse'
+                additionalProperties: false
+                description: REST response for all response codes in API path /prism/v4.0.b1/config/categories
+                  Get operation
+        "5XX":
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/prism.v4.r0.b1.error.ErrorResponse'
+                additionalProperties: false
+                description: REST response for all response codes in API path /prism/v4.0.b1/config/categories
+                  Get operation
+      x-permissions:
+        operationName: View Category
+        roleList:
+        - Internal Super Admin
+        - Prism Admin
+        - Self-Service Admin
+        - Prism Viewer
+        - Developer
+        - Project Admin
+        - Super Admin
+        - Storage Admin
+        - Flow Admin
+        - Flow Viewer
+        - Category Viewer
+        - Category Admin
+        - Disaster Recovery Admin
+        - Disaster Recovery Viewer
+        - Kubernetes Admin
+        - Virtual Machine Admin
+        - Virtual Machine Operator
+        - Virtual Machine Viewer
+      x-supported-versions:
+      - product: PC
+        version: 2024.1
+      x-code-samples:
+      - lang: Java
+        source: |2
+
+          package sample;
+
+          import com.nutanix.ctgrs.java.client.ApiClient;
+          import com.nutanix.ctgrs.java.client.api.CategoriesApi;
+          import com.nutanix.dp1.ctgrs.prism.v4.config.ListCategoriesApiResponse;
+
+          public class JavaSdkSample {
+              public static void main(String[] args) {
+                  // Configure the client
+                  ApiClient apiClient = new ApiClient();
+                  // IPv4/IPv6 address or FQDN of the cluster
+                  apiClient.setHost("localhost");
+                  // Port to which to connect to
+                  apiClient.setPort(9440);
+                  // Interval in ms to use during retry attempts
+                  apiClient.setRetryInterval(5000);
+                  // Max retry attempts while reconnecting on a loss of connection
+                  apiClient.setMaxRetryAttempts(5);
+                  // UserName to connect to the cluster
+                  String username = "username";
+                  // Password to connect to the cluster
+                  String password = "password";
+                  apiClient.setUsername(username);
+                  apiClient.setPassword(password);
+
+                  // Please add authorization information here if needed.
+                  CategoriesApi categoriesApi = new CategoriesApi(apiClient);
+
+                  int page = 0;
+                  int limit = 50;
+
+                  try {
+                      ListCategoriesApiResponse listCategoriesApiResponse = categoriesApi.listCategories(page, limit, null, null, null, null);
+                      System.out.println(listCategoriesApiResponse.toString());
+                  } catch (RestClientException ex) {
+                      System.out.println(ex.getMessage());
+                  }
+              }
+          }
+      - lang: JavaScript
+        source: |2
+
+          import { ApiClient, CategoriesApi } from "@nutanix-api/prism-js-client";
+
+          // Configure the client
+          let apiClientInstance = new ApiClient();
+          // IPv4/IPv6 address or FQDN of the cluster
+          apiClientInstance.host = 'localhost';
+          // Port to which to connect to
+          apiClientInstance.port = '9440';
+          // Max retry attempts while reconnecting on a loss of connection
+          apiClientInstance.maxRetryAttempts = 5;
+          // Interval in ms to use during retry attempts
+          apiClientInstance.retryInterval = 5000;
+          // UserName to connect to the cluster
+          apiClientInstance.username = 'username';
+          // Password to connect to the cluster
+          apiClientInstance.password = 'password';
+          // Please add authorization information here if needed.
+          let categoriesApi = new CategoriesApi(apiClientInstance);
+
+          function sample() {
+
+
+              // Construct Optional Parameters
+              var opts = {};
+              opts["$page"] = 0;
+              opts["$limit"] = 50;
+              opts["$filter"] = "string_sample_data";
+              opts["$orderby"] = "string_sample_data";
+              opts["$expand"] = "string_sample_data";
+              opts["$select"] = "string_sample_data";
+
+
+
+              categoriesApi.listCategories(opts).then(({data, response}) => {
+                  console.log(`API returned the following status code: ${response.status}`);
+                  console.log(data.getData());
+              }).catch((error) => {
+                  console.log(`Error is: ${error}`);
+              });
+          }
+          sample()
+      - lang: Python
+        source: |2
+
+          import ntnx_prism_py_client
+
+          if __name__ == "__main__":
+              # Configure the client
+              config = ntnx_prism_py_client.Configuration()
+              # IPv4/IPv6 address or FQDN of the cluster
+              config.host = "localhost"
+              # Port to which to connect to
+              config.port = 9440
+              # Max retry attempts while reconnecting on a loss of connection
+              config.max_retry_attempts = 3
+              # Backoff factor to use during retry attempts
+              config.backoff_factor = 3
+              # UserName to connect to the cluster
+              config.username = "username"
+              # Password to connect to the cluster
+              config.password = "password"
+              # Please add authorization information here if needed.
+              client = ntnx_prism_py_client.ApiClient(configuration=config)
+              categories_api = ntnx_prism_py_client.CategoriesApi(api_client=client)
+              page = 0
+              limit = 50
+
+              try:
+                  api_response = categories_api.list_categories(_page=page, _limit=limit)
+                  print(api_response)
+              except ntnx_prism_py_client.rest.ApiException as e:
+                  print(e)
+      - lang: Go
+        source: |2+
+
+          package main
+
+          import (
+              "fmt"
+              "github.com/nutanix/ntnx-api-golang-clients/prism-go-client/v4/api"
+              "github.com/nutanix/ntnx-api-golang-clients/prism-go-client/v4/client"
+              import1 "github.com/nutanix/ntnx-api-golang-clients/prism-go-client/v4/models/prism/v4/config"
+          )
+
+          var (
+              ApiClientInstance *client.ApiClient
+              CategoriesApiInstance *api.CategoriesApi
+          )
+
+          func main() {
+              ApiClientInstance = client.NewApiClient()
+              // IPv4/IPv6 address or FQDN of the cluster
+              ApiClientInstance.Host = "localhost"
+              // Port to which to connect to
+              ApiClientInstance.Port = 9440
+              // Interval in ms to use during retry attempts
+              ApiClientInstance.RetryInterval = 5000
+              // Max retry attempts while reconnecting on a loss of connection
+              ApiClientInstance.MaxRetryAttempts = 5
+              // UserName to connect to the cluster
+              ApiClientInstance.Username = "username"
+              // Password to connect to the cluster
+              ApiClientInstance.Password = "password"
+              // Please add authorization information here if needed.
+              CategoriesApiInstance = api.NewCategoriesApi(ApiClientInstance)
+
+              page_ := 0
+              limit_ := 50
+
+
+              response, error := CategoriesApiInstance.ListCategories(&page_, &limit_, nil, nil, nil, nil)
+              if error != nil {
+                  fmt.Println(error)
+                  return
+              }
+              data, _ := response.GetData().([]import1.Category)
+              fmt.Println(data)
+          }
+
+      - lang: cURL
+        source: |2
+
+          curl --request GET \
+               --url "https://{pc-ip}:9440/api/prism/v4.0.b1/config/categories?$filter=string_sample_data&$limit=50&$orderby=string_sample_data&$expand=string_sample_data&$page=0&$select=string_sample_data" \
+               --header 'Accept: application/json' \
+               --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+      - lang: Wget
+        source: |2
+
+          wget --verbose \
+               --method GET \
+               --header 'Accept: application/json' \
+               --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+               - "https://{pc-ip}:9440/api/prism/v4.0.b1/config/categories?$filter=string_sample_data&$limit=50&$orderby=string_sample_data&$expand=string_sample_data&$page=0&$select=string_sample_data"
+    post:
+      tags:
+      - Categories
+      summary: |
+        Create a category
+      description: |
+        Create a category with the given key and value.
+      operationId: createCategory
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/prism.v4.r0.b1.config.Category'
+        required: true
+      responses:
+        "201":
+          description: |
+            The requested category is successfully created.
+          headers:
+            Location:
+              style: simple
+              explode: false
+              schema:
+                pattern: "^((http[s]?):\\/)?\\/?([^:\\/\\s]+)((\\/\\w+)*(:[0-9]+)*?\\\
+                  /)([\\w\\-\\.]+[^#?\\s]+)(.*)?(#[\\w\\-]+)?$"
+                type: string
+                description: Indicates the target of a redirection or the URL of a
+                  newly created resource.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/prism.v4.r0.b1.config.Category'
+                additionalProperties: false
+                description: REST response for all response codes in API path /prism/v4.0.b1/config/categories
+                  Post operation
+        "4XX":
+          description: Client error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/prism.v4.r0.b1.error.ErrorResponse'
+                additionalProperties: false
+                description: REST response for all response codes in API path /prism/v4.0.b1/config/categories
+                  Post operation
+        "5XX":
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/prism.v4.r0.b1.error.ErrorResponse'
+                additionalProperties: false
+                description: REST response for all response codes in API path /prism/v4.0.b1/config/categories
+                  Post operation
+      x-permissions:
+        operationName: Create Category
+        roleList:
+        - Internal Super Admin
+        - Prism Admin
+        - Self-Service Admin
+        - Super Admin
+        - Storage Admin
+        - Category Admin
+        - Kubernetes Admin
+      x-supported-versions:
+      - product: PC
+        version: 2024.1
+      x-code-samples:
+      - lang: Java
+        source: "\npackage sample;\n\nimport com.nutanix.ctgrs.java.client.ApiClient;\n\
+          import com.nutanix.ctgrs.java.client.api.CategoriesApi;\nimport com.nutanix.dp1.ctgrs.prism.v4.config.Category;\n\
+          import com.nutanix.dp1.ctgrs.prism.v4.config.CreateCategoryApiResponse;\n\
+          \npublic class JavaSdkSample {\n    public static void main(String[] args)\
+          \ {\n        // Configure the client\n        ApiClient apiClient = new\
+          \ ApiClient();\n        // IPv4/IPv6 address or FQDN of the cluster\n  \
+          \      apiClient.setHost(\"localhost\");\n        // Port to which to connect\
+          \ to\n        apiClient.setPort(9440);\n        // Interval in ms to use\
+          \ during retry attempts\n        apiClient.setRetryInterval(5000);\n   \
+          \     // Max retry attempts while reconnecting on a loss of connection\n\
+          \        apiClient.setMaxRetryAttempts(5);\n        // UserName to connect\
+          \ to the cluster\n        String username = \"username\";\n        // Password\
+          \ to connect to the cluster\n        String password = \"password\";\n \
+          \       apiClient.setUsername(username);\n        apiClient.setPassword(password);\n\
+          \n        // Please add authorization information here if needed.\n    \
+          \    CategoriesApi categoriesApi = new CategoriesApi(apiClient);\n\n   \
+          \     Category category = new Category();\n\n        // Category object\
+          \ initializations here...\n        category.setKey(\" \x04\");  // required\
+          \ field\n        category.setValue(\"'\");  // required field\n\n      \
+          \  try {\n            CreateCategoryApiResponse createCategoryApiResponse\
+          \ = categoriesApi.createCategory(category);\n            System.out.println(createCategoryApiResponse.toString());\n\
+          \        } catch (RestClientException ex) {\n            System.out.println(ex.getMessage());\n\
+          \        }\n    }\n}\n"
+      - lang: JavaScript
+        source: "\nimport { ApiClient, CategoriesApi, Category } from \"@nutanix-api/prism-js-client\"\
+          ;\n\n// Configure the client\nlet apiClientInstance = new ApiClient();\n\
+          // IPv4/IPv6 address or FQDN of the cluster\napiClientInstance.host = 'localhost';\n\
+          // Port to which to connect to\napiClientInstance.port = '9440';\n// Max\
+          \ retry attempts while reconnecting on a loss of connection\napiClientInstance.maxRetryAttempts\
+          \ = 5;\n// Interval in ms to use during retry attempts\napiClientInstance.retryInterval\
+          \ = 5000;\n// UserName to connect to the cluster\napiClientInstance.username\
+          \ = 'username';\n// Password to connect to the cluster\napiClientInstance.password\
+          \ = 'password';\n// Please add authorization information here if needed.\n\
+          let categoriesApi = new CategoriesApi(apiClientInstance);\n\nfunction sample()\
+          \ {\n    let category = new Category();\n\n    // Category object initializations\
+          \ here...\n    category.setKey(\"&\x18\");  // required field\n    category.setValue(\"\
+          *\");  // required field\n\n\n\n\n\n    categoriesApi.createCategory(category).then(({data,\
+          \ response}) => {\n        console.log(`API returned the following status\
+          \ code: ${response.status}`);\n        console.log(data.getData());\n  \
+          \  }).catch((error) => {\n        console.log(`Error is: ${error}`);\n \
+          \   });\n}\nsample()\n"
+      - lang: Python
+        source: "\nimport ntnx_prism_py_client\n\nif __name__ == \"__main__\":\n \
+          \   # Configure the client\n    config = ntnx_prism_py_client.Configuration()\n\
+          \    # IPv4/IPv6 address or FQDN of the cluster\n    config.host = \"localhost\"\
+          \n    # Port to which to connect to\n    config.port = 9440\n    # Max retry\
+          \ attempts while reconnecting on a loss of connection\n    config.max_retry_attempts\
+          \ = 3\n    # Backoff factor to use during retry attempts\n    config.backoff_factor\
+          \ = 3\n    # UserName to connect to the cluster\n    config.username = \"\
+          username\"\n    # Password to connect to the cluster\n    config.password\
+          \ = \"password\"\n    # Please add authorization information here if needed.\n\
+          \    client = ntnx_prism_py_client.ApiClient(configuration=config)\n   \
+          \ categories_api = ntnx_prism_py_client.CategoriesApi(api_client=client)\n\
+          \    category = ntnx_prism_py_client.Category()\n\n    # Category object\
+          \ initializations here...\n    category.key = \"&\"  # required field\n\
+          \    category.value = \"\x11\"  # required field\n\n    try:\n        api_response\
+          \ = categories_api.create_category(body=category)\n        print(api_response)\n\
+          \    except ntnx_prism_py_client.rest.ApiException as e:\n        print(e)\n"
+      - lang: Go
+        source: |2+
+
+          package main
+
+          import (
+              "fmt"
+              "github.com/nutanix/ntnx-api-golang-clients/prism-go-client/v4/api"
+              "github.com/nutanix/ntnx-api-golang-clients/prism-go-client/v4/client"
+              import1 "github.com/nutanix/ntnx-api-golang-clients/prism-go-client/v4/models/prism/v4/config"
+          )
+
+          var (
+              ApiClientInstance *client.ApiClient
+              CategoriesApiInstance *api.CategoriesApi
+          )
+
+          func main() {
+              ApiClientInstance = client.NewApiClient()
+              // IPv4/IPv6 address or FQDN of the cluster
+              ApiClientInstance.Host = "localhost"
+              // Port to which to connect to
+              ApiClientInstance.Port = 9440
+              // Interval in ms to use during retry attempts
+              ApiClientInstance.RetryInterval = 5000
+              // Max retry attempts while reconnecting on a loss of connection
+              ApiClientInstance.MaxRetryAttempts = 5
+              // UserName to connect to the cluster
+              ApiClientInstance.Username = "username"
+              // Password to connect to the cluster
+              ApiClientInstance.Password = "password"
+              // Please add authorization information here if needed.
+              CategoriesApiInstance = api.NewCategoriesApi(ApiClientInstance)
+
+              category := import1.NewCategory()
+
+              // Category object initializations here...
+
+
+
+              response, error := CategoriesApiInstance.CreateCategory(category)
+              if error != nil {
+                  fmt.Println(error)
+                  return
+              }
+              data, _ := response.GetData().(import1.Category)
+              fmt.Println(data)
+          }
+
+      - lang: cURL
+        source: |2
+
+          curl --request POST \
+               --url "https://{pc-ip}:9440/api/prism/v4.0.b1/config/categories" \
+               --header 'Accept: application/json' \
+               --header 'Content-Type: application/json' \
+               --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+               --data {"tenantId":"string","extId":"string","links":[{"href":"string","rel":"string","$objectType":"common.v1.response.ApiLink"}],"key":"string","value":"string","type":"$UNKNOWN","description":"string","ownerUuid":"string","associations":[{"categoryId":"string","resourceType":"$UNKNOWN","resourceGroup":"$UNKNOWN","count":0,"$objectType":"prism.v4.config.AssociationSummary"}],"detailedAssociations":[{"categoryId":"string","resourceType":"$UNKNOWN","resourceGroup":"$UNKNOWN","resourceId":"string","$objectType":"prism.v4.config.AssociationDetail"}],"$objectType":"prism.v4.config.Category"} \
+      - lang: Wget
+        source: |2
+
+          wget --verbose \
+               --method POST \
+               --header 'Accept: application/json' \
+               --header 'Content-Type: application/json' \
+               --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+               --body-data {"tenantId":"string","extId":"string","links":[{"href":"string","rel":"string","$objectType":"common.v1.response.ApiLink"}],"key":"string","value":"string","type":"$UNKNOWN","description":"string","ownerUuid":"string","associations":[{"categoryId":"string","resourceType":"$UNKNOWN","resourceGroup":"$UNKNOWN","count":0,"$objectType":"prism.v4.config.AssociationSummary"}],"detailedAssociations":[{"categoryId":"string","resourceType":"$UNKNOWN","resourceGroup":"$UNKNOWN","resourceId":"string","$objectType":"prism.v4.config.AssociationDetail"}],"$objectType":"prism.v4.config.Category"} \
+               - "https://{pc-ip}:9440/api/prism/v4.0.b1/config/categories"
+  /prism/v4.0.b1/config/categories/{extId}:
+    get:
+      tags:
+      - Categories
+      summary: |
+        Fetch a category
+      description: |
+        Fetch details of a category with the given external identifier.
+      operationId: getCategoryById
+      parameters:
+      - name: extId
+        in: path
+        description: |
+          A globally unique identifier of an instance that is suitable for external consumption.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+      - name: $expand
+        in: query
+        description: |
+          A URL query parameter that allows clients to request related resources when a resource that satisfies a particular request is retrieved. Each expanded item is evaluated relative to the entity containing the property being expanded. Other query options can be applied to an expanded property by appending a semicolon-separated list of query options, enclosed in parentheses, to the property name. Permissible system query options are $filter, $select and $orderby. The following expansion keys are supported.
+          - associations
+          - detailedAssociations
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: |
+            The requested category with the `extId` value as provided in the path parameter is found and returned.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/prism.v4.r0.b1.config.Category'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /prism/v4.0.b1/config/categories/{extId}\
+                  \ Get operation"
+        "4XX":
+          description: Client error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/prism.v4.r0.b1.error.ErrorResponse'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /prism/v4.0.b1/config/categories/{extId}\
+                  \ Get operation"
+        "5XX":
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/prism.v4.r0.b1.error.ErrorResponse'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /prism/v4.0.b1/config/categories/{extId}\
+                  \ Get operation"
+      x-permissions:
+        operationName: View Category
+        roleList:
+        - Internal Super Admin
+        - Prism Admin
+        - Self-Service Admin
+        - Prism Viewer
+        - Developer
+        - Project Admin
+        - Super Admin
+        - Storage Admin
+        - Flow Admin
+        - Flow Viewer
+        - Category Viewer
+        - Category Admin
+        - Disaster Recovery Admin
+        - Disaster Recovery Viewer
+        - Kubernetes Admin
+        - Virtual Machine Admin
+        - Virtual Machine Operator
+        - Virtual Machine Viewer
+      x-supported-versions:
+      - product: PC
+        version: 2024.1
+      x-code-samples:
+      - lang: Java
+        source: |2
+
+          package sample;
+
+          import com.nutanix.ctgrs.java.client.ApiClient;
+          import com.nutanix.ctgrs.java.client.api.CategoriesApi;
+          import com.nutanix.dp1.ctgrs.prism.v4.config.GetCategoryApiResponse;
+
+          public class JavaSdkSample {
+              public static void main(String[] args) {
+                  // Configure the client
+                  ApiClient apiClient = new ApiClient();
+                  // IPv4/IPv6 address or FQDN of the cluster
+                  apiClient.setHost("localhost");
+                  // Port to which to connect to
+                  apiClient.setPort(9440);
+                  // Interval in ms to use during retry attempts
+                  apiClient.setRetryInterval(5000);
+                  // Max retry attempts while reconnecting on a loss of connection
+                  apiClient.setMaxRetryAttempts(5);
+                  // UserName to connect to the cluster
+                  String username = "username";
+                  // Password to connect to the cluster
+                  String password = "password";
+                  apiClient.setUsername(username);
+                  apiClient.setPassword(password);
+
+                  // Please add authorization information here if needed.
+                  CategoriesApi categoriesApi = new CategoriesApi(apiClient);
+
+                  String extId = "AbECaa06-feaf-8d4c-4fF6-F36705ec0f6F";
+
+                  try {
+                      GetCategoryApiResponse getCategoryApiResponse = categoriesApi.getCategoryById(extId, null);
+                      System.out.println(getCategoryApiResponse.toString());
+                  } catch (RestClientException ex) {
+                      System.out.println(ex.getMessage());
+                  }
+              }
+          }
+      - lang: JavaScript
+        source: |2
+
+          import { ApiClient, CategoriesApi } from "@nutanix-api/prism-js-client";
+
+          // Configure the client
+          let apiClientInstance = new ApiClient();
+          // IPv4/IPv6 address or FQDN of the cluster
+          apiClientInstance.host = 'localhost';
+          // Port to which to connect to
+          apiClientInstance.port = '9440';
+          // Max retry attempts while reconnecting on a loss of connection
+          apiClientInstance.maxRetryAttempts = 5;
+          // Interval in ms to use during retry attempts
+          apiClientInstance.retryInterval = 5000;
+          // UserName to connect to the cluster
+          apiClientInstance.username = 'username';
+          // Password to connect to the cluster
+          apiClientInstance.password = 'password';
+          // Please add authorization information here if needed.
+          let categoriesApi = new CategoriesApi(apiClientInstance);
+
+          function sample() {
+
+              let extId = "ca60C88d-575B-EA79-308d-Ef79Af0Ded8C";
+
+              // Construct Optional Parameters
+              var opts = {};
+              opts["$expand"] = "string_sample_data";
+
+
+
+              categoriesApi.getCategoryById(extId, opts).then(({data, response}) => {
+                  console.log(`API returned the following status code: ${response.status}`);
+                  console.log(data.getData());
+              }).catch((error) => {
+                  console.log(`Error is: ${error}`);
+              });
+          }
+          sample()
+      - lang: Python
+        source: |2
+
+          import ntnx_prism_py_client
+
+          if __name__ == "__main__":
+              # Configure the client
+              config = ntnx_prism_py_client.Configuration()
+              # IPv4/IPv6 address or FQDN of the cluster
+              config.host = "localhost"
+              # Port to which to connect to
+              config.port = 9440
+              # Max retry attempts while reconnecting on a loss of connection
+              config.max_retry_attempts = 3
+              # Backoff factor to use during retry attempts
+              config.backoff_factor = 3
+              # UserName to connect to the cluster
+              config.username = "username"
+              # Password to connect to the cluster
+              config.password = "password"
+              # Please add authorization information here if needed.
+              client = ntnx_prism_py_client.ApiClient(configuration=config)
+              categories_api = ntnx_prism_py_client.CategoriesApi(api_client=client)
+              ext_id = "677fAeea-5b8f-EDfa-bD94-cFdFFCaAC8cd"
+
+              try:
+                  api_response = categories_api.get_category_by_id(extId=ext_id)
+                  print(api_response)
+              except ntnx_prism_py_client.rest.ApiException as e:
+                  print(e)
+      - lang: Go
+        source: |2+
+
+          package main
+
+          import (
+              "fmt"
+              "github.com/nutanix/ntnx-api-golang-clients/prism-go-client/v4/api"
+              "github.com/nutanix/ntnx-api-golang-clients/prism-go-client/v4/client"
+              import1 "github.com/nutanix/ntnx-api-golang-clients/prism-go-client/v4/models/prism/v4/config"
+          )
+
+          var (
+              ApiClientInstance *client.ApiClient
+              CategoriesApiInstance *api.CategoriesApi
+          )
+
+          func main() {
+              ApiClientInstance = client.NewApiClient()
+              // IPv4/IPv6 address or FQDN of the cluster
+              ApiClientInstance.Host = "localhost"
+              // Port to which to connect to
+              ApiClientInstance.Port = 9440
+              // Interval in ms to use during retry attempts
+              ApiClientInstance.RetryInterval = 5000
+              // Max retry attempts while reconnecting on a loss of connection
+              ApiClientInstance.MaxRetryAttempts = 5
+              // UserName to connect to the cluster
+              ApiClientInstance.Username = "username"
+              // Password to connect to the cluster
+              ApiClientInstance.Password = "password"
+              // Please add authorization information here if needed.
+              CategoriesApiInstance = api.NewCategoriesApi(ApiClientInstance)
+
+              extId := "FFADee0c-bC3D-aFbd-7B5F-04A6f98ccEc0"
+
+
+              response, error := CategoriesApiInstance.GetCategoryById(&extId, nil)
+              if error != nil {
+                  fmt.Println(error)
+                  return
+              }
+              data, _ := response.GetData().(import1.Category)
+              fmt.Println(data)
+          }
+
+      - lang: cURL
+        source: |2
+
+          curl --request GET \
+               --url "https://{pc-ip}:9440/api/prism/v4.0.b1/config/categories/d55cc0dc-DB90-5Ea3-DbC3-eE6Dba2dFdaC?$expand=string_sample_data" \
+               --header 'Accept: application/json' \
+               --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+      - lang: Wget
+        source: |2
+
+          wget --verbose \
+               --method GET \
+               --header 'Accept: application/json' \
+               --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+               - "https://{pc-ip}:9440/api/prism/v4.0.b1/config/categories/1cfD897f-cC3C-4Daf-6De5-f20BCF98AE59?$expand=string_sample_data"
+    put:
+      tags:
+      - Categories
+      summary: |
+        Update a category
+      description: |
+        Update a category's description, value and owner properties.
+      operationId: updateCategoryById
+      parameters:
+      - name: extId
+        in: path
+        description: |
+          A globally unique identifier of an instance that is suitable for external consumption.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+      - name: If-Match
+        in: header
+        description: "The If-Match request header makes the request conditional. When\
+          \ not provided, the server will respond with  an HTTP-428 (Precondition\
+          \ Required) response code indicating that the server requires the request\
+          \ to be conditional. The server will allow the successful completion of\
+          \ PUT and PATCH operations, if the resource matches the ETag value returned\
+          \ to the response of a GET operation. If the conditional does not match,\
+          \ then an HTTP-412 (Precondition Failed) response will be returned."
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/prism.v4.r0.b1.config.Category'
+        required: true
+      responses:
+        "200":
+          description: |
+            The requested category with the `extId` value as provided in the path parameter is found, updated successfully
+            and returned.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/prism.v4.r0.b1.config.Category'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /prism/v4.0.b1/config/categories/{extId}\
+                  \ Put operation"
+        "4XX":
+          description: Client error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/prism.v4.r0.b1.error.ErrorResponse'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /prism/v4.0.b1/config/categories/{extId}\
+                  \ Put operation"
+        "5XX":
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/prism.v4.r0.b1.error.ErrorResponse'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /prism/v4.0.b1/config/categories/{extId}\
+                  \ Put operation"
+      x-permissions:
+        operationName: Update Category
+        roleList:
+        - Internal Super Admin
+        - Prism Admin
+        - Self-Service Admin
+        - Super Admin
+        - Storage Admin
+        - Category Admin
+        - Kubernetes Admin
+      x-supported-versions:
+      - product: PC
+        version: 2024.1
+      x-code-samples:
+      - lang: Java
+        source: "\npackage sample;\n\nimport com.nutanix.ctgrs.java.client.ApiClient;\n\
+          import com.nutanix.ctgrs.java.client.api.CategoriesApi;\nimport com.nutanix.dp1.ctgrs.prism.v4.config.Category;\n\
+          import com.nutanix.dp1.ctgrs.prism.v4.config.GetCategoryApiResponse;\nimport\
+          \ com.nutanix.dp1.ctgrs.prism.v4.config.UpdateCategoryApiResponse;\nimport\
+          \ java.util.HashMap;\nimport org.apache.http.HttpHeaders;\n\npublic class\
+          \ JavaSdkSample {\n    public static void main(String[] args) {\n      \
+          \  // Configure the client\n        ApiClient apiClient = new ApiClient();\n\
+          \        // IPv4/IPv6 address or FQDN of the cluster\n        apiClient.setHost(\"\
+          localhost\");\n        // Port to which to connect to\n        apiClient.setPort(9440);\n\
+          \        // Interval in ms to use during retry attempts\n        apiClient.setRetryInterval(5000);\n\
+          \        // Max retry attempts while reconnecting on a loss of connection\n\
+          \        apiClient.setMaxRetryAttempts(5);\n        // UserName to connect\
+          \ to the cluster\n        String username = \"username\";\n        // Password\
+          \ to connect to the cluster\n        String password = \"password\";\n \
+          \       apiClient.setUsername(username);\n        apiClient.setPassword(password);\n\
+          \n        // Please add authorization information here if needed.\n    \
+          \    CategoriesApi categoriesApi = new CategoriesApi(apiClient);\n\n   \
+          \     Category category = new Category();\n\n        // Category object\
+          \ initializations here...\n        category.setKey(\"\x1f\b(\x18\");  //\
+          \ required field\n        category.setValue(\"\x14\");  // required field\n\
+          \        String extId = \"CAaEc0E6-dBd1-DE4E-EFFF-FFf97b64c2d7\";\n\n  \
+          \      // perform GET call\n        GetCategoryApiResponse getResponse =\
+          \ null;\n        try {\n            getResponse = categoriesApi.getCategoryById(extId);\n\
+          \        } catch(RestClientException ex) {\n            System.out.println(ex.getMessage());\n\
+          \        }\n        // Extract E-Tag Header\n        String eTag = ApiClient.getEtag(getResponse);\n\
+          \        // initialize/change parameters for update\n        HashMap<String,\
+          \ Object> opts = new HashMap<>();\n        opts.put(HttpHeaders.IF_MATCH,\
+          \ eTag);\n        try {\n            UpdateCategoryApiResponse updateCategoryApiResponse\
+          \ = categoriesApi.updateCategoryById(extId, category, opts);\n         \
+          \   System.out.println(updateCategoryApiResponse.toString());\n        }\
+          \ catch (RestClientException ex) {\n            System.out.println(ex.getMessage());\n\
+          \        }\n    }\n}\n"
+      - lang: JavaScript
+        source: |2
+
+          import { ApiClient, CategoriesApi, Category, GetCategoryApiResponse } from "@nutanix-api/prism-js-client";
+
+          // Configure the client
+          let apiClientInstance = new ApiClient();
+          // IPv4/IPv6 address or FQDN of the cluster
+          apiClientInstance.host = 'localhost';
+          // Port to which to connect to
+          apiClientInstance.port = '9440';
+          // Max retry attempts while reconnecting on a loss of connection
+          apiClientInstance.maxRetryAttempts = 5;
+          // Interval in ms to use during retry attempts
+          apiClientInstance.retryInterval = 5000;
+          // UserName to connect to the cluster
+          apiClientInstance.username = 'username';
+          // Password to connect to the cluster
+          apiClientInstance.password = 'password';
+          // Please add authorization information here if needed.
+          let categoriesApi = new CategoriesApi(apiClientInstance);
+
+          function sample() {
+              let category = new Category();
+
+              // Category object initializations here...
+              category.setKey(")");  // required field
+              category.setValue("'#");  // required field
+
+              let extId = "33dcfDDd-EDA0-bAE5-2Ffa-9F29c3Ef8e7e";
+
+
+              // Perform Get call
+              categoriesApi.getCategoryById(extId).then(({data, response}) => {
+                  console.log(`API returned the following status code: ${response.status}`);
+                  // Extract E-Tag Header
+                  let etagValue = ApiClient.getEtag(data);
+
+                  categoriesApi.updateCategoryById(extId, category, {"If-Match" : etagValue}).then(({data, response}) => {
+                      console.log(`API returned the following status code: ${response.status}`);
+                      console.log(data.getData());
+                  }).catch((error) => {
+                      console.log(`Error is: ${error}`);
+                  });
+              });
+
+          }
+          sample()
+      - lang: Python
+        source: "\nimport ntnx_prism_py_client\n\nif __name__ == \"__main__\":\n \
+          \   # Configure the client\n    config = ntnx_prism_py_client.Configuration()\n\
+          \    # IPv4/IPv6 address or FQDN of the cluster\n    config.host = \"localhost\"\
+          \n    # Port to which to connect to\n    config.port = 9440\n    # Max retry\
+          \ attempts while reconnecting on a loss of connection\n    config.max_retry_attempts\
+          \ = 3\n    # Backoff factor to use during retry attempts\n    config.backoff_factor\
+          \ = 3\n    # UserName to connect to the cluster\n    config.username = \"\
+          username\"\n    # Password to connect to the cluster\n    config.password\
+          \ = \"password\"\n    # Please add authorization information here if needed.\n\
+          \    client = ntnx_prism_py_client.ApiClient(configuration=config)\n   \
+          \ categories_api = ntnx_prism_py_client.CategoriesApi(api_client=client)\n\
+          \    category = ntnx_prism_py_client.Category()\n\n    # Category object\
+          \ initializations here...\n    category.key = \",\"  # required field\n\
+          \    category.value = \"\x04\"  # required field\n    ext_id = \"c7Dd8Ba0-B7F7-adbB-9Aa4-eD0CECB42D4a\"\
+          \n\n    try:\n        api_response = categories_api.get_category_by_id(extId=ext_id)\n\
+          \    except ntnx_prism_py_client.rest.ApiException as e:\n        print(e)\n\
+          \    # Extract E-Tag Header\n    etag_value = ntnx_prism_py_client.ApiClient.get_etag(api_response)\n\
+          \    try:\n        api_response = categories_api.update_category_by_id(extId=ext_id,\
+          \ body=category, if_match=etag_value)\n        print(api_response)\n   \
+          \ except ntnx_prism_py_client.rest.ApiException as e:\n        print(e)\n"
+      - lang: Go
+        source: |2+
+
+          package main
+
+          import (
+              "fmt"
+              "github.com/nutanix/ntnx-api-golang-clients/prism-go-client/v4/api"
+              "github.com/nutanix/ntnx-api-golang-clients/prism-go-client/v4/client"
+              import1 "github.com/nutanix/ntnx-api-golang-clients/prism-go-client/v4/models/prism/v4/config"
+          )
+
+          var (
+              ApiClientInstance *client.ApiClient
+              CategoriesApiInstance *api.CategoriesApi
+          )
+
+          func main() {
+              ApiClientInstance = client.NewApiClient()
+              // IPv4/IPv6 address or FQDN of the cluster
+              ApiClientInstance.Host = "localhost"
+              // Port to which to connect to
+              ApiClientInstance.Port = 9440
+              // Interval in ms to use during retry attempts
+              ApiClientInstance.RetryInterval = 5000
+              // Max retry attempts while reconnecting on a loss of connection
+              ApiClientInstance.MaxRetryAttempts = 5
+              // UserName to connect to the cluster
+              ApiClientInstance.Username = "username"
+              // Password to connect to the cluster
+              ApiClientInstance.Password = "password"
+              // Please add authorization information here if needed.
+              CategoriesApiInstance = api.NewCategoriesApi(ApiClientInstance)
+
+              category := import1.NewCategory()
+
+              // Category object initializations here...
+
+              extId := "Ba5c779C-A8cE-D4bD-79de-EEfA989eFc7a"
+
+              getResponse, err := CategoriesApiInstance.GetCategoryById(&extId)
+              if err != nil {
+                  fmt.Println(err)
+                  return
+              }
+
+              // Extract E-Tag Header
+              etagValue := ApiClientInstance.GetEtag(getResponse)
+
+              args := make(map[string] interface{})
+              args["If-Match"] = etagValue
+
+              response, error := CategoriesApiInstance.UpdateCategoryById(&extId, category, args)
+              if error != nil {
+                  fmt.Println(error)
+                  return
+              }
+              data, _ := response.GetData().(import1.Category)
+              fmt.Println(data)
+          }
+
+      - lang: cURL
+        source: |2
+
+          curl --request PUT \
+               --url "https://{pc-ip}:9440/api/prism/v4.0.b1/config/categories/acb7BcF2-fA0B-AaAB-B094-Fd00A1799235" \
+               --header 'Accept: application/json' \
+               --header 'Content-Type: application/json' \
+               --header 'If-Match: string_sample_data' \
+               --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+               --data {"tenantId":"string","extId":"string","links":[{"href":"string","rel":"string","$objectType":"common.v1.response.ApiLink"}],"key":"string","value":"string","type":"$UNKNOWN","description":"string","ownerUuid":"string","associations":[{"categoryId":"string","resourceType":"$UNKNOWN","resourceGroup":"$UNKNOWN","count":0,"$objectType":"prism.v4.config.AssociationSummary"}],"detailedAssociations":[{"categoryId":"string","resourceType":"$UNKNOWN","resourceGroup":"$UNKNOWN","resourceId":"string","$objectType":"prism.v4.config.AssociationDetail"}],"$objectType":"prism.v4.config.Category"} \
+      - lang: Wget
+        source: |2
+
+          wget --verbose \
+               --method PUT \
+               --header 'Accept: application/json' \
+               --header 'Content-Type: application/json' \
+               --header 'If-Match: string_sample_data' \
+               --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+               --body-data {"tenantId":"string","extId":"string","links":[{"href":"string","rel":"string","$objectType":"common.v1.response.ApiLink"}],"key":"string","value":"string","type":"$UNKNOWN","description":"string","ownerUuid":"string","associations":[{"categoryId":"string","resourceType":"$UNKNOWN","resourceGroup":"$UNKNOWN","count":0,"$objectType":"prism.v4.config.AssociationSummary"}],"detailedAssociations":[{"categoryId":"string","resourceType":"$UNKNOWN","resourceGroup":"$UNKNOWN","resourceId":"string","$objectType":"prism.v4.config.AssociationDetail"}],"$objectType":"prism.v4.config.Category"} \
+               - "https://{pc-ip}:9440/api/prism/v4.0.b1/config/categories/c5AFF95E-AE0d-c338-Fd9e-Fc1Eb95c1eEb"
+    delete:
+      tags:
+      - Categories
+      summary: |
+        Delete a category
+      description: |
+        Delete a category with the given external identifier.
+      operationId: deleteCategoryById
+      parameters:
+      - name: extId
+        in: path
+        description: |
+          A globally unique identifier of an instance that is suitable for external consumption.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+      responses:
+        "204":
+          description: |
+            The requested category with the `extId` value as provided in the path parameter is found and deleted successfully.
+          content:
+            application/json: {}
+        "4XX":
+          description: Client error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/prism.v4.r0.b1.error.ErrorResponse'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /prism/v4.0.b1/config/categories/{extId}\
+                  \ Delete operation"
+        "5XX":
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/prism.v4.r0.b1.error.ErrorResponse'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /prism/v4.0.b1/config/categories/{extId}\
+                  \ Delete operation"
+      x-permissions:
+        operationName: Delete Category
+        roleList:
+        - Internal Super Admin
+        - Prism Admin
+        - Self-Service Admin
+        - Super Admin
+        - Storage Admin
+        - Category Admin
+        - Kubernetes Admin
+      x-supported-versions:
+      - product: PC
+        version: 2024.1
+  /prism/v4.0.b1/config/tasks/{extId}:
+    get:
+      tags:
+      - Tasks
+      summary: Fetch a task
+      description: Fetch an asynchronous operation called a task for the provided
+        extId.
+      operationId: getTaskById
+      parameters:
+      - name: extId
+        in: path
+        description: A globally unique identifier of a task. It consists of a prefix
+          and a UUID separated by ':'. 'legacy' prefix can be used with a task UUID
+          provided by previous API families.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          pattern: "^[a-zA-Z0-9/+]*={0,2}:[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"
+          type: string
+      responses:
+        "200":
+          description: Task object is returned in response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/prism.v4.r0.b1.config.Task'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /prism/v4.0.b1/config/tasks/{extId}\
+                  \ Get operation"
+        "4XX":
+          description: Client error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/prism.v4.r0.b1.error.ErrorResponse'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /prism/v4.0.b1/config/tasks/{extId}\
+                  \ Get operation"
+        "5XX":
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/prism.v4.r0.b1.error.ErrorResponse'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /prism/v4.0.b1/config/tasks/{extId}\
+                  \ Get operation"
+      x-permissions:
+        deploymentList:
+        - ON_PREM
+        - CLOUD
+        operationName: View Task
+        roleList:
+        - Internal Super Admin
+        - Prism Admin
+        - Self-Service Admin
+        - Super Admin
+        - Prism Viewer
+        - Task Self Owned
+        - Kubernetes Admin
+      x-supported-versions:
+      - product: PC
+        version: 2024.1
+      x-code-samples:
+      - lang: Java
+        source: |2
+
+          package sample;
+
+          import com.nutanix.tsks.java.client.ApiClient;
+          import com.nutanix.tsks.java.client.api.TasksApi;
+          import com.nutanix.dp1.tsks.prism.v4.config.GetTaskApiResponse;
+
+          public class JavaSdkSample {
+              public static void main(String[] args) {
+                  // Configure the client
+                  ApiClient apiClient = new ApiClient();
+                  // IPv4/IPv6 address or FQDN of the cluster
+                  apiClient.setHost("localhost");
+                  // Port to which to connect to
+                  apiClient.setPort(9440);
+                  // Interval in ms to use during retry attempts
+                  apiClient.setRetryInterval(5000);
+                  // Max retry attempts while reconnecting on a loss of connection
+                  apiClient.setMaxRetryAttempts(5);
+                  // UserName to connect to the cluster
+                  String username = "username";
+                  // Password to connect to the cluster
+                  String password = "password";
+                  apiClient.setUsername(username);
+                  apiClient.setPassword(password);
+
+                  // Please add authorization information here if needed.
+                  TasksApi tasksApi = new TasksApi(apiClient);
+
+                  String extId = "^+021++:27D4bb4E-B4Cd-eD1A-420D-3Bd062388771";
+
+                  try {
+                      GetTaskApiResponse getTaskApiResponse = tasksApi.getTaskById(extId);
+                      System.out.println(getTaskApiResponse.toString());
+                  } catch (RestClientException ex) {
+                      System.out.println(ex.getMessage());
+                  }
+              }
+          }
+      - lang: JavaScript
+        source: |2
+
+          import { ApiClient, TasksApi } from "@nutanix-api/prism-js-client";
+
+          // Configure the client
+          let apiClientInstance = new ApiClient();
+          // IPv4/IPv6 address or FQDN of the cluster
+          apiClientInstance.host = 'localhost';
+          // Port to which to connect to
+          apiClientInstance.port = '9440';
+          // Max retry attempts while reconnecting on a loss of connection
+          apiClientInstance.maxRetryAttempts = 5;
+          // Interval in ms to use during retry attempts
+          apiClientInstance.retryInterval = 5000;
+          // UserName to connect to the cluster
+          apiClientInstance.username = 'username';
+          // Password to connect to the cluster
+          apiClientInstance.password = 'password';
+          // Please add authorization information here if needed.
+          let tasksApi = new TasksApi(apiClientInstance);
+
+          function sample() {
+
+              let extId = "^n:FaFCc3a7-CbC2-CA0d-4b6D-16dfEc0514be";
+
+
+
+
+              tasksApi.getTaskById(extId).then(({data, response}) => {
+                  console.log(`API returned the following status code: ${response.status}`);
+                  console.log(data.getData());
+              }).catch((error) => {
+                  console.log(`Error is: ${error}`);
+              });
+          }
+          sample()
+      - lang: Python
+        source: |2
+
+          import ntnx_prism_py_client
+
+          if __name__ == "__main__":
+              # Configure the client
+              config = ntnx_prism_py_client.Configuration()
+              # IPv4/IPv6 address or FQDN of the cluster
+              config.host = "localhost"
+              # Port to which to connect to
+              config.port = 9440
+              # Max retry attempts while reconnecting on a loss of connection
+              config.max_retry_attempts = 3
+              # Backoff factor to use during retry attempts
+              config.backoff_factor = 3
+              # UserName to connect to the cluster
+              config.username = "username"
+              # Password to connect to the cluster
+              config.password = "password"
+              # Please add authorization information here if needed.
+              client = ntnx_prism_py_client.ApiClient(configuration=config)
+              tasks_api = ntnx_prism_py_client.TasksApi(api_client=client)
+              ext_id = "^f==:C9E7Ce21-989a-C1A9-fBdA-2b4aA4bE10Ed"
+
+              try:
+                  api_response = tasks_api.get_task_by_id(extId=ext_id)
+                  print(api_response)
+              except ntnx_prism_py_client.rest.ApiException as e:
+                  print(e)
+      - lang: Go
+        source: |2+
+
+          package main
+
+          import (
+              "fmt"
+              "github.com/nutanix/ntnx-api-golang-clients/prism-go-client/v4/api"
+              "github.com/nutanix/ntnx-api-golang-clients/prism-go-client/v4/client"
+              import1 "github.com/nutanix/ntnx-api-golang-clients/prism-go-client/v4/models/prism/v4/config"
+          )
+
+          var (
+              ApiClientInstance *client.ApiClient
+              TasksApiInstance *api.TasksApi
+          )
+
+          func main() {
+              ApiClientInstance = client.NewApiClient()
+              // IPv4/IPv6 address or FQDN of the cluster
+              ApiClientInstance.Host = "localhost"
+              // Port to which to connect to
+              ApiClientInstance.Port = 9440
+              // Interval in ms to use during retry attempts
+              ApiClientInstance.RetryInterval = 5000
+              // Max retry attempts while reconnecting on a loss of connection
+              ApiClientInstance.MaxRetryAttempts = 5
+              // UserName to connect to the cluster
+              ApiClientInstance.Username = "username"
+              // Password to connect to the cluster
+              ApiClientInstance.Password = "password"
+              // Please add authorization information here if needed.
+              TasksApiInstance = api.NewTasksApi(ApiClientInstance)
+
+              extId := "^5g+==:0A94bbdB-8FCA-2aAD-fCFB-a1FB5fEded93"
+
+
+              response, error := TasksApiInstance.GetTaskById(&extId)
+              if error != nil {
+                  fmt.Println(error)
+                  return
+              }
+              data, _ := response.GetData().(import1.Task)
+              fmt.Println(data)
+          }
+
+      - lang: cURL
+        source: |2
+
+          curl --request GET \
+               --url "https://{pc-ip}:9440/api/prism/v4.0.b1/config/tasks/^c:cCeEe0cE-a6C1-Bdae-10EF-fDc5C585Fec0" \
+               --header 'Accept: application/json' \
+               --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+      - lang: Wget
+        source: |2
+
+          wget --verbose \
+               --method GET \
+               --header 'Accept: application/json' \
+               --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+               - "https://{pc-ip}:9440/api/prism/v4.0.b1/config/tasks/^+78:45cea8Ce-eFbe-2EEc-dd53-513DBbfa2eFF"
+  /prism/v4.0.b1/config/tasks/{taskExtId}/$actions/cancel:
+    post:
+      tags:
+      - Tasks
+      summary: Cancel an ongoing task
+      description: "Cancel an ongoing task for the provided taskExtId. This action\
+        \ is supported only if 'isCancelable' is set as True for the task. The task\
+        \ may continue to run for some time after the request has been made, until\
+        \ the backend server deems it is safe to cancel the task. Cancellation requests\
+        \ are idempotent and multiple such requests for the same ongoing task are\
+        \ supported."
+      operationId: cancelTask
+      parameters:
+      - name: taskExtId
+        in: path
+        description: A globally unique identifier of a task. It consists of a prefix
+          and a UUID separated by ':'. 'legacy' prefix can be used with a task UUID
+          provided by previous API families.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          pattern: "^[a-zA-Z0-9/+]*={0,2}:[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"
+          type: string
+      responses:
+        "200":
+          description: Successful submission message is returned in response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/prism.v4.r0.b1.error.AppMessage'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /prism/v4.0.b1/config/tasks/{taskExtId}/$actions/cancel\
+                  \ Post operation"
+        "4XX":
+          description: Client error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/prism.v4.r0.b1.error.ErrorResponse'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /prism/v4.0.b1/config/tasks/{taskExtId}/$actions/cancel\
+                  \ Post operation"
+        "5XX":
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/prism.v4.r0.b1.error.ErrorResponse'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /prism/v4.0.b1/config/tasks/{taskExtId}/$actions/cancel\
+                  \ Post operation"
+      x-permissions:
+        deploymentList:
+        - ON_PREM
+        - CLOUD
+        operationName: Cancel Task
+        roleList:
+        - Internal Super Admin
+        - Prism Admin
+        - Self-Service Admin
+        - Super Admin
+      x-supported-versions:
+      - product: PC
+        version: 2024.1
+      x-code-samples:
+      - lang: Java
+        source: |2
+
+          package sample;
+
+          import com.nutanix.tsks.java.client.ApiClient;
+          import com.nutanix.tsks.java.client.api.TasksApi;
+          import com.nutanix.dp1.tsks.prism.v4.config.CancelTaskApiResponse;
+
+          public class JavaSdkSample {
+              public static void main(String[] args) {
+                  // Configure the client
+                  ApiClient apiClient = new ApiClient();
+                  // IPv4/IPv6 address or FQDN of the cluster
+                  apiClient.setHost("localhost");
+                  // Port to which to connect to
+                  apiClient.setPort(9440);
+                  // Interval in ms to use during retry attempts
+                  apiClient.setRetryInterval(5000);
+                  // Max retry attempts while reconnecting on a loss of connection
+                  apiClient.setMaxRetryAttempts(5);
+                  // UserName to connect to the cluster
+                  String username = "username";
+                  // Password to connect to the cluster
+                  String password = "password";
+                  apiClient.setUsername(username);
+                  apiClient.setPassword(password);
+
+                  // Please add authorization information here if needed.
+                  TasksApi tasksApi = new TasksApi(apiClient);
+
+                  String taskExtId = "^+:6E8cD4aD-9e4E-DEbE-CB7E-d3Ea6EABbBda";
+
+                  try {
+                      CancelTaskApiResponse cancelTaskApiResponse = tasksApi.cancelTask(taskExtId);
+                      System.out.println(cancelTaskApiResponse.toString());
+                  } catch (RestClientException ex) {
+                      System.out.println(ex.getMessage());
+                  }
+              }
+          }
+      - lang: JavaScript
+        source: |2
+
+          import { ApiClient, TasksApi } from "@nutanix-api/prism-js-client";
+
+          // Configure the client
+          let apiClientInstance = new ApiClient();
+          // IPv4/IPv6 address or FQDN of the cluster
+          apiClientInstance.host = 'localhost';
+          // Port to which to connect to
+          apiClientInstance.port = '9440';
+          // Max retry attempts while reconnecting on a loss of connection
+          apiClientInstance.maxRetryAttempts = 5;
+          // Interval in ms to use during retry attempts
+          apiClientInstance.retryInterval = 5000;
+          // UserName to connect to the cluster
+          apiClientInstance.username = 'username';
+          // Password to connect to the cluster
+          apiClientInstance.password = 'password';
+          // Please add authorization information here if needed.
+          let tasksApi = new TasksApi(apiClientInstance);
+
+          function sample() {
+
+              let taskExtId = "^:ccBFf3ff-5EdA-C5ef-1Bed-85fcB3777d3A";
+
+
+
+
+              tasksApi.cancelTask(taskExtId).then(({data, response}) => {
+                  console.log(`API returned the following status code: ${response.status}`);
+                  console.log(data.getData());
+              }).catch((error) => {
+                  console.log(`Error is: ${error}`);
+              });
+          }
+          sample()
+      - lang: Python
+        source: |2
+
+          import ntnx_prism_py_client
+
+          if __name__ == "__main__":
+              # Configure the client
+              config = ntnx_prism_py_client.Configuration()
+              # IPv4/IPv6 address or FQDN of the cluster
+              config.host = "localhost"
+              # Port to which to connect to
+              config.port = 9440
+              # Max retry attempts while reconnecting on a loss of connection
+              config.max_retry_attempts = 3
+              # Backoff factor to use during retry attempts
+              config.backoff_factor = 3
+              # UserName to connect to the cluster
+              config.username = "username"
+              # Password to connect to the cluster
+              config.password = "password"
+              # Please add authorization information here if needed.
+              client = ntnx_prism_py_client.ApiClient(configuration=config)
+              tasks_api = ntnx_prism_py_client.TasksApi(api_client=client)
+              task_ext_id = "^4=:ca4Ae52e-ec91-0fF0-2fa4-f8abf4Da0310"
+
+              try:
+                  api_response = tasks_api.cancel_task(taskExtId=task_ext_id)
+                  print(api_response)
+              except ntnx_prism_py_client.rest.ApiException as e:
+                  print(e)
+      - lang: Go
+        source: |2+
+
+          package main
+
+          import (
+              "fmt"
+              "github.com/nutanix/ntnx-api-golang-clients/prism-go-client/v4/api"
+              "github.com/nutanix/ntnx-api-golang-clients/prism-go-client/v4/client"
+              import1 "github.com/nutanix/ntnx-api-golang-clients/prism-go-client/v4/models/prism/v4/error"
+          )
+
+          var (
+              ApiClientInstance *client.ApiClient
+              TasksApiInstance *api.TasksApi
+          )
+
+          func main() {
+              ApiClientInstance = client.NewApiClient()
+              // IPv4/IPv6 address or FQDN of the cluster
+              ApiClientInstance.Host = "localhost"
+              // Port to which to connect to
+              ApiClientInstance.Port = 9440
+              // Interval in ms to use during retry attempts
+              ApiClientInstance.RetryInterval = 5000
+              // Max retry attempts while reconnecting on a loss of connection
+              ApiClientInstance.MaxRetryAttempts = 5
+              // UserName to connect to the cluster
+              ApiClientInstance.Username = "username"
+              // Password to connect to the cluster
+              ApiClientInstance.Password = "password"
+              // Please add authorization information here if needed.
+              TasksApiInstance = api.NewTasksApi(ApiClientInstance)
+
+              taskExtId := "^:8cAEfDbd-e6DB-a6e1-6aee-B7ED0f89C50e"
+
+
+              response, error := TasksApiInstance.CancelTask(&taskExtId)
+              if error != nil {
+                  fmt.Println(error)
+                  return
+              }
+              data, _ := response.GetData().(import1.AppMessage)
+              fmt.Println(data)
+          }
+
+      - lang: cURL
+        source: |2
+
+          curl --request POST \
+               --url "https://{pc-ip}:9440/api/prism/v4.0.b1/config/tasks/^+:B0CfFE0E-Bce3-dcEB-Bf2C-edEeCb82bAB7/$actions/cancel" \
+               --header 'Accept: application/json' \
+               --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+      - lang: Wget
+        source: |2
+
+          wget --verbose \
+               --method POST \
+               --header 'Accept: application/json' \
+               --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+               - "https://{pc-ip}:9440/api/prism/v4.0.b1/config/tasks/^:7fCC06Af-CEd3-ed1a-14EC-dD186dcFc1ca/$actions/cancel"
+  /prism/v4.0.b1/config/tasks:
+    get:
+      tags:
+      - Tasks
+      summary: List tasks
+      description: List tasks in the system. The response can be further filtered
+        / sorted using the filtering and sorting options provided. By default the
+        response would be sorted by 'createdTime' in the descending order.
+      operationId: listTasks
+      parameters:
+      - name: $page
+        in: query
+        description: |
+          A URL query parameter that specifies the page number of the result set. It must be a positive integer between 0 and the maximum number of pages that are available for that resource. Any number out of this range might lead to no results.
+        required: false
+        style: form
+        explode: false
+        schema:
+          minimum: 0
+          type: integer
+          description: |
+            A URL query parameter that specifies the page number of the result set. It must be a positive integer between 0 and the maximum number of pages that are available for that resource. Any number out of this range might lead to no results.
+          format: int32
+          default: 0
+      - name: $limit
+        in: query
+        description: |
+          A URL query parameter that specifies the total number of records returned in the result set.  Must be a positive integer between 1 and 100. Any number out of this range will lead to a validation error. If the limit is not provided, a default value of 50 records will be returned in the result set.
+        required: false
+        style: form
+        explode: false
+        schema:
+          maximum: 100
+          minimum: 1
+          type: integer
+          description: |
+            A URL query parameter that specifies the total number of records returned in the result set.  Must be a positive integer between 1 and 100. Any number out of this range will lead to a validation error. If the limit is not provided, a default value of 50 records will be returned in the result set.
+          format: int32
+          default: 50
+      - name: $filter
+        in: query
+        description: |
+          A URL query parameter that allows clients to filter a collection of resources. The expression specified with $filter is evaluated for each resource in the collection, and only items where the expression evaluates to true are included in the response. Expression specified with the $filter must conform to the [OData V4.01](https://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html) URL conventions.
+          For example, filter '$filter=name eq 'karbon-ntnx-1.0' would filter the result on cluster name 'karbon-ntnx1.0', filter '$filter=startswith(name, 'C')' would filter on cluster name starting with 'C'.
+          The filter can be applied to the following fields:
+          - clusterExtIds
+          - completedTime
+          - createdTime
+          - extId
+          - lastUpdatedTime
+          - operation
+          - operationDescription
+          - ownedBy/extId
+          - ownedBy/name
+          - parentTask
+          - progressPercentage
+          - startedTime
+          - status
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: $orderby
+        in: query
+        description: |
+          A URL query parameter that allows clients to specify the sort criteria for the returned list of objects. Resources can be sorted in ascending order using asc or descending order using desc. If asc or desc are not specified, the resources will be sorted in ascending order by default. For example, '$orderby=templateName desc' would get all templates sorted by templateName in descending order.
+          The orderby can be applied to the following fields:
+          - completedTime
+          - createdTime
+          - lastUpdatedTime
+          - operation
+          - ownedBy/extId
+          - ownedBy/name
+          - progressPercentage
+          - startedTime
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: $select
+        in: query
+        description: |
+          A URL query parameter that allows clients to request a specific set of properties for each entity or complex type. Expression specified with the $select must conform to the [OData V4.01](https://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html) URL conventions. If a $select expression consists of a single select item that is an asterisk (i.e., *), then all properties on the matching resource will be returned.
+          - clusterExtIds
+          - completedTime
+          - completionDetails
+          - createdTime
+          - entitiesAffected
+          - errorMessages
+          - extId
+          - isCancelable
+          - lastUpdatedTime
+          - operation
+          - operationDescription
+          - ownedBy/extId
+          - ownedBy/name
+          - parentTask
+          - progressPercentage
+          - startedTime
+          - status
+          - subTasks
+          - warnings
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: List of task objects is returned in response.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/prism.v4.r0.b1.config.Task'
+                additionalProperties: false
+                description: REST response for all response codes in API path /prism/v4.0.b1/config/tasks
+                  Get operation
+        "4XX":
+          description: Client error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/prism.v4.r0.b1.error.ErrorResponse'
+                additionalProperties: false
+                description: REST response for all response codes in API path /prism/v4.0.b1/config/tasks
+                  Get operation
+        "5XX":
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/prism.v4.r0.b1.error.ErrorResponse'
+                additionalProperties: false
+                description: REST response for all response codes in API path /prism/v4.0.b1/config/tasks
+                  Get operation
+      x-permissions:
+        deploymentList:
+        - ON_PREM
+        - CLOUD
+        operationName: View Task
+        roleList:
+        - Internal Super Admin
+        - Prism Admin
+        - Self-Service Admin
+        - Super Admin
+        - Prism Viewer
+        - Task Self Owned
+        - Kubernetes Admin
+      x-supported-versions:
+      - product: PC
+        version: 2024.1
+      x-code-samples:
+      - lang: Java
+        source: |2
+
+          package sample;
+
+          import com.nutanix.tsks.java.client.ApiClient;
+          import com.nutanix.tsks.java.client.api.TasksApi;
+          import com.nutanix.dp1.tsks.prism.v4.config.ListTasksApiResponse;
+
+          public class JavaSdkSample {
+              public static void main(String[] args) {
+                  // Configure the client
+                  ApiClient apiClient = new ApiClient();
+                  // IPv4/IPv6 address or FQDN of the cluster
+                  apiClient.setHost("localhost");
+                  // Port to which to connect to
+                  apiClient.setPort(9440);
+                  // Interval in ms to use during retry attempts
+                  apiClient.setRetryInterval(5000);
+                  // Max retry attempts while reconnecting on a loss of connection
+                  apiClient.setMaxRetryAttempts(5);
+                  // UserName to connect to the cluster
+                  String username = "username";
+                  // Password to connect to the cluster
+                  String password = "password";
+                  apiClient.setUsername(username);
+                  apiClient.setPassword(password);
+
+                  // Please add authorization information here if needed.
+                  TasksApi tasksApi = new TasksApi(apiClient);
+
+                  int page = 0;
+                  int limit = 50;
+
+                  try {
+                      ListTasksApiResponse listTasksApiResponse = tasksApi.listTasks(page, limit, null, null, null);
+                      System.out.println(listTasksApiResponse.toString());
+                  } catch (RestClientException ex) {
+                      System.out.println(ex.getMessage());
+                  }
+              }
+          }
+      - lang: JavaScript
+        source: |2
+
+          import { ApiClient, TasksApi } from "@nutanix-api/prism-js-client";
+
+          // Configure the client
+          let apiClientInstance = new ApiClient();
+          // IPv4/IPv6 address or FQDN of the cluster
+          apiClientInstance.host = 'localhost';
+          // Port to which to connect to
+          apiClientInstance.port = '9440';
+          // Max retry attempts while reconnecting on a loss of connection
+          apiClientInstance.maxRetryAttempts = 5;
+          // Interval in ms to use during retry attempts
+          apiClientInstance.retryInterval = 5000;
+          // UserName to connect to the cluster
+          apiClientInstance.username = 'username';
+          // Password to connect to the cluster
+          apiClientInstance.password = 'password';
+          // Please add authorization information here if needed.
+          let tasksApi = new TasksApi(apiClientInstance);
+
+          function sample() {
+
+
+              // Construct Optional Parameters
+              var opts = {};
+              opts["$page"] = 0;
+              opts["$limit"] = 50;
+              opts["$filter"] = "string_sample_data";
+              opts["$orderby"] = "string_sample_data";
+              opts["$select"] = "string_sample_data";
+
+
+
+              tasksApi.listTasks(opts).then(({data, response}) => {
+                  console.log(`API returned the following status code: ${response.status}`);
+                  console.log(data.getData());
+              }).catch((error) => {
+                  console.log(`Error is: ${error}`);
+              });
+          }
+          sample()
+      - lang: Python
+        source: |2
+
+          import ntnx_prism_py_client
+
+          if __name__ == "__main__":
+              # Configure the client
+              config = ntnx_prism_py_client.Configuration()
+              # IPv4/IPv6 address or FQDN of the cluster
+              config.host = "localhost"
+              # Port to which to connect to
+              config.port = 9440
+              # Max retry attempts while reconnecting on a loss of connection
+              config.max_retry_attempts = 3
+              # Backoff factor to use during retry attempts
+              config.backoff_factor = 3
+              # UserName to connect to the cluster
+              config.username = "username"
+              # Password to connect to the cluster
+              config.password = "password"
+              # Please add authorization information here if needed.
+              client = ntnx_prism_py_client.ApiClient(configuration=config)
+              tasks_api = ntnx_prism_py_client.TasksApi(api_client=client)
+              page = 0
+              limit = 50
+
+              try:
+                  api_response = tasks_api.list_tasks(_page=page, _limit=limit)
+                  print(api_response)
+              except ntnx_prism_py_client.rest.ApiException as e:
+                  print(e)
+      - lang: Go
+        source: |2+
+
+          package main
+
+          import (
+              "fmt"
+              "github.com/nutanix/ntnx-api-golang-clients/prism-go-client/v4/api"
+              "github.com/nutanix/ntnx-api-golang-clients/prism-go-client/v4/client"
+              import1 "github.com/nutanix/ntnx-api-golang-clients/prism-go-client/v4/models/prism/v4/config"
+          )
+
+          var (
+              ApiClientInstance *client.ApiClient
+              TasksApiInstance *api.TasksApi
+          )
+
+          func main() {
+              ApiClientInstance = client.NewApiClient()
+              // IPv4/IPv6 address or FQDN of the cluster
+              ApiClientInstance.Host = "localhost"
+              // Port to which to connect to
+              ApiClientInstance.Port = 9440
+              // Interval in ms to use during retry attempts
+              ApiClientInstance.RetryInterval = 5000
+              // Max retry attempts while reconnecting on a loss of connection
+              ApiClientInstance.MaxRetryAttempts = 5
+              // UserName to connect to the cluster
+              ApiClientInstance.Username = "username"
+              // Password to connect to the cluster
+              ApiClientInstance.Password = "password"
+              // Please add authorization information here if needed.
+              TasksApiInstance = api.NewTasksApi(ApiClientInstance)
+
+              page_ := 0
+              limit_ := 50
+
+
+              response, error := TasksApiInstance.ListTasks(&page_, &limit_, nil, nil, nil)
+              if error != nil {
+                  fmt.Println(error)
+                  return
+              }
+              data, _ := response.GetData().([]import1.Task)
+              fmt.Println(data)
+          }
+
+      - lang: cURL
+        source: |2
+
+          curl --request GET \
+               --url "https://{pc-ip}:9440/api/prism/v4.0.b1/config/tasks?$filter=string_sample_data&$limit=50&$orderby=string_sample_data&$page=0&$select=string_sample_data" \
+               --header 'Accept: application/json' \
+               --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+      - lang: Wget
+        source: |2
+
+          wget --verbose \
+               --method GET \
+               --header 'Accept: application/json' \
+               --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+               - "https://{pc-ip}:9440/api/prism/v4.0.b1/config/tasks?$filter=string_sample_data&$limit=50&$orderby=string_sample_data&$page=0&$select=string_sample_data"
+components:
+  schemas:
+    prism.v4.r0.b1.config.GetTaskApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - $ref: '#/components/schemas/prism.v4.r0.b1.config.Task'
+          - $ref: '#/components/schemas/prism.v4.r0.b1.error.ErrorResponse'
+      additionalProperties: false
+      description: "REST response for all response codes in API path /prism/v4.0.b1/config/tasks/{extId}\
+        \ Get operation"
+    prism.v4.r0.b1.config.Task:
+      type: object
+      properties:
+        extId:
+          pattern: "^[a-zA-Z0-9/+]*={0,2}:[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"
+          type: string
+          description: A globally unique identifier of a task.
+          readOnly: true
+        operation:
+          type: string
+          description: The operation name being tracked by the task.
+          readOnly: true
+        operationDescription:
+          type: string
+          description: Description of the operation being tracked by the task.
+          readOnly: true
+        parentTask:
+          $ref: '#/components/schemas/prism.v4.r0.b1.config.TaskReferenceInternal'
+        createdTime:
+          type: string
+          description: UTC date and time in RFC-3339 format when the task was created.
+          format: date-time
+          readOnly: true
+        startedTime:
+          type: string
+          description: UTC date and time in RFC-3339 format when the task was started.
+          format: date-time
+          readOnly: true
+        completedTime:
+          type: string
+          description: UTC date and time in RFC-3339 format when the task was completed.
+          format: date-time
+          readOnly: true
+        status:
+          $ref: '#/components/schemas/prism.v4.r0.b1.config.TaskStatus'
+        progressPercentage:
+          maximum: 100
+          minimum: 0
+          type: integer
+          description: Task progress expressed as a percentage.
+          format: int32
+          readOnly: true
+        entitiesAffected:
+          maxItems: 100
+          minItems: 0
+          type: array
+          description: Reference to entities associated with the task.
+          readOnly: true
+          items:
+            $ref: '#/components/schemas/prism.v4.r0.b1.config.EntityReference'
+        subTasks:
+          maxItems: 100
+          minItems: 0
+          type: array
+          description: "Reference to tasks spawned as children of the current task.\
+            \ The task get response would contain a limited number of subtask references.\
+            \ To get the entire list of subtasks for a task, use the parent task filter\
+            \ in the task list API."
+          readOnly: true
+          items:
+            $ref: '#/components/schemas/prism.v4.r0.b1.config.TaskReferenceInternal'
+        subSteps:
+          maxItems: 50
+          minItems: 0
+          type: array
+          description: List of steps completed as part of the task.
+          readOnly: true
+          items:
+            $ref: '#/components/schemas/prism.v4.r0.b1.config.TaskStep'
+        isCancelable:
+          type: boolean
+          description: Signifies if the task can be cancelled.
+          readOnly: true
+        ownedBy:
+          $ref: '#/components/schemas/prism.v4.r0.b1.config.OwnerReference'
+        completionDetails:
+          maxItems: 50
+          minItems: 0
+          type: array
+          description: Additional details on the task to aid the user with further
+            actions post completion of the task.
+          readOnly: true
+          items:
+            $ref: '#/components/schemas/common.v1.r0.b1.config.KVPair'
+        errorMessages:
+          maxItems: 100
+          minItems: 0
+          type: array
+          description: Error details explaining a task failure. These would be populated
+            only in the case of task failures.
+          readOnly: true
+          items:
+            $ref: '#/components/schemas/prism.v4.r0.b1.error.AppMessage'
+        legacyErrorMessage:
+          type: string
+          description: Provides an error message in the absence of a well-defined
+            error message for the tasks created through legacy APIs.
+          readOnly: true
+        warnings:
+          maxItems: 50
+          minItems: 0
+          type: array
+          description: Warning messages to alert the user of issues which did not
+            directly cause task failure. These can be populated for any task.
+          readOnly: true
+          items:
+            $ref: '#/components/schemas/prism.v4.r0.b1.error.AppMessage'
+        lastUpdatedTime:
+          type: string
+          description: UTC date and time in RFC-3339 format when the task was last
+            updated.
+          format: date-time
+          readOnly: true
+        clusterExtIds:
+          maxItems: 500
+          minItems: 0
+          type: array
+          description: List of globally unique identifiers for clusters associated
+            with the task or any of its subtasks.
+          readOnly: true
+          items:
+            pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+            type: string
+      additionalProperties: false
+      description: The task object tracking an asynchronous operation.
+    prism.v4.r0.b1.config.TaskReferenceInternal:
+      description: Reference to the parent task associated with the current task.
+      allOf:
+      - $ref: '#/components/schemas/common.v1.r0.b1.response.ApiLink'
+      - type: object
+        properties:
+          extId:
+            pattern: "^[a-zA-Z0-9/+]*={0,2}:[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"
+            type: string
+            description: A globally unique identifier of the task.
+            readOnly: true
+        additionalProperties: false
+    prism.v4.r0.b1.config.TaskStatus:
+      type: string
+      description: Status of the task.
+      enum:
+      - $UNKNOWN
+      - $REDACTED
+      - QUEUED
+      - RUNNING
+      - CANCELING
+      - SUCCEEDED
+      - FAILED
+      - CANCELED
+      x-enumDescriptions:
+        FAILED: Status indicating that the task has failed.
+        QUEUED: Status indicating that the task is queued for execution.
+        RUNNING: Status indicating that the task is currently being executed.
+        SUCCEEDED: Status indicating that the task has been executed successfully.
+        CANCELED: Status indicating that the task has been cancelled.
+        CANCELING: Status indicating that the task is marked for cancellation.
+    prism.v4.r0.b1.config.EntityReference:
+      type: object
+      properties:
+        extId:
+          type: string
+          description: A globally unique identifier of the entity.
+          readOnly: true
+        rel:
+          type: string
+          description: "Entity type identified as 'namespace:module[:submodule]:entityType'.\
+            \ For example - vmm:ahv:vm, where vmm is the namepsace, ahv is the module\
+            \ and vm is the entitytype."
+          readOnly: true
+      additionalProperties: false
+      description: Details of the entity.
+    prism.v4.r0.b1.config.TaskStep:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Message describing the completed steps for the task.
+          readOnly: true
+      additionalProperties: false
+      description: A single step in the task.
+    prism.v4.r0.b1.config.OwnerReference:
+      type: object
+      properties:
+        extId:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+          description: A globally unique identifier of the task owner.
+          readOnly: true
+        name:
+          type: string
+          description: Username of the task owner.
+          readOnly: true
+      additionalProperties: false
+      description: Reference to the owner of the task.
+    prism.v4.r0.b1.config.CancelTaskApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - $ref: '#/components/schemas/prism.v4.r0.b1.error.AppMessage'
+          - $ref: '#/components/schemas/prism.v4.r0.b1.error.ErrorResponse'
+      additionalProperties: false
+      description: "REST response for all response codes in API path /prism/v4.0.b1/config/tasks/{taskExtId}/$actions/cancel\
+        \ Post operation"
+    prism.v4.r0.b1.config.ListTasksApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/prism.v4.r0.b1.config.Task'
+          - $ref: '#/components/schemas/prism.v4.r0.b1.error.ErrorResponse'
+      additionalProperties: false
+      description: REST response for all response codes in API path /prism/v4.0.b1/config/tasks
+        Get operation
+    common.v1.r0.b1.config.KVPair:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The key of this key-value pair
+        value:
+          description: The value associated with the key for this key-value pair
+          oneOf:
+          - type: string
+          - type: integer
+          - type: boolean
+          - type: array
+            items:
+              type: string
+          - type: object
+            additionalProperties:
+              type: string
+      additionalProperties: false
+      description: |
+        A map describing a set of keys and their corresponding values.
+    common.v1.r0.b1.response.ApiLink:
+      type: object
+      properties:
+        href:
+          type: string
+          description: |
+            The URL at which the entity described by the link can be accessed.
+        rel:
+          type: string
+          description: |
+            A name that identifies the relationship of the link to the object that is returned by the URL.  The unique value of "self" identifies the URL for the object.
+      additionalProperties: false
+      description: |
+        A HATEOAS style link for the response.  Each link contains a user-friendly name identifying the link and an address for retrieving the particular resource.
+    prism.v4.r0.b1.config.TaskReference:
+      type: object
+      properties:
+        extId:
+          pattern: "^[a-zA-Z0-9/+]*={0,2}:[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"
+          type: string
+          description: A globally unique identifier of a task.
+      additionalProperties: false
+      description: A reference to a task tracking an asynchronous operation. The status
+        of the task can be queried by making a GET request to the task URI provided
+        in the metadata section of the API response.
+    prism.v4.r0.b1.error.ErrorResponse:
+      type: object
+      properties:
+        error:
+          oneOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/prism.v4.r0.b1.error.AppMessage'
+          - $ref: '#/components/schemas/prism.v4.r0.b1.error.SchemaValidationError'
+      additionalProperties: false
+      description: This schema is auto-generated by the Open API Dev Platform as REST
+        response for 4xx and 5xx error responses.
+      x-platform-generated: true
+    prism.v4.r0.b1.error.AppMessage:
+      type: object
+      properties:
+        message:
+          type: string
+          description: The message string.
+        severity:
+          $ref: '#/components/schemas/common.v1.r0.b1.config.MessageSeverity'
+        code:
+          type: string
+          description: "The code associated with this message.This string is typically\
+            \ prefixed by the namespace the endpoint belongs to. For example: VMM-40000"
+        locale:
+          type: string
+          description: Locale for this message. The default locale would be 'en-US'.
+          default: en_US
+        errorGroup:
+          type: string
+          description: The error group associated with this message of severity ERROR.
+        argumentsMap:
+          type: object
+          additionalProperties:
+            type: string
+          description: The map of argument name to value.
+      additionalProperties: false
+      description: Message with associated severity describing status of the current
+        operation.
+      x-platform-generated: true
+    prism.v4.r0.b1.error.MessageSeverity:
+      type: string
+      description: Enum schema MessageSeverity
+      enum:
+      - $UNKNOWN
+      - $REDACTED
+      - INFO
+      - WARNING
+      - ERROR
+      x-platform-generated: true
+      x-codegen-hint:
+        $any:
+        - type: entity-identifier
+          properties:
+            identifiers:
+            - value: $UNKNOWN
+              index: 201
+            - value: $REDACTED
+              index: 202
+            - value: INFO
+              index: 203
+            - value: WARNING
+              index: 204
+            - value: ERROR
+              index: 205
+    prism.v4.r0.b1.error.SchemaValidationError:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          description: Timestamp of the response.
+        statusCode:
+          type: integer
+          description: The HTTP status code of the response.
+        error:
+          type: string
+          description: The generic error message for the response.
+        path:
+          type: string
+          description: API path on which the request was made.
+        validationErrorMessages:
+          type: array
+          description: List of validation error messages
+          items:
+            $ref: '#/components/schemas/prism.v4.r0.b1.error.SchemaValidationErrorMessage'
+      additionalProperties: false
+      description: This schema is generated from SchemaValidationError.java
+      x-platform-generated: true
+    prism.v4.r0.b1.error.SchemaValidationErrorMessage:
+      type: object
+      properties:
+        location:
+          type: string
+          description: "The part of the request that failed validation. Validation\
+            \ can fail for path, query parameters, and request body."
+        message:
+          type: string
+          description: The detailed message for the validation error.
+        attributePath:
+          type: string
+          description: The path of the attribute that failed validation in the schema.
+      additionalProperties: false
+      description: This schema is generated from SchemaValidationErrorMessage.java
+      x-platform-generated: true
+    common.v1.r0.b1.response.ApiResponseMetadata:
+      type: object
+      properties:
+        flags:
+          type: array
+          description: |
+            An array of flags that may indicate the status of the response. For example, a flag with the name 'isPaginated' and value 'false', indicates that the response is not paginated.
+          items:
+            $ref: '#/components/schemas/common.v1.r0.b1.config.Flag'
+        links:
+          type: array
+          description: |
+            An array of HATEOAS style links for the response that may also include pagination links for list operations.
+          items:
+            $ref: '#/components/schemas/common.v1.r0.b1.response.ApiLink'
+        totalAvailableResults:
+          type: integer
+          description: |
+            The total number of entities that are available on the server for this type.
+          format: int32
+        messages:
+          type: array
+          description: |
+            Information, Warning or Error messages that might provide additional contextual information related to the operation.
+          items:
+            $ref: '#/components/schemas/common.v1.r0.b1.config.Message'
+        extraInfo:
+          type: array
+          description: |
+            An array of entity-specific metadata
+          items:
+            $ref: '#/components/schemas/common.v1.r0.b1.config.KVPair'
+      additionalProperties: false
+      description: |
+        The metadata associated with an API response. This value is always present and minimally contains the self-link for the API request that produced this response. It also contains pagination data for the paginated requests.
+    common.v1.r0.b1.config.Flag:
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: boolean
+          default: false
+      additionalProperties: false
+      description: |
+        Many entities in the Nutanix APIs carry flags.  This object captures all the flags associated with that entity through this object.  The field that hosts this type of object must have an attribute called x-bounded-map-keys that tells which flags are actually present for that entity.
+    common.v1.r0.b1.config.Message:
+      type: object
+      properties:
+        code:
+          type: string
+          description: |
+            A code that uniquely identifies a message.
+        message:
+          type: string
+          description: |
+            The description of the message.
+        locale:
+          type: string
+          description: |
+            The locale for the message description.
+          default: en_US
+        severity:
+          $ref: '#/components/schemas/common.v1.r0.b1.config.MessageSeverity'
+      additionalProperties: false
+    common.v1.r0.b1.config.MessageSeverity:
+      type: string
+      description: |
+        The message severity.
+      enum:
+      - $UNKNOWN
+      - $REDACTED
+      - INFO
+      - WARNING
+      - ERROR
+      x-enumDescriptions:
+        ERROR: |
+          Error indicating failed completion.
+        INFO: |
+          Information about successful completion.
+        WARNING: |
+          Warning indicating future error.
+    prism.v4.r0.b1.config.ListCategoriesApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/prism.v4.r0.b1.config.Category'
+          - $ref: '#/components/schemas/prism.v4.r0.b1.error.ErrorResponse'
+      additionalProperties: false
+      description: REST response for all response codes in API path /prism/v4.0.b1/config/categories
+        Get operation
+    prism.v4.r0.b1.config.CategoryOld:
+      description: |
+        Denotes the type of a category.<br>
+        There are three types of categories: SYSTEM, INTERNAL, and USER.<br>
+        This field is immutable.
+      allOf:
+      - $ref: '#/components/schemas/prism.v4.r0.b1.config.CategorySummaryOld'
+      - type: object
+        properties:
+          metadata:
+            type: array
+            description: |
+              Opaque metadata which can be associated to a category.<br>
+              It is a list of key-value pairs.<br>
+              For example, for a category 'California/SanJose' we can associate a geographical coordinate based metadata
+              like: {'latitude': '37.3382° N' , 'longitude': '121.8863° W'}.
+
+              The server does not validate this value nor does it enforce the uniqueness or any other constraints.
+              It is the responsibility of the user to ensure that any semantic or syntactic constraints are retained when mutating
+              this field.
+            items:
+              $ref: '#/components/schemas/common.v1.r0.b1.config.KVPair'
+        additionalProperties: false
+    prism.v4.r0.b1.config.Category:
+      allOf:
+      - $ref: '#/components/schemas/common.v1.r0.b1.response.ExternalizableAbstractModel'
+      - required:
+        - key
+        - value
+        type: object
+        properties:
+          key:
+            maxLength: 64
+            pattern: "^[^$/][^/]{0,63}$"
+            type: string
+            description: |
+              The key of a category when it is represented in `key:value` format.
+
+              Constraints applicable when field is given in the payload during create and update:
+              * A string of maxlength of 64
+              * Character at the start cannot be `$`
+              * Character `/` is not allowed anywhere
+
+              It is a mandatory field in the payload of `createCategory` and `updateCategoryById` APIs.<br>
+              This field can't be updated through `updateCategoryById` API.
+          value:
+            maxLength: 64
+            pattern: "^[^$/][^/]{0,63}$"
+            type: string
+            description: |
+              The value of a category when it is represented in `key:value` format.
+
+              Constraints applicable when field is given in the payload during create and update:
+              * A string of maxlength 64
+              * Character at the start cannot be `$`
+              * Character `/` is not allowed anywhere
+
+              It is a mandatory input field in the payload of `createCategory` and `updateCategoryById` APIs.<br>
+              This field can be updated through `updateCategoryById` API.<br>
+              Updating the value will not change the extId of the category.
+          type:
+            $ref: '#/components/schemas/prism.v4.r0.b1.config.CategoryType'
+          description:
+            pattern: "^.{0,512}$"
+            type: string
+            description: |
+              A string consisting of the description of the category as defined by the user.<br>
+              Description can be optionally provided in the payload of `createCategory` and `updateCategoryById` APIs.<br>
+              Description field can be updated through `updateCategoryById` API.<br>
+              The server does not validate this value nor does it enforce the uniqueness or any other constraints.<br>
+              It is the responsibility of the user to ensure that any semantic or syntactic constraints are retained when mutating
+              this field.
+          ownerUuid:
+            pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+            type: string
+            description: |
+              This field contains the UUID of a user who owns the category.<br>
+              This field will be ignored, if given in the payload of `createCategory` API. Hence, when a category is created, the logged-in user automatically becomes the owner of the category.<br>
+              This field can be updated through `updateCategoryById` API, in which case, should be provided, UUID of a valid user present in the system.<br>
+              Validity of the user UUID can be checked by invoking the api: authn/users/{extId} in the 'Identity and Access Management' or 'IAM' namespace.<br>
+              It is used for enabling RBAC access to self-owned categories.
+          associations:
+            maxItems: 100
+            minItems: 0
+            type: array
+            description: |
+              This field gives basic information about resources that are associated to the category.<br>
+              The results present under this field summarize the counts of various kinds of resources associated to the category.<br>
+              For more detailed information about the UUIDs of the resources, please look into the field `detailedAssociations`.<br>
+              This field will be ignored, if given in the payload of `updateCategoryById` or `createCategory` APIs.<br>
+              This field will not be present by default in `listCategories` API, unless the parameter $expand=associations is present in the url.
+            readOnly: true
+            items:
+              $ref: '#/components/schemas/prism.v4.r0.b1.config.AssociationSummary'
+          detailedAssociations:
+            maxItems: 100
+            minItems: 0
+            type: array
+            description: |-
+              This field gives detailed information about resources that are associated to the category.<br>
+              The results present under this field contain the UUIDs of the entities and policies of various kinds associated to the category.<br>
+              This field will be ignored, if given in the payload of `updateCategoryById` or `createCategory` APIs.<br>
+              This field will not be present by default in `listCategories` or `getCategoryById` APIs, unless the parameter $expand=detailedAssociations is present in the url.
+            readOnly: true
+            items:
+              $ref: '#/components/schemas/prism.v4.r0.b1.config.AssociationDetail'
+        additionalProperties: false
+    prism.v4.r0.b1.config.CreateCategoryApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - $ref: '#/components/schemas/prism.v4.r0.b1.config.Category'
+          - $ref: '#/components/schemas/prism.v4.r0.b1.error.ErrorResponse'
+      additionalProperties: false
+      description: REST response for all response codes in API path /prism/v4.0.b1/config/categories
+        Post operation
+    prism.v4.r0.b1.config.CategoryType:
+      type: string
+      description: |
+        Denotes the type of a category.<br>
+        There are three types of categories: SYSTEM, INTERNAL, and USER.<br>
+        This field is immutable.
+      enum:
+      - $UNKNOWN
+      - $REDACTED
+      - USER
+      - SYSTEM
+      - INTERNAL
+      x-enumDescriptions:
+        SYSTEM: |
+          Predefined categories contained in the system.<br>
+          Meant to be used by workflows visible in the UI that involve categories.<br>
+          System defined categories can't be created through the Categories API.<br>
+          They are predefined in a configuration file and are created at PC bootup time.<br>
+          System defined categories can't be updated or deleted.
+        INTERNAL: |
+          Predefined categories contained in the system.<br>
+          Meant to be used by internal services, apis and workflows that involve categories.<br>
+          These categories will not be visible in the UI.<br>
+          However, these categories will be returned in the response of `listCategories` and `getCategoryById` APIs, and
+          are available for filtering as well.<br>
+          Internal categories can't be created through the Categories API.<br>
+          They are predefined in a configuration file and are created at PC bootup time.<br>
+          Internal categories can't be updated or deleted.
+        USER: |
+          These categories get created by users through the invocation of `createCategory` api.<br>
+          User defined categories can be updated or deleted after creation.<br>
+    prism.v4.r0.b1.config.AssociationSummary:
+      type: object
+      properties:
+        categoryId:
+          type: string
+          description: |
+            External identifier for the given category, used across all v4 apis/entities/resources where categories are referenced.<br>
+            The field has UUID format.<br>
+            A type 4 UUID is generated during category creation.
+        resourceType:
+          $ref: '#/components/schemas/prism.v4.r0.b1.config.ResourceType'
+        resourceGroup:
+          $ref: '#/components/schemas/prism.v4.r0.b1.config.ResourceGroup'
+        count:
+          type: integer
+          description: |
+            Count of associations of a particular type of entity or policy
+      additionalProperties: false
+      description: |
+        This attribute contains the list of entities and policies which have been assigned the given category.<br>
+        These entities are grouped by entity types (like VM or HOST) or policy types (like PROTECTION_POLICY or NGT_POLICY).<br>
+        Each associated object contains the total entities belonging to the given entity type, count, category extId, and
+        references (for example for VM it'd be VM uuid).
+    prism.v4.r0.b1.config.AssociationDetail:
+      type: object
+      properties:
+        categoryId:
+          type: string
+          description: |
+            External identifier for the given category, used across all v4 apis/entities/resources where categories are referenced.<br>
+            The field has UUID format.<br>
+            A type 4 UUID is generated during category creation.
+        resourceType:
+          $ref: '#/components/schemas/prism.v4.r0.b1.config.ResourceType'
+        resourceGroup:
+          $ref: '#/components/schemas/prism.v4.r0.b1.config.ResourceGroup'
+        resourceId:
+          type: string
+          description: |
+            The UUID of the entity or policy associated with the particular category.
+      additionalProperties: false
+      description: |
+        This attribute contains the list of entities and policies which have been assigned the given category.<br>
+        These entities are grouped by entity types (like VM or HOST) or policy types (like PROTECTION_POLICY or NGT_POLICY).<br>
+        Each associated object contains the total entities belonging to the given entity type, count, category extId, and
+        references (for example for VM it'd be VM uuid).
+    prism.v4.r0.b1.config.ResourceType:
+      type: string
+      description: |
+        An enum denoting the associated resource types.<br>
+        Resource types are further grouped into 2 types - entity or a policy.
+      enum:
+      - $UNKNOWN
+      - $REDACTED
+      - VM
+      - MH_VM
+      - IMAGE
+      - SUBNET
+      - CLUSTER
+      - HOST
+      - REPORT
+      - MARKETPLACE_ITEM
+      - BLUEPRINT
+      - APP
+      - VOLUMEGROUP
+      - IMAGE_PLACEMENT_POLICY
+      - NETWORK_SECURITY_POLICY
+      - NETWORK_SECURITY_RULE
+      - VM_HOST_AFFINITY_POLICY
+      - QOS_POLICY
+      - NGT_POLICY
+      - PROTECTION_RULE
+      - ACCESS_CONTROL_POLICY
+      - STORAGE_POLICY
+      - IMAGE_RATE_LIMIT
+      - RECOVERY_PLAN
+      - BUNDLE
+      - POLICY_SCHEMA
+      x-enumDescriptions:
+        APP: A resource of type app.
+        PROTECTION_RULE: A policy or rule of type 'protection rule'.
+        IMAGE_RATE_LIMIT: A resource of type 'rate limit'.
+        MH_VM: A resource of type Virtual Machine.
+        VOLUMEGROUP: A resource of type volume group.
+        BLUEPRINT: A resource of type blueprint.
+        HOST: "A resource representing the underlying host, the machine hosting the\
+          \ hypervisors and vms."
+        REPORT: A resource of type report.
+        STORAGE_POLICY: A policy or rule of type 'storage policy'.
+        BUNDLE: A resource of type 'bundle'.
+        QOS_POLICY: A policy or rule of type 'qos policy'.
+        SUBNET: A resource of type network subnets.
+        IMAGE: A resource of type Image.
+        ACCESS_CONTROL_POLICY: A policy or rule of type 'access control policy' or
+          ACP; the rules that decide authorization of users to access an api.
+        VM: A resource of type Virtual Machine.
+        VM_HOST_AFFINITY_POLICY: A policy of type 'vm host affinity'; this policy
+          decides if 2 vms should belong to the same host.
+        NGT_POLICY: A policy or rule of type 'ngt policy'.
+        RECOVERY_PLAN: A policy or rule of type 'recovery plan'
+        MARKETPLACE_ITEM: A resource of type marketplace item.
+        CLUSTER: "A resource of type cluster, usually refers to a PE cluster."
+        NETWORK_SECURITY_POLICY: A policy of type 'network security'.
+        NETWORK_SECURITY_RULE: A rule of type 'network security'.
+        POLICY_SCHEMA: "Policies like user-defined-alerts, etc."
+        IMAGE_PLACEMENT_POLICY: A policy of type 'image placement'.
+    prism.v4.r0.b1.config.ResourceGroup:
+      type: string
+      description: |
+        An enum denoting the resource group.<br>
+        Resources can be organised into either an entity or a policy, hence it supports two possible values:
+          * ENTITY
+          * POLICY
+      enum:
+      - $UNKNOWN
+      - $REDACTED
+      - ENTITY
+      - POLICY
+      x-enumDescriptions:
+        POLICY: |
+          A ResourceGroup denoting a nutanix policy like vm host affinity policy, image placement policy, access control policy, etc.<br>
+          A category is generally associated to many entities.<br>
+          The policy which is associated to this category, is then applied to those entities which are also associated to the same category.
+        ENTITY: |
+          A ResourceGroup denoting a nutanix entity like vm, cluster, host, image, etc.<br>
+          A category is generally associated to many entities.<br>
+          A policy is then applied to these entities through the category.
+    prism.v4.r0.b1.config.CategorySummaryOld:
+      allOf:
+      - $ref: '#/components/schemas/common.v1.r0.b1.response.ExternalizableAbstractModel'
+      - required:
+        - name
+        type: object
+        properties:
+          fqName:
+            pattern: "^(?=.{1,260}$)[a-zA-Z]+([a-zA-Z0-9_.-]+)*(\\/([a-zA-Z]+([a-zA-Z0-9_.-]+)*))*$"
+            type: string
+            description: |
+              The fully qualified name of this category. It is unique for each category.<br>
+              It is a read-only field.
+              The service constructs it from the name-parentExtId combination.
+              An example of a fqName would be `Location/Bangalore`, where `Location` is the
+              parent category's name and `Bangalore` is the category name.<br>
+              This field is immutable.<br>
+          name:
+            pattern: "^(?=.{1,64}$)[a-zA-Z]+([a-zA-Z0-9_.-]+)*$"
+            type: string
+            description: |
+              The short name of this category. It may not be unique for each category.<br>
+              It is a mandatory field which must be specified inside the post/put request body.<br>
+              This field is immutable.
+          parentExtId:
+            pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+            type: string
+            description: |
+              The parent category of this category (may be null if this category is not part of a hierarchy).<br>
+              Each category can have at most one parent.<br>
+              A parent cannot be deleted until all the children categories are deleted first.<br>
+              Must be specified inside the post/put request body for child categories (if not specified, the service assumes
+              the category to be a parent category).<br>
+              This field is immutable.
+          userSpecifiedName:
+            type: string
+            description: |
+              The user specified name is a string that the user can specify; with syntax and semantics controlled by the user.
+
+              The server does not validate this value nor does it enforce the uniqueness or any other constraints.<br>
+              It is the responsibility of the user to ensure that any semantic or syntactic constraints are retained when mutating
+              this field. Unlike the name of the categories, which is immutable, the user name can be changed by the user to meet their needs.
+          type:
+            $ref: '#/components/schemas/prism.v4.r0.b1.config.CategoryType'
+          description:
+            pattern: "^.{0,512}$"
+            type: string
+            description: |
+              A string consisting of the description of the category as defined by the user.
+
+              The server does not validate this value nor does it enforce the uniqueness or any other constraints.<br>
+              It is the responsibility of the user to ensure that any semantic or syntactic constraints are retained when mutating
+              this field.
+          associations:
+            type: array
+            readOnly: true
+            items:
+              $ref: '#/components/schemas/prism.v4.r0.b1.config.CategoryAssociationSummaryOld'
+          childCategories:
+            type: array
+            readOnly: true
+            items:
+              $ref: '#/components/schemas/prism.v4.r0.b1.config.CategorySummaryOld'
+          ownerUuid:
+            pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+            type: string
+            description: |-
+              It is a read-only field inserted into category entity at the time of category creation, and which contains the UUID of
+              the user who created this category. It is used for enabling authorization of a particular kind where the user has no
+              access to view/create/update/delete any categories other than the category created by oneself.
+        additionalProperties: false
+    prism.v4.r0.b1.config.CategoryAssociationSummaryOld:
+      type: object
+      properties:
+        categoryId:
+          type: string
+          description: |
+            External identifier for the given category.
+        resourceType:
+          $ref: '#/components/schemas/prism.v4.r0.b1.config.ResourceType'
+        resourceGroup:
+          $ref: '#/components/schemas/prism.v4.r0.b1.config.ResourceGroup'
+        count:
+          type: integer
+          description: |
+            Denotes the type of a category.<br>
+            There are three types of categories: SYSTEM, INTERNAL, and USER.<br>
+            This field is immutable.
+      additionalProperties: false
+      description: |
+        This attribute contains the list of entities which have been assigned the given category.<br>
+        These entities are grouped by entity types (like VM or HOST).<br>
+        Each associated object contains the total entities belonging to the given entity type, and category extId.
+    prism.v4.r0.b1.config.GetCategoryApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - $ref: '#/components/schemas/prism.v4.r0.b1.config.Category'
+          - $ref: '#/components/schemas/prism.v4.r0.b1.error.ErrorResponse'
+      additionalProperties: false
+      description: "REST response for all response codes in API path /prism/v4.0.b1/config/categories/{extId}\
+        \ Get operation"
+    prism.v4.r0.b1.config.UpdateCategoryApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - $ref: '#/components/schemas/prism.v4.r0.b1.config.Category'
+          - $ref: '#/components/schemas/prism.v4.r0.b1.error.ErrorResponse'
+      additionalProperties: false
+      description: "REST response for all response codes in API path /prism/v4.0.b1/config/categories/{extId}\
+        \ Put operation"
+    prism.v4.r0.b1.config.DeleteCategoryApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - $ref: '#/components/schemas/prism.v4.r0.b1.error.ErrorResponse'
+      additionalProperties: false
+      description: "REST response for all response codes in API path /prism/v4.0.b1/config/categories/{extId}\
+        \ Delete operation"
+    common.v1.r0.b1.response.ExternalizableAbstractModel:
+      description: |
+        A model that represents an object instance that is accessible through an API endpoint.  Instances of this type get an extId field that contains the globally unique identifier for that instance.  Externally accessible instances are always tenant aware and, therefore, extend the TenantAwareModel
+      allOf:
+      - $ref: '#/components/schemas/common.v1.r0.b1.config.TenantAwareModel'
+      - type: object
+        properties:
+          extId:
+            pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+            type: string
+            description: |
+              A globally unique identifier of an instance that is suitable for external consumption.
+            nullable: true
+          links:
+            type: array
+            description: |
+              A HATEOAS style link for the response.  Each link contains a user-friendly name identifying the link and an address for retrieving the particular resource.
+            readOnly: true
+            items:
+              $ref: '#/components/schemas/common.v1.r0.b1.response.ApiLink'
+        additionalProperties: false
+    common.v1.r0.b1.config.TenantAwareModel:
+      type: object
+      properties:
+        tenantId:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+          description: |
+            A globally unique identifier that represents the tenant that owns this entity. The system automatically assigns it, and it and is immutable from an API consumer perspective (some use cases may cause this Id to change - For instance, a use case may require the transfer of ownership of the entity, but these cases are handled automatically on the server).
+          readOnly: true
+      additionalProperties: false
+      description: |
+        A model base class whose instances are bound to a specific tenant.  This model adds a tenantId to the base model class that it extends and is automatically set by the server.
+    prism.v4.r0.b1.config.Reference:
+      type: object
+      properties:
+        resourceId:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+          description: |
+            The external identifier of the resource which uniquely identifies it.
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/common.v1.r0.b1.response.ApiLink'
+      additionalProperties: false
+      description: |
+        Contains references for entities given in EntityAssociation.
+        This contains the entity ID and a list of links to fetch the associated entities.
+    prism.v4.r0.b1.config.AssociationDetailOld:
+      description: |
+        This attribute contains the list of entities which have been assigned the given category.<br>
+        These entities are grouped by entity types (like VM or HOST) or policy types (like PROTECTION_POLICY or
+        NGT_POLICY).<br>
+        Each associated object contains the total entities belonging to the given entity type, category extId, and
+        references (for example for VM it'd be VM UUID).
+      allOf:
+      - $ref: '#/components/schemas/prism.v4.r0.b1.config.CategoryAssociationSummaryOld'
+      - type: object
+        properties:
+          resourceReferences:
+            type: array
+            items:
+              $ref: '#/components/schemas/prism.v4.r0.b1.config.Reference'
+        additionalProperties: false
+    prism.v4.r0.b1.operations.BatchSpec:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/prism.v4.r0.b1.operations.BatchSpecMetadata'
+        payload:
+          maxItems: 500
+          minItems: 0
+          type: array
+          items:
+            $ref: '#/components/schemas/prism.v4.r0.b1.operations.BatchSpecPayload'
+      additionalProperties: false
+      description: The input specification for performing the batch operation.
+    prism.v4.r0.b1.operations.SubmitBatchApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - $ref: '#/components/schemas/prism.v4.r0.b1.config.TaskReference'
+          - $ref: '#/components/schemas/prism.v4.r0.b1.error.ErrorResponse'
+      additionalProperties: false
+      description: REST response for all response codes in API path /prism/v4.0.b1/operations/$actions/batch
+        Post operation
+    prism.v4.r0.b1.operations.BatchSpecMetadata:
+      required:
+      - action
+      - name
+      - uri
+      type: object
+      properties:
+        action:
+          $ref: '#/components/schemas/prism.v4.r0.b1.operations.ActionType'
+        name:
+          maxLength: 256
+          type: string
+          description: An user friendly name of the batch.
+        uri:
+          type: string
+          description: The absolute URI of the API operation on which batching will
+            be performed.
+        stopOnError:
+          type: boolean
+          description: A flag indicating whether the batch procession should halt
+            or continue when an error response is received from the server during
+            the execution of a batch chunk
+        chunkSize:
+          minimum: 1
+          type: integer
+          description: The chunk size to use during the batching operation. If not
+            specified a minimum value of 1 would be chosen.
+          default: 1
+      additionalProperties: false
+      description: The metadata section on the input specification for performing
+        the batch operation.
+    prism.v4.r0.b1.operations.BatchSpecPayload:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/prism.v4.r0.b1.operations.BatchSpecPayloadMetadata'
+        data:
+          type: object
+          additionalProperties: true
+          description: The data section of the payload provided to the batch operation.
+      additionalProperties: false
+      description: The specification corresponding to the actual payload provided
+        as an input to the batch operation.
+    prism.v4.r0.b1.operations.ActionType:
+      type: string
+      description: The batch request has been accepted for processing.
+      enum:
+      - $UNKNOWN
+      - $REDACTED
+      - CREATE
+      - MODIFY
+      - ACTION
+      - DELETE
+      x-enumDescriptions:
+        DELETE: Batch delete entities.
+        CREATE: Batch create entities.
+        ACTION: Batch perform custom action.
+        MODIFY: Batch update entities.
+    prism.v4.r0.b1.operations.BatchSpecPayloadMetadata:
+      type: object
+      properties:
+        headers:
+          type: array
+          items:
+            $ref: '#/components/schemas/prism.v4.r0.b1.operations.BatchSpecPayloadMetadataHeader'
+        path:
+          type: array
+          items:
+            $ref: '#/components/schemas/prism.v4.r0.b1.operations.BatchSpecPayloadMetadataPath'
+      additionalProperties: false
+      description: The metadata section on the input specification for performing
+        the batch operation.
+    prism.v4.r0.b1.operations.BatchSpecPayloadMetadataHeader:
+      required:
+      - name
+      - value
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the header parameter.
+        value:
+          type: string
+          description: The value of the header parameter.
+      additionalProperties: false
+      description: The metadata section on the input specification for performing
+        the batch operation.
+    prism.v4.r0.b1.operations.BatchSpecPayloadMetadataPath:
+      required:
+      - name
+      - value
+      type: object
+      properties:
+        name:
+          type: string
+          description: The name of the  path parameter.
+        value:
+          type: string
+          description: The value of the  path parameter.
+      additionalProperties: false
+      description: The metadata section on the input specification for performing
+        the batch operation.
+    prism.v4.r0.b1.operations.ListBatchesApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/prism.v4.r0.b1.operations.Batch'
+          - $ref: '#/components/schemas/prism.v4.r0.b1.error.ErrorResponse'
+      additionalProperties: false
+      description: REST response for all response codes in API path /prism/v4.0.b1/operations/batches
+        Get operation
+    prism.v4.r0.b1.operations.Batch:
+      description: A model that represents a Batch resource.
+      allOf:
+      - $ref: '#/components/schemas/common.v1.r0.b1.response.ExternalizableAbstractModel'
+      - type: object
+        properties:
+          name:
+            maxLength: 256
+            type: string
+            description: An user friendly name of the batch.
+          startTime:
+            type: string
+            description: |
+              The execution start time of the batch. The value will be in extended ISO-8601 format. For example, start time of 2022-04-23T01:23:45.678+09:00 would imply that the batch started execution at 1:23:45.678  on the 23rd of April 2022. Details around ISO-8601 format can be found at https://www.iso.org/standard/70907.html
+            format: date-time
+            readOnly: true
+          endTime:
+            type: string
+            description: |
+              The completion time of the batch. The value will be in extended ISO-8601 format. For example, end time of 2022-04-23T01:23:45.678+09:00 would imply that the batch completed its execution at 1:23:45.678  on the 23rd of April 2022. Details around ISO-8601 format can be found at https://www.iso.org/standard/70907.html
+            format: date-time
+            readOnly: true
+          size:
+            type: integer
+            description: The total number of elements submitted for processing in
+              the batch.
+            format: int32
+          successCount:
+            type: integer
+            description: The total number of elements successfully processed in the
+              batch.
+            format: int32
+          failedCount:
+            type: integer
+            description: The total number of elements that failed to be processed
+              in the batch.
+            format: int32
+          completionStatus:
+            $ref: '#/components/schemas/prism.v4.r0.b1.operations.BatchCompletionStatus'
+          executionStatus:
+            $ref: '#/components/schemas/prism.v4.r0.b1.operations.BatchExecutionStatus'
+        additionalProperties: false
+    prism.v4.r0.b1.operations.BatchCompletionStatus:
+      type: string
+      description: The completion status of the batch.
+      enum:
+      - $UNKNOWN
+      - $REDACTED
+      - SUCCEEDED
+      - FAILED
+      - PARTIALLY_SUCCEEDED
+      - CANCELLED
+    prism.v4.r0.b1.operations.BatchExecutionStatus:
+      type: string
+      description: The completion status of the batch.
+      enum:
+      - $UNKNOWN
+      - $REDACTED
+      - IN_PROGRESS
+      - COMPLETED
+    prism.v4.r0.b1.operations.GetBatchApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - $ref: '#/components/schemas/prism.v4.r0.b1.operations.Batch'
+          - $ref: '#/components/schemas/prism.v4.r0.b1.error.ErrorResponse'
+      additionalProperties: false
+      description: "REST response for all response codes in API path /prism/v4.0.b1/operations/batches/{extId}\
+        \ Get operation"
+  securitySchemes:
+    basicAuthScheme:
+      type: http
+      scheme: basic

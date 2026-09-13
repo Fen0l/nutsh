@@ -1,0 +1,100 @@
+[
+  {
+    "$objectType": "prism.v4.config.Task",
+    "extId": "ZXJnb24=:11111111-1111-4111-8111-000000000001",
+    "operation": "VmPowerOn",
+    "operationDescription": "Power on VM",
+    "status": "SUCCEEDED",
+    "progressPercentage": 100,
+    "createdTime": "2026-09-05T09:58:00Z",
+    "startedTime": "2026-09-05T09:58:01Z",
+    "completedTime": "2026-09-05T09:58:20Z",
+    "lastUpdatedTime": "2026-09-05T09:58:20Z",
+    "isCancelable": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "entitiesAffected": [
+      {
+        "$objectType": "prism.v4.config.EntityReference",
+        "extId": "3d0c4a2e-1b8f-4c1a-9e2f-000000000001",
+        "rel": "vmm:ahv:config:vm",
+        "name": "web-01"
+      }
+    ],
+    "subSteps": [],
+    "completionDetails": [
+      { "name": "hostExtId", "value": "7b2f2f70-0f6a-4b58-9f9b-000000000020" },
+      { "name": "durationMs", "value": "19000" }
+    ]
+  },
+  {
+    "$objectType": "prism.v4.config.Task",
+    "extId": "ZXJnb24=:11111111-1111-4111-8111-000000000002",
+    "operation": "VmDelete",
+    "operationDescription": "Delete VM",
+    "status": "FAILED",
+    "progressPercentage": 40,
+    "createdTime": "2026-09-05T09:50:00Z",
+    "startedTime": "2026-09-05T09:50:01Z",
+    "completedTime": "2026-09-05T09:50:09Z",
+    "lastUpdatedTime": "2026-09-05T09:50:09Z",
+    "isCancelable": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "entitiesAffected": [
+      {
+        "$objectType": "prism.v4.config.EntityReference",
+        "extId": "3d0c4a2e-1b8f-4c1a-9e2f-000000000003",
+        "rel": "vmm:ahv:config:vm",
+        "name": "db-01"
+      }
+    ],
+    "subSteps": [],
+    "errorMessages": [
+      { "message": "VM has a volume group attached", "severity": "ERROR", "code": "VMM-40023" },
+      { "message": "detach it and retry", "severity": "INFO", "code": "VMM-40024" }
+    ]
+  },
+  {
+    "$objectType": "prism.v4.config.Task",
+    "extId": "ZXJnb24=:11111111-1111-4111-8111-000000000003",
+    "operation": "VmMigrate",
+    "operationDescription": "Migrate VM to host",
+    "status": "RUNNING",
+    "progressPercentage": 40,
+    "createdTime": "2026-09-05T09:59:00Z",
+    "startedTime": "2026-09-05T09:59:02Z",
+    "lastUpdatedTime": "2026-09-05T09:59:40Z",
+    "isCancelable": true,
+    "numberOfSubtasks": 3,
+    "numberOfEntitiesAffected": 1,
+    "entitiesAffected": [
+      {
+        "$objectType": "prism.v4.config.EntityReference",
+        "extId": "3d0c4a2e-1b8f-4c1a-9e2f-000000000002",
+        "rel": "vmm:ahv:config:vm",
+        "name": "web-02"
+      }
+    ],
+    "subSteps": [
+      { "name": "Pre-migration checks", "status": "SUCCEEDED", "progressPercentage": 100 },
+      { "name": "Copy memory", "status": "RUNNING", "progressPercentage": 20 },
+      { "name": "Switch over", "status": "QUEUED", "progressPercentage": 0 }
+    ]
+  },
+  {
+    "$objectType": "prism.v4.config.Task",
+    "extId": "ZXJnb24=:11111111-1111-4111-8111-000000000004",
+    "operation": "ImageCreate",
+    "operationDescription": "Create image",
+    "status": "QUEUED",
+    "progressPercentage": 0,
+    "createdTime": "2026-09-05T09:59:50Z",
+    "lastUpdatedTime": "2026-09-05T09:59:50Z",
+    "isCancelable": true,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 0,
+    "entitiesAffected": [],
+    "subSteps": []
+  }
+]

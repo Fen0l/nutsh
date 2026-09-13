@@ -1,0 +1,12 @@
+[
+  {
+    "$objectType": "vmm.v4.ahv.config.Nic",
+    "extId": "1a2b3c4d-0000-4000-8000-000000000301",
+    "backingInfo": { "macAddress": "00:00:5e:00:53:01" },
+    "networkInfo": {
+      "nicType": "NORMAL_NIC",
+      "subnet": { "extId": "2b3c4d5e-0000-4000-8000-000000000401" },
+      "ipv4Config": { "ipAddress": { "value": "203.0.113.11", "prefixLength": 32 } }
+    }
+  }
+]

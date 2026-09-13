@@ -1,0 +1,1147 @@
+openapi: 3.0.1
+info:
+  title: Nutanix AIOps APIs
+  description: "Manage infrastructure on-premises and in the cloud seamlessly through\
+    \ AIOps features such as Analysis, Reporting, Capacity Planning, What if Analysis,\
+    \ VM Rightsizing, Troubleshooting, App Discovery, Broad Observability, and Ops\
+    \ Automation through Playbooks."
+  version: 4.0.1-alpha-1
+  x-logo:
+    altText: Aiops Logo
+    url: https://developers.nutanix.com/api/v1/namespaces/aiops/images/aiops-logo-img.svg
+  x-repo-name: aiops
+  x-minimum-negotiation-version: v4.1
+servers:
+- url: "https://{pc-ip}:9440/api"
+security:
+- basicAuthScheme: []
+- apiKeyAuthScheme: []
+paths:
+  /aiops/v4.0.a1/blackout/operation: {}
+  /aiops/v4.0.a1/blackout/$action/bulk-delete: {}
+  /aiops/v4.0.a1/blackout/calculate-runway: {}
+  /aiops/v4.0.a1/blackout/{clusterType}/clusters/{clusterUuid}/tasks: {}
+  /aiops/v4.0.a1/cluster-metrics/{extId}:
+    get:
+      tags:
+      - Cluster
+      summary: "Returns information regarding the total, used and available resources\
+        \ (cpu, memory, storage) for the given cluster"
+      description: Fetch information about resource usage of given cluster
+      operationId: getClusterResourceById
+      parameters:
+      - name: extId
+        in: path
+        description: The UUID of the cluster
+        required: true
+        style: simple
+        explode: false
+        schema:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+          example: debe6776-de59-4a04-8506-34e0251a69cf
+      responses:
+        "200":
+          description: Successfully returns the resource details for the given cluster
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/aiops.v4.r0.a1.clusterMetrics.ClusterMetrics'
+                additionalProperties: false
+                description: "REST response for all response codes in api path /aiops/v4.0.a1/cluster-metrics/{extId}\
+                  \ Get operation"
+        "4XX":
+          description: Client error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/aiops.v4.r0.a1.error.ErrorResponse'
+                additionalProperties: false
+                description: "REST response for all response codes in api path /aiops/v4.0.a1/cluster-metrics/{extId}\
+                  \ Get operation"
+        "5XX":
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/aiops.v4.r0.a1.error.ErrorResponse'
+                additionalProperties: false
+                description: "REST response for all response codes in api path /aiops/v4.0.a1/cluster-metrics/{extId}\
+                  \ Get operation"
+      x-code-samples:
+      - lang: Java
+        source: |2
+
+          package sample;
+
+          import com.nutanix.aio.java.client.ApiClient;
+          import com.nutanix.aio.java.client.api.ClusterApi;
+
+          public class JavaSdkSample {
+              public static void main(String[] args) {
+                  // Configure the client
+                  ApiClient apiClient = new ApiClient();
+                  // IPv4/IPv6 address or FQDN of the cluster
+                  apiClient.setHost("localhost");
+                  // Port to which to connect to
+                  apiClient.setPort(9440);
+                  // Interval in ms to use during retry attempts
+                  apiClient.setRetryInterval(5000);
+                  // Max retry attempts while reconnecting on a loss of connection
+                  apiClient.setMaxRetryAttempts(5);
+                  // UserName to connect to the cluster
+                  String username = "username";
+                  // Password to connect to the cluster
+                  String password = "password";
+                  apiClient.setUsername(username);
+                  apiClient.setPassword(password);
+
+                  // Please add authorization information here if needed.
+                  ClusterApi clusterApi = new ClusterApi(apiClient);
+
+                  String extId = "eBC0Cdcf-ebcC-a9Eb-FFC5-c4bcEef2F9EA";
+
+                  try {
+                      byte[] byte[] = clusterApi.getClusterResourceById(extId);
+                  } catch (RestClientException ex) {
+                      System.out.println(ex.getMessage());
+                  }
+              }
+          }
+      - lang: JavaScript
+        source: |2
+
+          import ApiClient from "@nutanix/neuron-js-client/src/ApiClient";
+          import ClusterApi from "@nutanix/neuron-js-client/src/apis/cluster-endpoints";
+          // Configure the client
+          let apiClientInstance = new ApiClient();
+          // IPv4/IPv6 address or FQDN of the cluster
+          apiClientInstance.host = 'localhost'
+          // Port to which to connect to
+          apiClientInstance.port = '9440';
+          // Max retry attempts while reconnecting on a loss of connection
+          apiClientInstance.maxRetryAttempts = 5;
+          // Interval in ms to use during retry attempts
+          apiClientInstance.retryInterval = 5000;
+          // UserName to connect to the cluster
+          apiClientInstance.username = 'username';
+          // Password to connect to the cluster
+          apiClientInstance.password = 'password';
+          // Please add authorization information here if needed.
+          let clusterApi = new ClusterApi(apiClientInstance);
+
+          function sample() {
+              let extId = "deCBFA3A-c8BD-Dd31-B2F9-CE65DbFC3B9c";
+
+              clusterApi.getClusterResourceById(extId).then(({data, response}) => {
+                  console.log(`API returned the following status code: ${response.status}`);
+                  console.log(data.getData());
+              }).catch((error) => {
+                  console.log(`Error is: ${err}`);
+              });
+          }
+          sample()
+      - lang: Python
+        source: |2
+
+          import ntnx_neuron_py_client
+
+          if __name__ == "__main__":
+              # Configure the client
+              config = ntnx_neuron_py_client.Configuration()
+              # IPv4/IPv6 address or FQDN of the cluster
+              config.host = "localhost"
+              # Port to which to connect to
+              config.port = 9440
+              # Max retry attempts while reconnecting on a loss of connection
+              config.max_retry_attempts = 3
+              # Backoff factor to use during retry attempts
+              config.backoff_factor = 3
+              # UserName to connect to the cluster
+              config.username = "username"
+              # Password to connect to the cluster
+              config.password = "password"
+              # Please add authorization information here if needed.
+              client = ntnx_neuron_py_client.ApiClient(configuration=config)
+              cluster_api = ntnx_neuron_py_client.ClusterApi(api_client=client)
+              ext_id = "5C1DbdBC-Fd92-FAbB-cb7F-5ddDfEceEA5C"
+
+              try:
+                  api_response = cluster_api.get_cluster_resource_by_id(extId=ext_id)
+              except ntnx_neuron_py_client.rest.ApiException as e:
+                  print(e)
+      - lang: Go
+        source: |2+
+
+          package main
+
+          import (
+              "fmt"
+              "github.com/nutanix/ntnx-api-golang-clients/neuron-go-client/v4/api"
+              "github.com/nutanix/ntnx-api-golang-clients/neuron-go-client/v4/client"
+          )
+
+          var (
+              ApiClientInstance *client.ApiClient
+              ClusterApiInstance *api.ClusterApi
+          )
+
+          func main() {
+              ApiClientInstance = client.NewApiClient()
+              // IPv4/IPv6 address or FQDN of the cluster
+              ApiClientInstance.Host = "localhost"
+              // Port to which to connect to
+              ApiClientInstance.Port = 9440
+              // Interval in ms to use during retry attempts
+              ApiClientInstance.RetryInterval = 5000
+              // Max retry attempts while reconnecting on a loss of connection
+              ApiClientInstance.MaxRetryAttempts = 5
+              // UserName to connect to the cluster
+              ApiClientInstance.Username = "username"
+              // Password to connect to the cluster
+              ApiClientInstance.Password = "password"
+              // Please add authorization information here if needed.
+              ClusterApiInstance = api.NewClusterApi(ApiClientInstance)
+
+              extId := "FfBb1Eca-Aeeb-db08-FfDe-0eDeaFB9F0Ab"
+
+              response, error := ClusterApiInstance.GetClusterResourceById(&extId)
+              if error != nil {
+                  fmt.Println(error)
+                  return
+              }
+              data, _ := response.Data.MarshalJSON()
+              fmt.Println(string(data))
+          }
+
+      - lang: cURL
+        source: |2
+
+          curl --request GET \
+               --url "https://{pc-ip}:9440/api/aiops/v4.0.a1/cluster-metrics/Ce88EFE2-E027-7bde-41db-4CBEF0d8cCDD" \
+               --header 'Accept: application/json' \
+      - lang: Wget
+        source: |2
+
+          wget --verbose \
+               --method GET \
+               --header 'Accept: application/json' \
+               - "https://{pc-ip}:9440/api/aiops/v4.0.a1/cluster-metrics/37E8b5C0-fBbC-3A1F-F6FE-3C0f92Ab6eAD"
+  /aiops/v4.0.a1/cluster-metrics:
+    get:
+      tags:
+      - Cluster
+      summary: "Returns information regarding the total, used and available resources\
+        \ (cpu, memory, storage) for all the clusters in Prism Central"
+      description: Fetch information about resource usage for all the clusters in
+        Prism Central
+      operationId: listResourcesForAllClusters
+      parameters:
+      - name: $page
+        in: query
+        description: |
+          A URL query parameter that specifies the page number of the result set.  Must be a positive integer between 0 and the maximum number of pages that are available for that resource. Any number out of this range will lead to no results being returned.
+        required: false
+        style: form
+        explode: false
+        schema:
+          minimum: 0
+          type: integer
+          description: |
+            A URL query parameter that specifies the page number of the result set.  Must be a positive integer between 0 and the maximum number of pages that are available for that resource. Any number out of this range will lead to no results being returned.
+          format: int32
+          default: 0
+      - name: $limit
+        in: query
+        description: |
+          A URL query parameter that specifies the total number of records returned in the result set.  Must be a positive integer between 0 and 100. Any number out of this range will lead to a validation error. If the limit is not provided a default value of 50 records will be returned in the result set.
+        required: false
+        style: form
+        explode: false
+        schema:
+          maximum: 100
+          type: integer
+          description: |
+            A URL query parameter that specifies the total number of records returned in the result set.  Must be a positive integer between 0 and 100. Any number out of this range will lead to a validation error. If the limit is not provided a default value of 50 records will be returned in the result set.
+          format: int32
+          default: 50
+      - name: $filter
+        in: query
+        description: |
+          A URL query parameter that allows clients to filter a collection of resources. The expression specified with $filter is evaluated for each resource in the collection, and only items where the expression evaluates to true are included in the response. Expression specified with the $filter must conform to the OData V4.01 URL conventions.
+          The filter can be applied on the following fields:
+          - clusterName
+          - extId
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: string
+      - name: $orderby
+        in: query
+        description: |
+          A URL query parameter that allows clients to specify the sort criteria for the returned list of objects. Resources can be sorted in ascending order using asc or descending order using desc. If asc or desc are not specified the resources will be sorted in ascending order by default. For example, 'orderby=templateName desc' would get all templates sorted by templateName in desc order.
+          The orderby can be applied to the following fields:
+          - clusterName
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: string
+      responses:
+        "200":
+          description: Successfully returns the resource for the all clusters under
+            the Prism Central
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/aiops.v4.r0.a1.clusterMetrics.ClusterMetrics'
+                additionalProperties: false
+                description: REST response for all response codes in api path /aiops/v4.0.a1/cluster-metrics
+                  Get operation
+        "4XX":
+          description: Client error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/aiops.v4.r0.a1.error.ErrorResponse'
+                additionalProperties: false
+                description: REST response for all response codes in api path /aiops/v4.0.a1/cluster-metrics
+                  Get operation
+        "5XX":
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/aiops.v4.r0.a1.error.ErrorResponse'
+                additionalProperties: false
+                description: REST response for all response codes in api path /aiops/v4.0.a1/cluster-metrics
+                  Get operation
+      x-code-samples:
+      - lang: Java
+        source: |2
+
+          package sample;
+
+          import com.nutanix.aio.java.client.ApiClient;
+          import com.nutanix.aio.java.client.api.ClusterApi;
+
+          public class JavaSdkSample {
+              public static void main(String[] args) {
+                  // Configure the client
+                  ApiClient apiClient = new ApiClient();
+                  // IPv4/IPv6 address or FQDN of the cluster
+                  apiClient.setHost("localhost");
+                  // Port to which to connect to
+                  apiClient.setPort(9440);
+                  // Interval in ms to use during retry attempts
+                  apiClient.setRetryInterval(5000);
+                  // Max retry attempts while reconnecting on a loss of connection
+                  apiClient.setMaxRetryAttempts(5);
+                  // UserName to connect to the cluster
+                  String username = "username";
+                  // Password to connect to the cluster
+                  String password = "password";
+                  apiClient.setUsername(username);
+                  apiClient.setPassword(password);
+
+                  // Please add authorization information here if needed.
+                  ClusterApi clusterApi = new ClusterApi(apiClient);
+
+                  int page = 0;
+                  int limit = 50;
+
+                  try {
+                      byte[] byte[] = clusterApi.listResourcesForAllClusters(page, limit, null, null);
+                  } catch (RestClientException ex) {
+                      System.out.println(ex.getMessage());
+                  }
+              }
+          }
+      - lang: JavaScript
+        source: |2
+
+          import ApiClient from "@nutanix/neuron-js-client/src/ApiClient";
+          import ClusterApi from "@nutanix/neuron-js-client/src/apis/cluster-endpoints";
+          // Configure the client
+          let apiClientInstance = new ApiClient();
+          // IPv4/IPv6 address or FQDN of the cluster
+          apiClientInstance.host = 'localhost'
+          // Port to which to connect to
+          apiClientInstance.port = '9440';
+          // Max retry attempts while reconnecting on a loss of connection
+          apiClientInstance.maxRetryAttempts = 5;
+          // Interval in ms to use during retry attempts
+          apiClientInstance.retryInterval = 5000;
+          // UserName to connect to the cluster
+          apiClientInstance.username = 'username';
+          // Password to connect to the cluster
+          apiClientInstance.password = 'password';
+          // Please add authorization information here if needed.
+          let clusterApi = new ClusterApi(apiClientInstance);
+
+          function sample() {
+              //Construct List Options
+              var listOptions = new Object();
+              listOptions.page = 0;
+              listOptions.limit = 50;
+
+              clusterApi.listResourcesForAllClusters(listOptions).then(({data, response}) => {
+                  console.log(`API returned the following status code: ${response.status}`);
+                  console.log(data.getData());
+              }).catch((error) => {
+                  console.log(`Error is: ${err}`);
+              });
+          }
+          sample()
+      - lang: Python
+        source: |2
+
+          import ntnx_neuron_py_client
+
+          if __name__ == "__main__":
+              # Configure the client
+              config = ntnx_neuron_py_client.Configuration()
+              # IPv4/IPv6 address or FQDN of the cluster
+              config.host = "localhost"
+              # Port to which to connect to
+              config.port = 9440
+              # Max retry attempts while reconnecting on a loss of connection
+              config.max_retry_attempts = 3
+              # Backoff factor to use during retry attempts
+              config.backoff_factor = 3
+              # UserName to connect to the cluster
+              config.username = "username"
+              # Password to connect to the cluster
+              config.password = "password"
+              # Please add authorization information here if needed.
+              client = ntnx_neuron_py_client.ApiClient(configuration=config)
+              cluster_api = ntnx_neuron_py_client.ClusterApi(api_client=client)
+              page = 0
+              limit = 50
+
+              try:
+                  api_response = cluster_api.list_resources_for_all_clusters(_page=page, _limit=limit)
+              except ntnx_neuron_py_client.rest.ApiException as e:
+                  print(e)
+      - lang: Go
+        source: |2+
+
+          package main
+
+          import (
+              "fmt"
+              "github.com/nutanix/ntnx-api-golang-clients/neuron-go-client/v4/api"
+              "github.com/nutanix/ntnx-api-golang-clients/neuron-go-client/v4/client"
+          )
+
+          var (
+              ApiClientInstance *client.ApiClient
+              ClusterApiInstance *api.ClusterApi
+          )
+
+          func main() {
+              ApiClientInstance = client.NewApiClient()
+              // IPv4/IPv6 address or FQDN of the cluster
+              ApiClientInstance.Host = "localhost"
+              // Port to which to connect to
+              ApiClientInstance.Port = 9440
+              // Interval in ms to use during retry attempts
+              ApiClientInstance.RetryInterval = 5000
+              // Max retry attempts while reconnecting on a loss of connection
+              ApiClientInstance.MaxRetryAttempts = 5
+              // UserName to connect to the cluster
+              ApiClientInstance.Username = "username"
+              // Password to connect to the cluster
+              ApiClientInstance.Password = "password"
+              // Please add authorization information here if needed.
+              ClusterApiInstance = api.NewClusterApi(ApiClientInstance)
+
+              page := 0
+              limit := 50
+
+              response, error := ClusterApiInstance.ListResourcesForAllClusters(&page, &limit, nil, nil)
+              if error != nil {
+                  fmt.Println(error)
+                  return
+              }
+              data, _ := response.Data.MarshalJSON()
+              fmt.Println(string(data))
+          }
+
+      - lang: cURL
+        source: |2
+
+          curl --request GET \
+               --url "https://{pc-ip}:9440/api/aiops/v4.0.a1/cluster-metrics?filter=string_sample_data&limit=50&orderby=string_sample_data&page=0" \
+               --header 'Accept: application/json' \
+      - lang: Wget
+        source: |2
+
+          wget --verbose \
+               --method GET \
+               --header 'Accept: application/json' \
+               - "https://{pc-ip}:9440/api/aiops/v4.0.a1/cluster-metrics?filter=string_sample_data&limit=50&orderby=string_sample_data&page=0"
+components:
+  schemas:
+    aiops.v4.r0.a1.blackout.BlackoutOperation:
+      allOf:
+      - $ref: '#/components/schemas/common.v1.r0.a3.response.ExternalizableAbstractModel'
+      - type: object
+        properties:
+          operation:
+            $ref: '#/components/schemas/aiops.v4.r0.a1.blackout.Operation'
+          blackoutPeriod:
+            $ref: '#/components/schemas/aiops.v4.r0.a1.blackout.BlackoutPeriod'
+        additionalProperties: false
+    aiops.v4.r0.a1.blackout.BlackoutOperationsApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/aiops.v4.r0.a1.blackout.BlackoutOperation'
+          - $ref: '#/components/schemas/aiops.v4.r0.a1.error.ErrorResponse'
+      additionalProperties: false
+      description: REST response for all response codes in api path /aiops/v4.0.a1/blackout/operation
+        Post operation
+    aiops.v4.r0.a1.blackout.Operation:
+      type: string
+      enum:
+      - CREATE
+      - UPDATE
+      - $UNKNOWN
+      - $REDACTED
+    aiops.v4.r0.a1.blackout.BlackoutPeriod:
+      type: object
+      properties:
+        uuid:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+          description: UUID of the blackout period created.
+          example: 1d746ea9-f9d7-4398-bff2-650367ef02c8
+        name:
+          maxLength: 256
+          minLength: 1
+          type: string
+          example: string
+        startTime:
+          type: string
+          description: Start timestamp of the blackout period.
+          format: date-time
+          example: 2009-09-23T14:30:00-07:00
+        endTime:
+          type: string
+          description: End timestamp of the blackout period.
+          format: date-time
+          example: 2009-09-23T14:30:00-07:00
+        clusterType:
+          $ref: '#/components/schemas/aiops.v4.r0.a1.blackout.ClusterEntity'
+        clusterUuid:
+          type: string
+          description: Cluster UUID
+          example: string
+        resources:
+          type: array
+          description: Resources (cpu / memory / storage) for which blackout period
+            is defined.
+          items:
+            type: string
+            example: string
+      additionalProperties: false
+    aiops.v4.r0.a1.blackout.ClusterEntity:
+      type: string
+      enum:
+      - NUTANIX
+      - VCENTER
+      - $UNKNOWN
+      - $REDACTED
+    aiops.v4.r0.a1.blackout.BulkBlackoutPeriodDeleteApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - $ref: '#/components/schemas/aiops.v4.r0.a1.error.ErrorResponse'
+      additionalProperties: false
+      description: REST response for all response codes in api path /aiops/v4.0.a1/blackout/$action/bulk-delete
+        Post operation
+    aiops.v4.r0.a1.blackout.CalculateRunway:
+      allOf:
+      - $ref: '#/components/schemas/common.v1.r0.a3.response.ExternalizableAbstractModel'
+      - type: object
+        properties:
+          clusterUuid:
+            type: string
+            description: Cluster UUID
+            example: string
+          clusterType:
+            $ref: '#/components/schemas/aiops.v4.r0.a1.blackout.ClusterEntity'
+        additionalProperties: false
+    aiops.v4.r0.a1.blackout.CalculateRunwayResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - $ref: '#/components/schemas/prism.v4.r0.a1.config.TaskReference'
+          - $ref: '#/components/schemas/aiops.v4.r0.a1.error.ErrorResponse'
+      additionalProperties: false
+      description: REST response for all response codes in api path /aiops/v4.0.a1/blackout/calculate-runway
+        Post operation
+    aiops.v4.r0.a1.blackout.TasksListResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - type: array
+            items:
+              type: string
+              example: string
+          - $ref: '#/components/schemas/aiops.v4.r0.a1.error.ErrorResponse'
+      additionalProperties: false
+      description: "REST response for all response codes in api path /aiops/v4.0.a1/blackout/{clusterType}/clusters/{clusterUuid}/tasks\
+        \ Get operation"
+    aiops.v4.r0.a1.clusterMetrics.ClusterApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - $ref: '#/components/schemas/aiops.v4.r0.a1.clusterMetrics.ClusterMetrics'
+          - $ref: '#/components/schemas/aiops.v4.r0.a1.error.ErrorResponse'
+      additionalProperties: false
+      description: "REST response for all response codes in api path /aiops/v4.0.a1/cluster-metrics/{extId}\
+        \ Get operation"
+    aiops.v4.r0.a1.clusterMetrics.ClusterMetrics:
+      allOf:
+      - $ref: '#/components/schemas/common.v1.r0.a3.response.ExternalizableAbstractModel'
+      - type: object
+        properties:
+          clusterName:
+            type: string
+            description: Name of the cluster
+            example: string
+          externalIP:
+            $ref: '#/components/schemas/common.v1.r0.a3.config.IPv4Address'
+          cvmIPs:
+            type: array
+            description: CVM IPs of the nodes in the cluster
+            items:
+              $ref: '#/components/schemas/common.v1.r0.a3.config.IPv4Address'
+          totalMemorySizeBytes:
+            type: integer
+            description: Total memory size in bytes in the cluster
+            format: int64
+            example: 72
+          currentMemoryUsageSizeBytes:
+            type: integer
+            description: Total memory size in bytes currently being used by the active
+              VMs
+            format: int64
+            example: 75
+          provisionedMemoryUsageBytes:
+            type: integer
+            description: Total memory size in bytes provisioned for all the VMs
+            format: int64
+            example: 99
+          maxVmMemorySizeBytes:
+            type: integer
+            description: Largest possible memory size in bytes for the next VM that
+              can be added
+            format: int64
+            example: 5
+          availableMemorySizeBytes:
+            type: integer
+            description: Total amount of available memory in bytes for deploying new
+              VMs
+            format: int64
+            example: 55
+          largestPoweredOffVMMemory:
+            type: integer
+            description: Powered OFF VM with the largest memory size
+            format: int64
+            example: 5
+          totalVCpuCount:
+            type: integer
+            description: Total number of vCPUs in the cluster
+            format: int64
+            example: 25
+          currentUsedVCpuCount:
+            type: integer
+            description: Total number of vCPUs currently being used by the active
+              VMs
+            format: int64
+            example: 19
+          provisionedVCpuCount:
+            type: integer
+            description: Total number of vCPUs provisioned for all the VMs
+            format: int64
+            example: 9
+          maxVmVCpuSize:
+            type: integer
+            description: Largest possible VM size in vCPUs for the next VM that can
+              be added
+            format: int64
+            example: 68
+          availableVCpuCount:
+            type: integer
+            description: Total number of available VMs for deploying new VMs
+            format: int64
+            example: 85
+          largestPoweredOffVMVCpu:
+            type: integer
+            description: Largest powered OFF VM in terms of vCPU count
+            format: int64
+            example: 68
+          totalCpuHz:
+            type: integer
+            description: Total amount of CPU in hertz in the cluster
+            format: int64
+            example: 28
+          currentUsedCpuHz:
+            type: integer
+            description: Total amount of CPU in hertz currently being used by the
+              active VMs
+            format: int64
+            example: 98
+          provisionedCpuHz:
+            type: integer
+            description: Total amount of CPU in hertz provisioned for all the VMs
+            format: int64
+            example: 83
+          totalStorageCapacityRawBytes:
+            type: integer
+            description: Total storage in bytes capacity in the cluster
+            format: int64
+            example: 93
+          totalStorageCapacityLogicalBytes:
+            type: integer
+            description: Total logical storage in bytes capacity after considering
+              RF
+            format: int64
+            example: 53
+          totalStorageCapacityLogicalWithSavingsBytes:
+            type: integer
+            description: "Total logical storage capacity in bytes after accounting\
+              \ for savings from dedup, compressions,and erasure coding"
+            format: int64
+            example: 58
+          totalStorageUsageBytes:
+            type: integer
+            description: Total raw storage usage by the cluster
+            format: int64
+            example: 38
+          totalStorageAvailableBytes:
+            type: integer
+            description: Total raw storage bytes still available in the cluster
+            format: int64
+            example: 31
+          totalStorageAvailableLogicalBytes:
+            type: integer
+            description: Total logical storage bytes still available in the cluster
+            format: int64
+            example: 65
+        additionalProperties: false
+    aiops.v4.r0.a1.clusterMetrics.ClusterListApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/aiops.v4.r0.a1.clusterMetrics.ClusterMetrics'
+          - $ref: '#/components/schemas/aiops.v4.r0.a1.error.ErrorResponse'
+      additionalProperties: false
+      description: REST response for all response codes in api path /aiops/v4.0.a1/cluster-metrics
+        Get operation
+    common.v1.r0.a3.response.ExternalizableAbstractModel:
+      description: |
+        A model that represents an object instance that is accessible through an API endpoint.  Instances of this type get an extId field that contains the globally unique identifier for that instance.  Externally accessible instances are always tenant aware and therefore extend the TenantAwareModel
+      allOf:
+      - $ref: '#/components/schemas/common.v1.r0.a3.config.TenantAwareModel'
+      - type: object
+        properties:
+          extId:
+            pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+            type: string
+            description: |
+              A globally unique identifier of an instance that is suitable for external consumption.
+            nullable: true
+            example: 316663cc-b9f5-444b-922c-26bcf8a9b2d9
+          links:
+            type: array
+            description: |
+              A HATEOAS style link for the response.  Each link contains a user friendly name identifying the link and an address for retrieving the particular resource.
+            items:
+              $ref: '#/components/schemas/common.v1.r0.a3.response.ApiLink'
+        additionalProperties: false
+    common.v1.r0.a3.config.TenantAwareModel:
+      type: object
+      properties:
+        tenantId:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+          description: |
+            A globally unique identifier that represents the tenant that owns this entity.  It is automatically assigned by the system and is immutable from an API consumer perspective (some use cases may cause this Id to change - for instance a use case may require the transfer of ownership of the entity, but these cases are handled automatically on the server).
+          readOnly: true
+          example: cf7172ea-7b2a-481c-a05b-b2c6c0a8a369
+      additionalProperties: false
+      description: |
+        A model base class whose instances are bound to a specific tenant.  This model adds a tenantId to the base model class that it extends and is automatically set by the server.
+    common.v1.r0.a3.response.ApiLink:
+      type: object
+      properties:
+        href:
+          type: string
+          description: |
+            The URL at which the entity described by this link can be accessed.
+          example: string
+        rel:
+          type: string
+          description: |
+            A name that identifies the relationship of this link to the object that is returned by the URL.  The special value of "self" identifies the URL for the object.
+          example: string
+      additionalProperties: false
+      description: |
+        A HATEOAS style link for the response.  Each link contains a user friendly name identifying the link and an address for retrieving the particular resource.
+    aiops.v4.r0.a1.clusterMetrics.Cluster:
+      type: object
+      properties:
+        name:
+          type: string
+          example: string
+        uuid:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+          example: 9ef42d48-7380-4921-8bed-256008976bd4
+        externalIpAddress:
+          type: string
+          example: string
+        memoryCapacityBytes:
+          type: string
+          example: string
+        numCpus:
+          type: string
+          example: string
+        hypervisorMemoryUsagePpm:
+          type: string
+          example: string
+        hypervisorCpuUsagePpm:
+          type: string
+          example: string
+        rf:
+          type: string
+          example: string
+        capacityBytes:
+          type: string
+          example: string
+        freeBytes:
+          type: string
+          example: string
+        usageBytes:
+          type: string
+          example: string
+        savedBytes:
+          type: string
+          example: string
+      additionalProperties: false
+    aiops.v4.r0.a1.clusterMetrics.Vm:
+      type: object
+      properties:
+        vmUuid:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+          example: db7e18ef-d559-4c79-bfd2-c79372c14283
+        vmMemory:
+          type: string
+          example: string
+        numVcpus:
+          type: string
+          example: string
+        powerState:
+          type: string
+          example: string
+        node:
+          type: string
+          example: string
+      additionalProperties: false
+    aiops.v4.r0.a1.clusterMetrics.Node:
+      type: object
+      properties:
+        nodeUuid:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+          example: f88e1517-d638-4160-9abf-ac8d44d2dc7f
+        haMemoryReservedBytes:
+          type: string
+          example: string
+        numCpuThreads:
+          type: string
+          example: string
+        capacityHz:
+          type: string
+          example: string
+        memorySizeBytes:
+          type: string
+          example: string
+      additionalProperties: false
+    common.v1.r0.a3.config.IPv4Address:
+      type: object
+      properties:
+        value:
+          pattern: "^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
+          type: string
+          example: 88.216.126.240
+        prefixLength:
+          maximum: 32
+          minimum: 0
+          type: integer
+          description: |
+            The prefix length of the network to which this host IPv4 address belongs.
+          format: int32
+          default: 32
+      additionalProperties: false
+    aiops.v4.r0.a1.error.ErrorResponse:
+      type: object
+      properties:
+        error:
+          oneOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/aiops.v4.r0.a1.error.AppMessage'
+          - $ref: '#/components/schemas/aiops.v4.r0.a1.error.SchemaValidationError'
+      additionalProperties: false
+      description: This schema is auto-generated by the Open API Dev Platform as REST
+        response for 4xx and 5xx error responses.
+    aiops.v4.r0.a1.error.AppMessage:
+      type: object
+      properties:
+        message:
+          type: string
+          example: string
+        severity:
+          $ref: '#/components/schemas/common.v1.r0.a3.config.MessageSeverity'
+        code:
+          type: string
+          example: string
+        locale:
+          type: string
+          description: The locale for the message description.
+          default: en_US
+        errorGroup:
+          type: string
+          example: string
+        argumentsMap:
+          type: object
+          additionalProperties:
+            type: string
+      additionalProperties: false
+      description: This schema is generated from AppMessage.java
+    aiops.v4.r0.a1.error.MessageSeverity:
+      type: string
+      description: Enum schema MessageSeverity
+      enum:
+      - INFO
+      - WARNING
+      - ERROR
+      - $UNKNOWN
+      - $REDACTED
+      x-codegen-hint:
+        $any:
+        - type: entity-identifier
+          properties:
+            identifiers:
+            - value: $UNKNOWN
+              index: 201
+            - value: $REDACTED
+              index: 202
+            - value: INFO
+              index: 203
+            - value: WARNING
+              index: 204
+            - value: ERROR
+              index: 205
+    aiops.v4.r0.a1.error.SchemaValidationError:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          example: string
+        statusCode:
+          type: integer
+          example: 52
+        error:
+          type: string
+          example: string
+        path:
+          type: string
+          example: string
+        validationErrorMessages:
+          type: array
+          items:
+            $ref: '#/components/schemas/aiops.v4.r0.a1.error.SchemaValidationErrorMessage'
+      additionalProperties: false
+      description: This schema is generated from SchemaValidationError.java
+    aiops.v4.r0.a1.error.SchemaValidationErrorMessage:
+      type: object
+      properties:
+        location:
+          type: string
+          example: string
+        message:
+          type: string
+          example: string
+        attributePath:
+          type: string
+          example: string
+      additionalProperties: false
+      description: This schema is generated from SchemaValidationErrorMessage.java
+    common.v1.r0.a3.response.ApiResponseMetadata:
+      type: object
+      properties:
+        flags:
+          type: array
+          items:
+            $ref: '#/components/schemas/common.v1.r0.a3.config.Flag'
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/common.v1.r0.a3.response.ApiLink'
+        totalAvailableResults:
+          type: integer
+          format: int32
+          example: 16
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/common.v1.r0.a3.config.Message'
+        extraInfo:
+          type: array
+          description: |
+            An array of entity-specific metadata
+          items:
+            $ref: '#/components/schemas/common.v1.r0.a3.config.KVPair'
+      additionalProperties: false
+      description: |
+        The metadata associated with an API response. Always present and minimally contains the self-link for the API request that produced this response.  Also contains pagination data for paginated requests.
+    common.v1.r0.a3.config.Flag:
+      type: object
+      properties:
+        name:
+          type: string
+          example: string
+        value:
+          type: boolean
+          default: false
+      additionalProperties: false
+      description: |
+        Many entities in the Nutanix APIs carry flags.  This object captures all the flags associated with that entity through this object.  The field that hosts this type of object must have an attribute called x-bounded-map-keys that tells which flags are actually present for that entity.
+    common.v1.r0.a3.config.Message:
+      type: object
+      properties:
+        code:
+          type: string
+          description: |
+            A code that uniquely identifies a message.
+          example: string
+        message:
+          type: string
+          example: string
+        locale:
+          type: string
+          description: |
+            The locale for the message description.
+          default: en_US
+        severity:
+          $ref: '#/components/schemas/common.v1.r0.a3.config.MessageSeverity'
+      additionalProperties: false
+    common.v1.r0.a3.config.KVPair:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The key of this key-value pair
+          example: string
+        value:
+          description: The value associated with the key for this key-value pair
+          oneOf:
+          - type: string
+            example: string
+          - type: integer
+            example: 69
+      additionalProperties: false
+      description: |
+        A map describing a set of keys and their corresponding values.
+    common.v1.r0.a3.config.MessageSeverity:
+      type: string
+      description: |
+        The message severity.
+      enum:
+      - INFO
+      - WARNING
+      - ERROR
+      - $UNKNOWN
+      - $REDACTED
+    prism.v4.r0.a1.config.TaskReference:
+      type: object
+      properties:
+        extId:
+          pattern: "^[a-zA-Z0-9/+]*={0,2}:[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"
+          type: string
+          description: Globally unique identifier of a task.
+          example: QmFzZTY0RW5jb2RlZA==:5b3f95fc-0e55-4f79-9bc8-43f96e8c959d
+      additionalProperties: false
+      description: Reference to a task tracking the async operation.
+  securitySchemes:
+    basicAuthScheme:
+      type: http
+      scheme: basic
+    apiKeyAuthScheme:
+      type: apiKey
+      name: X-ntnx-api-key
+      in: header

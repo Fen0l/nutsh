@@ -1,0 +1,40 @@
+[
+  {
+    "$objectType": "lifecycle.v4.resources.Bundle",
+    "extId": "64cc3ab6-eaff-495a-8828-415cdc4e90d3",
+    "name": "name-07edba54",
+    "sizeBytes": 14831768556,
+    "type": "SOFTWARE",
+    "images": [
+      {
+        "$objectType": "lifecycle.v4.resources.Image",
+        "extId": "5e96adc7-4fc9-4749-b677-fe151419e871",
+        "files": [
+          {
+            "fileLocationId": "321e3346-44b9-4194-a148-3f95f51570e7",
+            "$objectType": "lifecycle.v4.resources.ImageFile",
+            "name": "name-51995fb4",
+            "sizeBytes": 14827507863,
+            "checksumType": "SHASUM",
+            "checksum": "6355bc7c16c8c6d1ffac97fb1c4bc54ea9d1133a4ebc272c146927458d8a0cb1"
+          },
+          {
+            "fileLocationId": "c82933b4-ac9a-4102-a9db-aeb365cef7ed",
+            "name": "name-494db12d",
+            "sizeBytes": 6221,
+            "checksumType": "SHASUM",
+            "checksum": "f3a86c6f1e0c3229931e8a8154c0d24408ab6a28fcdea8122f404cb5c3da6f2a"
+          }
+        ],
+        "clusterExtId": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b",
+        "isStub": false,
+        "entityClass": "PC Core Cluster",
+        "entityModel": "PC",
+        "entityVersion": "pc.7.6"
+      }
+    ],
+    "clusterExtId": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b",
+    "createdTime": "2026-07-27T12:49:29.569329Z",
+    "uploadMode": "TARGETED"
+  }
+]

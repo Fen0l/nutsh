@@ -1,0 +1,64 @@
+[
+  {
+    "$objectType": "licensing.v4.config.Compliance",
+    "extId": "000656bb-5516-939c-0000-00000001c1ce",
+    "isMulticluster": false,
+    "type": "NUTANIX",
+    "isDeleted": false,
+    "services": [
+      {
+        "$objectType": "licensing.v4.config.Service",
+        "name": "name-5f48afc2",
+        "licenseType": "NCM",
+        "isCompliant": true,
+        "enforcementLevel": "$UNKNOWN"
+      },
+      {
+        "name": "name-54f266ba",
+        "licenseType": "NUS",
+        "isCompliant": true,
+        "enforcementLevel": "$UNKNOWN"
+      },
+      {
+        "name": "name-a0538ede",
+        "licenseType": "NKPFS",
+        "isCompliant": true,
+        "enforcementLevel": "$UNKNOWN"
+      },
+      {
+        "name": "name-4b966ef6",
+        "licenseType": "NCM",
+        "isCompliant": true,
+        "enforcementLevel": "$UNKNOWN"
+      },
+      {
+        "name": "name-8c13b923",
+        "licenseType": "NUS",
+        "isCompliant": true,
+        "enforcementLevel": "$UNKNOWN"
+      }
+    ]
+  },
+  {
+    "$objectType": "licensing.v4.config.Compliance",
+    "extId": "583a712d-6913-4ff8-9b49-9ffcb9a43d9b",
+    "isMulticluster": true,
+    "type": "NUTANIX",
+    "isDeleted": false,
+    "services": [
+      {
+        "$objectType": "licensing.v4.config.Service",
+        "name": "name-54f266ba",
+        "licenseType": "NUS",
+        "isCompliant": true,
+        "enforcementLevel": "$UNKNOWN"
+      },
+      {
+        "name": "name-8c13b923",
+        "licenseType": "NUS",
+        "isCompliant": true,
+        "enforcementLevel": "$UNKNOWN"
+      }
+    ]
+  }
+]

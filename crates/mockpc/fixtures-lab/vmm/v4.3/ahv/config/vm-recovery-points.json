@@ -1,0 +1,844 @@
+[
+  {
+    "$objectType": "vmm.v4.ahv.config.VmRecoveryPoint",
+    "extId": "971bbf13-19dc-4167-b19d-d69888729298",
+    "locationAgnosticId": "642fd192-bcad-439c-acdd-8e43c07c3cbd",
+    "creationTime": "2026-09-10T07:25:40.420072Z",
+    "vmCategories": [
+      "vmCategories-a1fbebc4"
+    ],
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-f6ade998",
+    "expirationTime": "2026-09-10T08:25:40.43376Z",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "vmExtId": "c28529ad-8a2d-4bef-54b8-949984f971f2"
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.VmRecoveryPoint",
+    "extId": "40da4c2b-38d0-444f-8b5d-e652bd37a776",
+    "locationAgnosticId": "642fd192-bcad-439c-acdd-8e43c07c3cbd",
+    "creationTime": "2026-09-10T07:25:40.420072Z",
+    "vmCategories": [
+      "vmCategories-a1fbebc4"
+    ],
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-f6ade998",
+    "expirationTime": "2026-09-10T08:25:40.420072Z",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "vmExtId": "c28529ad-8a2d-4bef-54b8-949984f971f2"
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.VmRecoveryPoint",
+    "extId": "77e7f87b-2f2d-4a78-9aea-85ed073002cc",
+    "locationAgnosticId": "fbf207ff-f471-4d94-818e-f3749f1586cd",
+    "creationTime": "2026-09-10T06:36:17.859978Z",
+    "vmCategories": [
+      "vmCategories-4037562c"
+    ],
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-f1860af9",
+    "expirationTime": "2026-09-10T08:36:17.859978Z",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "vmExtId": "ff4991de-96e2-4c05-86e2-4acb20251803"
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.VmRecoveryPoint",
+    "extId": "bbbb6e97-f1d0-40c8-a12c-50f41fa8efdc",
+    "locationAgnosticId": "1b5dc8de-c7c3-472a-a2b6-c956e1885e87",
+    "creationTime": "2026-09-10T05:36:17.390299Z",
+    "vmCategories": [
+      "vmCategories-4037562c"
+    ],
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-8e36b1d6",
+    "expirationTime": "2026-09-10T07:36:17.390299Z",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "vmExtId": "ff4991de-96e2-4c05-86e2-4acb20251803"
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.VmRecoveryPoint",
+    "extId": "066a2fbb-670f-4908-b866-3bc5394c291f",
+    "locationAgnosticId": "fe5d452f-a3c3-4824-ae4f-38420088b73c",
+    "creationTime": "2026-09-10T05:12:56.328772Z",
+    "vmCategories": [
+      "vmCategories-b80f0340",
+      "vmCategories-b82da5b6"
+    ],
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-470bec21",
+    "expirationTime": "2026-09-10T11:12:56.328772Z",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "vmExtId": "11cf673a-7697-4f28-5045-7a1e39790f8e"
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.VmRecoveryPoint",
+    "extId": "bd7e4b56-890c-4289-994e-66085edc434a",
+    "locationAgnosticId": "1d8a92de-d502-4d40-aea0-7c1e076c1c9a",
+    "creationTime": "2026-09-10T04:56:41.110867Z",
+    "vmCategories": [
+      "vmCategories-b80f0340",
+      "vmCategories-a1fbebc4",
+      "vmCategories-3dd8b0e7",
+      "vmCategories-bd059e4d",
+      "vmCategories-6f6f05d5"
+    ],
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-9659f4b0",
+    "expirationTime": "2026-09-10T10:56:41.110867Z",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "vmExtId": "9d319fd5-0366-4334-bd9f-28d7e2657959"
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.VmRecoveryPoint",
+    "extId": "98827bd6-24c0-4272-b96d-77776760ece4",
+    "locationAgnosticId": "f98fbb04-76da-4b67-b41b-714228246c92",
+    "creationTime": "2026-09-10T04:56:36.975245Z",
+    "vmCategories": [
+      "vmCategories-b80f0340",
+      "vmCategories-6f6f05d5"
+    ],
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-648484e6",
+    "expirationTime": "2026-09-10T10:56:36.975245Z",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "vmExtId": "c429f7a2-16fe-4c5c-8eb7-bc5b9da0a746"
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.VmRecoveryPoint",
+    "extId": "d12bed0b-7353-4173-b70a-ec91734d61ad",
+    "locationAgnosticId": "3c375cba-ce73-41ae-b3cf-df7952a12a39",
+    "creationTime": "2026-09-10T04:56:33.868222Z",
+    "vmCategories": [
+      "vmCategories-b80f0340"
+    ],
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-253e83bf",
+    "expirationTime": "2026-09-10T10:56:33.868222Z",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "vmExtId": "b5a54e80-5ec4-444a-8de6-6bb251223eca"
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.VmRecoveryPoint",
+    "extId": "5b4db36e-52c8-4a3c-a231-7ffb8065edf3",
+    "locationAgnosticId": "107be589-0ec3-470d-89ed-b62301be15d9",
+    "creationTime": "2026-08-05T04:56:35.252157Z",
+    "vmCategories": [
+      "vmCategories-b80f0340"
+    ],
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-b8c8413c",
+    "expirationTime": "2026-08-05T10:56:35.252157Z",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "vmExtId": "8ecf1210-306e-4451-6d5f-7ae3a559c4ca"
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.VmRecoveryPoint",
+    "extId": "44130c62-a63a-405e-8fd1-b0e12ca89607",
+    "locationAgnosticId": "22f672a2-7976-4150-a8d6-69eeffd3204d",
+    "creationTime": "2026-08-01T10:33:13.403802Z",
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-5444a19e",
+    "expirationTime": "2026-08-01T16:33:04.315671Z",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "vmExtId": "b7309667-2b74-408d-63ef-eebbbe6e8226"
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.VmRecoveryPoint",
+    "extId": "48dac163-b2fc-4d94-9dab-6c2a4b527ae9",
+    "locationAgnosticId": "316ba37a-8d8a-4d94-913f-15604f120be3",
+    "creationTime": "2026-08-01T10:23:51.672028Z",
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-980b7925",
+    "expirationTime": "2026-08-01T16:23:42.580584Z",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "vmExtId": "5c395621-ff24-4185-5977-af77e6e4f23c"
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.VmRecoveryPoint",
+    "extId": "bc6b666c-dada-4195-849d-7ce8843b85d3",
+    "locationAgnosticId": "014452dd-60d4-49df-b938-16f90c867e1b",
+    "creationTime": "2026-08-01T10:18:53.690267Z",
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-ddf4fd01",
+    "expirationTime": "2026-08-01T16:18:44.604354Z",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "vmExtId": "cdb73f73-ed39-41aa-58c4-29f3948a6053"
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.VmRecoveryPoint",
+    "extId": "a85ac0a2-97a7-4012-b144-c5f006df99e5",
+    "locationAgnosticId": "971ab62f-0649-4628-bfb5-00456d53a242",
+    "creationTime": "2026-08-01T10:18:53.690267Z",
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-ddf4fd01",
+    "expirationTime": "2026-08-01T16:18:44.604354Z",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "vmExtId": "c138a913-47e6-4d5c-4757-7cb4910f9936"
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.VmRecoveryPoint",
+    "extId": "a3fe5d4f-e266-4834-bf61-45df2716d712",
+    "locationAgnosticId": "e7821364-9dde-4ccf-ad9f-6551b299d706",
+    "creationTime": "2026-08-01T10:13:55.720185Z",
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-aa1904e6",
+    "expirationTime": "2026-08-01T16:13:46.623684Z",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "vmExtId": "248c8358-1a72-41f1-4157-222fda562d02"
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.VmRecoveryPoint",
+    "extId": "1e46be43-e7b8-4501-bdcc-c6797569972a",
+    "locationAgnosticId": "6d468f2c-3c07-4ba9-99b8-c047fe98ce95",
+    "creationTime": "2026-08-01T10:13:55.720185Z",
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-aa1904e6",
+    "expirationTime": "2026-08-01T16:13:46.623684Z",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "vmExtId": "2ff002f2-b98b-4638-7269-30d860c2fdd1"
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.VmRecoveryPoint",
+    "extId": "1a6cf882-b350-4aae-aad6-d2c1aa15ea2a",
+    "locationAgnosticId": "f82cbe7b-816b-4e77-9a94-91fca0a0a8cf",
+    "creationTime": "2026-06-03T12:37:37.197014Z",
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-c13dc378",
+    "expirationTime": "2094-06-21T15:51:44Z",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "vmExtId": "6dd1553b-e510-4f66-7143-d7ff0bbfeade"
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.VmRecoveryPoint",
+    "extId": "6d8f239b-13a6-41dd-b9cf-eae76c14e65d",
+    "locationAgnosticId": "e7842b5d-61f9-44af-b835-ed0679be6352",
+    "creationTime": "2026-05-04T13:47:41.010784Z",
+    "vmCategories": [
+      "vmCategories-b80f0340",
+      "vmCategories-66004230"
+    ],
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-174fa676",
+    "expirationTime": "2026-05-04T19:47:40.020233Z",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "vmExtId": "e7adb543-336e-4e74-7347-09980910edd1"
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.VmRecoveryPoint",
+    "extId": "f645834e-8aee-4f34-98e9-820a132835a8",
+    "locationAgnosticId": "7582d1a7-52ef-40a6-8245-08d1c815b717",
+    "creationTime": "2026-05-04T13:47:39.004629Z",
+    "vmCategories": [
+      "vmCategories-b80f0340",
+      "vmCategories-66004230"
+    ],
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-965ca453",
+    "expirationTime": "2026-05-04T19:47:38.013845Z",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "vmExtId": "120d0627-2c61-4885-5742-fe9f86e884ab"
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.VmRecoveryPoint",
+    "extId": "b05c3f50-ba21-4159-91fb-6effac0342fe",
+    "locationAgnosticId": "a8e4a206-8dea-4303-9eab-460fd393abaa",
+    "creationTime": "2026-04-24T01:47:39.661629Z",
+    "vmCategories": [
+      "vmCategories-b80f0340",
+      "vmCategories-66004230"
+    ],
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-dc580ec3",
+    "expirationTime": "2026-04-24T07:47:38.675807Z",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "vmExtId": "8b341bc1-4f34-45a7-66b3-1cfa7edd8e5b"
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.VmRecoveryPoint",
+    "extId": "3724eee0-c706-45b0-a3cb-acc95ffbb3ad",
+    "locationAgnosticId": "186b2736-d5be-4031-938b-b565e964c3b2",
+    "creationTime": "2026-04-24T01:47:39.661629Z",
+    "vmCategories": [
+      "vmCategories-b80f0340",
+      "vmCategories-66004230"
+    ],
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-dc580ec3",
+    "expirationTime": "2026-04-24T07:47:38.675642Z",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "vmExtId": "77280869-01e9-4179-6d3d-3d3c865334ab"
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.VmRecoveryPoint",
+    "extId": "49939f29-188f-4593-8014-b5aa24fbdca2",
+    "locationAgnosticId": "b14df4e1-e88b-4a18-8afc-5fdee7ba8272",
+    "creationTime": "2026-03-12T22:26:40.381113Z",
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-ca0a2da3",
+    "expirationTime": "2026-04-11T22:26:38Z",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "vmExtId": "855cdabb-47a4-4b2b-59dc-229dd5b204a1"
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.VmRecoveryPoint",
+    "extId": "7fd1b0f7-8817-4fa1-8b66-6a0cb8361c96",
+    "locationAgnosticId": "e87280da-8e4a-46fe-b29d-f4a79c65838c",
+    "creationTime": "2026-03-12T22:23:11.751115Z",
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-ca0a2da3",
+    "expirationTime": "2026-04-11T22:23:10Z",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "vmExtId": "94652f9e-ccfc-4dd4-40b1-2c85dbd5f286"
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.VmRecoveryPoint",
+    "extId": "7330626b-0de4-4231-bb25-20794f02d666",
+    "locationAgnosticId": "95373356-2dc6-4a56-9bb6-b03b8401dff5",
+    "creationTime": "2026-01-15T05:36:00.043174Z",
+    "vmCategories": [
+      "vmCategories-b80f0340"
+    ],
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-39178f3a",
+    "expirationTime": "2026-01-15T11:35:59.041268Z",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "vmExtId": "7d5334ae-fb9f-4491-bef0-68d6b7a2f71e"
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.VmRecoveryPoint",
+    "extId": "b2e1e93b-814b-4f3a-a225-86984dee5d82",
+    "locationAgnosticId": "de6f5ebe-2662-4027-92ca-8e491c4bdd6e",
+    "creationTime": "2026-01-15T05:31:20.804658Z",
+    "vmCategories": [
+      "vmCategories-b80f0340"
+    ],
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-117b19df",
+    "expirationTime": "2026-01-15T11:31:18.802995Z",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "vmExtId": "fac3ffe2-5465-42ff-b8de-c793b975f011"
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.VmRecoveryPoint",
+    "extId": "aa9df6bb-f621-4dd6-bf90-948164150091",
+    "locationAgnosticId": "0a974a0f-a384-45a8-b27d-7c9b7930db4c",
+    "creationTime": "2026-01-15T05:26:01.477963Z",
+    "vmCategories": [
+      "vmCategories-b80f0340"
+    ],
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-238aac90",
+    "expirationTime": "2026-01-15T11:26:00.477142Z",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "vmExtId": "240c6a7b-534f-4781-9f52-b6eb3ac3bf74"
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.VmRecoveryPoint",
+    "extId": "637b3151-8dd9-4915-b626-1fbbbfe97b78",
+    "locationAgnosticId": "bb3a7523-4704-47b6-b493-6e5282c0253e",
+    "creationTime": "2026-01-15T03:21:35.458398Z",
+    "vmCategories": [
+      "vmCategories-b80f0340"
+    ],
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-05688f4e",
+    "expirationTime": "2026-01-15T09:21:34.45641Z",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "vmExtId": "907b4759-ee93-4974-b2aa-70eb087f7294"
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.VmRecoveryPoint",
+    "extId": "41e4f823-0bd3-4c32-93b1-84cbba61c7e6",
+    "locationAgnosticId": "701c70b6-229f-4896-baa6-6794fbc96439",
+    "creationTime": "2025-11-18T22:13:35.872885Z",
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-bcff2943",
+    "expirationTime": "2093-12-07T01:27:43Z",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "vmExtId": "e36ef849-48ca-40ca-5950-1758d7deb1fe"
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.VmRecoveryPoint",
+    "extId": "da74639b-46c7-4cbf-afff-88654e262c60",
+    "locationAgnosticId": "8d7ad954-ec97-4834-bc93-b3d10ca651d9",
+    "creationTime": "2025-11-18T21:16:35.384478Z",
+    "vmCategories": [
+      "vmCategories-b80f0340"
+    ],
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "expirationTime": "1969-12-31T23:59:59.999999Z",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "vmExtId": "483605c1-74c2-4c05-475f-dc884f799865"
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.VmRecoveryPoint",
+    "extId": "71a2c16d-d2bb-4646-8ca1-30faa6ef7c16",
+    "locationAgnosticId": "9ef9bf83-10b1-4a88-b568-14f3dd93f360",
+    "creationTime": "2025-11-18T21:16:34.356608Z",
+    "vmCategories": [
+      "vmCategories-b80f0340"
+    ],
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "expirationTime": "1969-12-31T23:59:59.999999Z",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "vmExtId": "16a0b1b2-ee0e-41f6-4e28-0366c5f3547d"
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.VmRecoveryPoint",
+    "extId": "3e6fb98d-4481-427a-9e01-0418f7481bd1",
+    "locationAgnosticId": "5c21edd8-5a92-4214-9bdf-c08e10357808",
+    "creationTime": "2025-11-18T21:11:37.129219Z",
+    "vmCategories": [
+      "vmCategories-b80f0340"
+    ],
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "expirationTime": "1969-12-31T23:59:59.999999Z",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "vmExtId": "0cd509ab-10a1-4a93-8705-148733d3f0e6"
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.VmRecoveryPoint",
+    "extId": "62cf8fda-a6e7-47aa-99df-97e209cdb454",
+    "locationAgnosticId": "7e292426-5ab7-43ab-ba6b-74207262d153",
+    "creationTime": "2025-09-18T05:12:57.410294Z",
+    "vmCategories": [
+      "vmCategories-b80f0340",
+      "vmCategories-b82da5b6"
+    ],
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-b988c8c8",
+    "expirationTime": "2025-09-18T11:12:56.409554Z",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "vmExtId": "11cf673a-7697-4f28-5045-7a1e39790f8e"
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.VmRecoveryPoint",
+    "extId": "1e356e7e-6f6c-413f-ac54-489bb91127d7",
+    "locationAgnosticId": "2bec26a4-9a84-42d8-945b-bd2c35b2bb4b",
+    "creationTime": "2025-09-18T04:56:42.791023Z",
+    "vmCategories": [
+      "vmCategories-b80f0340",
+      "vmCategories-bd059e4d",
+      "vmCategories-3dd8b0e7",
+      "vmCategories-6f6f05d5"
+    ],
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-0093711d",
+    "expirationTime": "2025-09-18T10:56:41.79015Z",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "vmExtId": "9d319fd5-0366-4334-bd9f-28d7e2657959"
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.VmRecoveryPoint",
+    "extId": "f8536ff2-5766-4999-8e2d-8cf2df99c71a",
+    "locationAgnosticId": "f0e35cff-d1ad-40e4-87ce-b6a05b65556e",
+    "creationTime": "2025-09-18T04:56:37.786353Z",
+    "vmCategories": [
+      "vmCategories-b80f0340",
+      "vmCategories-6f6f05d5"
+    ],
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-ecdf5783",
+    "expirationTime": "2025-09-18T10:56:36.785334Z",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "vmExtId": "c429f7a2-16fe-4c5c-8eb7-bc5b9da0a746"
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.VmRecoveryPoint",
+    "extId": "f190e909-3284-48b2-9949-cee04b566398",
+    "locationAgnosticId": "918894cb-b6d0-497a-933e-e207943a0e2a",
+    "creationTime": "2025-09-18T04:56:36.785334Z",
+    "vmCategories": [
+      "vmCategories-b80f0340"
+    ],
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-6bf023f8",
+    "expirationTime": "2025-09-18T10:56:35.782649Z",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "vmExtId": "8ecf1210-306e-4451-6d5f-7ae3a559c4ca"
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.VmRecoveryPoint",
+    "extId": "8990fd75-b2da-4849-bcf7-46d8b379bef2",
+    "locationAgnosticId": "3624d43d-7520-48a8-bc09-f1cd17b7b5b5",
+    "creationTime": "2025-09-18T04:56:35.782649Z",
+    "vmCategories": [
+      "vmCategories-b80f0340"
+    ],
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-7590bd02",
+    "expirationTime": "2025-09-18T10:56:33.779338Z",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "vmExtId": "b5a54e80-5ec4-444a-8de6-6bb251223eca"
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.VmRecoveryPoint",
+    "extId": "6929b580-f1cd-4fb3-a18e-8b9fa1ae230a",
+    "locationAgnosticId": "3083ed3f-39cb-4edb-998e-7a0e3ac5f837",
+    "creationTime": "2025-09-17T11:21:15.682138Z",
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "expirationTime": "2025-09-18T11:21:13.880543Z",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "vmExtId": "dfcada3a-359b-4fb2-5e82-e7f1bf5318e8"
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.VmRecoveryPoint",
+    "extId": "c4ebaf9c-7cbd-4429-bc6d-117b0408ab76",
+    "locationAgnosticId": "c7222482-da75-4011-9c3d-70f1889a8d6e",
+    "creationTime": "2025-09-15T10:31:29.812122Z",
+    "vmCategories": [
+      "vmCategories-47ca0720"
+    ],
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-1b4d2fec",
+    "expirationTime": "2025-09-16T10:31:29.826257Z",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "vmExtId": "3eb706cd-f117-4ef7-91cc-41fc47ea6538"
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.VmRecoveryPoint",
+    "extId": "8229bdab-3568-466f-a7f3-76761590ac9a",
+    "locationAgnosticId": "838a0169-752c-490c-a00b-679e97b84b90",
+    "creationTime": "2025-09-15T07:23:33.247985Z",
+    "vmCategories": [
+      "vmCategories-b80f0340"
+    ],
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-ebcd41f7",
+    "expirationTime": "2025-09-15T13:23:32.256125Z",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "vmExtId": "01fc3968-210f-4749-ba0c-d00fcfe6884d"
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.VmRecoveryPoint",
+    "extId": "dbb3fcd0-ec66-481d-a27b-92df0d6eb306",
+    "locationAgnosticId": "6375736e-6b45-446e-9d30-4fad3ba515db",
+    "creationTime": "2025-08-20T07:34:55.665Z",
+    "vmCategories": [
+      "vmCategories-47ca0720"
+    ],
+    "name": "name-d3bb44f0",
+    "expirationTime": "2025-08-21T07:34:54.673988Z",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "vmExtId": "3eb706cd-f117-4ef7-91cc-41fc47ea6538"
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.VmRecoveryPoint",
+    "extId": "9f9ecbc8-1ccc-48e3-9182-3d4a9819949b",
+    "locationAgnosticId": "7a1d62fe-7d01-4ffd-a001-8a89ad5a520b",
+    "creationTime": "2025-07-22T12:25:01.531223Z",
+    "vmCategories": [
+      "vmCategories-b80f0340"
+    ],
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "expirationTime": "1969-12-31T23:59:59.999999Z",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "vmExtId": "ed6bf697-5d94-45ae-afcf-91c644f2d329"
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.VmRecoveryPoint",
+    "extId": "34c7b206-1068-40f8-a3ca-d0d6cbc64399",
+    "locationAgnosticId": "0c01a9e4-0e37-4159-ac0a-005c0680b767",
+    "creationTime": "2025-07-22T12:20:46.366496Z",
+    "vmCategories": [
+      "vmCategories-b80f0340"
+    ],
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-07027cbe",
+    "expirationTime": "2093-08-09T15:34:52Z",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "vmExtId": "8ecf1210-306e-4451-6d5f-7ae3a559c4ca"
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.VmRecoveryPoint",
+    "extId": "15103e10-9b63-4c8f-8d5b-29e3f42c4591",
+    "locationAgnosticId": "0c01a9e4-0e37-4159-ac0a-005c0680b767",
+    "creationTime": "2025-07-22T12:20:46.366496Z",
+    "vmCategories": [
+      "vmCategories-b80f0340"
+    ],
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-07027cbe",
+    "expirationTime": "2093-08-09T15:34:51.743017Z",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "vmExtId": "8ecf1210-306e-4451-6d5f-7ae3a559c4ca"
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.VmRecoveryPoint",
+    "extId": "e52d6783-79d8-43eb-9a3a-85d363d70254",
+    "locationAgnosticId": "1accc59f-5c0b-4a3d-ace5-360f984b5fc0",
+    "creationTime": "2025-07-21T11:09:18.700846Z",
+    "vmCategories": [
+      "vmCategories-b80f0340"
+    ],
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-5142c237",
+    "expirationTime": "2093-08-08T14:23:24.523284Z",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "vmExtId": "8ecf1210-306e-4451-6d5f-7ae3a559c4ca"
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.VmRecoveryPoint",
+    "extId": "79e06b5c-239d-48e2-b199-d581bd0f9e91",
+    "locationAgnosticId": "1accc59f-5c0b-4a3d-ace5-360f984b5fc0",
+    "creationTime": "2025-07-21T11:09:18.700846Z",
+    "vmCategories": [
+      "vmCategories-b80f0340"
+    ],
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-5142c237",
+    "expirationTime": "2093-08-08T14:23:25Z",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "vmExtId": "8ecf1210-306e-4451-6d5f-7ae3a559c4ca"
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.VmRecoveryPoint",
+    "extId": "10d75f18-ba41-46ef-b914-2f6922386b9a",
+    "locationAgnosticId": "7f865c04-e41b-4789-839b-97f517e3b80f",
+    "creationTime": "2025-07-21T08:56:22.845982Z",
+    "vmCategories": [
+      "vmCategories-b80f0340"
+    ],
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "expirationTime": "2025-07-22T08:56:21.845571Z",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "vmExtId": "3be6384c-50c5-4f60-6cd1-d71649a0e6b8"
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.VmRecoveryPoint",
+    "extId": "835b45a1-3a8f-4373-b210-87a9e0dd9987",
+    "locationAgnosticId": "eb9c1bbc-a05b-483e-937a-d233e0f45cbf",
+    "creationTime": "2025-06-20T09:11:32.924046Z",
+    "vmCategories": [
+      "vmCategories-b80f0340",
+      "vmCategories-6f6f05d5"
+    ],
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-e71e966b",
+    "expirationTime": "2093-07-08T12:25:36.103705Z",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "vmExtId": "9d319fd5-0366-4334-bd9f-28d7e2657959"
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.VmRecoveryPoint",
+    "extId": "2c2e61f0-0b7e-4640-a063-eb6ed919cac6",
+    "locationAgnosticId": "eb9c1bbc-a05b-483e-937a-d233e0f45cbf",
+    "creationTime": "2025-06-20T09:11:32.924046Z",
+    "vmCategories": [
+      "vmCategories-b80f0340",
+      "vmCategories-6f6f05d5"
+    ],
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-e71e966b",
+    "expirationTime": "2093-07-08T12:25:37Z",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "vmExtId": "9d319fd5-0366-4334-bd9f-28d7e2657959"
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.VmRecoveryPoint",
+    "extId": "4be96951-6d67-493c-b5e7-a4f9ce90f605",
+    "locationAgnosticId": "e2fc969b-f19e-4d89-99cb-e5eff29b8875",
+    "creationTime": "2025-05-12T13:48:10.014734Z",
+    "vmCategories": [
+      "vmCategories-b80f0340"
+    ],
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "expirationTime": "2025-05-12T13:48:10.033694Z",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "vmExtId": "9e36211d-8848-403d-885a-ac39bc987232"
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.VmRecoveryPoint",
+    "extId": "8fc979f1-45f2-407b-853d-f3f054e091dd",
+    "locationAgnosticId": "194bbb64-0711-45fc-aedf-421f1d2f0d58",
+    "creationTime": "2025-05-12T09:42:42.919488Z",
+    "vmCategories": [
+      "vmCategories-156ec9af",
+      "vmCategories-b80f0340",
+      "vmCategories-c95953b4"
+    ],
+    "name": "name-fa3e2e22",
+    "expirationTime": "2025-05-13T21:42:41.925879Z",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "vmExtId": "9e36211d-8848-403d-885a-ac39bc987232"
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.VmRecoveryPoint",
+    "extId": "06235d41-0e7f-4f8d-b7fb-d982559c23f6",
+    "locationAgnosticId": "7c7c47f3-7a5e-4914-ade6-bacca77631b1",
+    "creationTime": "2025-05-12T09:29:48.692606Z",
+    "vmCategories": [
+      "vmCategories-4037562c"
+    ],
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-6f432c1b",
+    "expirationTime": "2025-05-12T11:29:47.690787Z",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "vmExtId": "9e4a2a85-33b5-465c-886c-85fa53f313a9"
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.VmRecoveryPoint",
+    "extId": "ea0a0f17-047f-44ad-a7ad-c6c3b3960b44",
+    "locationAgnosticId": "b0556783-0658-4302-8ca2-34ff2cdfa0d7",
+    "creationTime": "2025-05-12T09:17:56.235575Z",
+    "vmCategories": [
+      "vmCategories-6f6f05d5"
+    ],
+    "name": "name-ee080583",
+    "expirationTime": "2025-05-13T21:17:55.242815Z",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "vmExtId": "9d319fd5-0366-4334-bd9f-28d7e2657959"
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.VmRecoveryPoint",
+    "extId": "df4aa32d-869f-4e14-aac7-45b856b3a0b4",
+    "locationAgnosticId": "e88f2f7b-ea35-46c7-9688-b5321c939ebc",
+    "creationTime": "2025-05-12T09:17:55.234888Z",
+    "vmCategories": [
+      "vmCategories-b80f0340",
+      "vmCategories-6f6f05d5"
+    ],
+    "name": "name-5a638c5e",
+    "expirationTime": "2025-05-13T21:17:54.243788Z",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "vmExtId": "c429f7a2-16fe-4c5c-8eb7-bc5b9da0a746"
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.VmRecoveryPoint",
+    "extId": "9d86d441-208f-499c-a18c-b984c7f745e6",
+    "locationAgnosticId": "d45a0efa-e533-4777-b02d-04695f2ea2b6",
+    "creationTime": "2025-05-12T08:42:42.900936Z",
+    "vmCategories": [
+      "vmCategories-156ec9af",
+      "vmCategories-b80f0340",
+      "vmCategories-c95953b4"
+    ],
+    "name": "name-147fce4f",
+    "expirationTime": "2025-05-13T20:42:41.907668Z",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "vmExtId": "9e36211d-8848-403d-885a-ac39bc987232"
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.VmRecoveryPoint",
+    "extId": "456d3813-74d6-4cbd-91e7-3020d2e8ab25",
+    "locationAgnosticId": "86428315-8e68-42b1-b72a-27fb50ffb917",
+    "creationTime": "2025-05-12T08:17:56.370385Z",
+    "vmCategories": [
+      "vmCategories-6f6f05d5"
+    ],
+    "name": "name-5e81f0e6",
+    "expirationTime": "2025-05-13T20:17:55.37815Z",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "vmExtId": "9d319fd5-0366-4334-bd9f-28d7e2657959"
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.VmRecoveryPoint",
+    "extId": "c69daf62-c691-43d7-bdb2-fe781d601661",
+    "locationAgnosticId": "89267f82-fced-4d29-aeb7-3dba932da9b5",
+    "creationTime": "2025-05-12T08:17:55.368772Z",
+    "vmCategories": [
+      "vmCategories-b80f0340",
+      "vmCategories-6f6f05d5"
+    ],
+    "name": "name-667e288b",
+    "expirationTime": "2025-05-13T20:17:54.376375Z",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "vmExtId": "c429f7a2-16fe-4c5c-8eb7-bc5b9da0a746"
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.VmRecoveryPoint",
+    "extId": "bb043e97-2ffd-4ad3-86be-8f992ebf4b06",
+    "locationAgnosticId": "5b08370d-afe4-471e-8b11-332481011038",
+    "creationTime": "2025-01-20T10:47:58.410607Z",
+    "vmCategories": [
+      "vmCategories-6f6f05d5"
+    ],
+    "name": "name-c792e118",
+    "expirationTime": "2093-02-07T14:02:03Z",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "vmExtId": "9d319fd5-0366-4334-bd9f-28d7e2657959"
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.VmRecoveryPoint",
+    "extId": "597ae540-eec8-46a7-bbd6-4a83b53b09d5",
+    "locationAgnosticId": "5b08370d-afe4-471e-8b11-332481011038",
+    "creationTime": "2025-01-20T10:47:58.410607Z",
+    "vmCategories": [
+      "vmCategories-6f6f05d5"
+    ],
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-c792e118",
+    "expirationTime": "2093-02-07T14:02:03Z",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "vmExtId": "9d319fd5-0366-4334-bd9f-28d7e2657959"
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.VmRecoveryPoint",
+    "extId": "e284f86b-a953-487e-a2ae-0f3fbd7d0a90",
+    "locationAgnosticId": "7fce49b1-8d2d-4736-a085-b89b0c647902",
+    "creationTime": "2024-11-22T10:12:48.256582Z",
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-a9bd9d9d",
+    "expirationTime": "2092-12-10T13:26:54Z",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "vmExtId": "87225f9e-a7fe-4b17-8ef7-7f0278909509"
+  }
+]

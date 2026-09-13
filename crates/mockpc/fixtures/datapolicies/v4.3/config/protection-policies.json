@@ -1,0 +1,52 @@
+[
+  {
+    "$objectType": "datapolicies.v4.config.ProtectionPolicy",
+    "extId": "b1a2c3d4-0000-4000-8000-000000000501",
+    "name": "gold-sync",
+    "categoryIds": ["c0000000-0000-4000-8000-000000000901"],
+    "replicationLocations": [
+      { "label": "local", "isPrimary": true, "domainManagerExtId": "18b7c9d0-4e1a-4c2b-9f3d-000000000030" },
+      { "label": "pc-dr", "isPrimary": false, "domainManagerExtId": "8f4d1c92-0000-4000-8000-000000000401" }
+    ],
+    "replicationConfigurations": [
+      {
+        "sourceLocationLabel": "local",
+        "remoteLocationLabel": "pc-dr",
+        "schedule": { "recoveryPointObjectiveTimeSeconds": 0, "recoveryPointType": "CRASH_CONSISTENT" }
+      }
+    ]
+  },
+  {
+    "$objectType": "datapolicies.v4.config.ProtectionPolicy",
+    "extId": "b1a2c3d4-0000-4000-8000-000000000502",
+    "name": "silver-async",
+    "categoryIds": ["c0000000-0000-4000-8000-000000000902"],
+    "replicationLocations": [
+      { "label": "local", "isPrimary": true, "domainManagerExtId": "18b7c9d0-4e1a-4c2b-9f3d-000000000030" },
+      { "label": "pc-dr", "isPrimary": false, "domainManagerExtId": "8f4d1c92-0000-4000-8000-000000000401" }
+    ],
+    "replicationConfigurations": [
+      {
+        "sourceLocationLabel": "local",
+        "remoteLocationLabel": "pc-dr",
+        "schedule": { "recoveryPointObjectiveTimeSeconds": 3600, "recoveryPointType": "CRASH_CONSISTENT" }
+      }
+    ]
+  },
+  {
+    "$objectType": "datapolicies.v4.config.ProtectionPolicy",
+    "extId": "b1a2c3d4-0000-4000-8000-000000000503",
+    "name": "bronze-local",
+    "categoryIds": ["c0000000-0000-4000-8000-000000000903"],
+    "replicationLocations": [
+      { "label": "local", "isPrimary": true, "domainManagerExtId": "18b7c9d0-4e1a-4c2b-9f3d-000000000030" }
+    ],
+    "replicationConfigurations": [
+      {
+        "sourceLocationLabel": "local",
+        "remoteLocationLabel": "local",
+        "schedule": { "recoveryPointObjectiveTimeSeconds": 21600, "recoveryPointType": "CRASH_CONSISTENT" }
+      }
+    ]
+  }
+]

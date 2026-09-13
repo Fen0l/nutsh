@@ -1,0 +1,2490 @@
+[
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "87e4260d-6697-4ce9-8cb5-835533e22f44",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:35.046Z",
+    "lastUpdateTime": "2026-08-04T18:04:50.467Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-eb9fd0b0",
+    "description": "description-24eb11da",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 1027,
+        "endPort": 1027
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "9390abe0-a765-491b-b8e7-b37ae32a61ca",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:34.539Z",
+    "lastUpdateTime": "2026-08-04T18:04:48.337Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-f519cd0c",
+    "description": "description-a904710c",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 674,
+        "endPort": 674
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "aec33ba6-cd65-41e3-9ed4-091fe2c954e3",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:39.119Z",
+    "lastUpdateTime": "2026-08-04T18:04:49.514Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-363a0d09",
+    "description": "description-363a0d09",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 6969,
+        "endPort": 6969
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 6969,
+        "endPort": 6969
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "2f21aa4c-f5b9-4eaf-8cbf-bc4fc1284645",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:32.815Z",
+    "lastUpdateTime": "2026-08-04T18:04:48.07Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-9e711233",
+    "description": "description-a9aa6936",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 104,
+        "endPort": 104
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 104,
+        "endPort": 104
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "71c4a840-89dc-43e5-b8a3-5b7d976602ec",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:38.781Z",
+    "lastUpdateTime": "2026-08-04T18:04:49.385Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-d20ed271",
+    "description": "description-bc8f150d",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 6350,
+        "endPort": 6350
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 6350,
+        "endPort": 6350
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "ffc5bb56-d7de-4d53-b5fd-d8b76278515e",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:39.71Z",
+    "lastUpdateTime": "2026-08-04T18:04:50.207Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-d1f1f48a",
+    "description": "description-18429dae",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 9389,
+        "endPort": 9389
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 9389,
+        "endPort": 9389
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "c30322e6-8abc-432f-8437-ab8488c7e3ea",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:34.119Z",
+    "lastUpdateTime": "2026-08-04T18:04:49.531Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-9282045f",
+    "description": "description-5a0ca0b3",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 548,
+        "endPort": 548
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 548,
+        "endPort": 548
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "96b2ae97-7757-48b3-a196-ccf8df678de5",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:38.472Z",
+    "lastUpdateTime": "2026-08-04T18:04:47.187Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-aec9e242",
+    "description": "description-65981c02",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 5672,
+        "endPort": 5672
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 5672,
+        "endPort": 5672
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "ae009e61-6289-42d7-9272-bcf5f4fc7dd9",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:38.457Z",
+    "lastUpdateTime": "2026-08-04T18:04:46.629Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-010b5943",
+    "description": "description-558c949c",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 5671,
+        "endPort": 5671
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 5671,
+        "endPort": 5671
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "dfb1acd7-efe2-453f-9b42-53fce10d16f9",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:34.462Z",
+    "lastUpdateTime": "2026-08-04T18:04:44.811Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-b9901b83",
+    "description": "description-6e331d03",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 654,
+        "endPort": 654
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "8ffc63b6-8964-4d41-9c2c-59fe3da33df3",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:38.08Z",
+    "lastUpdateTime": "2026-08-04T18:04:46.095Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-052268ef",
+    "description": "description-95904841",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 5190,
+        "endPort": 5190
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 5190,
+        "endPort": 5190
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "4029f051-9ee8-4cd1-b28f-b6101e0227fa",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:36.583Z",
+    "lastUpdateTime": "2026-08-04T18:04:50.562Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-4249f330",
+    "description": "description-0d0821cb",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 3052,
+        "endPort": 3052
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 3052,
+        "endPort": 3052
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "c78e0d5e-c6ef-4263-b49b-871674c0072e",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:36.69Z",
+    "lastUpdateTime": "2026-08-04T18:04:45.363Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-ef0a7a09",
+    "description": "description-129bdcf8",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 3283,
+        "endPort": 3283
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 3283,
+        "endPort": 3283
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "e5446b23-cebb-4432-b38d-23c3e2fad58f",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:36.916Z",
+    "lastUpdateTime": "2026-08-04T18:04:49.973Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-5e78a565",
+    "description": "description-f7cefdae",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 3659,
+        "endPort": 3659
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 3659,
+        "endPort": 3659
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "252132a4-f3cb-477b-b8ad-36850c105868",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:33.319Z",
+    "lastUpdateTime": "2026-08-04T18:04:47.78Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-652035d5",
+    "description": "description-bb6ee6b5",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 262,
+        "endPort": 262
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 262,
+        "endPort": 262
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "66ddd07b-8265-4d10-84c3-ed4a9413966a",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:33.569Z",
+    "lastUpdateTime": "2026-08-04T18:04:49.351Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-3ea3bb1d",
+    "description": "description-0c9bb9d4",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 384,
+        "endPort": 384
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 384,
+        "endPort": 384
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "c1e96b30-c438-4415-8dec-9a20dbcaf773",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:33.379Z",
+    "lastUpdateTime": "2026-08-04T18:04:43.705Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-03797132",
+    "description": "description-6ed2ec8c",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 311,
+        "endPort": 311
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 311,
+        "endPort": 311
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "e30b643a-bcae-4280-92ab-e40768c8398b",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:33.194Z",
+    "lastUpdateTime": "2026-08-04T18:04:50.516Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-95fe3f64",
+    "description": "description-c4b7d278",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 201,
+        "endPort": 201
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 201,
+        "endPort": 201
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "c412c7d4-4768-4c8e-8f5d-952610c4909f",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:38.004Z",
+    "lastUpdateTime": "2026-08-04T18:04:46.173Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-1f10c27d",
+    "description": "description-8d6beda2",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 5150,
+        "endPort": 5150
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 5150,
+        "endPort": 5150
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "1d5c7b00-7781-4af1-ba1c-3bdf3e80a304",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:33.58Z",
+    "lastUpdateTime": "2026-08-04T18:04:46.276Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-25f806e1",
+    "description": "description-c1e8fc4d",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 387,
+        "endPort": 387
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 387,
+        "endPort": 387
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "09bfc602-4d3f-4026-b962-513d1389a290",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:35.894Z",
+    "lastUpdateTime": "2026-08-04T18:04:50.427Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-16605653",
+    "description": "description-3201c55d",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 2080,
+        "endPort": 2080
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 2080,
+        "endPort": 2080
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "ccfa4e06-ec3e-45cd-acb8-d6c23a8abd3d",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:37.719Z",
+    "lastUpdateTime": "2026-08-04T18:04:45.387Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-72430adc",
+    "description": "description-02618acf",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 5004,
+        "endPort": 5004
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 5004,
+        "endPort": 5004
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "8f918244-c7cd-43a3-8f86-37384a81c60a",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:37.735Z",
+    "lastUpdateTime": "2026-08-04T18:04:44.966Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-72430ff5",
+    "description": "description-a19f68f0",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 5005,
+        "endPort": 5005
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 5005,
+        "endPort": 5005
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "47d55c1b-91f7-4835-a8be-5d0a9da5eb0a",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:37.403Z",
+    "lastUpdateTime": "2026-08-04T18:04:49.597Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-d5890354",
+    "description": "description-dd6868c8",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 4488,
+        "endPort": 4488
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 4488,
+        "endPort": 4488
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "3f175592-d1e6-4383-b134-21064124e6d7",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:40.481Z",
+    "lastUpdateTime": "2026-08-04T18:04:49.9Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-ec020bb0",
+    "description": "description-dc8ebe53",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 47808,
+        "endPort": 47808
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 47808,
+        "endPort": 47808
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "c19a7ccf-14bd-4507-bf60-d29d8bead3ec",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:39.606Z",
+    "lastUpdateTime": "2026-08-04T18:04:45.868Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-0b60d235",
+    "description": "description-db286c21",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 9101,
+        "endPort": 9101
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 9101,
+        "endPort": 9101
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "81a15961-ea85-4c60-98e5-07e0f53598fe",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:39.622Z",
+    "lastUpdateTime": "2026-08-04T18:04:49.256Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-0bc5b7a4",
+    "description": "description-94512631",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 9102,
+        "endPort": 9102
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 9102,
+        "endPort": 9102
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "add85f8d-d586-4406-a711-68c6c49f3bdb",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:39.639Z",
+    "lastUpdateTime": "2026-08-04T18:04:50.596Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-0ba50dc9",
+    "description": "description-4bf39316",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 9103,
+        "endPort": 9103
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 9103,
+        "endPort": 9103
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "950b7927-d143-40f9-9658-cd07ba327942",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:35.813Z",
+    "lastUpdateTime": "2026-08-04T18:04:47.773Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-b54dd525",
+    "description": "description-b5aa70a5",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 1984,
+        "endPort": 1984
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 1984,
+        "endPort": 1984
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "3d5646b5-2ecf-453a-ba9c-4e97c5be793d",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:36.873Z",
+    "lastUpdateTime": "2026-08-04T18:04:49.942Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-f6c5d17d",
+    "description": "description-59105aeb",
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 3527,
+        "endPort": 3527
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "e7e7ff44-d3af-47e6-91c0-dbc49548fc4f",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:37.03Z",
+    "lastUpdateTime": "2026-08-04T18:04:47.391Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-5cde5633",
+    "description": "description-36f75afa",
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 3784,
+        "endPort": 3784
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "77550ee7-6b59-4b29-88f5-9b0ddfb4758d",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:33.051Z",
+    "lastUpdateTime": "2026-08-04T18:04:48.547Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-a3a12de5",
+    "description": "description-626b5eec",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 152,
+        "endPort": 152
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 152,
+        "endPort": 152
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "83844f01-c939-46dc-87f9-46846308500d",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:33.333Z",
+    "lastUpdateTime": "2026-08-04T18:04:45.582Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-9fa30f33",
+    "description": "description-03b71233",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 264,
+        "endPort": 264
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 264,
+        "endPort": 264
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "3ee81058-1bd2-4069-bcb7-8af9ba3627ea",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:33.155Z",
+    "lastUpdateTime": "2026-08-04T18:04:47.191Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-13330fa2",
+    "description": "description-ff401e8f",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 179,
+        "endPort": 179
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 179,
+        "endPort": 179
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "a50baf0d-5607-41bf-b65a-f7bd97d2bde0",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:40.264Z",
+    "lastUpdateTime": "2026-08-04T18:04:46.447Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-a69972ad",
+    "description": "description-b49ac20d",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 24554,
+        "endPort": 24554
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 24554,
+        "endPort": 24554
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "ce262046-b437-4c7d-af8c-aeebb7ce9713",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:36.982Z",
+    "lastUpdateTime": "2026-08-04T18:04:44.596Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-a69e258f",
+    "description": "description-0aa75ac0",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 3724,
+        "endPort": 3724
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 3724,
+        "endPort": 3724
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "4f43f927-e464-4bf5-a86b-409e0b713bdf",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:35.166Z",
+    "lastUpdateTime": "2026-08-04T18:04:46.344Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-95eb778a",
+    "description": "description-b8cc4e69",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 1119,
+        "endPort": 1119
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 1119,
+        "endPort": 1119
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "4b57f826-7632-49f0-acc7-1e0dda10f61f",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:39.389Z",
+    "lastUpdateTime": "2026-08-04T18:04:48.61Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-c6b254c6",
+    "description": "description-542a9a01",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 7687,
+        "endPort": 7687
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "d5ac33e0-63a3-4208-b4f6-3d34090b1ba9",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:32.669Z",
+    "lastUpdateTime": "2026-08-04T18:04:47.71Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-44c60b74",
+    "description": "description-c484d436",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 68,
+        "endPort": 68
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 68,
+        "endPort": 68
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "ead878fb-c165-4734-b4ef-21c2806bb3fb",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:32.66Z",
+    "lastUpdateTime": "2026-08-04T18:04:45.719Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-44c5f044",
+    "description": "description-f18c257a",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 67,
+        "endPort": 67
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 67,
+        "endPort": 67
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "48376112-1f0c-462b-a7b5-0bf7763c8fe7",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:40.036Z",
+    "lastUpdateTime": "2026-08-04T18:04:47.807Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-fb525c80",
+    "description": "description-1e7ad75a",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 13782,
+        "endPort": 13782
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 13782,
+        "endPort": 13782
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "b0b559e0-f733-4b65-956e-e022dd449442",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:39.99Z",
+    "lastUpdateTime": "2026-08-04T18:04:50.082Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-098eb0ec",
+    "description": "description-fc6f7f88",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 13721,
+        "endPort": 13721
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 13721,
+        "endPort": 13721
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "9268d92a-8ab0-46be-9a55-8b75cb9ddc79",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:39.974Z",
+    "lastUpdateTime": "2026-08-04T18:04:49.415Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-fb83def9",
+    "description": "description-5d69236f",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 13720,
+        "endPort": 13720
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 13720,
+        "endPort": 13720
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "9258e457-d9fd-4970-9f7a-e75cd762b63f",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:37.244Z",
+    "lastUpdateTime": "2026-08-04T18:04:48.399Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-136f2190",
+    "description": "description-7e6c1527",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 4096,
+        "endPort": 4096
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 4096,
+        "endPort": 4096
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "6393be6d-d5a9-463e-84ca-b298b9da3a26",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:38.046Z",
+    "lastUpdateTime": "2026-08-04T18:04:48.481Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-0017900f",
+    "description": "description-74247baa",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 5154,
+        "endPort": 5154
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 5154,
+        "endPort": 5154
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "ac93fe34-2e2d-4ff5-9825-0a20312e1f48",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:37.895Z",
+    "lastUpdateTime": "2026-08-04T18:04:48.195Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-e8f1bd07",
+    "description": "description-d7225a39",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 5064,
+        "endPort": 5064
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 5064,
+        "endPort": 5064
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "94d93355-1948-41c3-9cea-3412c7a1a30a",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:37.916Z",
+    "lastUpdateTime": "2026-08-04T18:04:43.68Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-e8f1beba",
+    "description": "description-d7225520",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 5065,
+        "endPort": 5065
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 5065,
+        "endPort": 5065
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "5fdf55e5-5733-4391-a8af-c4245f16870d",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:35.206Z",
+    "lastUpdateTime": "2026-08-04T18:04:50.488Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-ccb4818d",
+    "description": "description-0688ce31",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 1198,
+        "endPort": 1198
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 1198,
+        "endPort": 1198
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "4613c642-9099-460d-ae8d-f6a18e889878",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:37.497Z",
+    "lastUpdateTime": "2026-08-04T18:04:46.078Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-3c4b7897",
+    "description": "description-23e4f6af",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 4728,
+        "endPort": 4728
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "c9edca0f-b033-4e3a-8182-19e8135cbbc8",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:38.129Z",
+    "lastUpdateTime": "2026-08-04T18:04:47.007Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-f8f4d7f5",
+    "description": "description-5fde944c",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 5246,
+        "endPort": 5246
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "4978b42c-9750-4760-9b6d-72358a847865",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:39.531Z",
+    "lastUpdateTime": "2026-08-04T18:04:46.178Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-509a2fda",
+    "description": "description-9c108660",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 8880,
+        "endPort": 8880
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "0f27283c-6ab9-4b53-8e39-f03025c1beec",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:37.084Z",
+    "lastUpdateTime": "2026-08-04T18:04:50.543Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-f0abb339",
+    "description": "description-bf551b0f",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 3830,
+        "endPort": 3830
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 3830,
+        "endPort": 3830
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "6e57a8fb-e8cc-4926-aaac-a48e2e9adc65",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:32.495Z",
+    "lastUpdateTime": "2026-08-04T18:04:43.791Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-3be7bced",
+    "description": "description-45a5170d",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 19,
+        "endPort": 19
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 19,
+        "endPort": 19
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "caaa5017-6743-42ce-92a7-c7ddec676881",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:36.562Z",
+    "lastUpdateTime": "2026-08-04T18:04:47.86Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-0edf73e2",
+    "description": "description-72f376e2",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 3020,
+        "endPort": 3020
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 3020,
+        "endPort": 3020
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "13eab5ce-9040-41e7-91a9-333b10b33be8",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:37.006Z",
+    "lastUpdateTime": "2026-08-04T18:04:49.712Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-d95a7f0a",
+    "description": "description-aad8938a",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 3749,
+        "endPort": 3749
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 3749,
+        "endPort": 3749
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "2ef66820-7600-4db9-98fc-b6e5ca211153",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:35.177Z",
+    "lastUpdateTime": "2026-08-04T18:04:49.876Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-d5ae4a00",
+    "description": "description-4fbee487",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 1167,
+        "endPort": 1167
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 1167,
+        "endPort": 1167
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "3fc8c639-7f75-465b-a3e4-209d07c3132c",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:35.87Z",
+    "lastUpdateTime": "2026-08-04T18:04:47.127Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-0e7f73be",
+    "description": "description-adaf3995",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 2000,
+        "endPort": 2000
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 2000,
+        "endPort": 2000
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "de0daff3-1d3b-4444-93c0-645d2a93251e",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:34.684Z",
+    "lastUpdateTime": "2026-08-04T18:04:47.159Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-39d72ef5",
+    "description": "description-a62e7d88",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 711,
+        "endPort": 711
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "b1928e88-df56-4b8d-a023-0ab529139ca5",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:33.805Z",
+    "lastUpdateTime": "2026-08-04T18:04:50.555Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-8c317f63",
+    "description": "description-8c317f63",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 504,
+        "endPort": 504
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 504,
+        "endPort": 504
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "c974ff83-cddc-4540-a4a0-7502f281cfcd",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:33.546Z",
+    "lastUpdateTime": "2026-08-04T18:04:47.33Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-7f026ece",
+    "description": "description-d8b7c12e",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 371,
+        "endPort": 371
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 371,
+        "endPort": 371
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "ce4ac24b-ccae-4705-a0ea-067f2c1b8a81",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:33.471Z",
+    "lastUpdateTime": "2026-08-04T18:04:50.194Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-e2599f01",
+    "description": "description-658ff865",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 356,
+        "endPort": 356
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 356,
+        "endPort": 356
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "8e3f11de-ea4e-4a5e-aa3b-d75cdb71d132",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:39.144Z",
+    "lastUpdateTime": "2026-08-04T18:04:50.232Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-15e3cc8d",
+    "description": "description-d79f2c68",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 7262,
+        "endPort": 7262
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 7262,
+        "endPort": 7262
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "e0a0e776-6e9e-404e-b5f9-0284421edd8d",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:38.486Z",
+    "lastUpdateTime": "2026-08-04T18:04:49.23Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-19551386",
+    "description": "description-8bf0464b",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 5683,
+        "endPort": 5683
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 5683,
+        "endPort": 5683
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "67fff92d-01b1-403f-b82e-81a7696d473d",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:38.502Z",
+    "lastUpdateTime": "2026-08-04T18:04:49.298Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-0b90e94f",
+    "description": "description-8bf0464b",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 5684,
+        "endPort": 5684
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 5684,
+        "endPort": 5684
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "373e4bd1-9af1-4f98-a0eb-aae58eb4b703",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:33.533Z",
+    "lastUpdateTime": "2026-08-04T18:04:46.358Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-63e57b5c",
+    "description": "description-63e57b5c",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 370,
+        "endPort": 370
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 370,
+        "endPort": 370
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "613a910a-eb8f-43ca-9b0f-d018045faf54",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:34.042Z",
+    "lastUpdateTime": "2026-08-04T18:04:43.894Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-23e4db62",
+    "description": "description-23e4db62",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 542,
+        "endPort": 542
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 542,
+        "endPort": 542
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "3c433c1c-6e85-45ec-a51e-baa11b21e4c9",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:36.112Z",
+    "lastUpdateTime": "2026-08-04T18:04:47.068Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-cc2dcaaa",
+    "description": "description-98bfc65c",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 2262,
+        "endPort": 2262
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 2262,
+        "endPort": 2262
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "69dcf0bd-0288-40b3-ad5b-7e4e7a70fb53",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:36.099Z",
+    "lastUpdateTime": "2026-08-04T18:04:49.13Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-56c5425b",
+    "description": "description-ea2faffc",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 2261,
+        "endPort": 2261
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 2261,
+        "endPort": 2261
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "e57a1ade-61cb-4bd0-a388-552f46ca7e77",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:38.304Z",
+    "lastUpdateTime": "2026-08-04T18:04:47.014Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-82574ec5",
+    "description": "description-def17d25",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 5412,
+        "endPort": 5412
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 5412,
+        "endPort": 5412
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "2c87abba-b4a4-4132-9dde-693d4d4d77ea",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:36.432Z",
+    "lastUpdateTime": "2026-08-04T18:04:46.413Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-f72fde34",
+    "description": "description-b7916a00",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 2809,
+        "endPort": 2809
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 2809,
+        "endPort": 2809
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "05f26379-63ec-4418-9e1a-5b245483803b",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:38.589Z",
+    "lastUpdateTime": "2026-08-04T18:04:49.283Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-c5beace3",
+    "description": "description-985099c3",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 5984,
+        "endPort": 5984
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 5984,
+        "endPort": 5984
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "6331998b-8dd1-40c8-8c1c-284ad7a325f8",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:33.989Z",
+    "lastUpdateTime": "2026-08-04T18:04:48.773Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-d65b2f34",
+    "description": "description-60d419f4",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 530,
+        "endPort": 530
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 530,
+        "endPort": 530
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "a677218b-418a-4803-bf94-aef3b54693a7",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:32.825Z",
+    "lastUpdateTime": "2026-08-04T18:04:49.082Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-0cb10454",
+    "description": "description-63f6d95d",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 105,
+        "endPort": 105
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 105,
+        "endPort": 105
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "9bff196c-de17-4b46-bb8d-7404a4777054",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:39.132Z",
+    "lastUpdateTime": "2026-08-04T18:04:49.061Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-8ba088f3",
+    "description": "description-0bc68fff",
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 7023,
+        "endPort": 7023
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "f4020261-772d-4b7a-804c-79bcafb2c485",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:36.23Z",
+    "lastUpdateTime": "2026-08-04T18:04:44.136Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-2ed20fbc",
+    "description": "description-2ed20fbc",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 2401,
+        "endPort": 2401
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 2401,
+        "endPort": 2401
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "5ec4a084-7ebd-445c-b9ac-df43a9c50938",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:39.333Z",
+    "lastUpdateTime": "2026-08-04T18:04:46.234Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-a2b9c352",
+    "description": "description-ce294dbc",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 7547,
+        "endPort": 7547
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 7547,
+        "endPort": 7547
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "0e2adb7c-2e31-47a0-912a-2734da8c8099",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:36.905Z",
+    "lastUpdateTime": "2026-08-04T18:04:45.166Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-0ccdd656",
+    "description": "description-aa86e2b6",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 3645,
+        "endPort": 3645
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 3645,
+        "endPort": 3645
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "650119dc-5b2f-4f3b-9ce3-a721f52cf667",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:36.944Z",
+    "lastUpdateTime": "2026-08-04T18:04:48.579Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-30df62bf",
+    "description": "description-d613c5b8",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 3689,
+        "endPort": 3689
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 3689,
+        "endPort": 3689
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "b6abb1c9-cc46-41ce-9029-02711a5961df",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:39.771Z",
+    "lastUpdateTime": "2026-08-04T18:04:46.132Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-9c01db06",
+    "description": "description-4843ab34",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 9800,
+        "endPort": 9800
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 9800,
+        "endPort": 9800
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "3bc03306-860e-40df-83cd-4be2b7e68757",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:32.444Z",
+    "lastUpdateTime": "2026-08-04T18:04:49.439Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-a5785e3c",
+    "description": "description-f33ff29c",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 13,
+        "endPort": 13
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 13,
+        "endPort": 13
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "d1acb2a3-478b-425d-88b1-bc49843fa29a",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:40.189Z",
+    "lastUpdateTime": "2026-08-04T18:04:49.099Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-e8128039",
+    "description": "description-73f616bf",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 17500,
+        "endPort": 17500
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 17500,
+        "endPort": 17500
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "a1ef447f-aa2a-4348-b9d8-1b4ef1546937",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:34.405Z",
+    "lastUpdateTime": "2026-08-04T18:04:50.188Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-538dcdef",
+    "description": "description-220e547c",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 647,
+        "endPort": 647
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "72946bd5-de1a-4a14-96e4-1092ce81e511",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:34.865Z",
+    "lastUpdateTime": "2026-08-04T18:04:46.765Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-f9f4ce87",
+    "description": "description-bad234fd",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 847,
+        "endPort": 847
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "f5795ea5-c959-4478-8716-e1e68f8c0c59",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:34.087Z",
+    "lastUpdateTime": "2026-08-04T18:04:46.426Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-e53cd6c2",
+    "description": "description-c90cb0d9",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 546,
+        "endPort": 546
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 546,
+        "endPort": 546
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "a0c64402-04af-45df-8b2a-5b064a28e91f",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:34.099Z",
+    "lastUpdateTime": "2026-08-04T18:04:49.574Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-152b968e",
+    "description": "description-792cb3ed",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 547,
+        "endPort": 547
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 547,
+        "endPort": 547
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "d53ad53b-e090-4253-9d93-2e0ff0923898",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:37.115Z",
+    "lastUpdateTime": "2026-08-04T18:04:47.183Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-13dd081a",
+    "description": "description-787977da",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 3868,
+        "endPort": 3868
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "977b53d9-dc9a-49fe-a599-beb530c36df9",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:39.934Z",
+    "lastUpdateTime": "2026-08-04T18:04:48.176Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-78eb83bf",
+    "description": "description-87a4c3df",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 11112,
+        "endPort": 11112
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 11112,
+        "endPort": 11112
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "5a5c4ed8-5e9c-4dca-baeb-44bb1410ff1c",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:32.405Z",
+    "lastUpdateTime": "2026-08-04T18:04:47.133Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-7288eb01",
+    "description": "description-0cd60661",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 9,
+        "endPort": 9
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 9,
+        "endPort": 9
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "dfeb8738-e7e5-4ef5-9ab0-8ec8d7044bc8",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:36.895Z",
+    "lastUpdateTime": "2026-08-04T18:04:49.762Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-841d40c7",
+    "description": "description-feb92d63",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 3632,
+        "endPort": 3632
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 3632,
+        "endPort": 3632
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "96fa4904-6e7a-4a8f-8652-6a70ef3d8b97",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:36.127Z",
+    "lastUpdateTime": "2026-08-04T18:04:45.681Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-ba6bfdad",
+    "description": "description-16259f79",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 2375,
+        "endPort": 2375
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 2375,
+        "endPort": 2375
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "26fafc5e-0b33-458a-8a42-28b962671172",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:36.148Z",
+    "lastUpdateTime": "2026-08-04T18:04:47.28Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-9814dce9",
+    "description": "description-80ebf308",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 2376,
+        "endPort": 2376
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 2376,
+        "endPort": 2376
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "30fa0ce4-d4fe-437d-bf0e-72cea3599998",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:32.605Z",
+    "lastUpdateTime": "2026-08-04T18:04:47.428Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-6eec1711",
+    "description": "description-57a5c903",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 53,
+        "endPort": 53
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 53,
+        "endPort": 53
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "c6c7b549-a8f3-4915-8e47-464294f03ce7",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:34.887Z",
+    "lastUpdateTime": "2026-08-04T18:04:50.614Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-4ae13365",
+    "description": "description-6547c23c",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 853,
+        "endPort": 853
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 853,
+        "endPort": 853
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "bfd08d35-8ac5-472b-8b85-426144fcb09a",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:38.699Z",
+    "lastUpdateTime": "2026-08-04T18:04:44.192Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-308b8691",
+    "description": "description-69d55023",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 6112,
+        "endPort": 6112
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 6112,
+        "endPort": 6112
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "f4121119-f1b6-4d39-8fc7-349bee2fdbd1",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:32.392Z",
+    "lastUpdateTime": "2026-08-04T18:04:49.704Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-26044164",
+    "description": "description-2774b544",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 7,
+        "endPort": 7
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 7,
+        "endPort": 7
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "18b1ce5e-e349-47da-bdfd-c50230b9c20a",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:38.714Z",
+    "lastUpdateTime": "2026-08-04T18:04:48.913Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-7c5e013e",
+    "description": "description-5806b4c8",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 6159,
+        "endPort": 6159
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "f50bb4fe-147f-4a90-bc0b-adb5319b3e0b",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:36.04Z",
+    "lastUpdateTime": "2026-08-04T18:04:44.819Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-fa06b9ad",
+    "description": "description-fa06b9ad",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 2181,
+        "endPort": 2181
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 2181,
+        "endPort": 2181
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "44fd2400-2136-413b-931c-23b129556d2f",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:33.934Z",
+    "lastUpdateTime": "2026-08-04T18:04:49.681Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-f03c7fd3",
+    "description": "description-3e25c748",
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 520,
+        "endPort": 520
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "089b05dd-eba3-492b-bc0a-60a036e59931",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:38.915Z",
+    "lastUpdateTime": "2026-08-04T18:04:47.174Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-f7210bc6",
+    "description": "description-7bbde44e",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 6515,
+        "endPort": 6515
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 6515,
+        "endPort": 6515
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "33546a77-cc2e-4e8e-86df-df87e84b7102",
+    "isSystemDefined": true,
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2026-07-31T08:30:36.063Z",
+    "lastUpdateTime": "2026-08-04T18:04:49.105Z",
+    "isSharedWithAllProjects": true,
+    "name": "name-afe63fff",
+    "description": "description-be9d3edf",
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 2211,
+        "endPort": 2211
+      }
+    ],
+    "udpServices": [
+      {
+        "$objectType": "microseg.v4.config.UdpPortRangeSpec",
+        "startPort": 2211,
+        "endPort": 2211
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  }
+]

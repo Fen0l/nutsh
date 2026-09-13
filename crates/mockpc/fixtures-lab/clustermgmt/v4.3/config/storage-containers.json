@@ -1,0 +1,742 @@
+[
+  {
+    "$objectType": "clustermgmt.v4.config.StorageContainer",
+    "links": [
+      {
+        "$objectType": "common.v1.response.ApiLink",
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/config/storage-containers/0167386c-4f6a-49d9-81f3-83795835bbe7",
+        "rel": "storage-container"
+      },
+      {
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/stats/storage-containers/0167386c-4f6a-49d9-81f3-83795835bbe7",
+        "rel": "storage-container-stats"
+      }
+    ],
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "storagePoolExtId": "83c21205-5611-49cf-999a-7c7d8aae320d",
+    "isMarkedForRemoval": false,
+    "markedForRemoval": false,
+    "maxCapacityBytes": 27547883375270,
+    "logicalImplicitReservedCapacityBytes": 0,
+    "isNfsWhitelistInherited": true,
+    "clusterName": "clusterName-d2b6bd1b",
+    "containerExtId": "0167386c-4f6a-49d9-81f3-83795835bbe7",
+    "ownerExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-25841bba",
+    "logicalExplicitReservedCapacityBytes": 0,
+    "replicationFactor": 2,
+    "erasureCode": "OFF",
+    "isInlineEcEnabled": false,
+    "hasHigherEcFaultDomainPreference": false,
+    "cacheDeduplication": "OFF",
+    "onDiskDedup": "OFF",
+    "isCompressionEnabled": true,
+    "compressionDelaySecs": 0,
+    "isInternal": false,
+    "isSoftwareEncryptionEnabled": false,
+    "isShared": false
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.StorageContainer",
+    "links": [
+      {
+        "$objectType": "common.v1.response.ApiLink",
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/config/storage-containers/0671e608-1d16-450f-89ce-c5aaf6711b9e",
+        "rel": "storage-container"
+      },
+      {
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/stats/storage-containers/0671e608-1d16-450f-89ce-c5aaf6711b9e",
+        "rel": "storage-container-stats"
+      }
+    ],
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "storagePoolExtId": "63725cff-c712-44e3-9e28-5bcbcb945fdf",
+    "isMarkedForRemoval": false,
+    "markedForRemoval": false,
+    "maxCapacityBytes": 40762045424719,
+    "logicalImplicitReservedCapacityBytes": 0,
+    "isNfsWhitelistInherited": true,
+    "clusterName": "clusterName-277ed708",
+    "containerExtId": "0671e608-1d16-450f-89ce-c5aaf6711b9e",
+    "ownerExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-25841bba",
+    "logicalExplicitReservedCapacityBytes": 0,
+    "replicationFactor": 2,
+    "erasureCode": "OFF",
+    "isInlineEcEnabled": false,
+    "hasHigherEcFaultDomainPreference": false,
+    "cacheDeduplication": "OFF",
+    "onDiskDedup": "OFF",
+    "isCompressionEnabled": true,
+    "compressionDelaySecs": 0,
+    "isInternal": false,
+    "isSoftwareEncryptionEnabled": false,
+    "isShared": false
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.StorageContainer",
+    "links": [
+      {
+        "$objectType": "common.v1.response.ApiLink",
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/config/storage-containers/08d0522f-3dbc-4cc7-a383-900676513d2e",
+        "rel": "storage-container"
+      },
+      {
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/stats/storage-containers/08d0522f-3dbc-4cc7-a383-900676513d2e",
+        "rel": "storage-container-stats"
+      }
+    ],
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "storagePoolExtId": "63725cff-c712-44e3-9e28-5bcbcb945fdf",
+    "isMarkedForRemoval": false,
+    "markedForRemoval": false,
+    "maxCapacityBytes": 40762045424719,
+    "logicalImplicitReservedCapacityBytes": 0,
+    "isNfsWhitelistInherited": true,
+    "clusterName": "clusterName-277ed708",
+    "containerExtId": "08d0522f-3dbc-4cc7-a383-900676513d2e",
+    "ownerExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-c2e08c9a",
+    "logicalExplicitReservedCapacityBytes": 0,
+    "replicationFactor": 2,
+    "erasureCode": "OFF",
+    "isInlineEcEnabled": false,
+    "hasHigherEcFaultDomainPreference": false,
+    "cacheDeduplication": "OFF",
+    "onDiskDedup": "OFF",
+    "isCompressionEnabled": true,
+    "compressionDelaySecs": 0,
+    "isInternal": false,
+    "isSoftwareEncryptionEnabled": false,
+    "isShared": false
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.StorageContainer",
+    "links": [
+      {
+        "$objectType": "common.v1.response.ApiLink",
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/config/storage-containers/2c927fd6-7e03-4e84-9a47-fd6e0c9bf0bf",
+        "rel": "storage-container"
+      },
+      {
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/stats/storage-containers/2c927fd6-7e03-4e84-9a47-fd6e0c9bf0bf",
+        "rel": "storage-container-stats"
+      }
+    ],
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "storagePoolExtId": "83c21205-5611-49cf-999a-7c7d8aae320d",
+    "isMarkedForRemoval": false,
+    "markedForRemoval": false,
+    "maxCapacityBytes": 27547883375270,
+    "logicalImplicitReservedCapacityBytes": 0,
+    "isNfsWhitelistInherited": true,
+    "clusterName": "clusterName-d2b6bd1b",
+    "containerExtId": "2c927fd6-7e03-4e84-9a47-fd6e0c9bf0bf",
+    "ownerExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-afc26000",
+    "logicalExplicitReservedCapacityBytes": 0,
+    "replicationFactor": 2,
+    "erasureCode": "OFF",
+    "isInlineEcEnabled": false,
+    "hasHigherEcFaultDomainPreference": false,
+    "cacheDeduplication": "OFF",
+    "onDiskDedup": "OFF",
+    "isCompressionEnabled": false,
+    "compressionDelaySecs": 0,
+    "isInternal": false,
+    "isSoftwareEncryptionEnabled": false,
+    "isShared": false
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.StorageContainer",
+    "links": [
+      {
+        "$objectType": "common.v1.response.ApiLink",
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/config/storage-containers/2db6c300-3c3d-4ac4-9c21-91cb8241accd",
+        "rel": "storage-container"
+      },
+      {
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/stats/storage-containers/2db6c300-3c3d-4ac4-9c21-91cb8241accd",
+        "rel": "storage-container-stats"
+      }
+    ],
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "storagePoolExtId": "63725cff-c712-44e3-9e28-5bcbcb945fdf",
+    "isMarkedForRemoval": false,
+    "markedForRemoval": false,
+    "maxCapacityBytes": 40762045424719,
+    "logicalImplicitReservedCapacityBytes": 0,
+    "isNfsWhitelistInherited": true,
+    "clusterName": "clusterName-277ed708",
+    "containerExtId": "2db6c300-3c3d-4ac4-9c21-91cb8241accd",
+    "ownerExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-ac40eaa9",
+    "logicalExplicitReservedCapacityBytes": 0,
+    "replicationFactor": 2,
+    "erasureCode": "OFF",
+    "isInlineEcEnabled": false,
+    "hasHigherEcFaultDomainPreference": false,
+    "cacheDeduplication": "OFF",
+    "onDiskDedup": "OFF",
+    "isCompressionEnabled": false,
+    "compressionDelaySecs": 0,
+    "isInternal": false,
+    "isSoftwareEncryptionEnabled": false,
+    "isShared": false
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.StorageContainer",
+    "links": [
+      {
+        "$objectType": "common.v1.response.ApiLink",
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/config/storage-containers/3d3a4a48-07b5-4e17-b09f-43212d22d7a6",
+        "rel": "storage-container"
+      },
+      {
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/stats/storage-containers/3d3a4a48-07b5-4e17-b09f-43212d22d7a6",
+        "rel": "storage-container-stats"
+      }
+    ],
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "storagePoolExtId": "63725cff-c712-44e3-9e28-5bcbcb945fdf",
+    "isMarkedForRemoval": false,
+    "markedForRemoval": false,
+    "maxCapacityBytes": 40762045424719,
+    "logicalImplicitReservedCapacityBytes": 0,
+    "isNfsWhitelistInherited": true,
+    "clusterName": "clusterName-277ed708",
+    "containerExtId": "3d3a4a48-07b5-4e17-b09f-43212d22d7a6",
+    "ownerExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-afbf7cd7",
+    "logicalExplicitReservedCapacityBytes": 0,
+    "replicationFactor": 2,
+    "erasureCode": "OFF",
+    "isInlineEcEnabled": false,
+    "hasHigherEcFaultDomainPreference": false,
+    "cacheDeduplication": "OFF",
+    "onDiskDedup": "OFF",
+    "isCompressionEnabled": false,
+    "compressionDelaySecs": 0,
+    "isInternal": false,
+    "isSoftwareEncryptionEnabled": false,
+    "isShared": false
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.StorageContainer",
+    "links": [
+      {
+        "$objectType": "common.v1.response.ApiLink",
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/config/storage-containers/48ac55c4-67fd-4d18-b8ae-e44fcaea298f",
+        "rel": "storage-container"
+      },
+      {
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/stats/storage-containers/48ac55c4-67fd-4d18-b8ae-e44fcaea298f",
+        "rel": "storage-container-stats"
+      }
+    ],
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "storagePoolExtId": "83c21205-5611-49cf-999a-7c7d8aae320d",
+    "isMarkedForRemoval": false,
+    "markedForRemoval": false,
+    "maxCapacityBytes": 27547883375270,
+    "logicalImplicitReservedCapacityBytes": 0,
+    "isNfsWhitelistInherited": true,
+    "clusterName": "clusterName-d2b6bd1b",
+    "containerExtId": "48ac55c4-67fd-4d18-b8ae-e44fcaea298f",
+    "ownerExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-afbf7cd7",
+    "logicalExplicitReservedCapacityBytes": 0,
+    "replicationFactor": 2,
+    "erasureCode": "OFF",
+    "isInlineEcEnabled": false,
+    "hasHigherEcFaultDomainPreference": false,
+    "cacheDeduplication": "OFF",
+    "onDiskDedup": "OFF",
+    "isCompressionEnabled": true,
+    "compressionDelaySecs": 0,
+    "isInternal": false,
+    "isSoftwareEncryptionEnabled": false,
+    "isShared": false
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.StorageContainer",
+    "links": [
+      {
+        "$objectType": "common.v1.response.ApiLink",
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/config/storage-containers/727ead6a-d62e-4885-9917-2b3caa1b2eaa",
+        "rel": "storage-container"
+      },
+      {
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/stats/storage-containers/727ead6a-d62e-4885-9917-2b3caa1b2eaa",
+        "rel": "storage-container-stats"
+      }
+    ],
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "storagePoolExtId": "63725cff-c712-44e3-9e28-5bcbcb945fdf",
+    "isMarkedForRemoval": false,
+    "markedForRemoval": false,
+    "maxCapacityBytes": 40762045424719,
+    "logicalImplicitReservedCapacityBytes": 0,
+    "isNfsWhitelistInherited": true,
+    "clusterName": "clusterName-277ed708",
+    "containerExtId": "727ead6a-d62e-4885-9917-2b3caa1b2eaa",
+    "ownerExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-abcb5118",
+    "logicalExplicitReservedCapacityBytes": 0,
+    "replicationFactor": 2,
+    "erasureCode": "OFF",
+    "isInlineEcEnabled": false,
+    "hasHigherEcFaultDomainPreference": false,
+    "cacheDeduplication": "OFF",
+    "onDiskDedup": "OFF",
+    "isCompressionEnabled": true,
+    "compressionDelaySecs": 0,
+    "isInternal": true,
+    "isSoftwareEncryptionEnabled": false,
+    "isShared": false
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.StorageContainer",
+    "links": [
+      {
+        "$objectType": "common.v1.response.ApiLink",
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/config/storage-containers/87e3786c-940d-4bfb-afa8-1eb2c3aa565b",
+        "rel": "storage-container"
+      },
+      {
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/stats/storage-containers/87e3786c-940d-4bfb-afa8-1eb2c3aa565b",
+        "rel": "storage-container-stats"
+      }
+    ],
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "storagePoolExtId": "63725cff-c712-44e3-9e28-5bcbcb945fdf",
+    "isMarkedForRemoval": false,
+    "markedForRemoval": false,
+    "maxCapacityBytes": 40762045424719,
+    "logicalImplicitReservedCapacityBytes": 0,
+    "isNfsWhitelistInherited": true,
+    "clusterName": "clusterName-277ed708",
+    "containerExtId": "87e3786c-940d-4bfb-afa8-1eb2c3aa565b",
+    "ownerExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-250aaed4",
+    "logicalExplicitReservedCapacityBytes": 0,
+    "replicationFactor": 2,
+    "erasureCode": "ON",
+    "isInlineEcEnabled": false,
+    "hasHigherEcFaultDomainPreference": false,
+    "cacheDeduplication": "OFF",
+    "onDiskDedup": "OFF",
+    "isCompressionEnabled": true,
+    "compressionDelaySecs": 3600,
+    "isInternal": false,
+    "isSoftwareEncryptionEnabled": false,
+    "isShared": false
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.StorageContainer",
+    "links": [
+      {
+        "$objectType": "common.v1.response.ApiLink",
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/config/storage-containers/88d9f271-e4aa-403e-8670-4c138777d25c",
+        "rel": "storage-container"
+      },
+      {
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/stats/storage-containers/88d9f271-e4aa-403e-8670-4c138777d25c",
+        "rel": "storage-container-stats"
+      }
+    ],
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "storagePoolExtId": "83c21205-5611-49cf-999a-7c7d8aae320d",
+    "isMarkedForRemoval": false,
+    "markedForRemoval": false,
+    "maxCapacityBytes": 27547883375270,
+    "logicalImplicitReservedCapacityBytes": 0,
+    "isNfsWhitelistInherited": true,
+    "clusterName": "clusterName-d2b6bd1b",
+    "containerExtId": "88d9f271-e4aa-403e-8670-4c138777d25c",
+    "ownerExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-d9130721",
+    "logicalExplicitReservedCapacityBytes": 0,
+    "replicationFactor": 2,
+    "erasureCode": "OFF",
+    "isInlineEcEnabled": false,
+    "hasHigherEcFaultDomainPreference": false,
+    "cacheDeduplication": "OFF",
+    "onDiskDedup": "OFF",
+    "isCompressionEnabled": true,
+    "compressionDelaySecs": 0,
+    "isInternal": false,
+    "isSoftwareEncryptionEnabled": false,
+    "isShared": false
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.StorageContainer",
+    "links": [
+      {
+        "$objectType": "common.v1.response.ApiLink",
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/config/storage-containers/9bdd5025-9e85-46ba-8c79-5117f2a303e8",
+        "rel": "storage-container"
+      },
+      {
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/stats/storage-containers/9bdd5025-9e85-46ba-8c79-5117f2a303e8",
+        "rel": "storage-container-stats"
+      }
+    ],
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "storagePoolExtId": "63725cff-c712-44e3-9e28-5bcbcb945fdf",
+    "isMarkedForRemoval": false,
+    "markedForRemoval": false,
+    "maxCapacityBytes": 40762045424719,
+    "logicalImplicitReservedCapacityBytes": 0,
+    "isNfsWhitelistInherited": true,
+    "clusterName": "clusterName-277ed708",
+    "containerExtId": "9bdd5025-9e85-46ba-8c79-5117f2a303e8",
+    "ownerExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-c6fc7b9e",
+    "logicalExplicitReservedCapacityBytes": 0,
+    "replicationFactor": 2,
+    "erasureCode": "OFF",
+    "isInlineEcEnabled": false,
+    "hasHigherEcFaultDomainPreference": false,
+    "cacheDeduplication": "OFF",
+    "onDiskDedup": "OFF",
+    "isCompressionEnabled": true,
+    "compressionDelaySecs": 0,
+    "isInternal": false,
+    "isSoftwareEncryptionEnabled": false,
+    "isShared": false
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.StorageContainer",
+    "links": [
+      {
+        "$objectType": "common.v1.response.ApiLink",
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/config/storage-containers/9c624d2c-cf20-4bfd-9c03-f805f67801b7",
+        "rel": "storage-container"
+      },
+      {
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/stats/storage-containers/9c624d2c-cf20-4bfd-9c03-f805f67801b7",
+        "rel": "storage-container-stats"
+      }
+    ],
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "storagePoolExtId": "83c21205-5611-49cf-999a-7c7d8aae320d",
+    "isMarkedForRemoval": false,
+    "markedForRemoval": false,
+    "maxCapacityBytes": 27547883375270,
+    "logicalImplicitReservedCapacityBytes": 0,
+    "isNfsWhitelistInherited": true,
+    "clusterName": "clusterName-d2b6bd1b",
+    "containerExtId": "9c624d2c-cf20-4bfd-9c03-f805f67801b7",
+    "ownerExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-abcb5118",
+    "logicalExplicitReservedCapacityBytes": 0,
+    "replicationFactor": 2,
+    "erasureCode": "OFF",
+    "isInlineEcEnabled": false,
+    "hasHigherEcFaultDomainPreference": false,
+    "cacheDeduplication": "OFF",
+    "onDiskDedup": "OFF",
+    "isCompressionEnabled": true,
+    "compressionDelaySecs": 0,
+    "isInternal": true,
+    "isSoftwareEncryptionEnabled": false,
+    "isShared": false
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.StorageContainer",
+    "links": [
+      {
+        "$objectType": "common.v1.response.ApiLink",
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/config/storage-containers/ae3a8c8e-7e3a-428d-9b2e-e60ca0bb8907",
+        "rel": "storage-container"
+      },
+      {
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/stats/storage-containers/ae3a8c8e-7e3a-428d-9b2e-e60ca0bb8907",
+        "rel": "storage-container-stats"
+      }
+    ],
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "storagePoolExtId": "83c21205-5611-49cf-999a-7c7d8aae320d",
+    "isMarkedForRemoval": false,
+    "markedForRemoval": false,
+    "maxCapacityBytes": 27547883375270,
+    "logicalImplicitReservedCapacityBytes": 0,
+    "isNfsWhitelistInherited": true,
+    "clusterName": "clusterName-d2b6bd1b",
+    "containerExtId": "ae3a8c8e-7e3a-428d-9b2e-e60ca0bb8907",
+    "ownerExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-d55f7eec",
+    "logicalExplicitReservedCapacityBytes": 0,
+    "replicationFactor": 2,
+    "erasureCode": "OFF",
+    "isInlineEcEnabled": false,
+    "hasHigherEcFaultDomainPreference": false,
+    "cacheDeduplication": "OFF",
+    "onDiskDedup": "OFF",
+    "isCompressionEnabled": true,
+    "compressionDelaySecs": 0,
+    "isInternal": false,
+    "isSoftwareEncryptionEnabled": false,
+    "isShared": false
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.StorageContainer",
+    "links": [
+      {
+        "$objectType": "common.v1.response.ApiLink",
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/config/storage-containers/cf923c46-fcd8-4670-8ec1-8a403c20c594",
+        "rel": "storage-container"
+      },
+      {
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/stats/storage-containers/cf923c46-fcd8-4670-8ec1-8a403c20c594",
+        "rel": "storage-container-stats"
+      }
+    ],
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "storagePoolExtId": "83c21205-5611-49cf-999a-7c7d8aae320d",
+    "isMarkedForRemoval": false,
+    "markedForRemoval": false,
+    "maxCapacityBytes": 27547883375270,
+    "logicalImplicitReservedCapacityBytes": 0,
+    "isNfsWhitelistInherited": true,
+    "clusterName": "clusterName-d2b6bd1b",
+    "containerExtId": "cf923c46-fcd8-4670-8ec1-8a403c20c594",
+    "ownerExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-241a353a",
+    "logicalExplicitReservedCapacityBytes": 0,
+    "replicationFactor": 2,
+    "erasureCode": "OFF",
+    "isInlineEcEnabled": false,
+    "hasHigherEcFaultDomainPreference": false,
+    "cacheDeduplication": "OFF",
+    "onDiskDedup": "OFF",
+    "isCompressionEnabled": true,
+    "compressionDelaySecs": 0,
+    "isInternal": false,
+    "isSoftwareEncryptionEnabled": false,
+    "isShared": false
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.StorageContainer",
+    "links": [
+      {
+        "$objectType": "common.v1.response.ApiLink",
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/config/storage-containers/d35f32c2-c755-44fd-bcf1-2ebcbd5f728b",
+        "rel": "storage-container"
+      },
+      {
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/stats/storage-containers/d35f32c2-c755-44fd-bcf1-2ebcbd5f728b",
+        "rel": "storage-container-stats"
+      }
+    ],
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "storagePoolExtId": "83c21205-5611-49cf-999a-7c7d8aae320d",
+    "isMarkedForRemoval": false,
+    "markedForRemoval": false,
+    "maxCapacityBytes": 27547883375270,
+    "logicalImplicitReservedCapacityBytes": 0,
+    "isNfsWhitelistInherited": true,
+    "clusterName": "clusterName-d2b6bd1b",
+    "containerExtId": "d35f32c2-c755-44fd-bcf1-2ebcbd5f728b",
+    "ownerExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-fca13dd7",
+    "logicalExplicitReservedCapacityBytes": 0,
+    "replicationFactor": 2,
+    "erasureCode": "OFF",
+    "isInlineEcEnabled": false,
+    "hasHigherEcFaultDomainPreference": false,
+    "cacheDeduplication": "OFF",
+    "onDiskDedup": "OFF",
+    "isCompressionEnabled": true,
+    "compressionDelaySecs": 0,
+    "isInternal": false,
+    "isSoftwareEncryptionEnabled": false,
+    "isShared": true
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.StorageContainer",
+    "links": [
+      {
+        "$objectType": "common.v1.response.ApiLink",
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/config/storage-containers/debe1e55-c442-4acb-bfb2-693fa53b85f4",
+        "rel": "storage-container"
+      },
+      {
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/stats/storage-containers/debe1e55-c442-4acb-bfb2-693fa53b85f4",
+        "rel": "storage-container-stats"
+      }
+    ],
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "storagePoolExtId": "63725cff-c712-44e3-9e28-5bcbcb945fdf",
+    "isMarkedForRemoval": false,
+    "markedForRemoval": false,
+    "maxCapacityBytes": 40762045424719,
+    "logicalImplicitReservedCapacityBytes": 0,
+    "isNfsWhitelistInherited": true,
+    "clusterName": "clusterName-277ed708",
+    "containerExtId": "debe1e55-c442-4acb-bfb2-693fa53b85f4",
+    "ownerExtId": "08f0dcd1-3a70-57a1-b84b-97d8e7b270fc",
+    "name": "name-fae563ce",
+    "logicalExplicitReservedCapacityBytes": 0,
+    "replicationFactor": 2,
+    "erasureCode": "OFF",
+    "isInlineEcEnabled": false,
+    "hasHigherEcFaultDomainPreference": false,
+    "cacheDeduplication": "OFF",
+    "onDiskDedup": "OFF",
+    "isCompressionEnabled": true,
+    "compressionDelaySecs": 0,
+    "isInternal": false,
+    "isSoftwareEncryptionEnabled": false,
+    "isShared": false
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.StorageContainer",
+    "links": [
+      {
+        "$objectType": "common.v1.response.ApiLink",
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/config/storage-containers/e3af3b23-f70d-407d-81a9-54a0e3e7fa63",
+        "rel": "storage-container"
+      },
+      {
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/stats/storage-containers/e3af3b23-f70d-407d-81a9-54a0e3e7fa63",
+        "rel": "storage-container-stats"
+      }
+    ],
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "storagePoolExtId": "83c21205-5611-49cf-999a-7c7d8aae320d",
+    "isMarkedForRemoval": false,
+    "markedForRemoval": false,
+    "maxCapacityBytes": 27547883375270,
+    "logicalImplicitReservedCapacityBytes": 0,
+    "isNfsWhitelistInherited": true,
+    "clusterName": "clusterName-d2b6bd1b",
+    "containerExtId": "e3af3b23-f70d-407d-81a9-54a0e3e7fa63",
+    "ownerExtId": "08f0dcd1-3a70-57a1-b84b-97d8e7b270fc",
+    "name": "name-fae563ce",
+    "logicalExplicitReservedCapacityBytes": 0,
+    "replicationFactor": 2,
+    "erasureCode": "OFF",
+    "isInlineEcEnabled": false,
+    "hasHigherEcFaultDomainPreference": false,
+    "cacheDeduplication": "OFF",
+    "onDiskDedup": "OFF",
+    "isCompressionEnabled": true,
+    "compressionDelaySecs": 0,
+    "isInternal": false,
+    "isSoftwareEncryptionEnabled": false,
+    "isShared": false
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.StorageContainer",
+    "links": [
+      {
+        "$objectType": "common.v1.response.ApiLink",
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/config/storage-containers/e7925308-322e-47ae-a8fa-0ad14310f480",
+        "rel": "storage-container"
+      },
+      {
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/stats/storage-containers/e7925308-322e-47ae-a8fa-0ad14310f480",
+        "rel": "storage-container-stats"
+      }
+    ],
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "storagePoolExtId": "83c21205-5611-49cf-999a-7c7d8aae320d",
+    "isMarkedForRemoval": false,
+    "markedForRemoval": false,
+    "maxCapacityBytes": 27547883375270,
+    "logicalImplicitReservedCapacityBytes": 0,
+    "isNfsWhitelistInherited": true,
+    "clusterName": "clusterName-d2b6bd1b",
+    "containerExtId": "e7925308-322e-47ae-a8fa-0ad14310f480",
+    "ownerExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-ac40eaa9",
+    "logicalExplicitReservedCapacityBytes": 0,
+    "replicationFactor": 2,
+    "erasureCode": "OFF",
+    "isInlineEcEnabled": false,
+    "hasHigherEcFaultDomainPreference": false,
+    "cacheDeduplication": "OFF",
+    "onDiskDedup": "OFF",
+    "isCompressionEnabled": false,
+    "compressionDelaySecs": 0,
+    "isInternal": false,
+    "isSoftwareEncryptionEnabled": false,
+    "isShared": true
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.StorageContainer",
+    "links": [
+      {
+        "$objectType": "common.v1.response.ApiLink",
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/config/storage-containers/e9102e2c-8987-4d1b-b34e-dcda1d432e80",
+        "rel": "storage-container"
+      },
+      {
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/stats/storage-containers/e9102e2c-8987-4d1b-b34e-dcda1d432e80",
+        "rel": "storage-container-stats"
+      }
+    ],
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "storagePoolExtId": "63725cff-c712-44e3-9e28-5bcbcb945fdf",
+    "isMarkedForRemoval": false,
+    "markedForRemoval": false,
+    "maxCapacityBytes": 40762045424719,
+    "logicalImplicitReservedCapacityBytes": 0,
+    "isNfsWhitelistInherited": true,
+    "clusterName": "clusterName-277ed708",
+    "containerExtId": "e9102e2c-8987-4d1b-b34e-dcda1d432e80",
+    "ownerExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-afc26000",
+    "logicalExplicitReservedCapacityBytes": 0,
+    "replicationFactor": 2,
+    "erasureCode": "OFF",
+    "isInlineEcEnabled": false,
+    "hasHigherEcFaultDomainPreference": false,
+    "cacheDeduplication": "OFF",
+    "onDiskDedup": "OFF",
+    "isCompressionEnabled": true,
+    "compressionDelaySecs": 0,
+    "isInternal": false,
+    "isSoftwareEncryptionEnabled": false,
+    "isShared": false
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.StorageContainer",
+    "links": [
+      {
+        "$objectType": "common.v1.response.ApiLink",
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/config/storage-containers/f71f3a28-2e8c-400b-b7b3-b15090c22a78",
+        "rel": "storage-container"
+      },
+      {
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/stats/storage-containers/f71f3a28-2e8c-400b-b7b3-b15090c22a78",
+        "rel": "storage-container-stats"
+      }
+    ],
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "storagePoolExtId": "83c21205-5611-49cf-999a-7c7d8aae320d",
+    "isMarkedForRemoval": false,
+    "markedForRemoval": false,
+    "maxCapacityBytes": 27547883375270,
+    "logicalImplicitReservedCapacityBytes": 0,
+    "isNfsWhitelistInherited": true,
+    "clusterName": "clusterName-d2b6bd1b",
+    "containerExtId": "f71f3a28-2e8c-400b-b7b3-b15090c22a78",
+    "ownerExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-46d3289e",
+    "logicalExplicitReservedCapacityBytes": 0,
+    "replicationFactor": 2,
+    "erasureCode": "OFF",
+    "isInlineEcEnabled": false,
+    "hasHigherEcFaultDomainPreference": false,
+    "cacheDeduplication": "OFF",
+    "onDiskDedup": "OFF",
+    "isCompressionEnabled": false,
+    "compressionDelaySecs": 0,
+    "isInternal": true,
+    "isSoftwareEncryptionEnabled": false,
+    "isShared": false
+  }
+]

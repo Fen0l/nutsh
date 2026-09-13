@@ -1,0 +1,64 @@
+[
+  {
+    "$objectType": "microseg.v4.config.NetworkSecurityPolicy",
+    "extId": "8d4a1c20-0000-4000-8000-000000000501",
+    "name": "isolate-prod",
+    "description": "quarantine anything tagged prod-suspect",
+    "type": "ISOLATION",
+    "state": "MONITOR",
+    "scope": "ALL_VLAN",
+    "rules": [
+      {
+        "$objectType": "microseg.v4.config.NetworkSecurityPolicyRule",
+        "extId": "8d4a1c20-0000-4000-8000-000000000511",
+        "description": "prod away from dev",
+        "type": "TWO_ENV_ISOLATION",
+        "isLoggingEnabled": false,
+        "spec": {
+          "$objectType": "microseg.v4.config.TwoEnvIsolationRuleSpec",
+          "firstIsolationGroup": ["c0000000-0000-4000-8000-000000000901"],
+          "secondIsolationGroup": ["c0000000-0000-4000-8000-000000000902"]
+        }
+      }
+    ],
+    "securedGroups": ["c0000000-0000-4000-8000-000000000901"],
+    "isIpv4AddressScope": true,
+    "isIpv6AddressScope": false,
+    "isIpv6TrafficAllowed": false,
+    "isHitlogEnabled": false,
+    "isSystemDefined": false,
+    "creationTime": "2026-08-01T09:00:00Z",
+    "lastUpdateTime": "2026-09-04T11:30:00Z"
+  },
+  {
+    "$objectType": "microseg.v4.config.NetworkSecurityPolicy",
+    "extId": "8d4a1c20-0000-4000-8000-000000000502",
+    "name": "app-tier",
+    "description": "three tiers of the example application",
+    "type": "APPLICATION",
+    "state": "ENFORCE",
+    "scope": "GLOBAL",
+    "rules": [],
+    "securedGroups": ["c0000000-0000-4000-8000-000000000903"],
+    "isIpv4AddressScope": true,
+    "isIpv6AddressScope": false,
+    "isHitlogEnabled": true,
+    "isSystemDefined": false,
+    "creationTime": "2026-07-15T09:00:00Z",
+    "lastUpdateTime": "2026-08-20T08:00:00Z"
+  },
+  {
+    "$objectType": "microseg.v4.config.NetworkSecurityPolicy",
+    "extId": "8d4a1c20-0000-4000-8000-000000000503",
+    "name": "quarantine-default",
+    "type": "QUARANTINE",
+    "state": "SAVE",
+    "scope": "VPC_LIST",
+    "vpcReferences": ["4c1f9b60-0000-4000-8000-000000000301"],
+    "isIpv4AddressScope": true,
+    "isHitlogEnabled": false,
+    "isSystemDefined": true,
+    "creationTime": "2026-06-02T09:00:00Z",
+    "lastUpdateTime": "2026-06-02T09:00:00Z"
+  }
+]

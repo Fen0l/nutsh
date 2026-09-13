@@ -1,0 +1,400 @@
+[
+  {
+    "$objectType": "iam.v4.authz.AuthorizationPolicyProjection",
+    "assignedUserGroupsCount": 0,
+    "assignedUsersCount": 1,
+    "authorizationPolicyType": "PREDEFINED_READ_ONLY",
+    "clientName": "clientName-fececb82",
+    "createdBy": "createdBy-84222325",
+    "createdTime": "2024-10-03T07:13:01.895179Z",
+    "description": "description-84222325",
+    "displayName": "displayName-36e7b6cc",
+    "entities": [
+      {
+        "entityFilter": {
+          "*": {
+            "*": {
+              "eq": "*"
+            }
+          }
+        }
+      }
+    ],
+    "extId": "4487ba39-4ce3-505c-b30c-b9e016dd4cc5",
+    "identities": [
+      {
+        "identityFilter": {
+          "user": {
+            "uuid": {
+              "anyof": [
+                "00000000-0000-0000-0000-000000000000"
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "isGlobal": false,
+    "isSharedWithAllProjects": true,
+    "isSystemDefined": true,
+    "lastUpdatedTime": "2024-10-03T07:13:01.895179Z",
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "role": "1a16e10d-ce43-5ceb-8956-40b25dcd60fb"
+  },
+  {
+    "$objectType": "iam.v4.authz.AuthorizationPolicyProjection",
+    "assignedUserGroupsCount": 0,
+    "assignedUsersCount": 0,
+    "authorizationPolicyType": "PREDEFINED_UPDATE_IDENTITY_ONLY",
+    "clientName": "clientName-fececb82",
+    "createdBy": "createdBy-84222325",
+    "createdTime": "2024-10-03T07:13:01.895231Z",
+    "description": "description-84222325",
+    "displayName": "displayName-8449de7d",
+    "entities": [
+      {
+        "entityFilter": {
+          "*": {
+            "*": {
+              "eq": "*"
+            }
+          }
+        }
+      }
+    ],
+    "extId": "708b5850-1e90-4adb-b945-836c4c941e4a",
+    "isGlobal": false,
+    "isSharedWithAllProjects": false,
+    "isSystemDefined": false,
+    "lastUpdatedTime": "2026-08-04T13:49:55.776265Z",
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "role": "43e18100-5ce1-5a89-aac3-66e78cc83c03"
+  },
+  {
+    "$objectType": "iam.v4.authz.AuthorizationPolicyProjection",
+    "assignedUserGroupsCount": 0,
+    "assignedUsersCount": 1,
+    "authorizationPolicyType": "PREDEFINED_READ_ONLY",
+    "clientName": "clientName-fececb82",
+    "createdBy": "createdBy-84222325",
+    "createdTime": "2024-10-03T07:13:09.783117Z",
+    "description": "description-72ff2868",
+    "displayName": "displayName-93656e60",
+    "entities": [
+      {
+        "entityFilter": {
+          "*": {
+            "*": {
+              "eq": "*"
+            }
+          }
+        }
+      }
+    ],
+    "extId": "d32de390-be7d-51b3-a934-9a133731b1ca",
+    "identities": [
+      {
+        "identityFilter": {
+          "user": {
+            "uuid": {
+              "anyof": [
+                "00000000-0000-0000-0000-000000000000"
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "isGlobal": false,
+    "isSharedWithAllProjects": false,
+    "isSystemDefined": true,
+    "lastUpdatedTime": "2024-10-03T07:13:09.783117Z",
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "role": "468c1fe7-d986-5788-af71-72c3031bc98d"
+  },
+  {
+    "$objectType": "iam.v4.authz.AuthorizationPolicyProjection",
+    "assignedUserGroupsCount": 0,
+    "assignedUsersCount": 1,
+    "authorizationPolicyType": "PREDEFINED_READ_ONLY",
+    "clientName": "clientName-fececb82",
+    "createdBy": "createdBy-84222325",
+    "createdTime": "2024-10-03T07:13:09.783274Z",
+    "description": "description-0163ca57",
+    "displayName": "displayName-5fed10ad",
+    "entities": [
+      {
+        "entityFilter": {
+          "*": {
+            "*": {
+              "eq": "*"
+            }
+          }
+        }
+      }
+    ],
+    "extId": "af8d8634-6ea2-5993-81e1-28bcbd766e30",
+    "identities": [
+      {
+        "identityFilter": {
+          "user": {
+            "uuid": {
+              "anyof": [
+                "00000000-0000-0000-0000-000000000000"
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "isGlobal": false,
+    "isSharedWithAllProjects": false,
+    "isSystemDefined": true,
+    "lastUpdatedTime": "2024-10-03T07:13:09.783274Z",
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "role": "24bfd96a-8b09-5f40-b1da-ae7abb1099f9"
+  },
+  {
+    "$objectType": "iam.v4.authz.AuthorizationPolicyProjection",
+    "assignedUserGroupsCount": 0,
+    "assignedUsersCount": 6,
+    "authorizationPolicyType": "USER_DEFINED",
+    "clientName": "clientName-c922d536",
+    "createdBy": "createdBy-18f299f1",
+    "createdTime": "2024-12-06T14:30:08.718101Z",
+    "description": "description-84222325",
+    "displayName": "displayName-373b79ff",
+    "entities": [
+      {
+        "entityFilter": {
+          "*": {
+            "*": {
+              "eq": "*"
+            }
+          }
+        }
+      }
+    ],
+    "extId": "fb674de6-9103-4a8e-6cbf-bb5f4b3d300a",
+    "identities": [
+      {
+        "identityFilter": {
+          "user": {
+            "uuid": {
+              "anyof": [
+                "createdBy-18f299f1"
+              ]
+            }
+          }
+        }
+      },
+      {
+        "identityFilter": {
+          "user": {
+            "uuid": {
+              "anyof": [
+                "eaea1529-e0a5-51ab-9222-8a4121119df3",
+                "08f0dcd1-3a70-57a1-b84b-97d8e7b270fc",
+                "fd52c7b9-fa10-59e2-9eb4-413d3e8b622d",
+                "7d555b69-6711-504a-971d-b8c9f1fed337",
+                "389584be-170c-5531-9cb7-036826cfabf6"
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "isGlobal": false,
+    "isSharedWithAllProjects": false,
+    "isSystemDefined": false,
+    "lastUpdatedTime": "2026-08-28T10:20:34.997104Z",
+    "projectExtId": "createdBy-18f299f1",
+    "role": "24bfd96a-8b09-5f40-b1da-ae7abb1099f9"
+  },
+  {
+    "$objectType": "iam.v4.authz.AuthorizationPolicyProjection",
+    "assignedUserGroupsCount": 0,
+    "assignedUsersCount": 0,
+    "authorizationPolicyType": "PREDEFINED_UPDATE_IDENTITY_ONLY",
+    "clientName": "clientName-fececb82",
+    "createdBy": "createdBy-84222325",
+    "createdTime": "2025-06-24T18:12:04.060809Z",
+    "description": "description-8c21ab6d",
+    "displayName": "displayName-be297d22",
+    "entities": [
+      {
+        "entityFilter": {
+          "*": {
+            "*": {
+              "eq": "*"
+            }
+          }
+        }
+      }
+    ],
+    "extId": "182587fa-1b10-4fd8-4185-c88eceef7336",
+    "identities": [
+      {
+        "identityFilter": {
+          "user": {
+            "uuid": {
+              "anyof": []
+            }
+          }
+        }
+      },
+      {
+        "identityFilter": {
+          "user": {
+            "group": {
+              "anyof": []
+            }
+          }
+        }
+      }
+    ],
+    "isGlobal": false,
+    "isSharedWithAllProjects": false,
+    "isSystemDefined": false,
+    "lastUpdatedTime": "2025-12-09T13:26:36.414219Z",
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "role": "6d9cff83-b936-537d-bd20-22455086e36e"
+  },
+  {
+    "$objectType": "iam.v4.authz.AuthorizationPolicyProjection",
+    "assignedUserGroupsCount": 0,
+    "assignedUsersCount": 1,
+    "authorizationPolicyType": "USER_DEFINED",
+    "clientName": "clientName-c922d536",
+    "createdBy": "createdBy-9a8253ee",
+    "createdTime": "2026-07-30T11:58:08.390629Z",
+    "description": "description-84222325",
+    "displayName": "displayName-0484cd91",
+    "entities": [
+      {
+        "entityFilter": {
+          "*": {
+            "*": {
+              "eq": "*"
+            }
+          }
+        }
+      }
+    ],
+    "extId": "95e4cd89-dc34-4992-58af-5dd0646fa5a6",
+    "identities": [
+      {
+        "identityFilter": {
+          "user": {
+            "uuid": {
+              "anyof": [
+                "7d555b69-6711-504a-971d-b8c9f1fed337"
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "isGlobal": false,
+    "isSharedWithAllProjects": false,
+    "isSystemDefined": false,
+    "lastUpdatedTime": "2026-07-30T11:58:08.390629Z",
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "role": "468c1fe7-d986-5788-af71-72c3031bc98d"
+  },
+  {
+    "$objectType": "iam.v4.authz.AuthorizationPolicyProjection",
+    "assignedUserGroupsCount": 0,
+    "assignedUsersCount": 1,
+    "authorizationPolicyType": "USER_DEFINED",
+    "clientName": "clientName-c922d536",
+    "createdBy": "createdBy-9a8253ee",
+    "createdTime": "2026-07-30T12:01:01.085097Z",
+    "description": "description-84222325",
+    "displayName": "displayName-4d672928",
+    "entities": [
+      {
+        "entityFilter": {
+          "*": {
+            "*": {
+              "eq": "*"
+            }
+          }
+        }
+      }
+    ],
+    "extId": "7d830d5d-acd0-4757-67b2-4cef1c68b3ea",
+    "identities": [
+      {
+        "identityFilter": {
+          "user": {
+            "uuid": {
+              "anyof": [
+                "7d555b69-6711-504a-971d-b8c9f1fed337"
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "isGlobal": false,
+    "isSharedWithAllProjects": false,
+    "isSystemDefined": false,
+    "lastUpdatedTime": "2026-07-30T12:01:01.085097Z",
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "role": "e70b3179-f309-472b-4465-092a90959edd"
+  },
+  {
+    "$objectType": "iam.v4.authz.AuthorizationPolicyProjection",
+    "assignedUserGroupsCount": 0,
+    "assignedUsersCount": 1,
+    "authorizationPolicyType": "USER_DEFINED",
+    "clientName": "clientName-c922d536",
+    "createdBy": "createdBy-9a8253ee",
+    "createdTime": "2026-07-30T12:09:08.760554Z",
+    "description": "description-84222325",
+    "displayName": "displayName-373b7bb2",
+    "entities": [
+      {
+        "entityFilter": {
+          "image": {
+            "uuid": {
+              "anyof": [
+                "d2772454-5cf3-45d5-aedc-b83c1261e70f"
+              ]
+            }
+          }
+        }
+      },
+      {
+        "entityFilter": {
+          "*": {
+            "owner_uuid": {
+              "eq": "SELF_OWNED"
+            }
+          }
+        }
+      }
+    ],
+    "extId": "638aef60-81d4-4f6d-48b8-3458ac97927d",
+    "identities": [
+      {
+        "identityFilter": {
+          "user": {
+            "uuid": {
+              "anyof": [
+                "7d555b69-6711-504a-971d-b8c9f1fed337"
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "isGlobal": false,
+    "isSharedWithAllProjects": false,
+    "isSystemDefined": false,
+    "lastUpdatedTime": "2026-07-30T12:09:08.760554Z",
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "role": "468c1fe7-d986-5788-af71-72c3031bc98d"
+  }
+]

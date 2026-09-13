@@ -1,0 +1,23 @@
+[
+  {
+    "$objectType": "datapolicies.v4.config.StoragePolicy",
+    "extId": "f1c9b671-2b1f-4647-6d04-635707459943",
+    "name": "name-997cf432",
+    "categoryExtIds": [
+      "4707ac34-6627-535e-85d0-0bc447a94b71"
+    ],
+    "compressionSpec": {
+      "$objectType": "datapolicies.v4.config.CompressionSpec",
+      "compressionState": "INLINE"
+    },
+    "encryptionSpec": {
+      "$objectType": "datapolicies.v4.config.EncryptionSpec",
+      "encryptionState": "SYSTEM_DERIVED"
+    },
+    "faultToleranceSpec": {
+      "$objectType": "datapolicies.v4.config.FaultToleranceSpec",
+      "replicationFactor": "TWO"
+    },
+    "policyType": "SYSTEM"
+  }
+]

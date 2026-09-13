@@ -1,0 +1,81 @@
+[
+  {
+    "$objectType": "objects.v4.config.ObjectStore",
+    "bucketCount": 11,
+    "certificateExtIds": [
+      "[redacted]"
+    ],
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "creationTime": "2024-12-06T04:36:22-08:00",
+    "deploymentVersion": "5.4",
+    "description": "description-54f266ba",
+    "dnsIp": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "prefixLength": 32,
+        "value": "198.51.100.238"
+      }
+    },
+    "domain": "domain-6db087cb",
+    "errorMessage": "",
+    "extId": "6a04a33f-fecf-45ed-7daf-a876764ee537",
+    "hypervisorType": "AHV",
+    "isHighPerfConfigEnabled": false,
+    "lastUpdateTime": "2024-12-06T04:36:22-08:00",
+    "licensingUsageBytes": 427491007310,
+    "localUsageBytes": 427492521808,
+    "name": "name-54f266ba",
+    "numWorkerNodes": 1,
+    "objectCount": 936449,
+    "publicNetworkIps": [
+      {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "prefixLength": 32,
+          "value": "198.51.100.66"
+        }
+      },
+      {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "prefixLength": 32,
+          "value": "203.0.113.107"
+        }
+      }
+    ],
+    "publicNetworkReference": "100d397d-fb42-4197-a4d0-5516a82a0518",
+    "shouldUseMaxLbForHybridCluster": false,
+    "state": "description-54f266ba_STORE_AVAILABLE",
+    "storageNetworkDnsIp": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "prefixLength": 32,
+        "value": "198.51.100.238"
+      }
+    },
+    "storageNetworkReference": "100d397d-fb42-4197-a4d0-5516a82a0518",
+    "storageNetworkVip": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "prefixLength": 32,
+        "value": "203.0.113.25"
+      }
+    },
+    "storageUsageBytes": 427492521808,
+    "tieredGarbageBytes": 0,
+    "tieredUsageBytes": 0,
+    "vip": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "prefixLength": 32,
+        "value": "203.0.113.25"
+      }
+    }
+  }
+]

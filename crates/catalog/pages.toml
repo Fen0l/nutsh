@@ -1,0 +1,579 @@
+# Feature pages: several kinds composed into one screen, the way a Prism Central page is.
+# Generated into the catalog beside KINDS. The generator fails on an unknown kind, on a
+# seventh pane, on a `row` past the end of `row_heights`, on a `col` past the second, on two
+# panes in one `(row, col)` cell, on a `weight` of zero, on a `summary_rows` past the last
+# row, and on a column path that is not a dotted path. A path that stops resolving after a
+# spec bump renders `-` rather than failing, so the page degrades a cell instead of dying.
+#
+# `row_heights`: `0` shares what is left of the page (a `Min(5)`), anything else is exact.
+# `summary_rows`: how many top rows the 26-cell summary column spans.
+#
+# Later pages, agreed in shape and not yet built: Protection Summary (entities by protection
+# state, RPO compliance), Security Dashboard (`security.report.*` summaries and STIG results),
+# Capacity (storage containers and cluster utilisation), LCM (inventory, available bundles,
+# upgrade history).
+
+[[page]]
+id = "disaster-recovery"
+title = "Disaster Recovery"
+summary = "disaster-recovery"
+summary_rows = 2
+row_heights = [5, 7, 0, 0]
+
+  # `RegisteredDomain` is registration with Nutanix Central, not a DR availability zone: DR
+  # peers are named by `domainManagerExtId` on the policies and plans below, which the store's
+  # name cache resolves. The pane is still worth showing, and "single PC" is the common case,
+  # not an error. It has no last-sync and no storage capacity: a `DomainPlatformData` schema
+  # with `lastSyncedAt`, `storageCapacity`, `vmCount` and `criticalAlertCount` exists in the
+  # file and is referenced by nothing. `platformData.connectivityStatus` is an unconstrained
+  # string, not an enum - still a `Status` column, because the vocabulary matches words, but
+  # not the first one: `registrationState` leads here as it leads the kind's own curated
+  # columns, so a row's colour is the registration state rather than the absence of an
+  # optional object. The pane must keep the kind's order to stay a subsequence of it.
+  [[page.pane]]
+  title = "Registered Prism Centrals"
+  kind = "multidomain.config.RegisteredDomain"
+  row = 0
+  col = 0
+  weight = 1
+  empty = "single PC - not registered with Nutanix Central"
+  columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "PC VERSION", path = "platformData.pcVersion", kind = "Text" },
+    { header = "CLUSTERS", path = "platformData.clusterCount", kind = "Text" },
+    { header = "STATE", path = "registrationState", kind = "Status" },
+    { header = "CONNECTIVITY", path = "platformData.connectivityStatus", kind = "Status" },
+    { header = "REGISTERED", path = "registeredTime", kind = "Timestamp" },
+  ]
+
+  # `label` is documented as "a unique user defined label of the replication location … used to
+  # identify the location in the replication configurations": a join key, not a site. On the recording
+  # those labels are `0`, `1` and `PC_192.0.2.8-0`. The site is `domainManagerExtId`, which the
+  # name warm-up resolves to the Prism Central's own name.
+  #
+  # `PRIMARY ← replicationLocations[].isPrimary` is gone. Every policy has exactly one primary
+  # location by definition ("One of the locations must be specified as the primary location"), so
+  # the column carried no information even before it was cut to `true,fa`. Selecting the primary
+  # element would need a path predicate the grammar does not have, and inventing one for a single
+  # column is a feature for a single column.
+  #
+  # These are the first four of `datapolicies.config.ProtectionPolicy`'s curated columns, in
+  # order, so the page and the kind's own table cannot disagree.
+  [[page.pane]]
+  title = "Protection Policies"
+  kind = "datapolicies.config.ProtectionPolicy"
+  row = 1
+  col = 0
+  weight = 1
+  empty = "no protection policies"
+  columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "SITES", path = "replicationLocations[].domainManagerExtId", kind = "Reference" },
+    { header = "RPO", path = "replicationConfigurations[].schedule.recoveryPointObjectiveTimeSeconds", kind = "Duration" },
+    { header = "CATEGORIES", path = "categoryIds", kind = "Count" },
+  ]
+
+  # `RecoveryPlan` has no stages column and no status: stages are a sub-resource
+  # (`datapolicies.config.RecoveryStage`, parent RecoveryPlan) reached by drilling into a row,
+  # and execution state lives on RecoveryPlanJob. The RPO wrapper above is `schedule`, not
+  # `scheduleConfig`.
+  [[page.pane]]
+  title = "Recovery Plans"
+  kind = "datapolicies.config.RecoveryPlan"
+  row = 2
+  col = 0
+  weight = 1
+  empty = "no recovery plans"
+  columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "PRIMARY SITE", path = "primaryLocation.domainManagerExtId", kind = "Reference" },
+    { header = "RECOVERY SITE", path = "recoveryLocation.domainManagerExtId", kind = "Reference" },
+    { header = "PAUSED", path = "isProtectionPausedPostFailover", kind = "Bool" },
+  ]
+
+  [[page.pane]]
+  title = "Recent DR jobs"
+  kind = "dataprotection.config.RecoveryPlanJob"
+  row = 3
+  col = 0
+  weight = 1
+  empty = "no recovery plan jobs"
+  columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "ACTION", path = "actionType", kind = "Enum" },
+    { header = "STATUS", path = "status", kind = "Status" },
+    { header = "PLAN", path = "recoveryPlanExtId", kind = "Reference" },
+    { header = "%", path = "percentageComplete", kind = "Percent" },
+    { header = "START", path = "startTime", kind = "Timestamp" },
+  ]
+
+[[page]]
+id = "dashboard"
+title = "Dashboard"
+summary = "dashboard"
+summary_rows = 2
+row_heights = [0, 0]
+
+  # `HOSTS` was `Count` over `nodes.numberOfNodes`, which is an integer and not an array:
+  # `cell::render_cell`'s `Count` arm counts the values a path matched, so the column printed `1`
+  # on every row whatever the cluster's size.
+  #
+  # The Dashboard asks a different question of a cluster than the Clusters table does - whether
+  # an upgrade is running, rather than what the operation mode is - so its columns are
+  # deliberately not a subsequence of the kind's.
+  [[page.pane]]
+  title = "Clusters"
+  kind = "clustermgmt.config.Cluster"
+  row = 0
+  col = 0
+  weight = 1
+  empty = "no clusters registered"
+  columns_note = "upgradeStatus is the Dashboard's question; the Clusters table leads with the operation mode"
+  columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "HOSTS", path = "nodes.numberOfNodes", kind = "Text" },
+    { header = "VMS", path = "vmCount", kind = "Text" },
+    { header = "UPGRADE", path = "upgradeStatus", kind = "Status" },
+    { header = "VERSION", path = "config.buildInfo.version", kind = "Text" },
+  ]
+
+  [[page.pane]]
+  title = "Unresolved alerts"
+  kind = "monitoring.serviceability.Alert"
+  filter = "isResolved eq false"
+  row = 0
+  col = 1
+  weight = 1
+  empty = "no unresolved alerts"
+  columns = [
+    { header = "SEVERITY", path = "severity", kind = "Status" },
+    { header = "MESSAGE", path = "title", kind = "Text" },
+    { header = "SOURCE", path = "sourceEntity.name", kind = "Text" },
+    { header = "AGE", path = "creationTime", kind = "Timestamp" },
+  ]
+
+  [[page.pane]]
+  title = "Running tasks"
+  kind = "prism.config.Task"
+  filter = "status eq Prism.Config.TaskStatus'RUNNING'"
+  row = 1
+  col = 0
+  weight = 1
+  empty = "nothing running"
+  columns = [
+    { header = "OPERATION", path = "operationDescription", kind = "Text" },
+    { header = "STATUS", path = "status", kind = "Status" },
+    { header = "PROGRESS", path = "progressPercentage", kind = "Percent" },
+    { header = "AGE", path = "startedTime", kind = "Timestamp" },
+  ]
+
+  # `$orderby=name`, not by creation time: `listVms` accepts `$orderby` but `createTime` is not
+  # among the fields it takes (`specs/vmm/v4.3.yaml:31916-31952`, where `createTime` appears
+  # under `$select` only), so ordering by it would be a 400.
+  [[page.pane]]
+  title = "VMs"
+  kind = "vmm.ahv.config.Vm"
+  orderby = "name"
+  row = 1
+  col = 1
+  weight = 1
+  empty = "no virtual machines"
+  columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "POWER", path = "powerState", kind = "Status" },
+    { header = "CLUSTER", path = "cluster.extId", kind = "Reference" },
+    { header = "CREATED", path = "createTime", kind = "Timestamp" },
+  ]
+
+# ─────────────────────────────────────────────────────────────────────────────────────────────
+# The group landing pages.
+#
+# Six of the nine curated `nav.toml` groups open on one of these, the way Data Protection opens
+# on Disaster Recovery: the group's first item is its page, and the individual resources stay
+# under it. Dashboard *is* a page and Contexts is a screen, so those two have none.
+#
+# Each is four panes over its own group's kinds, two by two, with `row_heights = [0, 0]` so the
+# two rows share the page evenly and neither is fixed to a height the terminal may not have.
+# None of them declares a `summary`: the summary column is code (`page/summary.rs`), and a box
+# nothing computes would be an empty column rather than a blank one.
+#
+# **A page id may not also name a nav group.** `nav_id` resolves a page id exactly and a group
+# name case-insensitively, so a page called `monitoring` would take `:hide monitoring` away from
+# the generated group of that name for good - which is why these ids are `hardware-overview` and
+# `monitoring-overview` rather than the bare group name. The titles are the group names, so
+# `nutsh Hardware` still opens the page; `nav_id` never looks at a title. The generator enforces
+# the rule; the one pair that exists is `dashboard` / `Dashboard`, and neither half of it can be
+# hidden at all.
+
+[[page]]
+id = "compute-storage"
+title = "Compute & Storage"
+row_heights = [0, 0]
+
+  [[page.pane]]
+  title = "VMs"
+  kind = "vmm.ahv.config.Vm"
+  row = 0
+  col = 0
+  weight = 1
+  empty = "no VMs"
+  columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "POWER", path = "powerState", kind = "Status" },
+    { header = "CLUSTER", path = "cluster.extId", kind = "Reference" },
+    { header = "MEM", path = "memorySizeBytes", kind = "Bytes" },
+  ]
+
+  [[page.pane]]
+  title = "Storage Containers"
+  kind = "clustermgmt.config.StorageContainer"
+  row = 0
+  col = 1
+  weight = 1
+  empty = "no storage containers"
+  columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "CLUSTER", path = "clusterName", kind = "Text" },
+    { header = "CAPACITY", path = "maxCapacityBytes", kind = "Bytes" },
+    { header = "RF", path = "replicationFactor", kind = "Text" },
+  ]
+
+  [[page.pane]]
+  title = "Images"
+  kind = "vmm.content.Image"
+  row = 1
+  col = 0
+  weight = 1
+  empty = "no images"
+  columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "TYPE", path = "type", kind = "Enum" },
+    { header = "SIZE", path = "sizeBytes", kind = "Bytes" },
+    { header = "CREATED", path = "createTime", kind = "Timestamp" },
+  ]
+
+  [[page.pane]]
+  title = "Volume Groups"
+  kind = "volumes.config.VolumeGroup"
+  row = 1
+  col = 1
+  weight = 1
+  empty = "no volume groups"
+  columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "SHARING", path = "sharingStatus", kind = "Enum" },
+    { header = "PROTOCOL", path = "protocol", kind = "Enum" },
+    { header = "ATTACHMENTS", path = "attachments", kind = "Count" },
+  ]
+
+[[page]]
+id = "network-security"
+title = "Network & Security"
+row_heights = [0, 0]
+
+  [[page.pane]]
+  title = "Subnets"
+  kind = "networking.config.Subnet"
+  row = 0
+  col = 0
+  weight = 1
+  empty = "no subnets"
+  columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "TYPE", path = "subnetType", kind = "Enum" },
+    { header = "VLAN", path = "networkId", kind = "Text" },
+    { header = "VPC", path = "vpcReference", kind = "Reference" },
+  ]
+
+  [[page.pane]]
+  title = "VPCs"
+  kind = "networking.config.Vpc"
+  row = 0
+  col = 1
+  weight = 1
+  empty = "no VPCs"
+  columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "TYPE", path = "vpcType", kind = "Enum" },
+    { header = "EXTERNAL SUBNETS", path = "externalSubnets", kind = "Count" },
+    { header = "PREFIXES", path = "externallyRoutablePrefixes", kind = "Count" },
+  ]
+
+  [[page.pane]]
+  title = "Gateways"
+  kind = "networking.config.Gateway"
+  row = 1
+  col = 0
+  weight = 1
+  empty = "no gateways"
+  columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "ACTIVE", path = "isActive", kind = "Bool" },
+    { header = "VPC", path = "vpcReference", kind = "Reference" },
+    { header = "VERSION", path = "installedSoftwareVersion", kind = "Text" },
+  ]
+
+  [[page.pane]]
+  title = "Security Policies"
+  kind = "microseg.config.policies"
+  row = 1
+  col = 1
+  weight = 1
+  empty = "no security policies"
+  columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "STATE", path = "state", kind = "Status" },
+    { header = "TYPE", path = "type", kind = "Enum" },
+    { header = "UPDATED", path = "lastUpdateTime", kind = "Timestamp" },
+  ]
+
+[[page]]
+id = "hardware-overview"
+title = "Hardware"
+row_heights = [0, 0]
+
+  [[page.pane]]
+  title = "Clusters"
+  kind = "clustermgmt.config.Cluster"
+  row = 0
+  col = 0
+  weight = 1
+  empty = "no clusters registered"
+  columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "MODE", path = "config.operationMode", kind = "Status" },
+    { header = "NODES", path = "nodes.numberOfNodes", kind = "Text" },
+    { header = "VERSION", path = "config.buildInfo.version", kind = "Text" },
+  ]
+
+  [[page.pane]]
+  title = "Hosts"
+  kind = "clustermgmt.config.Host"
+  row = 0
+  col = 1
+  weight = 1
+  empty = "no hosts"
+  columns = [
+    { header = "HOST", path = "hostName", kind = "Text" },
+    { header = "MAINTENANCE", path = "maintenanceState", kind = "Status" },
+    { header = "HYPERVISOR", path = "hypervisor.type", kind = "Enum" },
+    { header = "VMS", path = "hypervisor.numberOfVms", kind = "Text" },
+  ]
+
+  [[page.pane]]
+  title = "Disks"
+  kind = "clustermgmt.config.Disk"
+  row = 1
+  col = 0
+  weight = 1
+  empty = "no disks"
+  columns = [
+    { header = "DISK", path = "serialNumber", kind = "Text" },
+    { header = "STATUS", path = "status", kind = "Status" },
+    { header = "TIER", path = "storageTier", kind = "Enum" },
+    { header = "SIZE", path = "diskSizeBytes", kind = "Bytes" },
+  ]
+
+  [[page.pane]]
+  title = "Host NICs"
+  kind = "clustermgmt.config.HostNic"
+  row = 1
+  col = 1
+  weight = 1
+  empty = "no host NICs"
+  columns = [
+    { header = "NIC", path = "name", kind = "Text" },
+    { header = "MAC", path = "macAddress", kind = "Text" },
+    { header = "SPEED KBPS", path = "linkSpeedInKbps", kind = "Text" },
+    { header = "MODE", path = "operatingMode", kind = "Enum" },
+  ]
+
+[[page]]
+id = "monitoring-overview"
+title = "Monitoring"
+row_heights = [0, 0]
+
+  # Unresolved, as the Dashboard's pane is: a landing page for Monitoring that led with alerts
+  # somebody has already dealt with would bury the ones nobody has.
+  [[page.pane]]
+  title = "Unresolved alerts"
+  kind = "monitoring.serviceability.Alert"
+  filter = "isResolved eq false"
+  row = 0
+  col = 0
+  weight = 1
+  empty = "no unresolved alerts"
+  columns = [
+    { header = "SEVERITY", path = "severity", kind = "Status" },
+    { header = "MESSAGE", path = "title", kind = "Text" },
+    { header = "SOURCE", path = "sourceEntity.name", kind = "Text" },
+    { header = "AGE", path = "creationTime", kind = "Timestamp" },
+  ]
+
+  [[page.pane]]
+  title = "Events"
+  kind = "monitoring.serviceability.Event"
+  row = 0
+  col = 1
+  weight = 1
+  empty = "no events"
+  columns = [
+    { header = "TITLE", path = "title", kind = "Text" },
+    { header = "TYPE", path = "eventType", kind = "Text" },
+    { header = "SOURCE", path = "sourceEntity.name", kind = "Text" },
+    { header = "CREATED", path = "creationTime", kind = "Timestamp" },
+  ]
+
+  # Every task, not the Dashboard's running ones: the Dashboard asks "what is happening now",
+  # and this page is where you go to find out what happened.
+  [[page.pane]]
+  title = "Tasks"
+  kind = "prism.config.Task"
+  row = 1
+  col = 0
+  weight = 1
+  empty = "no tasks"
+  columns = [
+    { header = "OPERATION", path = "operationDescription", kind = "Text" },
+    { header = "STATUS", path = "status", kind = "Status" },
+    { header = "PROGRESS", path = "progressPercentage", kind = "Percent" },
+    { header = "STARTED", path = "startedTime", kind = "Timestamp" },
+  ]
+
+  [[page.pane]]
+  title = "Audits"
+  kind = "monitoring.serviceability.Audit"
+  row = 1
+  col = 1
+  weight = 1
+  empty = "no audits"
+  columns = [
+    { header = "TITLE", path = "title", kind = "Text" },
+    { header = "STATUS", path = "status", kind = "Status" },
+    { header = "USER", path = "userReference.name", kind = "Text" },
+    { header = "STARTED", path = "operationStartTime", kind = "Timestamp" },
+  ]
+
+[[page]]
+id = "policies-overview"
+title = "Policies"
+row_heights = [0, 0]
+
+  # Each pane leads with the non-compliant count rather than the compliant one: a policy is
+  # interesting when something is not obeying it.
+  [[page.pane]]
+  title = "VM-Host Affinity"
+  kind = "vmm.ahv.policies.VmHostAffinityPolicy"
+  row = 0
+  col = 0
+  weight = 1
+  empty = "no VM-host affinity policies"
+  columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "VMS", path = "numVms", kind = "Text" },
+    { header = "HOSTS", path = "numHosts", kind = "Text" },
+    { header = "NON-COMPLIANT", path = "numNonCompliantVms", kind = "Text" },
+  ]
+
+  [[page.pane]]
+  title = "VM Anti-Affinity"
+  kind = "vmm.ahv.policies.VmAntiAffinityPolicy"
+  row = 0
+  col = 1
+  weight = 1
+  empty = "no VM anti-affinity policies"
+  columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "COMPLIANT", path = "numCompliantVms", kind = "Text" },
+    { header = "NON-COMPLIANT", path = "numNonCompliantVms", kind = "Text" },
+    { header = "UPDATED", path = "updateTime", kind = "Timestamp" },
+  ]
+
+  [[page.pane]]
+  title = "VM Startup"
+  kind = "vmm.ahv.policies.VmStartupPolicy"
+  row = 1
+  col = 0
+  weight = 1
+  empty = "no VM startup policies"
+  columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "GROUPS", path = "groups", kind = "Count" },
+    { header = "NON-COMPLIANT", path = "numNonCompliantVms", kind = "Text" },
+    { header = "CONFLICTS", path = "numDependencyConflicts", kind = "Text" },
+  ]
+
+  [[page.pane]]
+  title = "Image Placement"
+  kind = "vmm.images.config.PlacementPolicy"
+  row = 1
+  col = 1
+  weight = 1
+  empty = "no image placement policies"
+  columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "STATE", path = "enforcementState", kind = "Status" },
+    { header = "TYPE", path = "placementType", kind = "Enum" },
+    { header = "UPDATED", path = "lastUpdateTime", kind = "Timestamp" },
+  ]
+
+[[page]]
+id = "admin-center"
+title = "Admin Center"
+row_heights = [0, 0]
+
+  [[page.pane]]
+  title = "Users"
+  kind = "iam.authn.User"
+  row = 0
+  col = 0
+  weight = 1
+  empty = "no users"
+  columns = [
+    { header = "USERNAME", path = "username", kind = "Text" },
+    { header = "STATUS", path = "status", kind = "Status" },
+    { header = "TYPE", path = "userType", kind = "Enum" },
+    { header = "LAST LOGIN", path = "lastLoginTime", kind = "Timestamp" },
+  ]
+
+  [[page.pane]]
+  title = "Roles"
+  kind = "iam.authz.Role"
+  row = 0
+  col = 1
+  weight = 1
+  empty = "no roles"
+  columns = [
+    { header = "NAME", path = "displayName", kind = "Text" },
+    { header = "SYSTEM", path = "isSystemDefined", kind = "Bool" },
+    { header = "OPERATIONS", path = "operations", kind = "Count" },
+    { header = "UPDATED", path = "lastUpdatedTime", kind = "Timestamp" },
+  ]
+
+  [[page.pane]]
+  title = "Prism Central"
+  kind = "prism.config.DomainManager"
+  row = 1
+  col = 0
+  weight = 1
+  empty = "no Prism Central record"
+  columns = [
+    { header = "NAME", path = "config.name", kind = "Text" },
+    { header = "SIZE", path = "config.size", kind = "Enum" },
+    { header = "NODES", path = "nodeExtIds", kind = "Count" },
+    { header = "HA", path = "shouldEnableHighAvailability", kind = "Bool" },
+  ]
+
+  [[page.pane]]
+  title = "LCM Entities"
+  kind = "lifecycle.resources.Entity"
+  row = 1
+  col = 1
+  weight = 1
+  empty = "no LCM inventory"
+  columns = [
+    { header = "ENTITY", path = "entityModel", kind = "Text" },
+    { header = "VERSION", path = "entityVersion", kind = "Text" },
+    { header = "TARGET", path = "targetVersion", kind = "Text" },
+    { header = "CLUSTER", path = "clusterExtId", kind = "Reference" },
+  ]

@@ -1,0 +1,20 @@
+[
+  {
+    "extId": "p-1",
+    "displayName": "vm-admins-by-group",
+    "role": "r-1",
+    "identities": [{ "identityFilter": { "group": { "name": { "anyof": ["admins"] } } } }]
+  },
+  {
+    "extId": "p-2",
+    "displayName": "vm-admins-by-user",
+    "role": "r-1",
+    "identities": [{ "identityFilter": { "user": { "uuid": { "anyof": ["u-1"] } } } }]
+  },
+  {
+    "extId": "p-3",
+    "displayName": "bob-is-super-admin",
+    "role": "r-2",
+    "identities": [{ "identityFilter": { "user": { "uuid": { "anyof": ["u-2"] } } } }]
+  }
+]

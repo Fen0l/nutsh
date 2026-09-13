@@ -1,0 +1,21 @@
+openapi: 3.0.1
+info:
+  title: preview-only
+  version: "1"
+paths:
+  /preview-only/v4.0.b1/config/things:
+    get:
+      parameters:
+        - name: $limit
+          in: query
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  # What `microseg`'s policy list declares: a collection the spec says
+                  # nothing else about, so the item schema cannot be found.
+                  data: {}

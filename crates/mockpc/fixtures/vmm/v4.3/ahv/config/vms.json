@@ -1,0 +1,254 @@
+[
+  {
+    "$objectType": "vmm.v4.r0.b1.ahv.config.Vm",
+    "extId": "3d0c4a2e-1b8f-4c1a-9e2f-000000000001",
+    "name": "web-01",
+    "description": "frontend",
+    "createTime": "2026-05-01T10:00:00Z",
+    "updateTime": "2026-09-01T08:30:00Z",
+    "numSockets": 2,
+    "numCoresPerSocket": 2,
+    "numThreadsPerCore": 1,
+    "memorySizeBytes": 8589934592,
+    "powerState": "ON",
+    "machineType": "PC",
+    "isAgentVm": false,
+    "protectionType": "UNPROTECTED",
+    "cluster": {
+      "extId": "0006158a-2f0d-4d5a-8e2d-000000000010"
+    },
+    "host": {
+      "extId": "7b2f2f70-0f6a-4b58-9f9b-000000000020"
+    },
+    "guestTools": {
+      "isInstalled": true,
+      "isEnabled": true,
+      "version": "4.1.2"
+    },
+    "disks": [
+      {
+        "extId": "9a1b2c3d-0000-4000-8000-000000000101",
+        "diskAddress": {
+          "busType": "SCSI",
+          "index": 0
+        },
+        "backingInfo": {
+          "$objectType": "vmm.v4.r0.b1.ahv.config.VmDisk",
+          "diskSizeBytes": 53687091200,
+          "storageContainer": {
+            "extId": "5f6e7d8c-0000-4000-8000-000000000201"
+          }
+        }
+      }
+    ],
+    "nics": [
+      {
+        "extId": "1a2b3c4d-0000-4000-8000-000000000301",
+        "backingInfo": {
+          "macAddress": "00:00:5e:00:53:01"
+        },
+        "networkInfo": {
+          "nicType": "NORMAL_NIC",
+          "subnet": {
+            "extId": "2b3c4d5e-0000-4000-8000-000000000401"
+          },
+          "ipv4Config": {
+            "ipAddress": {
+              "value": "203.0.113.11",
+              "prefixLength": 32
+            }
+          },
+          "ipv4Info": {
+            "learnedIpAddresses": [
+              {
+                "value": "203.0.113.11",
+                "prefixLength": 32
+              }
+            ]
+          }
+        },
+        "nicBackingInfo": {
+          "macAddress": "00:00:5e:00:53:01"
+        },
+        "nicNetworkInfo": {
+          "nicType": "NORMAL_NIC",
+          "subnet": {
+            "extId": "2b3c4d5e-0000-4000-8000-000000000401"
+          },
+          "ipv4Config": {
+            "ipAddress": {
+              "value": "203.0.113.11",
+              "prefixLength": 32
+            }
+          },
+          "ipv4Info": {
+            "learnedIpAddresses": [
+              {
+                "value": "203.0.113.11",
+                "prefixLength": 32
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "cdRoms": [],
+    "gpus": [],
+    "serialPorts": []
+  },
+  {
+    "$objectType": "vmm.v4.r0.b1.ahv.config.Vm",
+    "extId": "3d0c4a2e-1b8f-4c1a-9e2f-000000000002",
+    "name": "web-02",
+    "createTime": "2026-05-01T10:05:00Z",
+    "updateTime": "2026-08-20T12:00:00Z",
+    "numSockets": 2,
+    "numCoresPerSocket": 1,
+    "numThreadsPerCore": 1,
+    "memorySizeBytes": 4294967296,
+    "powerState": "OFF",
+    "machineType": "PC",
+    "isAgentVm": false,
+    "protectionType": "UNPROTECTED",
+    "cluster": {
+      "extId": "0006158a-2f0d-4d5a-8e2d-000000000010"
+    },
+    "guestTools": {
+      "isInstalled": false,
+      "isEnabled": false
+    },
+    "disks": [
+      {
+        "extId": "9a1b2c3d-0000-4000-8000-000000000102",
+        "diskAddress": {
+          "busType": "SCSI",
+          "index": 0
+        },
+        "backingInfo": {
+          "$objectType": "vmm.v4.r0.b1.ahv.config.VmDisk",
+          "diskSizeBytes": 21474836480,
+          "storageContainer": {
+            "extId": "5f6e7d8c-0000-4000-8000-000000000201"
+          }
+        }
+      }
+    ],
+    "nics": [
+      {
+        "extId": "1a2b3c4d-0000-4000-8000-000000000302",
+        "backingInfo": {
+          "macAddress": "00:00:5e:00:53:02"
+        },
+        "networkInfo": {
+          "nicType": "NORMAL_NIC",
+          "subnet": {
+            "extId": "2b3c4d5e-0000-4000-8000-000000000401"
+          },
+          "ipv4Info": {
+            "learnedIpAddresses": []
+          }
+        },
+        "nicBackingInfo": {
+          "macAddress": "00:00:5e:00:53:02"
+        },
+        "nicNetworkInfo": {
+          "nicType": "NORMAL_NIC",
+          "subnet": {
+            "extId": "2b3c4d5e-0000-4000-8000-000000000401"
+          },
+          "ipv4Info": {
+            "learnedIpAddresses": []
+          }
+        }
+      }
+    ],
+    "cdRoms": [],
+    "gpus": [],
+    "serialPorts": []
+  },
+  {
+    "$objectType": "vmm.v4.r0.b1.ahv.config.Vm",
+    "extId": "3d0c4a2e-1b8f-4c1a-9e2f-000000000003",
+    "name": "db-01",
+    "createTime": "2026-03-15T09:00:00Z",
+    "updateTime": "2026-09-03T22:10:00Z",
+    "numSockets": 4,
+    "numCoresPerSocket": 2,
+    "numThreadsPerCore": 2,
+    "memorySizeBytes": 34359738368,
+    "powerState": "ON",
+    "machineType": "PC",
+    "isAgentVm": false,
+    "protectionType": "UNPROTECTED",
+    "cluster": {
+      "extId": "0006158a-2f0d-4d5a-8e2d-000000000010"
+    },
+    "host": {
+      "extId": "7b2f2f70-0f6a-4b58-9f9b-000000000020"
+    },
+    "guestTools": {
+      "isInstalled": true,
+      "isEnabled": true,
+      "version": "3.9.0"
+    },
+    "disks": [
+      {
+        "extId": "9a1b2c3d-0000-4000-8000-000000000103",
+        "diskAddress": {
+          "busType": "SCSI",
+          "index": 0
+        },
+        "backingInfo": {
+          "$objectType": "vmm.v4.r0.b1.ahv.config.VmDisk",
+          "diskSizeBytes": 107374182400,
+          "storageContainer": {
+            "extId": "5f6e7d8c-0000-4000-8000-000000000201"
+          }
+        }
+      },
+      {
+        "extId": "9a1b2c3d-0000-4000-8000-000000000104",
+        "diskAddress": {
+          "busType": "SCSI",
+          "index": 1
+        },
+        "backingInfo": {
+          "$objectType": "vmm.v4.r0.b1.ahv.config.ADSFVolumeGroupReference",
+          "volumeGroupExtId": "6a7b8c9d-0000-4000-8000-000000000501"
+        }
+      }
+    ],
+    "nics": [
+      {
+        "extId": "1a2b3c4d-0000-4000-8000-000000000303",
+        "backingInfo": {
+          "macAddress": "00:00:5e:00:53:03"
+        },
+        "networkInfo": {
+          "nicType": "NORMAL_NIC",
+          "subnet": {
+            "extId": "2b3c4d5e-0000-4000-8000-000000000401"
+          },
+          "ipv4Info": {
+            "learnedIpAddresses": []
+          }
+        },
+        "nicBackingInfo": {
+          "macAddress": "00:00:5e:00:53:03"
+        },
+        "nicNetworkInfo": {
+          "nicType": "NORMAL_NIC",
+          "subnet": {
+            "extId": "2b3c4d5e-0000-4000-8000-000000000401"
+          },
+          "ipv4Info": {
+            "learnedIpAddresses": []
+          }
+        }
+      }
+    ],
+    "cdRoms": [],
+    "gpus": [],
+    "serialPorts": []
+  }
+]

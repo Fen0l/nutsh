@@ -1,0 +1,11 @@
+openapi: 3.0.1
+info:
+  title: mini
+  version: "1"
+paths:
+  /mini/v4.0/config/widgets:
+    get:
+      operationId: listWidgets
+  /mini/v4.0/config/widgets/{extId}:
+    get:
+      operationId: getWidget

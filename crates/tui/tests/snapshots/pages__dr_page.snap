@@ -1,0 +1,44 @@
+---
+source: crates/tui/tests/pages.rs
+expression: frame
+---
+╭ nutsh ─────────────────────────────────────────────────────────────────────────────────────╮
+│Context:    -                                                    ⏎ detail       O open table│       clusters 1  hosts 1
+│PC:         127.0.0.1:PORT  pc.2024.3                           ⇥ pane         y detail    │         vms 3  on/off 3/0
+│Cluster:    <all>                                               jk move        ^r refresh   │           alerts ⚠ 2  ✖ 2
+│Kind:       Data Protection › Disaster Recovery                 ^t every       ^x stop      │         tasks ▶ 4 running
+│Count:      4 panes                                              a actions     ^c quit      │
+╰────────────────────────────────────────────────────────────────────────────────────────────╯  v0.0.2-beta1 · pc.2024.3
+╭ nutsh ─────────── ↑3 ╮╭ Registered Prism Centrals [1] ─────────────────────────────────────╮╭ Summary ───────────────╮
+│      VMs             ││  NAME       PC VERSION   CLUSTERS  STATE   CONNECTIVITY  REGISTERED││Policies               3│
+│      ESXi VMs        ││▌ pc-dr      pc.7.6       3         ACTIVE  CONNECTED     11d       ││Recovery plans         2│
+│      Templates       ││                                                                    ││Recovery points        5│
+│      Images          │╰────────────────────────────────────────────────────────────────────╯│Recovery jobs          2│
+│      OVAs            │╭ Protection Policies [3] ───────────────────────────────────────────╮│Sampled VMs            3│
+│      VM Profiles     ││  NAME                                   SITES      RPO   CATEGORIES││  in sync              1│
+│      Guest Customizat││  gold-sync                              pc-lab +1  0s    1         ││  syncing              1│
+│      Storage Containe││  silver-async                           pc-lab +1  1h    1         ││  out of sync          1│
+│      Volume Groups   ││  bronze-local                           pc-lab     6h    1         ││                        │
+│      Storage Policies││                                                                    ││                        │
+│      Categories      │╰────────────────────────────────────────────────────────────────────╯╰────────────────────────╯
+│      Catalog Items   │╭ Recovery Plans [2] ──────────────────────────────────────────────────────────────────────────╮
+│  ▸ Network & Security││  NAME                                                     PRIMARY SITE  RECOVERY SITE  PAUSED│
+│  ▾ Data Protection   ││  dr-tier1                                                 pc-lab        pc-dr          ✗     │
+│    • Disaster Recover││  dr-tier2                                                 pc-lab        pc-dr          ✗     │
+│      Protection Polic││                                                                                              │
+│      Recovery Plans  ││                                                                                              │
+│      Recovery Plan Jo││                                                                                              │
+│      Recovery Points ││                                                                                              │
+│      Recovery Point S││                                                                                              │
+│      VM Recovery Poin│╰──────────────────────────────────────────────────────────────────────────────────────────────╯
+│      Entity Sync Poli│╭ Recent DR jobs [2] ──────────────────────────────────────────────────────────────────────────╮
+│  ▸ Hardware          ││  NAME                                      ACTION            STATUS     PLAN      %     START│
+│  ▸ Monitoring        ││  failover-test-04                          Test failover     SUCCEEDED  dr-tier1  100%  3h   │
+│  ▸ Policies          ││  failover-test-03                          Planned failover  FAILED     dr-tier2  40%   2d   │
+│  ▸ Admin Center      ││                                                                                              │
+│  ▸ Contexts          ││                                                                                              │
+│  ▸ Settings          ││                                                                                              │
+│  ─── by namespace ───││                                                                                              │
+╰───────────────── ↓18 ╯╰──────────────────────────────────────────────────────────────────────────────────────────────╯
+ :palette  ^b:menu  ⇥:pane  O:open  a:actions  ⏎:detail  esc:menu  ?:help
+[meter]          ● live

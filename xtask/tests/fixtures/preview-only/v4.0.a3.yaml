@@ -1,0 +1,13 @@
+openapi: 3.0.1
+info:
+  title: preview-only
+  version: "1"
+paths:
+  /preview-only/v4.0.a3/config/things:
+    get:
+      parameters:
+        - name: $limit
+          in: query
+      responses:
+        '200':
+          description: ok

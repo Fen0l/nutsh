@@ -1,0 +1,2444 @@
+# Curated overlay merged into the generated catalog by `cargo xtask gen-catalog`.
+# Keys are kind ids: the schema name with the version removed. Unknown ids fail generation.
+# Curated columns use the inline form: columns = [ { header = "NAME", path = "name", kind = "Text" } ]
+
+# ── Compute ─────────────────────────────────────────────────────────────────────────────────
+[kinds."vmm.ahv.config.Vm"]
+display = "Virtual Machines"
+aliases = ["vm", "vms"]
+category = "Compute"
+poll_secs = 5
+# `nics[]` carries both `networkInfo`/`backingInfo` and `nicNetworkInfo`/`nicBackingInfo`,
+# identically populated; the first pair is `deprecated: true` in the Nic schema. `host.extId`
+# is null for a powered-off VM and renders `-`. `IP` is `Ip` and not `Text` so it stops being
+# cut: as `Text` it is `Flex(1)` against a `Flex(6)` name column, and the live frame showed
+# `192.0.2.135` where the entity has `192.0.2.135,192.0.2.102`.
+columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "POWER", path = "powerState", kind = "Status" },
+    { header = "CLUSTER", path = "cluster.extId", kind = "Reference" },
+    { header = "HOST", path = "host.extId", kind = "Reference" },
+    { header = "IP", path = "nics[].nicNetworkInfo.ipv4Config.ipAddress.value", kind = "Ip" },
+    { header = "MEM", path = "memorySizeBytes", kind = "Bytes" },
+    { header = "SOCKETS", path = "numSockets", kind = "Text" },
+    { header = "PROTECTION", path = "protectionType", kind = "Enum" },
+    # The Dashboard's VMs pane asks for the creation time; a pane's columns must be a
+    # subsequence of the kind's, and this is a column worth having under `w` anyway.
+    { header = "CREATED", path = "createTime", kind = "Timestamp" },
+]
+
+# The composed detail (`y`). Modelled on Prism Central's own VM page - Details, Policies and
+# Management, Compute, Storage, Infrastructure, External Devices, Guest Details - collapsed to
+# what the v4 list response carries. Every path resolves against `vmm.v4.3.ahv.config.Vm`;
+# `cargo xtask gen-catalog` is what proves it.
+#
+# `project.extId` is the nil UUID on 89 of 100 recorded VMs and `ownershipInfo.owner.extId` on 86, so
+# both read as a dim `-` rather than as an `00000000` stub wherever the PC means "none". The
+# other 11 and 14 carry a real project and a real owner, which is what a `Reference` resolves -
+# and is why both stay curated rather than being left to the raw view. `host.extId` is absent on a
+# powered-off VM (69 of 100 recorded VMs have it). `guestTools` is present on 3 of 100, which is why
+# its section is conditional. `gpus[]` and `serialPorts[]` exist only in the synthetic fixture
+# and are omitted; `trunkedVlans` exists in no fixture and is not curated. `numNumaNodes`,
+# `apcConfig`, `biosUuid` and `generationUuid` are left to the raw view (`Y`).
+[[kinds."vmm.ahv.config.Vm".detail]]
+title = "Identity"
+fields = [
+    { label = "Name", path = "name", kind = "Text" },
+    { label = "UUID", path = "extId", kind = "Text" },
+    { label = "Description", path = "description", kind = "Text" },
+    { label = "Project", path = "project.extId", kind = "Reference" },
+    { label = "Owner", path = "ownershipInfo.owner.extId", kind = "Reference" },
+    { label = "Cloned from", path = "source.extId", kind = "Reference" },
+    { label = "Categories", path = "categories", kind = "Count" },
+]
+
+[[kinds."vmm.ahv.config.Vm".detail]]
+title = "State"
+fields = [
+    { label = "Power", path = "powerState", kind = "Status" },
+    { label = "Agent VM", path = "isAgentVm", kind = "Bool" },
+    { label = "Live migratable", path = "isLiveMigrateCapable", kind = "Bool" },
+    { label = "Migrating", path = "isCrossClusterMigrationInProgress", kind = "Bool" },
+]
+
+[[kinds."vmm.ahv.config.Vm".detail]]
+title = "Compute"
+fields = [
+    { label = "Sockets", path = "numSockets", kind = "Text" },
+    { label = "Cores/socket", path = "numCoresPerSocket", kind = "Text" },
+    { label = "Threads/core", path = "numThreadsPerCore", kind = "Text" },
+    { label = "Memory", path = "memorySizeBytes", kind = "Bytes" },
+    { label = "Machine type", path = "machineType", kind = "Enum" },
+    { label = "CPU hotplug", path = "isCpuHotplugEnabled", kind = "Bool" },
+    { label = "CPU passthrough", path = "isCpuPassthroughEnabled", kind = "Bool" },
+    { label = "Hard pinning", path = "isVcpuHardPinningEnabled", kind = "Bool" },
+    { label = "Overcommit", path = "isMemoryOvercommitEnabled", kind = "Bool" },
+    { label = "vTPM", path = "vtpmConfig.isVtpmEnabled", kind = "Bool" },
+    { label = "Clock timezone", path = "hardwareClockTimezone", kind = "Text" },
+]
+
+# `bootConfig` is a LegacyBoot or a UefiBoot and an empty "Boot" section would not say which, so
+# each variant carries its own title. Both variants are recorded: the recording's 100 VMs are 44
+# `LegacyBoot` and 56 `UefiBoot`, and every one of those 56 fills
+# `nvramDevice.backingStorageInfo.storageContainer.extId`.
+#
+# The tag is compared on its **short name**, because the two spellings of one shape coexist in
+# the committed corpus - `disks[].backingInfo` is tagged `vmm.v4.r0.b1.ahv.config.VmDisk` in
+# `crates/mockpc/fixtures/vmm/v4.3/ahv/config/vms.json` and `vmm.v4.ahv.config.VmDisk` in the
+# `disks.json` beside it and on 198 of the recording's 353 disks. A `when` written against
+# the full string would be right on one Prism Central build and silently wrong on the next.
+[[kinds."vmm.ahv.config.Vm".detail]]
+title = "UEFI boot"
+when = "bootConfig.$objectType = UefiBoot"
+fields = [
+    { label = "Boot order", path = "bootConfig.bootOrder[]", kind = "Enum" },
+    { label = "Secure boot", path = "bootConfig.isSecureBootEnabled", kind = "Bool" },
+    { label = "NVRAM container", path = "bootConfig.nvramDevice.backingStorageInfo.storageContainer.extId", kind = "Reference" },
+]
+
+[[kinds."vmm.ahv.config.Vm".detail]]
+title = "Legacy boot"
+when = "bootConfig.$objectType = LegacyBoot"
+fields = [
+    { label = "Boot order", path = "bootConfig.bootOrder[]", kind = "Enum" },
+    { label = "Boot bus", path = "bootConfig.bootDevice.diskAddress.busType", kind = "Enum" },
+    { label = "Boot index", path = "bootConfig.bootDevice.diskAddress.index", kind = "Text" },
+]
+
+# `Disk sizes`, not `Total`: `render_value` shows `first +n` and has no aggregation, so the label
+# says what the cell holds. A sum is the strongest candidate for a thirteenth `ColumnKind`.
+[[kinds."vmm.ahv.config.Vm".detail]]
+title = "Storage"
+fields = [
+    { label = "Disks", path = "disks", kind = "Count" },
+    { label = "Disk sizes", path = "disks[].backingInfo.diskSizeBytes", kind = "Bytes" },
+    { label = "Bus", path = "disks[].diskAddress.busType", kind = "Enum" },
+    { label = "Containers", path = "disks[].backingInfo.storageContainer.extId", kind = "Reference" },
+    { label = "Volume groups", path = "disks[].backingInfo.volumeGroupExtId", kind = "Reference" },
+    { label = "From image", path = "disks[].backingInfo.dataSource.reference.imageExtId", kind = "Reference" },
+    { label = "CD-ROMs", path = "cdRoms", kind = "Count" },
+    { label = "ISO type", path = "cdRoms[].isoType", kind = "Enum" },
+    { label = "Flash mode", path = "storageConfig.isFlashModeEnabled", kind = "Bool" },
+]
+
+# `nics[]` carries both the deprecated `backingInfo`/`networkInfo` pair and the current
+# `nicBackingInfo`/`nicNetworkInfo` pair with identical content; the curated columns already use
+# the current one, so the detail does too.
+[[kinds."vmm.ahv.config.Vm".detail]]
+title = "Network"
+fields = [
+    { label = "NICs", path = "nics", kind = "Count" },
+    { label = "MAC", path = "nics[].nicBackingInfo.macAddress", kind = "Text" },
+    { label = "IPv4", path = "nics[].nicNetworkInfo.ipv4Config.ipAddress.value", kind = "Ip" },
+    { label = "Learned IPv4", path = "nics[].nicNetworkInfo.ipv4Info.learnedIpAddresses[].value", kind = "Ip" },
+    { label = "IPv6", path = "nics[].nicNetworkInfo.ipv6Info.learnedIpv6Addresses[].value", kind = "Text" },
+    { label = "Subnets", path = "nics[].nicNetworkInfo.subnet.extId", kind = "Reference" },
+    { label = "NIC type", path = "nics[].nicNetworkInfo.nicType", kind = "Enum" },
+    { label = "Model", path = "nics[].nicBackingInfo.model", kind = "Enum" },
+    { label = "VLAN mode", path = "nics[].nicNetworkInfo.vlanMode", kind = "Enum" },
+    { label = "Connected", path = "nics[].nicBackingInfo.isConnected", kind = "Bool" },
+]
+
+[[kinds."vmm.ahv.config.Vm".detail]]
+title = "Protection"
+fields = [
+    { label = "Protection", path = "protectionType", kind = "Status" },
+    { label = "Policy", path = "protectionPolicyState.policy.extId", kind = "Reference" },
+]
+
+[[kinds."vmm.ahv.config.Vm".detail]]
+title = "Placement"
+fields = [
+    { label = "Cluster", path = "cluster.extId", kind = "Reference" },
+    { label = "Host", path = "host.extId", kind = "Reference" },
+]
+
+[[kinds."vmm.ahv.config.Vm".detail]]
+title = "Guest"
+when = "guestTools"
+fields = [
+    { label = "Installed", path = "guestTools.isInstalled", kind = "Bool" },
+    { label = "Enabled", path = "guestTools.isEnabled", kind = "Bool" },
+    { label = "Reachable", path = "guestTools.isReachable", kind = "Bool" },
+    { label = "Version", path = "guestTools.version", kind = "Text" },
+    { label = "Available", path = "guestTools.availableVersion", kind = "Text" },
+    { label = "Guest OS", path = "guestTools.guestOsVersion", kind = "Text" },
+    { label = "OS name", path = "guestTools.guestInfo.guestOsFullName", kind = "Text" },
+    { label = "VirtIO", path = "guestTools.guestInfo.installedVirtIoVersion", kind = "Text" },
+    { label = "Last boot", path = "guestTools.guestInfo.lastBootUpTime", kind = "Timestamp" },
+    { label = "DNS name", path = "guestTools.guestInfo.dnsName.value", kind = "Text" },
+    { label = "Capabilities", path = "guestTools.capabilities[]", kind = "Enum" },
+]
+
+[[kinds."vmm.ahv.config.Vm".detail]]
+title = "Lifecycle"
+fields = [
+    { label = "Created", path = "createTime", kind = "Timestamp" },
+    { label = "Updated", path = "updateTime", kind = "Timestamp" },
+]
+
+[kinds."vmm.ahv.config.Vm".actions."power-on"]
+key = "p"
+label = "Power on"
+danger = "low"
+order = 10
+
+# The eight power verbs, labelled by what they do to the guest rather than by the API name.
+# Three of them cut power where they stand - the spec calls them "Force power off", "Force a
+# power-cycle" and "Force reset of a Virtual Machine, without waiting for the guest" - and four
+# ask the guest to stop, two through ACPI and two through Nutanix Guest Tools. `Reset` beside
+# `Reboot` beside `Power cycle` told a reader none of that, and getting it wrong on a database
+# is not a mistake the second attempt fixes.
+#
+# The keys pair by case: `d`/`D` shut down and `r`/`R` reboot, lower case through ACPI and
+# upper case through the guest tools, as `p`/`P` already pairs on and off. `g` would have been
+# the mnemonic for "guest" and is the table's "go to the top".
+[kinds."vmm.ahv.config.Vm".actions."power-off"]
+key = "P"
+label = "Power off (cuts power)"
+danger = "medium"
+order = 20
+
+[kinds."vmm.ahv.config.Vm".actions."power-cycle"]
+label = "Power cycle (cuts power)"
+danger = "medium"
+order = 30
+
+[kinds."vmm.ahv.config.Vm".actions."reset"]
+label = "Reset (cuts power)"
+danger = "medium"
+order = 40
+
+[kinds."vmm.ahv.config.Vm".actions."shutdown"]
+key = "d"
+label = "Shut down (ACPI, asks the guest)"
+danger = "medium"
+order = 50
+
+[kinds."vmm.ahv.config.Vm".actions."guest-shutdown"]
+key = "D"
+label = "Shut down (guest tools)"
+danger = "medium"
+order = 60
+
+[kinds."vmm.ahv.config.Vm".actions."reboot"]
+key = "r"
+label = "Reboot (ACPI, asks the guest)"
+danger = "medium"
+order = 70
+
+[kinds."vmm.ahv.config.Vm".actions."guest-reboot"]
+key = "R"
+label = "Reboot (guest tools)"
+danger = "medium"
+order = 80
+
+[kinds."vmm.ahv.config.Vm".actions."migrate"]
+label = "Migrate to another cluster"
+danger = "medium"
+order = 90
+
+[kinds."vmm.ahv.config.Vm".actions."migrate-to-host"]
+key = "m"
+label = "Migrate to host"
+danger = "medium"
+order = 100
+
+[kinds."vmm.ahv.config.Vm".actions."clone"]
+key = "C"
+label = "Clone"
+danger = "low"
+order = 110
+form = [ { name = "name", label = "New name", type = "string", required = true } ]
+
+# Snapshotting a VM is a POST to dataprotection recovery points naming the VM, not a VM action
+# at all. `$ext_id` and `$now+30d` are expanded at submit time by `core::actions::build_body`;
+# a null expirationTime is an HTTP 400.
+[kinds."vmm.ahv.config.Vm".actions."snapshot"]
+from = "dataprotection.config.RecoveryPoint:create"
+key = "s"
+label = "Create recovery point"
+danger = "low"
+order = 120
+form = [
+  { name = "name", label = "Name", type = "string", required = true },
+  { name = "vmRecoveryPoints[0].vmExtId", type = "string", value = "$ext_id", hidden = true },
+  { name = "expirationTime", label = "Expires", type = "string", required = true, value = "$now+30d" },
+]
+
+[kinds."vmm.ahv.config.Vm".actions."revert"]
+label = "Revert to a recovery point"
+danger = "high"
+order = 130
+
+[kinds."vmm.ahv.config.Vm".actions."delete"]
+key = "ctrl-d"
+label = "Delete"
+danger = "high"
+order = 140
+
+[kinds."vmm.esxi.config.Vm"]
+display = "ESXi Virtual Machines"
+aliases = ["esxivm", "esxi-vms"]
+category = "Compute"
+poll_secs = 10
+# The AHV VM's columns as far as the ESXi schema has them. The addresses are spelled
+# differently - an AHV NIC has one `nicNetworkInfo.ipv4Config.ipAddress`, an ESXi NIC has an
+# array at `networkInfo.ipAddressInfo.ipv4Addresses[]` of the same `common.v1.0.config.IPv4Address`
+# - and it carries `numCpus` where AHV carries `numSockets`.
+columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "POWER", path = "powerState", kind = "Status" },
+    { header = "CLUSTER", path = "cluster.extId", kind = "Reference" },
+    { header = "HOST", path = "host.extId", kind = "Reference" },
+    { header = "IP", path = "nics[].networkInfo.ipAddressInfo.ipv4Addresses[].value", kind = "Ip" },
+    { header = "MEM", path = "memorySizeBytes", kind = "Bytes" },
+    { header = "CPUS", path = "numCpus", kind = "Text" },
+    { header = "GUEST OS", path = "guestOsName", kind = "Text" },
+    { header = "HW VERSION", path = "virtualHardwareVersion", kind = "Text" },
+    { header = "NICS", path = "nics", kind = "Count" },
+    { header = "DISKS", path = "disks", kind = "Count" },
+]
+
+# A VM's disks and NICs derive one Count column each from their schema, so the drill-down
+# would show a column of "-". These are the fields that make such a row worth reading.
+[kinds."vmm.ahv.config.Disk"]
+columns = [
+    { header = "BUS", path = "diskAddress.busType", kind = "Enum" },
+    { header = "INDEX", path = "diskAddress.index", kind = "Text" },
+    { header = "SIZE", path = "backingInfo.diskSizeBytes", kind = "Bytes" },
+    { header = "CONTAINER", path = "backingInfo.storageContainer.extId", kind = "Reference" },
+]
+
+# The non-prefixed pair is deprecated in the one Nic schema (`specs/vmm/v4.3.yaml:63434`).
+# `IP` is `Ip` rather than `Text` for the reason the VM table's own `IP` column is.
+[kinds."vmm.ahv.config.Nic"]
+columns = [
+    { header = "TYPE", path = "nicNetworkInfo.nicType", kind = "Enum" },
+    { header = "MAC", path = "nicBackingInfo.macAddress", kind = "Text" },
+    { header = "IP", path = "nicNetworkInfo.ipv4Config.ipAddress.value", kind = "Ip" },
+    { header = "SUBNET", path = "nicNetworkInfo.subnet.extId", kind = "Reference" },
+]
+
+# ── Compute & Storage ───────────────────────────────────────────────────────────────────────
+# The banner marks where the rest of the nav group is curated, not the whole of it: a second
+# TOML table with the same key is an error, so the kinds that already had a table keep their
+# columns where that table is - the AHV VM and its disks and NICs, the ESXi VM above, and
+# Images, Storage Containers, Volume Groups and Categories below.
+#
+# A template's identity is its name and the version that is live: `templateVersionSpec` is the
+# active version's own record, and `createdBy` is a full `iam` User, so the readable field is
+# `username` and not a name the schema does not have.
+[kinds."vmm.content.Template"]
+columns = [
+    { header = "NAME", path = "templateName", kind = "Text" },
+    { header = "VERSION", path = "templateVersionSpec.versionName", kind = "Text" },
+    { header = "ACTIVE", path = "templateVersionSpec.isActiveVersion", kind = "Bool" },
+    { header = "CLUSTERS", path = "templateVersionSpec.clusterLocationExtIds", kind = "Count" },
+    { header = "CREATED", path = "createTime", kind = "Timestamp" },
+    { header = "UPDATED", path = "updateTime", kind = "Timestamp" },
+    { header = "CREATED BY", path = "createdBy.username", kind = "Text" },
+]
+
+# `parentVm` is an opaque string with no UUID pattern, so it resolves against nothing; the
+# readable VM is the one inside the OVA's own captured configuration.
+[kinds."vmm.content.Ova"]
+columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "FORMAT", path = "diskFormat", kind = "Enum" },
+    { header = "SIZE", path = "sizeBytes", kind = "Bytes" },
+    { header = "VM", path = "vmConfig.name", kind = "Text" },
+    { header = "CLUSTERS", path = "clusterLocationExtIds", kind = "Count" },
+    { header = "CREATED", path = "createTime", kind = "Timestamp" },
+    { header = "CREATED BY", path = "createdBy.username", kind = "Text" },
+    { header = "UPDATED", path = "lastUpdateTime", kind = "Timestamp" },
+]
+
+# The profile *is* its `vmConfiguration`: memory, cores and NICs. It has no `createTime` and no
+# `createdBy` - only `updateTime` and `updatedBy`.
+[kinds."vmm.ahv.config.VmProfile"]
+columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "MEMORY", path = "vmConfiguration.memorySizeBytes", kind = "Bytes" },
+    { header = "CORES", path = "vmConfiguration.numCores", kind = "Text" },
+    { header = "NICS", path = "vmConfiguration.nics", kind = "Count" },
+    { header = "PROJECTS", path = "sharedWithProjects", kind = "Count" },
+    { header = "UPDATED", path = "updateTime", kind = "Timestamp" },
+    { header = "UPDATED BY", path = "updatedBy.extId", kind = "Reference" },
+]
+
+# `config` is a one-armed `oneOf` over a sysprep blob: nothing in it is a column.
+[kinds."vmm.ahv.config.VmGuestCustomizationProfile"]
+columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "CREATED", path = "createTime", kind = "Timestamp" },
+    { header = "UPDATED", path = "updateTime", kind = "Timestamp" },
+    { header = "CREATED BY", path = "createdBy.extId", kind = "Reference" },
+    { header = "UPDATED BY", path = "updatedBy.extId", kind = "Reference" },
+]
+
+# Four one-property specs - compression, encryption, fault tolerance and QoS - are what a
+# storage policy is; the generated table showed the policy type and a count of categories.
+[kinds."datapolicies.config.StoragePolicy"]
+columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "TYPE", path = "policyType", kind = "Enum" },
+    { header = "COMPRESSION", path = "compressionSpec.compressionState", kind = "Enum" },
+    { header = "ENCRYPTION", path = "encryptionSpec.encryptionState", kind = "Enum" },
+    { header = "RF", path = "faultToleranceSpec.replicationFactor", kind = "Enum" },
+    { header = "IOPS", path = "qosSpec.throttledIops", kind = "Text" },
+    { header = "CATEGORIES", path = "categoryExtIds", kind = "Count" },
+    { header = "OWNER", path = "ownerUuid", kind = "Reference" },
+]
+
+# ── Infrastructure ──────────────────────────────────────────────────────────────────────────
+# Prism Central's own row has a null `vmCount`; `containerName` and `inefficientVmCount` never
+# appear in a recorded response, so the fallback's two columns over them are dropped.
+[kinds."clustermgmt.config.Cluster"]
+display = "Clusters"
+aliases = ["cluster", "clusters", "cl"]
+category = "Infrastructure"
+poll_secs = 30
+warm = true
+columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "MODE", path = "config.operationMode", kind = "Status" },
+    { header = "NODES", path = "nodes.numberOfNodes", kind = "Text" },
+    { header = "VMS", path = "vmCount", kind = "Text" },
+    { header = "VERSION", path = "config.buildInfo.version", kind = "Text" },
+    { header = "EXTERNAL IP", path = "network.externalAddress.ipv4.value", kind = "Text" },
+    { header = "FT", path = "config.faultToleranceState.currentClusterFaultTolerance", kind = "Enum" },
+]
+
+# The Security section is curated from the **schema**, not from the recordings:
+# `clustermgmt.v4.config.ClusterConfigReference` declares all three properties and the three recorded
+# clusters simply do not return them. That is exactly the case the empty-section rule was written
+# for - it costs nothing on a cluster that omits them and is the first thing a security review
+# looks for on one that does not. `config.isPasswordRemoteLoginEnabled` is a different story: the
+# recorder writes the literal string "[redacted]" over it despite its boolean name, so it is
+# omitted. Deviation 8: "Encryption in transit" is 21 characters, past DETAIL_LABEL, so it reads
+# "In transit" - the heading carries the subject. Width is the only reason to drop the word:
+# "Encryption option" (17) and "Encryption scope" (16) both fit, and under a heading that says
+# Security rather than Encryption a bare "Option" and "Scope" say almost nothing, so both keep
+# the design's words.
+[[kinds."clustermgmt.config.Cluster".detail]]
+title = "Identity"
+fields = [
+    { label = "Name", path = "name", kind = "Text" },
+    { label = "UUID", path = "extId", kind = "Text" },
+    { label = "Function", path = "config.clusterFunction[]", kind = "Enum" },
+    { label = "Type", path = "config.clusterType", kind = "Enum" },
+    { label = "Architecture", path = "config.clusterArch", kind = "Enum" },
+]
+
+[[kinds."clustermgmt.config.Cluster".detail]]
+title = "State"
+fields = [
+    { label = "Mode", path = "config.operationMode", kind = "Status" },
+    { label = "Available", path = "config.isAvailable", kind = "Bool" },
+    { label = "Upgrade", path = "upgradeStatus", kind = "Status" },
+    { label = "LTS", path = "config.isLts", kind = "Bool" },
+]
+
+[[kinds."clustermgmt.config.Cluster".detail]]
+title = "Nodes"
+fields = [
+    { label = "Nodes", path = "nodes.numberOfNodes", kind = "Text" },
+    { label = "VMs", path = "vmCount", kind = "Text" },
+    { label = "Host IPs", path = "nodes.nodeList[].hostIp.ipv4.value", kind = "Ip" },
+    { label = "CVM IPs", path = "nodes.nodeList[].controllerVmIp.ipv4.value", kind = "Ip" },
+]
+
+[[kinds."clustermgmt.config.Cluster".detail]]
+title = "Versions"
+fields = [
+    { label = "AOS", path = "config.buildInfo.version", kind = "Text" },
+    { label = "Full", path = "config.buildInfo.fullVersion", kind = "Text" },
+    { label = "Hypervisors", path = "config.hypervisorTypes[]", kind = "Enum" },
+    { label = "Software", path = "config.clusterSoftwareMap[].version", kind = "Text" },
+]
+
+[[kinds."clustermgmt.config.Cluster".detail]]
+title = "Resilience"
+fields = [
+    { label = "RF", path = "config.redundancyFactor", kind = "Text" },
+    { label = "Current FT", path = "config.faultToleranceState.currentClusterFaultTolerance", kind = "Enum" },
+    { label = "Desired FT", path = "config.faultToleranceState.desiredClusterFaultTolerance", kind = "Enum" },
+    { label = "Domain", path = "config.faultToleranceState.domainAwarenessLevel", kind = "Enum" },
+    { label = "Rack aware", path = "config.faultToleranceState.isStrictRackAwarenessEnabled", kind = "Bool" },
+    { label = "Backup score", path = "backupEligibilityScore", kind = "Text" },
+]
+
+[[kinds."clustermgmt.config.Cluster".detail]]
+title = "Network"
+fields = [
+    { label = "Virtual IP", path = "network.externalAddress.ipv4.value", kind = "Ip" },
+    { label = "Data services", path = "network.externalDataServiceIp.ipv4.value", kind = "Ip" },
+    { label = "External subnet", path = "network.externalSubnet", kind = "Text" },
+    { label = "Name servers", path = "network.nameServerIpList[].ipv4.value", kind = "Ip" },
+    { label = "NTP", path = "network.ntpServerIpList[].fqdn.value", kind = "Text" },
+    { label = "Segmentation", path = "network.backplane.isSegmentationEnabled", kind = "Bool" },
+]
+
+[[kinds."clustermgmt.config.Cluster".detail]]
+title = "Configuration"
+fields = [
+    { label = "Timezone", path = "config.timezone", kind = "Text" },
+    { label = "Pulse", path = "config.pulseStatus.isEnabled", kind = "Bool" },
+    { label = "Remote support", path = "config.isRemoteSupportEnabled", kind = "Bool" },
+]
+
+[[kinds."clustermgmt.config.Cluster".detail]]
+title = "Security"
+fields = [
+    { label = "In transit", path = "config.encryptionInTransitStatus", kind = "Enum" },
+    { label = "Encryption option", path = "config.encryptionOption[]", kind = "Enum" },
+    { label = "Encryption scope", path = "config.encryptionScope[]", kind = "Enum" },
+]
+
+[kinds."clustermgmt.config.Cluster".actions."create"]
+label = "Create cluster"
+danger = "low"
+order = 10
+
+[kinds."clustermgmt.config.Cluster".actions."update"]
+label = "Update cluster"
+danger = "medium"
+order = 20
+
+[kinds."clustermgmt.config.Cluster".actions."delete"]
+label = "Delete cluster"
+danger = "high"
+order = 30
+
+# The Host cluster reference is `cluster.uuid`, the only one of the eleven spelled that way, and
+# the reason `action_parents` reads it. `MAINTENANCE` is second so the column that tints the row
+# is visible without scrolling. `bootTimeUsecs` is int64 microseconds, which `ColumnKind::Micros`
+# renders as an age, which is what makes an uptime column possible at all.
+[kinds."clustermgmt.config.Host"]
+display = "Hosts"
+aliases = ["host", "hosts", "node", "nodes"]
+category = "Infrastructure"
+poll_secs = 15
+warm = true
+actions_from = "clustermgmt.config.Host~hosts"
+action_parents = ["cluster.uuid"]
+columns = [
+    { header = "HOST", path = "hostName", kind = "Text" },
+    { header = "MAINTENANCE", path = "maintenanceState", kind = "Status" },
+    { header = "CLUSTER", path = "cluster.uuid", kind = "Reference" },
+    { header = "HYPERVISOR", path = "hypervisor.type", kind = "Enum" },
+    { header = "CVM IP", path = "controllerVm.externalAddress.ipv4.value", kind = "Ip" },
+    { header = "HYPERVISOR IP", path = "hypervisor.externalAddress.ipv4.value", kind = "Ip" },
+    { header = "VMS", path = "hypervisor.numberOfVms", kind = "Text" },
+    { header = "UPTIME", path = "bootTimeUsecs", kind = "Micros" },
+]
+
+# `bootTimeUsecs` is what `Micros` exists for: `curated.toml` records above that "there is no
+# uptime column" because `Timestamp` could not render it; the detail has one. `cluster.name` is a
+# real name on the host object, so it is `Text` and not a `Reference` lookup. The host carries no
+# AOS version - that lives on the cluster. `gpuList[]` holds a single empty string on all seven
+# recorded hosts, so it is `Text` (a dim `-`) and never a `Count`, which would claim one GPU.
+# `cpuFrequencyHz` is 2600000000 and there is no `Hertz` kind for one field on one kind, so it is
+# left to the raw view. The disk array key is singular: `disk`.
+[[kinds."clustermgmt.config.Host".detail]]
+title = "Identity"
+fields = [
+    { label = "Name", path = "hostName", kind = "Text" },
+    { label = "UUID", path = "extId", kind = "Text" },
+    { label = "Type", path = "hostType", kind = "Enum" },
+    { label = "Node serial", path = "nodeSerial", kind = "Text" },
+    { label = "Block model", path = "blockModel", kind = "Text" },
+    { label = "Block serial", path = "blockSerial", kind = "Text" },
+]
+
+[[kinds."clustermgmt.config.Host".detail]]
+title = "State"
+fields = [
+    { label = "Node status", path = "nodeStatus", kind = "Status" },
+    { label = "Maintenance", path = "maintenanceState", kind = "Status" },
+    { label = "CVM maintenance", path = "controllerVm.isInMaintenanceMode", kind = "Bool" },
+    { label = "Acropolis link", path = "hypervisor.acropolisConnectionState", kind = "Enum" },
+    { label = "Booted", path = "bootTimeUsecs", kind = "Micros" },
+    { label = "Secure boot", path = "isSecureBooted", kind = "Bool" },
+]
+
+[[kinds."clustermgmt.config.Host".detail]]
+title = "Hypervisor"
+fields = [
+    { label = "Type", path = "hypervisor.type", kind = "Enum" },
+    { label = "Version", path = "hypervisor.fullName", kind = "Text" },
+    { label = "State", path = "hypervisor.state", kind = "Enum" },
+    { label = "VMs", path = "hypervisor.numberOfVms", kind = "Text" },
+    { label = "User", path = "hypervisor.userName", kind = "Text" },
+]
+
+[[kinds."clustermgmt.config.Host".detail]]
+title = "Compute"
+fields = [
+    { label = "CPU model", path = "cpuModel", kind = "Text" },
+    { label = "Sockets", path = "numberOfCpuSockets", kind = "Text" },
+    { label = "Cores", path = "numberOfCpuCores", kind = "Text" },
+    { label = "Threads", path = "numberOfCpuThreads", kind = "Text" },
+    { label = "Memory", path = "memorySizeBytes", kind = "Bytes" },
+    { label = "Virtualized", path = "isHardwareVirtualized", kind = "Bool" },
+    { label = "GPUs", path = "gpuList[]", kind = "Text" },
+]
+
+[[kinds."clustermgmt.config.Host".detail]]
+title = "Network"
+fields = [
+    { label = "Hypervisor IP", path = "hypervisor.externalAddress.ipv4.value", kind = "Ip" },
+    { label = "CVM IP", path = "controllerVm.externalAddress.ipv4.value", kind = "Ip" },
+    { label = "CVM backplane", path = "controllerVm.backplaneAddress.ipv4.value", kind = "Ip" },
+    { label = "IPMI IP", path = "ipmi.ip.ipv4.value", kind = "Ip" },
+    { label = "IPMI user", path = "ipmi.username", kind = "Text" },
+]
+
+[[kinds."clustermgmt.config.Host".detail]]
+title = "Storage"
+fields = [
+    { label = "Disks", path = "disk", kind = "Count" },
+    { label = "Sizes", path = "disk[].sizeInBytes", kind = "Bytes" },
+    { label = "Tiers", path = "disk[].storageTier", kind = "Enum" },
+    { label = "Serials", path = "disk[].serialId", kind = "Text" },
+]
+
+[[kinds."clustermgmt.config.Host".detail]]
+title = "Placement"
+fields = [
+    { label = "Cluster", path = "cluster.name", kind = "Text" },
+    { label = "Cluster UUID", path = "cluster.uuid", kind = "Text" },
+    { label = "Rackable unit", path = "rackableUnitUuid", kind = "Text" },
+]
+
+[kinds."clustermgmt.config.Host".status]
+# The v4 spec spells the drained state `in_maintenanace`; the typo is Nutanix's, so both
+# spellings map, and a host on its way in or out reads as in flight rather than healthy.
+IN_MAINTENANACE = "Pending"
+IN_MAINTENANCE = "Pending"
+ENTERING_MAINTENANCE = "Pending"
+EXITING_MAINTENANCE = "Pending"
+
+# Maintenance lives under `/operations/clusters/{clusterExtId}/hosts/{extId}`, so it lands on
+# the cluster-scoped kind, whose get path supplies `{clusterExtId}`.
+[kinds."clustermgmt.config.Host~hosts"]
+display = "Hosts"
+category = "Infrastructure"
+poll_secs = 15
+columns = [
+    { header = "HOST", path = "hostName", kind = "Text" },
+    { header = "MAINTENANCE", path = "maintenanceState", kind = "Status" },
+    { header = "HYPERVISOR", path = "hypervisor.type", kind = "Enum" },
+    { header = "CVM IP", path = "controllerVm.externalAddress.ipv4.value", kind = "Ip" },
+    { header = "HYPERVISOR IP", path = "hypervisor.externalAddress.ipv4.value", kind = "Ip" },
+    { header = "VMS", path = "hypervisor.numberOfVms", kind = "Text" },
+    { header = "UPTIME", path = "bootTimeUsecs", kind = "Micros" },
+]
+
+[kinds."clustermgmt.config.Host~hosts".actions."enter-host-maintenance"]
+key = "M"
+label = "Enter maintenance"
+danger = "medium"
+order = 10
+needs_etag = false   # spec declares no If-Match; NTNX-Request-Id only.
+
+[kinds."clustermgmt.config.Host~hosts".actions."exit-host-maintenance"]
+label = "Exit maintenance"
+danger = "low"
+order = 20
+needs_etag = false   # as above
+
+# ── Hardware ────────────────────────────────────────────────────────────────────────────────
+# A disk carries `hostName` *and* `clusterName`, both of which are `NAME_KEYS`, so without
+# `name_path` every disk would name itself after the host it is in - in the cache, the detail
+# title and the breadcrumb alike. Its own identity is the serial number.
+[kinds."clustermgmt.config.Disk"]
+name_path = "serialNumber"
+columns = [
+    { header = "DISK", path = "serialNumber", kind = "Text" },
+    { header = "STATUS", path = "status", kind = "Status" },
+    { header = "TIER", path = "storageTier", kind = "Enum" },
+    { header = "HOST", path = "hostName", kind = "Text" },
+    { header = "CLUSTER", path = "clusterExtId", kind = "Reference" },
+    { header = "SIZE", path = "diskSizeBytes", kind = "Bytes" },
+    { header = "MODEL", path = "model", kind = "Text" },
+    { header = "FIRMWARE", path = "firmwareVersion", kind = "Text" },
+    { header = "ONLINE", path = "diskAdvanceConfig.isOnline", kind = "Bool" },
+    { header = "REMOVING", path = "diskAdvanceConfig.isMarkedForRemoval", kind = "Bool" },
+]
+
+[kinds."clustermgmt.config.Disk".status]
+# `DiskStatus` is NORMAL plus three words the shared vocabulary has never seen, so without
+# these a disk migrating its data off draws exactly like a healthy one. `NORMAL` is already
+# `Ok`; the three removal states are the ones that have to say so.
+MARKED_FOR_REMOVAL_BUT_NOT_DETACHABLE = "Warn"
+DATA_MIGRATION_INITIATED = "Pending"
+DETACHABLE = "Ending"
+
+# `mtuInBytes` is `Text` and not `Bytes` on purpose: an MTU is 1500, and `Bytes` would render
+# that as `1.5 KiB`, which is true of the number and false of the thing. `linkSpeedInKbps` is
+# `Text` for the same reason and carries its unit in the header, because there is no
+# bits-per-second `ColumnKind` and a bare `10000000` is not a speed anybody reads.
+#
+# **No STATUS column.** `interfaceStatus` is an unconstrained string in the schema, and pc.7.6
+# fills it with `"0"` and `"1"` - 17 zeroes and 11 ones over the 28 NICs of
+# `crates/mockpc/fixtures-lab/clustermgmt/v4.3/config/host-nics.json` (2026-09-10). A digit is
+# neither a word a status vocabulary can colour nor a word a person can read, and the two
+# repairs available are both worse than removal: a `[kinds.*.status]` block mapping `0` and `1`
+# would tint the row correctly and still print `1` under a heading that says STATUS, and no
+# `ColumnKind` turns the string `"0"` into a mark (`Bool` reads `as_bool`, which a string is
+# not). The fact the digit carries is already on the row and readable: `linkSpeedInKbps` is
+# `10000000` on exactly the eleven NICs whose `interfaceStatus` is `"1"` and `0` on the
+# seventeen whose it is `"0"`, and those same eleven are the only ones with an LLDP neighbour.
+# So the link state is the speed column, and the slot goes to `virtualSwitchExtId` - 28/28,
+# and `networking.config.VirtualSwitch` is warmed, so it reads as the switch's name.
+#
+# **No VLAN column.** `switchVlanId` is "learned through the discovery protocol" and readOnly,
+# and neither Prism Central ever sends it: 0/28 on PC1 and 0/12 on sierra. Seventeen of those
+# forty NICs *do* see an LLDP neighbour - they carry `switchDeviceId`, `switchMacAddress`,
+# `switchManagementIp` and `switchVendorInfo` - so the field is not missing for want of a
+# neighbour to learn it from. Empty on both, and never sent even where it could be.
+[kinds."clustermgmt.config.HostNic"]
+columns = [
+    { header = "NIC", path = "name", kind = "Text" },
+    { header = "MAC", path = "macAddress", kind = "Text" },
+    { header = "SPEED KBPS", path = "linkSpeedInKbps", kind = "Text" },
+    { header = "MTU", path = "mtuInBytes", kind = "Text" },
+    { header = "VSWITCH", path = "virtualSwitchExtId", kind = "Reference" },
+    { header = "SWITCH", path = "switchDeviceId", kind = "Text" },
+    { header = "CLUSTER", path = "clusterExtId", kind = "Reference" },
+    { header = "MODE", path = "operatingMode", kind = "Enum" },
+    { header = "DRIVER", path = "driverVersion", kind = "Text" },
+]
+
+[kinds."networking.config.NicProfile"]
+columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "MODE", path = "operatingMode", kind = "Enum" },
+    { header = "CAPABILITY", path = "capabilityConfig.capabilityType", kind = "Enum" },
+    { header = "OWNER", path = "ownerType", kind = "Enum" },
+    { header = "FAMILY", path = "nicFamily", kind = "Text" },
+    { header = "HOST NICS", path = "hostNicReferences", kind = "Count" },
+]
+
+# Both GPU profiles keep their whole identity under `configuration`, so both need `name_path`:
+# without it the fleet-wide GPU tables are one `CLUSTER EXT IDS` count, which is what the nav's
+# `Physical GPUs` and `Virtual GPUs` show today.
+[kinds."clustermgmt.ahv.config.PhysicalGpuProfile"]
+name_path = "configuration.name"
+columns = [
+    { header = "GPU", path = "configuration.name", kind = "Text" },
+    { header = "CLUSTERS", path = "clusterExtIds", kind = "Count" },
+]
+
+[kinds."clustermgmt.ahv.config.VirtualGpuProfile"]
+name_path = "configuration.name"
+columns = [
+    { header = "PROFILE", path = "configuration.name", kind = "Text" },
+    { header = "FRAME BUFFER", path = "configuration.frameBufferSizeBytes", kind = "Bytes" },
+    { header = "HEADS", path = "configuration.numberOfVirtualDisplayHeads", kind = "Text" },
+    { header = "RESOLUTION", path = "configuration.maxResolution", kind = "Text" },
+    { header = "PER VM", path = "configuration.maxInstancesPerVm", kind = "Text" },
+    { header = "CLUSTERS", path = "clusterExtIds", kind = "Count" },
+    { header = "LICENSES", path = "configuration.licenses", kind = "Count" },
+]
+
+# A PCIe device has no name at all; `description` is the model string, and `SKIP_PROPS` keeps it
+# out of every fallback, so it has to be curated to appear.
+[kinds."clustermgmt.ahv.config.PcieDevice"]
+name_path = "description"
+columns = [
+    { header = "DEVICE", path = "description", kind = "Text" },
+    { header = "STATE", path = "state", kind = "Status" },
+    { header = "TYPE", path = "type", kind = "Enum" },
+    { header = "HOST", path = "hostExtId", kind = "Reference" },
+    { header = "CLUSTER", path = "clusterExtId", kind = "Reference" },
+    { header = "VM", path = "ownerVmExtId", kind = "Reference" },
+    { header = "PARTITIONS", path = "maxPartitions", kind = "Text" },
+]
+
+[kinds."clustermgmt.ahv.config.PcieDevice".status]
+# `PcieDeviceState` prefixes every word with who owns the device, so none of them is in the
+# shared vocabulary and a broken card would draw exactly like an available one. Only the three
+# words that are about health are mapped: `HOST_USED`, `HOST_UNUSED` and `HOST_PARTITIONED`
+# say which side of the hypervisor a working device is on, not whether it is well, so they
+# keep `Role::Neutral`.
+HOST_BROKEN = "Error"
+UVM_AVAILABLE = "Ok"
+UVM_ASSIGNED = "Ok"
+UVM_RESERVED = "Pending"
+
+# `config` is a three-armed `oneOf` whose every arm carries a username and a password: nothing
+# in it is a column. The endpoint is the one field that says which array this is.
+[kinds."clustermgmt.config.ExternalStorage"]
+columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "HEALTH", path = "health", kind = "Status" },
+    { header = "PROVIDER", path = "providerType", kind = "Enum" },
+    { header = "ENDPOINT", path = "endPointAddress.ipv4.value", kind = "Ip" },
+    { header = "CAPACITY", path = "totalCapacityBytes", kind = "Bytes" },
+    { header = "FREE", path = "freeCapacityBytes", kind = "Bytes" },
+    { header = "CLUSTER", path = "clusterExtId", kind = "Reference" },
+]
+
+# ── Storage ─────────────────────────────────────────────────────────────────────────────────
+# Storage containers have no `extId` key at all: the identifier is `containerExtId`. Without
+# this the store keys every one on "" and a single row survives a poll.
+[kinds."clustermgmt.config.Host~hosts".status]
+IN_MAINTENANACE = "Pending"
+IN_MAINTENANCE = "Pending"
+ENTERING_MAINTENANCE = "Pending"
+EXITING_MAINTENANCE = "Pending"
+
+[kinds."clustermgmt.config.StorageContainer"]
+display = "Storage Containers"
+aliases = ["sc", "container", "containers", "storage-containers"]
+category = "Storage"
+ext_id_key = "containerExtId"
+warm = true
+columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "CLUSTER", path = "clusterName", kind = "Text" },
+    { header = "CAPACITY", path = "maxCapacityBytes", kind = "Bytes" },
+    { header = "RF", path = "replicationFactor", kind = "Text" },
+    { header = "COMPRESSION", path = "isCompressionEnabled", kind = "Bool" },
+    { header = "EC", path = "erasureCode", kind = "Enum" },
+    { header = "REMOVING", path = "isMarkedForRemoval", kind = "Bool" },
+]
+
+# Used and free bytes are **not on the entity**: the recording response's `links[]` points at
+# `/clustermgmt/v4.3/stats/storage-containers/{id}`, a separate endpoint this phase does not
+# call. That is why Capacity says `Max` and not `Used`, and it is the honest answer to "how full
+# is it". Deviation 8: "Reserved (explicit)" and "NFS whitelist inherited" are past
+# `DETAIL_LABEL` (23 characters for the second), so they read "Explicit reserved" and "NFS list
+# inherited". The predicate is the half that had to survive: `isNfsWhitelistInherited` says the
+# whitelist is *inherited*, and a bare "NFS whitelist  yes" reads as "there is one". "Marked for
+# removal" spends all eighteen characters on the same rule, so the neighbour it sits next to is
+# already the precedent for keeping the verb over the noun.
+[[kinds."clustermgmt.config.StorageContainer".detail]]
+title = "Identity"
+fields = [
+    { label = "Name", path = "name", kind = "Text" },
+    { label = "UUID", path = "containerExtId", kind = "Text" },
+    { label = "Cluster", path = "clusterName", kind = "Text" },
+    { label = "Cluster UUID", path = "clusterExtId", kind = "Reference" },
+    { label = "Storage pool", path = "storagePoolExtId", kind = "Reference" },
+    { label = "Owner", path = "ownerExtId", kind = "Reference" },
+]
+
+[[kinds."clustermgmt.config.StorageContainer".detail]]
+title = "Capacity"
+fields = [
+    { label = "Max", path = "maxCapacityBytes", kind = "Bytes" },
+    { label = "Explicit reserved", path = "logicalExplicitReservedCapacityBytes", kind = "Bytes" },
+    { label = "Implicit reserved", path = "logicalImplicitReservedCapacityBytes", kind = "Bytes" },
+]
+
+[[kinds."clustermgmt.config.StorageContainer".detail]]
+title = "Data reduction"
+fields = [
+    { label = "RF", path = "replicationFactor", kind = "Text" },
+    { label = "Compression", path = "isCompressionEnabled", kind = "Bool" },
+    { label = "Compression delay", path = "compressionDelaySecs", kind = "Duration" },
+    { label = "On-disk dedup", path = "onDiskDedup", kind = "Enum" },
+    { label = "Cache dedup", path = "cacheDeduplication", kind = "Enum" },
+    { label = "Erasure coding", path = "erasureCode", kind = "Enum" },
+]
+
+[[kinds."clustermgmt.config.StorageContainer".detail]]
+title = "Flags"
+fields = [
+    { label = "Internal", path = "isInternal", kind = "Bool" },
+    { label = "Shared", path = "isShared", kind = "Bool" },
+    { label = "NFS list inherited", path = "isNfsWhitelistInherited", kind = "Bool" },
+    { label = "Marked for removal", path = "isMarkedForRemoval", kind = "Bool" },
+]
+
+[kinds."clustermgmt.config.StorageContainer".actions."create"]
+label = "Create container"
+danger = "low"
+order = 10
+
+[kinds."clustermgmt.config.StorageContainer".actions."update"]
+label = "Update container"
+danger = "medium"
+order = 20
+
+[kinds."clustermgmt.config.StorageContainer".actions."mount"]
+label = "Mount on hosts"
+danger = "low"
+order = 30
+
+[kinds."clustermgmt.config.StorageContainer".actions."unmount"]
+label = "Unmount from hosts"
+danger = "medium"
+order = 40
+
+[kinds."clustermgmt.config.StorageContainer".actions."delete"]
+label = "Delete container"
+danger = "high"
+order = 50
+
+# `disks` and `targetPrefix` are writeOnly and always render `-`; `targetName` is the readable
+# one and sits under `w`.
+[kinds."volumes.config.VolumeGroup"]
+display = "Volume Groups"
+aliases = ["vg", "volume-group", "volume-groups"]
+category = "Storage"
+columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "CLUSTER", path = "clusterReference", kind = "Reference" },
+    { header = "SHARING", path = "sharingStatus", kind = "Enum" },
+    { header = "ATTACH TYPE", path = "attachmentType", kind = "Enum" },
+    { header = "PROTOCOL", path = "protocol", kind = "Enum" },
+    # The row's tint, so it sits inside DEFAULT_COLUMNS: past the sixth it would be sliced off
+    # the drawn row and `table::status_index` would find nothing to tint by.
+    { header = "HYDRATION", path = "hydrationStatus", kind = "Status" },
+    { header = "ATTACHMENTS", path = "attachments", kind = "Count" },
+    { header = "TARGET", path = "targetName", kind = "Text" },
+]
+
+# No fixture exists in either tree. Every path is a top-level property of
+# `volumes.v4.3.config.VolumeGroup` in `specs/volumes/v4.3.yaml`, plus `extId` from the shared
+# `ExternalizableAbstractModel` base; the generator is what proves each one. `disks` and
+# `targetPrefix` are `writeOnly` and always render `-`, as the columns above already record.
+# Volume-group **stats** are a separate schema behind a separate endpoint, so there is no
+# capacity section - as for storage containers.
+[[kinds."volumes.config.VolumeGroup".detail]]
+title = "Identity"
+fields = [
+    { label = "Name", path = "name", kind = "Text" },
+    { label = "UUID", path = "extId", kind = "Text" },
+    { label = "Description", path = "description", kind = "Text" },
+    { label = "Created by", path = "createdBy", kind = "Text" },
+    { label = "Project", path = "projectExtId", kind = "Reference" },
+]
+
+[[kinds."volumes.config.VolumeGroup".detail]]
+title = "State"
+fields = [
+    { label = "Sharing", path = "sharingStatus", kind = "Enum" },
+    { label = "Hydration", path = "hydrationStatus", kind = "Status" },
+    { label = "Usage", path = "usageType", kind = "Enum" },
+    { label = "Attachment", path = "attachmentType", kind = "Enum" },
+    { label = "Protocol", path = "protocol", kind = "Enum" },
+    { label = "Hidden", path = "isHidden", kind = "Bool" },
+    { label = "Load balance", path = "shouldLoadBalanceVmAttachments", kind = "Bool" },
+]
+
+[[kinds."volumes.config.VolumeGroup".detail]]
+title = "Target"
+fields = [
+    { label = "Target name", path = "targetName", kind = "Text" },
+]
+
+[[kinds."volumes.config.VolumeGroup".detail]]
+title = "Placement"
+fields = [
+    { label = "Cluster", path = "clusterReference", kind = "Reference" },
+]
+
+[[kinds."volumes.config.VolumeGroup".detail]]
+title = "Contents"
+fields = [
+    { label = "Attachments", path = "attachments", kind = "Count" },
+]
+
+[kinds."volumes.config.VolumeGroup".status]
+# The enum is IN_PROGRESS | COMPLETE | FAIL; the vocabulary knows FAILED, not FAIL.
+FAIL = "Error"
+COMPLETE = "Ok"
+
+[kinds."vmm.content.Image"]
+display = "Images"
+aliases = ["image", "images", "img"]
+category = "Storage"
+warm = true
+columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "TYPE", path = "type", kind = "Enum" },
+    { header = "SIZE", path = "sizeBytes", kind = "Bytes" },
+    { header = "CLUSTERS", path = "clusterLocationExtIds", kind = "Count" },
+    { header = "OWNER", path = "ownerName", kind = "Text" },
+    # The row's tint, so it sits inside DEFAULT_COLUMNS: past the sixth it would be sliced off
+    # the drawn row and `table::status_index` would find nothing to tint by.
+    { header = "COMPLIANCE", path = "placementPolicyStatus[].complianceStatus", kind = "Status" },
+    { header = "CREATED", path = "createTime", kind = "Timestamp" },
+]
+
+# No fixture exists in either tree; every path is a top-level property of
+# `vmm.v4.3.content.Image`, plus `extId` from the base model. `checksum` is a `oneOf` of
+# `ImageSha1Checksum` and `ImageSha256Checksum`, both carrying `hexDigest` - precisely why the
+# generator's path check must walk `oneOf`. `source` is a three-way `oneOf` with no common
+# property and is left to the raw view. Deviation 8: "Shared with all projects" is 24 characters
+# and reads "All projects" under the Sharing heading.
+[[kinds."vmm.content.Image".detail]]
+title = "Identity"
+fields = [
+    { label = "Name", path = "name", kind = "Text" },
+    { label = "UUID", path = "extId", kind = "Text" },
+    { label = "Description", path = "description", kind = "Text" },
+    { label = "Type", path = "type", kind = "Enum" },
+    { label = "Owner", path = "ownerName", kind = "Text" },
+    { label = "Project", path = "projectExtId", kind = "Reference" },
+]
+
+[[kinds."vmm.content.Image".detail]]
+title = "Content"
+fields = [
+    { label = "Size", path = "sizeBytes", kind = "Bytes" },
+    { label = "Checksum", path = "checksum.hexDigest", kind = "Text" },
+    { label = "Repository", path = "contentRepositoryName", kind = "Text" },
+]
+
+[[kinds."vmm.content.Image".detail]]
+title = "Placement"
+fields = [
+    { label = "Clusters", path = "clusterLocationExtIds", kind = "Count" },
+    { label = "Cluster", path = "clusterLocationExtIds[]", kind = "Reference" },
+    { label = "Compliance", path = "placementPolicyStatus[].complianceStatus", kind = "Status" },
+]
+
+[[kinds."vmm.content.Image".detail]]
+title = "Sharing"
+fields = [
+    { label = "Categories", path = "categoryExtIds[]", kind = "Reference" },
+    { label = "All projects", path = "isSharedWithAllProjects", kind = "Bool" },
+]
+
+[[kinds."vmm.content.Image".detail]]
+title = "Lifecycle"
+fields = [
+    { label = "Created", path = "createTime", kind = "Timestamp" },
+    { label = "Updated", path = "lastUpdateTime", kind = "Timestamp" },
+]
+
+[kinds."vmm.content.Image".status]
+NON_COMPLIANT = "Warn"
+COMPLIANT = "Ok"
+
+[kinds."vmm.content.Image".actions."create"]
+label = "Create image"
+danger = "low"
+order = 10
+
+[kinds."vmm.content.Image".actions."update"]
+label = "Update image"
+danger = "medium"
+order = 20
+
+[kinds."vmm.content.Image".actions."migrate"]
+label = "Migrate to another cluster"
+danger = "medium"
+order = 30
+
+[kinds."vmm.content.Image".actions."delete"]
+label = "Delete image"
+danger = "high"
+order = 40
+
+# ── Data protection ─────────────────────────────────────────────────────────────────────────
+[kinds."dataprotection.config.RecoveryPoint"]
+display = "Recovery Points"
+aliases = ["rp", "recovery-point", "recovery-points", "snapshot", "snapshots"]
+category = "Data Protection"
+columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "STATUS", path = "status", kind = "Status" },
+    { header = "TYPE", path = "recoveryPointType", kind = "Enum" },
+    { header = "CREATED", path = "creationTime", kind = "Timestamp" },
+    { header = "EXPIRES", path = "expirationTime", kind = "Timestamp" },
+    { header = "SIZE", path = "totalExclusiveUsageBytes", kind = "Bytes" },
+    { header = "VMS", path = "vmRecoveryPoints", kind = "Count" },
+]
+
+# Deliberately thin: the only recovery-point fixture is five synthetic entities whose
+# `vmRecoveryPoints[]` elements carry **only** `extId`. Curating a VM name or an
+# application-consistency flag would be inventing a path. The fallback carries whatever a real
+# Prism Central returns beyond this, and this section should grow once one is recorded.
+[[kinds."dataprotection.config.RecoveryPoint".detail]]
+title = "Identity"
+fields = [
+    { label = "Name", path = "name", kind = "Text" },
+    { label = "UUID", path = "extId", kind = "Text" },
+    { label = "Status", path = "status", kind = "Status" },
+    { label = "Type", path = "recoveryPointType", kind = "Enum" },
+]
+
+[[kinds."dataprotection.config.RecoveryPoint".detail]]
+title = "Timing"
+fields = [
+    { label = "Created", path = "creationTime", kind = "Timestamp" },
+    { label = "Expires", path = "expirationTime", kind = "Timestamp" },
+]
+
+[[kinds."dataprotection.config.RecoveryPoint".detail]]
+title = "Contents"
+fields = [
+    { label = "VMs", path = "vmRecoveryPoints", kind = "Count" },
+    { label = "VM UUIDs", path = "vmRecoveryPoints[].extId", kind = "Reference" },
+]
+
+[kinds."dataprotection.config.RecoveryPoint".actions."create"]
+label = "Create recovery point"
+danger = "low"
+order = 10
+
+[kinds."dataprotection.config.RecoveryPoint".actions."restore"]
+label = "Restore"
+danger = "medium"
+order = 20
+
+[kinds."dataprotection.config.RecoveryPoint".actions."set-expiration-time"]
+label = "Set expiry"
+danger = "low"
+order = 30
+
+[kinds."dataprotection.config.RecoveryPoint".actions."delete"]
+label = "Delete recovery point"
+danger = "high"
+order = 40
+
+# ── Data Protection ─────────────────────────────────────────────────────────────────────────
+# The rest of the nav group; Recovery Points keep their columns in the table above, because a
+# second TOML table with the same key is an error.
+#
+# The same six as the Disaster Recovery page's Protection Policies pane, in the same order, so
+# the kind's own table and the page cannot disagree. `replicationLocations[].label` is a join
+# key - in the recording those labels are `0`, `1` and `PC_192.0.2.8-0` - and the site is the
+# domain manager, which the warm-up resolves to the Prism Central's name.
+[kinds."datapolicies.config.ProtectionPolicy"]
+columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "SITES", path = "replicationLocations[].domainManagerExtId", kind = "Reference" },
+    { header = "RPO", path = "replicationConfigurations[].schedule.recoveryPointObjectiveTimeSeconds", kind = "Duration" },
+    { header = "CATEGORIES", path = "categoryIds", kind = "Count" },
+    { header = "APPROVAL", path = "isApprovalPolicyNeeded", kind = "Bool" },
+    { header = "OWNER", path = "ownerExtId", kind = "Reference" },
+]
+
+# `Duration` on the RPO is why that `ColumnKind` exists: `21600` is not an RPO anybody reads and
+# `6h` is. `domainManagerExtId` resolves through the warmed `prism.config.DomainManager` names,
+# which is why `name_path = "config.name"` is curated on that kind.
+[[kinds."datapolicies.config.ProtectionPolicy".detail]]
+title = "Identity"
+fields = [
+    { label = "Name", path = "name", kind = "Text" },
+    { label = "UUID", path = "extId", kind = "Text" },
+]
+
+[[kinds."datapolicies.config.ProtectionPolicy".detail]]
+title = "Scope"
+fields = [
+    { label = "Categories", path = "categoryIds", kind = "Count" },
+    { label = "Category", path = "categoryIds[]", kind = "Reference" },
+]
+
+[[kinds."datapolicies.config.ProtectionPolicy".detail]]
+title = "Replication"
+fields = [
+    { label = "From", path = "replicationConfigurations[].sourceLocationLabel", kind = "Text" },
+    { label = "To", path = "replicationConfigurations[].remoteLocationLabel", kind = "Text" },
+    { label = "Consistency", path = "replicationConfigurations[].schedule.recoveryPointType", kind = "Enum" },
+    { label = "RPO", path = "replicationConfigurations[].schedule.recoveryPointObjectiveTimeSeconds", kind = "Duration" },
+]
+
+[[kinds."datapolicies.config.ProtectionPolicy".detail]]
+title = "Locations"
+fields = [
+    { label = "Label", path = "replicationLocations[].label", kind = "Text" },
+    { label = "Prism Central", path = "replicationLocations[].domainManagerExtId", kind = "Reference" },
+    { label = "Primary", path = "replicationLocations[].isPrimary", kind = "Bool" },
+]
+
+# A recovery plan has no status: execution state lives on RecoveryPlanJob, and stages are a
+# sub-resource reached by drilling into a row.
+[kinds."datapolicies.config.RecoveryPlan"]
+columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "PRIMARY SITE", path = "primaryLocation.domainManagerExtId", kind = "Reference" },
+    { header = "RECOVERY SITE", path = "recoveryLocation.domainManagerExtId", kind = "Reference" },
+    { header = "PAUSED", path = "isProtectionPausedPostFailover", kind = "Bool" },
+    { header = "WITNESS", path = "witness.extId", kind = "Reference" },
+]
+
+# Ordered so the Disaster Recovery page's "Recent DR jobs" pane is a subsequence of it.
+[kinds."dataprotection.config.RecoveryPlanJob"]
+columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "ACTION", path = "actionType", kind = "Enum" },
+    { header = "STATUS", path = "status", kind = "Status" },
+    { header = "PLAN", path = "recoveryPlanExtId", kind = "Reference" },
+    { header = "PROGRESS", path = "percentageComplete", kind = "Percent" },
+    { header = "STARTED", path = "startTime", kind = "Timestamp" },
+    { header = "ENDED", path = "endTime", kind = "Timestamp" },
+    { header = "VMS", path = "numRecoverableVMs", kind = "Text" },
+]
+
+# `bucket.providerConfig` is a `oneOf` over credentials; the bucket's name and provider are the
+# two fields that say which store this is.
+[kinds."dataprotection.config.RecoveryPointStore"]
+columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "HEALTHY", path = "isHealthy", kind = "Bool" },
+    { header = "BUCKET", path = "bucket.bucketName", kind = "Text" },
+    { header = "PROVIDER", path = "bucket.provider", kind = "Enum" },
+    { header = "USED", path = "currentLogicalUsageBytes", kind = "Bytes" },
+    { header = "OWNER", path = "ownerExtId", kind = "Reference" },
+]
+
+# `vmExtId` and not `vm.extId`. §6.2 prefers the expanded object of a duplicated reference pair
+# on the theory that a newer API version populates it; the recording says the opposite for this kind,
+# and the recording wins. `crates/mockpc/fixtures-lab/vmm/v4.3/ahv/config/vm-recovery-points.json`
+# (2026-09-10) carries `vmExtId` on 58 of 58 rows and `vm` on none of them - a `GET` of one
+# recovery point returns `vm` as a **whole embedded VM**, so the object half of the pair is not
+# even a reference where it exists. `SIZE` and `DISKS` stay: `totalExclusiveUsageBytes` and
+# `diskRecoveryPoints` are absent from this recording's list rows, which is not a reason to drop a
+# column (`DISKS` fills on a `GET`, and the second PC has not spoken).
+[kinds."vmm.ahv.config.VmRecoveryPoint"]
+columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "STATUS", path = "status", kind = "Status" },
+    { header = "TYPE", path = "recoveryPointType", kind = "Enum" },
+    { header = "VM", path = "vmExtId", kind = "Reference" },
+    { header = "CREATED", path = "creationTime", kind = "Timestamp" },
+    { header = "EXPIRES", path = "expirationTime", kind = "Timestamp" },
+    { header = "SIZE", path = "totalExclusiveUsageBytes", kind = "Bytes" },
+    { header = "DISKS", path = "diskRecoveryPoints", kind = "Count" },
+]
+
+# The schema has no `name` at all: `entityName` is the identity, and `NAME_KEYS` cannot see it,
+# so the detail title and the breadcrumb need `name_path` to say the same thing the table does.
+#
+# No `ENTITY ID ← entityExtId`. The schema has six properties and no seventh to push it past,
+# so a column for it would sit inside the default six as an 8-hex stub - a synced entity is a
+# security or storage policy, and nothing warms those - right beside `ENTITY`, which already
+# names the same row. `⏎` on the row shows the extId in full.
+[kinds."datapolicies.config.EntitySyncPolicy"]
+name_path = "entityName"
+columns = [
+    { header = "ENTITY", path = "entityName", kind = "Text" },
+    { header = "STATUS", path = "status", kind = "Status" },
+    { header = "TYPE", path = "entityType", kind = "Enum" },
+    { header = "REMOTE PC", path = "remoteDomainManagerExtId", kind = "Reference" },
+    { header = "OWNER", path = "ownerExtId", kind = "Reference" },
+]
+
+# ── Networking ──────────────────────────────────────────────────────────────────────────────
+# `clusterReference` and `vpcReference` are bare UUID strings, so `Reference` reads them
+# directly; the fallback's `vpc.extId` and `virtualSwitch.extId` are expanded objects the recording
+# never returns. Subnet has no status-shaped field at all.
+[kinds."networking.config.Subnet"]
+display = "Subnets"
+aliases = ["subnet", "subnets", "net", "network", "networks"]
+category = "Networking"
+warm = true
+columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "TYPE", path = "subnetType", kind = "Enum" },
+    { header = "VLAN", path = "networkId", kind = "Text" },
+    { header = "SUBNET", path = "ipConfig[].ipv4.ipSubnet.ip.value", kind = "Text" },
+    { header = "GATEWAY", path = "ipConfig[].ipv4.defaultGatewayIp.value", kind = "Text" },
+    { header = "CLUSTER", path = "clusterReference", kind = "Reference" },
+    { header = "VPC", path = "vpcReference", kind = "Reference" },
+]
+
+# There is no `vlanId` key: the VLAN is `networkId`. The NAT flag is `isNatEnabled`. Both are
+# already right in the curated columns and the detail matches them. Deviation 8: "Advanced
+# networking" is 19 characters and reads "Advanced" under the Flags heading.
+[[kinds."networking.config.Subnet".detail]]
+title = "Identity"
+fields = [
+    { label = "Name", path = "name", kind = "Text" },
+    { label = "UUID", path = "extId", kind = "Text" },
+    { label = "Description", path = "description", kind = "Text" },
+    { label = "Type", path = "subnetType", kind = "Enum" },
+    { label = "VLAN", path = "networkId", kind = "Text" },
+    { label = "Hypervisor", path = "hypervisorType", kind = "Enum" },
+    { label = "Bridge", path = "bridgeName", kind = "Text" },
+]
+
+[[kinds."networking.config.Subnet".detail]]
+title = "Placement"
+fields = [
+    { label = "Cluster", path = "clusterReference", kind = "Reference" },
+    { label = "Virtual switch", path = "virtualSwitchReference", kind = "Reference" },
+    { label = "VPC", path = "vpcReference", kind = "Reference" },
+]
+
+[[kinds."networking.config.Subnet".detail]]
+title = "IPv4"
+fields = [
+    { label = "Subnet", path = "ipConfig[].ipv4.ipSubnet.ip.value", kind = "Ip" },
+    { label = "Prefix", path = "ipConfig[].ipv4.ipSubnet.prefixLength", kind = "Text" },
+    { label = "Gateway", path = "ipConfig[].ipv4.defaultGatewayIp.value", kind = "Ip" },
+    { label = "DHCP server", path = "ipConfig[].ipv4.dhcpServerAddress.value", kind = "Ip" },
+    { label = "Pool start", path = "ipConfig[].ipv4.poolList[].startIp.value", kind = "Ip" },
+    { label = "Pool end", path = "ipConfig[].ipv4.poolList[].endIp.value", kind = "Ip" },
+    { label = "Reserved", path = "reservedIpAddresses[].ipv4.value", kind = "Ip" },
+]
+
+[[kinds."networking.config.Subnet".detail]]
+title = "DHCP"
+fields = [
+    { label = "Domain", path = "dhcpOptions.domainName", kind = "Text" },
+    { label = "Search domains", path = "dhcpOptions.searchDomains[]", kind = "Text" },
+    { label = "Name servers", path = "dhcpOptions.domainNameServers[].ipv4.value", kind = "Ip" },
+]
+
+[[kinds."networking.config.Subnet".detail]]
+title = "Flags"
+fields = [
+    { label = "External", path = "isExternal", kind = "Bool" },
+    { label = "NAT", path = "isNatEnabled", kind = "Bool" },
+    { label = "Connected", path = "isConnected", kind = "Bool" },
+    { label = "Advanced", path = "isAdvancedNetworking", kind = "Bool" },
+]
+
+[[kinds."networking.config.Subnet".detail]]
+title = "Sharing"
+fields = [
+    { label = "Project", path = "projectExtId", kind = "Reference" },
+    { label = "Shared with", path = "sharedWithProjects[]", kind = "Count" },
+    { label = "Owner", path = "metadata.ownerUserName", kind = "Text" },
+    { label = "Project name", path = "metadata.projectName", kind = "Text" },
+]
+
+[kinds."networking.config.Subnet".actions."create"]
+label = "Create subnet"
+danger = "low"
+order = 10
+
+[kinds."networking.config.Subnet".actions."update"]
+label = "Update subnet"
+danger = "medium"
+order = 20
+
+[kinds."networking.config.Subnet".actions."share"]
+label = "Share with projects"
+danger = "low"
+order = 30
+
+[kinds."networking.config.Subnet".actions."unshare"]
+label = "Unshare"
+danger = "medium"
+order = 40
+
+[kinds."networking.config.Subnet".actions."delete"]
+label = "Delete subnet"
+danger = "high"
+order = 50
+
+# ── Network & Security ──────────────────────────────────────────────────────────────────────
+# The rest of the nav group; Subnets keep their columns in the table above, because a second
+# TOML table with the same key is an error.
+#
+# `supportedMultipleExternalSubnetType` is a 39-cell header, and `externalRoutingDomainReference`
+# is a reference the recording never populates; both stay past the sixth column.
+#
+# **No SNAT IPS column.** The readOnly `snatIps` is empty on all six VPCs of the two recorded
+# recordings (2026-09-10) - 0/4 on PC1, 0/2 on sierra - including the five that have an
+# external subnet with an active gateway node, which is the configuration that would compute
+# one. Empty on both and never sent; the addresses that do arrive sit one level down, at
+# `externalSubnets[].externalIps[].ipv4.value`, which is where a column that wants them should
+# look.
+[kinds."networking.config.Vpc"]
+warm = true
+columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "TYPE", path = "vpcType", kind = "Enum" },
+    { header = "SCOPE", path = "scope", kind = "Enum" },
+    { header = "EXTERNAL SUBNETS", path = "externalSubnets", kind = "Count" },
+    { header = "ROUTABLE PREFIXES", path = "externallyRoutablePrefixes", kind = "Count" },
+]
+
+# The identity of a floating IP is the address, not the optional name - which is why the first
+# column is `Ip` and `table::rule` has an arm for exactly that.
+#
+# Four of the six columns were rewritten from the recording
+# (`crates/mockpc/fixtures-lab/networking/v4.4/config/floating-ips.json`, 7 rows, 2026-09-10),
+# which fills none of the four fields the schema promised and all four of their siblings:
+#
+# - `floatingIpValue` is `readOnly` and never sent; the address is `floatingIp.ipv4.value` on
+#   7/7. (`floatingIp.ipv6.value` is the other half of `FloatingIPAddress` and no recorded row has
+#   one; a column takes one path, and v4 is the one that fills.)
+# - `privateIp`, the flat `readOnly` string, is likewise never sent. The private address lives
+#   under the association - `association.privateIp.ipv4.value` - on 5/5 associated rows.
+# - `vpc.extId` is `$expand`-only, and so, on this Prism Central, is the flat `vpcReference`
+#   beside it: the VPC arrives inside the association, on every one of the five. `association`
+#   is a `oneOf` and all three arms (`VmNicAssociation`, `PrivateIpAssociation`,
+#   `LoadBalancerSessionAssociation`) declare `vpcReference` and `privateIp`, so both paths
+#   resolve whatever a row is associated to.
+# - `externalSubnet.extId` is `$expand`-only; `externalSubnetReference` is on 7/7, and
+#   `networking.config.Subnet` is warmed, so it reads as the subnet's name.
+[kinds."networking.config.FloatingIp"]
+columns = [
+    { header = "IP", path = "floatingIp.ipv4.value", kind = "Ip" },
+    { header = "ASSOCIATION", path = "associationStatus", kind = "Status" },
+    { header = "PRIVATE IP", path = "association.privateIp.ipv4.value", kind = "Ip" },
+    { header = "VPC", path = "association.vpcReference", kind = "Reference" },
+    { header = "SUBNET", path = "externalSubnetReference", kind = "Reference" },
+    { header = "NAME", path = "name", kind = "Text" },
+]
+
+# `isQuickMode` is writeOnly and always renders `-`, so it is not a column at any position.
+[kinds."networking.config.VirtualSwitch"]
+warm = true
+columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "BOND MODE", path = "bondMode", kind = "Enum" },
+    { header = "DEFAULT", path = "isDefault", kind = "Bool" },
+    { header = "MTU", path = "mtu", kind = "Text" },
+    { header = "CLUSTERS", path = "clusters", kind = "Count" },
+    { header = "OWNER", path = "ownerType", kind = "Enum" },
+    { header = "UPDATING", path = "hasUpdateInProgress", kind = "Bool" },
+    { header = "ERROR", path = "hasDeploymentError", kind = "Bool" },
+]
+
+# A stretch is two states - the tunnel and the interface - and the round trip between them.
+# Those three live under `remoteStretchStatus[].status` and **not** under the top-level
+# `stretchStatus`, which pc.7.6 does not send at all: the one stretch in
+# `crates/mockpc/fixtures-lab/networking/v4.4/config/layer2-stretches.json` (2026-09-10)
+# answers with a list of three per-VTEP `RemoteVtepStretchStatus`, each holding the same
+# `StretchStatus` object the singular field would have held. So the three paths move under the
+# list and keep their fields; `[]` fans out, and `render_cell` collapses three identical `UP`s
+# into one cell, printing `UP +n` only when the VTEPs disagree.
+#
+# `INTERFACE` leads because it is the one of the three this Prism Central fills (`UP` on 3/3
+# VTEPs) and `table::status_index` paints the row from the *first* `Status` column: with
+# `TUNNEL` first, every stretch row would take its colour from an absence and come out Muted.
+# `TUNNEL` and `RTT MS` are empty here and stay - the shape is right now, and an empty column
+# on one Prism Central is not a dropped column.
+[kinds."networking.config.Layer2Stretch"]
+columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "TYPE", path = "connectionType", kind = "Enum" },
+    { header = "INTERFACE", path = "remoteStretchStatus[].status.interfaceState", kind = "Status" },
+    { header = "TUNNEL", path = "remoteStretchStatus[].status.tunnelState", kind = "Status" },
+    { header = "RTT MS", path = "remoteStretchStatus[].status.roundTripTimeMillis", kind = "Text" },
+    { header = "VNI", path = "vni", kind = "Text" },
+    { header = "MTU", path = "mtu", kind = "Text" },
+    { header = "REMOTES", path = "remoteStretchStatus", kind = "Count" },
+]
+
+# Warmed: `localGatewayReference` and `remoteGatewayReference` are inside the default six of
+# both the VPN connection and the BGP session below - four references, the count §4.3 warms
+# `vpc.extId` and `host.extId` for - and a gateway is listable and names itself at the top
+# level. Without it those four columns are 8-hex stubs nothing can ever resolve.
+#
+# `vpcReference` and not `vpc.extId`: the object half of the pair is `$expand`-only, and the
+# flat half is what the list sends - on the one gateway of four that belongs to a VPC in
+# `crates/mockpc/fixtures-lab/networking/v4.4/config/gateways.json` (2026-09-10). This is the
+# spelling `networking.config.LoadBalancerSession` already curates, and its `VPC` fills 2/2.
+[kinds."networking.config.Gateway"]
+warm = true
+columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "ACTIVE", path = "isActive", kind = "Bool" },
+    { header = "VPC", path = "vpcReference", kind = "Reference" },
+    { header = "VENDOR", path = "gatewayDeviceVendor", kind = "Text" },
+    { header = "VERSION", path = "installedSoftwareVersion", kind = "Text" },
+    { header = "SUPPORTED", path = "supportedSoftwareVersion", kind = "Text" },
+]
+
+# Both gateway references are flat UUID strings, so §6.2's pattern rule already types them
+# `Reference`, and `networking.config.Gateway` is warmed above so the warm-up names them rather
+# than leaving two 8-hex stubs inside the default six. `preSharedKey` lives under `ipsecConfig`,
+# which the recorder and the column rules both refuse.
+[kinds."networking.config.VpnConnection"]
+columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "IPSEC", path = "ipsecTunnelStatus.state", kind = "Status" },
+    { header = "BGP", path = "ebgpStatus.state", kind = "Status" },
+    { header = "ROLE", path = "localGatewayRole", kind = "Enum" },
+    { header = "LOCAL GW", path = "localGatewayReference", kind = "Reference" },
+    { header = "REMOTE GW", path = "remoteGatewayReference", kind = "Reference" },
+    { header = "ADVERTISED", path = "advertisedPrefixes", kind = "Count" },
+    { header = "LEARNED", path = "learnedPrefixes", kind = "Count" },
+]
+
+# Explicitly **not** `password`, which is `writeOnly` and `format: password` and was the fourth
+# column of the generated table.
+[kinds."networking.config.BgpSession"]
+columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "STATUS", path = "status.state", kind = "Status" },
+    { header = "LOCAL GW", path = "localGatewayReference", kind = "Reference" },
+    { header = "REMOTE GW", path = "remoteGatewayReference", kind = "Reference" },
+    { header = "PRIORITY", path = "dynamicRoutePriority", kind = "Text" },
+    { header = "ADVERTISE ALL", path = "shouldAdvertiseAllExternallyRoutablePrefixes", kind = "Bool" },
+    { header = "PREFIXES", path = "externallyRoutablePrefixesToAdvertise", kind = "Count" },
+]
+
+# The generated table was `NAME  PROJECT EXT ID  PRIORITY  VPC EXT ID  POLICIES`: two of five
+# were opaque ids, and `vpcExtId` was `Text`, so nothing resolved it.
+[kinds."networking.config.RoutingPolicy"]
+columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "VPC", path = "vpcExtId", kind = "Reference" },
+    { header = "PRIORITY", path = "priority", kind = "Text" },
+    { header = "RULES", path = "policies", kind = "Count" },
+]
+
+[kinds."networking.config.TrafficMirror"]
+columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "STATE", path = "state", kind = "Status" },
+    { header = "ENABLED", path = "isEnabled", kind = "Bool" },
+    { header = "SWITCH", path = "virtualSwitchReference", kind = "Reference" },
+    { header = "SOURCES", path = "sourceList", kind = "Count" },
+    { header = "DESTINATIONS", path = "destinationList", kind = "Count" },
+    { header = "CLUSTERS", path = "clusterReferenceList", kind = "Count" },
+    { header = "MESSAGE", path = "stateMessage", kind = "Text" },
+]
+
+[kinds."networking.config.LoadBalancerSession"]
+columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "TYPE", path = "type", kind = "Enum" },
+    { header = "ALGORITHM", path = "algorithm", kind = "Enum" },
+    { header = "VPC", path = "vpcReference", kind = "Reference" },
+    { header = "PROTOCOL", path = "listener.protocol", kind = "Enum" },
+    { header = "CHECK", path = "healthCheckConfig.intervalSecs", kind = "Duration" },
+]
+
+# The nav's **Security Policies**. The kind's `schema` is empty only because its path segment is
+# `policies` and the generator infers a schema from the list response's item name; the schema is
+# right there as `microseg.v4.3.config.NetworkSecurityPolicy`. Written without the version
+# segment so a bump to v4.4 does not rot this line.
+#
+# **No RULES column.** `rules` is the one field of this schema a list never returns: 0 of the
+# 7 policies of `crates/mockpc/fixtures-lab/microseg/v4.3/config/policies.json` and 0 of the 8
+# of `crates/mockpc/fixtures-lab-sierra/…` carry it, while a `GET /policies/{id}` of the first
+# of them returns three. The list projects it away on both Prism Centrals, so the count is not
+# a thing a table can ever draw - which is a different fault from an empty field, and the only
+# one that justifies removing a column outright. `securedGroups` is on 15/15 rows of the two
+# recordings and is what a sixth column would say instead.
+[kinds."microseg.config.policies"]
+schema = "microseg.config.NetworkSecurityPolicy"
+display = "Security Policies"
+aliases = ["security-policy", "security-policies", "netsec"]
+category = "Security"
+columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "STATE", path = "state", kind = "Status" },
+    { header = "TYPE", path = "type", kind = "Enum" },
+    { header = "SCOPE", path = "scope", kind = "Enum" },
+    { header = "UPDATED", path = "lastUpdateTime", kind = "Timestamp" },
+]
+
+[kinds."microseg.config.AddressGroup"]
+columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "ADDRESSES", path = "ipv4Addresses", kind = "Count" },
+    { header = "RANGES", path = "ipRanges", kind = "Count" },
+    { header = "POLICIES", path = "policyReferences", kind = "Count" },
+    { header = "CREATED BY", path = "createdBy", kind = "Reference" },
+    { header = "UPDATED", path = "lastUpdateTime", kind = "Timestamp" },
+]
+
+[kinds."microseg.config.ServiceGroup"]
+columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "SYSTEM", path = "isSystemDefined", kind = "Bool" },
+    { header = "TCP", path = "tcpServices", kind = "Count" },
+    { header = "UDP", path = "udpServices", kind = "Count" },
+    { header = "ICMP", path = "icmpServices", kind = "Count" },
+    { header = "UPDATED", path = "lastUpdateTime", kind = "Timestamp" },
+]
+
+# ── Operations ──────────────────────────────────────────────────────────────────────────────
+# `completedTime`, not `completionTime`; task extIds are base64-prefixed (`ZXJnb24=:<uuid>`).
+[kinds."prism.config.Task"]
+display = "Tasks"
+aliases = ["task", "tasks"]
+category = "Operations"
+poll_secs = 3
+# A Prism Central keeps every task it ever ran: the recording holds 6109 of them, 62 pages at a
+# second a page, re-walked every 3 s. The newest 500, which is what the screen can show,
+# arrive in five pages; the header's `500/6109` says the rest are there, and a `$filter` or a
+# pane's own `orderby` is how the older ones are reached until the filter grammar lands.
+# `createdTime` is sortable: the pinned `specs/prism/v4.4.yaml` declares twelve `$orderby`
+# fields for `listTasks` (L11175), `createdTime`, `startedTime`, `completedTime` and
+# `lastUpdatedTime` among them. (An earlier note here said the allowlist held `appName`
+# alone; that was true of v4.0/v4.1 and is not true of the version this catalog pins.)
+orderby = "createdTime desc"
+# The change-probe's field, and deliberately *not* the order above: a probe over a creation
+# time cannot see a task go RUNNING → SUCCEEDED, which is the most important change on the
+# busiest table in the program. `lastUpdatedTime` is on every row of
+# `crates/mockpc/fixtures-lab/prism/v4.4/config/tasks.json`, and is one of the twelve
+# `$orderby` fields the pinned spec declares for `listTasks`.
+probe_by = "lastUpdatedTime"
+max_rows = 500
+columns = [
+    { header = "OPERATION", path = "operationDescription", kind = "Text" },
+    { header = "STATUS", path = "status", kind = "Status" },
+    { header = "PROGRESS", path = "progressPercentage", kind = "Percent" },
+    { header = "ENTITY", path = "entitiesAffected[].name", kind = "Text" },
+    { header = "STARTED", path = "startedTime", kind = "Timestamp" },
+    { header = "COMPLETED", path = "completedTime", kind = "Timestamp" },
+    { header = "CANCELABLE", path = "isCancelable", kind = "Bool" },
+]
+
+# The affected-entity *type* is `rel` ("volumes:config:volume-group"), not `type`; the completion
+# timestamp is `completedTime`, not `completionTime`; `legacyErrorMessage` appears in neither
+# fixture and is not curated. The Errors section disappears on a task that succeeded, which is
+# 100 of 100 recorded tasks - exactly what the empty-section rule is for. `Percent` here is what
+# the curated `PROGRESS` **column** should also become.
+#
+# Deviation 1: there is no `subSteps[].status`. `prism.v4.4.config.TaskStep` declares exactly one
+# property, `name`, with `additionalProperties: false`, and the recording's six tasks that carry
+# `subSteps` carry `name` and `$objectType` and nothing else. The field is dropped rather than
+# replaced.
+[[kinds."prism.config.Task".detail]]
+title = "What"
+fields = [
+    { label = "Operation", path = "operation", kind = "Enum" },
+    { label = "Description", path = "operationDescription", kind = "Text" },
+    { label = "Status", path = "status", kind = "Status" },
+    { label = "Progress", path = "progressPercentage", kind = "Percent" },
+    { label = "Cancelable", path = "isCancelable", kind = "Bool" },
+    { label = "Owner", path = "ownedBy.name", kind = "Text" },
+]
+
+[[kinds."prism.config.Task".detail]]
+title = "Timing"
+fields = [
+    { label = "Created", path = "createdTime", kind = "Timestamp" },
+    { label = "Started", path = "startedTime", kind = "Timestamp" },
+    { label = "Completed", path = "completedTime", kind = "Timestamp" },
+    { label = "Updated", path = "lastUpdatedTime", kind = "Timestamp" },
+]
+
+[[kinds."prism.config.Task".detail]]
+title = "Entities"
+fields = [
+    { label = "Entities", path = "numberOfEntitiesAffected", kind = "Text" },
+    { label = "Name", path = "entitiesAffected[].name", kind = "Text" },
+    { label = "Type", path = "entitiesAffected[].rel", kind = "Text" },
+    { label = "Clusters", path = "clusterExtIds[]", kind = "Reference" },
+]
+
+[[kinds."prism.config.Task".detail]]
+title = "Hierarchy"
+fields = [
+    { label = "Parent", path = "parentTask.extId", kind = "Text" },
+    { label = "Root", path = "rootTask.extId", kind = "Text" },
+    { label = "Subtasks", path = "numberOfSubtasks", kind = "Text" },
+    { label = "Steps", path = "subSteps[].name", kind = "Text" },
+]
+
+[[kinds."prism.config.Task".detail]]
+title = "Errors"
+fields = [
+    { label = "Code", path = "errorMessages[].code", kind = "Text" },
+    { label = "Message", path = "errorMessages[].message", kind = "Text" },
+    { label = "Severity", path = "errorMessages[].severity", kind = "Status" },
+]
+
+[[kinds."prism.config.Task".detail]]
+title = "Result"
+fields = [
+    { label = "Key", path = "completionDetails[].name", kind = "Text" },
+    { label = "Value", path = "completionDetails[].value", kind = "Text" },
+]
+
+[kinds."prism.config.Task".status]
+# A queued task is noise on a busy Prism Central, not a warning.
+QUEUED = "Muted"
+
+[kinds."prism.config.Task".actions."cancel"]
+key = "c"
+label = "Cancel task"
+danger = "medium"
+needs_etag = false   # spec declares no If-Match and no requestBody.
+
+# `title` is the rendered sentence; `message` is the un-substituted template. `status` collapses
+# `isAcknowledged`/`isResolved` into one cell and is exactly what the two curated actions change.
+# Severity is what an alert row is read by: the first `Status` column tints the row.
+[kinds."monitoring.serviceability.Alert"]
+display = "Alerts"
+aliases = ["alert", "alerts"]
+category = "Operations"
+poll_secs = 10
+# 1559 alerts in the recording, 16 pages. Newest first, capped like tasks; the header's
+# `500/1559` says the rest are there. `creationTime` is sortable: the pinned
+# `specs/monitoring/v4.3.yaml` declares nine `$orderby` fields for `listAlerts` (L911),
+# `creationTime`, `lastOccurredTime` and `lastUpdatedTime` among them. (An earlier note here
+# said the monitoring spec declared no allowlist at all; that was true of v4.0/v4.1 and is
+# not true of the version this catalog pins. `acknowledgedTime` and `resolvedTime` are
+# date-times on the schema but are *not* in the allowlist - do not curate those.)
+orderby = "creationTime desc"
+# See the Task entry: the probe's order is last-modified, the table's is creation.
+# `lastUpdatedTime` is on every row of
+# `crates/mockpc/fixtures-lab/monitoring/v4.3/serviceability/alerts.json` and is one of the
+# nine `$orderby` fields the pinned spec declares for `listAlerts`.
+probe_by = "lastUpdatedTime"
+max_rows = 500
+columns = [
+    { header = "SEVERITY", path = "severity", kind = "Status" },
+    { header = "STATUS", path = "status", kind = "Status" },
+    { header = "TITLE", path = "title", kind = "Text" },
+    { header = "SOURCE", path = "sourceEntity.name", kind = "Text" },
+    { header = "CLUSTER", path = "clusterName", kind = "Text" },
+    { header = "CREATED", path = "creationTime", kind = "Timestamp" },
+    { header = "LAST", path = "lastOccurredTime", kind = "Timestamp" },
+]
+
+# Cause is placed **second**, above Where and Timing, deliberately: it is the single most useful
+# thing in a Nutanix alert ("IAMv2 Authn has performance issues" / "Check the iam-user-authn and
+# iam-proxy pods on MSP") and today it is sixty lines into a YAML dump. There is no
+# `acknowledgedBy`/`resolvedBy` in any of the 100 recorded alerts, so neither is curated.
+[[kinds."monitoring.serviceability.Alert".detail]]
+title = "What happened"
+fields = [
+    { label = "Title", path = "title", kind = "Text" },
+    { label = "Message", path = "message", kind = "Text" },
+    { label = "Severity", path = "severity", kind = "Status" },
+    { label = "Status", path = "status", kind = "Status" },
+    { label = "Code", path = "alertType", kind = "Text" },
+    { label = "Service", path = "serviceName", kind = "Text" },
+]
+
+[[kinds."monitoring.serviceability.Alert".detail]]
+title = "Cause"
+fields = [
+    { label = "Cause", path = "rootCauseAnalysis[].cause", kind = "Text" },
+    { label = "Resolution", path = "rootCauseAnalysis[].resolution", kind = "Text" },
+    { label = "KB", path = "kbArticles[]", kind = "Text" },
+]
+
+[[kinds."monitoring.serviceability.Alert".detail]]
+title = "Where"
+fields = [
+    { label = "Cluster", path = "clusterName", kind = "Text" },
+    { label = "Cluster UUID", path = "clusterUUID", kind = "Reference" },
+    { label = "Source", path = "sourceEntity.name", kind = "Text" },
+    { label = "Source type", path = "sourceEntity.type", kind = "Enum" },
+    { label = "Affected", path = "affectedEntities[].name", kind = "Text" },
+    { label = "Nodes", path = "impactedEntities.nodes[]", kind = "Reference" },
+]
+
+[[kinds."monitoring.serviceability.Alert".detail]]
+title = "Timing"
+fields = [
+    { label = "First seen", path = "creationTime", kind = "Timestamp" },
+    { label = "Last seen", path = "lastOccurredTime", kind = "Timestamp" },
+    { label = "Updated", path = "lastUpdatedTime", kind = "Timestamp" },
+    { label = "Acknowledged", path = "acknowledgedTime", kind = "Timestamp" },
+    { label = "Resolved", path = "resolvedTime", kind = "Timestamp" },
+]
+
+[[kinds."monitoring.serviceability.Alert".detail]]
+title = "Handling"
+fields = [
+    { label = "Acknowledged", path = "isAcknowledged", kind = "Bool" },
+    { label = "Resolved", path = "isResolved", kind = "Bool" },
+    { label = "Auto-resolved", path = "isAutoResolved", kind = "Bool" },
+    { label = "Runnable", path = "isRunnable", kind = "Bool" },
+]
+
+[[kinds."monitoring.serviceability.Alert".detail]]
+title = "Classification"
+fields = [
+    { label = "Impact", path = "primaryImpactType", kind = "Enum" },
+    { label = "Impacts", path = "impactTypes[]", kind = "Enum" },
+    { label = "Classes", path = "classifications[]", kind = "Enum" },
+]
+
+[[kinds."monitoring.serviceability.Alert".detail]]
+title = "Parameters"
+fields = [
+    { label = "Name", path = "parameters[].paramName", kind = "Text" },
+    { label = "Value", path = "parameters[].paramValue.stringValue", kind = "Text" },
+]
+
+# One endpoint, two verbs: hide it and offer the verbs instead. A menu offering "manage alert"
+# and then an enum is worse than one offering "Acknowledge" and "Resolve".
+[kinds."monitoring.serviceability.Alert".actions."manage-alert"]
+hidden = true
+
+[kinds."monitoring.serviceability.Alert".actions."acknowledge"]
+from = "manage-alert"
+key = "A"
+label = "Acknowledge"
+danger = "low"
+order = 10
+body = { actionType = "ACKNOWLEDGE" }
+
+[kinds."monitoring.serviceability.Alert".actions."resolve"]
+from = "manage-alert"
+key = "R"
+label = "Resolve"
+danger = "low"
+order = 20
+body = { actionType = "RESOLVE" }
+
+# The three append-only logs. Each is a collection a Prism Central never trims, so each is
+# read newest-first and capped; without an order a budget would keep an arbitrary slice of an
+# arbitrary age, which is worse than no budget. Older rows stay reachable: the header prints
+# the server's own total beside the shown count (`500/181825`), a page pane may name its own
+# `orderby`, and the filter grammar will narrow by time when it lands.
+#
+# Every `orderby` field below is in its endpoint's `x-odata-fields` allowlist in the spec this
+# catalog pins - checked, not guessed, because an order the server does not allow is a 400 on
+# the whole list rather than a degraded one.
+#
+# Two of the three are here; the third, `lifecycle.resources.LcmHistory`, is curated beside the
+# other LCM kinds in Admin Center, because a reader looking for it looks there.
+
+# 181 825 audits in the recording at 0.85 s per 100-row page: the collection is 1819 pages, about
+# 26 minutes, and the scheduler's blanket 200-page cap stopped the walk at 200 pages and
+# about 170 s of every 30 s cycle, with an empty table throughout. The newest 500 arrive in
+# five pages, four seconds, matching Alert. `creationTime` is one of the seven `$orderby`
+# fields `listAudits` declares in specs/monitoring/v4.3.yaml (L2129); `operationStartTime` is
+# another, but `operationEndTime` is not - it is null while an operation is still running.
+#
+# An audit is who did what and whether it worked, so `status` is second and tints the row.
+#
+# `clusterReference` is a `monitoring.v4.3.common.EntityReference` (specs/monitoring/v4.3.yaml
+# L8820), which declares `name`, but every row of
+# `crates/mockpc/fixtures/monitoring/v4.3/serviceability/audits.json` carries an `extId` and no
+# `name` there - the shape v4 uses for cluster and host references everywhere - while
+# `userReference` and `sourceEntity` on those same rows do carry names. So the cluster is a
+# `Reference` over the extId, which the warm-up resolves to a cluster name; as
+# `clusterReference.name` with kind `Text` the column would be blank on every row.
+[kinds."monitoring.serviceability.Audit"]
+orderby = "creationTime desc"
+max_rows = 500
+columns = [
+    { header = "TITLE", path = "title", kind = "Text" },
+    { header = "STATUS", path = "status", kind = "Status" },
+    { header = "OPERATION", path = "operationType", kind = "Enum" },
+    { header = "USER", path = "userReference.name", kind = "Text" },
+    { header = "SOURCE", path = "sourceEntity.name", kind = "Text" },
+    { header = "STARTED", path = "operationStartTime", kind = "Timestamp" },
+    { header = "ENDED", path = "operationEndTime", kind = "Timestamp" },
+    { header = "CLUSTER", path = "clusterReference.extId", kind = "Reference" },
+]
+
+# The audit log's sibling and the same shape. `creationTime` is one of the three `$orderby`
+# fields `listEvents` declares in specs/monitoring/v4.3.yaml, and the only date among them.
+# No row count measured in the recording, so it keeps the default budget: ten pages, bounded either
+# way, and the order is what makes those ten pages the ten worth having.
+#
+# An event has no status of any kind: it is a thing that happened, and the row that says what
+# it was is the title and the type.
+#
+# `operationType` and `serviceName` were the audit log's columns copied onto its sibling, and
+# the copy does not fit: both are absent from all 100 rows of
+# `crates/mockpc/fixtures-lab/monitoring/v4.3/serviceability/events.json` (2026-09-10) while
+# `monitoring.serviceability.Audit` fills `operationType` 100/100 from the same Prism Central.
+# What an event actually carries, on 100/100, is `eventType` and a typed `sourceEntity`, so
+# those take the two slots:
+#
+# - `TYPE` is `Text` and not `Enum`: `eventType` is free text in CamelCase
+#   (`VmRecoveryPointSuccessAudit`), not an enum, and `sentence_case` over an underscore-free
+#   token would print `Vmrecoverypointsuccessaudit`.
+# - `ENTITY` is `Enum` over `sourceEntity.type`, a lowercase word (`vm`, `volume_group`) that
+#   sentence-cases into `VM` and `Volume group` beside the name in `SOURCE`.
+[kinds."monitoring.serviceability.Event"]
+orderby = "creationTime desc"
+columns = [
+    { header = "TITLE", path = "title", kind = "Text" },
+    { header = "TYPE", path = "eventType", kind = "Text" },
+    { header = "SOURCE", path = "sourceEntity.name", kind = "Text" },
+    { header = "ENTITY", path = "sourceEntity.type", kind = "Enum" },
+    { header = "CLUSTER", path = "clusterName", kind = "Text" },
+    { header = "CREATED", path = "creationTime", kind = "Timestamp" },
+    { header = "AFFECTED", path = "affectedEntities", kind = "Count" },
+]
+
+# ── Monitoring: the rest ────────────────────────────────────────────────────────────────────
+# Named for what follows it, because four of the Monitoring sidebar group's six kinds are
+# already above: Alerts and Tasks with the operations they belong to, Audits and Events with
+# the append-only logs whose budgets they share. These two have nothing else to say and so
+# start here.
+
+# `isExpectedToErrorOnConflict` is writeOnly and always renders `-`; `policyId` is an
+# `A<uuid>`-shaped identifier with a prefix, so nothing resolves it.
+[kinds."monitoring.serviceability.UserDefinedPolicy"]
+columns = [
+    { header = "TITLE", path = "title", kind = "Text" },
+    { header = "ENABLED", path = "isEnabled", kind = "Bool" },
+    { header = "ENTITY", path = "entityType", kind = "Text" },
+    { header = "AUTO RESOLVE", path = "isAutoResolved", kind = "Bool" },
+    { header = "CONDITIONS", path = "triggerConditions", kind = "Count" },
+    { header = "IMPACTS", path = "impactTypes", kind = "Count" },
+    { header = "UPDATED", path = "lastUpdatedTime", kind = "Timestamp" },
+]
+
+[kinds."opsmgmt.config.Report"]
+columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "START", path = "startTime", kind = "Timestamp" },
+    { header = "END", path = "endTime", kind = "Timestamp" },
+    { header = "PERSISTENT", path = "isPersistent", kind = "Bool" },
+    { header = "RECIPIENTS", path = "recipients", kind = "Count" },
+    { header = "CREATED", path = "creationTime", kind = "Timestamp" },
+    { header = "FORMATS", path = "availableFormats", kind = "Count" },
+    { header = "OWNER", path = "ownerExtId", kind = "Reference" },
+]
+
+# ── Governance ──────────────────────────────────────────────────────────────────────────────
+# `associations` needs `$expand=associations`, which the table never sends, so no count column.
+[kinds."prism.config.Category"]
+display = "Categories"
+aliases = ["category", "categories", "cat"]
+category = "Governance"
+warm = true
+columns = [
+    { header = "KEY", path = "key", kind = "Text" },
+    { header = "VALUE", path = "value", kind = "Text" },
+    { header = "TYPE", path = "type", kind = "Enum" },
+    { header = "DESCRIPTION", path = "description", kind = "Text" },
+    { header = "SHARED", path = "isSharedWithAllProjects", kind = "Bool" },
+]
+
+# The same VmReference schema is nested under both conflict kinds at two path shapes each;
+# undifferentiated they would all display "VM References".
+[kinds."vmm.ahv.policies.VmReference"]
+display = "Dependee VMs"
+
+[kinds."vmm.ahv.policies.VmReference~dependee-vms"]
+display = "Dependee VMs"
+
+[kinds."vmm.ahv.policies.VmReference~dependent-vms"]
+display = "Dependent VMs"
+
+[kinds."vmm.ahv.policies.VmReference~dependent-vms~2"]
+display = "Dependent VMs"
+
+# ── Policies ────────────────────────────────────────────────────────────────────────────────
+# The four VM policies are counted rather than described: what a person asks of one is how many
+# VMs obey it. None of them has a status-shaped field, so none of these rows takes a tint.
+[kinds."vmm.ahv.policies.VmHostAffinityPolicy"]
+columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "VMS", path = "numVms", kind = "Text" },
+    { header = "HOSTS", path = "numHosts", kind = "Text" },
+    { header = "COMPLIANT", path = "numCompliantVms", kind = "Text" },
+    { header = "NON-COMPLIANT", path = "numNonCompliantVms", kind = "Text" },
+    { header = "UPDATED", path = "updateTime", kind = "Timestamp" },
+    { header = "VM CATEGORIES", path = "vmCategories", kind = "Count" },
+    { header = "HOST CATEGORIES", path = "hostCategories", kind = "Count" },
+]
+
+[kinds."vmm.ahv.policies.VmAntiAffinityPolicy"]
+columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "COMPLIANT", path = "numCompliantVms", kind = "Text" },
+    { header = "NON-COMPLIANT", path = "numNonCompliantVms", kind = "Text" },
+    { header = "PENDING", path = "numPendingVms", kind = "Text" },
+    { header = "CATEGORIES", path = "categories", kind = "Count" },
+    { header = "UPDATED", path = "updateTime", kind = "Timestamp" },
+    { header = "CREATED BY", path = "createdBy.extId", kind = "Reference" },
+]
+
+[kinds."vmm.ahv.policies.VmStartupPolicy"]
+columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "GROUPS", path = "groups", kind = "Count" },
+    { header = "CONDITIONS", path = "startConditions", kind = "Count" },
+    { header = "COMPLIANT", path = "numCompliantVms", kind = "Text" },
+    { header = "NON-COMPLIANT", path = "numNonCompliantVms", kind = "Text" },
+    { header = "CONFLICTS", path = "numDependencyConflicts", kind = "Text" },
+    { header = "UPDATED", path = "updateTime", kind = "Timestamp" },
+]
+
+# `rebootSchedule` is a two-armed `oneOf` - immediately, or at a time - with nothing in common
+# between the arms to put in a column.
+[kinds."vmm.ahv.policies.GuestRebootPolicy"]
+columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "CATEGORIES", path = "categories", kind = "Count" },
+    { header = "CREATED", path = "createTime", kind = "Timestamp" },
+    { header = "UPDATED", path = "updateTime", kind = "Timestamp" },
+    { header = "CREATED BY", path = "createdBy.extId", kind = "Reference" },
+]
+
+[kinds."vmm.images.config.PlacementPolicy"]
+columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "STATE", path = "enforcementState", kind = "Status" },
+    { header = "TYPE", path = "placementType", kind = "Enum" },
+    { header = "OWNER", path = "ownerName", kind = "Text" },
+    { header = "CREATED", path = "createTime", kind = "Timestamp" },
+    { header = "UPDATED", path = "lastUpdateTime", kind = "Timestamp" },
+]
+
+# No `placementType` and no `enforcementState` here: a rate limit policy is a number of kilobits
+# and the clusters it matches.
+[kinds."vmm.images.config.RateLimitPolicy"]
+columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "RATE KBPS", path = "rateLimitKbps", kind = "Text" },
+    { header = "CLUSTERS", path = "matchingClusterExtIds", kind = "Count" },
+    { header = "OWNER", path = "ownerName", kind = "Text" },
+    { header = "CREATED", path = "createTime", kind = "Timestamp" },
+    { header = "UPDATED", path = "lastUpdateTime", kind = "Timestamp" },
+]
+
+# `lastUpdatedBy` is a plain username string here, not a reference object as it is on the four
+# `vmm.ahv.policies` kinds beside it.
+[kinds."security.management.ApprovalPolicy"]
+columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "PENDING", path = "isUpdatePending", kind = "Bool" },
+    { header = "APPROVERS", path = "approverGroups", kind = "Count" },
+    { header = "POLICIES", path = "securedPolicies", kind = "Count" },
+    { header = "UPDATED BY", path = "lastUpdatedBy", kind = "Text" },
+    { header = "UPDATED", path = "lastUpdateTime", kind = "Timestamp" },
+]
+
+# ── The name cache's warm set ───────────────────────────────────────────────────────────────
+# `core::names` lists one page of each of these at connect and every five minutes after, so a
+# `Reference` cell resolves before anything has opened the kind it points at. The set is
+# evidence, not taste: these are the kinds the `Reference` paths in the first six columns of
+# all 262 kinds actually point at - `cluster.extId` 6 + `cluster.uuid` 3 + `clusterReference` 2,
+# `createdBy.extId` 8 + `updatedBy.extId` 6, `host.extId` 4, `vpc.extId` 4,
+# `virtualSwitch.extId` 2, the two `*Category.extId` 2 each, then the singletons.
+#
+# NOT `vmm.ahv.config.Vm`: `vm.extId` appears once, VMs are the largest list on any Prism
+# Central, and the VM table warms itself the moment anybody opens it.
+#
+# The generator refuses `warm` on a kind nothing can list, and on one that would name itself
+# with its own extId.
+#
+# This section is now a note and not a table: every one of the eleven carries `warm = true`
+# beside its own columns, because a second TOML table with the same key is a parse error and
+# not a merge. They are `clustermgmt.config.Cluster`, `clustermgmt.config.Host` and
+# `clustermgmt.config.StorageContainer`; `vmm.content.Image`; `networking.config.Subnet`,
+# `networking.config.Vpc`, `networking.config.VirtualSwitch` and `networking.config.Gateway`;
+# `prism.config.Category`; and `iam.authn.User` and `prism.config.DomainManager` in Admin
+# Center below. `crates/catalog/tests/consistency.rs` asserts the set whole.
+
+# ── Admin Center ────────────────────────────────────────────────────────────────────────────
+# Every `display`, `aliases` and `category` in this section is new curation beside the columns:
+# these kinds had derived display names, and Admin Center is where a person goes looking for
+# them by name.
+
+# Explicitly **not** `password`, which was column 16 of the generated table. The generator drops
+# it now too; this says so where a person will read it.
+[kinds."iam.authn.User"]
+warm = true
+display = "Users"
+aliases = ["user", "users"]
+category = "Identity"
+columns = [
+    { header = "USERNAME", path = "username", kind = "Text" },
+    { header = "STATUS", path = "status", kind = "Status" },
+    { header = "TYPE", path = "userType", kind = "Enum" },
+    { header = "DISPLAY NAME", path = "displayName", kind = "Text" },
+    { header = "EMAIL", path = "emailId", kind = "Text" },
+    { header = "LAST LOGIN", path = "lastLoginTime", kind = "Timestamp" },
+]
+
+[kinds."iam.authn.UserGroup"]
+display = "User Groups"
+aliases = ["group", "groups", "user-group", "user-groups"]
+category = "Identity"
+columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "TYPE", path = "groupType", kind = "Enum" },
+    { header = "DISTINGUISHED NAME", path = "distinguishedName", kind = "Text" },
+    { header = "CREATED", path = "createdTime", kind = "Timestamp" },
+    { header = "CREATED BY", path = "createdBy", kind = "Reference" },
+]
+
+# No `USERS ← assignedUsersCount` and no `GROUPS ← assignedUserGroupsCount`. They are not
+# empty, which would be a reason to keep them: they are `-1` on all 65 rows of
+# `crates/mockpc/fixtures-lab/iam/v4.0/authz/roles.json` (2026-09-10) - a "not computed"
+# sentinel typed `integer`, which a `Text` cell prints as `-1` and a reader takes for a count.
+# Retyping cannot help, because there is no `ColumnKind` that means "the server declined to
+# count", and `Count` is for the length of an array, not for a number.
+# `iam.authz.AuthorizationPolicy` answers the same question with real numbers (0, 1, 6) from
+# the same Prism Central and keeps its pair. In their place go the two figures this schema does
+# compute and fill 65/65: the reach of the role (`accessibleEntityTypesCount`) and the service
+# that defines it (`clientName`).
+[kinds."iam.authz.Role"]
+display = "Roles"
+aliases = ["role", "roles"]
+category = "Identity"
+columns = [
+    { header = "NAME", path = "displayName", kind = "Text" },
+    { header = "SYSTEM", path = "isSystemDefined", kind = "Bool" },
+    { header = "OPERATIONS", path = "operations", kind = "Count" },
+    { header = "ENTITY TYPES", path = "accessibleEntityTypesCount", kind = "Text" },
+    { header = "CLIENT", path = "clientName", kind = "Text" },
+    { header = "UPDATED", path = "lastUpdatedTime", kind = "Timestamp" },
+]
+
+[kinds."iam.authz.AuthorizationPolicy"]
+display = "Authorization Policies"
+aliases = ["acp", "authorization-policy", "authorization-policies"]
+category = "Identity"
+columns = [
+    { header = "NAME", path = "displayName", kind = "Text" },
+    { header = "TYPE", path = "authorizationPolicyType", kind = "Enum" },
+    { header = "ROLE", path = "role", kind = "Reference" },
+    { header = "USERS", path = "assignedUsersCount", kind = "Text" },
+    { header = "GROUPS", path = "assignedUserGroupsCount", kind = "Text" },
+    { header = "SYSTEM", path = "isSystemDefined", kind = "Bool" },
+]
+
+# `idpMetadataUrl` and `idpMetadataXml` are both writeOnly - they are what you *send* to
+# configure the provider - and the readable half is the parsed `idpMetadata` beside them.
+[kinds."iam.authn.SamlIdentityProvider"]
+display = "Identity Providers"
+aliases = ["idp", "idps", "saml"]
+category = "Identity"
+columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "ENTITY ID", path = "idpMetadata.entityId", kind = "Text" },
+    { header = "LOGIN URL", path = "idpMetadata.loginUrl", kind = "Text" },
+    { header = "USERNAME ATTR", path = "usernameAttribute", kind = "Text" },
+    { header = "SIGNED", path = "isSignedAuthnReqEnabled", kind = "Bool" },
+    { header = "UPDATED", path = "lastUpdatedTime", kind = "Timestamp" },
+]
+
+[kinds."iam.authn.DirectoryService"]
+display = "Directory Services"
+aliases = ["directory", "directories", "ldap"]
+category = "Identity"
+columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "TYPE", path = "directoryType", kind = "Enum" },
+    { header = "DOMAIN", path = "domainName", kind = "Text" },
+    { header = "URL", path = "url", kind = "Text" },
+    { header = "GROUP SEARCH", path = "groupSearchType", kind = "Enum" },
+    { header = "UPDATED", path = "lastUpdatedTime", kind = "Timestamp" },
+]
+
+# The Prism Central's own row. `name_path = "config.name"`:
+# `NAME_KEYS` finds nothing at the top level of `config.DomainManager`, whose own properties are
+# `config`, `network`, `isRegisteredWithHostingCluster`, `hostingClusterExtId`,
+# `shouldEnableHighAvailability`, `nodeExtIds` and `createdTime`. Without it the Disaster
+# Recovery page's `domainManagerExtId` columns stay stubs after a perfect warm-up.
+#
+# It declares neither `$page` nor `$limit`, and `Client::list_page_at` gates each parameter on
+# `list_params`, so the warm-up's request goes out bare and comes back whole - which for domain
+# managers is one row.
+#
+# No VERSION column, though `config.buildInfo.version` does resolve. It resolves by
+# inheritance and not from the schema a reader opens first: `DomainManagerClusterConfig`'s own
+# properties, at specs/prism/v4.4.yaml L14471, are `name`, `size`, `bootstrapConfig`,
+# `credentials` and `resourceConfig` - no `buildInfo`, which is how it came to be read as
+# having no version at all. It inherits `buildInfo` through its `allOf` on
+# `clustermgmt.v4.3.config.ClusterConfig` (L14202), whose `$ref` target
+# `clustermgmt.v4.3.config.BuildInfo` is at L14324 and has one property, `version`. The header
+# already prints the PC version, from version negotiation, and a seventh column is past
+# `DEFAULT_COLUMNS` and drawn only under `w`.
+[kinds."prism.config.DomainManager"]
+name_path = "config.name"
+warm = true
+display = "Prism Central"
+aliases = ["pc", "domain-manager", "domain-managers"]
+category = "Platform"
+columns = [
+    { header = "NAME", path = "config.name", kind = "Text" },
+    { header = "SIZE", path = "config.size", kind = "Enum" },
+    { header = "NODES", path = "nodeExtIds", kind = "Count" },
+    { header = "HA", path = "shouldEnableHighAvailability", kind = "Bool" },
+    { header = "HOSTING CLUSTER", path = "hostingClusterExtId", kind = "Reference" },
+    { header = "CREATED", path = "createdTime", kind = "Timestamp" },
+]
+
+# Ordered to match the Disaster Recovery page's Registered Prism Centrals pane, which is a
+# subsequence of this: the two curation sites are checked against each other by the generator,
+# so a reorder here without one there fails generation.
+#
+# Three `Status` columns, all inside the default six, and `STATE` leads them on purpose. Only
+# one column tints a row - `table::status_index` takes the first `Status` column of the shown
+# set, and `ui::render_rows` paints that one cell with `role_fg` and every other cell of the
+# row with `row_fg` of the same word - so the column that leads is the one the row's colour
+# means. `registrationState` is this kind's own health, an enum whose every word the `.status`
+# block below maps; `platformData` is an optional object and `connectivityStatus` an
+# unconstrained string, so with `CONNECTIVITY` leading, a Prism Central that answers without
+# `platformData` drew `-`, which normalises to `_`, and a `REGISTRATION_ERROR` row came out
+# Muted grey.
+#
+# `CONNECTIVITY` and `CREDENTIALS` therefore draw in the row's own colour whatever they say:
+# an `EXPIRED` credential on a `REGISTERED` Prism Central is not shouted in its own cell, and
+# no arrangement of one tinting column would let it be. Their words reach `status::role_in`
+# when `→` scrolls `STATE` off the left and one of them becomes the first shown `Status`
+# column, which is the other half of why the block below maps them.
+[kinds."multidomain.config.RegisteredDomain"]
+display = "Registered Prism Centrals"
+aliases = ["registered", "registered-domain", "registered-domains"]
+category = "Platform"
+columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "PC VERSION", path = "platformData.pcVersion", kind = "Text" },
+    { header = "CLUSTERS", path = "platformData.clusterCount", kind = "Text" },
+    { header = "STATE", path = "registrationState", kind = "Status" },
+    { header = "CONNECTIVITY", path = "platformData.connectivityStatus", kind = "Status" },
+    { header = "CREDENTIALS", path = "apiCredentialStatus", kind = "Status" },
+    { header = "REGISTERED", path = "registeredTime", kind = "Timestamp" },
+    { header = "FQDN", path = "fqdn", kind = "Text" },
+]
+
+[kinds."multidomain.config.RegisteredDomain".status]
+# `multidomain.v4.3.common.RegistrationState` (specs/multidomain/v4.3.yaml L4932) and
+# `multidomain.v4.3.config.ApiCredentialStatus` (L4986) share no word with the vocabulary in
+# `nutsh_core::status`, which matches whole normalised words: `REGISTRATION_ERROR` is not
+# `ERROR`, and `EXPIRED` is not in it at all. Both enums are mapped whole, and no word of one
+# collides with a word of the other. `platformData.connectivityStatus` is deliberately absent:
+# it is an unconstrained string rather than an enum, and the words a Prism Central writes there
+# - `CONNECTED`, `DISCONNECTED` - the vocabulary already knows.
+#
+# The Disaster Recovery page's Registered Prism Centrals pane draws `registrationState` too,
+# with `STATE` ahead of `CONNECTIVITY` there for the reason it leads here, so the pane's rows
+# take their colour from these words as well: `ui::render_rows` asks `status::role_in` about
+# the pane's own kind, and a pane and a table can no more disagree about a word than about a
+# column.
+#
+# The mock's one row (`crates/mockpc/fixtures/multidomain/v4.3/config/registered-domains.json`)
+# says `registrationState: "ACTIVE"`, which is not a word of `RegistrationState` at all: it
+# colours Ok off the shared vocabulary rather than off this block, so nothing here is
+# exercised by a snapshot yet, and the same row carries `dnsName` and no `fqdn`, so the FQDN
+# column draws blank on every mock row. Whether real rows carry `fqdn` or only `dnsName` is
+# unsettled.
+REGISTRATION_ERROR = "Error"
+UNREGISTRATION_ERROR = "Error"
+EXPIRED = "Error"
+REGISTERING = "Pending"
+UNREGISTERING = "Pending"
+REGISTERED = "Ok"
+VALID = "Ok"
+NEAR_EXPIRY = "Warn"
+UNREGISTERED = "Muted"
+DRAFT = "Muted"
+
+# `entityModel` is the identity; the generated first column was `entityType`, which is a class of
+# thing rather than a thing. `name_path` so the detail title and the breadcrumb say what the
+# table says.
+[kinds."lifecycle.resources.Entity"]
+name_path = "entityModel"
+display = "LCM Entities"
+aliases = ["lcm-entity", "lcm-entities"]
+category = "Lifecycle"
+columns = [
+    { header = "ENTITY", path = "entityModel", kind = "Text" },
+    { header = "CLASS", path = "entityClass", kind = "Text" },
+    { header = "VERSION", path = "entityVersion", kind = "Text" },
+    { header = "TARGET", path = "targetVersion", kind = "Text" },
+    { header = "CLUSTER", path = "clusterExtId", kind = "Reference" },
+    { header = "VENDOR", path = "hardwareVendor", kind = "Text" },
+]
+
+# The third of the three append-only logs, curated here rather than beside the other two: one
+# row per LCM run, appended forever. `startTime` and `endTime` are both in the eight `$orderby`
+# fields `listLcmHistories` declares in specs/lifecycle/v4.3.yaml; `startTime` is the one that
+# is always set, since a run in flight has no end. Default budget.
+[kinds."lifecycle.resources.LcmHistory"]
+orderby = "startTime desc"
+display = "LCM History"
+aliases = ["lcm-history"]
+category = "Lifecycle"
+columns = [
+    { header = "CLUSTER", path = "clusterName", kind = "Text" },
+    { header = "OPERATION", path = "operationType", kind = "Enum" },
+    { header = "STATUS", path = "operationStatus", kind = "Status" },
+    { header = "STARTED", path = "startTime", kind = "Timestamp" },
+    { header = "ENDED", path = "endTime", kind = "Timestamp" },
+    { header = "FRAMEWORK", path = "frameworkVersion", kind = "Text" },
+]
+
+# **No VENDOR column.** `vendor` - "the vendor or owner that produced the bundle" - is on none
+# of the six bundles of the two recordings (2026-09-10): 0/5 on PC1 and 0/1 on sierra. The
+# first reading blamed the objects, since PC1's five all came from the LCM framework rather
+# than an upload; sierra's single bundle is the upload that reading was missing -
+# `uploadMode` is `TARGETED` on it - and it names no vendor either. Empty on both Prism
+# Centrals for want of the field, not for want of the object. `uploadMode` keeps its column
+# for the mirror-image reason: it was empty on PC1 alone and sierra fills it 1/1.
+[kinds."lifecycle.resources.Bundle"]
+display = "LCM Bundles"
+aliases = ["bundle", "bundles", "lcm-bundle", "lcm-bundles"]
+category = "Lifecycle"
+columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "TYPE", path = "type", kind = "Enum" },
+    { header = "SIZE", path = "sizeBytes", kind = "Bytes" },
+    { header = "UPLOAD", path = "uploadMode", kind = "Enum" },
+    { header = "CREATED", path = "createdTime", kind = "Timestamp" },
+]
+
+# `expiryDate` is `format: date`, not `date-time`, so it is `Text` and not `Timestamp`: a
+# `Timestamp` column is `Cap(7)` and would cut `2027-01-31` to `2027-01`, and an expiry you have
+# to widen the table to read is worse than none. `name`, `type`, `category`, `subCategory` and
+# `expiryDate` are inherited from `BaseLicenseInfo`. The recording confirms the format -
+# `"expiryDate": "2026-12-10"` on all five rows of
+# `crates/mockpc/fixtures-lab/licensing/v4.4/config/licenses.json` (2026-09-10) - and `Text` is
+# still the answer, for a second reason the first note guessed at: `Timestamp` does not render
+# `-` on a date-only string, it falls through `parse_rfc3339` to `plain` and prints the same
+# ten characters **dim**, as though the date were an age like `3d`. `Text` prints the date the
+# Prism Central sent, in the row's own tint, which is what it is.
+#
+# No `SUB CATEGORY ← subCategory`. It is populated - with `"$UNKNOWN"`, on 5/5 - which is the
+# v4 sentinel for a value the negotiated version cannot name, arriving as data. An `Enum` cell
+# strips the `$` and sentence-cases what is left, so the column reads `Unknown` on every row
+# for ever; `Status` would be worse, since `normalize_status` takes `$UNKNOWN` to `UNKNOWN` and
+# the vocabulary maps that to `Role::Muted`, greying every licence row off a value that says
+# nothing. The seventh slot goes instead to `salesforceLicenseId`, which is filled and distinct
+# on 5/5 (`NUS-PRO-INCLUDED`, `LIC-02558494`) and is the identifier a licence is chased down
+# by. The second Prism Central was asked, on 2026-09-10, and it does name a real sub-category:
+# `ADDON`, on 1 of its 5 licences. The column still does not earn the slot back - 9 of the 10
+# licences across the two labs are `$UNKNOWN`, so the column would read `Unknown` nine times
+# out of ten against a `salesforceLicenseId` that is filled and distinct on 10/10. Restoring it
+# is still one line, and the condition it was waiting on has now been tested rather than left.
+#
+# `consumptionDetails` needs `$expand=consumptionDetails` - it is the one field in the
+# `$expand` allowlist `listLicenses` declares (specs/licensing/v4.4.yaml L3964) - which the
+# table never sends, so no count column, and column 8 is dropped rather than drawing `-` on
+# every row. Both labs bear that out: none of the ten recorded licences carries one.
+#
+# `type` answers outside its own enum on both Prism Centrals. The spec declares
+# `PRISM,CALM,FLOW,OBJECT,AOS,FILE,VDI,ROBO`; the recordings hold `NUS`, `NKPFS`,
+# `NDS_PLATFORM`, `NCM` and `NDB_PLATFORM` - seven distinct values, none of them declared. An
+# `Enum` cell prints whatever arrives, so the column is right; a filter or a vocabulary built
+# on that enum would not be.
+[kinds."licensing.config.License"]
+display = "Licenses"
+aliases = ["license", "licenses"]
+category = "Licensing"
+columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "TYPE", path = "type", kind = "Enum" },
+    { header = "CATEGORY", path = "category", kind = "Enum" },
+    { header = "METER", path = "meter", kind = "Enum" },
+    { header = "QUANTITY", path = "quantity", kind = "Text" },
+    { header = "EXPIRES", path = "expiryDate", kind = "Text" },
+    { header = "LICENSE ID", path = "salesforceLicenseId", kind = "Text" },
+]
+
+# `details` needs `$expand=details` - the one field in the `$expand` allowlist
+# `listEntitlements` declares (specs/licensing/v4.4.yaml L4986) - which the table never sends,
+# so no count column. Five columns is then the whole readable schema: `Entitlement` declares
+# `name`, `type`, `clusterExtId`, `isRegistered` and the dropped `details` over
+# `BaseClusterInfo`'s `isMulticluster`, and its `extId` is an identifier no column shows.
+#
+# The recording contradicts the first sentence and the note stays until someone acts on it: both
+# Prism Centrals send `details` on every row - 3/3 in
+# `crates/mockpc/fixtures-lab/licensing/v4.4/config/entitlements.json` and 2/2 in
+# `crates/mockpc/fixtures-lab-sierra/…` (2026-09-10) - to a plain list, since `ListOptions` has
+# no `$expand` field at all and none was asked for. A `DETAILS` (`Count`) column would fill.
+#
+# **No CLUSTER ID column.** `clusterExtId` is empty on all five entitlements of the two
+# recordings, single-cluster rows included, while every row's own `extId` *is* the cluster
+# uuid - PC1's three are exactly the three clusters of its own cluster fixture, and sierra's
+# `000656bb-…-c1ce` is the cluster its host NICs report. Empty on both Prism Centrals and
+# never sent by either, so the column goes; repairing it to `extId` would only put a second
+# copy of `CLUSTER` beside `CLUSTER`.
+[kinds."licensing.config.Entitlement"]
+display = "Entitlements"
+aliases = ["entitlement", "entitlements"]
+category = "Licensing"
+columns = [
+    { header = "CLUSTER", path = "name", kind = "Text" },
+    { header = "TYPE", path = "type", kind = "Enum" },
+    { header = "REGISTERED", path = "isRegistered", kind = "Bool" },
+    { header = "MULTICLUSTER", path = "isMulticluster", kind = "Bool" },
+]
+
+# Compliance has no `name` at all, so the first column is a `Reference` - which the warm-up
+# resolves, because `clustermgmt.config.Cluster` is one of the eleven warmed kinds. `table::rule`
+# anchors column 0 at `Flex(6)` for every kind but `Ip`, so a name of any length fits.
+#
+# The reference is `extId`, not `clusterExtId`. `clusterExtId` is empty on all five compliance
+# rows of the two recordings (2026-09-10) and `extId` is on all five - and `extId` *is* the
+# cluster: PC1's three are exactly the three clusters of
+# `crates/mockpc/fixtures-lab/clustermgmt/v4.3/config/clusters.json`, and sierra's
+# `000656bb-…-c1ce` is the cluster every one of its host NICs names. A compliance row is one
+# cluster's compliance, so its identifier is the cluster's, and the column that was empty on
+# both Prism Centrals now draws the cluster's name through the warm-up.
+[kinds."licensing.config.Compliance"]
+display = "Compliance"
+aliases = ["compliance"]
+category = "Licensing"
+columns = [
+    { header = "CLUSTER", path = "extId", kind = "Reference" },
+    { header = "TYPE", path = "type", kind = "Enum" },
+    { header = "MULTICLUSTER", path = "isMulticluster", kind = "Bool" },
+    { header = "SERVICES", path = "services", kind = "Count" },
+]
+
+# Three properties in the whole schema, and one of the three is `accessInformation`: a `oneOf`
+# over `AzureAccessInformation` (`endpointUrl`, `clientId`, the writeOnly `clientSecret`,
+# `credentialExpiryDate`) and `KmipAccessInformation` (`caName`, `certPem`, the writeOnly
+# `privateKey`). Not one of those is a column at any position, and not because they are all
+# secret: `accessinformation` is itself a `SECRET_KEY_MARKER`, so `nutsh_core::cache` deletes the
+# whole subtree from every row it writes to disk and a column under it would draw `-` on every
+# cache-restored frame. `crates/catalog/tests/secret.rs::no_curated_column_is_blanked_by_the_scrub`
+# is where that is asserted, and it is what refuses the endpoint, the CA name and the credential
+# expiry the plan asked for here.
+#
+# So the KMS table is the two properties a cached row still has. `creationTimestamp` is
+# `format: date`, so `Text` for the reason `licensing.config.License`'s `expiryDate` is.
+#
+# That is a shut door and not a wall. `SECRET_KEY_KEEP`, in `crates/catalog/src/secret.rs`, is
+# the door: `bucketsaccesskeys` sits on that list precisely because it is a *container* whose
+# members a recursive walk judges on their own merits, and `accessInformation` is the identical
+# case - `clientSecret`, `privateKey` and `truncatedClientSecret`, which is a piece of one, are
+# all still caught one level down by the `secret` and `privatekey` markers, correctly. It was
+# left shut on purpose. Widening the scrub's keep-list is a security decision that owes its own
+# justification and its own entry in
+# `crates/catalog/tests/secret.rs::every_kept_name_survives_the_markers`, and this task curates
+# columns; a follow-up that opens it restores ENDPOINT and CA here with no other change.
+#
+# EXPIRES costs a second entry. `accessInformation.credentialExpiryDate` carries the
+# `credential` marker in its own name, so the recursive walk deletes it one level down whatever
+# happens to its parent: it needs `credentialexpirydate` on the keep-list for the reason
+# `apicredentialstatus` and `credentialissuer` are already on it - a name that *describes* a
+# credential rather than being one.
+[kinds."security.config.KeyManagementServer"]
+display = "Key Management Servers"
+aliases = ["kms", "key-management-server", "key-management-servers"]
+category = "Security"
+columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "CREATED", path = "creationTimestamp", kind = "Text" },
+]
+
+# One property. `files.v4.0.config.FileServer` declares `name` and nothing else - the whole
+# schema body is fifteen lines of `specs/files/v4.0.yaml` (L31307) - so the Files screen is one
+# column because the API has one field, not because the heuristic gave up. Curated so the file
+# records that, and so `no_curated_column_shows_an_identifier_as_text` covers it.
+[kinds."files.config.FileServer"]
+display = "File Servers"
+aliases = ["files", "file-server", "file-servers"]
+category = "Storage"
+columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+]
+
+[kinds."objects.config.ObjectStore"]
+display = "Object Stores"
+aliases = ["objects", "object-store", "object-stores"]
+category = "Storage"
+columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "STATE", path = "state", kind = "Status" },
+    { header = "DOMAIN", path = "domain", kind = "Text" },
+    { header = "BUCKETS", path = "bucketCount", kind = "Text" },
+    { header = "OBJECTS", path = "objectCount", kind = "Text" },
+    { header = "USED", path = "storageUsageBytes", kind = "Bytes" },
+]
+
+[kinds."objects.config.ObjectStore".status]
+# `objects.v4.1.config.State` (specs/objects/v4.1.yaml L6445) writes the object store into
+# every one of its ten words, so none of them is in the shared vocabulary - which matches whole
+# normalised words, not substrings - and a store whose deployment failed drew exactly like an
+# available one. Nine of the ten are mapped, by what they say about the store: failed, ready,
+# working, going away. `UNDEPLOYED_OBJECT_STORE` is deliberately left `Role::Neutral` - a store
+# nobody has deployed is neither well nor unwell, and it is where every object store starts.
+OBJECT_STORE_DEPLOYMENT_FAILED = "Error"
+OBJECT_STORE_CERT_CREATION_FAILED = "Error"
+OBJECT_STORE_DELETION_FAILED = "Error"
+OBJECT_STORE_OPERATION_FAILED = "Error"
+OBJECT_STORE_AVAILABLE = "Ok"
+DEPLOYING_OBJECT_STORE = "Pending"
+CREATING_OBJECT_STORE_CERT = "Pending"
+OBJECT_STORE_OPERATION_PENDING = "Pending"
+DELETING_OBJECT_STORE = "Ending"

@@ -1,0 +1,338 @@
+openapi: 3.0.1
+info:
+  title: mini
+  version: "4.1"
+paths:
+  /mini/v4.1/config/widgets:
+    get:
+      parameters:
+        - name: $page
+          in: query
+        - name: $limit
+          in: query
+        - name: $filter
+          in: query
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/mini.v4.1.config.Widget'
+        '4XX':
+          description: client error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/mini.v4.1.error.ErrorResponse'
+    post:
+      parameters:
+        - name: NTNX-Request-Id
+          in: header
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/mini.v4.1.config.Widget'
+      responses:
+        '202':
+          description: accepted
+  /mini/v4.1/config/sprockets:
+    get:
+      parameters:
+        - name: $page
+          in: query
+        - name: $limit
+          in: query
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/mini.v4.1.config.ListSprocketsApiResponse'
+    post:
+      parameters:
+        - name: If-Match
+          in: header
+          required: true
+        - name: NTNX-Request-Id
+          in: header
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/mini.v4.r0.b1.config.Sprocket'
+      responses:
+        '202':
+          description: accepted
+  /mini/v4.1/config/widgets/{extId}:
+    get:
+      parameters:
+        - name: extId
+          in: path
+          required: true
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/mini.v4.1.config.Widget'
+    put:
+      parameters:
+        - name: extId
+          in: path
+          required: true
+        - name: If-Match
+          in: header
+          required: true
+        - name: NTNX-Request-Id
+          in: header
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/mini.v4.1.config.Widget'
+      responses:
+        '202':
+          description: accepted
+    delete:
+      parameters:
+        - name: extId
+          in: path
+          required: true
+        - name: NTNX-Request-Id
+          in: header
+          required: true
+      responses:
+        '202':
+          description: accepted
+  /mini/v4.1/config/widgets/{extId}/$actions/spin:
+    post:
+      parameters:
+        - name: extId
+          in: path
+          required: true
+        - name: NTNX-Request-Id
+          in: header
+          required: true
+      x-permissions:
+        roleList:
+          - name: Administrator
+          - name: Old Role
+            deprecated: true
+      responses:
+        '202':
+          description: accepted
+  /mini/v4.1/config/widgets/{widgetExtId}/$actions/repaint:
+    post:
+      parameters:
+        - name: widgetExtId
+          in: path
+          required: true
+        - name: NTNX-Request-Id
+          in: header
+          required: true
+      responses:
+        '202':
+          description: accepted
+  /mini/v4.1/config/widgets/{widgetExtId}/gears:
+    get:
+      parameters:
+        - name: widgetExtId
+          in: path
+          required: true
+        - name: $page
+          in: query
+        - name: $limit
+          in: query
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/mini.v4.1.config.Gear'
+  /mini/v4.1/config/orphan-parts/{orphanExtId}/bits:
+    get:
+      parameters:
+        - name: orphanExtId
+          in: path
+          required: true
+        - name: $limit
+          in: query
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/mini.v4.1.config.Gear'
+  /mini/v4.1/stats/widgets:
+    get:
+      parameters:
+        - name: $startTime
+          in: query
+          required: true
+        - name: $limit
+          in: query
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/mini.v4.1.stats.WidgetStats'
+components:
+  schemas:
+    mini.v4.1.config.Base:
+      type: object
+      properties:
+        extId:
+          type: string
+    mini.v4.1.config.Widget:
+      allOf:
+        - $ref: '#/components/schemas/mini.v4.1.config.Base'
+        - type: object
+          properties:
+            name:
+              type: string
+            description:
+              type: string
+            powerState:
+              type: string
+              enum: [ON, OFF]
+            syncStatus:
+              type: string
+              enum: [IN_SYNC, OUT_OF_SYNC]
+            retentionTimeSeconds:
+              type: integer
+            memorySizeBytes:
+              type: integer
+              format: int64
+            isEnabled:
+              type: boolean
+            createTime:
+              type: string
+              format: date-time
+            cluster:
+              type: object
+              properties:
+                extId:
+                  type: string
+            rack:
+              type: object
+              properties:
+                uuid:
+                  type: string
+            gears:
+              type: array
+              items:
+                $ref: '#/components/schemas/mini.v4.1.config.Gear'
+            externalIp:
+              type: string
+            ownership:
+              type: string
+            progressPercentage:
+              type: integer
+            bootTimeUsecs:
+              type: integer
+              format: int64
+            controllerAvgIoLatencyUsecs:
+              type: integer
+              format: int64
+            hypervisorVmRunningTimeUsecs:
+              type: integer
+              format: int64
+            ownerUuid:
+              type: string
+              pattern: '^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$'
+            clusterReference:
+              type: string
+              pattern: '^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$'
+            projectExtId:
+              type: string
+              pattern: '^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$'
+            password:
+              type: string
+            targetSecret:
+              type: string
+            secretAccessKey:
+              type: string
+            isForceResetPasswordEnabled:
+              type: boolean
+            quickMode:
+              type: string
+              writeOnly: true
+            creationTimestamp:
+              type: string
+    mini.v4.1.config.Gear:
+      type: object
+      properties:
+        extId:
+          type: string
+        teeth:
+          type: integer
+    mini.v4.1.stats.WidgetStats:
+      type: object
+      properties:
+        extId:
+          type: string
+        rpm:
+          type: number
+    mini.v4.1.error.ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+    mini.v4.1.config.ListSprocketsApiResponse:
+      type: object
+      properties:
+        data:
+          oneOf:
+            - type: array
+              items:
+                $ref: '#/components/schemas/mini.v4.r0.b1.config.Sprocket'
+            - $ref: '#/components/schemas/mini.v4.1.error.ErrorResponse'
+    mini.v4.r0.b1.config.Sprocket:
+      type: object
+      properties:
+        extId:
+          type: string
+        name:
+          type: string

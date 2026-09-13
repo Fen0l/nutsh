@@ -1,0 +1,40 @@
+---
+source: crates/tui/tests/detail.rs
+expression: "app.snapshot(120, 36).unwrap()"
+---
+╭ nutsh ─────────────────────────────────────────────────────────────────────────────────────╮
+│Context:    -                                                    ⏎ drill        y detail    │       clusters 3  hosts 7
+│PC:         127.0.0.1:PORT  pc.7.6                              S sort         w wide      │     vms 100  on/off 100/0
+│Cluster:    <all>                                               ←→ columns     ^r refresh   │       alerts ⚠ 100  ✖ 100
+│Kind:       Compute & Storage › Storage Containers              ^t every       ^x stop      │       tasks ▶ 100 running
+│Count:      20                                                   a actions     ^c quit      │
+╰────────────────────────────────────────────────────────────────────────────────────────────╯     v0.0.2-beta1 · pc.7.6
+╭ nutsh ───────────────╮┌Storage Containers · name-25841bba────────────────────────────────────────────────────────────┐
+│  ▸ Dashboard         ││IDENTITY ─────────────────────────────────────────────────────────────────────────────────────│
+│  ▾ Compute & Storage ││              Name name-25841bba                                                              │
+│      Overview        ││              UUID 0167386c-4f6a-49d9-81f3-83795835bbe7                                       │
+│      VMs             ││           Cluster clusterName-d2b6bd1b             Cluster UUID name-d2b6bd1b                │
+│      ESXi VMs        ││      Storage pool 83c21205                                Owner -                            │
+│      Templates       ││CAPACITY ─────────────────────────────────────────────────────────────────────────────────────│
+│      Images          ││               Max 25.1 TiB                    Explicit reserved 0 B                          │
+│      OVAs            ││ Implicit reserved 0 B                                                                        │
+│      VM Profiles     ││DATA REDUCTION ───────────────────────────────────────────────────────────────────────────────│
+│      Guest Customizat││                RF 2                                 Compression ✓                            │
+│    • Storage Con [20]││ Compression delay 0s                              On-disk dedup Off                          │
+│      Volume Groups   ││       Cache dedup Off                            Erasure coding Off                          │
+│      Storage Policies││FLAGS ────────────────────────────────────────────────────────────────────────────────────────│
+│      Categories      ││          Internal ✗                                      Shared ✗                            │
+│      Catalog Items   ││NFS list inherited ✓                          Marked for removal ✗                            │
+│  ▸ Network & Security││ACTIONS ──────────────────────────────────────────────────────────────────────────────────────│
+│  ▸ Data Protection   ││                   Update container                                                           │
+│  ▸ Hardware          ││                   Mount on hosts                                                             │
+│  ▸ Monitoring        ││                   Unmount from hosts                                                         │
+│  ▸ Policies          ││                   Delete container                                                           │
+│  ▸ Admin Center      ││─────────────────────────────────────── raw API names ────────────────────────────────────────│
+│  ▸ Contexts          ││                   clear-thick-provisioned-space                                              │
+│  ▸ Settings          ││                                                                                              │
+│  ─── by namespace ───││                                                                                              │
+│  ▸ aiops             ││                                                                                              │
+╰───────────────── ↓17 ╯└──────────────────────────────────────────────────────────────────────────────────────────────┘
+ j/k:scroll  g/G:top/bottom  a:actions  Y:yaml  J:json  esc:back
+[meter]          ● live

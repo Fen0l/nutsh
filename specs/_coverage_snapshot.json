@@ -1,0 +1,3870 @@
+{
+  "generated_at": "2026-03-12T21:36:13.979274+00:00",
+  "summary": {
+    "total_endpoints": 734,
+    "implemented": 734,
+    "coverage_pct": 100.0
+  },
+  "namespaces": {
+    "aiops": {
+      "version": "v4.0",
+      "total_endpoints": 18,
+      "implemented": 18,
+      "coverage_pct": 100.0,
+      "has_tests": true,
+      "implemented_endpoints": [
+        {
+          "method": "GET",
+          "path": "/aiops/v4.0/config/sources",
+          "dao": "ScenarioDAO.list_sources"
+        },
+        {
+          "method": "GET",
+          "path": "/aiops/v4.0/config/sources/{sourceExtId}/entity-types",
+          "dao": "ScenarioDAO.list_source_entity_types"
+        },
+        {
+          "method": "GET",
+          "path": "/aiops/v4.0/config/sources/{sourceExtId}/entity-descriptors",
+          "dao": "ScenarioDAO.list_source_entity_descriptors"
+        },
+        {
+          "method": "GET",
+          "path": "/aiops/v4.0/stats/sources/{sourceExtId}/entities/{extId}",
+          "dao": "ScenarioDAO.get_source_entity_stats"
+        },
+        {
+          "method": "POST",
+          "path": "/aiops/v4.0/config/scenarios/{extId}/$actions/generate-runway",
+          "dao": "ScenarioDAO.generate_runway"
+        },
+        {
+          "method": "GET",
+          "path": "/aiops/v4.0/config/simulations",
+          "dao": "ScenarioDAO.list_simulations"
+        },
+        {
+          "method": "POST",
+          "path": "/aiops/v4.0/config/simulations",
+          "dao": "ScenarioDAO.create_simulation"
+        },
+        {
+          "method": "GET",
+          "path": "/aiops/v4.0/config/simulations/{extId}",
+          "dao": "ScenarioDAO.get_simulation"
+        },
+        {
+          "method": "PUT",
+          "path": "/aiops/v4.0/config/simulations/{extId}",
+          "dao": "ScenarioDAO.update_simulation"
+        },
+        {
+          "method": "DELETE",
+          "path": "/aiops/v4.0/config/simulations/{extId}",
+          "dao": "ScenarioDAO.delete_simulation"
+        },
+        {
+          "method": "GET",
+          "path": "/aiops/v4.0/config/scenarios",
+          "dao": "ScenarioDAO.list"
+        },
+        {
+          "method": "POST",
+          "path": "/aiops/v4.0/config/scenarios",
+          "dao": "ScenarioDAO.create"
+        },
+        {
+          "method": "GET",
+          "path": "/aiops/v4.0/config/scenarios/{extId}",
+          "dao": "ScenarioDAO.get"
+        },
+        {
+          "method": "PUT",
+          "path": "/aiops/v4.0/config/scenarios/{extId}",
+          "dao": "ScenarioDAO.update"
+        },
+        {
+          "method": "DELETE",
+          "path": "/aiops/v4.0/config/scenarios/{extId}",
+          "dao": "ScenarioDAO.nuke"
+        },
+        {
+          "method": "POST",
+          "path": "/aiops/v4.0/config/scenarios/{extId}/$actions/generate-recommendation",
+          "dao": "ScenarioDAO.generate_recommendation"
+        },
+        {
+          "method": "POST",
+          "path": "/aiops/v4.0/config/scenarios/{extId}/$actions/generate-report",
+          "dao": "ScenarioDAO.generate_report"
+        },
+        {
+          "method": "GET",
+          "path": "/aiops/v4.0/config/scenarios/{scenarioExtId}/reports",
+          "dao": "ScenarioDAO.list_reports"
+        }
+      ],
+      "missing_endpoints": []
+    },
+    "clustermgmt": {
+      "version": "v4.0",
+      "total_endpoints": 74,
+      "implemented": 74,
+      "coverage_pct": 100.0,
+      "has_tests": true,
+      "implemented_endpoints": [
+        {
+          "method": "GET",
+          "path": "/clustermgmt/v4.0/config/clusters/{clusterExtId}/hosts/{extId}/bmc-info",
+          "dao": "HostDAO.get_bmc"
+        },
+        {
+          "method": "PUT",
+          "path": "/clustermgmt/v4.0/config/clusters/{clusterExtId}/hosts/{extId}/bmc-info",
+          "dao": "HostDAO.update_bmc"
+        },
+        {
+          "method": "GET",
+          "path": "/clustermgmt/v4.0/config/cluster-profiles",
+          "dao": "ClusterDAO.list_profiles"
+        },
+        {
+          "method": "POST",
+          "path": "/clustermgmt/v4.0/config/cluster-profiles",
+          "dao": "ClusterDAO.create_profile"
+        },
+        {
+          "method": "GET",
+          "path": "/clustermgmt/v4.0/config/cluster-profiles/{extId}",
+          "dao": "ClusterDAO.get_profile"
+        },
+        {
+          "method": "PUT",
+          "path": "/clustermgmt/v4.0/config/cluster-profiles/{extId}",
+          "dao": "ClusterDAO.update_profile"
+        },
+        {
+          "method": "DELETE",
+          "path": "/clustermgmt/v4.0/config/cluster-profiles/{extId}",
+          "dao": "ClusterDAO.delete_profile"
+        },
+        {
+          "method": "POST",
+          "path": "/clustermgmt/v4.0/config/cluster-profiles/{extId}/$actions/disassociate-cluster",
+          "dao": "ClusterDAO.disassociate_cluster_from_profile"
+        },
+        {
+          "method": "POST",
+          "path": "/clustermgmt/v4.0/config/cluster-profiles/{extId}/$actions/apply",
+          "dao": "ClusterDAO.apply_profile"
+        },
+        {
+          "method": "POST",
+          "path": "/clustermgmt/v4.0/config/clusters/{clusterExtId}/$actions/associate-categories",
+          "dao": "ClusterDAO.associate_categories"
+        },
+        {
+          "method": "POST",
+          "path": "/clustermgmt/v4.0/config/clusters/{clusterExtId}/$actions/disassociate-categories",
+          "dao": "ClusterDAO.disassociate_categories"
+        },
+        {
+          "method": "GET",
+          "path": "/clustermgmt/v4.0/config/clusters/{extId}",
+          "dao": "ClusterDAO.get"
+        },
+        {
+          "method": "PUT",
+          "path": "/clustermgmt/v4.0/config/clusters/{extId}",
+          "dao": "ClusterDAO.update"
+        },
+        {
+          "method": "DELETE",
+          "path": "/clustermgmt/v4.0/config/clusters/{extId}",
+          "dao": "ClusterDAO.nuke"
+        },
+        {
+          "method": "GET",
+          "path": "/clustermgmt/v4.0/config/clusters",
+          "dao": "ClusterDAO.list"
+        },
+        {
+          "method": "POST",
+          "path": "/clustermgmt/v4.0/config/clusters",
+          "dao": "ClusterDAO.create"
+        },
+        {
+          "method": "GET",
+          "path": "/clustermgmt/v4.0/config/clusters/{clusterExtId}/snmp",
+          "dao": "ClusterDAO.get_snmp"
+        },
+        {
+          "method": "POST",
+          "path": "/clustermgmt/v4.0/config/clusters/{clusterExtId}/snmp/$actions/update-status",
+          "dao": "ClusterDAO.update_snmp_status"
+        },
+        {
+          "method": "POST",
+          "path": "/clustermgmt/v4.0/config/clusters/{clusterExtId}/snmp/$actions/add-transports",
+          "dao": "ClusterDAO.add_snmp_transports"
+        },
+        {
+          "method": "POST",
+          "path": "/clustermgmt/v4.0/config/clusters/{clusterExtId}/snmp/$actions/remove-transports",
+          "dao": "ClusterDAO.remove_snmp_transports"
+        },
+        {
+          "method": "POST",
+          "path": "/clustermgmt/v4.0/config/clusters/{clusterExtId}/snmp/users",
+          "dao": "ClusterDAO.create_snmp_user"
+        },
+        {
+          "method": "GET",
+          "path": "/clustermgmt/v4.0/config/clusters/{clusterExtId}/snmp/users/{extId}",
+          "dao": "ClusterDAO.get_snmp_user"
+        },
+        {
+          "method": "PUT",
+          "path": "/clustermgmt/v4.0/config/clusters/{clusterExtId}/snmp/users/{extId}",
+          "dao": "ClusterDAO.update_snmp_user"
+        },
+        {
+          "method": "DELETE",
+          "path": "/clustermgmt/v4.0/config/clusters/{clusterExtId}/snmp/users/{extId}",
+          "dao": "ClusterDAO.delete_snmp_user"
+        },
+        {
+          "method": "POST",
+          "path": "/clustermgmt/v4.0/config/clusters/{clusterExtId}/snmp/traps",
+          "dao": "ClusterDAO.create_snmp_trap"
+        },
+        {
+          "method": "GET",
+          "path": "/clustermgmt/v4.0/config/clusters/{clusterExtId}/snmp/traps/{extId}",
+          "dao": "ClusterDAO.get_snmp_trap"
+        },
+        {
+          "method": "PUT",
+          "path": "/clustermgmt/v4.0/config/clusters/{clusterExtId}/snmp/traps/{extId}",
+          "dao": "ClusterDAO.update_snmp_trap"
+        },
+        {
+          "method": "DELETE",
+          "path": "/clustermgmt/v4.0/config/clusters/{clusterExtId}/snmp/traps/{extId}",
+          "dao": "ClusterDAO.delete_snmp_trap"
+        },
+        {
+          "method": "GET",
+          "path": "/clustermgmt/v4.0/config/clusters/{clusterExtId}/rsyslog-servers",
+          "dao": "ClusterDAO.list_rsyslog_servers"
+        },
+        {
+          "method": "POST",
+          "path": "/clustermgmt/v4.0/config/clusters/{clusterExtId}/rsyslog-servers",
+          "dao": "ClusterDAO.create_rsyslog_server"
+        },
+        {
+          "method": "GET",
+          "path": "/clustermgmt/v4.0/config/clusters/{clusterExtId}/rsyslog-servers/{extId}",
+          "dao": "ClusterDAO.get_rsyslog_server"
+        },
+        {
+          "method": "PUT",
+          "path": "/clustermgmt/v4.0/config/clusters/{clusterExtId}/rsyslog-servers/{extId}",
+          "dao": "ClusterDAO.update_rsyslog_server"
+        },
+        {
+          "method": "DELETE",
+          "path": "/clustermgmt/v4.0/config/clusters/{clusterExtId}/rsyslog-servers/{extId}",
+          "dao": "ClusterDAO.delete_rsyslog_server"
+        },
+        {
+          "method": "GET",
+          "path": "/clustermgmt/v4.0/config/clusters/{clusterExtId}/rackable-units",
+          "dao": "ClusterDAO.list_rackable_units"
+        },
+        {
+          "method": "GET",
+          "path": "/clustermgmt/v4.0/config/clusters/{clusterExtId}/rackable-units/{extId}",
+          "dao": "ClusterDAO.get_rackable_unit"
+        },
+        {
+          "method": "GET",
+          "path": "/clustermgmt/v4.0/config/clusters/{clusterExtId}/hosts/{extId}",
+          "dao": "HostDAO.get"
+        },
+        {
+          "method": "GET",
+          "path": "/clustermgmt/v4.0/config/clusters/{clusterExtId}/hosts",
+          "dao": "HostDAO.list_by_cluster"
+        },
+        {
+          "method": "POST",
+          "path": "/clustermgmt/v4.0/config/clusters/{clusterExtId}/$actions/discover-unconfigured-nodes",
+          "dao": "ClusterDAO.discover_unconfigured_nodes"
+        },
+        {
+          "method": "POST",
+          "path": "/clustermgmt/v4.0/config/clusters/{clusterExtId}/$actions/fetch-node-networking-details",
+          "dao": "ClusterDAO.fetch_node_networking_details"
+        },
+        {
+          "method": "POST",
+          "path": "/clustermgmt/v4.0/config/clusters/{clusterExtId}/$actions/expand-cluster",
+          "dao": "ClusterDAO.expand_cluster"
+        },
+        {
+          "method": "POST",
+          "path": "/clustermgmt/v4.0/config/clusters/{clusterExtId}/$actions/check-hypervisor-requirements",
+          "dao": "ClusterDAO.check_hypervisor_requirements"
+        },
+        {
+          "method": "POST",
+          "path": "/clustermgmt/v4.0/config/clusters/{clusterExtId}/$actions/validate-node",
+          "dao": "ClusterDAO.validate_node"
+        },
+        {
+          "method": "POST",
+          "path": "/clustermgmt/v4.0/config/clusters/{clusterExtId}/$actions/remove-node",
+          "dao": "ClusterDAO.remove_node"
+        },
+        {
+          "method": "GET",
+          "path": "/clustermgmt/v4.0/config/task-response/{extId}",
+          "dao": "ClusterDAO.get_task_response"
+        },
+        {
+          "method": "GET",
+          "path": "/clustermgmt/v4.0/config/clusters/{clusterExtId}/virtual-gpu-profiles",
+          "dao": "ClusterDAO.list_virtual_gpu_profiles"
+        },
+        {
+          "method": "GET",
+          "path": "/clustermgmt/v4.0/config/clusters/{clusterExtId}/physical-gpu-profiles",
+          "dao": "ClusterDAO.list_physical_gpu_profiles"
+        },
+        {
+          "method": "GET",
+          "path": "/clustermgmt/v4.0/config/hosts",
+          "dao": "HostDAO.get"
+        },
+        {
+          "method": "GET",
+          "path": "/clustermgmt/v4.0/config/clusters/{clusterExtId}/hosts/{hostExtId}/host-nics",
+          "dao": "HostDAO.list_host_nics"
+        },
+        {
+          "method": "GET",
+          "path": "/clustermgmt/v4.0/config/clusters/{clusterExtId}/hosts/{hostExtId}/host-nics/{extId}",
+          "dao": "HostDAO.get_host_nic"
+        },
+        {
+          "method": "GET",
+          "path": "/clustermgmt/v4.0/config/clusters/{clusterExtId}/hosts/{hostExtId}/virtual-nics",
+          "dao": "HostDAO.list_virtual_nics"
+        },
+        {
+          "method": "GET",
+          "path": "/clustermgmt/v4.0/config/clusters/{clusterExtId}/hosts/{hostExtId}/virtual-nics/{extId}",
+          "dao": "HostDAO.get_virtual_nic"
+        },
+        {
+          "method": "POST",
+          "path": "/clustermgmt/v4.0/operations/clusters/{clusterExtId}/hosts/{extId}/$actions/enter-host-maintenance",
+          "dao": "HostDAO.enter_maintenance"
+        },
+        {
+          "method": "POST",
+          "path": "/clustermgmt/v4.0/operations/clusters/{clusterExtId}/hosts/{extId}/$actions/exit-host-maintenance",
+          "dao": "HostDAO.exit_maintenance"
+        },
+        {
+          "method": "GET",
+          "path": "/clustermgmt/v4.0/stats/clusters/{extId}",
+          "dao": "ClusterDAO.get_cluster_stats"
+        },
+        {
+          "method": "GET",
+          "path": "/clustermgmt/v4.0/stats/clusters/{clusterExtId}/hosts/{extId}",
+          "dao": "ClusterDAO.get_cluster_host_stats"
+        },
+        {
+          "method": "GET",
+          "path": "/clustermgmt/v4.0/config/disks/{extId}",
+          "dao": "DiskDAO.get"
+        },
+        {
+          "method": "DELETE",
+          "path": "/clustermgmt/v4.0/config/disks/{extId}",
+          "dao": "DiskDAO.nuke"
+        },
+        {
+          "method": "GET",
+          "path": "/clustermgmt/v4.0/config/disks",
+          "dao": "DiskDAO.list"
+        },
+        {
+          "method": "POST",
+          "path": "/clustermgmt/v4.0/config/clusters/{extId}/$actions/add-disk",
+          "dao": "ClusterDAO.add_disk"
+        },
+        {
+          "method": "GET",
+          "path": "/clustermgmt/v4.0/stats/disks/{extId}",
+          "dao": "DiskDAO.get_disk_stats"
+        },
+        {
+          "method": "GET",
+          "path": "/clustermgmt/v4.0/ahv/config/pcie-devices",
+          "dao": "ClusterDAO.list_pcie_devices"
+        },
+        {
+          "method": "GET",
+          "path": "/clustermgmt/v4.0/config/storage-containers",
+          "dao": "StorageDAO.list"
+        },
+        {
+          "method": "POST",
+          "path": "/clustermgmt/v4.0/config/storage-containers",
+          "dao": "StorageDAO.create"
+        },
+        {
+          "method": "GET",
+          "path": "/clustermgmt/v4.0/config/storage-containers/{extId}",
+          "dao": "StorageDAO.get"
+        },
+        {
+          "method": "PUT",
+          "path": "/clustermgmt/v4.0/config/storage-containers/{extId}",
+          "dao": "StorageDAO.update"
+        },
+        {
+          "method": "DELETE",
+          "path": "/clustermgmt/v4.0/config/storage-containers/{extId}",
+          "dao": "StorageDAO.nuke"
+        },
+        {
+          "method": "POST",
+          "path": "/clustermgmt/v4.0/config/storage-containers/{extId}/$actions/mount",
+          "dao": "StorageDAO.mount"
+        },
+        {
+          "method": "POST",
+          "path": "/clustermgmt/v4.0/config/storage-containers/{extId}/$actions/unmount",
+          "dao": "StorageDAO.unmount"
+        },
+        {
+          "method": "GET",
+          "path": "/clustermgmt/v4.0/config/clusters/{clusterExtId}/storage-containers/datastores",
+          "dao": "ClusterDAO.list_datastores"
+        },
+        {
+          "method": "GET",
+          "path": "/clustermgmt/v4.0/stats/storage-containers/{extId}",
+          "dao": "DiskDAO.get_storage_container_stats"
+        },
+        {
+          "method": "GET",
+          "path": "/clustermgmt/v4.0/config/vcenter-extensions",
+          "dao": "ClusterDAO.list_vcenter_extensions"
+        },
+        {
+          "method": "GET",
+          "path": "/clustermgmt/v4.0/config/vcenter-extensions/{extId}",
+          "dao": "ClusterDAO.get_vcenter_extension"
+        },
+        {
+          "method": "POST",
+          "path": "/clustermgmt/v4.0/config/vcenter-extensions/{extId}/$actions/register",
+          "dao": "ClusterDAO.register_vcenter"
+        },
+        {
+          "method": "POST",
+          "path": "/clustermgmt/v4.0/config/vcenter-extensions/{extId}/$actions/unregister",
+          "dao": "ClusterDAO.unregister_vcenter"
+        }
+      ],
+      "missing_endpoints": []
+    },
+    "datapolicies": {
+      "version": "v4.0",
+      "total_endpoints": 5,
+      "implemented": 5,
+      "coverage_pct": 100.0,
+      "has_tests": true,
+      "implemented_endpoints": [
+        {
+          "method": "GET",
+          "path": "/datapolicies/v4.0/config/protection-policies",
+          "dao": "ProtectionPolicyDAO.list"
+        },
+        {
+          "method": "POST",
+          "path": "/datapolicies/v4.0/config/protection-policies",
+          "dao": "ProtectionPolicyDAO.create"
+        },
+        {
+          "method": "GET",
+          "path": "/datapolicies/v4.0/config/protection-policies/{extId}",
+          "dao": "ProtectionPolicyDAO.get"
+        },
+        {
+          "method": "PUT",
+          "path": "/datapolicies/v4.0/config/protection-policies/{extId}",
+          "dao": "ProtectionPolicyDAO.update"
+        },
+        {
+          "method": "DELETE",
+          "path": "/datapolicies/v4.0/config/protection-policies/{extId}",
+          "dao": "ProtectionPolicyDAO.nuke"
+        }
+      ],
+      "missing_endpoints": []
+    },
+    "dataprotection": {
+      "version": "v4.0",
+      "total_endpoints": 15,
+      "implemented": 15,
+      "coverage_pct": 100.0,
+      "has_tests": false,
+      "implemented_endpoints": [
+        {
+          "method": "GET",
+          "path": "/dataprotection/v4.0/config/protected-resources/{extId}",
+          "dao": "VMDAO.get_protected_resource"
+        },
+        {
+          "method": "POST",
+          "path": "/dataprotection/v4.0/config/protected-resources/{extId}/$actions/restore",
+          "dao": "VMDAO.restore_protected_resource"
+        },
+        {
+          "method": "POST",
+          "path": "/dataprotection/v4.0/config/protected-resources/{extId}/$actions/promote",
+          "dao": "VMDAO.promote_protected_resource"
+        },
+        {
+          "method": "GET",
+          "path": "/dataprotection/v4.0/config/recovery-points/{extId}",
+          "dao": "VMDAO.get_recovery_point"
+        },
+        {
+          "method": "DELETE",
+          "path": "/dataprotection/v4.0/config/recovery-points/{extId}",
+          "dao": "VMDAO.delete_recovery_point"
+        },
+        {
+          "method": "GET",
+          "path": "/dataprotection/v4.0/config/recovery-points",
+          "dao": "VMDAO.list_snapshots"
+        },
+        {
+          "method": "POST",
+          "path": "/dataprotection/v4.0/config/recovery-points",
+          "dao": "VMDAO.create_snapshot"
+        },
+        {
+          "method": "GET",
+          "path": "/dataprotection/v4.0/config/recovery-points/{recoveryPointExtId}/vm-recovery-points/{extId}",
+          "dao": "VMDAO.get_vm_recovery_point"
+        },
+        {
+          "method": "POST",
+          "path": "/dataprotection/v4.0/config/recovery-points/{extId}/$actions/restore",
+          "dao": "VMDAO.restore_snapshot"
+        },
+        {
+          "method": "POST",
+          "path": "/dataprotection/v4.0/config/recovery-points/{extId}/$actions/replicate",
+          "dao": "VMDAO.replicate_recovery_point"
+        },
+        {
+          "method": "POST",
+          "path": "/dataprotection/v4.0/config/recovery-points/{extId}/$actions/set-expiration-time",
+          "dao": "VMDAO.set_recovery_point_expiration"
+        },
+        {
+          "method": "POST",
+          "path": "/dataprotection/v4.0/config/recovery-points/{extId}/$actions/discover-cluster",
+          "dao": "VMDAO.discover_cluster"
+        },
+        {
+          "method": "POST",
+          "path": "/dataprotection/v4.0/content/recovery-points/{recoveryPointExtId}/volume-group-recovery-points/{volumeGroupRecoveryPointExtId}/disk-recovery-points/{extId}/$actions/compute-changed-regions",
+          "dao": "VMDAO.compute_changed_regions_vg"
+        },
+        {
+          "method": "POST",
+          "path": "/dataprotection/v4.0/content/recovery-points/{recoveryPointExtId}/vm-recovery-points/{vmRecoveryPointExtId}/disk-recovery-points/{extId}/$actions/compute-changed-regions",
+          "dao": "VMDAO.compute_changed_regions_vm"
+        },
+        {
+          "method": "GET",
+          "path": "/dataprotection/v4.0/content/recovery-points/{recoveryPointExtId}/vm-recovery-points/{vmRecoveryPointExtId}/vss-metadata",
+          "dao": "VMDAO.get_vss_metadata"
+        }
+      ],
+      "missing_endpoints": []
+    },
+    "files": {
+      "version": "v4.0",
+      "total_endpoints": 102,
+      "implemented": 102,
+      "coverage_pct": 100.0,
+      "has_tests": true,
+      "implemented_endpoints": [
+        {
+          "method": "GET",
+          "path": "/files/v4.0/stats/file-servers/{fileServerExtId}/anti-virus-servers/{extId}",
+          "dao": "FileServerDAO.get_anti_virus_server_stats"
+        },
+        {
+          "method": "GET",
+          "path": "/files/v4.0/stats/file-servers/{extId}",
+          "dao": "FileServerDAO.get_stats"
+        },
+        {
+          "method": "GET",
+          "path": "/files/v4.0/stats/file-servers/{fileServerExtId}/mount-targets/{extId}",
+          "dao": "FileServerDAO.get_mount_target_stats"
+        },
+        {
+          "method": "GET",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/anti-virus-servers",
+          "dao": "FileServerDAO.list_anti_virus_servers"
+        },
+        {
+          "method": "POST",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/anti-virus-servers",
+          "dao": "FileServerDAO.create_anti_virus_server"
+        },
+        {
+          "method": "GET",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/anti-virus-servers/{extId}",
+          "dao": "FileServerDAO.get_anti_virus_server"
+        },
+        {
+          "method": "PUT",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/anti-virus-servers/{extId}",
+          "dao": "FileServerDAO.update_anti_virus_server"
+        },
+        {
+          "method": "DELETE",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/anti-virus-servers/{extId}",
+          "dao": "FileServerDAO.delete_anti_virus_server"
+        },
+        {
+          "method": "POST",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/anti-virus-servers/{extId}/$actions/test-connection",
+          "dao": "FileServerDAO.test_anti_virus_connection"
+        },
+        {
+          "method": "GET",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/dns-records",
+          "dao": "FileServerDAO.list_dns_records"
+        },
+        {
+          "method": "POST",
+          "path": "/files/v4.0/config/file-servers/{extId}/$actions/revise-dns-records",
+          "dao": "FileServerDAO.revise_dns_records"
+        },
+        {
+          "method": "POST",
+          "path": "/files/v4.0/config/file-servers/{extId}/$actions/verify-dns-records",
+          "dao": "FileServerDAO.verify_dns_records"
+        },
+        {
+          "method": "GET",
+          "path": "/files/v4.0/config/file-servers",
+          "dao": "FileServerDAO.list"
+        },
+        {
+          "method": "GET",
+          "path": "/files/v4.0/config/file-servers/{extId}",
+          "dao": "FileServerDAO.get"
+        },
+        {
+          "method": "GET",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/infected-files",
+          "dao": "FileServerDAO.list_infected_files"
+        },
+        {
+          "method": "GET",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/infected-files/{extId}",
+          "dao": "FileServerDAO.get_infected_file"
+        },
+        {
+          "method": "DELETE",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/infected-files/{extId}",
+          "dao": "FileServerDAO.delete_infected_file"
+        },
+        {
+          "method": "POST",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/infected-files/{extId}/$actions/fix",
+          "dao": "FileServerDAO.fix_infected_file"
+        },
+        {
+          "method": "GET",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/mount-targets",
+          "dao": "FileServerDAO.list_mount_targets"
+        },
+        {
+          "method": "POST",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/mount-targets",
+          "dao": "FileServerDAO.create_mount_target"
+        },
+        {
+          "method": "GET",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/mount-targets/{extId}",
+          "dao": "FileServerDAO.get_mount_target"
+        },
+        {
+          "method": "PUT",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/mount-targets/{extId}",
+          "dao": "FileServerDAO.update_mount_target"
+        },
+        {
+          "method": "DELETE",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/mount-targets/{extId}",
+          "dao": "FileServerDAO.delete_mount_target"
+        },
+        {
+          "method": "POST",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/mount-targets/{extId}/$actions/enable-worm-compliance",
+          "dao": "FileServerDAO.enable_worm_compliance"
+        },
+        {
+          "method": "POST",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/mount-targets/{extId}/$actions/enable-worm-legal-hold",
+          "dao": "FileServerDAO.enable_worm_legal_hold"
+        },
+        {
+          "method": "POST",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/mount-targets/{extId}/$actions/disable-worm-legal-hold",
+          "dao": "FileServerDAO.disable_worm_legal_hold"
+        },
+        {
+          "method": "POST",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/mount-targets/{extId}/$actions/clone",
+          "dao": "FileServerDAO.clone_mount_target"
+        },
+        {
+          "method": "GET",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/notification-policies",
+          "dao": "FileServerDAO.list_notification_policies"
+        },
+        {
+          "method": "POST",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/notification-policies",
+          "dao": "FileServerDAO.create_notification_policy"
+        },
+        {
+          "method": "GET",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/notification-policies/{extId}",
+          "dao": "FileServerDAO.get_notification_policy"
+        },
+        {
+          "method": "PUT",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/notification-policies/{extId}",
+          "dao": "FileServerDAO.update_notification_policy"
+        },
+        {
+          "method": "DELETE",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/notification-policies/{extId}",
+          "dao": "FileServerDAO.delete_notification_policy"
+        },
+        {
+          "method": "GET",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/partner-servers",
+          "dao": "FileServerDAO.list_partner_servers"
+        },
+        {
+          "method": "POST",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/partner-servers",
+          "dao": "FileServerDAO.create_partner_server"
+        },
+        {
+          "method": "GET",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/partner-servers/{extId}",
+          "dao": "FileServerDAO.get_partner_server"
+        },
+        {
+          "method": "PUT",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/partner-servers/{extId}",
+          "dao": "FileServerDAO.update_partner_server"
+        },
+        {
+          "method": "DELETE",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/partner-servers/{extId}",
+          "dao": "FileServerDAO.delete_partner_server"
+        },
+        {
+          "method": "GET",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/email-config",
+          "dao": "FileServerDAO.get_email_config"
+        },
+        {
+          "method": "PUT",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/email-config",
+          "dao": "FileServerDAO.update_email_config"
+        },
+        {
+          "method": "GET",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/mount-targets/{mountTargetExtId}/quota-policies",
+          "dao": "FileServerDAO.list_quota_policies"
+        },
+        {
+          "method": "POST",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/mount-targets/{mountTargetExtId}/quota-policies",
+          "dao": "FileServerDAO.create_quota_policy"
+        },
+        {
+          "method": "GET",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/mount-targets/{mountTargetExtId}/quota-policies/{extId}",
+          "dao": "FileServerDAO.get_quota_policy"
+        },
+        {
+          "method": "PUT",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/mount-targets/{mountTargetExtId}/quota-policies/{extId}",
+          "dao": "FileServerDAO.update_quota_policy"
+        },
+        {
+          "method": "DELETE",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/mount-targets/{mountTargetExtId}/quota-policies/{extId}",
+          "dao": "FileServerDAO.delete_quota_policy"
+        },
+        {
+          "method": "GET",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/ransomware-configs",
+          "dao": "FileServerDAO.list_ransomware_configs"
+        },
+        {
+          "method": "POST",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/ransomware-configs",
+          "dao": "FileServerDAO.create_ransomware_config"
+        },
+        {
+          "method": "GET",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/ransomware-configs/{extId}",
+          "dao": "FileServerDAO.get_ransomware_config"
+        },
+        {
+          "method": "PUT",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/ransomware-configs/{extId}",
+          "dao": "FileServerDAO.update_ransomware_config"
+        },
+        {
+          "method": "DELETE",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/ransomware-configs/{extId}",
+          "dao": "FileServerDAO.delete_ransomware_config"
+        },
+        {
+          "method": "GET",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/recommendations",
+          "dao": "FileServerDAO.list_recommendations"
+        },
+        {
+          "method": "GET",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/recommendations/{extId}",
+          "dao": "FileServerDAO.get_recommendation"
+        },
+        {
+          "method": "DELETE",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/recommendations/{extId}",
+          "dao": "FileServerDAO.delete_recommendation"
+        },
+        {
+          "method": "GET",
+          "path": "/files/v4.0/operations/replication-jobs",
+          "dao": "FileServerDAO.list_replication_jobs"
+        },
+        {
+          "method": "GET",
+          "path": "/files/v4.0/operations/replication-jobs/{extId}",
+          "dao": "FileServerDAO.get_replication_job"
+        },
+        {
+          "method": "POST",
+          "path": "/files/v4.0/operations/$actions/failover",
+          "dao": "FileServerDAO.failover"
+        },
+        {
+          "method": "POST",
+          "path": "/files/v4.0/operations/$actions/ad-dns-failover",
+          "dao": "FileServerDAO.ad_dns_failover"
+        },
+        {
+          "method": "POST",
+          "path": "/files/v4.0/operations/$actions/resume-replication",
+          "dao": "FileServerDAO.resume_replication"
+        },
+        {
+          "method": "GET",
+          "path": "/files/v4.0/config/replication-policies",
+          "dao": "FileServerDAO.list_replication_policies"
+        },
+        {
+          "method": "POST",
+          "path": "/files/v4.0/config/replication-policies",
+          "dao": "FileServerDAO.create_replication_policy"
+        },
+        {
+          "method": "GET",
+          "path": "/files/v4.0/config/replication-policies/{extId}",
+          "dao": "FileServerDAO.get_replication_policy"
+        },
+        {
+          "method": "PUT",
+          "path": "/files/v4.0/config/replication-policies/{extId}",
+          "dao": "FileServerDAO.update_replication_policy"
+        },
+        {
+          "method": "DELETE",
+          "path": "/files/v4.0/config/replication-policies/{extId}",
+          "dao": "FileServerDAO.delete_replication_policy"
+        },
+        {
+          "method": "GET",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/replication-policies/{replicationPolicyExtId}/vdi-user-sessions",
+          "dao": "FileServerDAO.list_vdi_user_sessions"
+        },
+        {
+          "method": "GET",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/replication-policies/{replicationPolicyExtId}/vdi-user-sessions/{extId}",
+          "dao": "FileServerDAO.get_vdi_user_session"
+        },
+        {
+          "method": "PUT",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/replication-policies/{replicationPolicyExtId}/vdi-user-sessions/{extId}",
+          "dao": "FileServerDAO.update_vdi_user_session"
+        },
+        {
+          "method": "GET",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/mount-targets/{mountTargetExtId}/snapshot-changed-contents",
+          "dao": "FileServerDAO.list_snapshot_changed_contents"
+        },
+        {
+          "method": "GET",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/mount-targets/{mountTargetExtId}/snapshot-changed-contents/{extId}",
+          "dao": "FileServerDAO.get_snapshot_changed_content"
+        },
+        {
+          "method": "POST",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/mount-targets/{mountTargetExtId}/$actions/compute-snapshot-change",
+          "dao": "FileServerDAO.compute_snapshot_change"
+        },
+        {
+          "method": "GET",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/snapshot-schedules",
+          "dao": "FileServerDAO.list_snapshot_schedules"
+        },
+        {
+          "method": "POST",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/snapshot-schedules",
+          "dao": "FileServerDAO.create_snapshot_schedule"
+        },
+        {
+          "method": "GET",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/snapshot-schedules/{extId}",
+          "dao": "FileServerDAO.get_snapshot_schedule"
+        },
+        {
+          "method": "PUT",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/snapshot-schedules/{extId}",
+          "dao": "FileServerDAO.update_snapshot_schedule"
+        },
+        {
+          "method": "DELETE",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/snapshot-schedules/{extId}",
+          "dao": "FileServerDAO.delete_snapshot_schedule"
+        },
+        {
+          "method": "GET",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/mount-targets/{mountTargetExtId}/snapshots",
+          "dao": "FileServerDAO.list_snapshots"
+        },
+        {
+          "method": "POST",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/mount-targets/{mountTargetExtId}/snapshots",
+          "dao": "FileServerDAO.create_snapshot"
+        },
+        {
+          "method": "GET",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/mount-targets/{mountTargetExtId}/snapshots/{extId}",
+          "dao": "FileServerDAO.get_snapshot"
+        },
+        {
+          "method": "DELETE",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/mount-targets/{mountTargetExtId}/snapshots/{extId}",
+          "dao": "FileServerDAO.delete_snapshot"
+        },
+        {
+          "method": "POST",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/mount-targets/{mountTargetExtId}/snapshots/{extId}/$actions/restore",
+          "dao": "FileServerDAO.restore_snapshot"
+        },
+        {
+          "method": "GET",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/object-store-profiles",
+          "dao": "FileServerDAO.list_object_store_profiles"
+        },
+        {
+          "method": "POST",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/object-store-profiles",
+          "dao": "FileServerDAO.create_object_store_profile"
+        },
+        {
+          "method": "GET",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/object-store-profiles/{extId}",
+          "dao": "FileServerDAO.get_object_store_profile"
+        },
+        {
+          "method": "PUT",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/object-store-profiles/{extId}",
+          "dao": "FileServerDAO.update_object_store_profile"
+        },
+        {
+          "method": "GET",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/tier-configurations",
+          "dao": "FileServerDAO.list_tier_configurations"
+        },
+        {
+          "method": "POST",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/tier-configurations",
+          "dao": "FileServerDAO.create_tier_configuration"
+        },
+        {
+          "method": "GET",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/tier-configurations/{extId}",
+          "dao": "FileServerDAO.get_tier_configuration"
+        },
+        {
+          "method": "PUT",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/tier-configurations/{extId}",
+          "dao": "FileServerDAO.update_tier_configuration"
+        },
+        {
+          "method": "DELETE",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/tier-configurations/{extId}",
+          "dao": "FileServerDAO.delete_tier_configuration"
+        },
+        {
+          "method": "POST",
+          "path": "/files/v4.0/config/file-servers/{extId}/$actions/tier-data",
+          "dao": "FileServerDAO.tier_data"
+        },
+        {
+          "method": "POST",
+          "path": "/files/v4.0/config/file-servers/{extId}/$actions/recalculate-cold-data",
+          "dao": "FileServerDAO.recalculate_cold_data"
+        },
+        {
+          "method": "POST",
+          "path": "/files/v4.0/config/file-servers/{extId}/$actions/recall-tiered-files",
+          "dao": "FileServerDAO.recall_tiered_files"
+        },
+        {
+          "method": "GET",
+          "path": "/files/v4.0/config/unified-namespaces",
+          "dao": "FileServerDAO.list_unified_namespaces"
+        },
+        {
+          "method": "POST",
+          "path": "/files/v4.0/config/unified-namespaces",
+          "dao": "FileServerDAO.create_unified_namespace"
+        },
+        {
+          "method": "GET",
+          "path": "/files/v4.0/config/unified-namespaces/{extId}",
+          "dao": "FileServerDAO.get_unified_namespace"
+        },
+        {
+          "method": "PUT",
+          "path": "/files/v4.0/config/unified-namespaces/{extId}",
+          "dao": "FileServerDAO.update_unified_namespace"
+        },
+        {
+          "method": "DELETE",
+          "path": "/files/v4.0/config/unified-namespaces/{extId}",
+          "dao": "FileServerDAO.delete_unified_namespace"
+        },
+        {
+          "method": "POST",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/$actions/upload-user-mappings",
+          "dao": "FileServerDAO.upload_user_mappings"
+        },
+        {
+          "method": "GET",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/user-mappings",
+          "dao": "FileServerDAO.download_user_mappings"
+        },
+        {
+          "method": "GET",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/virus-scan-policies",
+          "dao": "FileServerDAO.list_virus_scan_policies"
+        },
+        {
+          "method": "POST",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/virus-scan-policies",
+          "dao": "FileServerDAO.create_virus_scan_policy"
+        },
+        {
+          "method": "GET",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/virus-scan-policies/{extId}",
+          "dao": "FileServerDAO.get_virus_scan_policy"
+        },
+        {
+          "method": "PUT",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/virus-scan-policies/{extId}",
+          "dao": "FileServerDAO.update_virus_scan_policy"
+        },
+        {
+          "method": "DELETE",
+          "path": "/files/v4.0/config/file-servers/{fileServerExtId}/virus-scan-policies/{extId}",
+          "dao": "FileServerDAO.delete_virus_scan_policy"
+        }
+      ],
+      "missing_endpoints": []
+    },
+    "iam": {
+      "version": "v4.0",
+      "total_endpoints": 54,
+      "implemented": 54,
+      "coverage_pct": 100.0,
+      "has_tests": true,
+      "implemented_endpoints": [
+        {
+          "method": "GET",
+          "path": "/iam/v4.0/authz/authorization-policies",
+          "dao": "DirectoryServiceDAO.list_auth_policies"
+        },
+        {
+          "method": "POST",
+          "path": "/iam/v4.0/authz/authorization-policies",
+          "dao": "DirectoryServiceDAO.create_auth_policy"
+        },
+        {
+          "method": "GET",
+          "path": "/iam/v4.0/authz/authorization-policies/{extId}",
+          "dao": "DirectoryServiceDAO.get_auth_policy"
+        },
+        {
+          "method": "PUT",
+          "path": "/iam/v4.0/authz/authorization-policies/{extId}",
+          "dao": "DirectoryServiceDAO.update_auth_policy"
+        },
+        {
+          "method": "DELETE",
+          "path": "/iam/v4.0/authz/authorization-policies/{extId}",
+          "dao": "DirectoryServiceDAO.delete_auth_policy"
+        },
+        {
+          "method": "GET",
+          "path": "/iam/v4.0/authn/cert-auth-providers",
+          "dao": "DirectoryServiceDAO.list_cert_auth"
+        },
+        {
+          "method": "POST",
+          "path": "/iam/v4.0/authn/cert-auth-providers",
+          "dao": "DirectoryServiceDAO.create_cert_auth"
+        },
+        {
+          "method": "GET",
+          "path": "/iam/v4.0/authn/cert-auth-providers/{extId}",
+          "dao": "DirectoryServiceDAO.get_cert_auth"
+        },
+        {
+          "method": "PUT",
+          "path": "/iam/v4.0/authn/cert-auth-providers/{extId}",
+          "dao": "DirectoryServiceDAO.update_cert_auth"
+        },
+        {
+          "method": "DELETE",
+          "path": "/iam/v4.0/authn/cert-auth-providers/{extId}",
+          "dao": "DirectoryServiceDAO.delete_cert_auth"
+        },
+        {
+          "method": "GET",
+          "path": "/iam/v4.0/authz/clients/{extId}",
+          "dao": "DirectoryServiceDAO.get_client"
+        },
+        {
+          "method": "GET",
+          "path": "/iam/v4.0/authn/directory-services",
+          "dao": "DirectoryServiceDAO.list"
+        },
+        {
+          "method": "POST",
+          "path": "/iam/v4.0/authn/directory-services",
+          "dao": "DirectoryServiceDAO.create"
+        },
+        {
+          "method": "GET",
+          "path": "/iam/v4.0/authn/directory-services/{extId}",
+          "dao": "DirectoryServiceDAO.get"
+        },
+        {
+          "method": "PUT",
+          "path": "/iam/v4.0/authn/directory-services/{extId}",
+          "dao": "DirectoryServiceDAO.update"
+        },
+        {
+          "method": "DELETE",
+          "path": "/iam/v4.0/authn/directory-services/{extId}",
+          "dao": "DirectoryServiceDAO.nuke"
+        },
+        {
+          "method": "POST",
+          "path": "/iam/v4.0/authn/directory-services/{extId}/$actions/search",
+          "dao": "DirectoryServiceDAO.search"
+        },
+        {
+          "method": "POST",
+          "path": "/iam/v4.0/authn/directory-services/{extId}/$actions/verify-connection-status",
+          "dao": "DirectoryServiceDAO.verify_connection_status"
+        },
+        {
+          "method": "GET",
+          "path": "/iam/v4.0/authz/entities",
+          "dao": "DirectoryServiceDAO.list_entities"
+        },
+        {
+          "method": "GET",
+          "path": "/iam/v4.0/authz/entities/{extId}",
+          "dao": "DirectoryServiceDAO.get_entity"
+        },
+        {
+          "method": "GET",
+          "path": "/iam/v4.0/authz/operations/{extId}",
+          "dao": "DirectoryServiceDAO.get_operation"
+        },
+        {
+          "method": "GET",
+          "path": "/iam/v4.0/authz/operations",
+          "dao": "DirectoryServiceDAO.list_operations"
+        },
+        {
+          "method": "GET",
+          "path": "/iam/v4.0/authz/roles",
+          "dao": "RoleDAO.list"
+        },
+        {
+          "method": "POST",
+          "path": "/iam/v4.0/authz/roles",
+          "dao": "RoleDAO.create"
+        },
+        {
+          "method": "GET",
+          "path": "/iam/v4.0/authz/roles/{extId}",
+          "dao": "RoleDAO.get"
+        },
+        {
+          "method": "PUT",
+          "path": "/iam/v4.0/authz/roles/{extId}",
+          "dao": "RoleDAO.update"
+        },
+        {
+          "method": "DELETE",
+          "path": "/iam/v4.0/authz/roles/{extId}",
+          "dao": "RoleDAO.nuke"
+        },
+        {
+          "method": "GET",
+          "path": "/iam/v4.0/authn/saml-identity-providers",
+          "dao": "DirectoryServiceDAO.list_saml_idps"
+        },
+        {
+          "method": "POST",
+          "path": "/iam/v4.0/authn/saml-identity-providers",
+          "dao": "DirectoryServiceDAO.create_saml_idp"
+        },
+        {
+          "method": "GET",
+          "path": "/iam/v4.0/authn/saml-identity-providers/{extId}",
+          "dao": "DirectoryServiceDAO.get_saml_idp"
+        },
+        {
+          "method": "PUT",
+          "path": "/iam/v4.0/authn/saml-identity-providers/{extId}",
+          "dao": "DirectoryServiceDAO.update_saml_idp"
+        },
+        {
+          "method": "DELETE",
+          "path": "/iam/v4.0/authn/saml-identity-providers/{extId}",
+          "dao": "DirectoryServiceDAO.delete_saml_idp"
+        },
+        {
+          "method": "GET",
+          "path": "/iam/v4.0/authn/saml-sp-metadata",
+          "dao": "DirectoryServiceDAO.get_saml_sp_metadata"
+        },
+        {
+          "method": "GET",
+          "path": "/iam/v4.0/authn/user-groups",
+          "dao": "UserGroupDAO.list"
+        },
+        {
+          "method": "POST",
+          "path": "/iam/v4.0/authn/user-groups",
+          "dao": "UserGroupDAO.create"
+        },
+        {
+          "method": "GET",
+          "path": "/iam/v4.0/authn/user-groups/{extId}",
+          "dao": "UserGroupDAO.get"
+        },
+        {
+          "method": "DELETE",
+          "path": "/iam/v4.0/authn/user-groups/{extId}",
+          "dao": "UserGroupDAO.nuke"
+        },
+        {
+          "method": "GET",
+          "path": "/iam/v4.0/authn/users/{userExtId}/keys",
+          "dao": "UserDAO.list_keys"
+        },
+        {
+          "method": "POST",
+          "path": "/iam/v4.0/authn/users/{userExtId}/keys",
+          "dao": "UserDAO.create_key"
+        },
+        {
+          "method": "GET",
+          "path": "/iam/v4.0/authn/users/{userExtId}/keys/{extId}",
+          "dao": "UserDAO.get_key"
+        },
+        {
+          "method": "DELETE",
+          "path": "/iam/v4.0/authn/users/{userExtId}/keys/{extId}",
+          "dao": "UserDAO.delete_key"
+        },
+        {
+          "method": "POST",
+          "path": "/iam/v4.0/authn/users/{userExtId}/keys/{extId}/$actions/revoke",
+          "dao": "UserDAO.revoke_key"
+        },
+        {
+          "method": "GET",
+          "path": "/iam/v4.0/authn/users",
+          "dao": "UserDAO.list"
+        },
+        {
+          "method": "POST",
+          "path": "/iam/v4.0/authn/users",
+          "dao": "UserDAO.create"
+        },
+        {
+          "method": "POST",
+          "path": "/iam/v4.0/authn/users/$actions/change-password",
+          "dao": "UserDAO.change_password_global"
+        },
+        {
+          "method": "GET",
+          "path": "/iam/v4.0/authn/users/{extId}",
+          "dao": "UserDAO.get"
+        },
+        {
+          "method": "PUT",
+          "path": "/iam/v4.0/authn/users/{extId}",
+          "dao": "UserDAO.update"
+        },
+        {
+          "method": "POST",
+          "path": "/iam/v4.0/authn/users/{extId}/$actions/reset-password",
+          "dao": "UserDAO.reset_password"
+        },
+        {
+          "method": "POST",
+          "path": "/iam/v4.0/authn/users/{extId}/$actions/change-state",
+          "dao": "UserDAO.change_state"
+        },
+        {
+          "method": "GET",
+          "path": "/iam/v4.0/authn/users/{userExtId}/buckets-access-keys",
+          "dao": "UserDAO.list_buckets_access_keys"
+        },
+        {
+          "method": "POST",
+          "path": "/iam/v4.0/authn/users/{userExtId}/buckets-access-keys",
+          "dao": "UserDAO.create_buckets_access_key"
+        },
+        {
+          "method": "GET",
+          "path": "/iam/v4.0/authn/users/{userExtId}/buckets-access-keys/{extId}",
+          "dao": "UserDAO.get_buckets_access_key"
+        },
+        {
+          "method": "DELETE",
+          "path": "/iam/v4.0/authn/users/{userExtId}/buckets-access-keys/{extId}",
+          "dao": "UserDAO.delete_buckets_access_key"
+        },
+        {
+          "method": "POST",
+          "path": "/iam/v4.0/authn/users/{userExtId}/buckets-access-keys/{extId}/$actions/revoke",
+          "dao": "UserDAO.revoke_buckets_access_key"
+        }
+      ],
+      "missing_endpoints": []
+    },
+    "licensing": {
+      "version": "v4.0",
+      "total_endpoints": 16,
+      "implemented": 16,
+      "coverage_pct": 100.0,
+      "has_tests": true,
+      "implemented_endpoints": [
+        {
+          "method": "GET",
+          "path": "/licensing/v4.0/agreements/eula",
+          "dao": "LicenseDAO.get_agreements_eula"
+        },
+        {
+          "method": "POST",
+          "path": "/licensing/v4.0/agreements/eula/$actions/add-user",
+          "dao": "LicenseDAO.add_eula_user"
+        },
+        {
+          "method": "GET",
+          "path": "/licensing/v4.0/config/license-keys",
+          "dao": "LicenseDAO.list_keys"
+        },
+        {
+          "method": "POST",
+          "path": "/licensing/v4.0/config/license-keys",
+          "dao": "LicenseDAO.create_key"
+        },
+        {
+          "method": "GET",
+          "path": "/licensing/v4.0/config/license-keys/{extId}",
+          "dao": "LicenseDAO.get_key"
+        },
+        {
+          "method": "DELETE",
+          "path": "/licensing/v4.0/config/license-keys/{extId}",
+          "dao": "LicenseDAO.delete_key"
+        },
+        {
+          "method": "POST",
+          "path": "/licensing/v4.0/config/$actions/assign-license-keys",
+          "dao": "LicenseDAO.assign_license_keys"
+        },
+        {
+          "method": "GET",
+          "path": "/licensing/v4.0/config/features",
+          "dao": "LicenseDAO.list_features"
+        },
+        {
+          "method": "GET",
+          "path": "/licensing/v4.0/config/licenses",
+          "dao": "LicenseDAO.list_licenses"
+        },
+        {
+          "method": "GET",
+          "path": "/licensing/v4.0/config/settings",
+          "dao": "LicenseDAO.get_settings"
+        },
+        {
+          "method": "GET",
+          "path": "/licensing/v4.0/config/violations",
+          "dao": "LicenseDAO.list_violations"
+        },
+        {
+          "method": "GET",
+          "path": "/licensing/v4.0/config/allowances",
+          "dao": "LicenseDAO.list_allowances"
+        },
+        {
+          "method": "GET",
+          "path": "/licensing/v4.0/config/entitlements",
+          "dao": "LicenseDAO.list_entitlements"
+        },
+        {
+          "method": "GET",
+          "path": "/licensing/v4.0/config/compliances",
+          "dao": "LicenseDAO.list_compliances"
+        },
+        {
+          "method": "GET",
+          "path": "/licensing/v4.0/config/recommendations",
+          "dao": "LicenseDAO.list_recommendations"
+        },
+        {
+          "method": "POST",
+          "path": "/licensing/v4.0/config/$actions/sync-license-state",
+          "dao": "LicenseDAO.sync_license_state"
+        }
+      ],
+      "missing_endpoints": []
+    },
+    "lifecycle": {
+      "version": "v4.0",
+      "total_endpoints": 20,
+      "implemented": 20,
+      "coverage_pct": 100.0,
+      "has_tests": true,
+      "implemented_endpoints": [
+        {
+          "method": "GET",
+          "path": "/lifecycle/v4.0/resources/bundles/{extId}",
+          "dao": "LcmDAO.get_bundle"
+        },
+        {
+          "method": "DELETE",
+          "path": "/lifecycle/v4.0/resources/bundles/{extId}",
+          "dao": "LcmDAO.delete_bundle"
+        },
+        {
+          "method": "GET",
+          "path": "/lifecycle/v4.0/resources/bundles",
+          "dao": "LcmDAO.list_bundles"
+        },
+        {
+          "method": "POST",
+          "path": "/lifecycle/v4.0/resources/bundles",
+          "dao": "LcmDAO.create_bundle"
+        },
+        {
+          "method": "GET",
+          "path": "/lifecycle/v4.0/resources/config",
+          "dao": "LcmDAO.get_config"
+        },
+        {
+          "method": "PUT",
+          "path": "/lifecycle/v4.0/resources/config",
+          "dao": "LcmDAO.update_config"
+        },
+        {
+          "method": "POST",
+          "path": "/lifecycle/v4.0/operations/$actions/preload-artifacts",
+          "dao": "LcmDAO.ops_preload_artifacts"
+        },
+        {
+          "method": "GET",
+          "path": "/lifecycle/v4.0/resources/entities/{extId}",
+          "dao": "LcmDAO.get_entity"
+        },
+        {
+          "method": "GET",
+          "path": "/lifecycle/v4.0/resources/entities",
+          "dao": "LcmDAO.list_entities"
+        },
+        {
+          "method": "GET",
+          "path": "/lifecycle/v4.0/resources/images",
+          "dao": "LcmDAO.list_images"
+        },
+        {
+          "method": "POST",
+          "path": "/lifecycle/v4.0/operations/$actions/inventory",
+          "dao": "LcmDAO.ops_inventory"
+        },
+        {
+          "method": "GET",
+          "path": "/lifecycle/v4.0/resources/lcm-summaries",
+          "dao": "LcmDAO.list_lcm_summaries"
+        },
+        {
+          "method": "GET",
+          "path": "/lifecycle/v4.0/resources/lcm-summaries/{extId}",
+          "dao": "LcmDAO.get_lcm_summary"
+        },
+        {
+          "method": "POST",
+          "path": "/lifecycle/v4.0/operations/$actions/compute-notifications",
+          "dao": "LcmDAO.ops_compute_notifications"
+        },
+        {
+          "method": "GET",
+          "path": "/lifecycle/v4.0/resources/notifications/{extId}",
+          "dao": "LcmDAO.get_notification"
+        },
+        {
+          "method": "POST",
+          "path": "/lifecycle/v4.0/operations/$actions/prechecks",
+          "dao": "LcmDAO.ops_prechecks"
+        },
+        {
+          "method": "POST",
+          "path": "/lifecycle/v4.0/operations/$actions/compute-recommendations",
+          "dao": "LcmDAO.ops_compute_recommendations"
+        },
+        {
+          "method": "GET",
+          "path": "/lifecycle/v4.0/resources/recommendations/{extId}",
+          "dao": "LcmDAO.get_recommendation"
+        },
+        {
+          "method": "GET",
+          "path": "/lifecycle/v4.0/resources/status",
+          "dao": "LcmDAO.get_status"
+        },
+        {
+          "method": "POST",
+          "path": "/lifecycle/v4.0/operations/$actions/upgrade",
+          "dao": "LcmDAO.ops_upgrade"
+        }
+      ],
+      "missing_endpoints": []
+    },
+    "microseg": {
+      "version": "v4.0",
+      "total_endpoints": 28,
+      "implemented": 28,
+      "coverage_pct": 100.0,
+      "has_tests": true,
+      "implemented_endpoints": [
+        {
+          "method": "GET",
+          "path": "/microseg/v4.0/config/address-groups",
+          "dao": "SecurityPolicyDAO.list_address_groups"
+        },
+        {
+          "method": "POST",
+          "path": "/microseg/v4.0/config/address-groups",
+          "dao": "SecurityPolicyDAO.create_address_group"
+        },
+        {
+          "method": "GET",
+          "path": "/microseg/v4.0/config/address-groups/{extId}",
+          "dao": "SecurityPolicyDAO.get_address_group"
+        },
+        {
+          "method": "PUT",
+          "path": "/microseg/v4.0/config/address-groups/{extId}",
+          "dao": "SecurityPolicyDAO.update_address_group"
+        },
+        {
+          "method": "DELETE",
+          "path": "/microseg/v4.0/config/address-groups/{extId}",
+          "dao": "SecurityPolicyDAO.delete_address_group"
+        },
+        {
+          "method": "GET",
+          "path": "/microseg/v4.0/config/directory-server-configs",
+          "dao": "SecurityPolicyDAO.list_directory_server_configs"
+        },
+        {
+          "method": "POST",
+          "path": "/microseg/v4.0/config/directory-server-configs",
+          "dao": "SecurityPolicyDAO.create_directory_server_config"
+        },
+        {
+          "method": "GET",
+          "path": "/microseg/v4.0/config/directory-server-configs/{extId}",
+          "dao": "SecurityPolicyDAO.get_directory_server_config"
+        },
+        {
+          "method": "PUT",
+          "path": "/microseg/v4.0/config/directory-server-configs/{extId}",
+          "dao": "SecurityPolicyDAO.update_directory_server_config"
+        },
+        {
+          "method": "DELETE",
+          "path": "/microseg/v4.0/config/directory-server-configs/{extId}",
+          "dao": "SecurityPolicyDAO.delete_directory_server_config"
+        },
+        {
+          "method": "GET",
+          "path": "/microseg/v4.0/config/category-mappings",
+          "dao": "SecurityPolicyDAO.list_category_mappings"
+        },
+        {
+          "method": "POST",
+          "path": "/microseg/v4.0/config/category-mappings",
+          "dao": "SecurityPolicyDAO.create_category_mapping"
+        },
+        {
+          "method": "GET",
+          "path": "/microseg/v4.0/config/category-mappings/{extId}",
+          "dao": "SecurityPolicyDAO.get_category_mapping"
+        },
+        {
+          "method": "PUT",
+          "path": "/microseg/v4.0/config/category-mappings/{extId}",
+          "dao": "SecurityPolicyDAO.update_category_mapping"
+        },
+        {
+          "method": "DELETE",
+          "path": "/microseg/v4.0/config/category-mappings/{extId}",
+          "dao": "SecurityPolicyDAO.delete_category_mapping"
+        },
+        {
+          "method": "GET",
+          "path": "/microseg/v4.0/config/policies",
+          "dao": "SecurityPolicyDAO.list"
+        },
+        {
+          "method": "POST",
+          "path": "/microseg/v4.0/config/policies",
+          "dao": "SecurityPolicyDAO.create"
+        },
+        {
+          "method": "GET",
+          "path": "/microseg/v4.0/config/policies/{extId}",
+          "dao": "SecurityPolicyDAO.get"
+        },
+        {
+          "method": "PUT",
+          "path": "/microseg/v4.0/config/policies/{extId}",
+          "dao": "SecurityPolicyDAO.update"
+        },
+        {
+          "method": "DELETE",
+          "path": "/microseg/v4.0/config/policies/{extId}",
+          "dao": "SecurityPolicyDAO.nuke"
+        },
+        {
+          "method": "GET",
+          "path": "/microseg/v4.0/config/policies/{policyExtId}/rules",
+          "dao": "SecurityPolicyDAO.list_rules"
+        },
+        {
+          "method": "POST",
+          "path": "/microseg/v4.0/config/policies/$actions/prepare-export",
+          "dao": "SecurityPolicyDAO.prepare_export"
+        },
+        {
+          "method": "POST",
+          "path": "/microseg/v4.0/config/policies/$actions/import",
+          "dao": "SecurityPolicyDAO.import_policies"
+        },
+        {
+          "method": "GET",
+          "path": "/microseg/v4.0/config/service-groups",
+          "dao": "SecurityPolicyDAO.list_service_groups"
+        },
+        {
+          "method": "POST",
+          "path": "/microseg/v4.0/config/service-groups",
+          "dao": "SecurityPolicyDAO.create_service_group"
+        },
+        {
+          "method": "GET",
+          "path": "/microseg/v4.0/config/service-groups/{extId}",
+          "dao": "SecurityPolicyDAO.get_service_group"
+        },
+        {
+          "method": "PUT",
+          "path": "/microseg/v4.0/config/service-groups/{extId}",
+          "dao": "SecurityPolicyDAO.update_service_group"
+        },
+        {
+          "method": "DELETE",
+          "path": "/microseg/v4.0/config/service-groups/{extId}",
+          "dao": "SecurityPolicyDAO.delete_service_group"
+        }
+      ],
+      "missing_endpoints": []
+    },
+    "monitoring": {
+      "version": "v4.0",
+      "total_endpoints": 22,
+      "implemented": 22,
+      "coverage_pct": 100.0,
+      "has_tests": true,
+      "implemented_endpoints": [
+        {
+          "method": "GET",
+          "path": "/monitoring/v4.0/serviceability/alerts/email-config",
+          "dao": "AlertDAO.get_email_config"
+        },
+        {
+          "method": "PUT",
+          "path": "/monitoring/v4.0/serviceability/alerts/email-config",
+          "dao": "AlertDAO.update_email_config"
+        },
+        {
+          "method": "GET",
+          "path": "/monitoring/v4.0/serviceability/alerts",
+          "dao": "AlertDAO.list"
+        },
+        {
+          "method": "GET",
+          "path": "/monitoring/v4.0/serviceability/alerts/{extId}",
+          "dao": "AlertDAO.get"
+        },
+        {
+          "method": "POST",
+          "path": "/monitoring/v4.0/serviceability/alerts/{extId}/$actions/manage-alert",
+          "dao": "AlertDAO.acknowledge"
+        },
+        {
+          "method": "GET",
+          "path": "/monitoring/v4.0/serviceability/audits",
+          "dao": "AlertDAO.list_audits"
+        },
+        {
+          "method": "GET",
+          "path": "/monitoring/v4.0/serviceability/audits/{extId}",
+          "dao": "AlertDAO.get_audit"
+        },
+        {
+          "method": "POST",
+          "path": "/monitoring/v4.0/serviceability/clusters/{extId}/$actions/collect-logs",
+          "dao": "AlertDAO.collect_cluster_logs"
+        },
+        {
+          "method": "GET",
+          "path": "/monitoring/v4.0/serviceability/clusters/{clusterExtId}/tags",
+          "dao": "AlertDAO.list_cluster_tags"
+        },
+        {
+          "method": "GET",
+          "path": "/monitoring/v4.0/serviceability/events",
+          "dao": "AlertDAO.list_events"
+        },
+        {
+          "method": "GET",
+          "path": "/monitoring/v4.0/serviceability/events/{extId}",
+          "dao": "AlertDAO.get_event"
+        },
+        {
+          "method": "GET",
+          "path": "/monitoring/v4.0/serviceability/alerts/system-defined-policies",
+          "dao": "AlertDAO.list_system_defined_policies"
+        },
+        {
+          "method": "GET",
+          "path": "/monitoring/v4.0/serviceability/alerts/system-defined-policies/{extId}",
+          "dao": "AlertDAO.get_system_defined_policy"
+        },
+        {
+          "method": "GET",
+          "path": "/monitoring/v4.0/serviceability/alerts/system-defined-policies/{systemDefinedPolicyExtId}/cluster-configs",
+          "dao": "AlertDAO.list_system_policy_cluster_configs"
+        },
+        {
+          "method": "GET",
+          "path": "/monitoring/v4.0/serviceability/alerts/system-defined-policies/{systemDefinedPolicyExtId}/cluster-configs/{extId}",
+          "dao": "AlertDAO.get_system_policy_cluster_config"
+        },
+        {
+          "method": "PUT",
+          "path": "/monitoring/v4.0/serviceability/alerts/system-defined-policies/{systemDefinedPolicyExtId}/cluster-configs/{extId}",
+          "dao": "AlertDAO.update_system_policy_cluster_config"
+        },
+        {
+          "method": "GET",
+          "path": "/monitoring/v4.0/serviceability/alerts/user-defined-policies",
+          "dao": "AlertDAO.list_alert_policies"
+        },
+        {
+          "method": "POST",
+          "path": "/monitoring/v4.0/serviceability/alerts/user-defined-policies",
+          "dao": "AlertDAO.create_alert_policy"
+        },
+        {
+          "method": "GET",
+          "path": "/monitoring/v4.0/serviceability/alerts/user-defined-policies/{extId}",
+          "dao": "AlertDAO.get_alert_policy"
+        },
+        {
+          "method": "PUT",
+          "path": "/monitoring/v4.0/serviceability/alerts/user-defined-policies/{extId}",
+          "dao": "AlertDAO.update_alert_policy"
+        },
+        {
+          "method": "DELETE",
+          "path": "/monitoring/v4.0/serviceability/alerts/user-defined-policies/{extId}",
+          "dao": "AlertDAO.delete_alert_policy"
+        },
+        {
+          "method": "POST",
+          "path": "/monitoring/v4.0/serviceability/alerts/user-defined-policies/$actions/find-conflicts",
+          "dao": "AlertDAO.find_policy_conflicts"
+        }
+      ],
+      "missing_endpoints": []
+    },
+    "multidomain": {
+      "version": "v4.2",
+      "total_endpoints": 5,
+      "implemented": 5,
+      "coverage_pct": 100.0,
+      "has_tests": true,
+      "implemented_endpoints": [
+        {
+          "method": "GET",
+          "path": "/multidomain/v4.2/config/external-repositories",
+          "dao": "ExternalRepositoryDAO.list"
+        },
+        {
+          "method": "POST",
+          "path": "/multidomain/v4.2/config/external-repositories",
+          "dao": "ExternalRepositoryDAO.create"
+        },
+        {
+          "method": "GET",
+          "path": "/multidomain/v4.2/config/external-repositories/{extId}",
+          "dao": "ExternalRepositoryDAO.get"
+        },
+        {
+          "method": "PUT",
+          "path": "/multidomain/v4.2/config/external-repositories/{extId}",
+          "dao": "ExternalRepositoryDAO.update"
+        },
+        {
+          "method": "DELETE",
+          "path": "/multidomain/v4.2/config/external-repositories/{extId}",
+          "dao": "ExternalRepositoryDAO.nuke"
+        }
+      ],
+      "missing_endpoints": []
+    },
+    "networking": {
+      "version": "v4.0",
+      "total_endpoints": 107,
+      "implemented": 107,
+      "coverage_pct": 100.0,
+      "has_tests": true,
+      "implemented_endpoints": [
+        {
+          "method": "GET",
+          "path": "/networking/v4.0/aws/config/subnets",
+          "dao": "NetworkDAO.list_aws_subnets"
+        },
+        {
+          "method": "GET",
+          "path": "/networking/v4.0/aws/config/vpcs",
+          "dao": "NetworkDAO.list_aws_vpcs"
+        },
+        {
+          "method": "GET",
+          "path": "/networking/v4.0/config/bgp-sessions/{bgpSessionExtId}/bgp-routes",
+          "dao": "GatewayDAO.list_bgp_routes"
+        },
+        {
+          "method": "GET",
+          "path": "/networking/v4.0/config/bgp-sessions/{bgpSessionExtId}/bgp-routes/{extId}",
+          "dao": "GatewayDAO.get_bgp_route"
+        },
+        {
+          "method": "GET",
+          "path": "/networking/v4.0/config/bgp-sessions",
+          "dao": "GatewayDAO.list_bgp_sessions"
+        },
+        {
+          "method": "POST",
+          "path": "/networking/v4.0/config/bgp-sessions",
+          "dao": "GatewayDAO.create_bgp_session"
+        },
+        {
+          "method": "GET",
+          "path": "/networking/v4.0/config/bgp-sessions/{extId}",
+          "dao": "GatewayDAO.get_bgp_session"
+        },
+        {
+          "method": "PUT",
+          "path": "/networking/v4.0/config/bgp-sessions/{extId}",
+          "dao": "GatewayDAO.update_bgp_session"
+        },
+        {
+          "method": "DELETE",
+          "path": "/networking/v4.0/config/bgp-sessions/{extId}",
+          "dao": "GatewayDAO.delete_bgp_session"
+        },
+        {
+          "method": "GET",
+          "path": "/networking/v4.0/aws/config/capabilities",
+          "dao": "NetworkDAO.get_aws_capabilities"
+        },
+        {
+          "method": "GET",
+          "path": "/networking/v4.0/config/capabilities",
+          "dao": "NetworkDAO.get_cluster_capabilities"
+        },
+        {
+          "method": "GET",
+          "path": "/networking/v4.0/config/floating-ips",
+          "dao": "FloatingIPDAO.list"
+        },
+        {
+          "method": "POST",
+          "path": "/networking/v4.0/config/floating-ips",
+          "dao": "FloatingIPDAO.create"
+        },
+        {
+          "method": "GET",
+          "path": "/networking/v4.0/config/floating-ips/{extId}",
+          "dao": "FloatingIPDAO.get"
+        },
+        {
+          "method": "PUT",
+          "path": "/networking/v4.0/config/floating-ips/{extId}",
+          "dao": "FloatingIPDAO.update"
+        },
+        {
+          "method": "DELETE",
+          "path": "/networking/v4.0/config/floating-ips/{extId}",
+          "dao": "FloatingIPDAO.nuke"
+        },
+        {
+          "method": "GET",
+          "path": "/networking/v4.0/config/gateways",
+          "dao": "GatewayDAO.list"
+        },
+        {
+          "method": "POST",
+          "path": "/networking/v4.0/config/gateways",
+          "dao": "GatewayDAO.create"
+        },
+        {
+          "method": "GET",
+          "path": "/networking/v4.0/config/gateways/{extId}",
+          "dao": "GatewayDAO.get"
+        },
+        {
+          "method": "PUT",
+          "path": "/networking/v4.0/config/gateways/{extId}",
+          "dao": "GatewayDAO.update"
+        },
+        {
+          "method": "DELETE",
+          "path": "/networking/v4.0/config/gateways/{extId}",
+          "dao": "GatewayDAO.nuke"
+        },
+        {
+          "method": "POST",
+          "path": "/networking/v4.0/config/gateways/{extId}/$actions/upgrade",
+          "dao": "GatewayDAO.upgrade"
+        },
+        {
+          "method": "GET",
+          "path": "/networking/v4.0/config/ipfix-exporters",
+          "dao": "NetworkDAO.list_ipfix"
+        },
+        {
+          "method": "POST",
+          "path": "/networking/v4.0/config/ipfix-exporters",
+          "dao": "NetworkDAO.create_ipfix"
+        },
+        {
+          "method": "GET",
+          "path": "/networking/v4.0/config/ipfix-exporters/{extId}",
+          "dao": "NetworkDAO.get_ipfix"
+        },
+        {
+          "method": "PUT",
+          "path": "/networking/v4.0/config/ipfix-exporters/{extId}",
+          "dao": "NetworkDAO.update_ipfix"
+        },
+        {
+          "method": "DELETE",
+          "path": "/networking/v4.0/config/ipfix-exporters/{extId}",
+          "dao": "NetworkDAO.delete_ipfix"
+        },
+        {
+          "method": "GET",
+          "path": "/networking/v4.0/stats/layer2-stretches/{extId}",
+          "dao": "NetworkDAO.get_l2_stretch_stats"
+        },
+        {
+          "method": "GET",
+          "path": "/networking/v4.0/config/layer2-stretches",
+          "dao": "NetworkDAO.list_l2_stretches"
+        },
+        {
+          "method": "POST",
+          "path": "/networking/v4.0/config/layer2-stretches",
+          "dao": "NetworkDAO.create_l2_stretch"
+        },
+        {
+          "method": "GET",
+          "path": "/networking/v4.0/config/layer2-stretches/{extId}",
+          "dao": "NetworkDAO.get_l2_stretch"
+        },
+        {
+          "method": "PUT",
+          "path": "/networking/v4.0/config/layer2-stretches/{extId}",
+          "dao": "NetworkDAO.update_l2_stretch"
+        },
+        {
+          "method": "DELETE",
+          "path": "/networking/v4.0/config/layer2-stretches/{extId}",
+          "dao": "NetworkDAO.delete_l2_stretch"
+        },
+        {
+          "method": "GET",
+          "path": "/networking/v4.0/stats/load-balancer-sessions/{extId}",
+          "dao": "LoadBalancerDAO.get_stats"
+        },
+        {
+          "method": "GET",
+          "path": "/networking/v4.0/config/load-balancer-sessions",
+          "dao": "LoadBalancerDAO.list"
+        },
+        {
+          "method": "POST",
+          "path": "/networking/v4.0/config/load-balancer-sessions",
+          "dao": "LoadBalancerDAO.create"
+        },
+        {
+          "method": "GET",
+          "path": "/networking/v4.0/config/load-balancer-sessions/{extId}",
+          "dao": "LoadBalancerDAO.get"
+        },
+        {
+          "method": "PUT",
+          "path": "/networking/v4.0/config/load-balancer-sessions/{extId}",
+          "dao": "LoadBalancerDAO.update"
+        },
+        {
+          "method": "DELETE",
+          "path": "/networking/v4.0/config/load-balancer-sessions/{extId}",
+          "dao": "LoadBalancerDAO.nuke"
+        },
+        {
+          "method": "GET",
+          "path": "/networking/v4.0/config/layer2-stretches/{layer2StretchExtId}/learned-mac-addresses",
+          "dao": "NetworkDAO.list_learned_macs"
+        },
+        {
+          "method": "GET",
+          "path": "/networking/v4.0/config/layer2-stretches/{layer2StretchExtId}/learned-mac-addresses/{extId}",
+          "dao": "NetworkDAO.get_learned_mac"
+        },
+        {
+          "method": "GET",
+          "path": "/networking/v4.0/config/controllers",
+          "dao": "NetworkDAO.list_controllers"
+        },
+        {
+          "method": "POST",
+          "path": "/networking/v4.0/config/controllers",
+          "dao": "NetworkDAO.create_controller"
+        },
+        {
+          "method": "GET",
+          "path": "/networking/v4.0/config/controllers/{extId}",
+          "dao": "NetworkDAO.get_controller"
+        },
+        {
+          "method": "PUT",
+          "path": "/networking/v4.0/config/controllers/{extId}",
+          "dao": "NetworkDAO.update_controller"
+        },
+        {
+          "method": "DELETE",
+          "path": "/networking/v4.0/config/controllers/{extId}",
+          "dao": "NetworkDAO.delete_controller"
+        },
+        {
+          "method": "GET",
+          "path": "/networking/v4.0/config/clusters/{clusterExtId}/remote-subnets",
+          "dao": "NetworkDAO.list_remote_subnets"
+        },
+        {
+          "method": "GET",
+          "path": "/networking/v4.0/config/clusters/{clusterExtId}/remote-subnets/{extId}",
+          "dao": "NetworkDAO.get_remote_subnet"
+        },
+        {
+          "method": "GET",
+          "path": "/networking/v4.0/config/clusters/{clusterExtId}/remote-vpn-connections",
+          "dao": "NetworkDAO.list_remote_vpn_connections"
+        },
+        {
+          "method": "GET",
+          "path": "/networking/v4.0/config/clusters/{clusterExtId}/remote-vpn-connections/{extId}",
+          "dao": "NetworkDAO.get_remote_vpn_connection"
+        },
+        {
+          "method": "GET",
+          "path": "/networking/v4.0/config/clusters/{clusterExtId}/remote-vtep-gateways",
+          "dao": "NetworkDAO.list_remote_vtep_gateways"
+        },
+        {
+          "method": "GET",
+          "path": "/networking/v4.0/config/clusters/{clusterExtId}/remote-vtep-gateways/{extId}",
+          "dao": "NetworkDAO.get_remote_vtep_gateway"
+        },
+        {
+          "method": "GET",
+          "path": "/networking/v4.0/config/route-tables",
+          "dao": "GatewayDAO.list_route_tables"
+        },
+        {
+          "method": "GET",
+          "path": "/networking/v4.0/config/route-tables/{extId}",
+          "dao": "GatewayDAO.get_route_table"
+        },
+        {
+          "method": "GET",
+          "path": "/networking/v4.0/config/route-tables/{routeTableExtId}/routes",
+          "dao": "GatewayDAO.list_routes"
+        },
+        {
+          "method": "POST",
+          "path": "/networking/v4.0/config/route-tables/{routeTableExtId}/routes",
+          "dao": "GatewayDAO.create_route"
+        },
+        {
+          "method": "GET",
+          "path": "/networking/v4.0/config/route-tables/{routeTableExtId}/routes/{extId}",
+          "dao": "GatewayDAO.get_route"
+        },
+        {
+          "method": "PUT",
+          "path": "/networking/v4.0/config/route-tables/{routeTableExtId}/routes/{extId}",
+          "dao": "GatewayDAO.update_route"
+        },
+        {
+          "method": "DELETE",
+          "path": "/networking/v4.0/config/route-tables/{routeTableExtId}/routes/{extId}",
+          "dao": "GatewayDAO.delete_route"
+        },
+        {
+          "method": "GET",
+          "path": "/networking/v4.0/config/routing-policies",
+          "dao": "GatewayDAO.list_routing_policies"
+        },
+        {
+          "method": "POST",
+          "path": "/networking/v4.0/config/routing-policies",
+          "dao": "GatewayDAO.create_routing_policy"
+        },
+        {
+          "method": "GET",
+          "path": "/networking/v4.0/config/routing-policies/{extId}",
+          "dao": "GatewayDAO.get_routing_policy"
+        },
+        {
+          "method": "PUT",
+          "path": "/networking/v4.0/config/routing-policies/{extId}",
+          "dao": "GatewayDAO.update_routing_policy"
+        },
+        {
+          "method": "DELETE",
+          "path": "/networking/v4.0/config/routing-policies/{extId}",
+          "dao": "GatewayDAO.delete_routing_policy"
+        },
+        {
+          "method": "POST",
+          "path": "/networking/v4.0/stats/routing-policies/$actions/clear",
+          "dao": "GatewayDAO.clear_routing_policy_stats"
+        },
+        {
+          "method": "POST",
+          "path": "/networking/v4.0/config/vnics/{extId}/$actions/migrate",
+          "dao": "NetworkDAO.migrate_vnic"
+        },
+        {
+          "method": "POST",
+          "path": "/networking/v4.0/config/$actions/migrate-subnets",
+          "dao": "NetworkDAO.migrate_subnets"
+        },
+        {
+          "method": "POST",
+          "path": "/networking/v4.0/config/subnets/{extId}/addresses/$actions/reserve",
+          "dao": "NetworkDAO.reserve_ip"
+        },
+        {
+          "method": "POST",
+          "path": "/networking/v4.0/config/subnets/{extId}/addresses/$actions/unreserve",
+          "dao": "NetworkDAO.unreserve_ip"
+        },
+        {
+          "method": "GET",
+          "path": "/networking/v4.0/config/subnets/{subnetExtId}/reserved-ips",
+          "dao": "NetworkDAO.list_reserved_ips"
+        },
+        {
+          "method": "GET",
+          "path": "/networking/v4.0/config/subnets",
+          "dao": "NetworkDAO.list"
+        },
+        {
+          "method": "POST",
+          "path": "/networking/v4.0/config/subnets",
+          "dao": "NetworkDAO.create"
+        },
+        {
+          "method": "GET",
+          "path": "/networking/v4.0/config/subnets/{extId}",
+          "dao": "NetworkDAO.get"
+        },
+        {
+          "method": "PUT",
+          "path": "/networking/v4.0/config/subnets/{extId}",
+          "dao": "NetworkDAO.update"
+        },
+        {
+          "method": "DELETE",
+          "path": "/networking/v4.0/config/subnets/{extId}",
+          "dao": "NetworkDAO.nuke"
+        },
+        {
+          "method": "GET",
+          "path": "/networking/v4.0/config/subnets/{subnetExtId}/vnics",
+          "dao": "NetworkDAO.list_vnics"
+        },
+        {
+          "method": "GET",
+          "path": "/networking/v4.0/stats/traffic-mirrors/{extId}",
+          "dao": "NetworkDAO.get_traffic_mirror_stats"
+        },
+        {
+          "method": "GET",
+          "path": "/networking/v4.0/config/traffic-mirrors",
+          "dao": "NetworkDAO.list_traffic_mirrors"
+        },
+        {
+          "method": "POST",
+          "path": "/networking/v4.0/config/traffic-mirrors",
+          "dao": "NetworkDAO.create_traffic_mirror"
+        },
+        {
+          "method": "GET",
+          "path": "/networking/v4.0/config/traffic-mirrors/{extId}",
+          "dao": "NetworkDAO.get_traffic_mirror"
+        },
+        {
+          "method": "PUT",
+          "path": "/networking/v4.0/config/traffic-mirrors/{extId}",
+          "dao": "NetworkDAO.update_traffic_mirror"
+        },
+        {
+          "method": "DELETE",
+          "path": "/networking/v4.0/config/traffic-mirrors/{extId}",
+          "dao": "NetworkDAO.delete_traffic_mirror"
+        },
+        {
+          "method": "GET",
+          "path": "/networking/v4.0/config/uplink-bonds",
+          "dao": "NetworkDAO.list_uplink_bonds"
+        },
+        {
+          "method": "GET",
+          "path": "/networking/v4.0/config/uplink-bonds/{extId}",
+          "dao": "NetworkDAO.get_uplink_bond"
+        },
+        {
+          "method": "POST",
+          "path": "/networking/v4.0/config/virtual-switches/$actions/migrate",
+          "dao": "LoadBalancerDAO.migrate_virtual_switch"
+        },
+        {
+          "method": "GET",
+          "path": "/networking/v4.0/config/node-schedulable-statuses",
+          "dao": "LoadBalancerDAO.list_node_schedulable_statuses"
+        },
+        {
+          "method": "GET",
+          "path": "/networking/v4.0/config/virtual-switches",
+          "dao": "LoadBalancerDAO.list_virtual_switches"
+        },
+        {
+          "method": "POST",
+          "path": "/networking/v4.0/config/virtual-switches",
+          "dao": "LoadBalancerDAO.create_virtual_switch"
+        },
+        {
+          "method": "GET",
+          "path": "/networking/v4.0/config/virtual-switches/{extId}",
+          "dao": "LoadBalancerDAO.get_virtual_switch"
+        },
+        {
+          "method": "PUT",
+          "path": "/networking/v4.0/config/virtual-switches/{extId}",
+          "dao": "LoadBalancerDAO.update_virtual_switch"
+        },
+        {
+          "method": "DELETE",
+          "path": "/networking/v4.0/config/virtual-switches/{extId}",
+          "dao": "LoadBalancerDAO.delete_virtual_switch"
+        },
+        {
+          "method": "GET",
+          "path": "/networking/v4.0/config/vpc-virtual-switch-mappings",
+          "dao": "VpcDAO.list_vs_mappings"
+        },
+        {
+          "method": "POST",
+          "path": "/networking/v4.0/config/vpc-virtual-switch-mappings",
+          "dao": "VpcDAO.set_vs_mappings"
+        },
+        {
+          "method": "GET",
+          "path": "/networking/v4.0/stats/vpc/{vpcExtId}/external-subnets/{extId}",
+          "dao": "VpcDAO.get_external_subnet_stats"
+        },
+        {
+          "method": "GET",
+          "path": "/networking/v4.0/config/vpcs",
+          "dao": "VpcDAO.list"
+        },
+        {
+          "method": "POST",
+          "path": "/networking/v4.0/config/vpcs",
+          "dao": "VpcDAO.create"
+        },
+        {
+          "method": "GET",
+          "path": "/networking/v4.0/config/vpcs/{extId}",
+          "dao": "VpcDAO.get"
+        },
+        {
+          "method": "PUT",
+          "path": "/networking/v4.0/config/vpcs/{extId}",
+          "dao": "VpcDAO.update"
+        },
+        {
+          "method": "DELETE",
+          "path": "/networking/v4.0/config/vpcs/{extId}",
+          "dao": "VpcDAO.nuke"
+        },
+        {
+          "method": "GET",
+          "path": "/networking/v4.0/stats/vpn-connections/{extId}",
+          "dao": "LoadBalancerDAO.get_vpn_stats"
+        },
+        {
+          "method": "GET",
+          "path": "/networking/v4.0/config/vpn-connections",
+          "dao": "LoadBalancerDAO.list_vpn_connections"
+        },
+        {
+          "method": "POST",
+          "path": "/networking/v4.0/config/vpn-connections",
+          "dao": "LoadBalancerDAO.create_vpn_connection"
+        },
+        {
+          "method": "GET",
+          "path": "/networking/v4.0/config/vpn-connections/{extId}",
+          "dao": "LoadBalancerDAO.get_vpn_connection"
+        },
+        {
+          "method": "PUT",
+          "path": "/networking/v4.0/config/vpn-connections/{extId}",
+          "dao": "LoadBalancerDAO.update_vpn_connection"
+        },
+        {
+          "method": "DELETE",
+          "path": "/networking/v4.0/config/vpn-connections/{extId}",
+          "dao": "LoadBalancerDAO.delete_vpn_connection"
+        },
+        {
+          "method": "GET",
+          "path": "/networking/v4.0/config/vpn-connections/{vpnConnectionExtId}/vpn-vendor-configs",
+          "dao": "LoadBalancerDAO.list_vpn_vendor_configs"
+        },
+        {
+          "method": "GET",
+          "path": "/networking/v4.0/config/vpn-connections/{vpnConnectionExtId}/vpn-vendor-configs/{extId}",
+          "dao": "LoadBalancerDAO.get_vpn_vendor_config"
+        }
+      ],
+      "missing_endpoints": []
+    },
+    "objects": {
+      "version": "v4.0",
+      "total_endpoints": 10,
+      "implemented": 10,
+      "coverage_pct": 100.0,
+      "has_tests": true,
+      "implemented_endpoints": [
+        {
+          "method": "GET",
+          "path": "/objects/v4.0/config/object-stores",
+          "dao": "ObjectStoreDAO.list"
+        },
+        {
+          "method": "POST",
+          "path": "/objects/v4.0/config/object-stores",
+          "dao": "ObjectStoreDAO.create"
+        },
+        {
+          "method": "GET",
+          "path": "/objects/v4.0/config/object-stores/{extId}",
+          "dao": "ObjectStoreDAO.get"
+        },
+        {
+          "method": "PUT",
+          "path": "/objects/v4.0/config/object-stores/{extId}",
+          "dao": "ObjectStoreDAO.update"
+        },
+        {
+          "method": "DELETE",
+          "path": "/objects/v4.0/config/object-stores/{extId}",
+          "dao": "ObjectStoreDAO.nuke"
+        },
+        {
+          "method": "GET",
+          "path": "/objects/v4.0/config/object-stores/{objectStoreExtId}/certificates",
+          "dao": "ObjectStoreDAO.list_certificates"
+        },
+        {
+          "method": "POST",
+          "path": "/objects/v4.0/config/object-stores/{objectStoreExtId}/certificates",
+          "dao": "ObjectStoreDAO.create_certificate"
+        },
+        {
+          "method": "GET",
+          "path": "/objects/v4.0/config/object-stores/{objectStoreExtId}/certificates/{extId}",
+          "dao": "ObjectStoreDAO.get_certificate"
+        },
+        {
+          "method": "GET",
+          "path": "/objects/v4.0/config/object-stores/{objectStoreExtId}/certificates/{certificateExtId}/certificate-authority",
+          "dao": "ObjectStoreDAO.get_certificate_authority"
+        },
+        {
+          "method": "GET",
+          "path": "/objects/v4.0/stats/object-stores/{extId}",
+          "dao": "ObjectStoreDAO.get_stats"
+        }
+      ],
+      "missing_endpoints": []
+    },
+    "opsmgmt": {
+      "version": "v4.0",
+      "total_endpoints": 17,
+      "implemented": 17,
+      "coverage_pct": 100.0,
+      "has_tests": true,
+      "implemented_endpoints": [
+        {
+          "method": "GET",
+          "path": "/opsmgmt/v4.0/config/user/{userExtId}/global-report-setting",
+          "dao": "ReportDAO.get_global_report_setting"
+        },
+        {
+          "method": "PUT",
+          "path": "/opsmgmt/v4.0/config/user/{userExtId}/global-report-setting",
+          "dao": "ReportDAO.update_global_report_setting"
+        },
+        {
+          "method": "GET",
+          "path": "/opsmgmt/v4.0/content/report-artifacts",
+          "dao": "ReportDAO.list_report_artifacts"
+        },
+        {
+          "method": "POST",
+          "path": "/opsmgmt/v4.0/content/report-artifacts",
+          "dao": "ReportDAO.create_report_artifact"
+        },
+        {
+          "method": "POST",
+          "path": "/opsmgmt/v4.0/content/report-artifacts/{reportArtifactExtId}/$actions/upload",
+          "dao": "ReportDAO.upload_report_artifact"
+        },
+        {
+          "method": "GET",
+          "path": "/opsmgmt/v4.0/content/report-artifacts/{reportArtifactExtId}/file",
+          "dao": "ReportDAO.get_report_artifact_file"
+        },
+        {
+          "method": "GET",
+          "path": "/opsmgmt/v4.0/config/report-configs",
+          "dao": "ReportDAO.list_configs"
+        },
+        {
+          "method": "POST",
+          "path": "/opsmgmt/v4.0/config/report-configs",
+          "dao": "ReportDAO.create_config"
+        },
+        {
+          "method": "GET",
+          "path": "/opsmgmt/v4.0/config/report-configs/{extId}",
+          "dao": "ReportDAO.get_config"
+        },
+        {
+          "method": "PUT",
+          "path": "/opsmgmt/v4.0/config/report-configs/{extId}",
+          "dao": "ReportDAO.update_config"
+        },
+        {
+          "method": "DELETE",
+          "path": "/opsmgmt/v4.0/config/report-configs/{extId}",
+          "dao": "ReportDAO.delete_config"
+        },
+        {
+          "method": "GET",
+          "path": "/opsmgmt/v4.0/config/reports",
+          "dao": "ReportDAO.list"
+        },
+        {
+          "method": "POST",
+          "path": "/opsmgmt/v4.0/config/reports",
+          "dao": "ReportDAO.create"
+        },
+        {
+          "method": "GET",
+          "path": "/opsmgmt/v4.0/config/reports/{extId}",
+          "dao": "ReportDAO.get"
+        },
+        {
+          "method": "DELETE",
+          "path": "/opsmgmt/v4.0/config/reports/{extId}",
+          "dao": "ReportDAO.nuke"
+        },
+        {
+          "method": "POST",
+          "path": "/opsmgmt/v4.0/config/reports/{extId}/$actions/notify-recipients",
+          "dao": "ReportDAO.notify_recipients"
+        },
+        {
+          "method": "GET",
+          "path": "/opsmgmt/v4.0/content/reports/{reportExtId}/file",
+          "dao": "ReportDAO.get_report_content_file"
+        }
+      ],
+      "missing_endpoints": []
+    },
+    "prism": {
+      "version": "v4.0",
+      "total_endpoints": 28,
+      "implemented": 28,
+      "coverage_pct": 100.0,
+      "has_tests": true,
+      "implemented_endpoints": [
+        {
+          "method": "POST",
+          "path": "/prism/v4.0/operations/$actions/batch",
+          "dao": "TaskDAO.submit_batch"
+        },
+        {
+          "method": "GET",
+          "path": "/prism/v4.0/operations/batches",
+          "dao": "TaskDAO.list_batches"
+        },
+        {
+          "method": "GET",
+          "path": "/prism/v4.0/operations/batches/{extId}",
+          "dao": "TaskDAO.get_batch"
+        },
+        {
+          "method": "GET",
+          "path": "/prism/v4.0/config/categories",
+          "dao": "CategoryDAO.list"
+        },
+        {
+          "method": "POST",
+          "path": "/prism/v4.0/config/categories",
+          "dao": "CategoryDAO.create"
+        },
+        {
+          "method": "GET",
+          "path": "/prism/v4.0/config/categories/{extId}",
+          "dao": "CategoryDAO.get"
+        },
+        {
+          "method": "PUT",
+          "path": "/prism/v4.0/config/categories/{extId}",
+          "dao": "CategoryDAO.update"
+        },
+        {
+          "method": "DELETE",
+          "path": "/prism/v4.0/config/categories/{extId}",
+          "dao": "CategoryDAO.nuke"
+        },
+        {
+          "method": "GET",
+          "path": "/prism/v4.0/management/restore-sources/{restoreSourceExtId}/restorable-domain-managers",
+          "dao": "TaskDAO.list_restorable_domain_managers"
+        },
+        {
+          "method": "GET",
+          "path": "/prism/v4.0/management/restore-sources/{restoreSourceExtId}/restorable-domain-managers/{restorableDomainManagerExtId}/restore-points",
+          "dao": "TaskDAO.list_restore_points"
+        },
+        {
+          "method": "GET",
+          "path": "/prism/v4.0/management/restore-sources/{restoreSourceExtId}/restorable-domain-managers/{restorableDomainManagerExtId}/restore-points/{extId}",
+          "dao": "TaskDAO.get_restore_point"
+        },
+        {
+          "method": "GET",
+          "path": "/prism/v4.0/management/domain-managers/{domainManagerExtId}/backup-targets",
+          "dao": "TaskDAO.list_backup_targets"
+        },
+        {
+          "method": "POST",
+          "path": "/prism/v4.0/management/domain-managers/{domainManagerExtId}/backup-targets",
+          "dao": "TaskDAO.create_backup_target"
+        },
+        {
+          "method": "GET",
+          "path": "/prism/v4.0/management/domain-managers/{domainManagerExtId}/backup-targets/{extId}",
+          "dao": "TaskDAO.get_backup_target"
+        },
+        {
+          "method": "PUT",
+          "path": "/prism/v4.0/management/domain-managers/{domainManagerExtId}/backup-targets/{extId}",
+          "dao": "TaskDAO.update_backup_target"
+        },
+        {
+          "method": "DELETE",
+          "path": "/prism/v4.0/management/domain-managers/{domainManagerExtId}/backup-targets/{extId}",
+          "dao": "TaskDAO.delete_backup_target"
+        },
+        {
+          "method": "POST",
+          "path": "/prism/v4.0/management/restore-sources/{restoreSourceExtId}/restorable-domain-managers/{restorableDomainManagerExtId}/restore-points/{extId}/$actions/restore",
+          "dao": "TaskDAO.restore_domain_manager"
+        },
+        {
+          "method": "POST",
+          "path": "/prism/v4.0/management/restore-sources",
+          "dao": "TaskDAO.create_restore_source"
+        },
+        {
+          "method": "GET",
+          "path": "/prism/v4.0/management/restore-sources/{extId}",
+          "dao": "TaskDAO.get_restore_source"
+        },
+        {
+          "method": "DELETE",
+          "path": "/prism/v4.0/management/restore-sources/{extId}",
+          "dao": "TaskDAO.delete_restore_source"
+        },
+        {
+          "method": "GET",
+          "path": "/prism/v4.0/config/domain-managers",
+          "dao": "TaskDAO.list_domain_managers"
+        },
+        {
+          "method": "POST",
+          "path": "/prism/v4.0/config/domain-managers",
+          "dao": "TaskDAO.create_domain_manager"
+        },
+        {
+          "method": "GET",
+          "path": "/prism/v4.0/config/domain-managers/{extId}",
+          "dao": "TaskDAO.get_domain_manager"
+        },
+        {
+          "method": "POST",
+          "path": "/prism/v4.0/management/domain-managers/{extId}/$actions/register",
+          "dao": "TaskDAO.register_domain_manager"
+        },
+        {
+          "method": "POST",
+          "path": "/prism/v4.0/management/domain-managers/{extId}/$actions/unregister",
+          "dao": "TaskDAO.unregister_domain_manager"
+        },
+        {
+          "method": "GET",
+          "path": "/prism/v4.0/config/tasks/{extId}",
+          "dao": "TaskDAO.get"
+        },
+        {
+          "method": "POST",
+          "path": "/prism/v4.0/config/tasks/{taskExtId}/$actions/cancel",
+          "dao": "TaskDAO.cancel"
+        },
+        {
+          "method": "GET",
+          "path": "/prism/v4.0/config/tasks",
+          "dao": "TaskDAO.list"
+        }
+      ],
+      "missing_endpoints": []
+    },
+    "security": {
+      "version": "v4.0",
+      "total_endpoints": 17,
+      "implemented": 17,
+      "coverage_pct": 100.0,
+      "has_tests": true,
+      "implemented_endpoints": [
+        {
+          "method": "GET",
+          "path": "/security/v4.0/management/approval-policies",
+          "dao": "CredentialDAO.list_mgmt_approval_policies"
+        },
+        {
+          "method": "POST",
+          "path": "/security/v4.0/management/approval-policies",
+          "dao": "CredentialDAO.create_mgmt_approval_policy"
+        },
+        {
+          "method": "GET",
+          "path": "/security/v4.0/management/approval-policies/{extId}",
+          "dao": "CredentialDAO.get_mgmt_approval_policy"
+        },
+        {
+          "method": "PUT",
+          "path": "/security/v4.0/management/approval-policies/{extId}",
+          "dao": "CredentialDAO.update_mgmt_approval_policy"
+        },
+        {
+          "method": "POST",
+          "path": "/security/v4.0/management/approval-policies/{extId}/$actions/associate-policies",
+          "dao": "CredentialDAO.mgmt_associate_policies"
+        },
+        {
+          "method": "GET",
+          "path": "/security/v4.0/config/credentials",
+          "dao": "CredentialDAO.list"
+        },
+        {
+          "method": "POST",
+          "path": "/security/v4.0/config/credentials",
+          "dao": "CredentialDAO.create"
+        },
+        {
+          "method": "GET",
+          "path": "/security/v4.0/config/credentials/{extId}",
+          "dao": "CredentialDAO.get"
+        },
+        {
+          "method": "PUT",
+          "path": "/security/v4.0/config/credentials/{extId}",
+          "dao": "CredentialDAO.update"
+        },
+        {
+          "method": "DELETE",
+          "path": "/security/v4.0/config/credentials/{extId}",
+          "dao": "CredentialDAO.nuke"
+        },
+        {
+          "method": "GET",
+          "path": "/security/v4.0/config/key-management-servers",
+          "dao": "CredentialDAO.list_kms"
+        },
+        {
+          "method": "POST",
+          "path": "/security/v4.0/config/key-management-servers",
+          "dao": "CredentialDAO.create_kms"
+        },
+        {
+          "method": "GET",
+          "path": "/security/v4.0/config/key-management-servers/{extId}",
+          "dao": "CredentialDAO.get_kms"
+        },
+        {
+          "method": "PUT",
+          "path": "/security/v4.0/config/key-management-servers/{extId}",
+          "dao": "CredentialDAO.update_kms"
+        },
+        {
+          "method": "DELETE",
+          "path": "/security/v4.0/config/key-management-servers/{extId}",
+          "dao": "CredentialDAO.delete_kms"
+        },
+        {
+          "method": "GET",
+          "path": "/security/v4.0/report/stig-summaries",
+          "dao": "CredentialDAO.list_stig_summaries"
+        },
+        {
+          "method": "GET",
+          "path": "/security/v4.0/report/stigs",
+          "dao": "CredentialDAO.list_stigs"
+        }
+      ],
+      "missing_endpoints": []
+    },
+    "storage": {
+      "version": "v4.0.a3",
+      "total_endpoints": 36,
+      "implemented": 36,
+      "coverage_pct": 100.0,
+      "has_tests": false,
+      "implemented_endpoints": [
+        {
+          "method": "GET",
+          "path": "/storage/v4.0.a3/config/iscsi-clients/{clientId}",
+          "dao": "VolumeGroupDAO.alpha_get_iscsi_client"
+        },
+        {
+          "method": "PATCH",
+          "path": "/storage/v4.0.a3/config/iscsi-clients/{clientId}",
+          "dao": "VolumeGroupDAO.alpha_patch_iscsi_client"
+        },
+        {
+          "method": "GET",
+          "path": "/storage/v4.0.a3/config/iscsi-clients",
+          "dao": "VolumeGroupDAO.alpha_list_iscsi_clients"
+        },
+        {
+          "method": "GET",
+          "path": "/storage/v4.0.a3/config/storage-containers",
+          "dao": "StorageDAO.alpha_list"
+        },
+        {
+          "method": "POST",
+          "path": "/storage/v4.0.a3/config/storage-containers",
+          "dao": "StorageDAO.alpha_create"
+        },
+        {
+          "method": "GET",
+          "path": "/storage/v4.0.a3/config/storage-containers/{containerExtId}",
+          "dao": "StorageDAO.alpha_get"
+        },
+        {
+          "method": "PUT",
+          "path": "/storage/v4.0.a3/config/storage-containers/{containerExtId}",
+          "dao": "StorageDAO.alpha_update"
+        },
+        {
+          "method": "DELETE",
+          "path": "/storage/v4.0.a3/config/storage-containers/{containerExtId}",
+          "dao": "StorageDAO.alpha_nuke"
+        },
+        {
+          "method": "POST",
+          "path": "/storage/v4.0.a3/config/storage-containers/{containerExtId}/$actions/mount",
+          "dao": "StorageDAO.alpha_mount"
+        },
+        {
+          "method": "POST",
+          "path": "/storage/v4.0.a3/config/storage-containers/{containerExtId}/$actions/unmount",
+          "dao": "StorageDAO.alpha_unmount"
+        },
+        {
+          "method": "GET",
+          "path": "/storage/v4.0.a3/config/storage-containers/datastores",
+          "dao": "StorageDAO.alpha_list_datastores"
+        },
+        {
+          "method": "GET",
+          "path": "/storage/v4.0.a3/config/volume-groups/{extId}",
+          "dao": "VolumeGroupDAO.alpha_get"
+        },
+        {
+          "method": "DELETE",
+          "path": "/storage/v4.0.a3/config/volume-groups/{extId}",
+          "dao": "VolumeGroupDAO.alpha_nuke"
+        },
+        {
+          "method": "PATCH",
+          "path": "/storage/v4.0.a3/config/volume-groups/{extId}",
+          "dao": "VolumeGroupDAO.alpha_patch"
+        },
+        {
+          "method": "GET",
+          "path": "/storage/v4.0.a3/config/volume-groups",
+          "dao": "VolumeGroupDAO.alpha_list"
+        },
+        {
+          "method": "POST",
+          "path": "/storage/v4.0.a3/config/volume-groups",
+          "dao": "VolumeGroupDAO.alpha_create"
+        },
+        {
+          "method": "GET",
+          "path": "/storage/v4.0.a3/config/volume-groups/{volumeGroupExtId}/disks",
+          "dao": "VolumeGroupDAO.alpha_list_disks"
+        },
+        {
+          "method": "POST",
+          "path": "/storage/v4.0.a3/config/volume-groups/{volumeGroupExtId}/disks",
+          "dao": "VolumeGroupDAO.alpha_create_disk"
+        },
+        {
+          "method": "GET",
+          "path": "/storage/v4.0.a3/config/volume-groups/{volumeGroupExtId}/disks/{diskExtId}",
+          "dao": "VolumeGroupDAO.alpha_get_disk"
+        },
+        {
+          "method": "DELETE",
+          "path": "/storage/v4.0.a3/config/volume-groups/{volumeGroupExtId}/disks/{diskExtId}",
+          "dao": "VolumeGroupDAO.alpha_delete_disk"
+        },
+        {
+          "method": "PATCH",
+          "path": "/storage/v4.0.a3/config/volume-groups/{volumeGroupExtId}/disks/{diskExtId}",
+          "dao": "VolumeGroupDAO.alpha_patch_disk"
+        },
+        {
+          "method": "GET",
+          "path": "/storage/v4.0.a3/config/volume-groups/{volumeGroupExtId}/iscsi-client-attachments",
+          "dao": "VolumeGroupDAO.alpha_list_iscsi_client_attachments"
+        },
+        {
+          "method": "POST",
+          "path": "/storage/v4.0.a3/config/volume-groups/{volumeGroupExtId}/$actions/attach-iscsi-client",
+          "dao": "VolumeGroupDAO.alpha_attach_iscsi_client"
+        },
+        {
+          "method": "POST",
+          "path": "/storage/v4.0.a3/config/volume-groups/{volumeGroupExtId}/$actions/detach-iscsi-client/{clientId}",
+          "dao": "VolumeGroupDAO.alpha_detach_iscsi_client"
+        },
+        {
+          "method": "GET",
+          "path": "/storage/v4.0.a3/config/volume-groups/{volumeGroupExtId}/vm-attachments",
+          "dao": "VolumeGroupDAO.alpha_list_vm_attachments"
+        },
+        {
+          "method": "POST",
+          "path": "/storage/v4.0.a3/config/volume-groups/{volumeGroupExtId}/$actions/attach-vm",
+          "dao": "VolumeGroupDAO.alpha_attach_vm"
+        },
+        {
+          "method": "POST",
+          "path": "/storage/v4.0.a3/config/volume-groups/{volumeGroupExtId}/$actions/detach-vm/{vmExtId}",
+          "dao": "VolumeGroupDAO.alpha_detach_vm"
+        },
+        {
+          "method": "GET",
+          "path": "/storage/v4.0.a3/config/volume-groups/{volumeGroupExtId}/category-associations",
+          "dao": "VolumeGroupDAO.alpha_list_category_associations"
+        },
+        {
+          "method": "POST",
+          "path": "/storage/v4.0.a3/config/volume-groups/{volumeGroupExtId}/$actions/associate-category",
+          "dao": "VolumeGroupDAO.alpha_associate_category"
+        },
+        {
+          "method": "POST",
+          "path": "/storage/v4.0.a3/config/volume-groups/{volumeGroupExtId}/$actions/disassociate-category",
+          "dao": "VolumeGroupDAO.alpha_disassociate_category"
+        },
+        {
+          "method": "POST",
+          "path": "/storage/v4.0.a3/config/volume-groups/{volumeGroupExtId}/$actions/migrate",
+          "dao": "VolumeGroupDAO.alpha_migrate"
+        },
+        {
+          "method": "POST",
+          "path": "/storage/v4.0.a3/config/volume-groups/{volumeGroupExtId}/$actions/revert",
+          "dao": "VolumeGroupDAO.alpha_revert"
+        },
+        {
+          "method": "POST",
+          "path": "/storage/v4.0.a3/config/volume-groups/{volumeGroupExtId}/$actions/pause-synchronous-replication",
+          "dao": "VolumeGroupDAO.alpha_pause_synchronous_replication"
+        },
+        {
+          "method": "POST",
+          "path": "/storage/v4.0.a3/config/volume-groups/{volumeGroupExtId}/$actions/resume-synchronous-replication",
+          "dao": "VolumeGroupDAO.alpha_resume_synchronous_replication"
+        },
+        {
+          "method": "GET",
+          "path": "/storage/v4.0.a3/config/volume-groups/{volumeGroupExtId}/metadata-info",
+          "dao": "VolumeGroupDAO.alpha_get_metadata_info"
+        },
+        {
+          "method": "POST",
+          "path": "/storage/v4.0.a3/config/volume-groups/{volumeGroupExtId}/$actions/update-metadata-info",
+          "dao": "VolumeGroupDAO.alpha_update_metadata_info"
+        }
+      ],
+      "missing_endpoints": []
+    },
+    "vmm": {
+      "version": "v4.0",
+      "total_endpoints": 134,
+      "implemented": 134,
+      "coverage_pct": 100.0,
+      "has_tests": true,
+      "implemented_endpoints": [
+        {
+          "method": "GET",
+          "path": "/vmm/v4.0/esxi/stats/vms",
+          "dao": "EsxiVMDAO.list_stats"
+        },
+        {
+          "method": "GET",
+          "path": "/vmm/v4.0/esxi/stats/vms/{extId}",
+          "dao": "EsxiVMDAO.get_stats"
+        },
+        {
+          "method": "GET",
+          "path": "/vmm/v4.0/esxi/stats/vms/{vmExtId}/nics/{extId}",
+          "dao": "EsxiVMDAO.get_nic_stats"
+        },
+        {
+          "method": "GET",
+          "path": "/vmm/v4.0/esxi/stats/vms/{vmExtId}/disks/{extId}",
+          "dao": "EsxiVMDAO.get_disk_stats"
+        },
+        {
+          "method": "POST",
+          "path": "/vmm/v4.0/esxi/config/vms/{extId}/$actions/associate-categories",
+          "dao": "EsxiVMDAO.associate_categories"
+        },
+        {
+          "method": "POST",
+          "path": "/vmm/v4.0/esxi/config/vms/{extId}/$actions/disassociate-categories",
+          "dao": "EsxiVMDAO.disassociate_categories"
+        },
+        {
+          "method": "GET",
+          "path": "/vmm/v4.0/esxi/config/vms/{extId}",
+          "dao": "EsxiVMDAO.get"
+        },
+        {
+          "method": "GET",
+          "path": "/vmm/v4.0/esxi/config/vms",
+          "dao": "EsxiVMDAO.list"
+        },
+        {
+          "method": "POST",
+          "path": "/vmm/v4.0/esxi/config/vms/{extId}/$actions/revert",
+          "dao": "EsxiVMDAO.revert"
+        },
+        {
+          "method": "GET",
+          "path": "/vmm/v4.0/esxi/config/vms/{extId}/nutanix-guest-tools",
+          "dao": "EsxiVMDAO.get_guest_tools"
+        },
+        {
+          "method": "PUT",
+          "path": "/vmm/v4.0/esxi/config/vms/{extId}/nutanix-guest-tools",
+          "dao": "EsxiVMDAO.update_guest_tools"
+        },
+        {
+          "method": "POST",
+          "path": "/vmm/v4.0/esxi/config/vms/{extId}/nutanix-guest-tools/$actions/install",
+          "dao": "EsxiVMDAO.install_guest_tools"
+        },
+        {
+          "method": "POST",
+          "path": "/vmm/v4.0/esxi/config/vms/{extId}/nutanix-guest-tools/$actions/upgrade",
+          "dao": "EsxiVMDAO.upgrade_guest_tools"
+        },
+        {
+          "method": "POST",
+          "path": "/vmm/v4.0/esxi/config/vms/{extId}/nutanix-guest-tools/$actions/insert-iso",
+          "dao": "EsxiVMDAO.insert_guest_tools_iso"
+        },
+        {
+          "method": "POST",
+          "path": "/vmm/v4.0/esxi/config/vms/{extId}/nutanix-guest-tools/$actions/uninstall",
+          "dao": "EsxiVMDAO.uninstall_guest_tools"
+        },
+        {
+          "method": "POST",
+          "path": "/vmm/v4.0/esxi/config/vms/{extId}/$actions/assign-owner",
+          "dao": "EsxiVMDAO.assign_owner"
+        },
+        {
+          "method": "POST",
+          "path": "/vmm/v4.0/esxi/config/vms/{extId}/$actions/power-on",
+          "dao": "EsxiVMDAO.power_on"
+        },
+        {
+          "method": "POST",
+          "path": "/vmm/v4.0/esxi/config/vms/{extId}/$actions/power-off",
+          "dao": "EsxiVMDAO.power_off"
+        },
+        {
+          "method": "POST",
+          "path": "/vmm/v4.0/esxi/config/vms/{extId}/$actions/reset",
+          "dao": "EsxiVMDAO.reset"
+        },
+        {
+          "method": "POST",
+          "path": "/vmm/v4.0/esxi/config/vms/{extId}/$actions/suspend",
+          "dao": "EsxiVMDAO.suspend"
+        },
+        {
+          "method": "POST",
+          "path": "/vmm/v4.0/esxi/config/vms/{extId}/$actions/guest-shutdown",
+          "dao": "EsxiVMDAO.guest_shutdown"
+        },
+        {
+          "method": "POST",
+          "path": "/vmm/v4.0/esxi/config/vms/{extId}/$actions/guest-reboot",
+          "dao": "EsxiVMDAO.guest_reboot"
+        },
+        {
+          "method": "GET",
+          "path": "/vmm/v4.0/images/config/placement-policies",
+          "dao": "ImagePlacementPolicyDAO.list"
+        },
+        {
+          "method": "POST",
+          "path": "/vmm/v4.0/images/config/placement-policies",
+          "dao": "ImagePlacementPolicyDAO.create"
+        },
+        {
+          "method": "GET",
+          "path": "/vmm/v4.0/images/config/placement-policies/{extId}",
+          "dao": "ImagePlacementPolicyDAO.get"
+        },
+        {
+          "method": "PUT",
+          "path": "/vmm/v4.0/images/config/placement-policies/{extId}",
+          "dao": "ImagePlacementPolicyDAO.update"
+        },
+        {
+          "method": "DELETE",
+          "path": "/vmm/v4.0/images/config/placement-policies/{extId}",
+          "dao": "ImagePlacementPolicyDAO.nuke"
+        },
+        {
+          "method": "POST",
+          "path": "/vmm/v4.0/images/config/placement-policies/{extId}/$actions/suspend",
+          "dao": "ImagePlacementPolicyDAO.suspend"
+        },
+        {
+          "method": "POST",
+          "path": "/vmm/v4.0/images/config/placement-policies/{extId}/$actions/resume",
+          "dao": "ImagePlacementPolicyDAO.resume"
+        },
+        {
+          "method": "GET",
+          "path": "/vmm/v4.0/images/config/rate-limit-policies",
+          "dao": "ImagePlacementPolicyDAO.list_rate_limits"
+        },
+        {
+          "method": "POST",
+          "path": "/vmm/v4.0/images/config/rate-limit-policies",
+          "dao": "ImagePlacementPolicyDAO.create_rate_limit"
+        },
+        {
+          "method": "GET",
+          "path": "/vmm/v4.0/images/config/rate-limit-policies/{extId}",
+          "dao": "ImagePlacementPolicyDAO.get_rate_limit"
+        },
+        {
+          "method": "PUT",
+          "path": "/vmm/v4.0/images/config/rate-limit-policies/{extId}",
+          "dao": "ImagePlacementPolicyDAO.update_rate_limit"
+        },
+        {
+          "method": "DELETE",
+          "path": "/vmm/v4.0/images/config/rate-limit-policies/{extId}",
+          "dao": "ImagePlacementPolicyDAO.delete_rate_limit"
+        },
+        {
+          "method": "GET",
+          "path": "/vmm/v4.0/images/config/effective-rate-limit-policies",
+          "dao": "ImagePlacementPolicyDAO.get_effective_rate_limits"
+        },
+        {
+          "method": "GET",
+          "path": "/vmm/v4.0/content/images",
+          "dao": "ImageDAO.list"
+        },
+        {
+          "method": "POST",
+          "path": "/vmm/v4.0/content/images",
+          "dao": "ImageDAO.create"
+        },
+        {
+          "method": "GET",
+          "path": "/vmm/v4.0/content/images/{extId}",
+          "dao": "ImageDAO.get"
+        },
+        {
+          "method": "PUT",
+          "path": "/vmm/v4.0/content/images/{extId}",
+          "dao": "ImageDAO.update"
+        },
+        {
+          "method": "DELETE",
+          "path": "/vmm/v4.0/content/images/{extId}",
+          "dao": "ImageDAO.nuke"
+        },
+        {
+          "method": "POST",
+          "path": "/vmm/v4.0/content/images/$actions/import",
+          "dao": "ImageDAO.import_image"
+        },
+        {
+          "method": "GET",
+          "path": "/vmm/v4.0/content/images/{imageExtId}/file",
+          "dao": "ImageDAO.get_file"
+        },
+        {
+          "method": "GET",
+          "path": "/vmm/v4.0/ahv/stats/vms",
+          "dao": "VMDAO.list_stats"
+        },
+        {
+          "method": "GET",
+          "path": "/vmm/v4.0/ahv/stats/vms/{extId}",
+          "dao": "VMDAO.get_stats"
+        },
+        {
+          "method": "GET",
+          "path": "/vmm/v4.0/ahv/stats/vms/{vmExtId}/disks/{extId}",
+          "dao": "VMDAO.get_disk_stats"
+        },
+        {
+          "method": "GET",
+          "path": "/vmm/v4.0/ahv/stats/vms/{vmExtId}/nics/{extId}",
+          "dao": "VMDAO.get_nic_stats"
+        },
+        {
+          "method": "GET",
+          "path": "/vmm/v4.0/content/templates",
+          "dao": "TemplateDAO.list"
+        },
+        {
+          "method": "POST",
+          "path": "/vmm/v4.0/content/templates",
+          "dao": "TemplateDAO.create"
+        },
+        {
+          "method": "GET",
+          "path": "/vmm/v4.0/content/templates/{extId}",
+          "dao": "TemplateDAO.get"
+        },
+        {
+          "method": "PUT",
+          "path": "/vmm/v4.0/content/templates/{extId}",
+          "dao": "TemplateDAO.update"
+        },
+        {
+          "method": "DELETE",
+          "path": "/vmm/v4.0/content/templates/{extId}",
+          "dao": "TemplateDAO.nuke"
+        },
+        {
+          "method": "POST",
+          "path": "/vmm/v4.0/content/templates/{extId}/$actions/deploy",
+          "dao": "TemplateDAO.deploy"
+        },
+        {
+          "method": "GET",
+          "path": "/vmm/v4.0/content/templates/{templateExtId}/versions",
+          "dao": "TemplateDAO.list_versions"
+        },
+        {
+          "method": "GET",
+          "path": "/vmm/v4.0/content/templates/{templateExtId}/versions/{extId}",
+          "dao": "TemplateDAO.get_version"
+        },
+        {
+          "method": "DELETE",
+          "path": "/vmm/v4.0/content/templates/{templateExtId}/versions/{extId}",
+          "dao": "TemplateDAO.delete_version"
+        },
+        {
+          "method": "POST",
+          "path": "/vmm/v4.0/content/templates/{extId}/$actions/initiate-guest-update",
+          "dao": "TemplateDAO.initiate_guest_update"
+        },
+        {
+          "method": "POST",
+          "path": "/vmm/v4.0/content/templates/{extId}/$actions/complete-guest-update",
+          "dao": "TemplateDAO.complete_guest_update"
+        },
+        {
+          "method": "POST",
+          "path": "/vmm/v4.0/content/templates/{extId}/$actions/cancel-guest-update",
+          "dao": "TemplateDAO.cancel_guest_update"
+        },
+        {
+          "method": "POST",
+          "path": "/vmm/v4.0/content/templates/{extId}/$actions/publish",
+          "dao": "TemplateDAO.publish"
+        },
+        {
+          "method": "POST",
+          "path": "/vmm/v4.0/ahv/config/vms/{extId}/$actions/associate-categories",
+          "dao": "VMDAO.associate_categories"
+        },
+        {
+          "method": "POST",
+          "path": "/vmm/v4.0/ahv/config/vms/{extId}/$actions/disassociate-categories",
+          "dao": "VMDAO.disassociate_categories"
+        },
+        {
+          "method": "GET",
+          "path": "/vmm/v4.0/ahv/config/vms/{vmExtId}/cd-roms/{extId}",
+          "dao": "VMDAO.get_cdrom"
+        },
+        {
+          "method": "DELETE",
+          "path": "/vmm/v4.0/ahv/config/vms/{vmExtId}/cd-roms/{extId}",
+          "dao": "VMDAO.delete_cdrom"
+        },
+        {
+          "method": "POST",
+          "path": "/vmm/v4.0/ahv/config/vms/{vmExtId}/cd-roms/{extId}/$actions/insert",
+          "dao": "VMDAO.cdrom_insert"
+        },
+        {
+          "method": "POST",
+          "path": "/vmm/v4.0/ahv/config/vms/{vmExtId}/cd-roms/{extId}/$actions/eject",
+          "dao": "VMDAO.cdrom_eject"
+        },
+        {
+          "method": "GET",
+          "path": "/vmm/v4.0/ahv/config/vms/{vmExtId}/cd-roms",
+          "dao": "VMDAO.list_cdroms"
+        },
+        {
+          "method": "POST",
+          "path": "/vmm/v4.0/ahv/config/vms/{vmExtId}/cd-roms",
+          "dao": "VMDAO.create_cdrom"
+        },
+        {
+          "method": "POST",
+          "path": "/vmm/v4.0/ahv/config/vms/{extId}/$actions/clone",
+          "dao": "VMDAO.clone"
+        },
+        {
+          "method": "GET",
+          "path": "/vmm/v4.0/ahv/config/vms/{vmExtId}/disks/{extId}",
+          "dao": "VMDAO.get_disk"
+        },
+        {
+          "method": "PUT",
+          "path": "/vmm/v4.0/ahv/config/vms/{vmExtId}/disks/{extId}",
+          "dao": "VMDAO.update_disk"
+        },
+        {
+          "method": "DELETE",
+          "path": "/vmm/v4.0/ahv/config/vms/{vmExtId}/disks/{extId}",
+          "dao": "VMDAO.delete_disk"
+        },
+        {
+          "method": "GET",
+          "path": "/vmm/v4.0/ahv/config/vms/{vmExtId}/disks",
+          "dao": "VMDAO.list_disks"
+        },
+        {
+          "method": "POST",
+          "path": "/vmm/v4.0/ahv/config/vms/{vmExtId}/disks",
+          "dao": "VMDAO.create_disk"
+        },
+        {
+          "method": "GET",
+          "path": "/vmm/v4.0/ahv/config/vms/{extId}",
+          "dao": "VMDAO.get"
+        },
+        {
+          "method": "PUT",
+          "path": "/vmm/v4.0/ahv/config/vms/{extId}",
+          "dao": "VMDAO.update"
+        },
+        {
+          "method": "DELETE",
+          "path": "/vmm/v4.0/ahv/config/vms/{extId}",
+          "dao": "VMDAO.nuke"
+        },
+        {
+          "method": "GET",
+          "path": "/vmm/v4.0/ahv/config/vms",
+          "dao": "VMDAO.list"
+        },
+        {
+          "method": "POST",
+          "path": "/vmm/v4.0/ahv/config/vms",
+          "dao": "VMDAO.create"
+        },
+        {
+          "method": "POST",
+          "path": "/vmm/v4.0/ahv/config/vms/{extId}/$actions/customize-guest",
+          "dao": "VMDAO.customize_guest"
+        },
+        {
+          "method": "POST",
+          "path": "/vmm/v4.0/ahv/config/vms/{extId}/$actions/migrate-vm-disks",
+          "dao": "VMDAO.migrate_disks"
+        },
+        {
+          "method": "POST",
+          "path": "/vmm/v4.0/ahv/config/vms/{extId}/$actions/revert",
+          "dao": "VMDAO.revert"
+        },
+        {
+          "method": "POST",
+          "path": "/vmm/v4.0/ahv/config/vms/{extId}/$actions/migrate",
+          "dao": "VMDAO.migrate"
+        },
+        {
+          "method": "POST",
+          "path": "/vmm/v4.0/ahv/config/vms/{extId}/$actions/migrate-to-host",
+          "dao": "VMDAO.migrate_to_host"
+        },
+        {
+          "method": "GET",
+          "path": "/vmm/v4.0/ahv/config/vms/{vmExtId}/gpus/{extId}",
+          "dao": "VMDAO.get_gpu"
+        },
+        {
+          "method": "DELETE",
+          "path": "/vmm/v4.0/ahv/config/vms/{vmExtId}/gpus/{extId}",
+          "dao": "VMDAO.delete_gpu"
+        },
+        {
+          "method": "GET",
+          "path": "/vmm/v4.0/ahv/config/vms/{vmExtId}/gpus",
+          "dao": "VMDAO.list_gpus"
+        },
+        {
+          "method": "POST",
+          "path": "/vmm/v4.0/ahv/config/vms/{vmExtId}/gpus",
+          "dao": "VMDAO.create_gpu"
+        },
+        {
+          "method": "GET",
+          "path": "/vmm/v4.0/ahv/config/vms/{extId}/guest-tools",
+          "dao": "VMDAO.get_guest_tools"
+        },
+        {
+          "method": "PUT",
+          "path": "/vmm/v4.0/ahv/config/vms/{extId}/guest-tools",
+          "dao": "VMDAO.update_guest_tools"
+        },
+        {
+          "method": "POST",
+          "path": "/vmm/v4.0/ahv/config/vms/{extId}/guest-tools/$actions/install",
+          "dao": "VMDAO.install_guest_tools"
+        },
+        {
+          "method": "POST",
+          "path": "/vmm/v4.0/ahv/config/vms/{extId}/guest-tools/$actions/upgrade",
+          "dao": "VMDAO.upgrade_guest_tools"
+        },
+        {
+          "method": "POST",
+          "path": "/vmm/v4.0/ahv/config/vms/{extId}/guest-tools/$actions/insert-iso",
+          "dao": "VMDAO.insert_guest_tools_iso"
+        },
+        {
+          "method": "POST",
+          "path": "/vmm/v4.0/ahv/config/vms/{extId}/guest-tools/$actions/uninstall",
+          "dao": "VMDAO.uninstall_guest_tools"
+        },
+        {
+          "method": "GET",
+          "path": "/vmm/v4.0/ahv/config/vms/{vmExtId}/nics/{extId}",
+          "dao": "VMDAO.get_nic"
+        },
+        {
+          "method": "PUT",
+          "path": "/vmm/v4.0/ahv/config/vms/{vmExtId}/nics/{extId}",
+          "dao": "VMDAO.update_nic"
+        },
+        {
+          "method": "DELETE",
+          "path": "/vmm/v4.0/ahv/config/vms/{vmExtId}/nics/{extId}",
+          "dao": "VMDAO.delete_nic"
+        },
+        {
+          "method": "GET",
+          "path": "/vmm/v4.0/ahv/config/vms/{vmExtId}/nics",
+          "dao": "VMDAO.list_nics"
+        },
+        {
+          "method": "POST",
+          "path": "/vmm/v4.0/ahv/config/vms/{vmExtId}/nics",
+          "dao": "VMDAO.create_nic"
+        },
+        {
+          "method": "POST",
+          "path": "/vmm/v4.0/ahv/config/vms/{vmExtId}/nics/{extId}/$actions/assign-ip",
+          "dao": "VMDAO.nic_assign_ip"
+        },
+        {
+          "method": "POST",
+          "path": "/vmm/v4.0/ahv/config/vms/{vmExtId}/nics/{extId}/$actions/release-ip",
+          "dao": "VMDAO.nic_release_ip"
+        },
+        {
+          "method": "POST",
+          "path": "/vmm/v4.0/ahv/config/vms/{vmExtId}/nics/{extId}/$actions/migrate",
+          "dao": "VMDAO.nic_migrate"
+        },
+        {
+          "method": "POST",
+          "path": "/vmm/v4.0/ahv/config/vms/{extId}/$actions/assign-owner",
+          "dao": "VMDAO.assign_owner"
+        },
+        {
+          "method": "GET",
+          "path": "/vmm/v4.0/ahv/config/vms/{vmExtId}/pcie-devices/{extId}",
+          "dao": "VMDAO.get_pcie_device"
+        },
+        {
+          "method": "DELETE",
+          "path": "/vmm/v4.0/ahv/config/vms/{vmExtId}/pcie-devices/{extId}",
+          "dao": "VMDAO.delete_pcie_device"
+        },
+        {
+          "method": "GET",
+          "path": "/vmm/v4.0/ahv/config/vms/{vmExtId}/pcie-devices",
+          "dao": "VMDAO.list_pcie_devices"
+        },
+        {
+          "method": "POST",
+          "path": "/vmm/v4.0/ahv/config/vms/{vmExtId}/pcie-devices",
+          "dao": "VMDAO.create_pcie_device"
+        },
+        {
+          "method": "POST",
+          "path": "/vmm/v4.0/ahv/config/vms/{extId}/$actions/power-on",
+          "dao": "VMDAO.power_on"
+        },
+        {
+          "method": "POST",
+          "path": "/vmm/v4.0/ahv/config/vms/{extId}/$actions/power-cycle",
+          "dao": "VMDAO.power_cycle"
+        },
+        {
+          "method": "POST",
+          "path": "/vmm/v4.0/ahv/config/vms/{extId}/$actions/power-off",
+          "dao": "VMDAO.power_off"
+        },
+        {
+          "method": "POST",
+          "path": "/vmm/v4.0/ahv/config/vms/{extId}/$actions/reset",
+          "dao": "VMDAO.restart"
+        },
+        {
+          "method": "POST",
+          "path": "/vmm/v4.0/ahv/config/vms/{extId}/$actions/shutdown",
+          "dao": "VMDAO.shutdown"
+        },
+        {
+          "method": "POST",
+          "path": "/vmm/v4.0/ahv/config/vms/{extId}/$actions/guest-shutdown",
+          "dao": "VMDAO.guest_shutdown"
+        },
+        {
+          "method": "POST",
+          "path": "/vmm/v4.0/ahv/config/vms/{extId}/$actions/reboot",
+          "dao": "VMDAO.reboot"
+        },
+        {
+          "method": "POST",
+          "path": "/vmm/v4.0/ahv/config/vms/{extId}/$actions/guest-reboot",
+          "dao": "VMDAO.guest_reboot"
+        },
+        {
+          "method": "GET",
+          "path": "/vmm/v4.0/ahv/config/vms/{vmExtId}/serial-ports/{extId}",
+          "dao": "VMDAO.get_serial_port"
+        },
+        {
+          "method": "PUT",
+          "path": "/vmm/v4.0/ahv/config/vms/{vmExtId}/serial-ports/{extId}",
+          "dao": "VMDAO.update_serial_port"
+        },
+        {
+          "method": "DELETE",
+          "path": "/vmm/v4.0/ahv/config/vms/{vmExtId}/serial-ports/{extId}",
+          "dao": "VMDAO.delete_serial_port"
+        },
+        {
+          "method": "GET",
+          "path": "/vmm/v4.0/ahv/config/vms/{vmExtId}/serial-ports",
+          "dao": "VMDAO.list_serial_ports"
+        },
+        {
+          "method": "POST",
+          "path": "/vmm/v4.0/ahv/config/vms/{vmExtId}/serial-ports",
+          "dao": "VMDAO.create_serial_port"
+        },
+        {
+          "method": "GET",
+          "path": "/vmm/v4.0/ahv/policies/vm-anti-affinity-policies/{extId}",
+          "dao": "VmAntiAffinityPolicyDAO.get"
+        },
+        {
+          "method": "PUT",
+          "path": "/vmm/v4.0/ahv/policies/vm-anti-affinity-policies/{extId}",
+          "dao": "VmAntiAffinityPolicyDAO.update"
+        },
+        {
+          "method": "DELETE",
+          "path": "/vmm/v4.0/ahv/policies/vm-anti-affinity-policies/{extId}",
+          "dao": "VmAntiAffinityPolicyDAO.nuke"
+        },
+        {
+          "method": "GET",
+          "path": "/vmm/v4.0/ahv/policies/vm-anti-affinity-policies",
+          "dao": "VmAntiAffinityPolicyDAO.list"
+        },
+        {
+          "method": "POST",
+          "path": "/vmm/v4.0/ahv/policies/vm-anti-affinity-policies",
+          "dao": "VmAntiAffinityPolicyDAO.create"
+        },
+        {
+          "method": "GET",
+          "path": "/vmm/v4.0/ahv/policies/vm-anti-affinity-policies/{vmAntiAffinityPolicyExtId}/vm-compliance-states",
+          "dao": "VmAntiAffinityPolicyDAO.list_compliance_states"
+        },
+        {
+          "method": "GET",
+          "path": "/vmm/v4.0/ahv/policies/legacy-vm-anti-affinity-policies",
+          "dao": "VmAntiAffinityPolicyDAO.list_legacy"
+        },
+        {
+          "method": "DELETE",
+          "path": "/vmm/v4.0/ahv/policies/legacy-vm-anti-affinity-policies/{extId}",
+          "dao": "VmAntiAffinityPolicyDAO.delete_legacy"
+        },
+        {
+          "method": "GET",
+          "path": "/vmm/v4.0/ahv/policies/vm-host-affinity-policies/{extId}",
+          "dao": "VmAntiAffinityPolicyDAO.get_host_affinity"
+        },
+        {
+          "method": "PUT",
+          "path": "/vmm/v4.0/ahv/policies/vm-host-affinity-policies/{extId}",
+          "dao": "VmAntiAffinityPolicyDAO.update_host_affinity"
+        },
+        {
+          "method": "DELETE",
+          "path": "/vmm/v4.0/ahv/policies/vm-host-affinity-policies/{extId}",
+          "dao": "VmAntiAffinityPolicyDAO.delete_host_affinity"
+        },
+        {
+          "method": "POST",
+          "path": "/vmm/v4.0/ahv/policies/vm-host-affinity-policies/{extId}/$actions/re-enforce",
+          "dao": "VmAntiAffinityPolicyDAO.re_enforce_host_affinity"
+        },
+        {
+          "method": "GET",
+          "path": "/vmm/v4.0/ahv/policies/vm-host-affinity-policies",
+          "dao": "VmAntiAffinityPolicyDAO.list_host_affinity"
+        },
+        {
+          "method": "POST",
+          "path": "/vmm/v4.0/ahv/policies/vm-host-affinity-policies",
+          "dao": "VmAntiAffinityPolicyDAO.create_host_affinity"
+        },
+        {
+          "method": "GET",
+          "path": "/vmm/v4.0/ahv/policies/vm-host-affinity-policies/{vmHostAffinityPolicyExtId}/vm-compliance-states",
+          "dao": "VmAntiAffinityPolicyDAO.list_host_affinity_compliance"
+        }
+      ],
+      "missing_endpoints": []
+    },
+    "volumes": {
+      "version": "v4.0",
+      "total_endpoints": 26,
+      "implemented": 26,
+      "coverage_pct": 100.0,
+      "has_tests": true,
+      "implemented_endpoints": [
+        {
+          "method": "GET",
+          "path": "/volumes/v4.0/config/iscsi-clients/{extId}",
+          "dao": "VolumeGroupDAO.get_iscsi_client"
+        },
+        {
+          "method": "PUT",
+          "path": "/volumes/v4.0/config/iscsi-clients/{extId}",
+          "dao": "VolumeGroupDAO.update_iscsi_client"
+        },
+        {
+          "method": "GET",
+          "path": "/volumes/v4.0/config/iscsi-clients",
+          "dao": "VolumeGroupDAO.list_iscsi_clients"
+        },
+        {
+          "method": "GET",
+          "path": "/volumes/v4.0/config/volume-groups/{extId}",
+          "dao": "VolumeGroupDAO.get"
+        },
+        {
+          "method": "PUT",
+          "path": "/volumes/v4.0/config/volume-groups/{extId}",
+          "dao": "VolumeGroupDAO.update"
+        },
+        {
+          "method": "DELETE",
+          "path": "/volumes/v4.0/config/volume-groups/{extId}",
+          "dao": "VolumeGroupDAO.nuke"
+        },
+        {
+          "method": "GET",
+          "path": "/volumes/v4.0/config/volume-groups",
+          "dao": "VolumeGroupDAO.list"
+        },
+        {
+          "method": "POST",
+          "path": "/volumes/v4.0/config/volume-groups",
+          "dao": "VolumeGroupDAO.create"
+        },
+        {
+          "method": "GET",
+          "path": "/volumes/v4.0/config/volume-groups/{volumeGroupExtId}/disks",
+          "dao": "VolumeGroupDAO.list_disks"
+        },
+        {
+          "method": "POST",
+          "path": "/volumes/v4.0/config/volume-groups/{volumeGroupExtId}/disks",
+          "dao": "VolumeGroupDAO.create_disk"
+        },
+        {
+          "method": "GET",
+          "path": "/volumes/v4.0/config/volume-groups/{volumeGroupExtId}/disks/{extId}",
+          "dao": "VolumeGroupDAO.get_disk"
+        },
+        {
+          "method": "PUT",
+          "path": "/volumes/v4.0/config/volume-groups/{volumeGroupExtId}/disks/{extId}",
+          "dao": "VolumeGroupDAO.update_disk"
+        },
+        {
+          "method": "DELETE",
+          "path": "/volumes/v4.0/config/volume-groups/{volumeGroupExtId}/disks/{extId}",
+          "dao": "VolumeGroupDAO.delete_disk"
+        },
+        {
+          "method": "GET",
+          "path": "/volumes/v4.0/config/volume-groups/{volumeGroupExtId}/external-iscsi-attachments",
+          "dao": "VolumeGroupDAO.list_external_iscsi_attachments"
+        },
+        {
+          "method": "POST",
+          "path": "/volumes/v4.0/config/volume-groups/{extId}/$actions/attach-iscsi-client",
+          "dao": "VolumeGroupDAO.attach_iscsi_client"
+        },
+        {
+          "method": "POST",
+          "path": "/volumes/v4.0/config/volume-groups/{extId}/$actions/detach-iscsi-client",
+          "dao": "VolumeGroupDAO.detach_iscsi_client"
+        },
+        {
+          "method": "GET",
+          "path": "/volumes/v4.0/config/volume-groups/{volumeGroupExtId}/vm-attachments",
+          "dao": "VolumeGroupDAO.list_vm_attachments"
+        },
+        {
+          "method": "POST",
+          "path": "/volumes/v4.0/config/volume-groups/{extId}/$actions/attach-vm",
+          "dao": "VolumeGroupDAO.attach_vm"
+        },
+        {
+          "method": "POST",
+          "path": "/volumes/v4.0/config/volume-groups/{extId}/$actions/detach-vm",
+          "dao": "VolumeGroupDAO.detach_vm"
+        },
+        {
+          "method": "GET",
+          "path": "/volumes/v4.0/config/volume-groups/{volumeGroupExtId}/category-associations",
+          "dao": "VolumeGroupDAO.list_category_associations"
+        },
+        {
+          "method": "POST",
+          "path": "/volumes/v4.0/config/volume-groups/{extId}/$actions/associate-category",
+          "dao": "VolumeGroupDAO.associate_category"
+        },
+        {
+          "method": "POST",
+          "path": "/volumes/v4.0/config/volume-groups/{extId}/$actions/disassociate-category",
+          "dao": "VolumeGroupDAO.disassociate_category"
+        },
+        {
+          "method": "POST",
+          "path": "/volumes/v4.0/config/volume-groups/{extId}/$actions/revert",
+          "dao": "VolumeGroupDAO.revert"
+        },
+        {
+          "method": "GET",
+          "path": "/volumes/v4.0/config/volume-groups/{volumeGroupExtId}/metadata",
+          "dao": "VolumeGroupDAO.get_metadata"
+        },
+        {
+          "method": "GET",
+          "path": "/volumes/v4.0/stats/volume-groups/{extId}",
+          "dao": "VolumeGroupDAO.get_stats"
+        },
+        {
+          "method": "GET",
+          "path": "/volumes/v4.0/stats/volume-groups/{volumeGroupExtId}/disks/{extId}",
+          "dao": "VolumeGroupDAO.get_disk_stats"
+        }
+      ],
+      "missing_endpoints": []
+    }
+  }
+}

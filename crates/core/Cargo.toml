@@ -1,0 +1,39 @@
+[package]
+name = "nutsh-core"
+description = "Store, scheduler, filters, explain, timeline, and safety rules"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+
+[lints]
+workspace = true
+
+[features]
+# The hooks tests reach for and nothing else may: the in-flight cycle's clock, which no
+# production caller sets. `nutsh-tui`'s own `testing` feature turns it on, so a release build of
+# the binary - which asks for neither - cannot call it.
+testing = []
+
+[dependencies]
+anyhow.workspace = true
+futures = "0.3"
+indexmap.workspace = true
+nutsh-catalog.workspace = true
+nutsh-config.workspace = true
+nutsh-prism.workspace = true
+serde.workspace = true
+serde_json = { workspace = true, features = ["preserve_order"] }
+time.workspace = true
+tokio.workspace = true
+tracing.workspace = true
+tracing-subscriber.workspace = true
+
+[dev-dependencies]
+nutsh-mockpc.workspace = true
+serde_yaml_ng.workspace = true
+tempfile = "3"
+# The paused clock: the idle pause is a five-minute rule, and no test may take five minutes to
+# assert one. A dev-dependency, so nothing the binary links carries it.
+tokio = { workspace = true, features = ["test-util"] }
+toml.workspace = true

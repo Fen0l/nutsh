@@ -1,0 +1,72 @@
+[
+  {
+    "$objectType": "licensing.v4.config.License",
+    "extId": "f74bee30-ca5e-4646-a158-9b21b39db6ab",
+    "name": "name-a31d1e0e",
+    "type": "NUS",
+    "category": "PRO",
+    "subCategory": "$UNKNOWN",
+    "expiryDate": "2026-12-10",
+    "salesforceLicenseId": "NUS-PRO-INCLUDED",
+    "meter": "TIB",
+    "scope": "PC_PE",
+    "quantity": 10.0,
+    "isDeleted": false
+  },
+  {
+    "$objectType": "licensing.v4.config.License",
+    "extId": "7273455e-2b05-4352-83d2-e005656771dc",
+    "name": "name-03ef38d4",
+    "type": "NKPFS",
+    "category": "ULTIMATE",
+    "subCategory": "$UNKNOWN",
+    "expiryDate": "2026-12-10",
+    "salesforceLicenseId": "LIC-02558494",
+    "meter": "CORES",
+    "scope": "PE",
+    "quantity": 168.0,
+    "isDeleted": false
+  },
+  {
+    "$objectType": "licensing.v4.config.License",
+    "extId": "16345a5a-aba7-462c-a03f-e03e6ebfc62d",
+    "name": "name-47d36db4",
+    "type": "NDS_PLATFORM",
+    "category": "ULTIMATE",
+    "subCategory": "$UNKNOWN",
+    "expiryDate": "2026-12-10",
+    "salesforceLicenseId": "NDB-INCLUDED-1",
+    "meter": "CORES",
+    "scope": "PE",
+    "quantity": 10.0,
+    "isDeleted": false
+  },
+  {
+    "$objectType": "licensing.v4.config.License",
+    "extId": "7108edf6-6803-4e63-a9a9-e787209d6e00",
+    "name": "name-ac3e5884",
+    "type": "NCM",
+    "category": "ULTIMATE",
+    "subCategory": "$UNKNOWN",
+    "expiryDate": "2026-12-10",
+    "salesforceLicenseId": "LIC-02558495",
+    "meter": "CORES",
+    "scope": "PC",
+    "quantity": 168.0,
+    "isDeleted": false
+  },
+  {
+    "$objectType": "licensing.v4.config.License",
+    "extId": "56144c88-9c5b-45c4-a363-3240b496cce0",
+    "name": "name-47d36db4",
+    "type": "NDS_PLATFORM",
+    "category": "ULTIMATE",
+    "subCategory": "$UNKNOWN",
+    "expiryDate": "2026-12-10",
+    "salesforceLicenseId": "NDB-INCLUDED-2",
+    "meter": "CORES",
+    "scope": "PE",
+    "quantity": 10.0,
+    "isDeleted": false
+  }
+]

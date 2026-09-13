@@ -1,0 +1,28 @@
+---
+source: crates/tui/tests/search.rs
+expression: frame.clone()
+---
+╭ nutsh ─────────────────────────────────────────────────────────────────────────────────────╮
+│Context:    -                                                    ⏎ drill        y detail    │       clusters -  hosts -
+│PC:         127.0.0.1:PORT  pc.2024.3                           S sort         w wide      │         vms -  on/off -/-
+│Cluster:    <all>                                               ←→ columns     ^r refresh   │           alerts ⚠ -  ✖ -
+│Kind:       Compute & Storage › VMs                             ^t every       ^x stop      │         tasks ▶ - running
+│Count:      3                                                    a actions     ^c quit      │
+╰────────────────────────────────────────────────────────────────────────────────────────────╯  v0.0.2-beta1 · pc.2024.3
+╭ nutsh ───────────────╮╭ results for "203.0.113"  [2] ────────────────────────────────────────────────────────────────╮
+│  ▸ Dashboard         ││  Virtual Machines [1]                                                                        │
+│  ▾ Compute & Storage ││▌   web-01                                                                   IP 203.0.113.11  │
+│      Overview        ││  Hosts [1]                                                                                   │
+│    • VMs [3]         ││    ahv-node-1                                                          CVM IP 203.0.113.201  │
+│      ESXi VMs        ││                                                                                              │
+│      Templates       ││                                                                                              │
+│      Images          ││                                                                                              │
+│      OVAs            ││                                                                                              │
+│      VM Profiles     ││                                                                                              │
+│      Guest Customizat││                                                                                              │
+│      Storage Containe││                                                                                              │
+│      Volume Groups   ││                                                                                              │
+│      Storage Policies││searched 2 loaded kinds · 230 not loaded                                                      │
+╰───────────────── ↓39 ╯╰──────────────────────────────────────────────────────────────────────────────────────────────╯
+ j k move  enter open  esc close
+[meter]          ● live

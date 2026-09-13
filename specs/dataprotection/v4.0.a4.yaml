@@ -1,0 +1,2850 @@
+openapi: 3.0.1
+info:
+  title: Nutanix Dataprotection Versioned APIs
+  description: "Business Continuity with full spectrum of Disaster Recovery and Backup\
+    \ solution. Spanning across Single PC, Cross AZ, MultiSite. Configuration of Recovery\
+    \ points, Protection policies, Recovery Plans. Execution and monitoring of back\
+    \ up and recovery orchestrations on OnPrem as well as Cloud."
+  version: 4.0.1-alpha-4
+  x-logo:
+    altText: Data Protection Logo
+    url: https://developers.nutanix.com/api/v1/namespaces/dataprotection/images/dataprotection-logo-img.svg
+  x-repo-name: dataprotection
+servers:
+- url: "https://{pc-ip}:9440/api"
+security:
+- basicAuthScheme: []
+paths:
+  /dataprotection/v4.0.a4/config/consistency-groups:
+    get:
+      tags:
+      - ConsistencyGroup
+      summary: List Consistency groups.
+      description: List of Consistency groups.
+      operationId: getConsistencyGroups
+      parameters:
+      - name: vmList
+        in: query
+        description: List of VM external identifiers. This endpoint will return the
+          list of Consistency groups that are part of the provided VM external identifiers
+          list.
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: array
+          items:
+            pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+            type: string
+      - name: volumeGroupList
+        in: query
+        description: List of volume group external identifiers. This endpoint will
+          return the list of Consistency groups that are part of the provided volume
+          group external identifiers list.
+        required: false
+        style: form
+        explode: false
+        schema:
+          type: array
+          items:
+            pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+            type: string
+      - name: $page
+        in: query
+        description: |
+          A URL query parameter that specifies the page number of the result set.  Must be a positive integer between 0 and the maximum number of pages that are available for that resource. Any number out of this range will lead to no results being returned.
+        required: false
+        style: form
+        explode: false
+        schema:
+          minimum: 0
+          type: integer
+          description: |
+            A URL query parameter that specifies the page number of the result set.  Must be a positive integer between 0 and the maximum number of pages that are available for that resource. Any number out of this range will lead to no results being returned.
+          format: int32
+          default: 0
+      - name: $limit
+        in: query
+        description: |
+          A URL query parameter that specifies the total number of records returned in the result set.  Must be a positive integer between 1 and 100. Any number out of this range will lead to a validation error. If the limit is not provided a default value of 50 records will be returned in the result set.
+        required: false
+        style: form
+        explode: false
+        schema:
+          maximum: 100
+          minimum: 1
+          type: integer
+          description: |
+            A URL query parameter that specifies the total number of records returned in the result set.  Must be a positive integer between 1 and 100. Any number out of this range will lead to a validation error. If the limit is not provided a default value of 50 records will be returned in the result set.
+          format: int32
+          default: 50
+      - name: $filter
+        in: query
+        description: |
+          A URL query parameter that allows clients to filter a collection of resources. The expression specified with $filter is evaluated for each resource in the collection, and only items where the expression evaluates to true are included in the response. Expression specified with the $filter must conform to the OData V4.01 URL conventions.
+          For example, filter '$filter=name eq 'karbon-ntnx-1.0' would filter result on cluster name karbon-ntnx1.0, filter '$filter=startswith(name, 'C')' would filter on cluster name starting with C.
+          The filter can be applied on the following fields:
+          - extId
+          - members/entityId
+          - members/extId
+          - name
+          - ownerExtId
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: $orderby
+        in: query
+        description: |
+          A URL query parameter that allows clients to specify the sort criteria for the returned list of objects. Resources can be sorted in ascending order using asc or descending order using desc. If asc or desc are not specified the resources will be sorted in ascending order by default. For example, '$orderby=templateName desc' would get all templates sorted by templateName in desc order.
+          The orderby can be applied to the following fields:
+          - name
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: $select
+        in: query
+        description: |
+          A URL query parameter that allows clients to request a specific set of properties for each entity or complex type. Expression specified with the $select must conform to the OData V4.01 URL conventions. If a $select expression consists of a single select item that is an asterisk (i.e. *), then all properties on the matching resource will be returned.
+          - extId
+          - name
+          - ownerExtId
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: List of Consistency groups.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/dataprotection.v4.r0.a4.config.ConsistencyGroup'
+                additionalProperties: false
+                description: REST response for all response codes in API path /dataprotection/v4.0.a4/config/consistency-groups
+                  Get operation
+        "4XX":
+          description: Client error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/dataprotection.v4.r0.a4.error.ErrorResponse'
+                additionalProperties: false
+                description: REST response for all response codes in API path /dataprotection/v4.0.a4/config/consistency-groups
+                  Get operation
+        "5XX":
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/dataprotection.v4.r0.a4.error.ErrorResponse'
+                additionalProperties: false
+                description: REST response for all response codes in API path /dataprotection/v4.0.a4/config/consistency-groups
+                  Get operation
+      x-code-samples:
+      - lang: Java
+        source: |2
+
+          package sample;
+
+          import com.nutanix.dp.java.client.ApiClient;
+          import com.nutanix.dp.java.client.api.ConsistencyGroupApi;
+          import com.nutanix.dp1.dp.dataprotection.v4.config.ConsistencyGroupListApiResponse;
+
+          public class JavaSdkSample {
+              public static void main(String[] args) {
+                  // Configure the client
+                  ApiClient apiClient = new ApiClient();
+                  // IPv4/IPv6 address or FQDN of the cluster
+                  apiClient.setHost("localhost");
+                  // Port to which to connect to
+                  apiClient.setPort(9440);
+                  // Interval in ms to use during retry attempts
+                  apiClient.setRetryInterval(5000);
+                  // Max retry attempts while reconnecting on a loss of connection
+                  apiClient.setMaxRetryAttempts(5);
+                  // UserName to connect to the cluster
+                  String username = "username";
+                  // Password to connect to the cluster
+                  String password = "password";
+                  apiClient.setUsername(username);
+                  apiClient.setPassword(password);
+
+                  // Please add authorization information here if needed.
+                  ConsistencyGroupApi consistencyGroupApi = new ConsistencyGroupApi(apiClient);
+
+                  List<String> vmList = new ArrayList<>();
+                  List<String> volumeGroupList = new ArrayList<>();
+                  int page = 0;
+                  int limit = 50;
+
+                  try {
+                      ConsistencyGroupListApiResponse consistencyGroupListApiResponse = consistencyGroupApi.getConsistencyGroups(vmList, volumeGroupList, page, limit, null, null, null);
+                      System.out.println(consistencyGroupListApiResponse.toString());
+                  } catch (RestClientException ex) {
+                      System.out.println(ex.getMessage());
+                  }
+              }
+          }
+      - lang: JavaScript
+        source: |2
+
+          import { ApiClient, ConsistencyGroupApi } from "@nutanix/dataprotection-js-client";
+
+          // Configure the client
+          let apiClientInstance = new ApiClient();
+          // IPv4/IPv6 address or FQDN of the cluster
+          apiClientInstance.host = 'localhost';
+          // Port to which to connect to
+          apiClientInstance.port = '9440';
+          // Max retry attempts while reconnecting on a loss of connection
+          apiClientInstance.maxRetryAttempts = 5;
+          // Interval in ms to use during retry attempts
+          apiClientInstance.retryInterval = 5000;
+          // UserName to connect to the cluster
+          apiClientInstance.username = 'username';
+          // Password to connect to the cluster
+          apiClientInstance.password = 'password';
+          // Please add authorization information here if needed.
+          let consistencyGroupApi = new ConsistencyGroupApi(apiClientInstance);
+
+          function sample() {
+              //Construct List Options
+              var listOptions = new Object();
+              listOptions.vmList = [];
+              listOptions.volumeGroupList = [];
+              listOptions.page = 0;
+              listOptions.limit = 50;
+
+              consistencyGroupApi.getConsistencyGroups(listOptions).then(({data, response}) => {
+                  console.log(`API returned the following status code: ${response.status}`);
+                  console.log(data.getData());
+              }).catch((error) => {
+                  console.log(`Error is: ${error}`);
+              });
+          }
+          sample()
+      - lang: Python
+        source: |2
+
+          import ntnx_dataprotection_py_client
+
+          if __name__ == "__main__":
+              # Configure the client
+              config = ntnx_dataprotection_py_client.Configuration()
+              # IPv4/IPv6 address or FQDN of the cluster
+              config.host = "localhost"
+              # Port to which to connect to
+              config.port = 9440
+              # Max retry attempts while reconnecting on a loss of connection
+              config.max_retry_attempts = 3
+              # Backoff factor to use during retry attempts
+              config.backoff_factor = 3
+              # UserName to connect to the cluster
+              config.username = "username"
+              # Password to connect to the cluster
+              config.password = "password"
+              # Please add authorization information here if needed.
+              client = ntnx_dataprotection_py_client.ApiClient(configuration=config)
+              consistency_group_api = ntnx_dataprotection_py_client.ConsistencyGroupApi(api_client=client)
+              vm_list = []
+              volume_group_list = []
+              page = 0
+              limit = 50
+
+              try:
+                  api_response = consistency_group_api.get_consistency_groups(_vmList=vm_list, _volumeGroupList=volume_group_list, _page=page, _limit=limit)
+                  print(api_response)
+              except ntnx_dataprotection_py_client.rest.ApiException as e:
+                  print(e)
+      - lang: Go
+        source: |2+
+
+          package main
+
+          import (
+              "fmt"
+              "github.com/nutanix/ntnx-api-golang-clients/dataprotection-go-client/v4/api"
+              "github.com/nutanix/ntnx-api-golang-clients/dataprotection-go-client/v4/client"
+              import1 "github.com/nutanix/ntnx-api-golang-clients/dataprotection-go-client/v4/models/dataprotection/v4/config"
+          )
+
+          var (
+              ApiClientInstance *client.ApiClient
+              ConsistencyGroupApiInstance *api.ConsistencyGroupApi
+          )
+
+          func main() {
+              ApiClientInstance = client.NewApiClient()
+              // IPv4/IPv6 address or FQDN of the cluster
+              ApiClientInstance.Host = "localhost"
+              // Port to which to connect to
+              ApiClientInstance.Port = 9440
+              // Interval in ms to use during retry attempts
+              ApiClientInstance.RetryInterval = 5000
+              // Max retry attempts while reconnecting on a loss of connection
+              ApiClientInstance.MaxRetryAttempts = 5
+              // UserName to connect to the cluster
+              ApiClientInstance.Username = "username"
+              // Password to connect to the cluster
+              ApiClientInstance.Password = "password"
+              // Please add authorization information here if needed.
+              ConsistencyGroupApiInstance = api.NewConsistencyGroupApi(ApiClientInstance)
+
+              vmList := []
+              volumeGroupList := []
+              page := 0
+              limit := 50
+
+              response, error := ConsistencyGroupApiInstance.GetConsistencyGroups(&vmList, &volumeGroupList, &page, &limit, nil, nil, nil)
+              if error != nil {
+                  fmt.Println(error)
+                  return
+              }
+              data, _ := response.GetData().([]import1.ConsistencyGroup)
+              fmt.Println(data)
+          }
+
+      - lang: cURL
+        source: |2
+
+          curl --request GET \
+               --url "https://{pc-ip}:9440/api/dataprotection/v4.0.a4/config/consistency-groups?$filter=string_sample_data&$limit=50&$orderby=string_sample_data&vmList=dba2dCeB-AeBF-7ca3-7Cee-AABa0ebdB831&volumeGroupList=bAeb77CE-45e9-6abE-2249-9CD27Fa9De8C&$page=0&$select=string_sample_data" \
+               --header 'Accept: application/json' \
+               --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+      - lang: Wget
+        source: |2
+
+          wget --verbose \
+               --method GET \
+               --header 'Accept: application/json' \
+               --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+               - "https://{pc-ip}:9440/api/dataprotection/v4.0.a4/config/consistency-groups?$filter=string_sample_data&$limit=50&$orderby=string_sample_data&vmList=F90bF6eF-dD5a-f8B9-FB0A-CEA2eD6b1CCC&volumeGroupList=d0EaDDcC-b0Df-513D-Fadf-0fEEC7E1e016&$page=0&$select=string_sample_data"
+    post:
+      tags:
+      - ConsistencyGroup
+      summary: Create a Consistency group.
+      description: Create a new Consistency group.
+      operationId: createConsistencyGroup
+      requestBody:
+        description: There are many scenarios where the state of an application must
+          be captured as an aggregate of the internal state of a set of related entities
+          at some point in time. The Consistency group is a collection of all the
+          entities whose snapshot represents the application state at that point in
+          time
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/dataprotection.v4.r0.a4.config.ConsistencyGroup'
+        required: true
+      responses:
+        "201":
+          description: Details of the queried Consistency group.
+          headers:
+            Location:
+              style: simple
+              explode: false
+              schema:
+                pattern: "^((http[s]?):\\/)?\\/?([^:\\/\\s]+)((\\/\\w+)*(:[0-9]+)*?\\\
+                  /)([\\w\\-\\.]+[^#?\\s]+)(.*)?(#[\\w\\-]+)?$"
+                type: string
+                description: Indicates the target of a redirection or the URL of a
+                  newly created resource.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/dataprotection.v4.r0.a4.config.ConsistencyGroup'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /dataprotection/v4.0.a4/config/consistency-groups/{extId}\
+                  \ Put operation"
+        "4XX":
+          description: Client error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/dataprotection.v4.r0.a4.error.ErrorResponse'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /dataprotection/v4.0.a4/config/consistency-groups/{extId}\
+                  \ Put operation"
+        "5XX":
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/dataprotection.v4.r0.a4.error.ErrorResponse'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /dataprotection/v4.0.a4/config/consistency-groups/{extId}\
+                  \ Put operation"
+      x-code-samples:
+      - lang: Java
+        source: |2
+
+          package sample;
+
+          import com.nutanix.dp.java.client.ApiClient;
+          import com.nutanix.dp.java.client.api.ConsistencyGroupApi;
+          import com.nutanix.dp1.dp.dataprotection.v4.config.ConsistencyGroup;
+          import com.nutanix.dp1.dp.dataprotection.v4.config.ConsistencyGroupApiResponse;
+
+          public class JavaSdkSample {
+              public static void main(String[] args) {
+                  // Configure the client
+                  ApiClient apiClient = new ApiClient();
+                  // IPv4/IPv6 address or FQDN of the cluster
+                  apiClient.setHost("localhost");
+                  // Port to which to connect to
+                  apiClient.setPort(9440);
+                  // Interval in ms to use during retry attempts
+                  apiClient.setRetryInterval(5000);
+                  // Max retry attempts while reconnecting on a loss of connection
+                  apiClient.setMaxRetryAttempts(5);
+                  // UserName to connect to the cluster
+                  String username = "username";
+                  // Password to connect to the cluster
+                  String password = "password";
+                  apiClient.setUsername(username);
+                  apiClient.setPassword(password);
+
+                  // Please add authorization information here if needed.
+                  ConsistencyGroupApi consistencyGroupApi = new ConsistencyGroupApi(apiClient);
+
+                  ConsistencyGroup consistencyGroup = new ConsistencyGroup();
+
+                  // ConsistencyGroup object initializations here...
+                  consistencyGroup.setName("string_sample_data");  // required field
+
+
+                  try {
+                      ConsistencyGroupApiResponse consistencyGroupApiResponse = consistencyGroupApi.createConsistencyGroup(consistencyGroup);
+                      System.out.println(consistencyGroupApiResponse.toString());
+                  } catch (RestClientException ex) {
+                      System.out.println(ex.getMessage());
+                  }
+              }
+          }
+      - lang: JavaScript
+        source: |2
+
+          import { ApiClient, ConsistencyGroupApi, ConsistencyGroup } from "@nutanix/dataprotection-js-client";
+
+          // Configure the client
+          let apiClientInstance = new ApiClient();
+          // IPv4/IPv6 address or FQDN of the cluster
+          apiClientInstance.host = 'localhost';
+          // Port to which to connect to
+          apiClientInstance.port = '9440';
+          // Max retry attempts while reconnecting on a loss of connection
+          apiClientInstance.maxRetryAttempts = 5;
+          // Interval in ms to use during retry attempts
+          apiClientInstance.retryInterval = 5000;
+          // UserName to connect to the cluster
+          apiClientInstance.username = 'username';
+          // Password to connect to the cluster
+          apiClientInstance.password = 'password';
+          // Please add authorization information here if needed.
+          let consistencyGroupApi = new ConsistencyGroupApi(apiClientInstance);
+
+          function sample() {
+              let consistencyGroup = new ConsistencyGroup();
+
+              // ConsistencyGroup object initializations here...
+              consistencyGroup.setName("string_sample_data");  // required field
+
+
+              consistencyGroupApi.createConsistencyGroup(consistencyGroup).then(({data, response}) => {
+                  console.log(`API returned the following status code: ${response.status}`);
+                  console.log(data.getData());
+              }).catch((error) => {
+                  console.log(`Error is: ${error}`);
+              });
+          }
+          sample()
+      - lang: Python
+        source: |2
+
+          import ntnx_dataprotection_py_client
+
+          if __name__ == "__main__":
+              # Configure the client
+              config = ntnx_dataprotection_py_client.Configuration()
+              # IPv4/IPv6 address or FQDN of the cluster
+              config.host = "localhost"
+              # Port to which to connect to
+              config.port = 9440
+              # Max retry attempts while reconnecting on a loss of connection
+              config.max_retry_attempts = 3
+              # Backoff factor to use during retry attempts
+              config.backoff_factor = 3
+              # UserName to connect to the cluster
+              config.username = "username"
+              # Password to connect to the cluster
+              config.password = "password"
+              # Please add authorization information here if needed.
+              client = ntnx_dataprotection_py_client.ApiClient(configuration=config)
+              consistency_group_api = ntnx_dataprotection_py_client.ConsistencyGroupApi(api_client=client)
+              consistencyGroup = ntnx_dataprotection_py_client.ConsistencyGroup()
+
+              # ConsistencyGroup object initializations here...
+              consistencyGroup.name = "string_sample_data"  # required field
+
+              try:
+                  api_response = consistency_group_api.create_consistency_group(body=consistencyGroup)
+                  print(api_response)
+              except ntnx_dataprotection_py_client.rest.ApiException as e:
+                  print(e)
+      - lang: Go
+        source: |2+
+
+          package main
+
+          import (
+              "fmt"
+              "github.com/nutanix/ntnx-api-golang-clients/dataprotection-go-client/v4/api"
+              "github.com/nutanix/ntnx-api-golang-clients/dataprotection-go-client/v4/client"
+              import1 "github.com/nutanix/ntnx-api-golang-clients/dataprotection-go-client/v4/models/dataprotection/v4/config"
+          )
+
+          var (
+              ApiClientInstance *client.ApiClient
+              ConsistencyGroupApiInstance *api.ConsistencyGroupApi
+          )
+
+          func main() {
+              ApiClientInstance = client.NewApiClient()
+              // IPv4/IPv6 address or FQDN of the cluster
+              ApiClientInstance.Host = "localhost"
+              // Port to which to connect to
+              ApiClientInstance.Port = 9440
+              // Interval in ms to use during retry attempts
+              ApiClientInstance.RetryInterval = 5000
+              // Max retry attempts while reconnecting on a loss of connection
+              ApiClientInstance.MaxRetryAttempts = 5
+              // UserName to connect to the cluster
+              ApiClientInstance.Username = "username"
+              // Password to connect to the cluster
+              ApiClientInstance.Password = "password"
+              // Please add authorization information here if needed.
+              ConsistencyGroupApiInstance = api.NewConsistencyGroupApi(ApiClientInstance)
+
+              consistencyGroup := import1.NewConsistencyGroup()
+
+              // ConsistencyGroup object initializations here...
+
+
+              response, error := ConsistencyGroupApiInstance.CreateConsistencyGroup(consistencyGroup)
+              if error != nil {
+                  fmt.Println(error)
+                  return
+              }
+              data, _ := response.GetData().(import1.ConsistencyGroup)
+              fmt.Println(data)
+          }
+
+      - lang: cURL
+        source: |2
+
+          curl --request POST \
+               --url "https://{pc-ip}:9440/api/dataprotection/v4.0.a4/config/consistency-groups" \
+               --header 'Accept: application/json' \
+               --header 'Content-Type: application/json' \
+               --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+               --data {"tenantId":"string","extId":"string","links":[{"href":"string","rel":"string","$objectType":"common.v1.response.ApiLink"}],"name":"string","ownerExtId":"string","members":[{"extId":"string","entityId":"string","entityType":"$UNKNOWN","$objectType":"dataprotection.v4.config.ConsistencyGroupMember"}],"$objectType":"dataprotection.v4.config.ConsistencyGroup"} \
+      - lang: Wget
+        source: |2
+
+          wget --verbose \
+               --method POST \
+               --header 'Accept: application/json' \
+               --header 'Content-Type: application/json' \
+               --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+               --body-data {"tenantId":"string","extId":"string","links":[{"href":"string","rel":"string","$objectType":"common.v1.response.ApiLink"}],"name":"string","ownerExtId":"string","members":[{"extId":"string","entityId":"string","entityType":"$UNKNOWN","$objectType":"dataprotection.v4.config.ConsistencyGroupMember"}],"$objectType":"dataprotection.v4.config.ConsistencyGroup"} \
+               - "https://{pc-ip}:9440/api/dataprotection/v4.0.a4/config/consistency-groups"
+  /dataprotection/v4.0.a4/config/consistency-groups/{extId}:
+    get:
+      tags:
+      - ConsistencyGroup
+      summary: Get a Consistency group.
+      description: "Query the Consistency group for the provided {extId}."
+      operationId: getConsistencyGroup
+      parameters:
+      - name: extId
+        in: path
+        description: The external identifier that can be used to retrieve the Consistency
+          group.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+      responses:
+        "200":
+          description: Details of the queried Consistency group.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/dataprotection.v4.r0.a4.config.ConsistencyGroup'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /dataprotection/v4.0.a4/config/consistency-groups/{extId}\
+                  \ Put operation"
+        "4XX":
+          description: Client error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/dataprotection.v4.r0.a4.error.ErrorResponse'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /dataprotection/v4.0.a4/config/consistency-groups/{extId}\
+                  \ Put operation"
+        "5XX":
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/dataprotection.v4.r0.a4.error.ErrorResponse'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /dataprotection/v4.0.a4/config/consistency-groups/{extId}\
+                  \ Put operation"
+      x-code-samples:
+      - lang: Java
+        source: |2
+
+          package sample;
+
+          import com.nutanix.dp.java.client.ApiClient;
+          import com.nutanix.dp.java.client.api.ConsistencyGroupApi;
+          import com.nutanix.dp1.dp.dataprotection.v4.config.ConsistencyGroupApiResponse;
+
+          public class JavaSdkSample {
+              public static void main(String[] args) {
+                  // Configure the client
+                  ApiClient apiClient = new ApiClient();
+                  // IPv4/IPv6 address or FQDN of the cluster
+                  apiClient.setHost("localhost");
+                  // Port to which to connect to
+                  apiClient.setPort(9440);
+                  // Interval in ms to use during retry attempts
+                  apiClient.setRetryInterval(5000);
+                  // Max retry attempts while reconnecting on a loss of connection
+                  apiClient.setMaxRetryAttempts(5);
+                  // UserName to connect to the cluster
+                  String username = "username";
+                  // Password to connect to the cluster
+                  String password = "password";
+                  apiClient.setUsername(username);
+                  apiClient.setPassword(password);
+
+                  // Please add authorization information here if needed.
+                  ConsistencyGroupApi consistencyGroupApi = new ConsistencyGroupApi(apiClient);
+
+                  String extId = "67fC4d9B-dBb8-Af58-edd0-2FAdAbdeBDDd";
+
+                  try {
+                      ConsistencyGroupApiResponse consistencyGroupApiResponse = consistencyGroupApi.getConsistencyGroup(extId);
+                      System.out.println(consistencyGroupApiResponse.toString());
+                  } catch (RestClientException ex) {
+                      System.out.println(ex.getMessage());
+                  }
+              }
+          }
+      - lang: JavaScript
+        source: |2
+
+          import { ApiClient, ConsistencyGroupApi } from "@nutanix/dataprotection-js-client";
+
+          // Configure the client
+          let apiClientInstance = new ApiClient();
+          // IPv4/IPv6 address or FQDN of the cluster
+          apiClientInstance.host = 'localhost';
+          // Port to which to connect to
+          apiClientInstance.port = '9440';
+          // Max retry attempts while reconnecting on a loss of connection
+          apiClientInstance.maxRetryAttempts = 5;
+          // Interval in ms to use during retry attempts
+          apiClientInstance.retryInterval = 5000;
+          // UserName to connect to the cluster
+          apiClientInstance.username = 'username';
+          // Password to connect to the cluster
+          apiClientInstance.password = 'password';
+          // Please add authorization information here if needed.
+          let consistencyGroupApi = new ConsistencyGroupApi(apiClientInstance);
+
+          function sample() {
+              let extId = "dd8F0eb3-AcBF-a3Cf-A6E9-dB3230E0FcFA";
+
+              consistencyGroupApi.getConsistencyGroup(extId).then(({data, response}) => {
+                  console.log(`API returned the following status code: ${response.status}`);
+                  console.log(data.getData());
+              }).catch((error) => {
+                  console.log(`Error is: ${error}`);
+              });
+          }
+          sample()
+      - lang: Python
+        source: |2
+
+          import ntnx_dataprotection_py_client
+
+          if __name__ == "__main__":
+              # Configure the client
+              config = ntnx_dataprotection_py_client.Configuration()
+              # IPv4/IPv6 address or FQDN of the cluster
+              config.host = "localhost"
+              # Port to which to connect to
+              config.port = 9440
+              # Max retry attempts while reconnecting on a loss of connection
+              config.max_retry_attempts = 3
+              # Backoff factor to use during retry attempts
+              config.backoff_factor = 3
+              # UserName to connect to the cluster
+              config.username = "username"
+              # Password to connect to the cluster
+              config.password = "password"
+              # Please add authorization information here if needed.
+              client = ntnx_dataprotection_py_client.ApiClient(configuration=config)
+              consistency_group_api = ntnx_dataprotection_py_client.ConsistencyGroupApi(api_client=client)
+              ext_id = "EfA5d22a-9C26-5FdD-eAbD-C0063Bf110E7"
+
+              try:
+                  api_response = consistency_group_api.get_consistency_group(extId=ext_id)
+                  print(api_response)
+              except ntnx_dataprotection_py_client.rest.ApiException as e:
+                  print(e)
+      - lang: Go
+        source: |2+
+
+          package main
+
+          import (
+              "fmt"
+              "github.com/nutanix/ntnx-api-golang-clients/dataprotection-go-client/v4/api"
+              "github.com/nutanix/ntnx-api-golang-clients/dataprotection-go-client/v4/client"
+              import1 "github.com/nutanix/ntnx-api-golang-clients/dataprotection-go-client/v4/models/dataprotection/v4/config"
+          )
+
+          var (
+              ApiClientInstance *client.ApiClient
+              ConsistencyGroupApiInstance *api.ConsistencyGroupApi
+          )
+
+          func main() {
+              ApiClientInstance = client.NewApiClient()
+              // IPv4/IPv6 address or FQDN of the cluster
+              ApiClientInstance.Host = "localhost"
+              // Port to which to connect to
+              ApiClientInstance.Port = 9440
+              // Interval in ms to use during retry attempts
+              ApiClientInstance.RetryInterval = 5000
+              // Max retry attempts while reconnecting on a loss of connection
+              ApiClientInstance.MaxRetryAttempts = 5
+              // UserName to connect to the cluster
+              ApiClientInstance.Username = "username"
+              // Password to connect to the cluster
+              ApiClientInstance.Password = "password"
+              // Please add authorization information here if needed.
+              ConsistencyGroupApiInstance = api.NewConsistencyGroupApi(ApiClientInstance)
+
+              extId := "Ba98EE19-abad-DCAF-fD4d-FDd41Ce9eB38"
+
+              response, error := ConsistencyGroupApiInstance.GetConsistencyGroup(&extId)
+              if error != nil {
+                  fmt.Println(error)
+                  return
+              }
+              data, _ := response.GetData().(import1.ConsistencyGroup)
+              fmt.Println(data)
+          }
+
+      - lang: cURL
+        source: |2
+
+          curl --request GET \
+               --url "https://{pc-ip}:9440/api/dataprotection/v4.0.a4/config/consistency-groups/aD3ecF31-3A45-Bbbc-08f0-C39A4d6ceeEc" \
+               --header 'Accept: application/json' \
+               --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+      - lang: Wget
+        source: |2
+
+          wget --verbose \
+               --method GET \
+               --header 'Accept: application/json' \
+               --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+               - "https://{pc-ip}:9440/api/dataprotection/v4.0.a4/config/consistency-groups/CaFDb0b4-fcCE-FFBC-EBec-82a3f608feCC"
+    put:
+      tags:
+      - ConsistencyGroup
+      summary: Update a Consistency group.
+      description: "Update details of the Consistency group for the provided {extId}."
+      operationId: updateConsistencyGroup
+      parameters:
+      - name: extId
+        in: path
+        description: The external identifier that can be used to retrieve the Consistency
+          group.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+      - name: If-Match
+        in: header
+        description: "The If-Match request header makes the request conditional. When\
+          \ not provided, the server will respond with  an HTTP-428 (Precondition\
+          \ Required) response code indicating that the server requires the request\
+          \ to be conditional.The server will allow the successful completion of PUT\
+          \ and PATCH operations, if the resource matches the ETag value returned\
+          \ to the response of a GET operation. If the conditional does not match,\
+          \ then an HTTP-412 (Precondition Failed) response will be returned."
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        description: Required details for updating the Consistency group.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/dataprotection.v4.r0.a4.config.ConsistencyGroup'
+        required: true
+      responses:
+        "200":
+          description: Details of the queried Consistency group.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/dataprotection.v4.r0.a4.config.ConsistencyGroup'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /dataprotection/v4.0.a4/config/consistency-groups/{extId}\
+                  \ Put operation"
+        "4XX":
+          description: Client error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/dataprotection.v4.r0.a4.error.ErrorResponse'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /dataprotection/v4.0.a4/config/consistency-groups/{extId}\
+                  \ Put operation"
+        "5XX":
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/dataprotection.v4.r0.a4.error.ErrorResponse'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /dataprotection/v4.0.a4/config/consistency-groups/{extId}\
+                  \ Put operation"
+      x-code-samples:
+      - lang: Java
+        source: |2
+
+          package sample;
+
+          import com.nutanix.dp.java.client.ApiClient;
+          import com.nutanix.dp.java.client.api.ConsistencyGroupApi;
+          import com.nutanix.dp1.dp.dataprotection.v4.config.ConsistencyGroup;
+          import com.nutanix.dp1.dp.dataprotection.v4.config.ConsistencyGroupApiResponse;
+
+          public class JavaSdkSample {
+              public static void main(String[] args) {
+                  // Configure the client
+                  ApiClient apiClient = new ApiClient();
+                  // IPv4/IPv6 address or FQDN of the cluster
+                  apiClient.setHost("localhost");
+                  // Port to which to connect to
+                  apiClient.setPort(9440);
+                  // Interval in ms to use during retry attempts
+                  apiClient.setRetryInterval(5000);
+                  // Max retry attempts while reconnecting on a loss of connection
+                  apiClient.setMaxRetryAttempts(5);
+                  // UserName to connect to the cluster
+                  String username = "username";
+                  // Password to connect to the cluster
+                  String password = "password";
+                  apiClient.setUsername(username);
+                  apiClient.setPassword(password);
+
+                  // Please add authorization information here if needed.
+                  ConsistencyGroupApi consistencyGroupApi = new ConsistencyGroupApi(apiClient);
+
+                  ConsistencyGroup consistencyGroup = new ConsistencyGroup();
+
+                  // ConsistencyGroup object initializations here...
+                  consistencyGroup.setName("string_sample_data");  // required field
+
+                  String extId = "BeF5fbB8-Ffbf-8DcD-4CBA-cE3eFdABcAD7";
+
+                  // perform GET call
+                  try {
+                      ConsistencyGroupApiResponse getResponse = consistencyGroupApi.getConsistencyGroup(extId);
+                  } catch(RestClientException ex) {
+                      System.out.println(ex.getMessage());
+                  }
+                  // Extract E-Tag Header
+                  String eTag = ApiClient.getEtag(getResponse);
+                  // initialize/change parameters for update
+                  HashMap<String, Object> opts = new HashMap<>();
+                  opts.put(HttpHeaders.IF_MATCH, eTag);
+                  try {
+                      ConsistencyGroupApiResponse consistencyGroupApiResponse = consistencyGroupApi.updateConsistencyGroup(extId, consistencyGroup, opts);
+                      System.out.println(consistencyGroupApiResponse.toString());
+                  } catch (RestClientException ex) {
+                      System.out.println(ex.getMessage());
+                  }
+              }
+          }
+      - lang: JavaScript
+        source: |2
+
+          import { ApiClient, ConsistencyGroupApi, ConsistencyGroup } from "@nutanix/dataprotection-js-client";
+
+          // Configure the client
+          let apiClientInstance = new ApiClient();
+          // IPv4/IPv6 address or FQDN of the cluster
+          apiClientInstance.host = 'localhost';
+          // Port to which to connect to
+          apiClientInstance.port = '9440';
+          // Max retry attempts while reconnecting on a loss of connection
+          apiClientInstance.maxRetryAttempts = 5;
+          // Interval in ms to use during retry attempts
+          apiClientInstance.retryInterval = 5000;
+          // UserName to connect to the cluster
+          apiClientInstance.username = 'username';
+          // Password to connect to the cluster
+          apiClientInstance.password = 'password';
+          // Please add authorization information here if needed.
+          let consistencyGroupApi = new ConsistencyGroupApi(apiClientInstance);
+
+          function sample() {
+              let consistencyGroup = new ConsistencyGroup();
+
+              // ConsistencyGroup object initializations here...
+              consistencyGroup.setName("string_sample_data");  // required field
+
+              let extId = "daa8bEEe-01D7-30a2-BFea-9cfadd72EfC1";
+              // Perform Get call
+              consistencyGroupApi.getConsistencyGroup(extId).then(({data, response}) => {
+                  console.log(`API returned the following status code: ${response.status}`);
+                  // Extract E-Tag Header
+                  let etagValue = ApiClient.getEtag(data);
+
+                  consistencyGroupApi.updateConsistencyGroup(extId, consistencyGroup, {"If-Match" : etagValue}).then(({data, response}) => {
+                      console.log(`API returned the following status code: ${response.status}`);
+                      console.log(data.getData());
+                  }).catch((error) => {
+                      console.log(`Error is: ${error}`);
+                  });
+              });
+
+          }
+          sample()
+      - lang: Python
+        source: |2
+
+          import ntnx_dataprotection_py_client
+
+          if __name__ == "__main__":
+              # Configure the client
+              config = ntnx_dataprotection_py_client.Configuration()
+              # IPv4/IPv6 address or FQDN of the cluster
+              config.host = "localhost"
+              # Port to which to connect to
+              config.port = 9440
+              # Max retry attempts while reconnecting on a loss of connection
+              config.max_retry_attempts = 3
+              # Backoff factor to use during retry attempts
+              config.backoff_factor = 3
+              # UserName to connect to the cluster
+              config.username = "username"
+              # Password to connect to the cluster
+              config.password = "password"
+              # Please add authorization information here if needed.
+              client = ntnx_dataprotection_py_client.ApiClient(configuration=config)
+              consistency_group_api = ntnx_dataprotection_py_client.ConsistencyGroupApi(api_client=client)
+              consistencyGroup = ntnx_dataprotection_py_client.ConsistencyGroup()
+
+              # ConsistencyGroup object initializations here...
+              consistencyGroup.name = "string_sample_data"  # required field
+              ext_id = "B4aF9Eec-FaDC-d4cf-cc72-BCc00fcFD5ec"
+
+              try:
+                  api_response = consistency_group_api.get_consistency_group(extId=ext_id)
+              except ntnx_dataprotection_py_client.rest.ApiException as e:
+                  print(e)
+              # Extract E-Tag Header
+              etag_value = ntnx_dataprotection_py_client.ApiClient.get_etag(api_response)
+              try:
+                  api_response = consistency_group_api.update_consistency_group(extId=ext_id, body=consistencyGroup, if_match=etag_value)
+                  print(api_response)
+              except ntnx_dataprotection_py_client.rest.ApiException as e:
+                  print(e)
+      - lang: Go
+        source: |2+
+
+          package main
+
+          import (
+              "fmt"
+              "github.com/nutanix/ntnx-api-golang-clients/dataprotection-go-client/v4/api"
+              "github.com/nutanix/ntnx-api-golang-clients/dataprotection-go-client/v4/client"
+              import1 "github.com/nutanix/ntnx-api-golang-clients/dataprotection-go-client/v4/models/dataprotection/v4/config"
+          )
+
+          var (
+              ApiClientInstance *client.ApiClient
+              ConsistencyGroupApiInstance *api.ConsistencyGroupApi
+          )
+
+          func main() {
+              ApiClientInstance = client.NewApiClient()
+              // IPv4/IPv6 address or FQDN of the cluster
+              ApiClientInstance.Host = "localhost"
+              // Port to which to connect to
+              ApiClientInstance.Port = 9440
+              // Interval in ms to use during retry attempts
+              ApiClientInstance.RetryInterval = 5000
+              // Max retry attempts while reconnecting on a loss of connection
+              ApiClientInstance.MaxRetryAttempts = 5
+              // UserName to connect to the cluster
+              ApiClientInstance.Username = "username"
+              // Password to connect to the cluster
+              ApiClientInstance.Password = "password"
+              // Please add authorization information here if needed.
+              ConsistencyGroupApiInstance = api.NewConsistencyGroupApi(ApiClientInstance)
+
+              consistencyGroup := import1.NewConsistencyGroup()
+
+              // ConsistencyGroup object initializations here...
+
+              extId := "aFAFdca6-A78e-A0f0-bFdD-A13273DCA5d3"
+
+              getResponse, err := ConsistencyGroupApiInstance.GetConsistencyGroup(&extId)
+              if err != nil {
+                  fmt.Println(err)
+                  return
+              }
+
+              // Extract E-Tag Header
+              etagValue := ApiClientInstance.GetEtag(getResponse)
+
+              args := make(map[string] interface{})
+              args["If-Match"] = etagValue
+              response, error := ConsistencyGroupApiInstance.UpdateConsistencyGroup(&extId, consistencyGroup, args)
+              if error != nil {
+                  fmt.Println(error)
+                  return
+              }
+              data, _ := response.GetData().(import1.ConsistencyGroup)
+              fmt.Println(data)
+          }
+
+      - lang: cURL
+        source: |2
+
+          curl --request PUT \
+               --url "https://{pc-ip}:9440/api/dataprotection/v4.0.a4/config/consistency-groups/Abcebd0a-cCf2-471F-DcD0-8eBa2BAcE8B0" \
+               --header 'Accept: application/json' \
+               --header 'Content-Type: application/json' \
+               --header 'If-Match: string_sample_data' \
+               --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+               --data {"tenantId":"string","extId":"string","links":[{"href":"string","rel":"string","$objectType":"common.v1.response.ApiLink"}],"name":"string","ownerExtId":"string","members":[{"extId":"string","entityId":"string","entityType":"$UNKNOWN","$objectType":"dataprotection.v4.config.ConsistencyGroupMember"}],"$objectType":"dataprotection.v4.config.ConsistencyGroup"} \
+      - lang: Wget
+        source: |2
+
+          wget --verbose \
+               --method PUT \
+               --header 'Accept: application/json' \
+               --header 'Content-Type: application/json' \
+               --header 'If-Match: string_sample_data' \
+               --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+               --body-data {"tenantId":"string","extId":"string","links":[{"href":"string","rel":"string","$objectType":"common.v1.response.ApiLink"}],"name":"string","ownerExtId":"string","members":[{"extId":"string","entityId":"string","entityType":"$UNKNOWN","$objectType":"dataprotection.v4.config.ConsistencyGroupMember"}],"$objectType":"dataprotection.v4.config.ConsistencyGroup"} \
+               - "https://{pc-ip}:9440/api/dataprotection/v4.0.a4/config/consistency-groups/11dD4d1e-8cCe-AE6C-bc5f-Cd9010c1C0Dd"
+    delete:
+      tags:
+      - ConsistencyGroup
+      summary: Delete a Consistency group.
+      description: "Delete the Consistency group for the provided {extId}."
+      operationId: deleteConsistencyGroup
+      parameters:
+      - name: extId
+        in: path
+        description: The external identifier that can be used to retrieve the Consistency
+          group.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+      responses:
+        "204":
+          description: Task Id corresponding to the Consistency group delete operation.
+          content:
+            application/json: {}
+        "4XX":
+          description: Client error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/dataprotection.v4.r0.a4.error.ErrorResponse'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /dataprotection/v4.0.a4/config/consistency-groups/{extId}\
+                  \ Delete operation"
+        "5XX":
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/dataprotection.v4.r0.a4.error.ErrorResponse'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /dataprotection/v4.0.a4/config/consistency-groups/{extId}\
+                  \ Delete operation"
+  /dataprotection/v4.0.a4/config/consistency-groups/{extId}/$actions/migrate: {}
+  /dataprotection/v4.0.a4/config/consistency-groups/{extId}/$actions/create-recovery-point: {}
+  /dataprotection/v4.0.a4/config/protected-resources/{extId}: {}
+  /dataprotection/v4.0.a4/config/protected-resources/{extId}/$actions/restore: {}
+  /dataprotection/v4.0.a4/config/protected-resources/{extId}/$actions/promote: {}
+  /dataprotection/v4.0.a4/config/recovery-points/{extId}: {}
+  /dataprotection/v4.0.a4/config/recovery-points: {}
+  /dataprotection/v4.0.a4/config/recovery-points/{recoveryPointExtId}/vm-recovery-points: {}
+  /dataprotection/v4.0.a4/config/recovery-points/{recoveryPointExtId}/vm-recovery-points/{vmRecoveryPointExtId}: {}
+  ? /dataprotection/v4.0.a4/config/recovery-points/{recoveryPointExtId}/vm-recovery-points/{vmRecoveryPointExtId}/disk-recovery-points
+  : {}
+  ? /dataprotection/v4.0.a4/config/recovery-points/{recoveryPointExtId}/vm-recovery-points/{vmRecoveryPointExtId}/disk-recovery-points/{diskRecoveryPointExtId}/changed-regions
+  : {}
+  ? /dataprotection/v4.0.a4/config/recovery-points/{recoveryPointExtId}/vm-recovery-points/{vmRecoveryPointExtId}/disk-recovery-points/{diskRecoveryPointExtId}
+  : {}
+  /dataprotection/v4.0.a4/config/recovery-points/{recoveryPointExtId}/volume-group-recovery-points: {}
+  ? /dataprotection/v4.0.a4/config/recovery-points/{recoveryPointExtId}/volume-group-recovery-points/{volumeGroupRecoveryPointExtId}
+  : {}
+  ? /dataprotection/v4.0.a4/config/recovery-points/{recoveryPointExtId}/volume-group-recovery-points/{volumeGroupRecoveryPointExtId}/disk-recovery-points
+  : {}
+  ? /dataprotection/v4.0.a4/config/recovery-points/{recoveryPointExtId}/volume-group-recovery-points/{volumeGroupRecoveryPointExtId}/disk-recovery-points/{diskRecoveryPointExtId}
+  : {}
+  /dataprotection/v4.0.a4/config/recovery-points/{extId}/$actions/restore: {}
+  /dataprotection/v4.0.a4/config/recovery-points/{recoveryPointExtId}/vm-recovery-points/{vmRecoveryPointExtId}/$actions/restore: {}
+  ? /dataprotection/v4.0.a4/config/recovery-points/{recoveryPointExtId}/vm-recovery-points/{vmRecoveryPointExtId}/$actions/validate-restore
+  : {}
+  ? /dataprotection/v4.0.a4/config/recovery-points/{recoveryPointExtId}/volume-group-recovery-points/{volumeGroupRecoveryPointExtId}/$actions/restore
+  : {}
+  /dataprotection/v4.0.a4/config/recovery-points/{extId}/$actions/replicate: {}
+  /dataprotection/v4.0.a4/config/recovery-points/{extId}/$actions/set-expiration-time: {}
+  /dataprotection/v4.0.a4/config/synced-volume-groups/{extId}/$actions/promote: {}
+  /dataprotection/v4.0.a4/config/synced-volume-groups/{extId}: {}
+  /dataprotection/v4.0.a4/config/witness/{extId}: {}
+components:
+  schemas:
+    dataprotection.v4.r0.a4.config.ConsistencyGroupListApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/dataprotection.v4.r0.a4.config.ConsistencyGroup'
+          - $ref: '#/components/schemas/dataprotection.v4.r0.a4.error.ErrorResponse'
+      additionalProperties: false
+      description: REST response for all response codes in API path /dataprotection/v4.0.a4/config/consistency-groups
+        Get operation
+    dataprotection.v4.r0.a4.config.ConsistencyGroup:
+      title: Consistency group model object
+      description: There are many scenarios where the state of an application must
+        be captured as an aggregate of the internal state of a set of related entities
+        at some point in time. The Consistency group is a collection of all the entities
+        whose snapshot represents the application state at that point in time
+      allOf:
+      - $ref: '#/components/schemas/common.v1.r0.a3.response.ExternalizableAbstractModel'
+      - required:
+        - name
+        type: object
+        properties:
+          name:
+            maxLength: 256
+            type: string
+            description: Name of the Consistency group.
+          ownerExtId:
+            pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+            type: string
+            description: The external identifier of the user who created this Consistency
+              group. This is a read-only field that is inserted into the Consistency
+              group entity at the time of Consistency group creation.
+          members:
+            maxItems: 30
+            minItems: 1
+            type: array
+            items:
+              $ref: '#/components/schemas/dataprotection.v4.r0.a4.config.ConsistencyGroupMember'
+        additionalProperties: false
+    dataprotection.v4.r0.a4.config.ConsistencyGroupApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - $ref: '#/components/schemas/dataprotection.v4.r0.a4.config.ConsistencyGroup'
+          - $ref: '#/components/schemas/dataprotection.v4.r0.a4.error.ErrorResponse'
+      additionalProperties: false
+      description: "REST response for all response codes in API path /dataprotection/v4.0.a4/config/consistency-groups/{extId}\
+        \ Put operation"
+    dataprotection.v4.r0.a4.config.ConsistencyGroupMember:
+      title: Consistency group member model object
+      required:
+      - entityType
+      type: object
+      properties:
+        extId:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+          description: External identifier of the members (VM or volume group) of
+            the Consistency group object.
+        entityId:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+          description: External identifier of the members (VM or volume group) of
+            the Consistency group object.
+        entityType:
+          $ref: '#/components/schemas/dataprotection.v4.r0.a4.config.ConsistencyGroupMemberType'
+      additionalProperties: false
+      description: External identifier of the members (VM or volume group) of the
+        Consistency group object.
+    dataprotection.v4.r0.a4.config.ConsistencyGroupMemberType:
+      title: Consistency group member type
+      type: string
+      description: Consistency group member type
+      enum:
+      - $UNKNOWN
+      - $REDACTED
+      - VM
+      - VOLUME_GROUP
+      x-enumDescriptions:
+        VOLUME_GROUP: Entity of type volume group that is part of a Consistency group.
+        VM: Entity of type VM that is part of a Consistency group.
+    dataprotection.v4.r0.a4.config.DeleteConsistencyGroupApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - $ref: '#/components/schemas/dataprotection.v4.r0.a4.error.ErrorResponse'
+      additionalProperties: false
+      description: "REST response for all response codes in API path /dataprotection/v4.0.a4/config/consistency-groups/{extId}\
+        \ Delete operation"
+    dataprotection.v4.r0.a4.config.ConsistencyGroupMigrationSpec:
+      title: Consistency group migration specification.
+      required:
+      - targetAvailabilityZoneId
+      type: object
+      properties:
+        targetAvailabilityZoneId:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+          description: Reference to the target Availability Zone where the entities
+            need to be migrated.
+        targetClusterId:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+          description: Reference to the cluster in the target Availability Zone where
+            the entities need to be migrated.
+      additionalProperties: false
+      description: Specification for the migrate action on the Consistency group.
+    dataprotection.v4.r0.a4.config.ConsistencyGroupMigrateApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - $ref: '#/components/schemas/storage.v4.r0.a1.config.Task'
+          - $ref: '#/components/schemas/prism.v4.r0.a2.config.TaskReference'
+          - $ref: '#/components/schemas/dataprotection.v4.r0.a4.error.ErrorResponse'
+      additionalProperties: false
+      description: "REST response for all response codes in API path /dataprotection/v4.0.a4/config/consistency-groups/{extId}/$actions/migrate\
+        \ Post operation"
+    dataprotection.v4.r0.a4.config.ConsistencyGroupRecoveryPointSpec:
+      title: Consistency group Recovery point specification
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          maxLength: 256
+          type: string
+          description: Name of the Consistency group Recovery point.
+        recoveryPointType:
+          $ref: '#/components/schemas/dataprotection.v4.r0.a2.common.RecoveryPointType'
+      additionalProperties: false
+      description: Specification for Create Consistency group Recovery point
+    dataprotection.v4.r0.a4.config.CreateConsistencyGroupRecoveryPointApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - $ref: '#/components/schemas/prism.v4.r0.a2.config.TaskReference'
+          - $ref: '#/components/schemas/dataprotection.v4.r0.a4.config.RecoveryPoint'
+          - $ref: '#/components/schemas/dataprotection.v4.r0.a4.error.ErrorResponse'
+      additionalProperties: false
+      description: "REST response for all response codes in API path /dataprotection/v4.0.a4/config/consistency-groups/{extId}/$actions/create-recovery-point\
+        \ Post operation"
+    dataprotection.v4.r0.a4.config.RecoveryPoint:
+      title: Recovery point
+      description: Details about the Recovery point along with all the captured VM
+        and volume group Recovery point(s).
+      allOf:
+      - $ref: '#/components/schemas/dataprotection.v4.r0.a2.common.BaseRecoveryPoint'
+      - type: object
+        properties:
+          ownerExtId:
+            pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+            type: string
+            description: "A read only field inserted into Recovery point at the time\
+              \ of Recovery point creation, indicating the external identifier of\
+              \ the user who created this Recovery point."
+            readOnly: true
+          locationReferences:
+            type: array
+            description: List of location references where the VM or volume group
+              Recovery points are a part of the specified Recovery point.
+            readOnly: true
+            items:
+              $ref: '#/components/schemas/dataprotection.v4.r0.a4.config.LocationReference'
+          vmReferenceList:
+            maxItems: 64
+            minItems: 1
+            type: array
+            description: List of VM external identifiers that are intended to be captured
+              as part of the Recovery point.
+            writeOnly: true
+            items:
+              pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+              type: string
+              description: VM external identifier which is captured as part of this
+                Recovery point.
+          volumeGroupReferenceList:
+            maxItems: 64
+            minItems: 1
+            type: array
+            description: List of volume group external identifiers that are intended
+              to be captured as part of the Recovery point.
+            writeOnly: true
+            items:
+              pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+              type: string
+              description: Volume group external identifier which is captured as part
+                of this Recovery point.
+          vmRecoveryPoints:
+            title: VM Recovery points.
+            maxItems: 64
+            minItems: 1
+            type: array
+            description: List of VM Recovery points that are a part of the specified
+              top-level Recovery point.
+            items:
+              $ref: '#/components/schemas/dataprotection.v4.r0.a4.config.VmSubRecoveryPoint'
+          volumeGroupRecoveryPoints:
+            title: Volume group Recovery points.
+            maxItems: 64
+            minItems: 1
+            type: array
+            description: List of volume group Recovery points that are a part of the
+              specified top-level Recovery point.
+            items:
+              $ref: '#/components/schemas/dataprotection.v4.r0.a4.config.VolumeGroupSubRecoveryPoint'
+        additionalProperties: false
+    dataprotection.v4.r0.a4.config.LocationReference:
+      type: object
+      properties:
+        locationExtId:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+          description: External identifier of the cluster where the Recovery point
+            is present.
+      additionalProperties: false
+      description: Location reference where the specified Recovery point is present.
+    dataprotection.v4.r0.a4.config.VmSubRecoveryPoint:
+      title: VM Recovery point
+      type: object
+      properties:
+        vmRecoveryPointId:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+          description: The external identifier that can be used to retrieve the VM
+            Recovery point using its URL.
+          readOnly: true
+        consistencyGroupExtId:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+          description: External identifier of the Consistency group which the entity
+            was part of at the time of Recovery point creation.
+          readOnly: true
+        locationAgnosticId:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+          description: Location agnostic identifier of the Recovery point. This identifier
+            is used to identify the same instances of a Recovery point across different
+            sites.
+          readOnly: true
+        vmExtId:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+          description: VM external identifier which is captured as part of this Recovery
+            point.
+        vmCategories:
+          type: array
+          description: "Category key-value pairs associated with the VM at the time\
+            \ of Recovery point creation. The category key and value are separated\
+            \ by '/'. For example, a category with key 'dept' and value 'hr' will\
+            \ be represented as 'dept/hr'."
+          readOnly: true
+          items:
+            type: string
+      additionalProperties: false
+      description: A model that represents VM Recovery point properties.
+    dataprotection.v4.r0.a4.config.VolumeGroupSubRecoveryPoint:
+      title: 'Volume group Recovery point '
+      type: object
+      properties:
+        volumeGroupRecoveryPointId:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+          description: The external identifier that can be used to retrieve the volume
+            group Recovery point using its URL.
+        consistencyGroupExtId:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+          description: External identifier of the Consistency group which the entity
+            was part of at the time of Recovery point creation.
+          readOnly: true
+        locationAgnosticId:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+          description: Location agnostic identifier of the Recovery point. This identifier
+            is used to identify the same instances of a Recovery point across different
+            sites.
+          readOnly: true
+        volumeGroupExtId:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+          description: Volume group external identifier which is captured as part
+            of this Recovery point.
+        volumeGroupCategories:
+          type: array
+          description: "Category key-value pairs associated with the volume group\
+            \ at the time of Recovery point creation. The category key and value are\
+            \ separated by '/'. For example, a category with key 'dept' and value\
+            \ 'hr' will be represented as 'dept/hr'."
+          readOnly: true
+          items:
+            type: string
+      additionalProperties: false
+      description: A model that represents volume group Recovery point properties.
+    dataprotection.v4.r0.a4.config.ProtectedResourceApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - $ref: '#/components/schemas/dataprotection.v4.r0.a4.config.ProtectedResource'
+          - $ref: '#/components/schemas/dataprotection.v4.r0.a4.error.ErrorResponse'
+      additionalProperties: false
+      description: "REST response for all response codes in API path /dataprotection/v4.0.a4/config/protected-resources/{extId}\
+        \ Get operation"
+    dataprotection.v4.r0.a4.config.ProtectedResource:
+      title: Protected resource model object.
+      description: "Once a VM or volume group is associated with some protection policy,\
+        \ the schedule(s) in the protection policy kick in to achieve the specified\
+        \ recovery point objective. A protected resource represents the data protection\
+        \ view of such a VM or volume group. It contains information such as the restorable\
+        \ time ranges on the local Prism Central and the state of replication to the\
+        \ targets specified in all the applied protection policies."
+      allOf:
+      - $ref: '#/components/schemas/common.v1.r0.a3.response.ExternalizableAbstractModel'
+      - type: object
+        properties:
+          entityExtId:
+            pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+            type: string
+            description: The external identifier of the VM or the volume group associated
+              with the protected resource.
+          entityType:
+            $ref: '#/components/schemas/dataprotection.v4.r0.a4.config.ProtectedResourceEntityType'
+          sourceSiteReference:
+            $ref: '#/components/schemas/dataprotection.v4.r0.a4.config.DataProtectionSiteReference'
+          dataProtectionInfo:
+            title: Data protection information for the protected resource.
+            type: array
+            description: "The data protection details for the protected resource that\
+              \ are relevant to any of the clusters in the local Prism Central, like\
+              \ the time ranges available for recovery."
+            items:
+              $ref: '#/components/schemas/dataprotection.v4.r0.a4.config.DataProtectionInfo'
+          replicationStates:
+            type: array
+            items:
+              $ref: '#/components/schemas/dataprotection.v4.r0.a4.config.ReplicationState'
+        additionalProperties: false
+    dataprotection.v4.r0.a4.config.ProtectedResourceEntityType:
+      title: Protected resource entity type.
+      type: string
+      description: Protected resource entity type.
+      enum:
+      - $UNKNOWN
+      - $REDACTED
+      - VM
+      - VOLUME_GROUP
+    dataprotection.v4.r0.a4.config.DataProtectionSiteReference:
+      type: object
+      properties:
+        pcExtId:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+          description: External identifier of the Prism Central.
+        clusterExtId:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+          description: External identifier of the cluster.
+      additionalProperties: false
+    dataprotection.v4.r0.a4.config.DataProtectionInfo:
+      title: Data protection information for the protected resource.
+      type: object
+      properties:
+        recoveryInfo:
+          $ref: '#/components/schemas/dataprotection.v4.r0.a4.config.RecoveryInfo'
+        locationReference:
+          $ref: '#/components/schemas/dataprotection.v4.r0.a4.config.DataProtectionSiteReference'
+      additionalProperties: false
+      description: "The data protection details for the protected resource that are\
+        \ relevant to the specified cluster, like the time ranges available for recovery\
+        \ on the given cluster."
+    dataprotection.v4.r0.a4.config.ReplicationState:
+      title: Replication related information about the protected resource.
+      type: object
+      properties:
+        protectionPolicyReference:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+          description: The external identifier of the protection policy associated
+            with the protected resource.
+        recoveryPointObjective:
+          type: integer
+          description: The recovery point objective of the schedule in seconds.
+          format: int64
+        replicationStatus:
+          $ref: '#/components/schemas/dataprotection.v4.r0.a4.config.ProtectedResourceReplicationStatus'
+        targetSiteReference:
+          $ref: '#/components/schemas/dataprotection.v4.r0.a4.config.DataProtectionSiteReference'
+      additionalProperties: false
+      description: Replication related information about the protected resource.
+    dataprotection.v4.r0.a4.config.RecoveryInfo:
+      title: Recovery related information.
+      type: object
+      properties:
+        restorableTimeRanges:
+          title: List of restorable time ranges.
+          type: array
+          description: List of restorable time ranges.
+          items:
+            $ref: '#/components/schemas/dataprotection.v4.r0.a4.config.RestorableTimeRange'
+      additionalProperties: false
+      description: The restorable time range details that can be used to recover the
+        protected resource.
+    dataprotection.v4.r0.a4.config.RestorableTimeRange:
+      title: Time range during which the entity is restorable.
+      type: object
+      properties:
+        startTime:
+          type: string
+          description: UTC date and time in ISO 8601 format representing the time
+            when the restorable time range for the entity starts.
+          format: date-time
+        endTime:
+          type: string
+          description: UTC date and time in ISO 8601 format representing the time
+            when the restorable time range for the entity ends.
+          format: date-time
+      additionalProperties: false
+      description: "The start and end time details, both inclusively represent the\
+        \ range of time during which the entity is restorable."
+    dataprotection.v4.r0.a4.config.ProtectedResourceReplicationStatus:
+      title: Status of replication to a specified target site.
+      type: string
+      description: |-
+        Status of replication to a specified target site:
+         ACTIVE - Replications are in-progress and the specified recovery point objective is met on the target site.
+         SYNCING - The system is trying to meet the specified recovery point objective for the target site.
+         DEGRADED - The replication schedule has been degraded to a higher recovery point objective.
+         DISABLED - The replication schedule is disabled and there are no ongoing replications.
+         DECOUPLED - The connection between recovery and source site is broken, the protected resource at the recovery
+         site is out of sync and has been promoted to a live entity.
+      enum:
+      - $UNKNOWN
+      - $REDACTED
+      - ACTIVE
+      - SYNCING
+      - DEGRADED
+      - DISABLED
+      - DECOUPLED
+    dataprotection.v4.r0.a4.config.ProtectedResourceRestoreSpec:
+      title: Protected resource restore specification.
+      required:
+      - clusterExtId
+      type: object
+      properties:
+        clusterExtId:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+          description: The external identifier of the cluster on which the entity
+            has valid restorable time ranges. The restored entity will be created
+            on the same cluster.
+        restoreTime:
+          type: string
+          description: UTC date and time in ISO 8601 format representing the time
+            from when the state of the entity should be restored. This needs to be
+            a valid time within the restorable time range(s) for the protected resource.
+          format: date-time
+      additionalProperties: false
+      description: Restore action specifications for a minutely scheduled protected
+        resource.
+    dataprotection.v4.r0.a4.config.ProtectedResourceRestoreApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - $ref: '#/components/schemas/prism.v4.r0.a2.config.TaskReference'
+          - $ref: '#/components/schemas/dataprotection.v4.r0.a4.error.ErrorResponse'
+      additionalProperties: false
+      description: "REST response for all response codes in API path /dataprotection/v4.0.a4/config/protected-resources/{extId}/$actions/restore\
+        \ Post operation"
+    dataprotection.v4.r0.a4.config.ProtectedResourcePromoteApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - $ref: '#/components/schemas/prism.v4.r0.a2.config.TaskReference'
+          - $ref: '#/components/schemas/dataprotection.v4.r0.a4.error.ErrorResponse'
+      additionalProperties: false
+      description: "REST response for all response codes in API path /dataprotection/v4.0.a4/config/protected-resources/{extId}/$actions/promote\
+        \ Post operation"
+    dataprotection.v4.r0.a4.config.RecoveryPointApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - $ref: '#/components/schemas/dataprotection.v4.r0.a4.config.RecoveryPoint'
+          - $ref: '#/components/schemas/dataprotection.v4.r0.a4.error.ErrorResponse'
+      additionalProperties: false
+      description: "REST response for all response codes in API path /dataprotection/v4.0.a4/config/recovery-points/{extId}\
+        \ Get operation"
+    dataprotection.v4.r0.a4.config.DeleteRecoveryPointApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - $ref: '#/components/schemas/storage.v4.r0.a1.config.Task'
+          - $ref: '#/components/schemas/prism.v4.r0.a2.config.TaskReference'
+          - $ref: '#/components/schemas/dataprotection.v4.r0.a4.error.ErrorResponse'
+      additionalProperties: false
+      description: "REST response for all response codes in API path /dataprotection/v4.0.a4/config/recovery-points/{extId}\
+        \ Delete operation"
+    dataprotection.v4.r0.a4.config.RecoveryPointListApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/dataprotection.v4.r0.a4.config.RecoveryPoint'
+          - $ref: '#/components/schemas/dataprotection.v4.r0.a4.error.ErrorResponse'
+      additionalProperties: false
+      description: REST response for all response codes in API path /dataprotection/v4.0.a4/config/recovery-points
+        Get operation
+    dataprotection.v4.r0.a4.config.CreateRecoveryPointApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - $ref: '#/components/schemas/prism.v4.r0.a2.config.TaskReference'
+          - $ref: '#/components/schemas/dataprotection.v4.r0.a4.config.RecoveryPoint'
+          - $ref: '#/components/schemas/dataprotection.v4.r0.a4.error.ErrorResponse'
+      additionalProperties: false
+      description: REST response for all response codes in API path /dataprotection/v4.0.a4/config/recovery-points
+        Post operation
+    dataprotection.v4.r0.a4.config.VMRecoveryPointListApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/dataprotection.v4.r0.a4.config.VMRecoveryPoint'
+          - $ref: '#/components/schemas/dataprotection.v4.r0.a4.error.ErrorResponse'
+      additionalProperties: false
+      description: "REST response for all response codes in API path /dataprotection/v4.0.a4/config/recovery-points/{recoveryPointExtId}/vm-recovery-points\
+        \ Get operation"
+    dataprotection.v4.r0.a4.config.VMRecoveryPoint:
+      title: VM Recovery point
+      description: A model that represents VM Recovery point properties.
+      allOf:
+      - $ref: '#/components/schemas/dataprotection.v4.r0.a2.common.BaseRecoveryPoint'
+      - type: object
+        properties:
+          consistencyGroupExtId:
+            pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+            type: string
+            description: External identifier of the Consistency group which the entity
+              was part of at the time of Recovery point creation.
+          vm:
+            $ref: '#/components/schemas/dataprotection.v4.r0.a4.config.Vm'
+        additionalProperties: false
+    dataprotection.v4.r0.a4.config.Vm:
+      type: object
+      properties:
+        vmExtId:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+          description: VM external identifier which is captured as part of this Recovery
+            point.
+        name:
+          type: string
+          description: The name of the VM that is captured as part of this Recovery
+            point.
+        numVcpus:
+          type: integer
+          description: Number of vCPUs.
+        coresPerVcpu:
+          type: integer
+          description: Number of cores per vCPU.
+        vmNumThreadsPerCore:
+          type: integer
+          description: Docref(vmNumThreadsPerCoreDesc)
+        memorySizeBytes:
+          type: integer
+          description: Memory size in bytes.
+          format: int64
+        hypervisorType:
+          $ref: '#/components/schemas/dataprotection.v4.r0.a4.config.HypervisorType'
+        powerState:
+          $ref: '#/components/schemas/dataprotection.v4.r0.a4.config.PowerState'
+        hardwareArchitecture:
+          $ref: '#/components/schemas/dataprotection.v4.r0.a4.config.HardwareArchitecture'
+      additionalProperties: false
+      description: The configuration of the VM captured by the Recovery point.
+    dataprotection.v4.r0.a4.config.HypervisorType:
+      type: string
+      description: Hypervisor type where the Recovery point is generated.
+      enum:
+      - $UNKNOWN
+      - $REDACTED
+      - AHV
+      - HYPERV
+      - VMWARE
+    dataprotection.v4.r0.a4.config.PowerState:
+      type: string
+      description: Power state of the VM when the Recovery point is generated.
+      enum:
+      - $UNKNOWN
+      - $REDACTED
+      - "OFF"
+      - "ON"
+    dataprotection.v4.r0.a4.config.HardwareArchitecture:
+      type: string
+      description: Architecture of the hardware where the Recovery point is generated.
+      enum:
+      - $UNKNOWN
+      - $REDACTED
+      - X86_64
+      - PPC
+    dataprotection.v4.r0.a4.config.VMRecoveryPointApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - $ref: '#/components/schemas/dataprotection.v4.r0.a4.config.VMRecoveryPoint'
+          - $ref: '#/components/schemas/dataprotection.v4.r0.a4.error.ErrorResponse'
+      additionalProperties: false
+      description: "REST response for all response codes in API path /dataprotection/v4.0.a4/config/recovery-points/{recoveryPointExtId}/vm-recovery-points/{vmRecoveryPointExtId}\
+        \ Get operation"
+    dataprotection.v4.r0.a4.config.DiskRecoveryPointListApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/dataprotection.v4.r0.a4.config.DiskRecoveryPoint'
+          - $ref: '#/components/schemas/dataprotection.v4.r0.a4.error.ErrorResponse'
+      additionalProperties: false
+      description: "REST response for all response codes in API path /dataprotection/v4.0.a4/config/recovery-points/{recoveryPointExtId}/volume-group-recovery-points/{volumeGroupRecoveryPointExtId}/disk-recovery-points\
+        \ Get operation"
+    dataprotection.v4.r0.a4.config.DiskRecoveryPoint:
+      title: Disk Recovery point model.
+      description: A model that represents the disk Recovery point properties.
+      allOf:
+      - $ref: '#/components/schemas/dataprotection.v4.r0.a2.common.BaseRecoveryPoint'
+      - type: object
+        properties:
+          disk:
+            $ref: '#/components/schemas/dataprotection.v4.r0.a4.config.Disk'
+        additionalProperties: false
+    dataprotection.v4.r0.a4.config.Disk:
+      type: object
+      properties:
+        diskExtId:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+          description: Disk external identifier which is captured as part of this
+            Recovery point.
+        capacityBytes:
+          type: integer
+          description: Capacity of the virtual disk in bytes.
+          format: int64
+      additionalProperties: false
+      description: The configuration of the Disk captured by the Recovery point.
+    dataprotection.v4.r0.a4.config.ChangedRegionsListApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - $ref: '#/components/schemas/dataprotection.v4.r0.a4.config.ChangedRegions'
+          - $ref: '#/components/schemas/dataprotection.v4.r0.a4.error.ErrorResponse'
+      additionalProperties: false
+      description: "REST response for all response codes in API path /dataprotection/v4.0.a4/config/recovery-points/{recoveryPointExtId}/vm-recovery-points/{vmRecoveryPointExtId}/disk-recovery-points/{diskRecoveryPointExtId}/changed-regions\
+        \ Get operation"
+    dataprotection.v4.r0.a4.config.ChangedRegions:
+      title: Changed regions
+      type: object
+      properties:
+        regions:
+          type: array
+          description: Changed Regions list comprising of offset and regions length
+            pertaining to the Disk Recovery Point.
+          items:
+            $ref: '#/components/schemas/dataprotection.v4.r0.a4.config.Regions'
+        nextOffset:
+          type: integer
+          description: The offset from where the client must continue the request.
+            This field will not be set when there are no more changed regions to be
+            returned. Note that the nextOffset can be outside the endOffset specified
+            by the client in the request. This helps clients reach the next changed
+            offset faster.
+          format: int64
+      additionalProperties: false
+      description: Changed Regions tracking
+    dataprotection.v4.r0.a4.config.Regions:
+      title: Regions
+      type: object
+      properties:
+        offset:
+          type: integer
+          description: The byte offset indicating the start of the regions.
+          format: int64
+        length:
+          type: integer
+          description: The length of the regions in bytes.
+          format: int64
+      additionalProperties: false
+      description: Changed Regions list comprising of offset and regions length pertaining
+        to the Disk Recovery Point.
+    dataprotection.v4.r0.a4.config.DiskRecoveryPointApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - $ref: '#/components/schemas/dataprotection.v4.r0.a4.config.DiskRecoveryPoint'
+          - $ref: '#/components/schemas/dataprotection.v4.r0.a4.error.ErrorResponse'
+      additionalProperties: false
+      description: "REST response for all response codes in API path /dataprotection/v4.0.a4/config/recovery-points/{recoveryPointExtId}/volume-group-recovery-points/{volumeGroupRecoveryPointExtId}/disk-recovery-points/{diskRecoveryPointExtId}\
+        \ Get operation"
+    dataprotection.v4.r0.a4.config.VolumeGroupRecoveryPointListApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/dataprotection.v4.r0.a4.config.VolumeGroupRecoveryPoint'
+          - $ref: '#/components/schemas/dataprotection.v4.r0.a4.error.ErrorResponse'
+      additionalProperties: false
+      description: "REST response for all response codes in API path /dataprotection/v4.0.a4/config/recovery-points/{recoveryPointExtId}/volume-group-recovery-points\
+        \ Get operation"
+    dataprotection.v4.r0.a4.config.VolumeGroupRecoveryPoint:
+      title: 'Volume group Recovery point '
+      description: A model that represents volume group Recovery point properties.
+      allOf:
+      - $ref: '#/components/schemas/dataprotection.v4.r0.a2.common.BaseRecoveryPoint'
+      - type: object
+        properties:
+          consistencyGroupExtId:
+            pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+            type: string
+            description: External identifier of the Consistency group which the entity
+              was part of at the time of Recovery point creation.
+          volumeGroup:
+            $ref: '#/components/schemas/dataprotection.v4.r0.a4.config.VolumeGroup'
+        additionalProperties: false
+    dataprotection.v4.r0.a4.config.VolumeGroup:
+      type: object
+      properties:
+        volumeGroupExtId:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+          description: Volume group external identifier which is captured as part
+            of this Recovery point.
+        name:
+          type: string
+          description: The name of the volume group that is captured as part of this
+            Recovery point.
+      additionalProperties: false
+      description: The configuration of the volume group captured by the Recovery
+        point.
+    dataprotection.v4.r0.a4.config.VolumeGroupRecoveryPointApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - $ref: '#/components/schemas/dataprotection.v4.r0.a4.config.VolumeGroupRecoveryPoint'
+          - $ref: '#/components/schemas/dataprotection.v4.r0.a4.error.ErrorResponse'
+      additionalProperties: false
+      description: "REST response for all response codes in API path /dataprotection/v4.0.a4/config/recovery-points/{recoveryPointExtId}/volume-group-recovery-points/{volumeGroupRecoveryPointExtId}\
+        \ Get operation"
+    dataprotection.v4.r0.a4.config.RecoveryPointRestorationSpec:
+      title: Recovery point restore specification.
+      type: object
+      properties:
+        clusterExtId:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+          description: "Recovery points are restored at the associated location reference\
+            \ by default. However, there is no particular location reference associated\
+            \ with Recovery points located on the cloud. In such a case, the client\
+            \ must specify the external identifier of the cluster on which the entity\
+            \ should be restored."
+        vmRecoveryPointRestoreOverrides:
+          maxItems: 64
+          minItems: 1
+          type: array
+          description: List of specifications to restore a specific VM Recovery point(s)
+            that are a part of the top-level recovery point. A specific VM Recovery
+            point can be selected for restore by specifying its external identifier
+            along with override specification (if any).
+          items:
+            $ref: '#/components/schemas/dataprotection.v4.r0.a4.config.VmRecoveryPointRestoreOverride'
+        volumeGroupRecoveryPointRestoreOverrides:
+          maxItems: 64
+          minItems: 1
+          type: array
+          description: List of specifications to restore a specific volume group Recovery
+            point(s) that are a part of the top-level Recovery point. A specific volume
+            group Recovery point can be selected for restore by specifying its external
+            identifier along with override specification (if any).
+          items:
+            $ref: '#/components/schemas/dataprotection.v4.r0.a4.config.VolumeGroupRecoveryPointRestoreOverride'
+      additionalProperties: false
+      description: "Specification for the restore action on the top-level Recovery\
+        \ point. For a Recovery point that contains multiple VM or volume group Recovery\
+        \ points, users can selectively trigger restore for any specific set of VM\
+        \ or volume group Recovery point(s). In case no particular selection is made,\
+        \ all VM and volume group Recovery points that are a part of the top-level\
+        \ Recovery point will be restored."
+    dataprotection.v4.r0.a4.config.RecoveryPointRestoreApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - $ref: '#/components/schemas/storage.v4.r0.a1.config.Task'
+          - $ref: '#/components/schemas/prism.v4.r0.a2.config.TaskReference'
+          - $ref: '#/components/schemas/dataprotection.v4.r0.a4.error.ErrorResponse'
+      additionalProperties: false
+      description: "REST response for all response codes in API path /dataprotection/v4.0.a4/config/recovery-points/{extId}/$actions/restore\
+        \ Post operation"
+    dataprotection.v4.r0.a4.config.VmRecoveryPointRestoreOverride:
+      title: VM Recovery point restore specification.
+      required:
+      - vmRecoveryPointId
+      type: object
+      properties:
+        vmRecoveryPointId:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+          description: "External identifier of a VM Recovery point, that is a part\
+            \ of the top-level Recovery point."
+        ahvVmOverrideSpec:
+          $ref: '#/components/schemas/dataprotection.v4.r0.a4.config.AhvVmOverrideSpec'
+        esxiVmOverrideSpec:
+          $ref: '#/components/schemas/dataprotection.v4.r0.a4.config.EsxiVmOverrideSpec'
+      additionalProperties: false
+    dataprotection.v4.r0.a4.config.VolumeGroupRecoveryPointRestoreOverride:
+      title: Volume group Recovery point restore specification.
+      required:
+      - volumeGroupRecoveryPointId
+      type: object
+      properties:
+        volumeGroupRecoveryPointId:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+          description: "External identifier of a volume group Recovery point, that\
+            \ is a part of the top-level Recovery point."
+        volumeGroupOverrideSpec:
+          $ref: '#/components/schemas/dataprotection.v4.r0.a4.config.VolumeGroupOverrideSpec'
+      additionalProperties: false
+    dataprotection.v4.r0.a4.config.AhvVmOverrideSpec:
+      title: AHV VM restore Recovery point override specification.
+      type: object
+      properties:
+        name:
+          maxLength: 256
+          type: string
+          description: The name of the restored VM
+      additionalProperties: false
+      description: Recovery point restore that overrides the AHV VM configuration.
+        The specified properties will be overridden for the restored VM.
+    dataprotection.v4.r0.a4.config.EsxiVmOverrideSpec:
+      title: ESXi VM restore Recovery point override specification.
+      type: object
+      properties:
+        name:
+          maxLength: 256
+          type: string
+          description: The name of the restored VM
+      additionalProperties: false
+      description: Recovery point restore that overrides the ESXi VM configuration.
+        The specified properties will be overridden for the restored VM.
+    dataprotection.v4.r0.a4.config.VolumeGroupOverrideSpec:
+      title: Volume group restore Recovery point override specification.
+      type: object
+      properties:
+        name:
+          maxLength: 256
+          type: string
+          description: The name of the restored volume group.
+      additionalProperties: false
+      description: Recovery point restore that overrides the volume group configuration.
+        The specified properties will be overridden for the restored volume group.
+    dataprotection.v4.r0.a4.config.VmRecoveryPointRestorationSpec:
+      title: VM Recovery point restore specification.
+      type: object
+      properties:
+        ahvVmOverrideSpec:
+          $ref: '#/components/schemas/dataprotection.v4.r0.a4.config.AhvVmOverrideSpec'
+        esxiVmOverrideSpec:
+          $ref: '#/components/schemas/dataprotection.v4.r0.a4.config.EsxiVmOverrideSpec'
+        clusterExtId:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+          description: "Recovery points are restored at the associated location reference\
+            \ by default. However, there is no particular location reference associated\
+            \ with Recovery points located on the cloud. In such a case, the client\
+            \ must specify the external identifier of the cluster on which the entity\
+            \ should be restored."
+      additionalProperties: false
+      description: Specification for the restore action on the VM Recovery point.
+    dataprotection.v4.r0.a4.config.VmRecoveryPointRestoreApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - $ref: '#/components/schemas/storage.v4.r0.a1.config.Task'
+          - $ref: '#/components/schemas/prism.v4.r0.a2.config.TaskReference'
+          - $ref: '#/components/schemas/dataprotection.v4.r0.a4.error.ErrorResponse'
+      additionalProperties: false
+      description: "REST response for all response codes in API path /dataprotection/v4.0.a4/config/recovery-points/{recoveryPointExtId}/vm-recovery-points/{vmRecoveryPointExtId}/$actions/restore\
+        \ Post operation"
+    dataprotection.v4.r0.a4.config.ValidateRestoreVmRecoveryPointApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/dataprotection.v4.r0.a4.config.ValidateRecoveryPointResult'
+          - $ref: '#/components/schemas/dataprotection.v4.r0.a4.error.ErrorResponse'
+      additionalProperties: false
+      description: "REST response for all response codes in API path /dataprotection/v4.0.a4/config/recovery-points/{recoveryPointExtId}/vm-recovery-points/{vmRecoveryPointExtId}/$actions/validate-restore\
+        \ Post operation"
+    dataprotection.v4.r0.a4.config.ValidateRecoveryPointResult:
+      title: Recovery point validation result
+      required:
+      - severity
+      type: object
+      properties:
+        severity:
+          $ref: '#/components/schemas/dataprotection.v4.r0.a4.config.ValidationSeverity'
+        detail:
+          type: string
+          description: Validation failure or warning details.
+        resolution:
+          type: string
+          description: Possible resolution for the validation failure or warning.
+      additionalProperties: false
+      description: "Recovery point validation failure details, if any."
+    dataprotection.v4.r0.a4.config.ValidationSeverity:
+      type: string
+      description: Validation failure severity. Applicable values are WARNING or ERROR.
+      enum:
+      - $UNKNOWN
+      - $REDACTED
+      - WARNING
+      - ERROR
+    dataprotection.v4.r0.a4.config.VolumeGroupRecoveryPointRestorationSpec:
+      title: Volume group Recovery point restore specification.
+      type: object
+      properties:
+        clusterExtId:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+          description: "Recovery points are restored at the associated location reference\
+            \ by default. However, there is no particular location reference associated\
+            \ with Recovery points located on the cloud. In such a case, the client\
+            \ must specify the external identifier of the cluster on which the entity\
+            \ should be restored."
+        name:
+          maxLength: 256
+          type: string
+          description: The name of the restored volume group.
+      additionalProperties: false
+      description: Specification for the restore action on the volume group Recovery
+        point.
+    dataprotection.v4.r0.a4.config.VolumeGroupRecoveryPointRestoreApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - $ref: '#/components/schemas/storage.v4.r0.a1.config.Task'
+          - $ref: '#/components/schemas/prism.v4.r0.a2.config.TaskReference'
+          - $ref: '#/components/schemas/dataprotection.v4.r0.a4.error.ErrorResponse'
+      additionalProperties: false
+      description: "REST response for all response codes in API path /dataprotection/v4.0.a4/config/recovery-points/{recoveryPointExtId}/volume-group-recovery-points/{volumeGroupRecoveryPointExtId}/$actions/restore\
+        \ Post operation"
+    dataprotection.v4.r0.a4.config.RecoveryPointReplicationSpec:
+      title: Recovery point replicate specification
+      description: External identifier of the cluster and the Prism Central where
+        the Recovery point should be replicated.
+      allOf:
+      - $ref: '#/components/schemas/dataprotection.v4.r0.a4.config.DataProtectionSiteReference'
+      - type: object
+        properties:
+          targetAvailabilityZoneId:
+            type: string
+            description: Target availability zone reference for the entities to be
+              replicated.
+          targetClusterId:
+            type: string
+            description: Details of the Cluster reference in the target availability
+              zone for the entities to be replicated.
+        additionalProperties: false
+    dataprotection.v4.r0.a4.config.RecoveryPointReplicateApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - $ref: '#/components/schemas/storage.v4.r0.a1.config.Task'
+          - $ref: '#/components/schemas/prism.v4.r0.a2.config.TaskReference'
+          - $ref: '#/components/schemas/dataprotection.v4.r0.a4.error.ErrorResponse'
+      additionalProperties: false
+      description: "REST response for all response codes in API path /dataprotection/v4.0.a4/config/recovery-points/{extId}/$actions/replicate\
+        \ Post operation"
+    dataprotection.v4.r0.a4.config.SetExpirationTimeSpec:
+      title: Recovery point expiration time update specification.
+      required:
+      - expirationTime
+      type: object
+      properties:
+        expirationTime:
+          type: string
+          description: "The UTC date and time in ISO-8601 format when the current\
+            \ Recovery point expires and will be garbage collected. If not specified,\
+            \ the Recovery point will never expire."
+          format: date-time
+      additionalProperties: false
+      description: Specification to set the expiration time of the Recovery point.
+    dataprotection.v4.r0.a4.config.UpdateRecoveryPointExpirationTimeApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - $ref: '#/components/schemas/prism.v4.r0.a2.config.TaskReference'
+          - $ref: '#/components/schemas/dataprotection.v4.r0.a4.error.ErrorResponse'
+      additionalProperties: false
+      description: "REST response for all response codes in API path /dataprotection/v4.0.a4/config/recovery-points/{extId}/$actions/set-expiration-time\
+        \ Post operation"
+    dataprotection.v4.r0.a4.config.SynchronousReplicaPromoteApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - $ref: '#/components/schemas/prism.v4.r0.a2.config.TaskReference'
+          - $ref: '#/components/schemas/dataprotection.v4.r0.a4.error.ErrorResponse'
+      additionalProperties: false
+      description: "REST response for all response codes in API path /dataprotection/v4.0.a4/config/synced-volume-groups/{extId}/$actions/promote\
+        \ Post operation"
+    dataprotection.v4.r0.a4.config.SyncedVolumeGroupByIdApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - $ref: '#/components/schemas/dataprotection.v4.r0.a4.config.VolumeGroupSyncContext'
+          - $ref: '#/components/schemas/dataprotection.v4.r0.a4.error.ErrorResponse'
+      additionalProperties: false
+      description: "REST response for all response codes in API path /dataprotection/v4.0.a4/config/synced-volume-groups/{extId}\
+        \ Get operation"
+    dataprotection.v4.r0.a4.config.VolumeGroupSyncContext:
+      title: Volume Group Sync context specification
+      type: object
+      properties:
+        primarySite:
+          $ref: '#/components/schemas/dataprotection.v4.r0.a4.config.SiteReference'
+        secondarySite:
+          $ref: '#/components/schemas/dataprotection.v4.r0.a4.config.SiteReference'
+      additionalProperties: false
+      description: Specification corresponding to the Volume Group synced state. The
+        primary site reference corresponds to the cluster reference information along
+        with the related AZ information where the entity resides. The secondary site
+        reference corresponds to the cluster site reference information along with
+        the related AZ information where the Volume Group is synced to.
+    dataprotection.v4.r0.a4.config.SiteReference:
+      title: Site reference specification
+      type: object
+      properties:
+        availabilityZoneReference:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+          description: The UUID corresponding to the Availability Zone where an entity
+            resides or is synced.
+        clusterReference:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+          description: The UUID corresponding to the cluster where an entity resides
+            or is synced.
+      additionalProperties: false
+      description: Specification corresponding to the cluster reference information
+        along with the related AZ information.
+    dataprotection.v4.r0.a4.config.WitnessApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.r0.a3.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - $ref: '#/components/schemas/dataprotection.v4.r0.a4.config.Witness'
+          - $ref: '#/components/schemas/dataprotection.v4.r0.a4.error.ErrorResponse'
+      additionalProperties: false
+      description: "REST response for all response codes in API path /dataprotection/v4.0.a4/config/witness/{extId}\
+        \ Get operation"
+    dataprotection.v4.r0.a4.config.Witness:
+      title: Witness information.
+      description: A model that represents the details of a Witness site.
+      allOf:
+      - $ref: '#/components/schemas/common.v1.r0.a3.response.ExternalizableAbstractModel'
+      - type: object
+        properties:
+          name:
+            type: string
+            description: Name of the Witness site.
+          hostReferences:
+            type: array
+            description: List of host references of the Witness.
+            items:
+              $ref: '#/components/schemas/dataprotection.v4.r0.a4.config.HostReference'
+          ipAddresses:
+            type: array
+            description: List of IP addresses to be assigned to the Virtual Machine.
+            items:
+              type: string
+              description: IP address.
+          status:
+            $ref: '#/components/schemas/dataprotection.v4.r0.a4.config.WitnessAvailabilityStatus'
+        additionalProperties: false
+    dataprotection.v4.r0.a4.config.HostReference:
+      required:
+      - extId
+      - hostType
+      - name
+      description: Information about the Witness host site.
+      allOf:
+      - $ref: '#/components/schemas/common.v1.r0.a3.response.ExternalizableAbstractModel'
+      - type: object
+        properties:
+          hostType:
+            $ref: '#/components/schemas/dataprotection.v4.r0.a4.config.HostType'
+          name:
+            type: string
+            description: Name of the Witness host site.
+        additionalProperties: false
+    dataprotection.v4.r0.a4.config.WitnessAvailabilityStatus:
+      type: string
+      description: Availability status of the Witness.
+      enum:
+      - $UNKNOWN
+      - $REDACTED
+      - AVAILABLE
+      - UNAVAILABLE
+    dataprotection.v4.r0.a4.config.HostType:
+      type: string
+      description: Type of the Witness host site.
+      enum:
+      - $UNKNOWN
+      - $REDACTED
+      - PRISM_ELEMENT
+    common.v1.r0.a3.response.ExternalizableAbstractModel:
+      description: |
+        A model that represents an object instance that is accessible through an API endpoint.  Instances of this type get an extId field that contains the globally unique identifier for that instance.  Externally accessible instances are always tenant aware and therefore extend the TenantAwareModel
+      allOf:
+      - $ref: '#/components/schemas/common.v1.r0.a3.config.TenantAwareModel'
+      - type: object
+        properties:
+          extId:
+            pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+            type: string
+            description: |
+              A globally unique identifier of an instance that is suitable for external consumption.
+            nullable: true
+          links:
+            type: array
+            description: |
+              A HATEOAS style link for the response.  Each link contains a user friendly name identifying the link and an address for retrieving the particular resource.
+            readOnly: true
+            items:
+              $ref: '#/components/schemas/common.v1.r0.a3.response.ApiLink'
+        additionalProperties: false
+    common.v1.r0.a3.config.TenantAwareModel:
+      type: object
+      properties:
+        tenantId:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+          description: |
+            A globally unique identifier that represents the tenant that owns this entity.  It is automatically assigned by the system and is immutable from an API consumer perspective (some use cases may cause this Id to change - for instance a use case may require the transfer of ownership of the entity, but these cases are handled automatically on the server).
+          readOnly: true
+      additionalProperties: false
+      description: |
+        A model base class whose instances are bound to a specific tenant.  This model adds a tenantId to the base model class that it extends and is automatically set by the server.
+    common.v1.r0.a3.response.ApiLink:
+      type: object
+      properties:
+        href:
+          type: string
+          description: |
+            The URL at which the entity described by the link can be accessed.
+        rel:
+          type: string
+          description: |
+            A name that identifies the relationship of the link to the object that is returned by the URL.  The unique value of "self" identifies the URL for the object.
+      additionalProperties: false
+      description: |
+        A HATEOAS style link for the response.  Each link contains a user friendly name identifying the link and an address for retrieving the particular resource.
+    dataprotection.v4.r0.a2.common.RecoveryPointType:
+      type: string
+      description: Type of the Recovery point.
+      enum:
+      - $UNKNOWN
+      - $REDACTED
+      - CRASH_CONSISTENT
+      - APPLICATION_CONSISTENT
+      x-enumDescriptions:
+        CRASH_CONSISTENT: Crash-consistent Recovery points capture all the VM and
+          application level details.
+        APPLICATION_CONSISTENT: Application-consistent Recovery points can capture
+          all the data stored in the memory and also the in-progress transaction details.
+    dataprotection.v4.r0.a4.config.Category:
+      title: Category key value pair.
+      required:
+      - key
+      - value
+      type: object
+      properties:
+        key:
+          type: string
+          description: Name of the category key.
+        value:
+          type: string
+          description: Name of the category value.
+      additionalProperties: false
+      description: Specifies category in key and value object format.
+    dataprotection.v4.r0.a4.config.ClusterReference:
+      title: Cluster reference.
+      required:
+      - extId
+      type: object
+      properties:
+        extId:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+          description: External identifier of the cluster.
+        name:
+          type: string
+          description: "Name of the Prism Element cluster, this is a read-only field"
+          readOnly: true
+      additionalProperties: false
+      description: The UUID corresponding to the cluster where an entity resides or
+        is synced.
+    dataprotection.v4.r0.a4.config.VpcReference:
+      title: VPC reference.
+      required:
+      - extId
+      type: object
+      properties:
+        extId:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+          description: External identifier of the VPC.
+        name:
+          type: string
+          description: "Name of the VPC, this is a read-only field."
+          readOnly: true
+      additionalProperties: false
+      description: VPC reference to which the network belongs.
+    dataprotection.v4.r0.a4.config.DisasterRecoveryLocation:
+      title: Disaster recovery location.
+      required:
+      - pcExtId
+      type: object
+      properties:
+        pcExtId:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+          description: External identifier of the Prism Central.
+        clusterReferences:
+          type: array
+          description: List of Prism Element clusters references. It is required in
+            the scenario when both primary and secondary Prism Elements are managed
+            by the same Prism Central.
+          items:
+            $ref: '#/components/schemas/dataprotection.v4.r0.a4.config.ClusterReference'
+      additionalProperties: false
+    dataprotection.v4.r0.a4.config.IpAddress:
+      title: IP address.
+      required:
+      - ipv4
+      type: object
+      properties:
+        ipv4:
+          pattern: "^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
+          type: string
+          description: IP address value in IPv4 format.
+      additionalProperties: false
+      description: IP address.
+    dataprotection.v4.r0.a4.config.Subnet:
+      title: Subnet.
+      type: object
+      properties:
+        ipv4:
+          $ref: '#/components/schemas/common.v1.r0.a3.config.IPv4Address'
+      additionalProperties: false
+      description: CIDR of the network gateway.
+    common.v1.r0.a3.config.IPv4Address:
+      type: object
+      properties:
+        value:
+          pattern: "^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
+          type: string
+        prefixLength:
+          maximum: 32
+          minimum: 0
+          type: integer
+          description: |
+            The prefix length of the network to which this host IPv4 address belongs.
+          format: int32
+          default: 32
+      additionalProperties: false
+    dataprotection.v4.r0.a2.common.BaseRecoveryPoint:
+      title: Recovery point properties
+      description: A model that represents common properties of a Recovery point resources
+      allOf:
+      - $ref: '#/components/schemas/common.v1.r0.a3.response.ExternalizableAbstractModel'
+      - type: object
+        properties:
+          locationAgnosticId:
+            pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+            type: string
+            description: Location agnostic identifier of the Recovery point.
+            readOnly: true
+          name:
+            maxLength: 256
+            type: string
+            description: The name of the Recovery point.
+          creationTime:
+            type: string
+            description: The UTC date and time in ISO-8601 format when the Recovery
+              point is created.
+            format: date-time
+            readOnly: true
+          expirationTime:
+            type: string
+            description: The UTC date and time in ISO-8601 format when the current
+              Recovery point expires and will be garbage collected.
+            format: date-time
+          status:
+            $ref: '#/components/schemas/dataprotection.v4.r0.a2.common.RecoveryPointStatus'
+          recoveryPointType:
+            $ref: '#/components/schemas/dataprotection.v4.r0.a2.common.RecoveryPointType'
+          vendorSpecificProperties:
+            type: array
+            description: List of additional metadata provided by the client at the
+              time of Recovery point creation.
+            readOnly: true
+            items:
+              $ref: '#/components/schemas/dataprotection.v4.r0.a2.common.VendorSpecificProperty'
+        additionalProperties: false
+    dataprotection.v4.r0.a2.common.RecoveryPointStatus:
+      type: string
+      description: "The status of the Recovery point, which indicates whether this\
+        \ Recovery point is fit to be consumed."
+      enum:
+      - $UNKNOWN
+      - $REDACTED
+      - INCOMPLETE
+      - COMPLETE
+      - EXPIRED
+      x-enumDescriptions:
+        COMPLETE: The Recovery point is in a complete state and ready to be consumed.
+        EXPIRED: The Recovery point has expired and may not be fit for consumption.
+        INCOMPLETE: The Recovery point is incomplete and not ready to be consumed.
+    dataprotection.v4.r0.a2.common.VendorSpecificProperty:
+      required:
+      - vendorId
+      - vendorMetadata
+      type: object
+      properties:
+        vendorId:
+          type: string
+          description: "The unique identifier of the vendor. It can be a magic number,\
+            \ UUID or vendor name."
+        vendorMetadata:
+          type: string
+          description: This is an opaque data interpreted only by the respective vendor.
+          format: byte
+      additionalProperties: false
+      description: Additional metadata provided by the client at the time of Recovery
+        point creation.
+    dataprotection.v4.r0.a4.error.ErrorResponse:
+      type: object
+      properties:
+        error:
+          oneOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/dataprotection.v4.r0.a4.error.AppMessage'
+          - $ref: '#/components/schemas/dataprotection.v4.r0.a4.error.SchemaValidationError'
+      additionalProperties: false
+      description: This schema is auto-generated by the Open API Dev Platform as REST
+        response for 4xx and 5xx error responses.
+    dataprotection.v4.r0.a4.error.AppMessage:
+      type: object
+      properties:
+        message:
+          type: string
+        severity:
+          $ref: '#/components/schemas/common.v1.r0.a3.config.MessageSeverity'
+        code:
+          type: string
+        locale:
+          type: string
+          description: The locale for the message description.
+          default: en_US
+        errorGroup:
+          type: string
+        argumentsMap:
+          type: object
+          additionalProperties:
+            type: string
+      additionalProperties: false
+      description: This schema is generated from AppMessage.java
+    dataprotection.v4.r0.a4.error.MessageSeverity:
+      type: string
+      description: Enum schema MessageSeverity
+      enum:
+      - $UNKNOWN
+      - $REDACTED
+      - INFO
+      - WARNING
+      - ERROR
+      x-codegen-hint:
+        $any:
+        - type: entity-identifier
+          properties:
+            identifiers:
+            - value: $UNKNOWN
+              index: 201
+            - value: $REDACTED
+              index: 202
+            - value: INFO
+              index: 203
+            - value: WARNING
+              index: 204
+            - value: ERROR
+              index: 205
+    dataprotection.v4.r0.a4.error.SchemaValidationError:
+      type: object
+      properties:
+        timestamp:
+          type: string
+        statusCode:
+          type: integer
+        error:
+          type: string
+        path:
+          type: string
+        validationErrorMessages:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataprotection.v4.r0.a4.error.SchemaValidationErrorMessage'
+      additionalProperties: false
+      description: This schema is generated from SchemaValidationError.java
+    dataprotection.v4.r0.a4.error.SchemaValidationErrorMessage:
+      type: object
+      properties:
+        location:
+          type: string
+        message:
+          type: string
+        attributePath:
+          type: string
+      additionalProperties: false
+      description: This schema is generated from SchemaValidationErrorMessage.java
+    common.v1.r0.a3.response.ApiResponseMetadata:
+      type: object
+      properties:
+        flags:
+          type: array
+          description: |
+            An array of flags that may indicate the status of the response. For example a flag with name isPaginated and value false indicates that the response is not paginated.
+          items:
+            $ref: '#/components/schemas/common.v1.r0.a3.config.Flag'
+        links:
+          type: array
+          description: |
+            An array of HATEOAS style links for the response that may also include pagination links for list operations.
+          items:
+            $ref: '#/components/schemas/common.v1.r0.a3.response.ApiLink'
+        totalAvailableResults:
+          type: integer
+          description: |
+            The total number of entities that are available on the server for this type.
+          format: int32
+        messages:
+          type: array
+          description: |
+            Information, Warning or Error messages that might provide additional contextual information related to the operation.
+          items:
+            $ref: '#/components/schemas/common.v1.r0.a3.config.Message'
+        extraInfo:
+          type: array
+          description: |
+            An array of entity-specific metadata
+          items:
+            $ref: '#/components/schemas/common.v1.r0.a3.config.KVPair'
+      additionalProperties: false
+      description: |
+        The metadata associated with an API response. This value is always present and minimally contains the self-link for the API request that produced this response. It also contains pagination data for the paginated requests.
+    common.v1.r0.a3.config.Flag:
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: boolean
+          default: false
+      additionalProperties: false
+      description: |
+        Many entities in the Nutanix APIs carry flags.  This object captures all the flags associated with that entity through this object.  The field that hosts this type of object must have an attribute called x-bounded-map-keys that tells which flags are actually present for that entity.
+    common.v1.r0.a3.config.Message:
+      type: object
+      properties:
+        code:
+          type: string
+          description: |
+            A code that uniquely identifies a message.
+        message:
+          type: string
+          description: |
+            The description of the message.
+        locale:
+          type: string
+          description: |
+            The locale for the message description.
+          default: en_US
+        severity:
+          $ref: '#/components/schemas/common.v1.r0.a3.config.MessageSeverity'
+      additionalProperties: false
+    common.v1.r0.a3.config.KVPair:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The key of this key-value pair
+        value:
+          description: The value associated with the key for this key-value pair
+          oneOf:
+          - type: string
+          - type: integer
+          - type: boolean
+          - type: array
+            items:
+              type: string
+          - type: object
+            additionalProperties:
+              type: string
+      additionalProperties: false
+      description: |
+        A map describing a set of keys and their corresponding values.
+    common.v1.r0.a3.config.MessageSeverity:
+      type: string
+      description: |
+        The message severity.
+      enum:
+      - $UNKNOWN
+      - $REDACTED
+      - INFO
+      - WARNING
+      - ERROR
+    storage.v4.r0.a1.config.Task:
+      title: Task Object
+      type: object
+      properties:
+        extId:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+          description: The external identifier of the task.
+      additionalProperties: false
+      description: Object encapsulating Task ID return value.
+    prism.v4.r0.a2.config.TaskReference:
+      type: object
+      properties:
+        extId:
+          pattern: "^[a-zA-Z0-9/+]*={0,2}:[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"
+          type: string
+          description: A globally unique identifier of a task.
+      additionalProperties: false
+      description: Reference to a task tracking an asynchronous operation. The status
+        of the task can be queried by making a GET request to the task URI provided
+        in the metadata section of the API response.
+  securitySchemes:
+    basicAuthScheme:
+      type: http
+      scheme: basic

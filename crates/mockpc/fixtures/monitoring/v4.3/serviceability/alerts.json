@@ -1,0 +1,56 @@
+[
+  {
+    "$objectType": "monitoring.v4.serviceability.Alert",
+    "extId": "9ead870c-d76f-4475-8a13-000000000001",
+    "severity": "WARNING",
+    "status": "OPEN",
+    "isAcknowledged": false,
+    "isAutoResolved": false,
+    "isResolved": false,
+    "title": "Disk space usage high for /home on Controller VM 203.0.113.11",
+    "message": "Disk space usage for {mount_path} on {entity} {ip_address} has exceeded {threshold}%.",
+    "alertType": "A1031",
+    "clusterName": "prod-01",
+    "clusterUUID": "0006158a-2f0d-4d5a-8e2d-000000000010",
+    "creationTime": "2026-09-05T09:50:46Z",
+    "lastOccurredTime": "2026-09-05T09:55:46Z",
+    "lastUpdatedTime": "2026-09-05T09:55:46Z",
+    "sourceEntity": {
+      "$objectType": "monitoring.v4.common.AlertEntityReference",
+      "type": "node",
+      "name": "node-01",
+      "extId": "7b2f2f70-0f6a-4b58-9f9b-000000000020"
+    },
+    "impactTypes": ["SYSTEM_INDICATOR"],
+    "primaryImpactType": "SYSTEM_INDICATOR",
+    "classifications": ["Storage"],
+    "parameters": []
+  },
+  {
+    "$objectType": "monitoring.v4.serviceability.Alert",
+    "extId": "9ead870c-d76f-4475-8a13-000000000002",
+    "severity": "CRITICAL",
+    "status": "ACKNOWLEDGED",
+    "isAcknowledged": true,
+    "isAutoResolved": false,
+    "isResolved": false,
+    "title": "CVM 203.0.113.12 is unreachable",
+    "message": "{entity} is unreachable.",
+    "alertType": "A3034",
+    "clusterName": "prod-01",
+    "clusterUUID": "0006158a-2f0d-4d5a-8e2d-000000000010",
+    "creationTime": "2026-09-05T09:40:00Z",
+    "lastOccurredTime": "2026-09-05T09:58:00Z",
+    "lastUpdatedTime": "2026-09-05T09:58:00Z",
+    "sourceEntity": {
+      "$objectType": "monitoring.v4.common.AlertEntityReference",
+      "type": "node",
+      "name": "node-02",
+      "extId": "7b2f2f70-0f6a-4b58-9f9b-000000000021"
+    },
+    "impactTypes": ["AVAILABILITY"],
+    "primaryImpactType": "AVAILABILITY",
+    "classifications": ["Hardware"],
+    "parameters": []
+  }
+]

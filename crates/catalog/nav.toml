@@ -1,0 +1,146 @@
+# The sidebar's tree. Generated into the catalog beside KINDS by `cargo xtask gen-catalog`,
+# which fails when a `kind` is not in KINDS, when a `page` is not in pages.toml, or when a
+# `kind` is not `Reach::Direct` - the same predicate the palette uses to decide what it may
+# open. An item with only a `note` is drawn greyed with the note as its reason, so the menu
+# keeps mirroring the official UI even where the v4 API has no equivalent.
+#
+# The generator appends one group per namespace after these, under a separator, holding what
+# this file left over of it: every top-level-openable kind of that namespace that no group below
+# names, so nothing in the catalog is unreachable from the menu and nothing is in it twice. A
+# namespace with no remainder contributes no group. Moving a kind into a group here therefore
+# takes it out of its namespace group, which is the point - those are an explorer for what
+# nobody has curated, not a second spelling of this menu.
+
+[[group]]
+name = "Dashboard"
+items = [{ label = "Dashboard", page = "dashboard" }]
+
+[[group]]
+name = "Compute & Storage"
+items = [
+  { label = "Overview", page = "compute-storage" },
+  { label = "VMs", kind = "vmm.ahv.config.Vm" },
+  { label = "ESXi VMs", kind = "vmm.esxi.config.Vm" },
+  { label = "Templates", kind = "vmm.content.Template" },
+  { label = "Images", kind = "vmm.content.Image" },
+  { label = "OVAs", kind = "vmm.content.Ova" },
+  { label = "VM Profiles", kind = "vmm.ahv.config.VmProfile" },
+  { label = "Guest Customization", kind = "vmm.ahv.config.VmGuestCustomizationProfile" },
+  { label = "Storage Containers", kind = "clustermgmt.config.StorageContainer" },
+  { label = "Volume Groups", kind = "volumes.config.VolumeGroup" },
+  { label = "Storage Policies", kind = "datapolicies.config.StoragePolicy" },
+  { label = "Categories", kind = "prism.config.Category" },
+  { label = "Catalog Items", note = "not in the v4 API" },
+]
+
+[[group]]
+name = "Network & Security"
+items = [
+  { label = "Overview", page = "network-security" },
+  { label = "Subnets", kind = "networking.config.Subnet" },
+  { label = "VPCs", kind = "networking.config.Vpc" },
+  { label = "Floating IPs", kind = "networking.config.FloatingIp" },
+  { label = "Virtual Switches", kind = "networking.config.VirtualSwitch" },
+  { label = "Subnet Extensions", kind = "networking.config.Layer2Stretch" },
+  { label = "Gateways", kind = "networking.config.Gateway" },
+  { label = "VPN Connections", kind = "networking.config.VpnConnection" },
+  { label = "BGP Sessions", kind = "networking.config.BgpSession" },
+  { label = "Routing Policies", kind = "networking.config.RoutingPolicy" },
+  { label = "Traffic Mirrors", kind = "networking.config.TrafficMirror" },
+  { label = "Load Balancer Sessions", kind = "networking.config.LoadBalancerSession" },
+  { label = "Security Policies", kind = "microseg.config.policies" },
+  { label = "Address Groups", kind = "microseg.config.AddressGroup" },
+  { label = "Service Groups", kind = "microseg.config.ServiceGroup" },
+]
+
+[[group]]
+name = "Data Protection"
+items = [
+  { label = "Disaster Recovery", page = "disaster-recovery" },
+  { label = "Protection Policies", kind = "datapolicies.config.ProtectionPolicy" },
+  { label = "Recovery Plans", kind = "datapolicies.config.RecoveryPlan" },
+  { label = "Recovery Plan Jobs", kind = "dataprotection.config.RecoveryPlanJob" },
+  { label = "Recovery Points", kind = "dataprotection.config.RecoveryPoint" },
+  { label = "Recovery Point Stores", kind = "dataprotection.config.RecoveryPointStore" },
+  { label = "VM Recovery Points", kind = "vmm.ahv.config.VmRecoveryPoint" },
+  { label = "Entity Sync Policies", kind = "datapolicies.config.EntitySyncPolicy" },
+]
+
+[[group]]
+name = "Hardware"
+items = [
+  { label = "Overview", page = "hardware-overview" },
+  { label = "Clusters", kind = "clustermgmt.config.Cluster" },
+  { label = "Hosts", kind = "clustermgmt.config.Host" },
+  { label = "Disks", kind = "clustermgmt.config.Disk" },
+  { label = "Host NICs", kind = "clustermgmt.config.HostNic" },
+  { label = "NIC Profiles", kind = "networking.config.NicProfile" },
+  # The `clustermgmt.config.*` namesakes of these two are the per-cluster ones and come back
+  # `Reach::FromParent`; the `ahv` ones are the fleet-wide, directly openable pair.
+  { label = "Physical GPUs", kind = "clustermgmt.ahv.config.PhysicalGpuProfile" },
+  { label = "Virtual GPUs", kind = "clustermgmt.ahv.config.VirtualGpuProfile" },
+  { label = "PCIe Devices", kind = "clustermgmt.ahv.config.PcieDevice" },
+  { label = "External Storage", kind = "clustermgmt.config.ExternalStorage" },
+]
+
+[[group]]
+name = "Monitoring"
+items = [
+  { label = "Overview", page = "monitoring-overview" },
+  { label = "Alerts", kind = "monitoring.serviceability.Alert" },
+  { label = "Events", kind = "monitoring.serviceability.Event" },
+  { label = "Tasks", kind = "prism.config.Task" },
+  { label = "Audits", kind = "monitoring.serviceability.Audit" },
+  { label = "Alert Policies", kind = "monitoring.serviceability.UserDefinedPolicy" },
+  { label = "Reports", kind = "opsmgmt.config.Report" },
+]
+
+[[group]]
+name = "Policies"
+items = [
+  { label = "Overview", page = "policies-overview" },
+  { label = "VM-Host Affinity", kind = "vmm.ahv.policies.VmHostAffinityPolicy" },
+  { label = "VM Anti-Affinity", kind = "vmm.ahv.policies.VmAntiAffinityPolicy" },
+  { label = "VM Startup", kind = "vmm.ahv.policies.VmStartupPolicy" },
+  { label = "Guest Reboot", kind = "vmm.ahv.policies.GuestRebootPolicy" },
+  { label = "Image Placement", kind = "vmm.images.config.PlacementPolicy" },
+  { label = "Bandwidth Throttling", kind = "vmm.images.config.RateLimitPolicy" },
+  { label = "Approval Policies", kind = "security.management.ApprovalPolicy" },
+  { label = "NGT Policies", note = "not in the v4 API" },
+]
+
+[[group]]
+name = "Admin Center"
+items = [
+  { label = "Overview", page = "admin-center" },
+  { label = "Users", kind = "iam.authn.User" },
+  { label = "User Groups", kind = "iam.authn.UserGroup" },
+  { label = "Roles", kind = "iam.authz.Role" },
+  { label = "Authorization Policies", kind = "iam.authz.AuthorizationPolicy" },
+  { label = "Identity Providers", kind = "iam.authn.SamlIdentityProvider" },
+  { label = "Directory Services", kind = "iam.authn.DirectoryService" },
+  { label = "Prism Central", kind = "prism.config.DomainManager" },
+  { label = "Registered PCs", kind = "multidomain.config.RegisteredDomain" },
+  { label = "LCM Entities", kind = "lifecycle.resources.Entity" },
+  { label = "LCM Bundles", kind = "lifecycle.resources.Bundle" },
+  { label = "LCM History", kind = "lifecycle.resources.LcmHistory" },
+  { label = "Licenses", kind = "licensing.config.License" },
+  { label = "Entitlements", kind = "licensing.config.Entitlement" },
+  { label = "Compliance", kind = "licensing.config.Compliance" },
+  { label = "Key Management Servers", kind = "security.config.KeyManagementServer" },
+  { label = "Files", kind = "files.config.FileServer" },
+  { label = "Objects", kind = "objects.config.ObjectStore" },
+  { label = "Projects", note = "not in the v4 API" },
+]
+
+# One row per configured context, then `(env)`, then `add…`, are added by the sidebar at
+# runtime: they are the config file's, not the catalog's.
+[[group]]
+name = "Contexts"
+items = [{ label = "Contexts", contexts = true }]
+
+# The settings screen, beside the Contexts screen it is a sibling of: the one place that says
+# what is set, what it is set to, and who set it.
+[[group]]
+name = "Settings"
+items = [{ label = "Settings", settings = true }]

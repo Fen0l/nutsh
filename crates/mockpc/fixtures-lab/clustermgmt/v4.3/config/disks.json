@@ -1,0 +1,2544 @@
+[
+  {
+    "$objectType": "clustermgmt.v4.config.Disk",
+    "extId": "0323d129-73e1-42ad-b2af-a8d5928ac2c2",
+    "links": [
+      {
+        "$objectType": "common.v1.response.ApiLink",
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/config/disks/0323d129-73e1-42ad-b2af-a8d5928ac2c2",
+        "rel": "disk"
+      }
+    ],
+    "clusterName": "clusterName-277ed708",
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "storagePoolExtId": "63725cff-c712-44e3-9e28-5bcbcb945fdf",
+    "serviceVMId": "000623f4-7174-ae2a-0000-00000001c1da::9",
+    "nodeExtId": "db7c8f4b-541d-4db7-b9f7-4e24cad11d84",
+    "mountPath": "/home/nutanix/data/stargate-storage/disks/serialNumber-57a958b7",
+    "location": 3,
+    "serialNumber": "serialNumber-57a958b7",
+    "diskSizeBytes": 1749251024238,
+    "physicalCapacityBytes": 1920383410176,
+    "model": "SAMSUNG MZ7LM1T9HMJP-00005",
+    "vendor": "Not Available",
+    "firmwareVersion": "404Q",
+    "targetFirmwareVersion": "404Q",
+    "hostName": "hostName-32bb2481",
+    "status": "NORMAL",
+    "storageTier": "SSD_SATA",
+    "cvmIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "203.0.113.205",
+        "prefixLength": 32
+      }
+    },
+    "nodeIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "198.51.100.228",
+        "prefixLength": 32
+      }
+    },
+    "diskAdvanceConfig": {
+      "$objectType": "clustermgmt.v4.config.DiskAdvanceConfig",
+      "isSelfEncryptingDrive": false,
+      "isSelfManagedNvme": false,
+      "isBootDisk": false,
+      "hasBootPartitionsOnly": false,
+      "isSpdkManaged": false,
+      "isOnline": true,
+      "isMarkedForRemoval": false,
+      "isDataMigrated": false,
+      "isUnhealthy": false,
+      "isSuspectedUnhealthy": false,
+      "isMounted": true,
+      "isUnderDiagnosis": false,
+      "isDiagnosticInfoAvailable": false,
+      "isErrorFoundInLog": false,
+      "isPlannedOutage": false
+    }
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.Disk",
+    "extId": "061b3d7c-a0e1-4fb0-8b26-e994c74e9861",
+    "links": [
+      {
+        "$objectType": "common.v1.response.ApiLink",
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/config/disks/061b3d7c-a0e1-4fb0-8b26-e994c74e9861",
+        "rel": "disk"
+      }
+    ],
+    "clusterName": "clusterName-277ed708",
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "storagePoolExtId": "63725cff-c712-44e3-9e28-5bcbcb945fdf",
+    "serviceVMId": "000623f4-7174-ae2a-0000-00000001c1da::9",
+    "nodeExtId": "db7c8f4b-541d-4db7-b9f7-4e24cad11d84",
+    "mountPath": "/home/nutanix/data/stargate-storage/disks/serialNumber-41a282e0",
+    "location": 5,
+    "serialNumber": "serialNumber-41a282e0",
+    "diskSizeBytes": 1749251024238,
+    "physicalCapacityBytes": 1920383410176,
+    "model": "SAMSUNG MZ7LM1T9HMJP-00005",
+    "vendor": "Not Available",
+    "firmwareVersion": "404Q",
+    "targetFirmwareVersion": "404Q",
+    "hostName": "hostName-32bb2481",
+    "status": "NORMAL",
+    "storageTier": "SSD_SATA",
+    "cvmIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "203.0.113.205",
+        "prefixLength": 32
+      }
+    },
+    "nodeIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "198.51.100.228",
+        "prefixLength": 32
+      }
+    },
+    "diskAdvanceConfig": {
+      "$objectType": "clustermgmt.v4.config.DiskAdvanceConfig",
+      "isSelfEncryptingDrive": false,
+      "isSelfManagedNvme": false,
+      "isBootDisk": false,
+      "hasBootPartitionsOnly": false,
+      "isSpdkManaged": false,
+      "isOnline": true,
+      "isMarkedForRemoval": false,
+      "isDataMigrated": false,
+      "isUnhealthy": false,
+      "isSuspectedUnhealthy": false,
+      "isMounted": true,
+      "isUnderDiagnosis": false,
+      "isDiagnosticInfoAvailable": false,
+      "isErrorFoundInLog": false,
+      "isPlannedOutage": false
+    }
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.Disk",
+    "extId": "0770bd09-de24-4b54-ac0c-891a5e60bc30",
+    "links": [
+      {
+        "$objectType": "common.v1.response.ApiLink",
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/config/disks/0770bd09-de24-4b54-ac0c-891a5e60bc30",
+        "rel": "disk"
+      }
+    ],
+    "clusterName": "clusterName-277ed708",
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "storagePoolExtId": "63725cff-c712-44e3-9e28-5bcbcb945fdf",
+    "serviceVMId": "000623f4-7174-ae2a-0000-00000001c1da::10",
+    "nodeExtId": "0a505ef2-ede4-467c-941f-d39d73bdf1c9",
+    "mountPath": "/home/nutanix/data/stargate-storage/disks/serialNumber-66dcd431",
+    "location": 2,
+    "serialNumber": "serialNumber-66dcd431",
+    "diskSizeBytes": 1663279211345,
+    "physicalCapacityBytes": 1920383410176,
+    "model": "INTEL SSDSC2KG019T8",
+    "vendor": "Not Available",
+    "firmwareVersion": "0165",
+    "targetFirmwareVersion": "0165",
+    "hostName": "hostName-32bb2634",
+    "status": "NORMAL",
+    "storageTier": "SSD_SATA",
+    "cvmIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "198.51.100.164",
+        "prefixLength": 32
+      }
+    },
+    "nodeIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "203.0.113.15",
+        "prefixLength": 32
+      }
+    },
+    "diskAdvanceConfig": {
+      "$objectType": "clustermgmt.v4.config.DiskAdvanceConfig",
+      "isSelfEncryptingDrive": false,
+      "isSelfManagedNvme": false,
+      "isBootDisk": true,
+      "hasBootPartitionsOnly": false,
+      "isSpdkManaged": false,
+      "isOnline": true,
+      "isMarkedForRemoval": false,
+      "isDataMigrated": false,
+      "isUnhealthy": false,
+      "isSuspectedUnhealthy": false,
+      "isMounted": true,
+      "isUnderDiagnosis": false,
+      "isDiagnosticInfoAvailable": false,
+      "isErrorFoundInLog": false,
+      "isPlannedOutage": false
+    }
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.Disk",
+    "extId": "0b379b75-b4a4-42f9-b1e1-b683a7b850c0",
+    "links": [
+      {
+        "$objectType": "common.v1.response.ApiLink",
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/config/disks/0b379b75-b4a4-42f9-b1e1-b683a7b850c0",
+        "rel": "disk"
+      }
+    ],
+    "clusterName": "clusterName-d2b6bd1b",
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "storagePoolExtId": "83c21205-5611-49cf-999a-7c7d8aae320d",
+    "serviceVMId": "0006237e-c983-e712-0000-00000001c1d0::6",
+    "nodeExtId": "9cad7457-dc26-4839-bfce-2aa79a0f54c7",
+    "mountPath": "/home/nutanix/data/stargate-storage/disks/serialNumber-f5585817",
+    "location": 5,
+    "serialNumber": "serialNumber-f5585817",
+    "diskSizeBytes": 1610500161378,
+    "physicalCapacityBytes": 1920383410176,
+    "model": "SAMSUNG MZ7KM1T9HMJP-00005",
+    "vendor": "Not Available",
+    "firmwareVersion": "304Q",
+    "targetFirmwareVersion": "304Q",
+    "hostName": "hostName-a0df6ef9",
+    "status": "NORMAL",
+    "storageTier": "SSD_SATA",
+    "cvmIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "203.0.113.25",
+        "prefixLength": 32
+      }
+    },
+    "nodeIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "198.51.100.246",
+        "prefixLength": 32
+      }
+    },
+    "diskAdvanceConfig": {
+      "$objectType": "clustermgmt.v4.config.DiskAdvanceConfig",
+      "isSelfEncryptingDrive": false,
+      "isSelfManagedNvme": false,
+      "isBootDisk": false,
+      "hasBootPartitionsOnly": false,
+      "isSpdkManaged": false,
+      "isOnline": true,
+      "isMarkedForRemoval": false,
+      "isDataMigrated": false,
+      "isUnhealthy": false,
+      "isSuspectedUnhealthy": false,
+      "isMounted": true,
+      "isUnderDiagnosis": false,
+      "isDiagnosticInfoAvailable": false,
+      "isErrorFoundInLog": false,
+      "isPlannedOutage": false
+    }
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.Disk",
+    "extId": "0e99f0a0-7d51-4c00-a26b-325d321d1671",
+    "links": [
+      {
+        "$objectType": "common.v1.response.ApiLink",
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/config/disks/0e99f0a0-7d51-4c00-a26b-325d321d1671",
+        "rel": "disk"
+      }
+    ],
+    "clusterName": "clusterName-277ed708",
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "storagePoolExtId": "63725cff-c712-44e3-9e28-5bcbcb945fdf",
+    "serviceVMId": "000623f4-7174-ae2a-0000-00000001c1da::9",
+    "nodeExtId": "db7c8f4b-541d-4db7-b9f7-4e24cad11d84",
+    "mountPath": "/home/nutanix/data/stargate-storage/disks/serialNumber-41ade86f",
+    "location": 4,
+    "serialNumber": "serialNumber-41ade86f",
+    "diskSizeBytes": 1749251024238,
+    "physicalCapacityBytes": 1920383410176,
+    "model": "SAMSUNG MZ7LM1T9HMJP-00005",
+    "vendor": "Not Available",
+    "firmwareVersion": "404Q",
+    "targetFirmwareVersion": "404Q",
+    "hostName": "hostName-32bb2481",
+    "status": "NORMAL",
+    "storageTier": "SSD_SATA",
+    "cvmIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "203.0.113.205",
+        "prefixLength": 32
+      }
+    },
+    "nodeIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "198.51.100.228",
+        "prefixLength": 32
+      }
+    },
+    "diskAdvanceConfig": {
+      "$objectType": "clustermgmt.v4.config.DiskAdvanceConfig",
+      "isSelfEncryptingDrive": false,
+      "isSelfManagedNvme": false,
+      "isBootDisk": false,
+      "hasBootPartitionsOnly": false,
+      "isSpdkManaged": false,
+      "isOnline": true,
+      "isMarkedForRemoval": false,
+      "isDataMigrated": false,
+      "isUnhealthy": false,
+      "isSuspectedUnhealthy": false,
+      "isMounted": true,
+      "isUnderDiagnosis": false,
+      "isDiagnosticInfoAvailable": false,
+      "isErrorFoundInLog": false,
+      "isPlannedOutage": false
+    }
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.Disk",
+    "extId": "15d785db-059b-463f-b0da-8a3bfd8f7bcc",
+    "links": [
+      {
+        "$objectType": "common.v1.response.ApiLink",
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/config/disks/15d785db-059b-463f-b0da-8a3bfd8f7bcc",
+        "rel": "disk"
+      }
+    ],
+    "clusterName": "clusterName-d2b6bd1b",
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "storagePoolExtId": "83c21205-5611-49cf-999a-7c7d8aae320d",
+    "serviceVMId": "0006237e-c983-e712-0000-00000001c1d0::6",
+    "nodeExtId": "9cad7457-dc26-4839-bfce-2aa79a0f54c7",
+    "mountPath": "/home/nutanix/data/stargate-storage/disks/serialNumber-41b0fe92",
+    "location": 1,
+    "serialNumber": "serialNumber-41b0fe92",
+    "diskSizeBytes": 1599674709799,
+    "physicalCapacityBytes": 1920383410176,
+    "model": "SAMSUNG MZ7LM1T9HMJP-00005",
+    "vendor": "Not Available",
+    "firmwareVersion": "404Q",
+    "targetFirmwareVersion": "404Q",
+    "hostName": "hostName-a0df6ef9",
+    "status": "NORMAL",
+    "storageTier": "SSD_SATA",
+    "cvmIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "203.0.113.25",
+        "prefixLength": 32
+      }
+    },
+    "nodeIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "198.51.100.246",
+        "prefixLength": 32
+      }
+    },
+    "diskAdvanceConfig": {
+      "$objectType": "clustermgmt.v4.config.DiskAdvanceConfig",
+      "isSelfEncryptingDrive": false,
+      "isSelfManagedNvme": false,
+      "isBootDisk": true,
+      "hasBootPartitionsOnly": false,
+      "isSpdkManaged": false,
+      "isOnline": true,
+      "isMarkedForRemoval": false,
+      "isDataMigrated": false,
+      "isUnhealthy": false,
+      "isSuspectedUnhealthy": false,
+      "isMounted": true,
+      "isUnderDiagnosis": false,
+      "isDiagnosticInfoAvailable": false,
+      "isErrorFoundInLog": false,
+      "isPlannedOutage": false
+    }
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.Disk",
+    "extId": "1bf1e1ef-8ae6-404b-b956-c2a8a36b702d",
+    "links": [
+      {
+        "$objectType": "common.v1.response.ApiLink",
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/config/disks/1bf1e1ef-8ae6-404b-b956-c2a8a36b702d",
+        "rel": "disk"
+      }
+    ],
+    "clusterName": "clusterName-d2b6bd1b",
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "storagePoolExtId": "83c21205-5611-49cf-999a-7c7d8aae320d",
+    "serviceVMId": "0006237e-c983-e712-0000-00000001c1d0::5",
+    "nodeExtId": "38521854-c20d-41ff-8348-41c53db66e38",
+    "mountPath": "/home/nutanix/data/stargate-storage/disks/serialNumber-0b44e726",
+    "location": 6,
+    "serialNumber": "serialNumber-0b44e726",
+    "diskSizeBytes": 1684699044859,
+    "physicalCapacityBytes": 1920383410176,
+    "model": "SAMSUNG MZ7LM1T9HMJP-00005",
+    "vendor": "Not Available",
+    "firmwareVersion": "404Q",
+    "targetFirmwareVersion": "404Q",
+    "hostName": "hostName-a0df6d46",
+    "status": "NORMAL",
+    "storageTier": "SSD_SATA",
+    "cvmIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "198.51.100.230",
+        "prefixLength": 32
+      }
+    },
+    "nodeIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "203.0.113.205",
+        "prefixLength": 32
+      }
+    },
+    "diskAdvanceConfig": {
+      "$objectType": "clustermgmt.v4.config.DiskAdvanceConfig",
+      "isSelfEncryptingDrive": false,
+      "isSelfManagedNvme": false,
+      "isBootDisk": false,
+      "hasBootPartitionsOnly": false,
+      "isSpdkManaged": false,
+      "isOnline": true,
+      "isMarkedForRemoval": false,
+      "isDataMigrated": false,
+      "isUnhealthy": false,
+      "isSuspectedUnhealthy": false,
+      "isMounted": true,
+      "isUnderDiagnosis": false,
+      "isDiagnosticInfoAvailable": false,
+      "isErrorFoundInLog": false,
+      "isPlannedOutage": false
+    }
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.Disk",
+    "extId": "1d184217-e4fb-443d-b2a9-cbc8597fd720",
+    "links": [
+      {
+        "$objectType": "common.v1.response.ApiLink",
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/config/disks/1d184217-e4fb-443d-b2a9-cbc8597fd720",
+        "rel": "disk"
+      }
+    ],
+    "clusterName": "clusterName-277ed708",
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "storagePoolExtId": "63725cff-c712-44e3-9e28-5bcbcb945fdf",
+    "serviceVMId": "000623f4-7174-ae2a-0000-00000001c1da::10",
+    "nodeExtId": "0a505ef2-ede4-467c-941f-d39d73bdf1c9",
+    "mountPath": "/home/nutanix/data/stargate-storage/disks/serialNumber-0786e1cf",
+    "location": 6,
+    "serialNumber": "serialNumber-0786e1cf",
+    "diskSizeBytes": 1749786993491,
+    "physicalCapacityBytes": 1920383410176,
+    "model": "SAMSUNG MZ7LM1T9HMJP-00005",
+    "vendor": "Not Available",
+    "firmwareVersion": "404Q",
+    "targetFirmwareVersion": "404Q",
+    "hostName": "hostName-32bb2634",
+    "status": "NORMAL",
+    "storageTier": "SSD_SATA",
+    "cvmIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "198.51.100.164",
+        "prefixLength": 32
+      }
+    },
+    "nodeIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "203.0.113.15",
+        "prefixLength": 32
+      }
+    },
+    "diskAdvanceConfig": {
+      "$objectType": "clustermgmt.v4.config.DiskAdvanceConfig",
+      "isSelfEncryptingDrive": false,
+      "isSelfManagedNvme": false,
+      "isBootDisk": false,
+      "hasBootPartitionsOnly": false,
+      "isSpdkManaged": false,
+      "isOnline": true,
+      "isMarkedForRemoval": false,
+      "isDataMigrated": false,
+      "isUnhealthy": false,
+      "isSuspectedUnhealthy": false,
+      "isMounted": true,
+      "isUnderDiagnosis": false,
+      "isDiagnosticInfoAvailable": false,
+      "isErrorFoundInLog": false,
+      "isPlannedOutage": false
+    }
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.Disk",
+    "extId": "271ad738-ebf3-41d7-b154-3d36102d6899",
+    "links": [
+      {
+        "$objectType": "common.v1.response.ApiLink",
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/config/disks/271ad738-ebf3-41d7-b154-3d36102d6899",
+        "rel": "disk"
+      }
+    ],
+    "clusterName": "clusterName-277ed708",
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "storagePoolExtId": "63725cff-c712-44e3-9e28-5bcbcb945fdf",
+    "serviceVMId": "000623f4-7174-ae2a-0000-00000001c1da::8",
+    "nodeExtId": "73e903d6-2b8a-46e3-877c-b6bbb347bb4a",
+    "mountPath": "/home/nutanix/data/stargate-storage/disks/serialNumber-0783d42b",
+    "location": 3,
+    "serialNumber": "serialNumber-0783d42b",
+    "diskSizeBytes": 1749251024238,
+    "physicalCapacityBytes": 1920383410176,
+    "model": "SAMSUNG MZ7LM1T9HMJP-00005",
+    "vendor": "Not Available",
+    "firmwareVersion": "404Q",
+    "targetFirmwareVersion": "404Q",
+    "hostName": "hostName-32bb22ce",
+    "status": "NORMAL",
+    "storageTier": "SSD_SATA",
+    "cvmIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "198.51.100.246",
+        "prefixLength": 32
+      }
+    },
+    "nodeIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "203.0.113.97",
+        "prefixLength": 32
+      }
+    },
+    "diskAdvanceConfig": {
+      "$objectType": "clustermgmt.v4.config.DiskAdvanceConfig",
+      "isSelfEncryptingDrive": false,
+      "isSelfManagedNvme": false,
+      "isBootDisk": false,
+      "hasBootPartitionsOnly": false,
+      "isSpdkManaged": false,
+      "isOnline": true,
+      "isMarkedForRemoval": false,
+      "isDataMigrated": false,
+      "isUnhealthy": false,
+      "isSuspectedUnhealthy": false,
+      "isMounted": true,
+      "isUnderDiagnosis": false,
+      "isDiagnosticInfoAvailable": false,
+      "isErrorFoundInLog": false,
+      "isPlannedOutage": false
+    }
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.Disk",
+    "extId": "27b49c78-db50-4019-8ec0-ae26bdfcb381",
+    "links": [
+      {
+        "$objectType": "common.v1.response.ApiLink",
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/config/disks/27b49c78-db50-4019-8ec0-ae26bdfcb381",
+        "rel": "disk"
+      }
+    ],
+    "clusterName": "clusterName-277ed708",
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "storagePoolExtId": "63725cff-c712-44e3-9e28-5bcbcb945fdf",
+    "serviceVMId": "000623f4-7174-ae2a-0000-00000001c1da::9",
+    "nodeExtId": "db7c8f4b-541d-4db7-b9f7-4e24cad11d84",
+    "mountPath": "/home/nutanix/data/stargate-storage/disks/serialNumber-ee1348b5",
+    "location": 2,
+    "serialNumber": "serialNumber-ee1348b5",
+    "diskSizeBytes": 1587584603498,
+    "physicalCapacityBytes": 1920383410176,
+    "model": "SAMSUNG MZ7KM1T9HMJP-00005",
+    "vendor": "Not Available",
+    "firmwareVersion": "304Q",
+    "targetFirmwareVersion": "304Q",
+    "hostName": "hostName-32bb2481",
+    "status": "NORMAL",
+    "storageTier": "SSD_SATA",
+    "cvmIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "203.0.113.205",
+        "prefixLength": 32
+      }
+    },
+    "nodeIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "198.51.100.228",
+        "prefixLength": 32
+      }
+    },
+    "diskAdvanceConfig": {
+      "$objectType": "clustermgmt.v4.config.DiskAdvanceConfig",
+      "isSelfEncryptingDrive": false,
+      "isSelfManagedNvme": false,
+      "isBootDisk": true,
+      "hasBootPartitionsOnly": false,
+      "isSpdkManaged": false,
+      "isOnline": true,
+      "isMarkedForRemoval": false,
+      "isDataMigrated": false,
+      "isUnhealthy": false,
+      "isSuspectedUnhealthy": false,
+      "isMounted": true,
+      "isUnderDiagnosis": false,
+      "isDiagnosticInfoAvailable": false,
+      "isErrorFoundInLog": false,
+      "isPlannedOutage": false
+    }
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.Disk",
+    "extId": "29d54a8b-c0db-4e62-9495-4bc2c56ca98f",
+    "links": [
+      {
+        "$objectType": "common.v1.response.ApiLink",
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/config/disks/29d54a8b-c0db-4e62-9495-4bc2c56ca98f",
+        "rel": "disk"
+      }
+    ],
+    "clusterName": "clusterName-277ed708",
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "storagePoolExtId": "63725cff-c712-44e3-9e28-5bcbcb945fdf",
+    "serviceVMId": "000623f4-7174-ae2a-0000-00000001c1da::8",
+    "nodeExtId": "73e903d6-2b8a-46e3-877c-b6bbb347bb4a",
+    "mountPath": "/home/nutanix/data/stargate-storage/disks/serialNumber-0038f4f8",
+    "location": 2,
+    "serialNumber": "serialNumber-0038f4f8",
+    "diskSizeBytes": 1587597230894,
+    "physicalCapacityBytes": 1920383410176,
+    "model": "SAMSUNG MZ7KM1T9HMJP-00005",
+    "vendor": "Not Available",
+    "firmwareVersion": "304Q",
+    "targetFirmwareVersion": "304Q",
+    "hostName": "hostName-32bb22ce",
+    "status": "NORMAL",
+    "storageTier": "SSD_SATA",
+    "cvmIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "198.51.100.246",
+        "prefixLength": 32
+      }
+    },
+    "nodeIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "203.0.113.97",
+        "prefixLength": 32
+      }
+    },
+    "diskAdvanceConfig": {
+      "$objectType": "clustermgmt.v4.config.DiskAdvanceConfig",
+      "isSelfEncryptingDrive": false,
+      "isSelfManagedNvme": false,
+      "isBootDisk": true,
+      "hasBootPartitionsOnly": false,
+      "isSpdkManaged": false,
+      "isOnline": true,
+      "isMarkedForRemoval": false,
+      "isDataMigrated": false,
+      "isUnhealthy": false,
+      "isSuspectedUnhealthy": false,
+      "isMounted": true,
+      "isUnderDiagnosis": false,
+      "isDiagnosticInfoAvailable": false,
+      "isErrorFoundInLog": false,
+      "isPlannedOutage": false
+    }
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.Disk",
+    "extId": "2afc1198-fff5-4474-9297-5566ece78cf6",
+    "links": [
+      {
+        "$objectType": "common.v1.response.ApiLink",
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/config/disks/2afc1198-fff5-4474-9297-5566ece78cf6",
+        "rel": "disk"
+      }
+    ],
+    "clusterName": "clusterName-d2b6bd1b",
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "storagePoolExtId": "83c21205-5611-49cf-999a-7c7d8aae320d",
+    "serviceVMId": "0006237e-c983-e712-0000-00000001c1d0::4",
+    "nodeExtId": "44e477e6-edcf-4722-b35b-88deb3a160ef",
+    "mountPath": "/home/nutanix/data/stargate-storage/disks/serialNumber-023967c9",
+    "location": 3,
+    "serialNumber": "serialNumber-023967c9",
+    "diskSizeBytes": 1657635942162,
+    "physicalCapacityBytes": 1920383410176,
+    "model": "SAMSUNG MZ7LM1T9HMJP-00005",
+    "vendor": "Not Available",
+    "firmwareVersion": "404Q",
+    "targetFirmwareVersion": "404Q",
+    "hostName": "hostName-a0df69e0",
+    "status": "NORMAL",
+    "storageTier": "SSD_SATA",
+    "cvmIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "203.0.113.17",
+        "prefixLength": 32
+      }
+    },
+    "nodeIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "198.51.100.164",
+        "prefixLength": 32
+      }
+    },
+    "diskAdvanceConfig": {
+      "$objectType": "clustermgmt.v4.config.DiskAdvanceConfig",
+      "isSelfEncryptingDrive": false,
+      "isSelfManagedNvme": false,
+      "isBootDisk": false,
+      "hasBootPartitionsOnly": false,
+      "isSpdkManaged": false,
+      "isOnline": true,
+      "isMarkedForRemoval": false,
+      "isDataMigrated": false,
+      "isUnhealthy": false,
+      "isSuspectedUnhealthy": false,
+      "isMounted": true,
+      "isUnderDiagnosis": false,
+      "isDiagnosticInfoAvailable": false,
+      "isErrorFoundInLog": false,
+      "isPlannedOutage": false
+    }
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.Disk",
+    "extId": "2fd64d7e-5a86-41b6-9938-10f9166ce19b",
+    "links": [
+      {
+        "$objectType": "common.v1.response.ApiLink",
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/config/disks/2fd64d7e-5a86-41b6-9938-10f9166ce19b",
+        "rel": "disk"
+      }
+    ],
+    "clusterName": "clusterName-277ed708",
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "storagePoolExtId": "63725cff-c712-44e3-9e28-5bcbcb945fdf",
+    "serviceVMId": "000623f4-7174-ae2a-0000-00000001c1da::8",
+    "nodeExtId": "73e903d6-2b8a-46e3-877c-b6bbb347bb4a",
+    "mountPath": "/home/nutanix/data/stargate-storage/disks/serialNumber-57a94b1f",
+    "location": 5,
+    "serialNumber": "serialNumber-57a94b1f",
+    "diskSizeBytes": 1749251024238,
+    "physicalCapacityBytes": 1920383410176,
+    "model": "SAMSUNG MZ7LM1T9HMJP-00005",
+    "vendor": "Not Available",
+    "firmwareVersion": "404Q",
+    "targetFirmwareVersion": "404Q",
+    "hostName": "hostName-32bb22ce",
+    "status": "NORMAL",
+    "storageTier": "SSD_SATA",
+    "cvmIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "198.51.100.246",
+        "prefixLength": 32
+      }
+    },
+    "nodeIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "203.0.113.97",
+        "prefixLength": 32
+      }
+    },
+    "diskAdvanceConfig": {
+      "$objectType": "clustermgmt.v4.config.DiskAdvanceConfig",
+      "isSelfEncryptingDrive": false,
+      "isSelfManagedNvme": false,
+      "isBootDisk": false,
+      "hasBootPartitionsOnly": false,
+      "isSpdkManaged": false,
+      "isOnline": true,
+      "isMarkedForRemoval": false,
+      "isDataMigrated": false,
+      "isUnhealthy": false,
+      "isSuspectedUnhealthy": false,
+      "isMounted": true,
+      "isUnderDiagnosis": false,
+      "isDiagnosticInfoAvailable": false,
+      "isErrorFoundInLog": false,
+      "isPlannedOutage": false
+    }
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.Disk",
+    "extId": "353ed8cc-012b-45ad-922d-0787a689dc0e",
+    "links": [
+      {
+        "$objectType": "common.v1.response.ApiLink",
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/config/disks/353ed8cc-012b-45ad-922d-0787a689dc0e",
+        "rel": "disk"
+      }
+    ],
+    "clusterName": "clusterName-277ed708",
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "storagePoolExtId": "63725cff-c712-44e3-9e28-5bcbcb945fdf",
+    "serviceVMId": "000623f4-7174-ae2a-0000-00000001c1da::8",
+    "nodeExtId": "73e903d6-2b8a-46e3-877c-b6bbb347bb4a",
+    "mountPath": "/home/nutanix/data/stargate-storage/disks/serialNumber-57a95c1d",
+    "location": 4,
+    "serialNumber": "serialNumber-57a95c1d",
+    "diskSizeBytes": 1749251024238,
+    "physicalCapacityBytes": 1920383410176,
+    "model": "SAMSUNG MZ7LM1T9HMJP-00005",
+    "vendor": "Not Available",
+    "firmwareVersion": "404Q",
+    "targetFirmwareVersion": "404Q",
+    "hostName": "hostName-32bb22ce",
+    "status": "NORMAL",
+    "storageTier": "SSD_SATA",
+    "cvmIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "198.51.100.246",
+        "prefixLength": 32
+      }
+    },
+    "nodeIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "203.0.113.97",
+        "prefixLength": 32
+      }
+    },
+    "diskAdvanceConfig": {
+      "$objectType": "clustermgmt.v4.config.DiskAdvanceConfig",
+      "isSelfEncryptingDrive": false,
+      "isSelfManagedNvme": false,
+      "isBootDisk": false,
+      "hasBootPartitionsOnly": false,
+      "isSpdkManaged": false,
+      "isOnline": true,
+      "isMarkedForRemoval": false,
+      "isDataMigrated": false,
+      "isUnhealthy": false,
+      "isSuspectedUnhealthy": false,
+      "isMounted": true,
+      "isUnderDiagnosis": false,
+      "isDiagnosticInfoAvailable": false,
+      "isErrorFoundInLog": false,
+      "isPlannedOutage": false
+    }
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.Disk",
+    "extId": "39edd54f-0bcd-464c-be58-94dcdb019529",
+    "links": [
+      {
+        "$objectType": "common.v1.response.ApiLink",
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/config/disks/39edd54f-0bcd-464c-be58-94dcdb019529",
+        "rel": "disk"
+      }
+    ],
+    "clusterName": "clusterName-d2b6bd1b",
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "storagePoolExtId": "83c21205-5611-49cf-999a-7c7d8aae320d",
+    "serviceVMId": "0006237e-c983-e712-0000-00000001c1d0::6",
+    "nodeExtId": "9cad7457-dc26-4839-bfce-2aa79a0f54c7",
+    "mountPath": "/home/nutanix/data/stargate-storage/disks/serialNumber-2eb65510",
+    "location": 2,
+    "serialNumber": "serialNumber-2eb65510",
+    "diskSizeBytes": 1524213982072,
+    "physicalCapacityBytes": 1920383410176,
+    "model": "SAMSUNG MZ7KM1T9HMJP-00005",
+    "vendor": "Not Available",
+    "firmwareVersion": "304Q",
+    "targetFirmwareVersion": "304Q",
+    "hostName": "hostName-a0df6ef9",
+    "status": "NORMAL",
+    "storageTier": "SSD_SATA",
+    "cvmIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "203.0.113.25",
+        "prefixLength": 32
+      }
+    },
+    "nodeIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "198.51.100.246",
+        "prefixLength": 32
+      }
+    },
+    "diskAdvanceConfig": {
+      "$objectType": "clustermgmt.v4.config.DiskAdvanceConfig",
+      "isSelfEncryptingDrive": false,
+      "isSelfManagedNvme": false,
+      "isBootDisk": true,
+      "hasBootPartitionsOnly": false,
+      "isSpdkManaged": false,
+      "isOnline": true,
+      "isMarkedForRemoval": false,
+      "isDataMigrated": false,
+      "isUnhealthy": false,
+      "isSuspectedUnhealthy": false,
+      "isMounted": true,
+      "isUnderDiagnosis": false,
+      "isDiagnosticInfoAvailable": false,
+      "isErrorFoundInLog": false,
+      "isPlannedOutage": false
+    }
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.Disk",
+    "extId": "3c1a5f54-f38b-4ad8-9c4c-83560b2388e5",
+    "links": [
+      {
+        "$objectType": "common.v1.response.ApiLink",
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/config/disks/3c1a5f54-f38b-4ad8-9c4c-83560b2388e5",
+        "rel": "disk"
+      }
+    ],
+    "clusterName": "clusterName-277ed708",
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "storagePoolExtId": "63725cff-c712-44e3-9e28-5bcbcb945fdf",
+    "serviceVMId": "000623f4-7174-ae2a-0000-00000001c1da::7",
+    "nodeExtId": "422ac3ad-bb71-4c47-83f9-7367f1b7da90",
+    "mountPath": "/home/nutanix/data/stargate-storage/disks/serialNumber-0780c83a",
+    "location": 5,
+    "serialNumber": "serialNumber-0780c83a",
+    "diskSizeBytes": 1749265697650,
+    "physicalCapacityBytes": 1920383410176,
+    "model": "SAMSUNG MZ7LM1T9HMJP-00005",
+    "vendor": "Not Available",
+    "firmwareVersion": "404Q",
+    "targetFirmwareVersion": "404Q",
+    "hostName": "hostName-32bb211b",
+    "status": "NORMAL",
+    "storageTier": "SSD_SATA",
+    "cvmIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "203.0.113.33",
+        "prefixLength": 32
+      }
+    },
+    "nodeIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "198.51.100.56",
+        "prefixLength": 32
+      }
+    },
+    "diskAdvanceConfig": {
+      "$objectType": "clustermgmt.v4.config.DiskAdvanceConfig",
+      "isSelfEncryptingDrive": false,
+      "isSelfManagedNvme": false,
+      "isBootDisk": false,
+      "hasBootPartitionsOnly": false,
+      "isSpdkManaged": false,
+      "isOnline": true,
+      "isMarkedForRemoval": false,
+      "isDataMigrated": false,
+      "isUnhealthy": false,
+      "isSuspectedUnhealthy": false,
+      "isMounted": true,
+      "isUnderDiagnosis": false,
+      "isDiagnosticInfoAvailable": false,
+      "isErrorFoundInLog": false,
+      "isPlannedOutage": false
+    }
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.Disk",
+    "extId": "51d53204-c798-4a9a-8d1a-9fab4a482655",
+    "links": [
+      {
+        "$objectType": "common.v1.response.ApiLink",
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/config/disks/51d53204-c798-4a9a-8d1a-9fab4a482655",
+        "rel": "disk"
+      }
+    ],
+    "clusterName": "clusterName-d2b6bd1b",
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "storagePoolExtId": "83c21205-5611-49cf-999a-7c7d8aae320d",
+    "serviceVMId": "0006237e-c983-e712-0000-00000001c1d0::6",
+    "nodeExtId": "9cad7457-dc26-4839-bfce-2aa79a0f54c7",
+    "mountPath": "/home/nutanix/data/stargate-storage/disks/serialNumber-f564898e",
+    "location": 6,
+    "serialNumber": "serialNumber-f564898e",
+    "diskSizeBytes": 1610500161378,
+    "physicalCapacityBytes": 1920383410176,
+    "model": "SAMSUNG MZ7KM1T9HMJP-00005",
+    "vendor": "Not Available",
+    "firmwareVersion": "304Q",
+    "targetFirmwareVersion": "304Q",
+    "hostName": "hostName-a0df6ef9",
+    "status": "NORMAL",
+    "storageTier": "SSD_SATA",
+    "cvmIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "203.0.113.25",
+        "prefixLength": 32
+      }
+    },
+    "nodeIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "198.51.100.246",
+        "prefixLength": 32
+      }
+    },
+    "diskAdvanceConfig": {
+      "$objectType": "clustermgmt.v4.config.DiskAdvanceConfig",
+      "isSelfEncryptingDrive": false,
+      "isSelfManagedNvme": false,
+      "isBootDisk": false,
+      "hasBootPartitionsOnly": false,
+      "isSpdkManaged": false,
+      "isOnline": true,
+      "isMarkedForRemoval": false,
+      "isDataMigrated": false,
+      "isUnhealthy": false,
+      "isSuspectedUnhealthy": false,
+      "isMounted": true,
+      "isUnderDiagnosis": false,
+      "isDiagnosticInfoAvailable": false,
+      "isErrorFoundInLog": false,
+      "isPlannedOutage": false
+    }
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.Disk",
+    "extId": "53c96d1f-1c84-495d-99fb-15ae5aec3102",
+    "links": [
+      {
+        "$objectType": "common.v1.response.ApiLink",
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/config/disks/53c96d1f-1c84-495d-99fb-15ae5aec3102",
+        "rel": "disk"
+      }
+    ],
+    "clusterName": "clusterName-d2b6bd1b",
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "storagePoolExtId": "83c21205-5611-49cf-999a-7c7d8aae320d",
+    "serviceVMId": "0006237e-c983-e712-0000-00000001c1d0::6",
+    "nodeExtId": "9cad7457-dc26-4839-bfce-2aa79a0f54c7",
+    "mountPath": "/home/nutanix/data/stargate-storage/disks/serialNumber-2eb896cc",
+    "location": 3,
+    "serialNumber": "serialNumber-2eb896cc",
+    "diskSizeBytes": 1610500161378,
+    "physicalCapacityBytes": 1920383410176,
+    "model": "SAMSUNG MZ7KM1T9HMJP-00005",
+    "vendor": "Not Available",
+    "firmwareVersion": "304Q",
+    "targetFirmwareVersion": "304Q",
+    "hostName": "hostName-a0df6ef9",
+    "status": "NORMAL",
+    "storageTier": "SSD_SATA",
+    "cvmIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "203.0.113.25",
+        "prefixLength": 32
+      }
+    },
+    "nodeIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "198.51.100.246",
+        "prefixLength": 32
+      }
+    },
+    "diskAdvanceConfig": {
+      "$objectType": "clustermgmt.v4.config.DiskAdvanceConfig",
+      "isSelfEncryptingDrive": false,
+      "isSelfManagedNvme": false,
+      "isBootDisk": false,
+      "hasBootPartitionsOnly": false,
+      "isSpdkManaged": false,
+      "isOnline": true,
+      "isMarkedForRemoval": false,
+      "isDataMigrated": false,
+      "isUnhealthy": false,
+      "isSuspectedUnhealthy": false,
+      "isMounted": true,
+      "isUnderDiagnosis": false,
+      "isDiagnosticInfoAvailable": false,
+      "isErrorFoundInLog": false,
+      "isPlannedOutage": false
+    }
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.Disk",
+    "extId": "547ccac0-c5b9-4ada-9b2d-b7bcc4f419d3",
+    "links": [
+      {
+        "$objectType": "common.v1.response.ApiLink",
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/config/disks/547ccac0-c5b9-4ada-9b2d-b7bcc4f419d3",
+        "rel": "disk"
+      }
+    ],
+    "clusterName": "clusterName-277ed708",
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "storagePoolExtId": "63725cff-c712-44e3-9e28-5bcbcb945fdf",
+    "serviceVMId": "000623f4-7174-ae2a-0000-00000001c1da::8",
+    "nodeExtId": "73e903d6-2b8a-46e3-877c-b6bbb347bb4a",
+    "mountPath": "/home/nutanix/data/stargate-storage/disks/serialNumber-0032ca65",
+    "location": 1,
+    "serialNumber": "serialNumber-0032ca65",
+    "diskSizeBytes": 1587622470873,
+    "physicalCapacityBytes": 1920383410176,
+    "model": "SAMSUNG MZ7KM1T9HMJP-00005",
+    "vendor": "Not Available",
+    "firmwareVersion": "304Q",
+    "targetFirmwareVersion": "304Q",
+    "hostName": "hostName-32bb22ce",
+    "status": "NORMAL",
+    "storageTier": "SSD_SATA",
+    "cvmIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "198.51.100.246",
+        "prefixLength": 32
+      }
+    },
+    "nodeIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "203.0.113.97",
+        "prefixLength": 32
+      }
+    },
+    "diskAdvanceConfig": {
+      "$objectType": "clustermgmt.v4.config.DiskAdvanceConfig",
+      "isSelfEncryptingDrive": false,
+      "isSelfManagedNvme": false,
+      "isBootDisk": true,
+      "hasBootPartitionsOnly": false,
+      "isSpdkManaged": false,
+      "isOnline": true,
+      "isMarkedForRemoval": false,
+      "isDataMigrated": false,
+      "isUnhealthy": false,
+      "isSuspectedUnhealthy": false,
+      "isMounted": true,
+      "isUnderDiagnosis": false,
+      "isDiagnosticInfoAvailable": false,
+      "isErrorFoundInLog": false,
+      "isPlannedOutage": false
+    }
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.Disk",
+    "extId": "5d8a9924-ec4b-4b9c-a553-e3017617113a",
+    "links": [
+      {
+        "$objectType": "common.v1.response.ApiLink",
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/config/disks/5d8a9924-ec4b-4b9c-a553-e3017617113a",
+        "rel": "disk"
+      }
+    ],
+    "clusterName": "clusterName-277ed708",
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "storagePoolExtId": "63725cff-c712-44e3-9e28-5bcbcb945fdf",
+    "serviceVMId": "000623f4-7174-ae2a-0000-00000001c1da::10",
+    "nodeExtId": "0a505ef2-ede4-467c-941f-d39d73bdf1c9",
+    "mountPath": "/home/nutanix/data/stargate-storage/disks/serialNumber-07723ef0",
+    "location": 3,
+    "serialNumber": "serialNumber-07723ef0",
+    "diskSizeBytes": 1749786993491,
+    "physicalCapacityBytes": 1920383410176,
+    "model": "SAMSUNG MZ7LM1T9HMJP-00005",
+    "vendor": "Not Available",
+    "firmwareVersion": "404Q",
+    "targetFirmwareVersion": "404Q",
+    "hostName": "hostName-32bb2634",
+    "status": "NORMAL",
+    "storageTier": "SSD_SATA",
+    "cvmIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "198.51.100.164",
+        "prefixLength": 32
+      }
+    },
+    "nodeIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "203.0.113.15",
+        "prefixLength": 32
+      }
+    },
+    "diskAdvanceConfig": {
+      "$objectType": "clustermgmt.v4.config.DiskAdvanceConfig",
+      "isSelfEncryptingDrive": false,
+      "isSelfManagedNvme": false,
+      "isBootDisk": false,
+      "hasBootPartitionsOnly": false,
+      "isSpdkManaged": false,
+      "isOnline": true,
+      "isMarkedForRemoval": false,
+      "isDataMigrated": false,
+      "isUnhealthy": false,
+      "isSuspectedUnhealthy": false,
+      "isMounted": true,
+      "isUnderDiagnosis": false,
+      "isDiagnosticInfoAvailable": false,
+      "isErrorFoundInLog": false,
+      "isPlannedOutage": false
+    }
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.Disk",
+    "extId": "60c6196f-07c8-4a84-a553-b2270e3d2c29",
+    "links": [
+      {
+        "$objectType": "common.v1.response.ApiLink",
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/config/disks/60c6196f-07c8-4a84-a553-b2270e3d2c29",
+        "rel": "disk"
+      }
+    ],
+    "clusterName": "clusterName-277ed708",
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "storagePoolExtId": "63725cff-c712-44e3-9e28-5bcbcb945fdf",
+    "serviceVMId": "000623f4-7174-ae2a-0000-00000001c1da::7",
+    "nodeExtId": "422ac3ad-bb71-4c47-83f9-7367f1b7da90",
+    "mountPath": "/home/nutanix/data/stargate-storage/disks/serialNumber-57a31b73",
+    "location": 4,
+    "serialNumber": "serialNumber-57a31b73",
+    "diskSizeBytes": 1749265697650,
+    "physicalCapacityBytes": 1920383410176,
+    "model": "SAMSUNG MZ7LM1T9HMJP-00005",
+    "vendor": "Not Available",
+    "firmwareVersion": "404Q",
+    "targetFirmwareVersion": "404Q",
+    "hostName": "hostName-32bb211b",
+    "status": "NORMAL",
+    "storageTier": "SSD_SATA",
+    "cvmIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "203.0.113.33",
+        "prefixLength": 32
+      }
+    },
+    "nodeIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "198.51.100.56",
+        "prefixLength": 32
+      }
+    },
+    "diskAdvanceConfig": {
+      "$objectType": "clustermgmt.v4.config.DiskAdvanceConfig",
+      "isSelfEncryptingDrive": false,
+      "isSelfManagedNvme": false,
+      "isBootDisk": false,
+      "hasBootPartitionsOnly": false,
+      "isSpdkManaged": false,
+      "isOnline": true,
+      "isMarkedForRemoval": false,
+      "isDataMigrated": false,
+      "isUnhealthy": false,
+      "isSuspectedUnhealthy": false,
+      "isMounted": true,
+      "isUnderDiagnosis": false,
+      "isDiagnosticInfoAvailable": false,
+      "isErrorFoundInLog": false,
+      "isPlannedOutage": false
+    }
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.Disk",
+    "extId": "61a31abc-3b9e-4fa1-b250-049042f145bb",
+    "links": [
+      {
+        "$objectType": "common.v1.response.ApiLink",
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/config/disks/61a31abc-3b9e-4fa1-b250-049042f145bb",
+        "rel": "disk"
+      }
+    ],
+    "clusterName": "clusterName-d2b6bd1b",
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "storagePoolExtId": "83c21205-5611-49cf-999a-7c7d8aae320d",
+    "serviceVMId": "0006237e-c983-e712-0000-00000001c1d0::4",
+    "nodeExtId": "44e477e6-edcf-4722-b35b-88deb3a160ef",
+    "mountPath": "/home/nutanix/data/stargate-storage/disks/serialNumber-3c69bcb7",
+    "location": 5,
+    "serialNumber": "serialNumber-3c69bcb7",
+    "diskSizeBytes": 1657635942162,
+    "physicalCapacityBytes": 1920383410176,
+    "model": "SAMSUNG MZ7LM1T9HMJP-00005",
+    "vendor": "Not Available",
+    "firmwareVersion": "404Q",
+    "targetFirmwareVersion": "404Q",
+    "hostName": "hostName-a0df69e0",
+    "status": "NORMAL",
+    "storageTier": "SSD_SATA",
+    "cvmIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "203.0.113.17",
+        "prefixLength": 32
+      }
+    },
+    "nodeIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "198.51.100.164",
+        "prefixLength": 32
+      }
+    },
+    "diskAdvanceConfig": {
+      "$objectType": "clustermgmt.v4.config.DiskAdvanceConfig",
+      "isSelfEncryptingDrive": false,
+      "isSelfManagedNvme": false,
+      "isBootDisk": false,
+      "hasBootPartitionsOnly": false,
+      "isSpdkManaged": false,
+      "isOnline": true,
+      "isMarkedForRemoval": false,
+      "isDataMigrated": false,
+      "isUnhealthy": false,
+      "isSuspectedUnhealthy": false,
+      "isMounted": true,
+      "isUnderDiagnosis": false,
+      "isDiagnosticInfoAvailable": false,
+      "isErrorFoundInLog": false,
+      "isPlannedOutage": false
+    }
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.Disk",
+    "extId": "643723e4-9b8a-437f-aa52-132dd65baecf",
+    "links": [
+      {
+        "$objectType": "common.v1.response.ApiLink",
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/config/disks/643723e4-9b8a-437f-aa52-132dd65baecf",
+        "rel": "disk"
+      }
+    ],
+    "clusterName": "clusterName-277ed708",
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "storagePoolExtId": "63725cff-c712-44e3-9e28-5bcbcb945fdf",
+    "serviceVMId": "000623f4-7174-ae2a-0000-00000001c1da::7",
+    "nodeExtId": "422ac3ad-bb71-4c47-83f9-7367f1b7da90",
+    "mountPath": "/home/nutanix/data/stargate-storage/disks/serialNumber-0786edb4",
+    "location": 6,
+    "serialNumber": "serialNumber-0786edb4",
+    "diskSizeBytes": 1749265697650,
+    "physicalCapacityBytes": 1920383410176,
+    "model": "SAMSUNG MZ7LM1T9HMJP-00005",
+    "vendor": "Not Available",
+    "firmwareVersion": "404Q",
+    "targetFirmwareVersion": "404Q",
+    "hostName": "hostName-32bb211b",
+    "status": "NORMAL",
+    "storageTier": "SSD_SATA",
+    "cvmIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "203.0.113.33",
+        "prefixLength": 32
+      }
+    },
+    "nodeIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "198.51.100.56",
+        "prefixLength": 32
+      }
+    },
+    "diskAdvanceConfig": {
+      "$objectType": "clustermgmt.v4.config.DiskAdvanceConfig",
+      "isSelfEncryptingDrive": false,
+      "isSelfManagedNvme": false,
+      "isBootDisk": false,
+      "hasBootPartitionsOnly": false,
+      "isSpdkManaged": false,
+      "isOnline": true,
+      "isMarkedForRemoval": false,
+      "isDataMigrated": false,
+      "isUnhealthy": false,
+      "isSuspectedUnhealthy": false,
+      "isMounted": true,
+      "isUnderDiagnosis": false,
+      "isDiagnosticInfoAvailable": false,
+      "isErrorFoundInLog": false,
+      "isPlannedOutage": false
+    }
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.Disk",
+    "extId": "70cc2176-764c-4140-9c94-f59c7dab75f7",
+    "links": [
+      {
+        "$objectType": "common.v1.response.ApiLink",
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/config/disks/70cc2176-764c-4140-9c94-f59c7dab75f7",
+        "rel": "disk"
+      }
+    ],
+    "clusterName": "clusterName-d2b6bd1b",
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "storagePoolExtId": "83c21205-5611-49cf-999a-7c7d8aae320d",
+    "serviceVMId": "0006237e-c983-e712-0000-00000001c1d0::4",
+    "nodeExtId": "44e477e6-edcf-4722-b35b-88deb3a160ef",
+    "mountPath": "/home/nutanix/data/stargate-storage/disks/serialNumber-02428b9c",
+    "location": 4,
+    "serialNumber": "serialNumber-02428b9c",
+    "diskSizeBytes": 1657635942162,
+    "physicalCapacityBytes": 1920383410176,
+    "model": "SAMSUNG MZ7LM1T9HMJP-00005",
+    "vendor": "Not Available",
+    "firmwareVersion": "404Q",
+    "targetFirmwareVersion": "404Q",
+    "hostName": "hostName-a0df69e0",
+    "status": "NORMAL",
+    "storageTier": "SSD_SATA",
+    "cvmIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "203.0.113.17",
+        "prefixLength": 32
+      }
+    },
+    "nodeIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "198.51.100.164",
+        "prefixLength": 32
+      }
+    },
+    "diskAdvanceConfig": {
+      "$objectType": "clustermgmt.v4.config.DiskAdvanceConfig",
+      "isSelfEncryptingDrive": false,
+      "isSelfManagedNvme": false,
+      "isBootDisk": false,
+      "hasBootPartitionsOnly": false,
+      "isSpdkManaged": false,
+      "isOnline": true,
+      "isMarkedForRemoval": false,
+      "isDataMigrated": false,
+      "isUnhealthy": false,
+      "isSuspectedUnhealthy": false,
+      "isMounted": true,
+      "isUnderDiagnosis": false,
+      "isDiagnosticInfoAvailable": false,
+      "isErrorFoundInLog": false,
+      "isPlannedOutage": false
+    }
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.Disk",
+    "extId": "864afd2b-b26b-4458-ab59-515ee4495663",
+    "links": [
+      {
+        "$objectType": "common.v1.response.ApiLink",
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/config/disks/864afd2b-b26b-4458-ab59-515ee4495663",
+        "rel": "disk"
+      }
+    ],
+    "clusterName": "clusterName-277ed708",
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "storagePoolExtId": "63725cff-c712-44e3-9e28-5bcbcb945fdf",
+    "serviceVMId": "000623f4-7174-ae2a-0000-00000001c1da::9",
+    "nodeExtId": "db7c8f4b-541d-4db7-b9f7-4e24cad11d84",
+    "mountPath": "/home/nutanix/data/stargate-storage/disks/serialNumber-41a298f7",
+    "location": 6,
+    "serialNumber": "serialNumber-41a298f7",
+    "diskSizeBytes": 1749251024238,
+    "physicalCapacityBytes": 1920383410176,
+    "model": "SAMSUNG MZ7LM1T9HMJP-00005",
+    "vendor": "Not Available",
+    "firmwareVersion": "404Q",
+    "targetFirmwareVersion": "404Q",
+    "hostName": "hostName-32bb2481",
+    "status": "NORMAL",
+    "storageTier": "SSD_SATA",
+    "cvmIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "203.0.113.205",
+        "prefixLength": 32
+      }
+    },
+    "nodeIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "198.51.100.228",
+        "prefixLength": 32
+      }
+    },
+    "diskAdvanceConfig": {
+      "$objectType": "clustermgmt.v4.config.DiskAdvanceConfig",
+      "isSelfEncryptingDrive": false,
+      "isSelfManagedNvme": false,
+      "isBootDisk": false,
+      "hasBootPartitionsOnly": false,
+      "isSpdkManaged": false,
+      "isOnline": true,
+      "isMarkedForRemoval": false,
+      "isDataMigrated": false,
+      "isUnhealthy": false,
+      "isSuspectedUnhealthy": false,
+      "isMounted": true,
+      "isUnderDiagnosis": false,
+      "isDiagnosticInfoAvailable": false,
+      "isErrorFoundInLog": false,
+      "isPlannedOutage": false
+    }
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.Disk",
+    "extId": "8b02710d-fc50-420d-a676-1ce39c6ef57e",
+    "links": [
+      {
+        "$objectType": "common.v1.response.ApiLink",
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/config/disks/8b02710d-fc50-420d-a676-1ce39c6ef57e",
+        "rel": "disk"
+      }
+    ],
+    "clusterName": "clusterName-d2b6bd1b",
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "storagePoolExtId": "83c21205-5611-49cf-999a-7c7d8aae320d",
+    "serviceVMId": "0006237e-c983-e712-0000-00000001c1d0::4",
+    "nodeExtId": "44e477e6-edcf-4722-b35b-88deb3a160ef",
+    "mountPath": "/home/nutanix/data/stargate-storage/disks/serialNumber-5a32be0b",
+    "location": 1,
+    "serialNumber": "serialNumber-5a32be0b",
+    "diskSizeBytes": 1582751687916,
+    "physicalCapacityBytes": 1920383410176,
+    "model": "SAMSUNG MZ7LM1T9HMJP-00005",
+    "vendor": "Not Available",
+    "firmwareVersion": "404Q",
+    "targetFirmwareVersion": "404Q",
+    "hostName": "hostName-a0df69e0",
+    "status": "NORMAL",
+    "storageTier": "SSD_SATA",
+    "cvmIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "203.0.113.17",
+        "prefixLength": 32
+      }
+    },
+    "nodeIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "198.51.100.164",
+        "prefixLength": 32
+      }
+    },
+    "diskAdvanceConfig": {
+      "$objectType": "clustermgmt.v4.config.DiskAdvanceConfig",
+      "isSelfEncryptingDrive": false,
+      "isSelfManagedNvme": false,
+      "isBootDisk": true,
+      "hasBootPartitionsOnly": false,
+      "isSpdkManaged": false,
+      "isOnline": true,
+      "isMarkedForRemoval": false,
+      "isDataMigrated": false,
+      "isUnhealthy": false,
+      "isSuspectedUnhealthy": false,
+      "isMounted": true,
+      "isUnderDiagnosis": false,
+      "isDiagnosticInfoAvailable": false,
+      "isErrorFoundInLog": false,
+      "isPlannedOutage": false
+    }
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.Disk",
+    "extId": "927165f0-9b7d-4ac1-89a1-f69a6a3b3220",
+    "links": [
+      {
+        "$objectType": "common.v1.response.ApiLink",
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/config/disks/927165f0-9b7d-4ac1-89a1-f69a6a3b3220",
+        "rel": "disk"
+      }
+    ],
+    "clusterName": "clusterName-d2b6bd1b",
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "storagePoolExtId": "83c21205-5611-49cf-999a-7c7d8aae320d",
+    "serviceVMId": "0006237e-c983-e712-0000-00000001c1d0::4",
+    "nodeExtId": "44e477e6-edcf-4722-b35b-88deb3a160ef",
+    "mountPath": "/home/nutanix/data/stargate-storage/disks/serialNumber-021f883b",
+    "location": 2,
+    "serialNumber": "serialNumber-021f883b",
+    "diskSizeBytes": 1582751687916,
+    "physicalCapacityBytes": 1920383410176,
+    "model": "SAMSUNG MZ7LM1T9HMJP-00005",
+    "vendor": "Not Available",
+    "firmwareVersion": "404Q",
+    "targetFirmwareVersion": "404Q",
+    "hostName": "hostName-a0df69e0",
+    "status": "NORMAL",
+    "storageTier": "SSD_SATA",
+    "cvmIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "203.0.113.17",
+        "prefixLength": 32
+      }
+    },
+    "nodeIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "198.51.100.164",
+        "prefixLength": 32
+      }
+    },
+    "diskAdvanceConfig": {
+      "$objectType": "clustermgmt.v4.config.DiskAdvanceConfig",
+      "isSelfEncryptingDrive": false,
+      "isSelfManagedNvme": false,
+      "isBootDisk": true,
+      "hasBootPartitionsOnly": false,
+      "isSpdkManaged": false,
+      "isOnline": true,
+      "isMarkedForRemoval": false,
+      "isDataMigrated": false,
+      "isUnhealthy": false,
+      "isSuspectedUnhealthy": false,
+      "isMounted": true,
+      "isUnderDiagnosis": false,
+      "isDiagnosticInfoAvailable": false,
+      "isErrorFoundInLog": false,
+      "isPlannedOutage": false
+    }
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.Disk",
+    "extId": "94ac4f28-5b7f-429a-9b67-18df5b3164f5",
+    "links": [
+      {
+        "$objectType": "common.v1.response.ApiLink",
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/config/disks/94ac4f28-5b7f-429a-9b67-18df5b3164f5",
+        "rel": "disk"
+      }
+    ],
+    "clusterName": "clusterName-d2b6bd1b",
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "storagePoolExtId": "83c21205-5611-49cf-999a-7c7d8aae320d",
+    "serviceVMId": "0006237e-c983-e712-0000-00000001c1d0::5",
+    "nodeExtId": "38521854-c20d-41ff-8348-41c53db66e38",
+    "mountPath": "/home/nutanix/data/stargate-storage/disks/serialNumber-f53e5d59",
+    "location": 1,
+    "serialNumber": "serialNumber-f53e5d59",
+    "diskSizeBytes": 1523455555455,
+    "physicalCapacityBytes": 1920383410176,
+    "model": "SAMSUNG MZ7KM1T9HMJP-00005",
+    "vendor": "Not Available",
+    "firmwareVersion": "304Q",
+    "targetFirmwareVersion": "304Q",
+    "hostName": "hostName-a0df6d46",
+    "status": "NORMAL",
+    "storageTier": "SSD_SATA",
+    "cvmIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "198.51.100.230",
+        "prefixLength": 32
+      }
+    },
+    "nodeIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "203.0.113.205",
+        "prefixLength": 32
+      }
+    },
+    "diskAdvanceConfig": {
+      "$objectType": "clustermgmt.v4.config.DiskAdvanceConfig",
+      "isSelfEncryptingDrive": false,
+      "isSelfManagedNvme": false,
+      "isBootDisk": true,
+      "hasBootPartitionsOnly": false,
+      "isSpdkManaged": false,
+      "isOnline": true,
+      "isMarkedForRemoval": false,
+      "isDataMigrated": false,
+      "isUnhealthy": false,
+      "isSuspectedUnhealthy": false,
+      "isMounted": true,
+      "isUnderDiagnosis": false,
+      "isDiagnosticInfoAvailable": false,
+      "isErrorFoundInLog": false,
+      "isPlannedOutage": false
+    }
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.Disk",
+    "extId": "96e75fde-65e7-4e74-960b-7c1074a899cf",
+    "links": [
+      {
+        "$objectType": "common.v1.response.ApiLink",
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/config/disks/96e75fde-65e7-4e74-960b-7c1074a899cf",
+        "rel": "disk"
+      }
+    ],
+    "clusterName": "clusterName-277ed708",
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "storagePoolExtId": "63725cff-c712-44e3-9e28-5bcbcb945fdf",
+    "serviceVMId": "000623f4-7174-ae2a-0000-00000001c1da::10",
+    "nodeExtId": "0a505ef2-ede4-467c-941f-d39d73bdf1c9",
+    "mountPath": "/home/nutanix/data/stargate-storage/disks/serialNumber-021f7fbc",
+    "location": 4,
+    "serialNumber": "serialNumber-021f7fbc",
+    "diskSizeBytes": 1749786993491,
+    "physicalCapacityBytes": 1920383410176,
+    "model": "SAMSUNG MZ7LM1T9HMJP-00005",
+    "vendor": "Not Available",
+    "firmwareVersion": "404Q",
+    "targetFirmwareVersion": "404Q",
+    "hostName": "hostName-32bb2634",
+    "status": "NORMAL",
+    "storageTier": "SSD_SATA",
+    "cvmIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "198.51.100.164",
+        "prefixLength": 32
+      }
+    },
+    "nodeIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "203.0.113.15",
+        "prefixLength": 32
+      }
+    },
+    "diskAdvanceConfig": {
+      "$objectType": "clustermgmt.v4.config.DiskAdvanceConfig",
+      "isSelfEncryptingDrive": false,
+      "isSelfManagedNvme": false,
+      "isBootDisk": false,
+      "hasBootPartitionsOnly": false,
+      "isSpdkManaged": false,
+      "isOnline": true,
+      "isMarkedForRemoval": false,
+      "isDataMigrated": false,
+      "isUnhealthy": false,
+      "isSuspectedUnhealthy": false,
+      "isMounted": true,
+      "isUnderDiagnosis": false,
+      "isDiagnosticInfoAvailable": false,
+      "isErrorFoundInLog": false,
+      "isPlannedOutage": false
+    }
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.Disk",
+    "extId": "a1c70f80-574b-43e1-a208-543dfebe7b07",
+    "links": [
+      {
+        "$objectType": "common.v1.response.ApiLink",
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/config/disks/a1c70f80-574b-43e1-a208-543dfebe7b07",
+        "rel": "disk"
+      }
+    ],
+    "clusterName": "clusterName-277ed708",
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "storagePoolExtId": "63725cff-c712-44e3-9e28-5bcbcb945fdf",
+    "serviceVMId": "000623f4-7174-ae2a-0000-00000001c1da::10",
+    "nodeExtId": "0a505ef2-ede4-467c-941f-d39d73bdf1c9",
+    "mountPath": "/home/nutanix/data/stargate-storage/disks/serialNumber-04003b05",
+    "location": 1,
+    "serialNumber": "serialNumber-04003b05",
+    "diskSizeBytes": 1588667906062,
+    "physicalCapacityBytes": 1920383410176,
+    "model": "SAMSUNG MZ7KM1T9HMJP-00005",
+    "vendor": "Not Available",
+    "firmwareVersion": "304Q",
+    "targetFirmwareVersion": "304Q",
+    "hostName": "hostName-32bb2634",
+    "status": "NORMAL",
+    "storageTier": "SSD_SATA",
+    "cvmIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "198.51.100.164",
+        "prefixLength": 32
+      }
+    },
+    "nodeIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "203.0.113.15",
+        "prefixLength": 32
+      }
+    },
+    "diskAdvanceConfig": {
+      "$objectType": "clustermgmt.v4.config.DiskAdvanceConfig",
+      "isSelfEncryptingDrive": false,
+      "isSelfManagedNvme": false,
+      "isBootDisk": true,
+      "hasBootPartitionsOnly": false,
+      "isSpdkManaged": false,
+      "isOnline": true,
+      "isMarkedForRemoval": false,
+      "isDataMigrated": false,
+      "isUnhealthy": false,
+      "isSuspectedUnhealthy": false,
+      "isMounted": true,
+      "isUnderDiagnosis": false,
+      "isDiagnosticInfoAvailable": false,
+      "isErrorFoundInLog": false,
+      "isPlannedOutage": false
+    }
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.Disk",
+    "extId": "be0727a5-9cdd-4ae4-bf38-a50f9405340e",
+    "links": [
+      {
+        "$objectType": "common.v1.response.ApiLink",
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/config/disks/be0727a5-9cdd-4ae4-bf38-a50f9405340e",
+        "rel": "disk"
+      }
+    ],
+    "clusterName": "clusterName-d2b6bd1b",
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "storagePoolExtId": "83c21205-5611-49cf-999a-7c7d8aae320d",
+    "serviceVMId": "0006237e-c983-e712-0000-00000001c1d0::5",
+    "nodeExtId": "38521854-c20d-41ff-8348-41c53db66e38",
+    "mountPath": "/home/nutanix/data/stargate-storage/disks/serialNumber-0b44f30b",
+    "location": 3,
+    "serialNumber": "serialNumber-0b44f30b",
+    "diskSizeBytes": 1684699044859,
+    "physicalCapacityBytes": 1920383410176,
+    "model": "SAMSUNG MZ7LM1T9HMJP-00005",
+    "vendor": "Not Available",
+    "firmwareVersion": "404Q",
+    "targetFirmwareVersion": "404Q",
+    "hostName": "hostName-a0df6d46",
+    "status": "NORMAL",
+    "storageTier": "SSD_SATA",
+    "cvmIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "198.51.100.230",
+        "prefixLength": 32
+      }
+    },
+    "nodeIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "203.0.113.205",
+        "prefixLength": 32
+      }
+    },
+    "diskAdvanceConfig": {
+      "$objectType": "clustermgmt.v4.config.DiskAdvanceConfig",
+      "isSelfEncryptingDrive": false,
+      "isSelfManagedNvme": false,
+      "isBootDisk": false,
+      "hasBootPartitionsOnly": false,
+      "isSpdkManaged": false,
+      "isOnline": true,
+      "isMarkedForRemoval": false,
+      "isDataMigrated": false,
+      "isUnhealthy": false,
+      "isSuspectedUnhealthy": false,
+      "isMounted": true,
+      "isUnderDiagnosis": false,
+      "isDiagnosticInfoAvailable": false,
+      "isErrorFoundInLog": false,
+      "isPlannedOutage": false
+    }
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.Disk",
+    "extId": "d723b275-9ef0-4774-8c8b-cf791cc611fd",
+    "links": [
+      {
+        "$objectType": "common.v1.response.ApiLink",
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/config/disks/d723b275-9ef0-4774-8c8b-cf791cc611fd",
+        "rel": "disk"
+      }
+    ],
+    "clusterName": "clusterName-277ed708",
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "storagePoolExtId": "63725cff-c712-44e3-9e28-5bcbcb945fdf",
+    "serviceVMId": "000623f4-7174-ae2a-0000-00000001c1da::7",
+    "nodeExtId": "422ac3ad-bb71-4c47-83f9-7367f1b7da90",
+    "mountPath": "/home/nutanix/data/stargate-storage/disks/serialNumber-55e1ac95",
+    "location": 1,
+    "serialNumber": "serialNumber-55e1ac95",
+    "diskSizeBytes": 1588595520267,
+    "physicalCapacityBytes": 1920383410176,
+    "model": "SAMSUNG MZ7KM1T9HMJP-00005",
+    "vendor": "Not Available",
+    "firmwareVersion": "304Q",
+    "targetFirmwareVersion": "304Q",
+    "hostName": "hostName-32bb211b",
+    "status": "NORMAL",
+    "storageTier": "SSD_SATA",
+    "cvmIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "203.0.113.33",
+        "prefixLength": 32
+      }
+    },
+    "nodeIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "198.51.100.56",
+        "prefixLength": 32
+      }
+    },
+    "diskAdvanceConfig": {
+      "$objectType": "clustermgmt.v4.config.DiskAdvanceConfig",
+      "isSelfEncryptingDrive": false,
+      "isSelfManagedNvme": false,
+      "isBootDisk": true,
+      "hasBootPartitionsOnly": false,
+      "isSpdkManaged": false,
+      "isOnline": true,
+      "isMarkedForRemoval": false,
+      "isDataMigrated": false,
+      "isUnhealthy": false,
+      "isSuspectedUnhealthy": false,
+      "isMounted": true,
+      "isUnderDiagnosis": false,
+      "isDiagnosticInfoAvailable": false,
+      "isErrorFoundInLog": false,
+      "isPlannedOutage": false
+    }
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.Disk",
+    "extId": "dc1695a0-5c35-413f-8e26-6ccc1796c97a",
+    "links": [
+      {
+        "$objectType": "common.v1.response.ApiLink",
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/config/disks/dc1695a0-5c35-413f-8e26-6ccc1796c97a",
+        "rel": "disk"
+      }
+    ],
+    "clusterName": "clusterName-277ed708",
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "storagePoolExtId": "63725cff-c712-44e3-9e28-5bcbcb945fdf",
+    "serviceVMId": "000623f4-7174-ae2a-0000-00000001c1da::9",
+    "nodeExtId": "db7c8f4b-541d-4db7-b9f7-4e24cad11d84",
+    "mountPath": "/home/nutanix/data/stargate-storage/disks/serialNumber-ee1352e7",
+    "location": 1,
+    "serialNumber": "serialNumber-ee1352e7",
+    "diskSizeBytes": 1587622470873,
+    "physicalCapacityBytes": 1920383410176,
+    "model": "SAMSUNG MZ7KM1T9HMJP-00005",
+    "vendor": "Not Available",
+    "firmwareVersion": "304Q",
+    "targetFirmwareVersion": "304Q",
+    "hostName": "hostName-32bb2481",
+    "status": "NORMAL",
+    "storageTier": "SSD_SATA",
+    "cvmIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "203.0.113.205",
+        "prefixLength": 32
+      }
+    },
+    "nodeIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "198.51.100.228",
+        "prefixLength": 32
+      }
+    },
+    "diskAdvanceConfig": {
+      "$objectType": "clustermgmt.v4.config.DiskAdvanceConfig",
+      "isSelfEncryptingDrive": false,
+      "isSelfManagedNvme": false,
+      "isBootDisk": true,
+      "hasBootPartitionsOnly": false,
+      "isSpdkManaged": false,
+      "isOnline": true,
+      "isMarkedForRemoval": false,
+      "isDataMigrated": false,
+      "isUnhealthy": false,
+      "isSuspectedUnhealthy": false,
+      "isMounted": true,
+      "isUnderDiagnosis": false,
+      "isDiagnosticInfoAvailable": false,
+      "isErrorFoundInLog": false,
+      "isPlannedOutage": false
+    }
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.Disk",
+    "extId": "df320046-afed-4df9-8d7d-632e8351002c",
+    "links": [
+      {
+        "$objectType": "common.v1.response.ApiLink",
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/config/disks/df320046-afed-4df9-8d7d-632e8351002c",
+        "rel": "disk"
+      }
+    ],
+    "clusterName": "clusterName-277ed708",
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "storagePoolExtId": "63725cff-c712-44e3-9e28-5bcbcb945fdf",
+    "serviceVMId": "000623f4-7174-ae2a-0000-00000001c1da::8",
+    "nodeExtId": "73e903d6-2b8a-46e3-877c-b6bbb347bb4a",
+    "mountPath": "/home/nutanix/data/stargate-storage/disks/serialNumber-024284d0",
+    "location": 6,
+    "serialNumber": "serialNumber-024284d0",
+    "diskSizeBytes": 1749251024238,
+    "physicalCapacityBytes": 1920383410176,
+    "model": "SAMSUNG MZ7LM1T9HMJP-00005",
+    "vendor": "Not Available",
+    "firmwareVersion": "404Q",
+    "targetFirmwareVersion": "404Q",
+    "hostName": "hostName-32bb22ce",
+    "status": "NORMAL",
+    "storageTier": "SSD_SATA",
+    "cvmIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "198.51.100.246",
+        "prefixLength": 32
+      }
+    },
+    "nodeIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "203.0.113.97",
+        "prefixLength": 32
+      }
+    },
+    "diskAdvanceConfig": {
+      "$objectType": "clustermgmt.v4.config.DiskAdvanceConfig",
+      "isSelfEncryptingDrive": false,
+      "isSelfManagedNvme": false,
+      "isBootDisk": false,
+      "hasBootPartitionsOnly": false,
+      "isSpdkManaged": false,
+      "isOnline": true,
+      "isMarkedForRemoval": false,
+      "isDataMigrated": false,
+      "isUnhealthy": false,
+      "isSuspectedUnhealthy": false,
+      "isMounted": true,
+      "isUnderDiagnosis": false,
+      "isDiagnosticInfoAvailable": false,
+      "isErrorFoundInLog": false,
+      "isPlannedOutage": false
+    }
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.Disk",
+    "extId": "e76d3c89-6abb-4e05-9508-30d6d9466673",
+    "links": [
+      {
+        "$objectType": "common.v1.response.ApiLink",
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/config/disks/e76d3c89-6abb-4e05-9508-30d6d9466673",
+        "rel": "disk"
+      }
+    ],
+    "clusterName": "clusterName-277ed708",
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "storagePoolExtId": "63725cff-c712-44e3-9e28-5bcbcb945fdf",
+    "serviceVMId": "000623f4-7174-ae2a-0000-00000001c1da::7",
+    "nodeExtId": "422ac3ad-bb71-4c47-83f9-7367f1b7da90",
+    "mountPath": "/home/nutanix/data/stargate-storage/disks/serialNumber-57a640e1",
+    "location": 3,
+    "serialNumber": "serialNumber-57a640e1",
+    "diskSizeBytes": 1749265697650,
+    "physicalCapacityBytes": 1920383410176,
+    "model": "SAMSUNG MZ7LM1T9HMJP-00005",
+    "vendor": "Not Available",
+    "firmwareVersion": "404Q",
+    "targetFirmwareVersion": "404Q",
+    "hostName": "hostName-32bb211b",
+    "status": "NORMAL",
+    "storageTier": "SSD_SATA",
+    "cvmIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "203.0.113.33",
+        "prefixLength": 32
+      }
+    },
+    "nodeIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "198.51.100.56",
+        "prefixLength": 32
+      }
+    },
+    "diskAdvanceConfig": {
+      "$objectType": "clustermgmt.v4.config.DiskAdvanceConfig",
+      "isSelfEncryptingDrive": false,
+      "isSelfManagedNvme": false,
+      "isBootDisk": false,
+      "hasBootPartitionsOnly": false,
+      "isSpdkManaged": false,
+      "isOnline": true,
+      "isMarkedForRemoval": false,
+      "isDataMigrated": false,
+      "isUnhealthy": false,
+      "isSuspectedUnhealthy": false,
+      "isMounted": true,
+      "isUnderDiagnosis": false,
+      "isDiagnosticInfoAvailable": false,
+      "isErrorFoundInLog": false,
+      "isPlannedOutage": false
+    }
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.Disk",
+    "extId": "ecbdd031-fed2-48e4-b8cd-b98618111598",
+    "links": [
+      {
+        "$objectType": "common.v1.response.ApiLink",
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/config/disks/ecbdd031-fed2-48e4-b8cd-b98618111598",
+        "rel": "disk"
+      }
+    ],
+    "clusterName": "clusterName-277ed708",
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "storagePoolExtId": "63725cff-c712-44e3-9e28-5bcbcb945fdf",
+    "serviceVMId": "000623f4-7174-ae2a-0000-00000001c1da::7",
+    "nodeExtId": "422ac3ad-bb71-4c47-83f9-7367f1b7da90",
+    "mountPath": "/home/nutanix/data/stargate-storage/disks/serialNumber-ee134036",
+    "location": 2,
+    "serialNumber": "serialNumber-ee134036",
+    "diskSizeBytes": 1588595520267,
+    "physicalCapacityBytes": 1920383410176,
+    "model": "SAMSUNG MZ7KM1T9HMJP-00005",
+    "vendor": "Not Available",
+    "firmwareVersion": "304Q",
+    "targetFirmwareVersion": "304Q",
+    "hostName": "hostName-32bb211b",
+    "status": "NORMAL",
+    "storageTier": "SSD_SATA",
+    "cvmIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "203.0.113.33",
+        "prefixLength": 32
+      }
+    },
+    "nodeIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "198.51.100.56",
+        "prefixLength": 32
+      }
+    },
+    "diskAdvanceConfig": {
+      "$objectType": "clustermgmt.v4.config.DiskAdvanceConfig",
+      "isSelfEncryptingDrive": false,
+      "isSelfManagedNvme": false,
+      "isBootDisk": true,
+      "hasBootPartitionsOnly": false,
+      "isSpdkManaged": false,
+      "isOnline": true,
+      "isMarkedForRemoval": false,
+      "isDataMigrated": false,
+      "isUnhealthy": false,
+      "isSuspectedUnhealthy": false,
+      "isMounted": true,
+      "isUnderDiagnosis": false,
+      "isDiagnosticInfoAvailable": false,
+      "isErrorFoundInLog": false,
+      "isPlannedOutage": false
+    }
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.Disk",
+    "extId": "ed6f5e93-63ca-419b-9120-6cacb1ce049e",
+    "links": [
+      {
+        "$objectType": "common.v1.response.ApiLink",
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/config/disks/ed6f5e93-63ca-419b-9120-6cacb1ce049e",
+        "rel": "disk"
+      }
+    ],
+    "clusterName": "clusterName-d2b6bd1b",
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "storagePoolExtId": "83c21205-5611-49cf-999a-7c7d8aae320d",
+    "serviceVMId": "0006237e-c983-e712-0000-00000001c1d0::5",
+    "nodeExtId": "38521854-c20d-41ff-8348-41c53db66e38",
+    "mountPath": "/home/nutanix/data/stargate-storage/disks/serialNumber-0247e6e1",
+    "location": 4,
+    "serialNumber": "serialNumber-0247e6e1",
+    "diskSizeBytes": 1684699044859,
+    "physicalCapacityBytes": 1920383410176,
+    "model": "SAMSUNG MZ7LM1T9HMJP-00005",
+    "vendor": "Not Available",
+    "firmwareVersion": "404Q",
+    "targetFirmwareVersion": "404Q",
+    "hostName": "hostName-a0df6d46",
+    "status": "NORMAL",
+    "storageTier": "SSD_SATA",
+    "cvmIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "198.51.100.230",
+        "prefixLength": 32
+      }
+    },
+    "nodeIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "203.0.113.205",
+        "prefixLength": 32
+      }
+    },
+    "diskAdvanceConfig": {
+      "$objectType": "clustermgmt.v4.config.DiskAdvanceConfig",
+      "isSelfEncryptingDrive": false,
+      "isSelfManagedNvme": false,
+      "isBootDisk": false,
+      "hasBootPartitionsOnly": false,
+      "isSpdkManaged": false,
+      "isOnline": true,
+      "isMarkedForRemoval": false,
+      "isDataMigrated": false,
+      "isUnhealthy": false,
+      "isSuspectedUnhealthy": false,
+      "isMounted": true,
+      "isUnderDiagnosis": false,
+      "isDiagnosticInfoAvailable": false,
+      "isErrorFoundInLog": false,
+      "isPlannedOutage": false
+    }
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.Disk",
+    "extId": "eef6ef80-9030-4f96-9412-64c41d0de959",
+    "links": [
+      {
+        "$objectType": "common.v1.response.ApiLink",
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/config/disks/eef6ef80-9030-4f96-9412-64c41d0de959",
+        "rel": "disk"
+      }
+    ],
+    "clusterName": "clusterName-d2b6bd1b",
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "storagePoolExtId": "83c21205-5611-49cf-999a-7c7d8aae320d",
+    "serviceVMId": "0006237e-c983-e712-0000-00000001c1d0::5",
+    "nodeExtId": "38521854-c20d-41ff-8348-41c53db66e38",
+    "mountPath": "/home/nutanix/data/stargate-storage/disks/serialNumber-024289e9",
+    "location": 5,
+    "serialNumber": "serialNumber-024289e9",
+    "diskSizeBytes": 1684699044859,
+    "physicalCapacityBytes": 1920383410176,
+    "model": "SAMSUNG MZ7LM1T9HMJP-00005",
+    "vendor": "Not Available",
+    "firmwareVersion": "404Q",
+    "targetFirmwareVersion": "404Q",
+    "hostName": "hostName-a0df6d46",
+    "status": "NORMAL",
+    "storageTier": "SSD_SATA",
+    "cvmIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "198.51.100.230",
+        "prefixLength": 32
+      }
+    },
+    "nodeIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "203.0.113.205",
+        "prefixLength": 32
+      }
+    },
+    "diskAdvanceConfig": {
+      "$objectType": "clustermgmt.v4.config.DiskAdvanceConfig",
+      "isSelfEncryptingDrive": false,
+      "isSelfManagedNvme": false,
+      "isBootDisk": false,
+      "hasBootPartitionsOnly": false,
+      "isSpdkManaged": false,
+      "isOnline": true,
+      "isMarkedForRemoval": false,
+      "isDataMigrated": false,
+      "isUnhealthy": false,
+      "isSuspectedUnhealthy": false,
+      "isMounted": true,
+      "isUnderDiagnosis": false,
+      "isDiagnosticInfoAvailable": false,
+      "isErrorFoundInLog": false,
+      "isPlannedOutage": false
+    }
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.Disk",
+    "extId": "f6c84ffe-4cb0-4ad3-b121-6408a80158ee",
+    "links": [
+      {
+        "$objectType": "common.v1.response.ApiLink",
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/config/disks/f6c84ffe-4cb0-4ad3-b121-6408a80158ee",
+        "rel": "disk"
+      }
+    ],
+    "clusterName": "clusterName-d2b6bd1b",
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "storagePoolExtId": "83c21205-5611-49cf-999a-7c7d8aae320d",
+    "serviceVMId": "0006237e-c983-e712-0000-00000001c1d0::5",
+    "nodeExtId": "38521854-c20d-41ff-8348-41c53db66e38",
+    "mountPath": "/home/nutanix/data/stargate-storage/disks/serialNumber-f55b3b40",
+    "location": 2,
+    "serialNumber": "serialNumber-f55b3b40",
+    "diskSizeBytes": 1523403421140,
+    "physicalCapacityBytes": 1920383410176,
+    "model": "SAMSUNG MZ7KM1T9HMJP-00005",
+    "vendor": "Not Available",
+    "firmwareVersion": "304Q",
+    "targetFirmwareVersion": "304Q",
+    "hostName": "hostName-a0df6d46",
+    "status": "NORMAL",
+    "storageTier": "SSD_SATA",
+    "cvmIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "198.51.100.230",
+        "prefixLength": 32
+      }
+    },
+    "nodeIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "203.0.113.205",
+        "prefixLength": 32
+      }
+    },
+    "diskAdvanceConfig": {
+      "$objectType": "clustermgmt.v4.config.DiskAdvanceConfig",
+      "isSelfEncryptingDrive": false,
+      "isSelfManagedNvme": false,
+      "isBootDisk": true,
+      "hasBootPartitionsOnly": false,
+      "isSpdkManaged": false,
+      "isOnline": true,
+      "isMarkedForRemoval": false,
+      "isDataMigrated": false,
+      "isUnhealthy": false,
+      "isSuspectedUnhealthy": false,
+      "isMounted": true,
+      "isUnderDiagnosis": false,
+      "isDiagnosticInfoAvailable": false,
+      "isErrorFoundInLog": false,
+      "isPlannedOutage": false
+    }
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.Disk",
+    "extId": "f981e420-3b0d-4ad8-b02d-3a427d4aae4e",
+    "links": [
+      {
+        "$objectType": "common.v1.response.ApiLink",
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/config/disks/f981e420-3b0d-4ad8-b02d-3a427d4aae4e",
+        "rel": "disk"
+      }
+    ],
+    "clusterName": "clusterName-277ed708",
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "storagePoolExtId": "63725cff-c712-44e3-9e28-5bcbcb945fdf",
+    "serviceVMId": "000623f4-7174-ae2a-0000-00000001c1da::10",
+    "nodeExtId": "0a505ef2-ede4-467c-941f-d39d73bdf1c9",
+    "mountPath": "/home/nutanix/data/stargate-storage/disks/serialNumber-0b44e8d9",
+    "location": 5,
+    "serialNumber": "serialNumber-0b44e8d9",
+    "diskSizeBytes": 1749786993491,
+    "physicalCapacityBytes": 1920383410176,
+    "model": "SAMSUNG MZ7LM1T9HMJP-00005",
+    "vendor": "Not Available",
+    "firmwareVersion": "404Q",
+    "targetFirmwareVersion": "404Q",
+    "hostName": "hostName-32bb2634",
+    "status": "NORMAL",
+    "storageTier": "SSD_SATA",
+    "cvmIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "198.51.100.164",
+        "prefixLength": 32
+      }
+    },
+    "nodeIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "203.0.113.15",
+        "prefixLength": 32
+      }
+    },
+    "diskAdvanceConfig": {
+      "$objectType": "clustermgmt.v4.config.DiskAdvanceConfig",
+      "isSelfEncryptingDrive": false,
+      "isSelfManagedNvme": false,
+      "isBootDisk": false,
+      "hasBootPartitionsOnly": false,
+      "isSpdkManaged": false,
+      "isOnline": true,
+      "isMarkedForRemoval": false,
+      "isDataMigrated": false,
+      "isUnhealthy": false,
+      "isSuspectedUnhealthy": false,
+      "isMounted": true,
+      "isUnderDiagnosis": false,
+      "isDiagnosticInfoAvailable": false,
+      "isErrorFoundInLog": false,
+      "isPlannedOutage": false
+    }
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.Disk",
+    "extId": "feac9ddd-870f-4d67-83b6-1ae27d47e5c2",
+    "links": [
+      {
+        "$objectType": "common.v1.response.ApiLink",
+        "href": "https://203.0.113.1:9440/api/clustermgmt/v4.3/config/disks/feac9ddd-870f-4d67-83b6-1ae27d47e5c2",
+        "rel": "disk"
+      }
+    ],
+    "clusterName": "clusterName-d2b6bd1b",
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "storagePoolExtId": "83c21205-5611-49cf-999a-7c7d8aae320d",
+    "serviceVMId": "0006237e-c983-e712-0000-00000001c1d0::6",
+    "nodeExtId": "9cad7457-dc26-4839-bfce-2aa79a0f54c7",
+    "mountPath": "/home/nutanix/data/stargate-storage/disks/serialNumber-5a32bfbe",
+    "location": 4,
+    "serialNumber": "serialNumber-5a32bfbe",
+    "diskSizeBytes": 1683556091633,
+    "physicalCapacityBytes": 1920383410176,
+    "model": "SAMSUNG MZ7LM1T9HMJP-00005",
+    "vendor": "Not Available",
+    "firmwareVersion": "404Q",
+    "targetFirmwareVersion": "404Q",
+    "hostName": "hostName-a0df6ef9",
+    "status": "NORMAL",
+    "storageTier": "SSD_SATA",
+    "cvmIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "203.0.113.25",
+        "prefixLength": 32
+      }
+    },
+    "nodeIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "198.51.100.246",
+        "prefixLength": 32
+      }
+    },
+    "diskAdvanceConfig": {
+      "$objectType": "clustermgmt.v4.config.DiskAdvanceConfig",
+      "isSelfEncryptingDrive": false,
+      "isSelfManagedNvme": false,
+      "isBootDisk": false,
+      "hasBootPartitionsOnly": false,
+      "isSpdkManaged": false,
+      "isOnline": true,
+      "isMarkedForRemoval": false,
+      "isDataMigrated": false,
+      "isUnhealthy": false,
+      "isSuspectedUnhealthy": false,
+      "isMounted": true,
+      "isUnderDiagnosis": false,
+      "isDiagnosticInfoAvailable": false,
+      "isErrorFoundInLog": false,
+      "isPlannedOutage": false
+    }
+  }
+]

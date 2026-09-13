@@ -1,0 +1,3117 @@
+openapi: 3.0.1
+info:
+  title: Nutanix Objects Storage Management APIs
+  description: Manage Petabytes of Unstructured and Machine-generated data using a
+    software-defined Object Store Service
+  version: 4.0.1-alpha-2
+  x-logo:
+    altText: Objects Logo
+    url: https://developers.nutanix.com/api/v1/namespaces/objects/images/objects-logo-img.svg
+  x-repo-name: objects
+servers:
+- url: "https://{pc-ip}:9440/api"
+security:
+- basicAuthScheme: []
+tags:
+- name: ObjectStores
+  description: An Object store provides an Amazon Web Services Simple Storage Service
+    (AWS S3) compatible REST API interface to handle petabytes of unstructured and
+    machine-generated data.
+  x-displayName: Object Stores
+paths:
+  /objects/v4.0.a2/operations/object-stores:
+    get:
+      tags:
+      - ObjectStores
+      summary: Get a list of the Object stores
+      description: Get a list of all the Object store details on the registered Prism
+        Central.
+      operationId: GetObjectstores
+      parameters:
+      - name: $page
+        in: query
+        description: |
+          A URL query parameter that specifies the page number of the result set. It must be a positive integer between 0 and the maximum number of pages that are available for that resource. Any number out of this range might lead to no results.
+        required: false
+        style: form
+        explode: false
+        schema:
+          minimum: 0
+          type: integer
+          description: |
+            A URL query parameter that specifies the page number of the result set. It must be a positive integer between 0 and the maximum number of pages that are available for that resource. Any number out of this range might lead to no results.
+          format: int32
+          default: 0
+      - name: $limit
+        in: query
+        description: |
+          A URL query parameter that specifies the total number of records returned in the result set.  Must be a positive integer between 1 and 100. Any number out of this range will lead to a validation error. If the limit is not provided, a default value of 50 records will be returned in the result set.
+        required: false
+        style: form
+        explode: false
+        schema:
+          maximum: 100
+          minimum: 1
+          type: integer
+          description: |
+            A URL query parameter that specifies the total number of records returned in the result set.  Must be a positive integer between 1 and 100. Any number out of this range will lead to a validation error. If the limit is not provided, a default value of 50 records will be returned in the result set.
+          format: int32
+          default: 50
+      - name: $filter
+        in: query
+        description: |
+          A URL query parameter that allows clients to filter a collection of resources. The expression specified with $filter is evaluated for each resource in the collection, and only items where the expression evaluates to true are included in the response. Expression specified with the $filter must conform to the [OData V4.01](https://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html) URL conventions.
+          For example, filter '$filter=name eq 'karbon-ntnx-1.0' would filter the result on cluster name 'karbon-ntnx1.0', filter '$filter=startswith(name, 'C')' would filter on cluster name starting with 'C'.
+          The filter can be applied to the following fields:
+          - certificateReference
+          - clusterReference
+          - creationTime
+          - deploymentVersion
+          - description
+          - domain
+          - lastUpdateTime
+          - name
+          - numWorkerNodes
+          - publicNetworkReference
+          - region
+          - state
+          - storageNetworkDnsIp/ipv4/value
+          - storageNetworkDnsIp/ipv6/value
+          - storageNetworkReference
+          - storageNetworkVip/ipv4/value
+          - storageNetworkVip/ipv6/value
+          - totalCapacityGiB
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: $orderby
+        in: query
+        description: |
+          A URL query parameter that allows clients to specify the sort criteria for the returned list of objects. Resources can be sorted in ascending order using asc or descending order using desc. If asc or desc are not specified, the resources will be sorted in ascending order by default. For example, '$orderby=templateName desc' would get all templates sorted by templateName in descending order.
+          The orderby can be applied to the following fields:
+          - certificateReference
+          - clusterReference
+          - creationTime
+          - deploymentVersion
+          - description
+          - domain
+          - lastUpdateTime
+          - name
+          - numWorkerNodes
+          - publicNetworkReference
+          - region
+          - state
+          - storageNetworkDnsIp/ipv4/value
+          - storageNetworkDnsIp/ipv6/value
+          - storageNetworkReference
+          - storageNetworkVip/ipv4/value
+          - storageNetworkVip/ipv6/value
+          - totalCapacityGiB
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: $expand
+        in: query
+        description: |
+          A URL query parameter that allows clients to request related resources when a resource that satisfies a particular request is retrieved. Each expanded item is evaluated relative to the entity containing the property being expanded. Other query options can be applied to an expanded property by appending a semicolon-separated list of query options, enclosed in parentheses, to the property name. Permissible system query options are $filter, $select and $orderby. The following expansion keys are supported.
+          - certificate
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: $select
+        in: query
+        description: |
+          A URL query parameter that allows clients to request a specific set of properties for each entity or complex type. Expression specified with the $select must conform to the [OData V4.01](https://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html) URL conventions. If a $select expression consists of a single select item that is an asterisk (i.e., *), then all properties on the matching resource will be returned.
+          - certificateReference
+          - clusterReference
+          - creationTime
+          - deploymentVersion
+          - description
+          - domain
+          - extId
+          - lastUpdateTime
+          - links
+          - metadata
+          - name
+          - numWorkerNodes
+          - publicNetworkIps
+          - publicNetworkReference
+          - region
+          - state
+          - storageNetworkDnsIp/ipv4/prefixLength
+          - storageNetworkDnsIp/ipv4/value
+          - storageNetworkDnsIp/ipv6/prefixLength
+          - storageNetworkDnsIp/ipv6/value
+          - storageNetworkReference
+          - storageNetworkVip/ipv4/prefixLength
+          - storageNetworkVip/ipv4/value
+          - storageNetworkVip/ipv6/prefixLength
+          - storageNetworkVip/ipv6/value
+          - tenantId
+          - totalCapacityGiB
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: List of Object stores returned successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/objects.v4.r0.a2.operations.Objectstore'
+                additionalProperties: false
+                description: REST response for all response codes in API path /objects/v4.0.a2/operations/object-stores
+                  Get operation
+        "4XX":
+          description: Client error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/objects.v4.r0.a2.error.ErrorResponse'
+                additionalProperties: false
+                description: REST response for all response codes in API path /objects/v4.0.a2/operations/object-stores
+                  Get operation
+        "5XX":
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/objects.v4.r0.a2.error.ErrorResponse'
+                additionalProperties: false
+                description: REST response for all response codes in API path /objects/v4.0.a2/operations/object-stores
+                  Get operation
+      x-permissions:
+        operationName: View Object Store
+        roleList:
+        - Objects Viewer
+        - Objects Editor
+        - Objects Admin
+        - Prism Admin
+        - Internal Super Admin
+        - Super Admin
+      x-supported-versions:
+      - product: PC
+        version: 2023.4
+      - product: PE
+        version: 6.5.3.1
+      - product: Objects Manager
+        version: 4.3
+      x-code-samples:
+      - lang: Java
+        source: |2
+
+          package sample;
+
+          import com.nutanix.obj.java.client.ApiClient;
+          import com.nutanix.obj.java.client.api.ObjectStoresApi;
+          import com.nutanix.dp1.obj.objects.v4.operations.ObjectstoreListApiResponse;
+
+          public class JavaSdkSample {
+              public static void main(String[] args) {
+                  // Configure the client
+                  ApiClient apiClient = new ApiClient();
+                  // IPv4/IPv6 address or FQDN of the cluster
+                  apiClient.setHost("localhost");
+                  // Port to which to connect to
+                  apiClient.setPort(9440);
+                  // Interval in ms to use during retry attempts
+                  apiClient.setRetryInterval(5000);
+                  // Max retry attempts while reconnecting on a loss of connection
+                  apiClient.setMaxRetryAttempts(5);
+                  // UserName to connect to the cluster
+                  String username = "username";
+                  // Password to connect to the cluster
+                  String password = "password";
+                  apiClient.setUsername(username);
+                  apiClient.setPassword(password);
+
+                  // Please add authorization information here if needed.
+                  ObjectStoresApi objectStoresApi = new ObjectStoresApi(apiClient);
+
+                  int page = 0;
+                  int limit = 50;
+
+                  try {
+                      ObjectstoreListApiResponse objectstoreListApiResponse = objectStoresApi.GetObjectstores(page, limit, null, null, null, null);
+                      System.out.println(objectstoreListApiResponse.toString());
+                  } catch (RestClientException ex) {
+                      System.out.println(ex.getMessage());
+                  }
+              }
+          }
+      - lang: JavaScript
+        source: |2
+
+          import { ApiClient, ObjectStoresApi } from "@nutanix-api/objects-js-client";
+
+          // Configure the client
+          let apiClientInstance = new ApiClient();
+          // IPv4/IPv6 address or FQDN of the cluster
+          apiClientInstance.host = 'localhost';
+          // Port to which to connect to
+          apiClientInstance.port = '9440';
+          // Max retry attempts while reconnecting on a loss of connection
+          apiClientInstance.maxRetryAttempts = 5;
+          // Interval in ms to use during retry attempts
+          apiClientInstance.retryInterval = 5000;
+          // UserName to connect to the cluster
+          apiClientInstance.username = 'username';
+          // Password to connect to the cluster
+          apiClientInstance.password = 'password';
+          // Please add authorization information here if needed.
+          let objectStoresApi = new ObjectStoresApi(apiClientInstance);
+
+          function sample() {
+
+
+              // Construct Optional Parameters
+              var opts = {};
+              opts["$page"] = 0;
+              opts["$limit"] = 50;
+              opts["$filter"] = "string_sample_data";
+              opts["$orderby"] = "string_sample_data";
+              opts["$expand"] = "string_sample_data";
+              opts["$select"] = "string_sample_data";
+
+
+
+              objectStoresApi.GetObjectstores(opts).then(({data, response}) => {
+                  console.log(`API returned the following status code: ${response.status}`);
+                  console.log(data.getData());
+              }).catch((error) => {
+                  console.log(`Error is: ${error}`);
+              });
+          }
+          sample()
+      - lang: Python
+        source: |2
+
+          import ntnx_objects_py_client
+
+          if __name__ == "__main__":
+              # Configure the client
+              config = ntnx_objects_py_client.Configuration()
+              # IPv4/IPv6 address or FQDN of the cluster
+              config.host = "localhost"
+              # Port to which to connect to
+              config.port = 9440
+              # Max retry attempts while reconnecting on a loss of connection
+              config.max_retry_attempts = 3
+              # Backoff factor to use during retry attempts
+              config.backoff_factor = 3
+              # UserName to connect to the cluster
+              config.username = "username"
+              # Password to connect to the cluster
+              config.password = "password"
+              # Please add authorization information here if needed.
+              client = ntnx_objects_py_client.ApiClient(configuration=config)
+              object_stores_api = ntnx_objects_py_client.ObjectStoresApi(api_client=client)
+              page = 0
+              limit = 50
+
+              try:
+                  api_response = object_stores_api.get_objectstores(_page=page, _limit=limit)
+                  print(api_response)
+              except ntnx_objects_py_client.rest.ApiException as e:
+                  print(e)
+      - lang: Go
+        source: |2+
+
+          package main
+
+          import (
+              "fmt"
+              "github.com/nutanix/ntnx-api-golang-clients/objects-go-client/v4/api"
+              "github.com/nutanix/ntnx-api-golang-clients/objects-go-client/v4/client"
+              import1 "github.com/nutanix/ntnx-api-golang-clients/objects-go-client/v4/models/objects/v4/operations"
+          )
+
+          var (
+              ApiClientInstance *client.ApiClient
+              ObjectStoresApiInstance *api.ObjectStoresApi
+          )
+
+          func main() {
+              ApiClientInstance = client.NewApiClient()
+              // IPv4/IPv6 address or FQDN of the cluster
+              ApiClientInstance.Host = "localhost"
+              // Port to which to connect to
+              ApiClientInstance.Port = 9440
+              // Interval in ms to use during retry attempts
+              ApiClientInstance.RetryInterval = 5000
+              // Max retry attempts while reconnecting on a loss of connection
+              ApiClientInstance.MaxRetryAttempts = 5
+              // UserName to connect to the cluster
+              ApiClientInstance.Username = "username"
+              // Password to connect to the cluster
+              ApiClientInstance.Password = "password"
+              // Please add authorization information here if needed.
+              ObjectStoresApiInstance = api.NewObjectStoresApi(ApiClientInstance)
+
+              page_ := 0
+              limit_ := 50
+
+
+              response, error := ObjectStoresApiInstance.GetObjectstores(&page_, &limit_, nil, nil, nil, nil)
+              if error != nil {
+                  fmt.Println(error)
+                  return
+              }
+              data, _ := response.GetData().([]import1.Objectstore)
+              fmt.Println(data)
+          }
+
+      - lang: cURL
+        source: |2
+
+          curl --request GET \
+               --url "https://{pc-ip}:9440/api/objects/v4.0.a2/operations/object-stores?$filter=string_sample_data&$limit=50&$orderby=string_sample_data&$expand=string_sample_data&$page=0&$select=string_sample_data" \
+               --header 'Accept: application/json' \
+               --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+      - lang: Wget
+        source: |2
+
+          wget --verbose \
+               --method GET \
+               --header 'Accept: application/json' \
+               --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+               - "https://{pc-ip}:9440/api/objects/v4.0.a2/operations/object-stores?$filter=string_sample_data&$limit=50&$orderby=string_sample_data&$expand=string_sample_data&$page=0&$select=string_sample_data"
+    post:
+      tags:
+      - ObjectStores
+      summary: Create an Object store
+      description: "Run the prechecks, create and start the deployment of an Object\
+        \ store on Prism Central."
+      operationId: CreateObjectstore
+      requestBody:
+        description: Object store schema to be deployed.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/objects.v4.r0.a2.operations.Objectstore'
+        required: true
+      responses:
+        "202":
+          description: The request to create and deploy an Object store is accepted.
+          headers:
+            Location:
+              style: simple
+              explode: false
+              schema:
+                pattern: "^((http[s]?):\\/)?\\/?([^:\\/\\s]+)((\\/\\w+)*(:[0-9]+)*?\\\
+                  /)([\\w\\-\\.]+[^#?\\s]+)(.*)?(#[\\w\\-]+)?$"
+                type: string
+                description: Indicates the target of a redirection or the URL of a
+                  newly created resource.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/prism.v4.r0.b1.config.TaskReference'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /objects/v4.0.a2/operations/object-stores/{objectStoreExtId}/certificates\
+                  \ Post operation"
+        "4XX":
+          description: Client error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/objects.v4.r0.a2.error.ErrorResponse'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /objects/v4.0.a2/operations/object-stores/{objectStoreExtId}/certificates\
+                  \ Post operation"
+        "5XX":
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/objects.v4.r0.a2.error.ErrorResponse'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /objects/v4.0.a2/operations/object-stores/{objectStoreExtId}/certificates\
+                  \ Post operation"
+      x-permissions:
+        operationName: Create Object Store
+        roleList:
+        - Objects Admin
+        - Prism Admin
+        - Internal Super Admin
+        - Super Admin
+      x-supported-versions:
+      - product: PC
+        version: 2023.4
+      - product: PE
+        version: 6.5.3.1
+      - product: Objects Manager
+        version: 4.3
+      x-code-samples:
+      - lang: Java
+        source: |2
+
+          package sample;
+
+          import com.nutanix.obj.java.client.ApiClient;
+          import com.nutanix.obj.java.client.api.ObjectStoresApi;
+          import com.nutanix.dp1.obj.objects.v4.operations.Objectstore;
+          import com.nutanix.dp1.obj.objects.v4.operations.TaskReferenceApiResponse;
+
+          public class JavaSdkSample {
+              public static void main(String[] args) {
+                  // Configure the client
+                  ApiClient apiClient = new ApiClient();
+                  // IPv4/IPv6 address or FQDN of the cluster
+                  apiClient.setHost("localhost");
+                  // Port to which to connect to
+                  apiClient.setPort(9440);
+                  // Interval in ms to use during retry attempts
+                  apiClient.setRetryInterval(5000);
+                  // Max retry attempts while reconnecting on a loss of connection
+                  apiClient.setMaxRetryAttempts(5);
+                  // UserName to connect to the cluster
+                  String username = "username";
+                  // Password to connect to the cluster
+                  String password = "password";
+                  apiClient.setUsername(username);
+                  apiClient.setPassword(password);
+
+                  // Please add authorization information here if needed.
+                  ObjectStoresApi objectStoresApi = new ObjectStoresApi(apiClient);
+
+                  Objectstore objectstore = new Objectstore();
+
+                  // Objectstore object initializations here...
+                  objectstore.setName("l-xZs8");  // required field
+
+                  try {
+                      TaskReferenceApiResponse taskReferenceApiResponse = objectStoresApi.CreateObjectstore(objectstore);
+                      System.out.println(taskReferenceApiResponse.toString());
+                  } catch (RestClientException ex) {
+                      System.out.println(ex.getMessage());
+                  }
+              }
+          }
+      - lang: JavaScript
+        source: |2
+
+          import { ApiClient, ObjectStoresApi, Objectstore } from "@nutanix-api/objects-js-client";
+
+          // Configure the client
+          let apiClientInstance = new ApiClient();
+          // IPv4/IPv6 address or FQDN of the cluster
+          apiClientInstance.host = 'localhost';
+          // Port to which to connect to
+          apiClientInstance.port = '9440';
+          // Max retry attempts while reconnecting on a loss of connection
+          apiClientInstance.maxRetryAttempts = 5;
+          // Interval in ms to use during retry attempts
+          apiClientInstance.retryInterval = 5000;
+          // UserName to connect to the cluster
+          apiClientInstance.username = 'username';
+          // Password to connect to the cluster
+          apiClientInstance.password = 'password';
+          // Please add authorization information here if needed.
+          let objectStoresApi = new ObjectStoresApi(apiClientInstance);
+
+          function sample() {
+              let objectstore = new Objectstore();
+
+              // Objectstore object initializations here...
+              objectstore.setName("z----4OP");  // required field
+
+
+
+
+
+              objectStoresApi.CreateObjectstore(objectstore).then(({data, response}) => {
+                  console.log(`API returned the following status code: ${response.status}`);
+                  console.log(data.getData());
+              }).catch((error) => {
+                  console.log(`Error is: ${error}`);
+              });
+          }
+          sample()
+      - lang: Python
+        source: |2
+
+          import ntnx_objects_py_client
+
+          if __name__ == "__main__":
+              # Configure the client
+              config = ntnx_objects_py_client.Configuration()
+              # IPv4/IPv6 address or FQDN of the cluster
+              config.host = "localhost"
+              # Port to which to connect to
+              config.port = 9440
+              # Max retry attempts while reconnecting on a loss of connection
+              config.max_retry_attempts = 3
+              # Backoff factor to use during retry attempts
+              config.backoff_factor = 3
+              # UserName to connect to the cluster
+              config.username = "username"
+              # Password to connect to the cluster
+              config.password = "password"
+              # Please add authorization information here if needed.
+              client = ntnx_objects_py_client.ApiClient(configuration=config)
+              object_stores_api = ntnx_objects_py_client.ObjectStoresApi(api_client=client)
+              objectstore = ntnx_objects_py_client.Objectstore()
+
+              # Objectstore object initializations here...
+              objectstore.name = "Q--V"  # required field
+
+              try:
+                  api_response = object_stores_api.create_objectstore(body=objectstore)
+                  print(api_response)
+              except ntnx_objects_py_client.rest.ApiException as e:
+                  print(e)
+      - lang: Go
+        source: |2+
+
+          package main
+
+          import (
+              "fmt"
+              "github.com/nutanix/ntnx-api-golang-clients/objects-go-client/v4/api"
+              "github.com/nutanix/ntnx-api-golang-clients/objects-go-client/v4/client"
+              import1 "github.com/nutanix/ntnx-api-golang-clients/objects-go-client/v4/models/objects/v4/operations"
+              import2 "github.com/nutanix/ntnx-api-golang-clients/objects-go-client/v4/models/prism/v4/config"
+          )
+
+          var (
+              ApiClientInstance *client.ApiClient
+              ObjectStoresApiInstance *api.ObjectStoresApi
+          )
+
+          func main() {
+              ApiClientInstance = client.NewApiClient()
+              // IPv4/IPv6 address or FQDN of the cluster
+              ApiClientInstance.Host = "localhost"
+              // Port to which to connect to
+              ApiClientInstance.Port = 9440
+              // Interval in ms to use during retry attempts
+              ApiClientInstance.RetryInterval = 5000
+              // Max retry attempts while reconnecting on a loss of connection
+              ApiClientInstance.MaxRetryAttempts = 5
+              // UserName to connect to the cluster
+              ApiClientInstance.Username = "username"
+              // Password to connect to the cluster
+              ApiClientInstance.Password = "password"
+              // Please add authorization information here if needed.
+              ObjectStoresApiInstance = api.NewObjectStoresApi(ApiClientInstance)
+
+              objectstore := import1.NewObjectstore()
+
+              // Objectstore object initializations here...
+
+
+
+              response, error := ObjectStoresApiInstance.CreateObjectstore(objectstore)
+              if error != nil {
+                  fmt.Println(error)
+                  return
+              }
+              data, _ := response.GetData().(import2.TaskReference)
+              fmt.Println(data)
+          }
+
+      - lang: cURL
+        source: |2
+
+          curl --request POST \
+               --url "https://{pc-ip}:9440/api/objects/v4.0.a2/operations/object-stores" \
+               --header 'Accept: application/json' \
+               --header 'Content-Type: application/json' \
+               --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+               --data {"tenantId":"string","extId":"string","links":[{"href":"string","rel":"string","$objectType":"common.v1.response.ApiLink"}],"metadata":{"ownerReferenceId":"string","ownerUserName":"string","projectReferenceId":"string","projectName":"string","categoryIds":["string"],"$objectType":"common.v1.config.Metadata"},"name":"string","creationTime":"2015-07-20T15:49:04-07:00","lastUpdateTime":"2015-07-20T15:49:04-07:00","description":"string","deploymentVersion":"string","domain":"string","region":"string","numWorkerNodes":0,"clusterReference":"string","storageNetworkReference":"string","storageNetworkVip":{"ipv4":{"value":"string","prefixLength":32,"$objectType":"common.v1.config.IPv4Address"},"ipv6":{"value":"string","prefixLength":128,"$objectType":"common.v1.config.IPv6Address"},"$objectType":"common.v1.config.IPAddress"},"storageNetworkDnsIp":{"ipv4":{"value":"string","prefixLength":32,"$objectType":"common.v1.config.IPv4Address"},"ipv6":{"value":"string","prefixLength":128,"$objectType":"common.v1.config.IPv6Address"},"$objectType":"common.v1.config.IPAddress"},"publicNetworkReference":"string","publicNetworkIps":[{"ipv4":{"value":"string","prefixLength":32,"$objectType":"common.v1.config.IPv4Address"},"ipv6":{"value":"string","prefixLength":128,"$objectType":"common.v1.config.IPv6Address"},"$objectType":"common.v1.config.IPAddress"}],"totalCapacityGiB":0,"state":"$UNKNOWN","certificateReference":"string","$objectType":"objects.v4.operations.Objectstore"} \
+      - lang: Wget
+        source: |2
+
+          wget --verbose \
+               --method POST \
+               --header 'Accept: application/json' \
+               --header 'Content-Type: application/json' \
+               --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+               --body-data {"tenantId":"string","extId":"string","links":[{"href":"string","rel":"string","$objectType":"common.v1.response.ApiLink"}],"metadata":{"ownerReferenceId":"string","ownerUserName":"string","projectReferenceId":"string","projectName":"string","categoryIds":["string"],"$objectType":"common.v1.config.Metadata"},"name":"string","creationTime":"2015-07-20T15:49:04-07:00","lastUpdateTime":"2015-07-20T15:49:04-07:00","description":"string","deploymentVersion":"string","domain":"string","region":"string","numWorkerNodes":0,"clusterReference":"string","storageNetworkReference":"string","storageNetworkVip":{"ipv4":{"value":"string","prefixLength":32,"$objectType":"common.v1.config.IPv4Address"},"ipv6":{"value":"string","prefixLength":128,"$objectType":"common.v1.config.IPv6Address"},"$objectType":"common.v1.config.IPAddress"},"storageNetworkDnsIp":{"ipv4":{"value":"string","prefixLength":32,"$objectType":"common.v1.config.IPv4Address"},"ipv6":{"value":"string","prefixLength":128,"$objectType":"common.v1.config.IPv6Address"},"$objectType":"common.v1.config.IPAddress"},"publicNetworkReference":"string","publicNetworkIps":[{"ipv4":{"value":"string","prefixLength":32,"$objectType":"common.v1.config.IPv4Address"},"ipv6":{"value":"string","prefixLength":128,"$objectType":"common.v1.config.IPv6Address"},"$objectType":"common.v1.config.IPAddress"}],"totalCapacityGiB":0,"state":"$UNKNOWN","certificateReference":"string","$objectType":"objects.v4.operations.Objectstore"} \
+               - "https://{pc-ip}:9440/api/objects/v4.0.a2/operations/object-stores"
+  /objects/v4.0.a2/operations/object-stores/{extId}:
+    get:
+      tags:
+      - ObjectStores
+      summary: Get an Object store
+      description: "Get an Object store for the provided UUID.  \n  \n`state`   string\
+        \ (State of the Object store)  \nEnum for the state of the Object store. \
+        \ \n| Enum | Description |\n| ----------- | ----------- |\n| `\"OBJECT_STORE_DEPLOYING\"\
+        `\t| The Object store will be in this state during an ongoing deployment of\
+        \ the Object store. The Object store will be unavailable through S3 APIs in\
+        \ this state. The Object store will move to the OBJECT_STORE_AVAILABLE state\
+        \ if the deployment succeeds, and to the OBJECT_STORE_DEPLOYMENT_ERROR state\
+        \ if the deployment fails. |\n| `\"OBJECT_STORE_OPERATION_ERROR\"`\t| The\
+        \ Object store is in this state when there is an error while performing an\
+        \ operation on the Object store. The Object store may not be available through\
+        \ S3 APIs in this state. |\n| `\"OBJECT_STORE_CREATE_CERT_ERROR\"` | \tAn\
+        \ Object store enters this state if there is an error while creating the Object\
+        \ store certificate. Creating a new certificate can be retried from this state.\
+        \ The Object store may not be available through S3 APIs in this state. |\n\
+        | `\"OBJECT_STORE_OPERATION_PENDING\"` | \tThe Object store is in this state\
+        \ during an ongoing operation on the Object store. The Object store may not\
+        \ be available through S3 APIs in this state. The Object store will enter\
+        \ the OBJECT_STORE_OPERATION_ERROR state if the operation fails, or the OBJECT_STORE_AVAILABLE\
+        \ state if the operation is successful. |\n| `\"OBJECT_STORE_INPUT\"` | \t\
+        The Object store is in this state if it has not been deployed. |\n| `\"OBJECT_STORE_CREATING_CERT\"\
+        ` | \tThe Object store is in this state during a certificate creation for\
+        \ the Object store. The Object store will be unavailable through S3 APIs in\
+        \ this state. It will move to the OBJECT_STORE_AVAILABLE state if the certificate\
+        \ was created successfully, or to the OBJECT_STORE_CREATE_CERT_ERROR state\
+        \ if an error occurs while creating the certificate. |\n| `\"OBJECT_STORE_AVAILABLE\"\
+        `\t | An Object store is in this state if its deployment was successful, and\
+        \ there are no ongoing operations on the Object store. The Object store will\
+        \ be available through S3 APIs in this state. In this state, the Object store\
+        \ can be deleted or a new certificate can be created for this Object store.\
+        \ |\n| `\"OBJECT_STORE_DELETE_INPUT_ERROR\"` | \tAn undeployed Object store\
+        \ enters this state if there is an error deleting it. Deleting the Object\
+        \ store can be retried from this state. |\n| `\"OBJECT_STORE_DELETING_INPUT\"\
+        ` | \tAn undeployed Object store being deleted is in this state. It will be\
+        \ either deleted or move to the OBJECT_STORE_DELETE_INPUT_ERROR state if the\
+        \ deletion fails. |\n| `\"OBJECT_STORE_DELETE_ERROR\"` | \tAn Object store\
+        \ enters this state if there is an error deleting the Object store. The Object\
+        \ store will not be available through S3 APIs in this state. Deleting the\
+        \ Object store can be retried from this state. |\n| `\"OBJECT_STORE_DEPLOYMENT_ERROR\"\
+        ` | \tAn Object store enters this state when its deployment fails. The Object\
+        \ store deployment can be retried or the Object store can be deleted from\
+        \ this state. |\n| `\"OBJECT_STORE_DELETING\"` | \tA deployed Object store\
+        \ is in this state when the Object store is being deleted. The Object store\
+        \ will be unavailable through S3 APIs in this state. It can be either deleted\
+        \ or move to the OBJECT_STORE_DELETE_ERROR state if the deletion fails. |\n"
+      operationId: GetObjectstore
+      parameters:
+      - name: extId
+        in: path
+        description: The UUID of the Object store.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+      - name: $expand
+        in: query
+        description: |
+          A URL query parameter that allows clients to request related resources when a resource that satisfies a particular request is retrieved. Each expanded item is evaluated relative to the entity containing the property being expanded. Other query options can be applied to an expanded property by appending a semicolon-separated list of query options, enclosed in parentheses, to the property name. Permissible system query options are $filter, $select and $orderby. The following expansion keys are supported.
+          - certificate
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Object store details returned successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/objects.v4.r0.a2.operations.Objectstore'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /objects/v4.0.a2/operations/object-stores/{extId}\
+                  \ Get operation"
+        "4XX":
+          description: Client error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/objects.v4.r0.a2.error.ErrorResponse'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /objects/v4.0.a2/operations/object-stores/{extId}\
+                  \ Get operation"
+        "5XX":
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/objects.v4.r0.a2.error.ErrorResponse'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /objects/v4.0.a2/operations/object-stores/{extId}\
+                  \ Get operation"
+      x-permissions:
+        operationName: View Object Store
+        roleList:
+        - Objects Viewer
+        - Objects Editor
+        - Objects Admin
+        - Prism Admin
+        - Internal Super Admin
+        - Super Admin
+      x-supported-versions:
+      - product: PC
+        version: 2023.4
+      - product: PE
+        version: 6.5.3.1
+      - product: Objects Manager
+        version: 4.3
+      x-code-samples:
+      - lang: Java
+        source: |2
+
+          package sample;
+
+          import com.nutanix.obj.java.client.ApiClient;
+          import com.nutanix.obj.java.client.api.ObjectStoresApi;
+          import com.nutanix.dp1.obj.objects.v4.operations.ObjectstoreApiResponse;
+
+          public class JavaSdkSample {
+              public static void main(String[] args) {
+                  // Configure the client
+                  ApiClient apiClient = new ApiClient();
+                  // IPv4/IPv6 address or FQDN of the cluster
+                  apiClient.setHost("localhost");
+                  // Port to which to connect to
+                  apiClient.setPort(9440);
+                  // Interval in ms to use during retry attempts
+                  apiClient.setRetryInterval(5000);
+                  // Max retry attempts while reconnecting on a loss of connection
+                  apiClient.setMaxRetryAttempts(5);
+                  // UserName to connect to the cluster
+                  String username = "username";
+                  // Password to connect to the cluster
+                  String password = "password";
+                  apiClient.setUsername(username);
+                  apiClient.setPassword(password);
+
+                  // Please add authorization information here if needed.
+                  ObjectStoresApi objectStoresApi = new ObjectStoresApi(apiClient);
+
+
+                  try {
+                      ObjectstoreApiResponse objectstoreApiResponse = objectStoresApi.GetObjectstore(null);
+                      System.out.println(objectstoreApiResponse.toString());
+                  } catch (RestClientException ex) {
+                      System.out.println(ex.getMessage());
+                  }
+              }
+          }
+      - lang: JavaScript
+        source: |2
+
+          import { ApiClient, ObjectStoresApi } from "@nutanix-api/objects-js-client";
+
+          // Configure the client
+          let apiClientInstance = new ApiClient();
+          // IPv4/IPv6 address or FQDN of the cluster
+          apiClientInstance.host = 'localhost';
+          // Port to which to connect to
+          apiClientInstance.port = '9440';
+          // Max retry attempts while reconnecting on a loss of connection
+          apiClientInstance.maxRetryAttempts = 5;
+          // Interval in ms to use during retry attempts
+          apiClientInstance.retryInterval = 5000;
+          // UserName to connect to the cluster
+          apiClientInstance.username = 'username';
+          // Password to connect to the cluster
+          apiClientInstance.password = 'password';
+          // Please add authorization information here if needed.
+          let objectStoresApi = new ObjectStoresApi(apiClientInstance);
+
+          function sample() {
+
+
+              // Construct Optional Parameters
+              var opts = {};
+              opts["$expand"] = "string_sample_data";
+
+
+
+              objectStoresApi.GetObjectstore(opts).then(({data, response}) => {
+                  console.log(`API returned the following status code: ${response.status}`);
+                  console.log(data.getData());
+              }).catch((error) => {
+                  console.log(`Error is: ${error}`);
+              });
+          }
+          sample()
+      - lang: Python
+        source: |2
+
+          import ntnx_objects_py_client
+
+          if __name__ == "__main__":
+              # Configure the client
+              config = ntnx_objects_py_client.Configuration()
+              # IPv4/IPv6 address or FQDN of the cluster
+              config.host = "localhost"
+              # Port to which to connect to
+              config.port = 9440
+              # Max retry attempts while reconnecting on a loss of connection
+              config.max_retry_attempts = 3
+              # Backoff factor to use during retry attempts
+              config.backoff_factor = 3
+              # UserName to connect to the cluster
+              config.username = "username"
+              # Password to connect to the cluster
+              config.password = "password"
+              # Please add authorization information here if needed.
+              client = ntnx_objects_py_client.ApiClient(configuration=config)
+              object_stores_api = ntnx_objects_py_client.ObjectStoresApi(api_client=client)
+
+              try:
+                  api_response = object_stores_api.get_objectstore()
+                  print(api_response)
+              except ntnx_objects_py_client.rest.ApiException as e:
+                  print(e)
+      - lang: Go
+        source: |2+
+
+          package main
+
+          import (
+              "fmt"
+              "github.com/nutanix/ntnx-api-golang-clients/objects-go-client/v4/api"
+              "github.com/nutanix/ntnx-api-golang-clients/objects-go-client/v4/client"
+              import1 "github.com/nutanix/ntnx-api-golang-clients/objects-go-client/v4/models/objects/v4/operations"
+          )
+
+          var (
+              ApiClientInstance *client.ApiClient
+              ObjectStoresApiInstance *api.ObjectStoresApi
+          )
+
+          func main() {
+              ApiClientInstance = client.NewApiClient()
+              // IPv4/IPv6 address or FQDN of the cluster
+              ApiClientInstance.Host = "localhost"
+              // Port to which to connect to
+              ApiClientInstance.Port = 9440
+              // Interval in ms to use during retry attempts
+              ApiClientInstance.RetryInterval = 5000
+              // Max retry attempts while reconnecting on a loss of connection
+              ApiClientInstance.MaxRetryAttempts = 5
+              // UserName to connect to the cluster
+              ApiClientInstance.Username = "username"
+              // Password to connect to the cluster
+              ApiClientInstance.Password = "password"
+              // Please add authorization information here if needed.
+              ObjectStoresApiInstance = api.NewObjectStoresApi(ApiClientInstance)
+
+
+
+              response, error := ObjectStoresApiInstance.GetObjectstore(nil)
+              if error != nil {
+                  fmt.Println(error)
+                  return
+              }
+              data, _ := response.GetData().(import1.Objectstore)
+              fmt.Println(data)
+          }
+
+      - lang: cURL
+        source: |2
+
+          curl --request GET \
+               --url "https://{pc-ip}:9440/api/objects/v4.0.a2/operations/object-stores/{extId}?$expand=string_sample_data" \
+               --header 'Accept: application/json' \
+               --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+      - lang: Wget
+        source: |2
+
+          wget --verbose \
+               --method GET \
+               --header 'Accept: application/json' \
+               --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+               - "https://{pc-ip}:9440/api/objects/v4.0.a2/operations/object-stores/{extId}?$expand=string_sample_data"
+    put:
+      tags:
+      - ObjectStores
+      summary: Update an Object store
+      description: |
+        Update an Object store. The deployment of an Object store can be restarted from the state OBJECT_STORE_DEPLOYMENT_ERROR.
+      operationId: UpdateObjectstore
+      parameters:
+      - name: extId
+        in: path
+        description: The UUID of the Object store.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+      - name: If-Match
+        in: header
+        description: "The If-Match request header makes the request conditional. When\
+          \ not provided, the server will respond with  an HTTP-428 (Precondition\
+          \ Required) response code indicating that the server requires the request\
+          \ to be conditional. The server will allow the successful completion of\
+          \ PUT and PATCH operations, if the resource matches the ETag value returned\
+          \ to the response of a GET operation. If the conditional does not match,\
+          \ then an HTTP-412 (Precondition Failed) response will be returned."
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        description: |
+          Update the Object store. To retry the deployment of an Object store, get the Object store and pass the Object store in the request body unchanged.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/objects.v4.r0.a2.operations.Objectstore'
+        required: true
+      responses:
+        "202":
+          description: The request to update the Object store is accepted.
+          headers:
+            Location:
+              style: simple
+              explode: false
+              schema:
+                pattern: "^((http[s]?):\\/)?\\/?([^:\\/\\s]+)((\\/\\w+)*(:[0-9]+)*?\\\
+                  /)([\\w\\-\\.]+[^#?\\s]+)(.*)?(#[\\w\\-]+)?$"
+                type: string
+                description: Indicates the target of a redirection or the URL of a
+                  newly created resource.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/prism.v4.r0.b1.config.TaskReference'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /objects/v4.0.a2/operations/object-stores/{objectStoreExtId}/certificates\
+                  \ Post operation"
+        "4XX":
+          description: Client error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/objects.v4.r0.a2.error.ErrorResponse'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /objects/v4.0.a2/operations/object-stores/{objectStoreExtId}/certificates\
+                  \ Post operation"
+        "5XX":
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/objects.v4.r0.a2.error.ErrorResponse'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /objects/v4.0.a2/operations/object-stores/{objectStoreExtId}/certificates\
+                  \ Post operation"
+      x-permissions:
+        operationName: Create Object Store
+        roleList:
+        - Objects Editor
+        - Objects Admin
+        - Prism Admin
+        - Internal Super Admin
+        - Super Admin
+      x-supported-versions:
+      - product: PC
+        version: 2023.4
+      - product: PE
+        version: 6.5.3.1
+      - product: Objects Manager
+        version: 4.3
+      x-code-samples:
+      - lang: Java
+        source: |2
+
+          package sample;
+
+          import com.nutanix.obj.java.client.ApiClient;
+          import com.nutanix.obj.java.client.api.ObjectStoresApi;
+          import com.nutanix.dp1.obj.objects.v4.operations.Objectstore;
+          import com.nutanix.dp1.obj.objects.v4.operations.ObjectstoreApiResponse;
+          import com.nutanix.dp1.obj.objects.v4.operations.TaskReferenceApiResponse;
+          import java.util.HashMap;
+          import org.apache.http.HttpHeaders;
+
+          public class JavaSdkSample {
+              public static void main(String[] args) {
+                  // Configure the client
+                  ApiClient apiClient = new ApiClient();
+                  // IPv4/IPv6 address or FQDN of the cluster
+                  apiClient.setHost("localhost");
+                  // Port to which to connect to
+                  apiClient.setPort(9440);
+                  // Interval in ms to use during retry attempts
+                  apiClient.setRetryInterval(5000);
+                  // Max retry attempts while reconnecting on a loss of connection
+                  apiClient.setMaxRetryAttempts(5);
+                  // UserName to connect to the cluster
+                  String username = "username";
+                  // Password to connect to the cluster
+                  String password = "password";
+                  apiClient.setUsername(username);
+                  apiClient.setPassword(password);
+
+                  // Please add authorization information here if needed.
+                  ObjectStoresApi objectStoresApi = new ObjectStoresApi(apiClient);
+
+                  Objectstore objectstore = new Objectstore();
+
+                  // Objectstore object initializations here...
+                  objectstore.setName("i1Ha");  // required field
+                  String extId = "bbaa1aFE-84Bc-24bd-cdF1-E28DBaaaD21F";
+
+                  // perform GET call
+                  ObjectstoreApiResponse getResponse = null;
+                  try {
+                      getResponse = objectStoresApi.GetObjectstore(extId);
+                  } catch(RestClientException ex) {
+                      System.out.println(ex.getMessage());
+                  }
+                  // Extract E-Tag Header
+                  String eTag = ApiClient.getEtag(getResponse);
+                  // initialize/change parameters for update
+                  HashMap<String, Object> opts = new HashMap<>();
+                  opts.put(HttpHeaders.IF_MATCH, eTag);
+                  try {
+                      TaskReferenceApiResponse taskReferenceApiResponse = objectStoresApi.UpdateObjectstore(extId, objectstore, opts);
+                      System.out.println(taskReferenceApiResponse.toString());
+                  } catch (RestClientException ex) {
+                      System.out.println(ex.getMessage());
+                  }
+              }
+          }
+      - lang: JavaScript
+        source: |2
+
+          import { ApiClient, ObjectStoresApi, Objectstore, ObjectstoreApiResponse } from "@nutanix-api/objects-js-client";
+
+          // Configure the client
+          let apiClientInstance = new ApiClient();
+          // IPv4/IPv6 address or FQDN of the cluster
+          apiClientInstance.host = 'localhost';
+          // Port to which to connect to
+          apiClientInstance.port = '9440';
+          // Max retry attempts while reconnecting on a loss of connection
+          apiClientInstance.maxRetryAttempts = 5;
+          // Interval in ms to use during retry attempts
+          apiClientInstance.retryInterval = 5000;
+          // UserName to connect to the cluster
+          apiClientInstance.username = 'username';
+          // Password to connect to the cluster
+          apiClientInstance.password = 'password';
+          // Please add authorization information here if needed.
+          let objectStoresApi = new ObjectStoresApi(apiClientInstance);
+
+          function sample() {
+              let objectstore = new Objectstore();
+
+              // Objectstore object initializations here...
+              objectstore.setName("P-62");  // required field
+
+              let extId = "e8A00F1b-cb02-7EB1-7B8e-B7c0Bc80ae5c";
+
+
+              // Perform Get call
+              objectStoresApi.GetObjectstore(extId).then(({data, response}) => {
+                  console.log(`API returned the following status code: ${response.status}`);
+                  // Extract E-Tag Header
+                  let etagValue = ApiClient.getEtag(data);
+
+                  objectStoresApi.UpdateObjectstore(extId, objectstore, {"If-Match" : etagValue}).then(({data, response}) => {
+                      console.log(`API returned the following status code: ${response.status}`);
+                      console.log(data.getData());
+                  }).catch((error) => {
+                      console.log(`Error is: ${error}`);
+                  });
+              });
+
+          }
+          sample()
+      - lang: Python
+        source: |2
+
+          import ntnx_objects_py_client
+
+          if __name__ == "__main__":
+              # Configure the client
+              config = ntnx_objects_py_client.Configuration()
+              # IPv4/IPv6 address or FQDN of the cluster
+              config.host = "localhost"
+              # Port to which to connect to
+              config.port = 9440
+              # Max retry attempts while reconnecting on a loss of connection
+              config.max_retry_attempts = 3
+              # Backoff factor to use during retry attempts
+              config.backoff_factor = 3
+              # UserName to connect to the cluster
+              config.username = "username"
+              # Password to connect to the cluster
+              config.password = "password"
+              # Please add authorization information here if needed.
+              client = ntnx_objects_py_client.ApiClient(configuration=config)
+              object_stores_api = ntnx_objects_py_client.ObjectStoresApi(api_client=client)
+              objectstore = ntnx_objects_py_client.Objectstore()
+
+              # Objectstore object initializations here...
+              objectstore.name = "Fx-I"  # required field
+              ext_id = "b3D9e344-0D4b-FB2A-886D-dEbd08bb1D9a"
+
+              try:
+                  api_response = object_stores_api.get_objectstore(extId=ext_id)
+              except ntnx_objects_py_client.rest.ApiException as e:
+                  print(e)
+              # Extract E-Tag Header
+              etag_value = ntnx_objects_py_client.ApiClient.get_etag(api_response)
+              try:
+                  api_response = object_stores_api.update_objectstore(extId=ext_id, body=objectstore, if_match=etag_value)
+                  print(api_response)
+              except ntnx_objects_py_client.rest.ApiException as e:
+                  print(e)
+      - lang: Go
+        source: |2+
+
+          package main
+
+          import (
+              "fmt"
+              "github.com/nutanix/ntnx-api-golang-clients/objects-go-client/v4/api"
+              "github.com/nutanix/ntnx-api-golang-clients/objects-go-client/v4/client"
+              import1 "github.com/nutanix/ntnx-api-golang-clients/objects-go-client/v4/models/objects/v4/operations"
+              import2 "github.com/nutanix/ntnx-api-golang-clients/objects-go-client/v4/models/prism/v4/config"
+          )
+
+          var (
+              ApiClientInstance *client.ApiClient
+              ObjectStoresApiInstance *api.ObjectStoresApi
+          )
+
+          func main() {
+              ApiClientInstance = client.NewApiClient()
+              // IPv4/IPv6 address or FQDN of the cluster
+              ApiClientInstance.Host = "localhost"
+              // Port to which to connect to
+              ApiClientInstance.Port = 9440
+              // Interval in ms to use during retry attempts
+              ApiClientInstance.RetryInterval = 5000
+              // Max retry attempts while reconnecting on a loss of connection
+              ApiClientInstance.MaxRetryAttempts = 5
+              // UserName to connect to the cluster
+              ApiClientInstance.Username = "username"
+              // Password to connect to the cluster
+              ApiClientInstance.Password = "password"
+              // Please add authorization information here if needed.
+              ObjectStoresApiInstance = api.NewObjectStoresApi(ApiClientInstance)
+
+              objectstore := import1.NewObjectstore()
+
+              // Objectstore object initializations here...
+
+              extId := "ceCE6DAf-cCdf-F20e-A6B7-6f1aDFD2Bb7a"
+
+              getResponse, err := ObjectStoresApiInstance.GetObjectstore(&extId)
+              if err != nil {
+                  fmt.Println(err)
+                  return
+              }
+
+              // Extract E-Tag Header
+              etagValue := ApiClientInstance.GetEtag(getResponse)
+
+              args := make(map[string] interface{})
+              args["If-Match"] = etagValue
+
+              response, error := ObjectStoresApiInstance.UpdateObjectstore(&extId, objectstore, args)
+              if error != nil {
+                  fmt.Println(error)
+                  return
+              }
+              data, _ := response.GetData().(import2.TaskReference)
+              fmt.Println(data)
+          }
+
+      - lang: cURL
+        source: |2
+
+          curl --request PUT \
+               --url "https://{pc-ip}:9440/api/objects/v4.0.a2/operations/object-stores/FC50EF9B-Cd96-B31C-4Afe-c3Ce4c55CFBe" \
+               --header 'Accept: application/json' \
+               --header 'Content-Type: application/json' \
+               --header 'If-Match: string_sample_data' \
+               --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+               --data {"tenantId":"string","extId":"string","links":[{"href":"string","rel":"string","$objectType":"common.v1.response.ApiLink"}],"metadata":{"ownerReferenceId":"string","ownerUserName":"string","projectReferenceId":"string","projectName":"string","categoryIds":["string"],"$objectType":"common.v1.config.Metadata"},"name":"string","creationTime":"2015-07-20T15:49:04-07:00","lastUpdateTime":"2015-07-20T15:49:04-07:00","description":"string","deploymentVersion":"string","domain":"string","region":"string","numWorkerNodes":0,"clusterReference":"string","storageNetworkReference":"string","storageNetworkVip":{"ipv4":{"value":"string","prefixLength":32,"$objectType":"common.v1.config.IPv4Address"},"ipv6":{"value":"string","prefixLength":128,"$objectType":"common.v1.config.IPv6Address"},"$objectType":"common.v1.config.IPAddress"},"storageNetworkDnsIp":{"ipv4":{"value":"string","prefixLength":32,"$objectType":"common.v1.config.IPv4Address"},"ipv6":{"value":"string","prefixLength":128,"$objectType":"common.v1.config.IPv6Address"},"$objectType":"common.v1.config.IPAddress"},"publicNetworkReference":"string","publicNetworkIps":[{"ipv4":{"value":"string","prefixLength":32,"$objectType":"common.v1.config.IPv4Address"},"ipv6":{"value":"string","prefixLength":128,"$objectType":"common.v1.config.IPv6Address"},"$objectType":"common.v1.config.IPAddress"}],"totalCapacityGiB":0,"state":"$UNKNOWN","certificateReference":"string","$objectType":"objects.v4.operations.Objectstore"} \
+      - lang: Wget
+        source: |2
+
+          wget --verbose \
+               --method PUT \
+               --header 'Accept: application/json' \
+               --header 'Content-Type: application/json' \
+               --header 'If-Match: string_sample_data' \
+               --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+               --body-data {"tenantId":"string","extId":"string","links":[{"href":"string","rel":"string","$objectType":"common.v1.response.ApiLink"}],"metadata":{"ownerReferenceId":"string","ownerUserName":"string","projectReferenceId":"string","projectName":"string","categoryIds":["string"],"$objectType":"common.v1.config.Metadata"},"name":"string","creationTime":"2015-07-20T15:49:04-07:00","lastUpdateTime":"2015-07-20T15:49:04-07:00","description":"string","deploymentVersion":"string","domain":"string","region":"string","numWorkerNodes":0,"clusterReference":"string","storageNetworkReference":"string","storageNetworkVip":{"ipv4":{"value":"string","prefixLength":32,"$objectType":"common.v1.config.IPv4Address"},"ipv6":{"value":"string","prefixLength":128,"$objectType":"common.v1.config.IPv6Address"},"$objectType":"common.v1.config.IPAddress"},"storageNetworkDnsIp":{"ipv4":{"value":"string","prefixLength":32,"$objectType":"common.v1.config.IPv4Address"},"ipv6":{"value":"string","prefixLength":128,"$objectType":"common.v1.config.IPv6Address"},"$objectType":"common.v1.config.IPAddress"},"publicNetworkReference":"string","publicNetworkIps":[{"ipv4":{"value":"string","prefixLength":32,"$objectType":"common.v1.config.IPv4Address"},"ipv6":{"value":"string","prefixLength":128,"$objectType":"common.v1.config.IPv6Address"},"$objectType":"common.v1.config.IPAddress"}],"totalCapacityGiB":0,"state":"$UNKNOWN","certificateReference":"string","$objectType":"objects.v4.operations.Objectstore"} \
+               - "https://{pc-ip}:9440/api/objects/v4.0.a2/operations/object-stores/aDfCa0cF-DeD0-e2FC-DeEc-bE1aFeA9Ad9b"
+    delete:
+      tags:
+      - ObjectStores
+      summary: Delete an Object store
+      description: |
+        Send a request to delete an Object store for the provided UUID and clean up its data. An Object store can only be deleted when it is in the state OBJECT_STORE_INPUT, OBJECT_STORE_DELETE_INPUT_ERROR, OBJECT_STORE_AVAILABLE, OBJECT_STORE_DEPLOYMENT_ERROR or OBJECT_STORE_DELETE_ERROR and does not contain any buckets.
+      operationId: DeleteObjectstore
+      parameters:
+      - name: extId
+        in: path
+        description: The UUID of the Object store.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+      - name: If-Match
+        in: header
+        description: The current ETag of the existing Object store.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "202":
+          description: The request to delete an Object store is accepted.
+          headers:
+            Location:
+              style: simple
+              explode: false
+              schema:
+                pattern: "^((http[s]?):\\/)?\\/?([^:\\/\\s]+)((\\/\\w+)*(:[0-9]+)*?\\\
+                  /)([\\w\\-\\.]+[^#?\\s]+)(.*)?(#[\\w\\-]+)?$"
+                type: string
+                description: Indicates the target of a redirection or the URL of a
+                  newly created resource.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/prism.v4.r0.b1.config.TaskReference'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /objects/v4.0.a2/operations/object-stores/{objectStoreExtId}/certificates\
+                  \ Post operation"
+        "4XX":
+          description: Client error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/objects.v4.r0.a2.error.ErrorResponse'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /objects/v4.0.a2/operations/object-stores/{objectStoreExtId}/certificates\
+                  \ Post operation"
+        "5XX":
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/objects.v4.r0.a2.error.ErrorResponse'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /objects/v4.0.a2/operations/object-stores/{objectStoreExtId}/certificates\
+                  \ Post operation"
+      x-permissions:
+        operationName: Delete Object Store
+        roleList:
+        - Objects Editor
+        - Objects Admin
+        - Prism Admin
+        - Internal Super Admin
+        - Super Admin
+      x-supported-versions:
+      - product: PC
+        version: 2023.4
+      - product: PE
+        version: 6.5.3.1
+      - product: Objects Manager
+        version: 4.3
+      x-code-samples:
+      - lang: Java
+        source: |2
+
+          package sample;
+
+          import com.nutanix.obj.java.client.ApiClient;
+          import com.nutanix.obj.java.client.api.ObjectStoresApi;
+          import com.nutanix.dp1.obj.objects.v4.operations.ObjectstoreApiResponse;
+          import com.nutanix.dp1.obj.objects.v4.operations.TaskReferenceApiResponse;
+          import java.util.HashMap;
+          import org.apache.http.HttpHeaders;
+
+          public class JavaSdkSample {
+              public static void main(String[] args) {
+                  // Configure the client
+                  ApiClient apiClient = new ApiClient();
+                  // IPv4/IPv6 address or FQDN of the cluster
+                  apiClient.setHost("localhost");
+                  // Port to which to connect to
+                  apiClient.setPort(9440);
+                  // Interval in ms to use during retry attempts
+                  apiClient.setRetryInterval(5000);
+                  // Max retry attempts while reconnecting on a loss of connection
+                  apiClient.setMaxRetryAttempts(5);
+                  // UserName to connect to the cluster
+                  String username = "username";
+                  // Password to connect to the cluster
+                  String password = "password";
+                  apiClient.setUsername(username);
+                  apiClient.setPassword(password);
+
+                  // Please add authorization information here if needed.
+                  ObjectStoresApi objectStoresApi = new ObjectStoresApi(apiClient);
+
+                  String extId = "Ac0c7eCA-A80d-b0FA-BAae-f5b1b2ebeDF7";
+
+                  // perform GET call
+                  ObjectstoreApiResponse getResponse = null;
+                  try {
+                      getResponse = objectStoresApi.GetObjectstore(extId);
+                  } catch(RestClientException ex) {
+                      System.out.println(ex.getMessage());
+                  }
+                  // Extract E-Tag Header
+                  String eTag = ApiClient.getEtag(getResponse);
+                  // initialize/change parameters for update
+                  HashMap<String, Object> opts = new HashMap<>();
+                  opts.put(HttpHeaders.IF_MATCH, eTag);
+                  try {
+                      TaskReferenceApiResponse taskReferenceApiResponse = objectStoresApi.DeleteObjectstore(extId, opts);
+                      System.out.println(taskReferenceApiResponse.toString());
+                  } catch (RestClientException ex) {
+                      System.out.println(ex.getMessage());
+                  }
+              }
+          }
+      - lang: JavaScript
+        source: |2
+
+          import { ApiClient, ObjectStoresApi, ObjectstoreApiResponse } from "@nutanix-api/objects-js-client";
+
+          // Configure the client
+          let apiClientInstance = new ApiClient();
+          // IPv4/IPv6 address or FQDN of the cluster
+          apiClientInstance.host = 'localhost';
+          // Port to which to connect to
+          apiClientInstance.port = '9440';
+          // Max retry attempts while reconnecting on a loss of connection
+          apiClientInstance.maxRetryAttempts = 5;
+          // Interval in ms to use during retry attempts
+          apiClientInstance.retryInterval = 5000;
+          // UserName to connect to the cluster
+          apiClientInstance.username = 'username';
+          // Password to connect to the cluster
+          apiClientInstance.password = 'password';
+          // Please add authorization information here if needed.
+          let objectStoresApi = new ObjectStoresApi(apiClientInstance);
+
+          function sample() {
+
+              let extId = "dbedEAE0-deFD-cCf6-50BA-ff08A70Eb9EB";
+
+
+              // Perform Get call
+              objectStoresApi.GetObjectstore(extId).then(({data, response}) => {
+                  console.log(`API returned the following status code: ${response.status}`);
+                  // Extract E-Tag Header
+                  let etagValue = ApiClient.getEtag(data);
+
+                  objectStoresApi.DeleteObjectstore(extId, {"If-Match" : etagValue}).then(({data, response}) => {
+                      console.log(`API returned the following status code: ${response.status}`);
+                      console.log(data.getData());
+                  }).catch((error) => {
+                      console.log(`Error is: ${error}`);
+                  });
+              });
+
+          }
+          sample()
+      - lang: Python
+        source: |2
+
+          import ntnx_objects_py_client
+
+          if __name__ == "__main__":
+              # Configure the client
+              config = ntnx_objects_py_client.Configuration()
+              # IPv4/IPv6 address or FQDN of the cluster
+              config.host = "localhost"
+              # Port to which to connect to
+              config.port = 9440
+              # Max retry attempts while reconnecting on a loss of connection
+              config.max_retry_attempts = 3
+              # Backoff factor to use during retry attempts
+              config.backoff_factor = 3
+              # UserName to connect to the cluster
+              config.username = "username"
+              # Password to connect to the cluster
+              config.password = "password"
+              # Please add authorization information here if needed.
+              client = ntnx_objects_py_client.ApiClient(configuration=config)
+              object_stores_api = ntnx_objects_py_client.ObjectStoresApi(api_client=client)
+              ext_id = "C8aad52B-0DdF-AdBD-ef82-Cb2789B7a4Ac"
+
+              try:
+                  api_response = object_stores_api.get_objectstore(extId=ext_id)
+              except ntnx_objects_py_client.rest.ApiException as e:
+                  print(e)
+              # Extract E-Tag Header
+              etag_value = ntnx_objects_py_client.ApiClient.get_etag(api_response)
+              try:
+                  api_response = object_stores_api.delete_objectstore(extId=ext_id, if_match=etag_value)
+                  print(api_response)
+              except ntnx_objects_py_client.rest.ApiException as e:
+                  print(e)
+      - lang: Go
+        source: |2+
+
+          package main
+
+          import (
+              "fmt"
+              "github.com/nutanix/ntnx-api-golang-clients/objects-go-client/v4/api"
+              "github.com/nutanix/ntnx-api-golang-clients/objects-go-client/v4/client"
+              import1 "github.com/nutanix/ntnx-api-golang-clients/objects-go-client/v4/models/prism/v4/config"
+          )
+
+          var (
+              ApiClientInstance *client.ApiClient
+              ObjectStoresApiInstance *api.ObjectStoresApi
+          )
+
+          func main() {
+              ApiClientInstance = client.NewApiClient()
+              // IPv4/IPv6 address or FQDN of the cluster
+              ApiClientInstance.Host = "localhost"
+              // Port to which to connect to
+              ApiClientInstance.Port = 9440
+              // Interval in ms to use during retry attempts
+              ApiClientInstance.RetryInterval = 5000
+              // Max retry attempts while reconnecting on a loss of connection
+              ApiClientInstance.MaxRetryAttempts = 5
+              // UserName to connect to the cluster
+              ApiClientInstance.Username = "username"
+              // Password to connect to the cluster
+              ApiClientInstance.Password = "password"
+              // Please add authorization information here if needed.
+              ObjectStoresApiInstance = api.NewObjectStoresApi(ApiClientInstance)
+
+              extId := "ECF5c91C-dEfB-bb1b-F056-b188248Ec79a"
+
+              getResponse, err := ObjectStoresApiInstance.GetObjectstore(&extId)
+              if err != nil {
+                  fmt.Println(err)
+                  return
+              }
+
+              // Extract E-Tag Header
+              etagValue := ApiClientInstance.GetEtag(getResponse)
+
+              args := make(map[string] interface{})
+              args["If-Match"] = etagValue
+
+              response, error := ObjectStoresApiInstance.DeleteObjectstore(&extId, args)
+              if error != nil {
+                  fmt.Println(error)
+                  return
+              }
+              data, _ := response.GetData().(import1.TaskReference)
+              fmt.Println(data)
+          }
+
+      - lang: cURL
+        source: |2
+
+          curl --request DELETE \
+               --url "https://{pc-ip}:9440/api/objects/v4.0.a2/operations/object-stores/daefE7F5-DBE0-B3fA-92c6-DBA56EA40B69" \
+               --header 'Accept: application/json' \
+               --header 'If-Match: string_sample_data' \
+               --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+      - lang: Wget
+        source: |2
+
+          wget --verbose \
+               --method DELETE \
+               --header 'Accept: application/json' \
+               --header 'If-Match: string_sample_data' \
+               --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+               - "https://{pc-ip}:9440/api/objects/v4.0.a2/operations/object-stores/EecFeeFD-6eA3-AEaA-aCf2-dfAFBDFaE7eB"
+  /objects/v4.0.a2/operations/object-stores/{objectStoreExtId}/certificates:
+    get:
+      tags:
+      - ObjectStores
+      summary: Get a list of the SSL certificates of an Object store
+      description: Get a list of the SSL certificates which can be used to access
+        an Object store.
+      operationId: GetCertificates
+      parameters:
+      - name: objectStoreExtId
+        in: path
+        description: The UUID of the Object store.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+      - name: $page
+        in: query
+        description: |
+          A URL query parameter that specifies the page number of the result set. It must be a positive integer between 0 and the maximum number of pages that are available for that resource. Any number out of this range might lead to no results.
+        required: false
+        style: form
+        explode: false
+        schema:
+          minimum: 0
+          type: integer
+          description: |
+            A URL query parameter that specifies the page number of the result set. It must be a positive integer between 0 and the maximum number of pages that are available for that resource. Any number out of this range might lead to no results.
+          format: int32
+          default: 0
+      - name: $limit
+        in: query
+        description: |
+          A URL query parameter that specifies the total number of records returned in the result set.  Must be a positive integer between 1 and 100. Any number out of this range will lead to a validation error. If the limit is not provided, a default value of 50 records will be returned in the result set.
+        required: false
+        style: form
+        explode: false
+        schema:
+          maximum: 100
+          minimum: 1
+          type: integer
+          description: |
+            A URL query parameter that specifies the total number of records returned in the result set.  Must be a positive integer between 1 and 100. Any number out of this range will lead to a validation error. If the limit is not provided, a default value of 50 records will be returned in the result set.
+          format: int32
+          default: 50
+      - name: $filter
+        in: query
+        description: |
+          A URL query parameter that allows clients to filter a collection of resources. The expression specified with $filter is evaluated for each resource in the collection, and only items where the expression evaluates to true are included in the response. Expression specified with the $filter must conform to the [OData V4.01](https://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html) URL conventions.
+          For example, filter '$filter=name eq 'karbon-ntnx-1.0' would filter the result on cluster name 'karbon-ntnx1.0', filter '$filter=startswith(name, 'C')' would filter on cluster name starting with 'C'.
+          The filter can be applied to the following fields:
+          - ca
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: $orderby
+        in: query
+        description: |
+          A URL query parameter that allows clients to specify the sort criteria for the returned list of objects. Resources can be sorted in ascending order using asc or descending order using desc. If asc or desc are not specified, the resources will be sorted in ascending order by default. For example, '$orderby=templateName desc' would get all templates sorted by templateName in descending order.
+          The orderby can be applied to the following fields:
+          - ca
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: $select
+        in: query
+        description: |
+          A URL query parameter that allows clients to request a specific set of properties for each entity or complex type. Expression specified with the $select must conform to the [OData V4.01](https://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html) URL conventions. If a $select expression consists of a single select item that is an asterisk (i.e., *), then all properties on the matching resource will be returned.
+          - alternateFqdns
+          - ca
+          - extId
+          - links
+          - metadata
+          - privateKey
+          - publicCert
+          - tenantId
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: A list of the certificates of an Object store is returned successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/objects.v4.r0.a2.operations.Certificate'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /objects/v4.0.a2/operations/object-stores/{objectStoreExtId}/certificates\
+                  \ Get operation"
+        "4XX":
+          description: Client error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/objects.v4.r0.a2.error.ErrorResponse'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /objects/v4.0.a2/operations/object-stores/{objectStoreExtId}/certificates\
+                  \ Get operation"
+        "5XX":
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/objects.v4.r0.a2.error.ErrorResponse'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /objects/v4.0.a2/operations/object-stores/{objectStoreExtId}/certificates\
+                  \ Get operation"
+      x-permissions:
+        operationName: Download Certificate Object Store
+        roleList:
+        - Objects Viewer
+        - Objects Editor
+        - Objects Admin
+        - Prism Admin
+        - Internal Super Admin
+        - Super Admin
+      x-supported-versions:
+      - product: PC
+        version: 2023.4
+      - product: PE
+        version: 6.5.3.1
+      - product: Objects Manager
+        version: 4.3
+      x-code-samples:
+      - lang: Java
+        source: |2
+
+          package sample;
+
+          import com.nutanix.obj.java.client.ApiClient;
+          import com.nutanix.obj.java.client.api.ObjectStoresApi;
+          import com.nutanix.dp1.obj.objects.v4.operations.CertificateListApiResponse;
+
+          public class JavaSdkSample {
+              public static void main(String[] args) {
+                  // Configure the client
+                  ApiClient apiClient = new ApiClient();
+                  // IPv4/IPv6 address or FQDN of the cluster
+                  apiClient.setHost("localhost");
+                  // Port to which to connect to
+                  apiClient.setPort(9440);
+                  // Interval in ms to use during retry attempts
+                  apiClient.setRetryInterval(5000);
+                  // Max retry attempts while reconnecting on a loss of connection
+                  apiClient.setMaxRetryAttempts(5);
+                  // UserName to connect to the cluster
+                  String username = "username";
+                  // Password to connect to the cluster
+                  String password = "password";
+                  apiClient.setUsername(username);
+                  apiClient.setPassword(password);
+
+                  // Please add authorization information here if needed.
+                  ObjectStoresApi objectStoresApi = new ObjectStoresApi(apiClient);
+
+                  int page = 0;
+                  int limit = 50;
+
+                  try {
+                      CertificateListApiResponse certificateListApiResponse = objectStoresApi.GetCertificates(page, limit, null, null, null);
+                      System.out.println(certificateListApiResponse.toString());
+                  } catch (RestClientException ex) {
+                      System.out.println(ex.getMessage());
+                  }
+              }
+          }
+      - lang: JavaScript
+        source: |2
+
+          import { ApiClient, ObjectStoresApi } from "@nutanix-api/objects-js-client";
+
+          // Configure the client
+          let apiClientInstance = new ApiClient();
+          // IPv4/IPv6 address or FQDN of the cluster
+          apiClientInstance.host = 'localhost';
+          // Port to which to connect to
+          apiClientInstance.port = '9440';
+          // Max retry attempts while reconnecting on a loss of connection
+          apiClientInstance.maxRetryAttempts = 5;
+          // Interval in ms to use during retry attempts
+          apiClientInstance.retryInterval = 5000;
+          // UserName to connect to the cluster
+          apiClientInstance.username = 'username';
+          // Password to connect to the cluster
+          apiClientInstance.password = 'password';
+          // Please add authorization information here if needed.
+          let objectStoresApi = new ObjectStoresApi(apiClientInstance);
+
+          function sample() {
+
+
+              // Construct Optional Parameters
+              var opts = {};
+              opts["$page"] = 0;
+              opts["$limit"] = 50;
+              opts["$filter"] = "string_sample_data";
+              opts["$orderby"] = "string_sample_data";
+              opts["$select"] = "string_sample_data";
+
+
+
+              objectStoresApi.GetCertificates(opts).then(({data, response}) => {
+                  console.log(`API returned the following status code: ${response.status}`);
+                  console.log(data.getData());
+              }).catch((error) => {
+                  console.log(`Error is: ${error}`);
+              });
+          }
+          sample()
+      - lang: Python
+        source: |2
+
+          import ntnx_objects_py_client
+
+          if __name__ == "__main__":
+              # Configure the client
+              config = ntnx_objects_py_client.Configuration()
+              # IPv4/IPv6 address or FQDN of the cluster
+              config.host = "localhost"
+              # Port to which to connect to
+              config.port = 9440
+              # Max retry attempts while reconnecting on a loss of connection
+              config.max_retry_attempts = 3
+              # Backoff factor to use during retry attempts
+              config.backoff_factor = 3
+              # UserName to connect to the cluster
+              config.username = "username"
+              # Password to connect to the cluster
+              config.password = "password"
+              # Please add authorization information here if needed.
+              client = ntnx_objects_py_client.ApiClient(configuration=config)
+              object_stores_api = ntnx_objects_py_client.ObjectStoresApi(api_client=client)
+              page = 0
+              limit = 50
+
+              try:
+                  api_response = object_stores_api.get_certificates(_page=page, _limit=limit)
+                  print(api_response)
+              except ntnx_objects_py_client.rest.ApiException as e:
+                  print(e)
+      - lang: Go
+        source: |2+
+
+          package main
+
+          import (
+              "fmt"
+              "github.com/nutanix/ntnx-api-golang-clients/objects-go-client/v4/api"
+              "github.com/nutanix/ntnx-api-golang-clients/objects-go-client/v4/client"
+              import1 "github.com/nutanix/ntnx-api-golang-clients/objects-go-client/v4/models/objects/v4/operations"
+          )
+
+          var (
+              ApiClientInstance *client.ApiClient
+              ObjectStoresApiInstance *api.ObjectStoresApi
+          )
+
+          func main() {
+              ApiClientInstance = client.NewApiClient()
+              // IPv4/IPv6 address or FQDN of the cluster
+              ApiClientInstance.Host = "localhost"
+              // Port to which to connect to
+              ApiClientInstance.Port = 9440
+              // Interval in ms to use during retry attempts
+              ApiClientInstance.RetryInterval = 5000
+              // Max retry attempts while reconnecting on a loss of connection
+              ApiClientInstance.MaxRetryAttempts = 5
+              // UserName to connect to the cluster
+              ApiClientInstance.Username = "username"
+              // Password to connect to the cluster
+              ApiClientInstance.Password = "password"
+              // Please add authorization information here if needed.
+              ObjectStoresApiInstance = api.NewObjectStoresApi(ApiClientInstance)
+
+              page_ := 0
+              limit_ := 50
+
+
+              response, error := ObjectStoresApiInstance.GetCertificates(&page_, &limit_, nil, nil, nil)
+              if error != nil {
+                  fmt.Println(error)
+                  return
+              }
+              data, _ := response.GetData().([]import1.Certificate)
+              fmt.Println(data)
+          }
+
+      - lang: cURL
+        source: |2
+
+          curl --request GET \
+               --url "https://{pc-ip}:9440/api/objects/v4.0.a2/operations/object-stores/{objectStoreExtId}/certificates?$filter=string_sample_data&$limit=50&$orderby=string_sample_data&$page=0&$select=string_sample_data" \
+               --header 'Accept: application/json' \
+               --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+      - lang: Wget
+        source: |2
+
+          wget --verbose \
+               --method GET \
+               --header 'Accept: application/json' \
+               --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+               - "https://{pc-ip}:9440/api/objects/v4.0.a2/operations/object-stores/{objectStoreExtId}/certificates?$filter=string_sample_data&$limit=50&$orderby=string_sample_data&$page=0&$select=string_sample_data"
+    post:
+      tags:
+      - ObjectStores
+      summary: Create a SSL certificate for an Object store
+      description: |
+        This operation creates a new default certificate and keys. It also creates the alternate FQDNs for the Object store. The certificate of an Object store can be created when it is in a OBJECT_STORE_AVAILABLE or OBJECT_STORE_CREATE_CERT_ERROR state. If the publicCert, privateKey, and ca values are provided in the request body, these values are used to create the new certificate. If these values are not provided, they will be generated for the new certificate. Optionally, a list of additional alternate FQDNs can be provided.
+      operationId: CreateCertificate
+      parameters:
+      - name: objectStoreExtId
+        in: path
+        description: The UUID of the Object store.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+      - name: If-Match
+        in: header
+        description: The current ETag of the existing Object store.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        description: "Contains the public certificates, private key, and CA certificate,\
+          \ along with a list of alternate FQDNs for creating a certificate for the\
+          \ Object store."
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/objects.v4.r0.a2.operations.Certificate'
+        required: true
+      responses:
+        "202":
+          description: The request to create the new certificate for an Object store
+            is accepted.
+          headers:
+            Location:
+              style: simple
+              explode: false
+              schema:
+                pattern: "^((http[s]?):\\/)?\\/?([^:\\/\\s]+)((\\/\\w+)*(:[0-9]+)*?\\\
+                  /)([\\w\\-\\.]+[^#?\\s]+)(.*)?(#[\\w\\-]+)?$"
+                type: string
+                description: Indicates the target of a redirection or the URL of a
+                  newly created resource.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/prism.v4.r0.b1.config.TaskReference'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /objects/v4.0.a2/operations/object-stores/{objectStoreExtId}/certificates\
+                  \ Post operation"
+        "4XX":
+          description: Client error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/objects.v4.r0.a2.error.ErrorResponse'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /objects/v4.0.a2/operations/object-stores/{objectStoreExtId}/certificates\
+                  \ Post operation"
+        "5XX":
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/objects.v4.r0.a2.error.ErrorResponse'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /objects/v4.0.a2/operations/object-stores/{objectStoreExtId}/certificates\
+                  \ Post operation"
+      x-permissions:
+        operationName: Replace Certificates Object Store
+        roleList:
+        - Objects Editor
+        - Objects Admin
+        - Prism Admin
+        - Internal Super Admin
+        - Super Admin
+      x-supported-versions:
+      - product: PC
+        version: 2023.4
+      - product: PE
+        version: 6.5.3.1
+      - product: Objects Manager
+        version: 4.3
+      x-code-samples:
+      - lang: Java
+        source: |2
+
+          package sample;
+
+          import com.nutanix.obj.java.client.ApiClient;
+          import com.nutanix.obj.java.client.api.ObjectStoresApi;
+          import com.nutanix.dp1.obj.objects.v4.operations.Certificate;
+          import com.nutanix.dp1.obj.objects.v4.operations.TaskReferenceApiResponse;
+          import java.util.HashMap;
+          import org.apache.http.HttpHeaders;
+
+          public class JavaSdkSample {
+              public static void main(String[] args) {
+                  // Configure the client
+                  ApiClient apiClient = new ApiClient();
+                  // IPv4/IPv6 address or FQDN of the cluster
+                  apiClient.setHost("localhost");
+                  // Port to which to connect to
+                  apiClient.setPort(9440);
+                  // Interval in ms to use during retry attempts
+                  apiClient.setRetryInterval(5000);
+                  // Max retry attempts while reconnecting on a loss of connection
+                  apiClient.setMaxRetryAttempts(5);
+                  // UserName to connect to the cluster
+                  String username = "username";
+                  // Password to connect to the cluster
+                  String password = "password";
+                  apiClient.setUsername(username);
+                  apiClient.setPassword(password);
+
+                  // Please add authorization information here if needed.
+                  ObjectStoresApi objectStoresApi = new ObjectStoresApi(apiClient);
+
+                  Certificate certificate = new Certificate();
+
+                  // Certificate object initializations here...
+                  String objectStoreExtId = "0afDfFC6-FBa1-B00A-c877-0CCBDA580eB0";
+
+                  /*
+                  Some Create, Update, and Delete operations generally require an If-Match header with a value to be passed in order to protect against concurrent updates.
+                  The value that needs to be sent in the If-Match header needs to be retrieved by performing a Read(Get) operation on the same resource.
+                  ETags can be retrieved by calling a static method of ApiClient as below:
+                  String eTag = ApiClient.getEtag(getResponse);
+                  HashMap<String, Object> opts = new HashMap<>();
+                  opts.put(HttpHeaders.IF_MATCH, eTag);
+                  */
+                  try {
+                      TaskReferenceApiResponse taskReferenceApiResponse = objectStoresApi.CreateCertificate(objectStoreExtId, certificate, opts);
+                      System.out.println(taskReferenceApiResponse.toString());
+                  } catch (RestClientException ex) {
+                      System.out.println(ex.getMessage());
+                  }
+              }
+          }
+      - lang: JavaScript
+        source: |2
+
+          import { ApiClient, ObjectStoresApi, Certificate } from "@nutanix-api/objects-js-client";
+
+          // Configure the client
+          let apiClientInstance = new ApiClient();
+          // IPv4/IPv6 address or FQDN of the cluster
+          apiClientInstance.host = 'localhost';
+          // Port to which to connect to
+          apiClientInstance.port = '9440';
+          // Max retry attempts while reconnecting on a loss of connection
+          apiClientInstance.maxRetryAttempts = 5;
+          // Interval in ms to use during retry attempts
+          apiClientInstance.retryInterval = 5000;
+          // UserName to connect to the cluster
+          apiClientInstance.username = 'username';
+          // Password to connect to the cluster
+          apiClientInstance.password = 'password';
+          // Please add authorization information here if needed.
+          let objectStoresApi = new ObjectStoresApi(apiClientInstance);
+
+          function sample() {
+              let certificate = new Certificate();
+
+              // Certificate object initializations here...
+
+              let objectStoreExtId = "9acE2ad5-1bCc-FE1e-4cc8-4566ACAF2eCc";
+
+
+              /*
+              Some Create, Update, and Delete operations generally require an If-Match header with a value to be passed in order to protect against concurrent updates.
+              The value that needs to be sent in the If-Match header needs to be retrieved by performing a Read(Get) operation on the same resource.
+              ETags can be retrieved by calling a static method of ApiClient as below:
+              let etagValue = ApiClient.getEtag(data);
+              */
+              objectStoresApi.CreateCertificate(objectStoreExtId, certificate, {"If-Match" : etagValue}).then(({data, response}) => {
+                  console.log(`API returned the following status code: ${response.status}`);
+                  console.log(data.getData());
+              }).catch((error) => {
+                  console.log(`Error is: ${error}`);
+              });
+
+          }
+          sample()
+      - lang: Python
+        source: |2
+
+          import ntnx_objects_py_client
+
+          if __name__ == "__main__":
+              # Configure the client
+              config = ntnx_objects_py_client.Configuration()
+              # IPv4/IPv6 address or FQDN of the cluster
+              config.host = "localhost"
+              # Port to which to connect to
+              config.port = 9440
+              # Max retry attempts while reconnecting on a loss of connection
+              config.max_retry_attempts = 3
+              # Backoff factor to use during retry attempts
+              config.backoff_factor = 3
+              # UserName to connect to the cluster
+              config.username = "username"
+              # Password to connect to the cluster
+              config.password = "password"
+              # Please add authorization information here if needed.
+              client = ntnx_objects_py_client.ApiClient(configuration=config)
+              object_stores_api = ntnx_objects_py_client.ObjectStoresApi(api_client=client)
+              certificate = ntnx_objects_py_client.Certificate()
+
+              # Certificate object initializations here...
+              object_store_ext_id = "EDeDfaD8-D5Db-CFD7-beaF-BCbdfd7DDFCF"
+
+              """
+              Some Create, Update, and Delete operations generally require an If-Match header with a value to be passed in order to protect against concurrent updates.
+              The value that needs to be sent in the If-Match header needs to be retrieved by performing a Read(Get) operation on the same resource.
+              ETags can be retrieved by calling a static method of ApiClient as below:
+              etag_value = ApiClient.get_etag(get_api_response)
+              """
+              try:
+                  api_response = object_stores_api.create_certificate(objectStoreExtId=object_store_ext_id, body=certificate, if_match=etag_value)
+                  print(api_response)
+              except ntnx_objects_py_client.rest.ApiException as e:
+                  print(e)
+      - lang: Go
+        source: |2+
+
+          package main
+
+          import (
+              "fmt"
+              "github.com/nutanix/ntnx-api-golang-clients/objects-go-client/v4/api"
+              "github.com/nutanix/ntnx-api-golang-clients/objects-go-client/v4/client"
+              import1 "github.com/nutanix/ntnx-api-golang-clients/objects-go-client/v4/models/objects/v4/operations"
+              import2 "github.com/nutanix/ntnx-api-golang-clients/objects-go-client/v4/models/prism/v4/config"
+          )
+
+          var (
+              ApiClientInstance *client.ApiClient
+              ObjectStoresApiInstance *api.ObjectStoresApi
+          )
+
+          func main() {
+              ApiClientInstance = client.NewApiClient()
+              // IPv4/IPv6 address or FQDN of the cluster
+              ApiClientInstance.Host = "localhost"
+              // Port to which to connect to
+              ApiClientInstance.Port = 9440
+              // Interval in ms to use during retry attempts
+              ApiClientInstance.RetryInterval = 5000
+              // Max retry attempts while reconnecting on a loss of connection
+              ApiClientInstance.MaxRetryAttempts = 5
+              // UserName to connect to the cluster
+              ApiClientInstance.Username = "username"
+              // Password to connect to the cluster
+              ApiClientInstance.Password = "password"
+              // Please add authorization information here if needed.
+              ObjectStoresApiInstance = api.NewObjectStoresApi(ApiClientInstance)
+
+              certificate := import1.NewCertificate()
+
+              // Certificate object initializations here...
+
+              objectStoreExtId := "E74ff449-dC1E-B8f6-8d39-F8FDDcdb9E5F"
+
+              /*
+              Some Create, Update, and Delete operations generally require an If-Match header with a value to be passed in order to protect against concurrent updates.
+              The value that needs to be sent in the If-Match header needs to be retrieved by performing a Read(Get) operation on the same resource.
+              ETags can be retrieved by calling a static method of ApiClient as below:
+              etagValue := ApiClientInstance.GetEtag(getResponse)
+              */
+
+              response, error := ObjectStoresApiInstance.CreateCertificate(&objectStoreExtId, certificate, args)
+              if error != nil {
+                  fmt.Println(error)
+                  return
+              }
+              data, _ := response.GetData().(import2.TaskReference)
+              fmt.Println(data)
+          }
+
+      - lang: cURL
+        source: |2
+
+          curl --request POST \
+               --url "https://{pc-ip}:9440/api/objects/v4.0.a2/operations/object-stores/01Bee6Ea-ca8d-D0BE-dbB6-DAFb7ce2DCAe/certificates" \
+               --header 'Accept: application/json' \
+               --header 'Content-Type: multipart/form-data' \
+               --header 'If-Match: string_sample_data' \
+               --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+               --data_binary @SOME_BINARY_DATA \
+      - lang: Wget
+        source: |2
+
+          wget --verbose \
+               --method POST \
+               --header 'Accept: application/json' \
+               --header 'Content-Type: multipart/form-data' \
+               --header 'If-Match: string_sample_data' \
+               --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+               --post-file @SOME_BINARY_DATA \
+               - "https://{pc-ip}:9440/api/objects/v4.0.a2/operations/object-stores/5afdF6ff-ca0e-0d5e-c23b-19b38f7c3Bee/certificates"
+  /objects/v4.0.a2/operations/object-stores/{objectStoreExtId}/certificates/{extId}:
+    get:
+      tags:
+      - ObjectStores
+      summary: Get the details of an Object store certificate
+      description: Get the details of the SSL certificate which can be used to connect
+        to an Object store.
+      operationId: GetCertificate
+      parameters:
+      - name: objectStoreExtId
+        in: path
+        description: The UUID of the Object store.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+      - name: extId
+        in: path
+        description: The UUID of the certificate of an Object store.
+        required: true
+        style: simple
+        explode: false
+        schema:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+      responses:
+        "200":
+          description: Details of an Object store certificate are returned successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/objects.v4.r0.a2.operations.Certificate'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /objects/v4.0.a2/operations/object-stores/{objectStoreExtId}/certificates/{extId}\
+                  \ Get operation"
+        "4XX":
+          description: Client error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/objects.v4.r0.a2.error.ErrorResponse'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /objects/v4.0.a2/operations/object-stores/{objectStoreExtId}/certificates/{extId}\
+                  \ Get operation"
+        "5XX":
+          description: Server error response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+                  data:
+                    $ref: '#/components/schemas/objects.v4.r0.a2.error.ErrorResponse'
+                additionalProperties: false
+                description: "REST response for all response codes in API path /objects/v4.0.a2/operations/object-stores/{objectStoreExtId}/certificates/{extId}\
+                  \ Get operation"
+      x-permissions:
+        operationName: Download Certificate Object Store
+        roleList:
+        - Objects Viewer
+        - Objects Editor
+        - Objects Admin
+        - Prism Admin
+        - Internal Super Admin
+        - Super Admin
+      x-supported-versions:
+      - product: PC
+        version: 2023.4
+      - product: PE
+        version: 6.5.3.1
+      - product: Objects Manager
+        version: 4.3
+      x-code-samples:
+      - lang: Java
+        source: |2
+
+          package sample;
+
+          import com.nutanix.obj.java.client.ApiClient;
+          import com.nutanix.obj.java.client.api.ObjectStoresApi;
+          import com.nutanix.dp1.obj.objects.v4.operations.CertificateApiResponse;
+
+          public class JavaSdkSample {
+              public static void main(String[] args) {
+                  // Configure the client
+                  ApiClient apiClient = new ApiClient();
+                  // IPv4/IPv6 address or FQDN of the cluster
+                  apiClient.setHost("localhost");
+                  // Port to which to connect to
+                  apiClient.setPort(9440);
+                  // Interval in ms to use during retry attempts
+                  apiClient.setRetryInterval(5000);
+                  // Max retry attempts while reconnecting on a loss of connection
+                  apiClient.setMaxRetryAttempts(5);
+                  // UserName to connect to the cluster
+                  String username = "username";
+                  // Password to connect to the cluster
+                  String password = "password";
+                  apiClient.setUsername(username);
+                  apiClient.setPassword(password);
+
+                  // Please add authorization information here if needed.
+                  ObjectStoresApi objectStoresApi = new ObjectStoresApi(apiClient);
+
+                  String objectStoreExtId = "1aFdfA2a-FB1B-dDf9-A6c4-5A6eaF0Aa6De";
+                  String extId = "EDdbcBd2-9cCb-6769-3e45-EeeE6B63ef0f";
+
+                  try {
+                      CertificateApiResponse certificateApiResponse = objectStoresApi.GetCertificate(objectStoreExtId, extId);
+                      System.out.println(certificateApiResponse.toString());
+                  } catch (RestClientException ex) {
+                      System.out.println(ex.getMessage());
+                  }
+              }
+          }
+      - lang: JavaScript
+        source: |2
+
+          import { ApiClient, ObjectStoresApi } from "@nutanix-api/objects-js-client";
+
+          // Configure the client
+          let apiClientInstance = new ApiClient();
+          // IPv4/IPv6 address or FQDN of the cluster
+          apiClientInstance.host = 'localhost';
+          // Port to which to connect to
+          apiClientInstance.port = '9440';
+          // Max retry attempts while reconnecting on a loss of connection
+          apiClientInstance.maxRetryAttempts = 5;
+          // Interval in ms to use during retry attempts
+          apiClientInstance.retryInterval = 5000;
+          // UserName to connect to the cluster
+          apiClientInstance.username = 'username';
+          // Password to connect to the cluster
+          apiClientInstance.password = 'password';
+          // Please add authorization information here if needed.
+          let objectStoresApi = new ObjectStoresApi(apiClientInstance);
+
+          function sample() {
+
+              let objectStoreExtId = "BB191Fa3-abC9-58Ed-9dB1-7D0d9b3aBeEc";
+              let extId = "9aC74C0E-BAE9-1bBE-10Cd-16AA3afFdbbE";
+
+
+
+
+              objectStoresApi.GetCertificate(objectStoreExtId, extId).then(({data, response}) => {
+                  console.log(`API returned the following status code: ${response.status}`);
+                  console.log(data.getData());
+              }).catch((error) => {
+                  console.log(`Error is: ${error}`);
+              });
+          }
+          sample()
+      - lang: Python
+        source: |2
+
+          import ntnx_objects_py_client
+
+          if __name__ == "__main__":
+              # Configure the client
+              config = ntnx_objects_py_client.Configuration()
+              # IPv4/IPv6 address or FQDN of the cluster
+              config.host = "localhost"
+              # Port to which to connect to
+              config.port = 9440
+              # Max retry attempts while reconnecting on a loss of connection
+              config.max_retry_attempts = 3
+              # Backoff factor to use during retry attempts
+              config.backoff_factor = 3
+              # UserName to connect to the cluster
+              config.username = "username"
+              # Password to connect to the cluster
+              config.password = "password"
+              # Please add authorization information here if needed.
+              client = ntnx_objects_py_client.ApiClient(configuration=config)
+              object_stores_api = ntnx_objects_py_client.ObjectStoresApi(api_client=client)
+              object_store_ext_id = "ACD6a2e1-fCEA-fa76-Ac7B-0c0ceEccfC5c"
+              ext_id = "Ec5AABaB-AAFe-dF14-d8D8-Efd854E85486"
+
+              try:
+                  api_response = object_stores_api.get_certificate(objectStoreExtId=object_store_ext_id, extId=ext_id)
+                  print(api_response)
+              except ntnx_objects_py_client.rest.ApiException as e:
+                  print(e)
+      - lang: Go
+        source: |2+
+
+          package main
+
+          import (
+              "fmt"
+              "github.com/nutanix/ntnx-api-golang-clients/objects-go-client/v4/api"
+              "github.com/nutanix/ntnx-api-golang-clients/objects-go-client/v4/client"
+              import1 "github.com/nutanix/ntnx-api-golang-clients/objects-go-client/v4/models/objects/v4/operations"
+          )
+
+          var (
+              ApiClientInstance *client.ApiClient
+              ObjectStoresApiInstance *api.ObjectStoresApi
+          )
+
+          func main() {
+              ApiClientInstance = client.NewApiClient()
+              // IPv4/IPv6 address or FQDN of the cluster
+              ApiClientInstance.Host = "localhost"
+              // Port to which to connect to
+              ApiClientInstance.Port = 9440
+              // Interval in ms to use during retry attempts
+              ApiClientInstance.RetryInterval = 5000
+              // Max retry attempts while reconnecting on a loss of connection
+              ApiClientInstance.MaxRetryAttempts = 5
+              // UserName to connect to the cluster
+              ApiClientInstance.Username = "username"
+              // Password to connect to the cluster
+              ApiClientInstance.Password = "password"
+              // Please add authorization information here if needed.
+              ObjectStoresApiInstance = api.NewObjectStoresApi(ApiClientInstance)
+
+              objectStoreExtId := "8d89Ef4C-93e7-1aEb-a33f-3fE97cdddB17"
+              extId := "e263eCee-bFc4-7F1A-5ABD-7F6dffF77E3f"
+
+
+              response, error := ObjectStoresApiInstance.GetCertificate(&objectStoreExtId, &extId)
+              if error != nil {
+                  fmt.Println(error)
+                  return
+              }
+              data, _ := response.GetData().(import1.Certificate)
+              fmt.Println(data)
+          }
+
+      - lang: cURL
+        source: |2
+
+          curl --request GET \
+               --url "https://{pc-ip}:9440/api/objects/v4.0.a2/operations/object-stores/DfbccfF2-E817-e6FA-89ab-Ba8d6ddeCeaF/certificates/8FcBcD97-0CAe-a06d-9C9C-dcC4e38Eea4B" \
+               --header 'Accept: application/json' \
+               --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+      - lang: Wget
+        source: |2
+
+          wget --verbose \
+               --method GET \
+               --header 'Accept: application/json' \
+               --header 'Authorization:Basic $APP_ACCESS_TOKEN' \
+               - "https://{pc-ip}:9440/api/objects/v4.0.a2/operations/object-stores/6dFEdd09-37B5-7C3D-C3f4-ceFdC0BEDaa5/certificates/9BaFD0ea-Df5E-AdED-CDA8-3D56226c2bd9"
+components:
+  schemas:
+    objects.v4.r0.a2.operations.ObjectstoreListApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/objects.v4.r0.a2.operations.Objectstore'
+          - $ref: '#/components/schemas/objects.v4.r0.a2.error.ErrorResponse'
+      additionalProperties: false
+      description: REST response for all response codes in API path /objects/v4.0.a2/operations/object-stores
+        Get operation
+    objects.v4.r0.a2.operations.Objectstore:
+      allOf:
+      - $ref: '#/components/schemas/common.v1.r0.b1.response.ExternalizableAbstractModel'
+      - title: Object store Definition
+        required:
+        - name
+        type: object
+        properties:
+          metadata:
+            $ref: '#/components/schemas/common.v1.r0.b1.config.Metadata'
+          name:
+            maxLength: 50
+            minLength: 1
+            pattern: "^(([a-zA-Z]|[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]))*([A-Za-z]|[A-Za-z][A-Za-z0-9-]*[A-Za-z0-9])$"
+            type: string
+            description: The name of the Object store.
+          creationTime:
+            type: string
+            description: The time when the Object store was created.
+            format: date-time
+            readOnly: true
+          lastUpdateTime:
+            type: string
+            description: The time when the Object store was last updated.
+            format: date-time
+            readOnly: true
+          description:
+            maxLength: 1000
+            minLength: 0
+            type: string
+            description: A brief description of the Object store.
+          deploymentVersion:
+            maxLength: 50
+            minLength: 1
+            pattern: "^[a-zA-z0-9][a-zA-z0-9\\.]*[a-zA-Z0-9]?$"
+            type: string
+            description: Object store deployment version.
+          domain:
+            maxLength: 1000
+            minLength: 1
+            pattern: "^(([a-zA-Z0-9_\\-]{1,63})\\.)+([a-zA-Z0-9_\\-]{1,63})$"
+            type: string
+            description: |
+              The DNS domain/subdomain the Object store belongs to. All the Object stores under one Prism Central must have the same domain name. The domain name must consist of at least 2 parts separated by a '.'. Each part can contain upper and lower case letters, digits, hyphens, or underscores. Each part can be up to 63 characters long. The domain must begin and end with an alphanumeric character. For example - 'objects-0.pc_nutanix.com'.
+          region:
+            maxLength: 50
+            minLength: 1
+            pattern: "^[a-z]+\\-[a-z]+\\-[0-9]$"
+            type: string
+            description: The region in which the Object store is deployed.
+          numWorkerNodes:
+            maximum: 1000
+            minimum: 1
+            type: integer
+            description: The number of worker nodes (VMs) to be created for the Object
+              store. Each worker node requires 10 vCPUs and 32 GiB of memory.
+            format: int64
+          clusterReference:
+            pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+            type: string
+            description: UUID of the AHV or ESXi cluster.
+          storageNetworkReference:
+            maxLength: 1000
+            minLength: 0
+            type: string
+            description: Reference to the Storage Network of the Object store. This
+              is the subnet UUID for an AHV cluster or the IPAM name for an ESXi cluster.
+          storageNetworkVip:
+            $ref: '#/components/schemas/common.v1.r0.b1.config.IPAddress'
+          storageNetworkDnsIp:
+            $ref: '#/components/schemas/common.v1.r0.b1.config.IPAddress'
+          publicNetworkReference:
+            maxLength: 1000
+            minLength: 0
+            type: string
+            description: Public network reference of the Object store. This is the
+              subnet UUID for an AHV cluster or the IPAM name for an ESXi cluster.
+          publicNetworkIps:
+            maxItems: 1000
+            minItems: 1
+            type: array
+            description: A list of static IP addresses used as public IPs to access
+              the Object store.
+            items:
+              $ref: '#/components/schemas/common.v1.r0.b1.config.IPAddress'
+          totalCapacityGiB:
+            maximum: 178814713856
+            minimum: 1
+            type: integer
+            description: Size of the Object store in GiB.
+            format: int64
+          state:
+            $ref: '#/components/schemas/objects.v4.r0.a2.operations.StateEnum'
+          certificateReference:
+            pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+            type: string
+            description: UUID reference to the Object store certificate.
+            readOnly: true
+        additionalProperties: false
+        description: An Object store entity.
+    objects.v4.r0.a2.operations.TaskReferenceApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - $ref: '#/components/schemas/prism.v4.r0.b1.config.TaskReference'
+          - $ref: '#/components/schemas/objects.v4.r0.a2.error.ErrorResponse'
+      additionalProperties: false
+      description: "REST response for all response codes in API path /objects/v4.0.a2/operations/object-stores/{objectStoreExtId}/certificates\
+        \ Post operation"
+    objects.v4.r0.a2.operations.StateEnum:
+      title: State of the Object store
+      type: string
+      description: Enum for the state of the Object store.
+      enum:
+      - $UNKNOWN
+      - $REDACTED
+      - OBJECT_STORE_DEPLOYMENT_ERROR
+      - OBJECT_STORE_CREATE_CERT_ERROR
+      - OBJECT_STORE_DELETE_ERROR
+      - OBJECT_STORE_DELETE_INPUT_ERROR
+      - OBJECT_STORE_INPUT
+      - OBJECT_STORE_DEPLOYING
+      - OBJECT_STORE_CREATING_CERT
+      - OBJECT_STORE_DELETING
+      - OBJECT_STORE_DELETING_INPUT
+      - OBJECT_STORE_AVAILABLE
+      - OBJECT_STORE_OPERATION_PENDING
+      - OBJECT_STORE_OPERATION_ERROR
+      x-enumDescriptions:
+        OBJECT_STORE_DEPLOYING: |
+          The Object store is being deployed.
+        OBJECT_STORE_OPERATION_ERROR: |
+          There was an error while performing an operation on the Object store.
+        OBJECT_STORE_CREATE_CERT_ERROR: |
+          Creating the Object store certificate has failed.
+        OBJECT_STORE_OPERATION_PENDING: |
+          There is an ongoing operation on the Object store.
+        OBJECT_STORE_INPUT: The Object store is not deployed.
+        OBJECT_STORE_CREATING_CERT: |
+          A certificate is being created for the Object store.
+        OBJECT_STORE_AVAILABLE: |
+          There are no ongoing operations on the deployed Object store.
+        OBJECT_STORE_DELETE_INPUT_ERROR: |
+          There was an error deleting the undeployed Object store.
+        OBJECT_STORE_DELETING_INPUT: |
+          An undeployed Object store is being deleted.
+        OBJECT_STORE_DELETE_ERROR: |
+          There was an error deleting the Object store.
+        OBJECT_STORE_DEPLOYMENT_ERROR: |
+          The Object store deployment has failed.
+        OBJECT_STORE_DELETING: |
+          A deployed Object store is being deleted.
+    objects.v4.r0.a2.operations.Certificate:
+      allOf:
+      - $ref: '#/components/schemas/common.v1.r0.b1.response.ExternalizableAbstractModel'
+      - title: Object store Definition
+        type: object
+        properties:
+          metadata:
+            $ref: '#/components/schemas/common.v1.r0.b1.config.Metadata'
+          publicCert:
+            maxLength: 2000000
+            minLength: 1
+            type: string
+            description: The public certificate to upload.
+          privateKey:
+            maxLength: 2000000
+            minLength: 1
+            type: string
+            description: The private key to upload.
+          ca:
+            maxLength: 2000000
+            minLength: 1
+            type: string
+            description: CA file to upload.
+          alternateFqdns:
+            maxItems: 1000
+            minItems: 1
+            type: array
+            description: |
+              The list of alternate FQDNs for accessing the Object store. The FQDNs must consist of at least 2 parts separated by a '.'. Each part can contain upper and lower case letters, digits, hyphens or underscores but must begin and end with a letter. Each part can be up to 63 characters long. For e.g 'objects-0.pc_nutanix.com'.
+            items:
+              $ref: '#/components/schemas/common.v1.r0.b1.config.FQDN'
+        additionalProperties: false
+        description: An Object store entity.
+    objects.v4.r0.a2.operations.ObjectstoreApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - $ref: '#/components/schemas/objects.v4.r0.a2.operations.Objectstore'
+          - $ref: '#/components/schemas/objects.v4.r0.a2.error.ErrorResponse'
+      additionalProperties: false
+      description: "REST response for all response codes in API path /objects/v4.0.a2/operations/object-stores/{extId}\
+        \ Get operation"
+    objects.v4.r0.a2.operations.CertificateListApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/objects.v4.r0.a2.operations.Certificate'
+          - $ref: '#/components/schemas/objects.v4.r0.a2.error.ErrorResponse'
+      additionalProperties: false
+      description: "REST response for all response codes in API path /objects/v4.0.a2/operations/object-stores/{objectStoreExtId}/certificates\
+        \ Get operation"
+    objects.v4.r0.a2.operations.CertificateApiResponse:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/common.v1.r0.b1.response.ApiResponseMetadata'
+        data:
+          oneOf:
+          - $ref: '#/components/schemas/objects.v4.r0.a2.operations.Certificate'
+          - $ref: '#/components/schemas/objects.v4.r0.a2.error.ErrorResponse'
+      additionalProperties: false
+      description: "REST response for all response codes in API path /objects/v4.0.a2/operations/object-stores/{objectStoreExtId}/certificates/{extId}\
+        \ Get operation"
+    common.v1.r0.b1.response.ExternalizableAbstractModel:
+      description: |
+        A model that represents an object instance that is accessible through an API endpoint.  Instances of this type get an extId field that contains the globally unique identifier for that instance.  Externally accessible instances are always tenant aware and, therefore, extend the TenantAwareModel
+      allOf:
+      - $ref: '#/components/schemas/common.v1.r0.b1.config.TenantAwareModel'
+      - type: object
+        properties:
+          extId:
+            pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+            type: string
+            description: |
+              A globally unique identifier of an instance that is suitable for external consumption.
+            nullable: true
+          links:
+            type: array
+            description: |
+              A HATEOAS style link for the response.  Each link contains a user-friendly name identifying the link and an address for retrieving the particular resource.
+            readOnly: true
+            items:
+              $ref: '#/components/schemas/common.v1.r0.b1.response.ApiLink'
+        additionalProperties: false
+    common.v1.r0.b1.config.Metadata:
+      type: object
+      properties:
+        ownerReferenceId:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+          description: |
+            A globally unique identifier that represents the owner of this resource.
+        ownerUserName:
+          maxLength: 128
+          type: string
+          description: |
+            The userName of the owner of this resource.
+        projectReferenceId:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+          description: |
+            A globally unique identifier that represents the project this resource belongs to.
+        projectName:
+          maxLength: 128
+          type: string
+          description: |
+            The name of the project this resource belongs to.
+        categoryIds:
+          type: array
+          description: |
+            A list of globally unique identifiers that represent all the categories the resource is associated with.
+          items:
+            pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+            type: string
+      additionalProperties: false
+      description: |
+        Metadata associated with this resource.
+    common.v1.r0.b1.config.IPAddress:
+      type: object
+      properties:
+        ipv4:
+          $ref: '#/components/schemas/common.v1.r0.b1.config.IPv4Address'
+        ipv6:
+          $ref: '#/components/schemas/common.v1.r0.b1.config.IPv6Address'
+      additionalProperties: false
+      description: |
+        An unique address that identifies a device on the internet or a local network in IPv4 or IPv6 format.
+    common.v1.r0.b1.config.FQDN:
+      type: object
+      properties:
+        value:
+          pattern: "^(?:[a-z0-9][\\w\\-]*[a-z0-9]*\\.)*(?:(?:(?:[a-z0-9][\\w\\-]*[a-z0-9]*)(?:\\\
+            .[a-z0-9]+)?))$"
+          type: string
+      additionalProperties: false
+      description: |
+        A fully qualified domain name that specifies its exact location in the tree hierarchy of the Domain Name System.
+    common.v1.r0.b1.config.TenantAwareModel:
+      type: object
+      properties:
+        tenantId:
+          pattern: "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+          type: string
+          description: |
+            A globally unique identifier that represents the tenant that owns this entity. The system automatically assigns it, and it and is immutable from an API consumer perspective (some use cases may cause this Id to change - For instance, a use case may require the transfer of ownership of the entity, but these cases are handled automatically on the server).
+          readOnly: true
+      additionalProperties: false
+      description: |
+        A model base class whose instances are bound to a specific tenant.  This model adds a tenantId to the base model class that it extends and is automatically set by the server.
+    common.v1.r0.b1.response.ApiLink:
+      type: object
+      properties:
+        href:
+          type: string
+          description: |
+            The URL at which the entity described by the link can be accessed.
+        rel:
+          type: string
+          description: |
+            A name that identifies the relationship of the link to the object that is returned by the URL.  The unique value of "self" identifies the URL for the object.
+      additionalProperties: false
+      description: |
+        A HATEOAS style link for the response.  Each link contains a user-friendly name identifying the link and an address for retrieving the particular resource.
+    common.v1.r0.b1.config.IPv4Address:
+      type: object
+      properties:
+        value:
+          pattern: "^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$"
+          type: string
+        prefixLength:
+          maximum: 32
+          minimum: 0
+          type: integer
+          description: |
+            The prefix length of the network to which this host IPv4 address belongs.
+          format: int32
+          default: 32
+      additionalProperties: false
+    common.v1.r0.b1.config.IPv6Address:
+      type: object
+      properties:
+        value:
+          pattern: "^(?:(?:(?:[A-Fa-f0-9]{1,4}:){6}|(?=(?:[A-Fa-f0-9]{0,4}:){0,6}(?:[0-9]{1,3}\\\
+            .){3}[0-9]{1,3}$)(([0-9a-fA-F]{1,4}:){0,5}|:)((:[0-9a-fA-F]{1,4}){1,5}:|:)|::(?:[A-Fa-f0-9]{1,4}:){5})(?:(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\\\
+            .){3}(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])|(?:[A-Fa-f0-9]{1,4}:){7}[A-Fa-f0-9]{1,4}|(?=(?:[A-Fa-f0-9]{0,4}:){0,7}[A-Fa-f0-9]{0,4}$)(([0-9a-fA-F]{1,4}:){1,7}|:)((:[0-9a-fA-F]{1,4}){1,7}|:)|(?:[A-Fa-f0-9]{1,4}:){7}:|:(:[A-Fa-f0-9]{1,4}){7})$"
+          type: string
+        prefixLength:
+          maximum: 128
+          minimum: 0
+          type: integer
+          description: |
+            The prefix length of the network to which this host IPv6 address belongs.
+          format: int32
+          default: 128
+      additionalProperties: false
+    objects.v4.r0.a2.error.ErrorResponse:
+      type: object
+      properties:
+        error:
+          oneOf:
+          - type: array
+            items:
+              $ref: '#/components/schemas/objects.v4.r0.a2.error.AppMessage'
+          - $ref: '#/components/schemas/objects.v4.r0.a2.error.SchemaValidationError'
+      additionalProperties: false
+      description: This schema is auto-generated by the Open API Dev Platform as REST
+        response for 4xx and 5xx error responses.
+      x-platform-generated: true
+    objects.v4.r0.a2.error.AppMessage:
+      type: object
+      properties:
+        message:
+          type: string
+          description: The message string.
+        severity:
+          $ref: '#/components/schemas/common.v1.r0.b1.config.MessageSeverity'
+        code:
+          type: string
+          description: "The code associated with this message.This string is typically\
+            \ prefixed by the namespace the endpoint belongs to. For example: VMM-40000"
+        locale:
+          type: string
+          description: Locale for this message. The default locale would be 'en-US'.
+          default: en_US
+        errorGroup:
+          type: string
+          description: The error group associated with this message of severity ERROR.
+        argumentsMap:
+          type: object
+          additionalProperties:
+            type: string
+          description: The map of argument name to value.
+      additionalProperties: false
+      description: Message with associated severity describing status of the current
+        operation.
+      x-platform-generated: true
+    objects.v4.r0.a2.error.MessageSeverity:
+      type: string
+      description: Enum schema MessageSeverity
+      enum:
+      - $UNKNOWN
+      - $REDACTED
+      - INFO
+      - WARNING
+      - ERROR
+      x-platform-generated: true
+      x-codegen-hint:
+        $any:
+        - type: entity-identifier
+          properties:
+            identifiers:
+            - value: $UNKNOWN
+              index: 201
+            - value: $REDACTED
+              index: 202
+            - value: INFO
+              index: 203
+            - value: WARNING
+              index: 204
+            - value: ERROR
+              index: 205
+    objects.v4.r0.a2.error.SchemaValidationError:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          description: Timestamp of the response.
+        statusCode:
+          type: integer
+          description: The HTTP status code of the response.
+        error:
+          type: string
+          description: The generic error message for the response.
+        path:
+          type: string
+          description: API path on which the request was made.
+        validationErrorMessages:
+          type: array
+          description: List of validation error messages
+          items:
+            $ref: '#/components/schemas/objects.v4.r0.a2.error.SchemaValidationErrorMessage'
+      additionalProperties: false
+      description: This schema is generated from SchemaValidationError.java
+      x-platform-generated: true
+    objects.v4.r0.a2.error.SchemaValidationErrorMessage:
+      type: object
+      properties:
+        location:
+          type: string
+          description: "The part of the request that failed validation. Validation\
+            \ can fail for path, query parameters, and request body."
+        message:
+          type: string
+          description: The detailed message for the validation error.
+        attributePath:
+          type: string
+          description: The path of the attribute that failed validation in the schema.
+      additionalProperties: false
+      description: This schema is generated from SchemaValidationErrorMessage.java
+      x-platform-generated: true
+    common.v1.r0.b1.response.ApiResponseMetadata:
+      type: object
+      properties:
+        flags:
+          type: array
+          description: |
+            An array of flags that may indicate the status of the response. For example, a flag with the name 'isPaginated' and value 'false', indicates that the response is not paginated.
+          items:
+            $ref: '#/components/schemas/common.v1.r0.b1.config.Flag'
+        links:
+          type: array
+          description: |
+            An array of HATEOAS style links for the response that may also include pagination links for list operations.
+          items:
+            $ref: '#/components/schemas/common.v1.r0.b1.response.ApiLink'
+        totalAvailableResults:
+          type: integer
+          description: |
+            The total number of entities that are available on the server for this type.
+          format: int32
+        messages:
+          type: array
+          description: |
+            Information, Warning or Error messages that might provide additional contextual information related to the operation.
+          items:
+            $ref: '#/components/schemas/common.v1.r0.b1.config.Message'
+        extraInfo:
+          type: array
+          description: |
+            An array of entity-specific metadata
+          items:
+            $ref: '#/components/schemas/common.v1.r0.b1.config.KVPair'
+      additionalProperties: false
+      description: |
+        The metadata associated with an API response. This value is always present and minimally contains the self-link for the API request that produced this response. It also contains pagination data for the paginated requests.
+    common.v1.r0.b1.config.Flag:
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: boolean
+          default: false
+      additionalProperties: false
+      description: |
+        Many entities in the Nutanix APIs carry flags.  This object captures all the flags associated with that entity through this object.  The field that hosts this type of object must have an attribute called x-bounded-map-keys that tells which flags are actually present for that entity.
+    common.v1.r0.b1.config.Message:
+      type: object
+      properties:
+        code:
+          type: string
+          description: |
+            A code that uniquely identifies a message.
+        message:
+          type: string
+          description: |
+            The description of the message.
+        locale:
+          type: string
+          description: |
+            The locale for the message description.
+          default: en_US
+        severity:
+          $ref: '#/components/schemas/common.v1.r0.b1.config.MessageSeverity'
+      additionalProperties: false
+    common.v1.r0.b1.config.KVPair:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The key of this key-value pair
+        value:
+          description: The value associated with the key for this key-value pair
+          oneOf:
+          - type: string
+          - type: integer
+          - type: boolean
+          - type: array
+            items:
+              type: string
+          - type: object
+            additionalProperties:
+              type: string
+      additionalProperties: false
+      description: |
+        A map describing a set of keys and their corresponding values.
+    common.v1.r0.b1.config.MessageSeverity:
+      type: string
+      description: |
+        The message severity.
+      enum:
+      - $UNKNOWN
+      - $REDACTED
+      - INFO
+      - WARNING
+      - ERROR
+      x-enumDescriptions:
+        ERROR: |
+          Error indicating failed completion.
+        INFO: |
+          Information about successful completion.
+        WARNING: |
+          Warning indicating future error.
+    prism.v4.r0.b1.config.TaskReference:
+      type: object
+      properties:
+        extId:
+          pattern: "^[a-zA-Z0-9/+]*={0,2}:[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"
+          type: string
+          description: A globally unique identifier of a task.
+      additionalProperties: false
+      description: A reference to a task tracking an asynchronous operation. The status
+        of the task can be queried by making a GET request to the task URI provided
+        in the metadata section of the API response.
+  securitySchemes:
+    basicAuthScheme:
+      type: http
+      scheme: basic

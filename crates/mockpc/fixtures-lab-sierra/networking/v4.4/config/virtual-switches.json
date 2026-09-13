@@ -1,0 +1,67 @@
+[
+  {
+    "$objectType": "networking.v4.config.VirtualSwitch",
+    "extId": "7362b1ec-e77e-4bdb-9190-cce68cfd5f4d",
+    "hasDeploymentError": true,
+    "hasUpdateInProgress": false,
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "00000000-0000-0000-0000-000000000000",
+      "ownerUserName": "ownerUserName-59acbb2c",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000",
+      "projectName": "projectName-57a4a4a3"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-4f05891a",
+    "description": "description-cc00b343",
+    "isDefault": true,
+    "mtu": 1500,
+    "bondMode": "ACTIVE_BACKUP",
+    "clusters": [
+      {
+        "$objectType": "networking.v4.config.Cluster",
+        "extId": "000656bb-5516-939c-0000-00000001c1ce",
+        "hosts": [
+          {
+            "internalBridgeName": "internalBridgeName-136f7b9f",
+            "routeTable": 1000,
+            "$objectType": "networking.v4.config.Host",
+            "extId": "40e34298-61e8-4e6d-8922-8caa22bb5c7f",
+            "hostNics": [
+              "eth0",
+              "eth1",
+              "eth2",
+              "eth3"
+            ],
+            "activeUplink": "eth2"
+          },
+          {
+            "internalBridgeName": "internalBridgeName-136f7b9f",
+            "routeTable": 1000,
+            "extId": "f0490cf9-3011-49cd-8a53-4e8bde071ab5",
+            "hostNics": [
+              "eth0",
+              "eth1",
+              "eth2",
+              "eth3"
+            ],
+            "activeUplink": "eth2"
+          },
+          {
+            "internalBridgeName": "internalBridgeName-136f7b9f",
+            "routeTable": 1000,
+            "extId": "7998b8db-390a-4de5-ba41-58229f23beef",
+            "hostNics": [
+              "eth0",
+              "eth1",
+              "eth2",
+              "eth3"
+            ],
+            "activeUplink": "eth2"
+          }
+        ]
+      }
+    ],
+    "ownerType": "PE"
+  }
+]

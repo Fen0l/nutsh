@@ -1,0 +1,28 @@
+---
+source: crates/tui/tests/header.rs
+expression: "app.snapshot(120, 24).unwrap()"
+---
+ nutsh Compute & Storage › VMs  [3]  cluster:<all>  ctx:-                                                        ● live
+╭ nutsh ───────────────╮╭ Virtual Machines [3] ────────────────────────────────────────────────────────────────────────╮
+│  ▸ Dashboard         ││  NAME                                    POWER  CLUSTER      HOST        IP            MEM   │
+│  ▾ Compute & Storage ││▌ web-01                                  ON     lab-cluster  ahv-node-1  203.0.113.11  8 GiB │
+│      Overview        ││  web-02                                  OFF    lab-cluster  -           -             4 GiB │
+│    • VMs [3]         ││  db-01                                   ON     lab-cluster  ahv-node-1  -             32 GiB│
+│      ESXi VMs        ││                                                                                              │
+│      Templates       ││                                                                                              │
+│      Images          ││                                                                                              │
+│      OVAs            ││                                                                                              │
+│      VM Profiles     ││                                                                                              │
+│      Guest Customizat││                                                                                              │
+│      Storage Containe││                                                                                              │
+│      Volume Groups   ││                                                                                              │
+│      Storage Policies││                                                                                              │
+│      Categories      ││                                                                                              │
+│      Catalog Items   ││                                                                                              │
+│  ▸ Network & Security││                                                                                              │
+│  ▸ Data Protection   ││                                                                                              │
+│  ▸ Hardware          ││                                                                                              │
+│  ▸ Monitoring        ││                                                                                              │
+╰───────────────── ↓23 ╯╰──────────────────────────────────────────────────────────────────────────────────────────────╯
+ :palette  ^b:menu  ⇥:focus  /:filter  a:actions  ⏎:drill  esc:menu  ?:help
+[meter]

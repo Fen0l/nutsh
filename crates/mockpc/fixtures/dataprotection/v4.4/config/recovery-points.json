@@ -1,0 +1,52 @@
+[
+  {
+    "$objectType": "dataprotection.v4.config.RecoveryPoint",
+    "extId": "e1f2a3b4-0000-4000-8000-000000000801",
+    "name": "rp-web-01-2026-09-05",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "creationTime": "2026-09-05T06:00:00Z",
+    "expirationTime": "2026-09-12T06:00:00Z",
+    "vmRecoveryPoints": [{ "extId": "f0000000-0000-4000-8000-000000000811" }]
+  },
+  {
+    "$objectType": "dataprotection.v4.config.RecoveryPoint",
+    "extId": "e1f2a3b4-0000-4000-8000-000000000802",
+    "name": "rp-web-02-2026-09-05",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "creationTime": "2026-09-05T06:00:00Z",
+    "expirationTime": "2026-09-12T06:00:00Z",
+    "vmRecoveryPoints": [{ "extId": "f0000000-0000-4000-8000-000000000812" }]
+  },
+  {
+    "$objectType": "dataprotection.v4.config.RecoveryPoint",
+    "extId": "e1f2a3b4-0000-4000-8000-000000000803",
+    "name": "rp-db-01-2026-09-05",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "creationTime": "2026-09-05T06:00:00Z",
+    "expirationTime": "2026-09-12T06:00:00Z",
+    "vmRecoveryPoints": [{ "extId": "f0000000-0000-4000-8000-000000000813" }]
+  },
+  {
+    "$objectType": "dataprotection.v4.config.RecoveryPoint",
+    "extId": "e1f2a3b4-0000-4000-8000-000000000804",
+    "name": "rp-web-01-2026-09-04",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "creationTime": "2026-09-04T06:00:00Z",
+    "expirationTime": "2026-09-11T06:00:00Z",
+    "vmRecoveryPoints": [{ "extId": "f0000000-0000-4000-8000-000000000814" }]
+  },
+  {
+    "$objectType": "dataprotection.v4.config.RecoveryPoint",
+    "extId": "e1f2a3b4-0000-4000-8000-000000000805",
+    "name": "rp-db-01-2026-09-04",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "creationTime": "2026-09-04T06:00:00Z",
+    "expirationTime": "2026-09-11T06:00:00Z",
+    "vmRecoveryPoints": [{ "extId": "f0000000-0000-4000-8000-000000000815" }]
+  }
+]

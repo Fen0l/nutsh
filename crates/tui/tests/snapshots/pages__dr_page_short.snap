@@ -1,0 +1,28 @@
+---
+source: crates/tui/tests/pages.rs
+expression: frame
+---
+╭ nutsh ─────────────────────────────────────────────╮
+│Context:    -                                       │       clusters 1  hosts 1
+│PC:         127.0.0.1:PORT  pc.2024.3              │         vms 3  on/off 3/0
+│Cluster:    <all>                                   │           alerts ⚠ 2  ✖ 2
+│Kind:       Data Protection › Disaster Recovery     │         tasks ▶ 4 running
+│Count:      2 of 4 panes                            │
+╰────────────────────────────────────────────────────╯  v0.0.2-beta1 · pc.2024.3
+╭ Registered Prism Centrals [1] »2 ──────────────────╮╭ Summary ───────────────╮
+│  NAME              STATE   CONNECTIVITY  REGISTERED││Policies               3│
+│▌ pc-dr             ACTIVE  CONNECTED     11d       ││Recovery plans         2│
+│                                                    ││Recovery points        5│
+╰────────────────────────────────────────────────────╯│Recovery jobs          2│
+╭ Protection Policies [3] ───────────────────────────╮│Sampled VMs            3│
+│  NAME                   SITES      RPO   CATEGORIES││  in sync              1│
+│  gold-sync              pc-lab +1  0s    1         ││  syncing              1│
+│  silver-async           pc-lab +1  1h    1         ││  out of sync          1│
+│  bronze-local           pc-lab     6h    1         ││                        │
+│                                                    ││                        │
+╰────────────────────────────────────────────────────╯╰────────────────────────╯
+
+
+
+ :palette  ^b:menu  ⇥:pane  O:open  a:actions  ⏎:detail  esc:menu  ?:help
+[meter]          ● live

@@ -1,0 +1,14 @@
+[
+  {
+    "$objectType": "files.v4.config.FileServer",
+    "extId": "5218cbef-6d5f-431a-7c4e-8acbe39059b6",
+    "links": [
+      {
+        "$objectType": "common.v1.response.ApiLink",
+        "href": "https://203.0.113.1:9440/api/files/v4.0/config/file-servers/5218cbef-6d5f-431a-7c4e-8acbe39059b6",
+        "rel": "self"
+      }
+    ],
+    "name": "name-97ce4e01"
+  }
+]

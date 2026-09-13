@@ -1,0 +1,25 @@
+[
+  {
+    "$objectType": "iam.v4.authn.DirectoryService",
+    "createdBy": "createdBy-18f299f1",
+    "createdTime": "2024-12-06T06:16:13.958809-08:00",
+    "directoryType": "ACTIVE_DIRECTORY",
+    "domainName": "domainName-2e4759fb",
+    "extId": "7b5915f4-a938-58aa-b0f1-1b30cdc4f3d8",
+    "groupSearchType": "NON_RECURSIVE",
+    "isSharedWithAllProjects": false,
+    "lastUpdatedTime": "2026-08-04T07:11:35.485043-07:00",
+    "name": "name-fae563ce",
+    "projectExtId": "createdBy-18f299f1",
+    "serviceAccount": {
+      "$objectType": "iam.v4.authn.DsServiceAccount",
+      "password": "[redacted]",
+      "username": "username-343bd50d"
+    },
+    "sharedWithProjects": [
+      "43d3f951-12b9-4323-98e9-62bb91da1136"
+    ],
+    "tenantId": "59d5de78-a964-5746-8c6e-677c4c7a79df",
+    "url": "url-d9191598"
+  }
+]

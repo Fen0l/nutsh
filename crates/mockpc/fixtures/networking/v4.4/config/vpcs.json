@@ -1,0 +1,120 @@
+[
+  {
+    "$objectType": "networking.v4.config.Vpc",
+    "extId": "4c1f9b60-0000-4000-8000-000000000301",
+    "name": "lab-vpc",
+    "description": "the example transit VPC",
+    "vpcType": "REGULAR",
+    "scope": "VMS",
+    "externalSubnets": [
+      {
+        "$objectType": "networking.v4.config.ExternalSubnet",
+        "subnetReference": "6a2e3f10-0000-4000-8000-000000000401",
+        "externalIps": [
+          {
+            "$objectType": "common.v1.config.IPAddress",
+            "ipv4": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "203.0.113.40",
+              "prefixLength": 32
+            }
+          }
+        ],
+        "activeGatewayCount": 1
+      },
+      {
+        "$objectType": "networking.v4.config.ExternalSubnet",
+        "subnetReference": "6a2e3f10-0000-4000-8000-000000000402",
+        "externalIps": [
+          {
+            "$objectType": "common.v1.config.IPAddress",
+            "ipv4": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "198.51.100.40",
+              "prefixLength": 32
+            }
+          }
+        ],
+        "activeGatewayCount": 1
+      }
+    ],
+    "snatIps": [
+      {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "203.0.113.41",
+          "prefixLength": 32
+        }
+      }
+    ],
+    "externallyRoutablePrefixes": [
+      {
+        "$objectType": "networking.v4.config.IPSubnet",
+        "ipv4": {
+          "$objectType": "networking.v4.config.IPv4Subnet",
+          "ip": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "203.0.113.0",
+            "prefixLength": 32
+          },
+          "prefixLength": 24
+        }
+      }
+    ],
+    "shouldAdvertiseConnectedSubnets": true
+  },
+  {
+    "$objectType": "networking.v4.config.Vpc",
+    "extId": "4c1f9b60-0000-4000-8000-000000000302",
+    "name": "dmz-vpc",
+    "description": "north-south traffic only",
+    "vpcType": "TRANSIT",
+    "scope": "VMS_AND_CONTAINERS",
+    "externalSubnets": [
+      {
+        "$objectType": "networking.v4.config.ExternalSubnet",
+        "subnetReference": "6a2e3f10-0000-4000-8000-000000000401",
+        "externalIps": [],
+        "activeGatewayCount": 1
+      }
+    ],
+    "snatIps": [],
+    "externallyRoutablePrefixes": []
+  },
+  {
+    "$objectType": "networking.v4.config.Vpc",
+    "extId": "4c1f9b60-0000-4000-8000-000000000303",
+    "name": "k8s-vpc",
+    "vpcType": "REGULAR",
+    "scope": "CONTAINERS",
+    "externalSubnets": [],
+    "snatIps": [],
+    "externallyRoutablePrefixes": [
+      {
+        "$objectType": "networking.v4.config.IPSubnet",
+        "ipv4": {
+          "$objectType": "networking.v4.config.IPv4Subnet",
+          "ip": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "192.0.2.0",
+            "prefixLength": 32
+          },
+          "prefixLength": 25
+        }
+      },
+      {
+        "$objectType": "networking.v4.config.IPSubnet",
+        "ipv4": {
+          "$objectType": "networking.v4.config.IPv4Subnet",
+          "ip": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "192.0.2.128",
+            "prefixLength": 32
+          },
+          "prefixLength": 25
+        }
+      }
+    ]
+  }
+]

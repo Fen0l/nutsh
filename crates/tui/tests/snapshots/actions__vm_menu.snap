@@ -1,0 +1,34 @@
+---
+source: crates/tui/tests/actions.rs
+expression: "app.snapshot(120, 30).unwrap()"
+---
+╭ nutsh ──────────────────────────────╭ act on web-01 ──────────────────────────────────────────────────╮
+│Context:    -                        │▌ Power on                                                    [p]│ters 1  hosts 1
+│PC:         127.0.0.1:PORT  pc.2024.│  Power off (cuts power)                                      [P]│s 3  on/off 3/0
+│Cluster:    <all>                    │  Power cycle (cuts power)                                       │alerts ⚠ 2  ✖ 2
+│Kind:       Compute & Storage › VMs  │  Reset (cuts power)                                             │sks ▶ 4 running
+│Count:      3                        │  Shut down (ACPI, asks the guest)                            [d]│
+╰─────────────────────────────────────│  Shut down (guest tools)                                     [D]│ta1 · pc.2024.3
+╭ nutsh ───────────────╮╭ Virtual Mach│  Reboot (ACPI, asks the guest)                               [r]│──────────────╮
+│  ▸ Dashboard         ││  NAME       │  Reboot (guest tools)                                        [R]│        MEM   │
+│  ▾ Compute & Storage ││▌ web-01     │  Migrate to another cluster                                     │113.11  8 GiB │
+│      Overview        ││  web-02     │  Migrate to host                                             [m]│        4 GiB │
+│    • VMs [3]         ││  db-01      │  Clone                                                       [C]│        32 GiB│
+│      ESXi VMs        ││             │  Create recovery point                                       [s]│              │
+│      Templates       ││             │  Revert to a recovery point                                     │              │
+│      Images          ││             │  Delete                                                 [ctrl-d]│              │
+│      OVAs            ││             │  ──────────────────────── raw API names ────────────────────────│              │
+│      VM Profiles     ││             │  add-custom-attributes                                          │              │
+│      Guest Customizat││             │  assign-owner                                                   │              │
+│      Storage Containe││             │  associate-categories                                           │              │
+│      Volume Groups   ││             │  create                                                         │              │
+│      Storage Policies││             │  customize-guest                                                │              │
+│      Categories      ││             │  disassociate-categories                                        │              │
+│      Catalog Items   ││             │  generate-console-token                                         │              │
+│  ▸ Network & Security││             │  migrate-vm-disks                                               │              │
+│  ▸ Data Protection   ││             │  remove-custom-attributes                                       │              │
+│  ▸ Hardware          ││             │  transfer-files-to-guest                                        │              │
+│  ▸ Monitoring        ││             │  update                                                         │              │
+╰───────────────── ↓23 ╯╰─────────────╰─────────────────────────────────────────────────────────────────╯──────────────╯
+ type to filter  ↑↓ move  enter run  esc close
+[meter]          ● live

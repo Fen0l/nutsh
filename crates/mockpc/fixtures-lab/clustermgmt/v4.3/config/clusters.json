@@ -1,0 +1,661 @@
+[
+  {
+    "$objectType": "clustermgmt.v4.config.Cluster",
+    "extId": "0006237e-c983-e712-0000-00000001c1d0",
+    "vmCount": 34,
+    "backupEligibilityScore": 3,
+    "externalStorageProviderInfo": [
+      {
+        "$objectType": "clustermgmt.v4.config.ExternalStorageProviderInfo",
+        "providerType": "DELL_POWERFLEX",
+        "isInstalled": false,
+        "compatibleVersion": "5.1.0.336_5616"
+      },
+      {
+        "providerType": "EVERPURE_FLASHARRAY",
+        "isInstalled": false,
+        "compatibleVersion": "null"
+      },
+      {
+        "providerType": "DELL_POWERSTORE",
+        "isInstalled": false,
+        "compatibleVersion": "null"
+      }
+    ],
+    "name": "name-d2b6bd1b",
+    "nodes": {
+      "numberOfNodes": 3,
+      "$objectType": "clustermgmt.v4.config.NodeReference",
+      "nodeList": [
+        {
+          "nodeUuid": "44e477e6-edcf-4722-b35b-88deb3a160ef",
+          "$objectType": "clustermgmt.v4.config.NodeListItemReference",
+          "controllerVmIp": {
+            "$objectType": "common.v1.config.IPAddress",
+            "ipv4": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "203.0.113.17",
+              "prefixLength": 32
+            }
+          },
+          "hostIp": {
+            "$objectType": "common.v1.config.IPAddress",
+            "ipv4": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "198.51.100.164",
+              "prefixLength": 32
+            }
+          }
+        },
+        {
+          "nodeUuid": "38521854-c20d-41ff-8348-41c53db66e38",
+          "controllerVmIp": {
+            "$objectType": "common.v1.config.IPAddress",
+            "ipv4": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "198.51.100.230",
+              "prefixLength": 32
+            }
+          },
+          "hostIp": {
+            "$objectType": "common.v1.config.IPAddress",
+            "ipv4": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "203.0.113.205",
+              "prefixLength": 32
+            }
+          }
+        },
+        {
+          "nodeUuid": "9cad7457-dc26-4839-bfce-2aa79a0f54c7",
+          "controllerVmIp": {
+            "$objectType": "common.v1.config.IPAddress",
+            "ipv4": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "203.0.113.25",
+              "prefixLength": 32
+            }
+          },
+          "hostIp": {
+            "$objectType": "common.v1.config.IPAddress",
+            "ipv4": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "198.51.100.246",
+              "prefixLength": 32
+            }
+          }
+        }
+      ]
+    },
+    "config": {
+      "incarnationId": 1727877313980178,
+      "hypervisorTypes": [
+        "AHV"
+      ],
+      "timezone": "Europe/Paris",
+      "clusterSoftwareMap": [
+        {
+          "$objectType": "clustermgmt.v4.config.SoftwareMapReference",
+          "softwareType": "NCC",
+          "version": "ncc-6.0.0.1"
+        },
+        {
+          "softwareType": "NOS",
+          "version": "el9-release-ganges-7.6-stable-050aa562113677c96712dab25f2b4e33479a2f7b"
+        }
+      ],
+      "isRemoteSupportEnabled": false,
+      "isLts": false,
+      "isPasswordRemoteLoginEnabled": "[redacted]",
+      "isAvailable": true,
+      "$objectType": "clustermgmt.v4.config.ClusterConfigReference",
+      "buildInfo": {
+        "$objectType": "clustermgmt.v4.config.BuildReference",
+        "buildType": "release",
+        "version": "7.6",
+        "fullVersion": "el9-release-ganges-7.6-stable-050aa562113677c96712dab25f2b4e33479a2f7b",
+        "commitId": "050aa562113677c96712dab25f2b4e33479a2f7b",
+        "shortCommitId": "050aa5"
+      },
+      "clusterFunction": [
+        "AOS"
+      ],
+      "authorizedPublicKeyList": [
+        {
+          "$objectType": "clustermgmt.v4.config.PublicKey",
+          "name": "name-9e608834",
+          "key": "[redacted]"
+        },
+        {
+          "name": "name-7b1ca75a",
+          "key": "[redacted]"
+        },
+        {
+          "name": "name-969ad273",
+          "key": "[redacted]"
+        },
+        {
+          "name": "name-f945369e",
+          "key": "[redacted]"
+        },
+        {
+          "name": "name-4d1f8a2f",
+          "key": "[redacted]"
+        },
+        {
+          "name": "name-4d1f887c",
+          "key": "[redacted]"
+        },
+        {
+          "name": "name-4d1f86c9",
+          "key": "[redacted]"
+        }
+      ],
+      "redundancyFactor": 2,
+      "clusterArch": "X86_64",
+      "faultToleranceState": {
+        "currentMaxFaultTolerance": 1,
+        "desiredMaxFaultTolerance": 1,
+        "$objectType": "clustermgmt.v4.config.FaultToleranceState",
+        "domainAwarenessLevel": "NODE",
+        "currentClusterFaultTolerance": "CFT_1N_OR_1D",
+        "desiredClusterFaultTolerance": "CFT_1N_OR_1D",
+        "isStrictRackAwarenessEnabled": false
+      },
+      "operationMode": "NORMAL",
+      "pulseStatus": {
+        "$objectType": "clustermgmt.v4.config.PulseStatus",
+        "isEnabled": true
+      },
+      "clusterType": "HYPER_CONVERGED",
+      "isDegradedNodeMonitoringDisabled": false
+    },
+    "network": {
+      "externalSubnet": "203.0.113.1/203.0.113.1",
+      "internalSubnet": "203.0.113.1/203.0.113.1",
+      "$objectType": "clustermgmt.v4.config.ClusterNetworkReference",
+      "externalAddress": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "198.51.100.86",
+          "prefixLength": 32
+        }
+      },
+      "externalDataServiceIp": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "203.0.113.45",
+          "prefixLength": 32
+        }
+      },
+      "nameServerIpList": [
+        {
+          "$objectType": "common.v1.config.IPAddressOrFQDN",
+          "ipv4": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "198.51.100.146",
+            "prefixLength": 32
+          }
+        }
+      ],
+      "ntpServerIpList": [
+        {
+          "$objectType": "common.v1.config.IPAddressOrFQDN",
+          "fqdn": {
+            "$objectType": "common.v1.config.FQDN",
+            "value": "value-b138bfa2"
+          }
+        }
+      ],
+      "backplane": {
+        "$objectType": "clustermgmt.v4.config.BackplaneNetworkParams",
+        "isSegmentationEnabled": true,
+        "vlanTag": 71,
+        "subnet": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "198.51.100.124",
+          "prefixLength": 32
+        },
+        "netmask": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "198.51.100.232",
+          "prefixLength": 32
+        }
+      }
+    },
+    "upgradeStatus": "SUCCEEDED"
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.Cluster",
+    "extId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "vmCount": 73,
+    "backupEligibilityScore": 4,
+    "externalStorageProviderInfo": [
+      {
+        "$objectType": "clustermgmt.v4.config.ExternalStorageProviderInfo",
+        "providerType": "DELL_POWERFLEX",
+        "isInstalled": false,
+        "compatibleVersion": "5.1.0.336_5616"
+      },
+      {
+        "providerType": "EVERPURE_FLASHARRAY",
+        "isInstalled": false,
+        "compatibleVersion": "null"
+      },
+      {
+        "providerType": "DELL_POWERSTORE",
+        "isInstalled": false,
+        "compatibleVersion": "null"
+      }
+    ],
+    "name": "name-277ed708",
+    "nodes": {
+      "numberOfNodes": 4,
+      "$objectType": "clustermgmt.v4.config.NodeReference",
+      "nodeList": [
+        {
+          "nodeUuid": "422ac3ad-bb71-4c47-83f9-7367f1b7da90",
+          "$objectType": "clustermgmt.v4.config.NodeListItemReference",
+          "controllerVmIp": {
+            "$objectType": "common.v1.config.IPAddress",
+            "ipv4": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "203.0.113.33",
+              "prefixLength": 32
+            }
+          },
+          "hostIp": {
+            "$objectType": "common.v1.config.IPAddress",
+            "ipv4": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "198.51.100.56",
+              "prefixLength": 32
+            }
+          }
+        },
+        {
+          "nodeUuid": "73e903d6-2b8a-46e3-877c-b6bbb347bb4a",
+          "controllerVmIp": {
+            "$objectType": "common.v1.config.IPAddress",
+            "ipv4": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "198.51.100.246",
+              "prefixLength": 32
+            }
+          },
+          "hostIp": {
+            "$objectType": "common.v1.config.IPAddress",
+            "ipv4": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "203.0.113.97",
+              "prefixLength": 32
+            }
+          }
+        },
+        {
+          "nodeUuid": "db7c8f4b-541d-4db7-b9f7-4e24cad11d84",
+          "controllerVmIp": {
+            "$objectType": "common.v1.config.IPAddress",
+            "ipv4": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "203.0.113.205",
+              "prefixLength": 32
+            }
+          },
+          "hostIp": {
+            "$objectType": "common.v1.config.IPAddress",
+            "ipv4": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "198.51.100.228",
+              "prefixLength": 32
+            }
+          }
+        },
+        {
+          "nodeUuid": "0a505ef2-ede4-467c-941f-d39d73bdf1c9",
+          "controllerVmIp": {
+            "$objectType": "common.v1.config.IPAddress",
+            "ipv4": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "198.51.100.164",
+              "prefixLength": 32
+            }
+          },
+          "hostIp": {
+            "$objectType": "common.v1.config.IPAddress",
+            "ipv4": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "203.0.113.15",
+              "prefixLength": 32
+            }
+          }
+        }
+      ]
+    },
+    "config": {
+      "incarnationId": 1728382642728490,
+      "hypervisorTypes": [
+        "AHV"
+      ],
+      "timezone": "Europe/Paris",
+      "clusterSoftwareMap": [
+        {
+          "$objectType": "clustermgmt.v4.config.SoftwareMapReference",
+          "softwareType": "NCC",
+          "version": "ncc-6.0.0.1"
+        },
+        {
+          "softwareType": "NOS",
+          "version": "el9-release-ganges-7.6-stable-050aa562113677c96712dab25f2b4e33479a2f7b"
+        }
+      ],
+      "isRemoteSupportEnabled": false,
+      "isLts": false,
+      "isPasswordRemoteLoginEnabled": "[redacted]",
+      "isAvailable": true,
+      "$objectType": "clustermgmt.v4.config.ClusterConfigReference",
+      "buildInfo": {
+        "$objectType": "clustermgmt.v4.config.BuildReference",
+        "buildType": "release",
+        "version": "7.6",
+        "fullVersion": "el9-release-ganges-7.6-stable-050aa562113677c96712dab25f2b4e33479a2f7b",
+        "commitId": "050aa562113677c96712dab25f2b4e33479a2f7b",
+        "shortCommitId": "050aa5"
+      },
+      "clusterFunction": [
+        "AOS"
+      ],
+      "authorizedPublicKeyList": [
+        {
+          "$objectType": "clustermgmt.v4.config.PublicKey",
+          "name": "name-69b14bc6",
+          "key": "[redacted]"
+        },
+        {
+          "name": "name-1e194f9c",
+          "key": "[redacted]"
+        },
+        {
+          "name": "name-5c4a6e3d",
+          "key": "[redacted]"
+        },
+        {
+          "name": "name-e932a933",
+          "key": "[redacted]"
+        },
+        {
+          "name": "name-f945369e",
+          "key": "[redacted]"
+        },
+        {
+          "name": "name-aeca75e3",
+          "key": "[redacted]"
+        },
+        {
+          "name": "name-aeca7430",
+          "key": "[redacted]"
+        },
+        {
+          "name": "name-aeca7949",
+          "key": "[redacted]"
+        },
+        {
+          "name": "name-aeca7796",
+          "key": "[redacted]"
+        }
+      ],
+      "redundancyFactor": 2,
+      "clusterArch": "X86_64",
+      "faultToleranceState": {
+        "currentMaxFaultTolerance": 1,
+        "desiredMaxFaultTolerance": 1,
+        "$objectType": "clustermgmt.v4.config.FaultToleranceState",
+        "domainAwarenessLevel": "NODE",
+        "currentClusterFaultTolerance": "CFT_1N_OR_1D",
+        "desiredClusterFaultTolerance": "CFT_1N_OR_1D",
+        "isStrictRackAwarenessEnabled": false
+      },
+      "operationMode": "NORMAL",
+      "pulseStatus": {
+        "$objectType": "clustermgmt.v4.config.PulseStatus",
+        "isEnabled": true
+      },
+      "clusterType": "HYPER_CONVERGED",
+      "isDegradedNodeMonitoringDisabled": false
+    },
+    "network": {
+      "externalSubnet": "203.0.113.1/203.0.113.1",
+      "internalSubnet": "203.0.113.1/203.0.113.1",
+      "$objectType": "clustermgmt.v4.config.ClusterNetworkReference",
+      "externalAddress": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "198.51.100.128",
+          "prefixLength": 32
+        }
+      },
+      "externalDataServiceIp": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "203.0.113.251",
+          "prefixLength": 32
+        }
+      },
+      "nameServerIpList": [
+        {
+          "$objectType": "common.v1.config.IPAddressOrFQDN",
+          "ipv4": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "198.51.100.218",
+            "prefixLength": 32
+          }
+        }
+      ],
+      "ntpServerIpList": [
+        {
+          "$objectType": "common.v1.config.IPAddressOrFQDN",
+          "fqdn": {
+            "$objectType": "common.v1.config.FQDN",
+            "value": "value-b138bfa2"
+          }
+        }
+      ],
+      "backplane": {
+        "$objectType": "clustermgmt.v4.config.BackplaneNetworkParams",
+        "isSegmentationEnabled": true,
+        "vlanTag": 51,
+        "subnet": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "198.51.100.20",
+          "prefixLength": 32
+        },
+        "netmask": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "198.51.100.232",
+          "prefixLength": 32
+        }
+      }
+    },
+    "upgradeStatus": "SUCCEEDED"
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.Cluster",
+    "extId": "36feb6ab-2508-4451-8c73-bed665e94892",
+    "name": "name-651a0b9a",
+    "nodes": {
+      "numberOfNodes": 3,
+      "$objectType": "clustermgmt.v4.config.NodeReference",
+      "nodeList": [
+        {
+          "nodeUuid": "4195b939-6b5d-414d-833c-b6b1cec9183e",
+          "$objectType": "clustermgmt.v4.config.NodeListItemReference",
+          "controllerVmIp": {
+            "$objectType": "common.v1.config.IPAddress",
+            "ipv4": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "203.0.113.161",
+              "prefixLength": 32
+            }
+          }
+        },
+        {
+          "nodeUuid": "656d42d2-e306-41b9-ac62-5ba1447259fb",
+          "controllerVmIp": {
+            "$objectType": "common.v1.config.IPAddress",
+            "ipv4": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "198.51.100.120",
+              "prefixLength": 32
+            }
+          }
+        },
+        {
+          "nodeUuid": "4c75c73a-6609-427f-a93f-f5d715f0b33a",
+          "controllerVmIp": {
+            "$objectType": "common.v1.config.IPAddress",
+            "ipv4": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "203.0.113.169",
+              "prefixLength": 32
+            }
+          }
+        }
+      ]
+    },
+    "config": {
+      "incarnationId": 3962805568309576785,
+      "hypervisorTypes": [
+        "$UNKNOWN"
+      ],
+      "timezone": "America/Los_Angeles",
+      "clusterSoftwareMap": [
+        {
+          "$objectType": "clustermgmt.v4.config.SoftwareMapReference",
+          "softwareType": "NCC",
+          "version": "ncc-6.0.0.1"
+        },
+        {
+          "softwareType": "PRISM_CENTRAL",
+          "version": "el9-release-ganges-7.6-stable-bbbafeb5204877ec3ced1b4b302d1f85f19836db"
+        }
+      ],
+      "isRemoteSupportEnabled": false,
+      "isLts": false,
+      "isPasswordRemoteLoginEnabled": "[redacted]",
+      "isAvailable": true,
+      "$objectType": "clustermgmt.v4.config.ClusterConfigReference",
+      "buildInfo": {
+        "$objectType": "clustermgmt.v4.config.BuildReference",
+        "buildType": "release",
+        "version": "7.6",
+        "fullVersion": "el9-release-ganges-7.6-stable-bbbafeb5204877ec3ced1b4b302d1f85f19836db",
+        "commitId": "bbbafeb5204877ec3ced1b4b302d1f85f19836db",
+        "shortCommitId": "bbbafe"
+      },
+      "clusterFunction": [
+        "PRISM_CENTRAL"
+      ],
+      "authorizedPublicKeyList": [
+        {
+          "$objectType": "clustermgmt.v4.config.PublicKey",
+          "name": "name-579a48c2",
+          "key": "[redacted]"
+        },
+        {
+          "name": "name-9454d5f4",
+          "key": "[redacted]"
+        },
+        {
+          "name": "name-95395500",
+          "key": "[redacted]"
+        },
+        {
+          "name": "name-f945369e",
+          "key": "[redacted]"
+        }
+      ],
+      "redundancyFactor": 2,
+      "clusterArch": "X86_64",
+      "faultToleranceState": {
+        "currentMaxFaultTolerance": 1,
+        "desiredMaxFaultTolerance": 1,
+        "$objectType": "clustermgmt.v4.config.FaultToleranceState",
+        "domainAwarenessLevel": "NODE",
+        "currentClusterFaultTolerance": "CFT_1N_OR_1D",
+        "desiredClusterFaultTolerance": "CFT_1N_OR_1D",
+        "isStrictRackAwarenessEnabled": false
+      },
+      "operationMode": "NORMAL",
+      "pulseStatus": {
+        "$objectType": "clustermgmt.v4.config.PulseStatus",
+        "isEnabled": true,
+        "piiScrubbingLevel": "DEFAULT"
+      },
+      "isDegradedNodeMonitoringDisabled": false
+    },
+    "network": {
+      "externalSubnet": "203.0.113.1/203.0.113.1",
+      "internalSubnet": "203.0.113.1/203.0.113.1",
+      "$objectType": "clustermgmt.v4.config.ClusterNetworkReference",
+      "externalAddress": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "203.0.113.153",
+          "prefixLength": 32
+        }
+      },
+      "externalDataServiceIp": {
+        "$objectType": "common.v1.config.IPAddress"
+      },
+      "nameServerIpList": [
+        {
+          "$objectType": "common.v1.config.IPAddressOrFQDN",
+          "ipv4": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "203.0.113.27",
+            "prefixLength": 32
+          }
+        },
+        {
+          "ipv4": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "198.51.100.146",
+            "prefixLength": 32
+          }
+        },
+        {
+          "ipv4": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "198.51.100.8",
+            "prefixLength": 32
+          }
+        },
+        {
+          "ipv4": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "198.51.100.218",
+            "prefixLength": 32
+          }
+        }
+      ],
+      "ntpServerIpList": [
+        {
+          "$objectType": "common.v1.config.IPAddressOrFQDN",
+          "fqdn": {
+            "$objectType": "common.v1.config.FQDN",
+            "value": "value-b138bfa2"
+          }
+        }
+      ],
+      "backplane": {
+        "$objectType": "clustermgmt.v4.config.BackplaneNetworkParams",
+        "isSegmentationEnabled": false
+      }
+    }
+  }
+]

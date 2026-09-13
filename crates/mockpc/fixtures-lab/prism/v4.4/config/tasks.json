@@ -1,0 +1,3395 @@
+[
+  {
+    "extId": "ZXJnb24=:196d9975-0c98-41e9-924a-5ccced0ce33f",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T17:41:01.999032Z",
+    "startedTime": "2026-09-05T17:41:01.999032Z",
+    "completedTime": "2026-09-05T17:41:02.031986Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "e45440df-37c2-47d7-6e51-19579758eb82",
+        "rel": "volumes:config:volume-group",
+        "name": "name-21a58d36",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T17:41:02.031983Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:05b76161-b88f-4df2-a05a-3ff9b0296c9c",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T17:41:01.998576Z",
+    "startedTime": "2026-09-05T17:41:01.998576Z",
+    "completedTime": "2026-09-05T17:41:02.041985Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "dd96ba3c-e4de-4c4c-49ec-65e5e3804f47",
+        "rel": "volumes:config:volume-group",
+        "name": "name-ec4d5f43",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T17:41:02.041981Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:d7633f67-fad0-45fe-bce1-d7be0b99a389",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T17:41:01.997624Z",
+    "startedTime": "2026-09-05T17:41:01.997624Z",
+    "completedTime": "2026-09-05T17:41:02.035544Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "7198f1c8-5595-4f82-5abe-51abf4ba8070",
+        "rel": "volumes:config:volume-group",
+        "name": "name-6543b2d2",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T17:41:02.035541Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:970678e1-7801-42d4-8ab5-86b59025d445",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T17:36:01.197386Z",
+    "startedTime": "2026-09-05T17:36:01.197386Z",
+    "completedTime": "2026-09-05T17:36:01.222867Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "dd96ba3c-e4de-4c4c-49ec-65e5e3804f47",
+        "rel": "volumes:config:volume-group",
+        "name": "name-ec4d5f43",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T17:36:01.222864Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:a4aaa8af-4fa8-4f90-a4b3-184e9ec98163",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T17:36:01.19252Z",
+    "startedTime": "2026-09-05T17:36:01.19252Z",
+    "completedTime": "2026-09-05T17:36:01.219513Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "e45440df-37c2-47d7-6e51-19579758eb82",
+        "rel": "volumes:config:volume-group",
+        "name": "name-21a58d36",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T17:36:01.21951Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:64981212-65cb-4cea-a22b-ddddbed52ac9",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T17:36:01.190558Z",
+    "startedTime": "2026-09-05T17:36:01.190558Z",
+    "completedTime": "2026-09-05T17:36:01.220155Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "7198f1c8-5595-4f82-5abe-51abf4ba8070",
+        "rel": "volumes:config:volume-group",
+        "name": "name-6543b2d2",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T17:36:01.220153Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:391d7d0d-8d64-4d6f-b419-5cd4fc4ebaee",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T17:31:00.596487Z",
+    "startedTime": "2026-09-05T17:31:00.596487Z",
+    "completedTime": "2026-09-05T17:31:00.61787Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "7198f1c8-5595-4f82-5abe-51abf4ba8070",
+        "rel": "volumes:config:volume-group",
+        "name": "name-6543b2d2",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T17:31:00.617868Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:aa696680-0b47-464b-a6c2-807d869f79a0",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T17:31:00.596472Z",
+    "startedTime": "2026-09-05T17:31:00.596472Z",
+    "completedTime": "2026-09-05T17:31:00.618449Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "dd96ba3c-e4de-4c4c-49ec-65e5e3804f47",
+        "rel": "volumes:config:volume-group",
+        "name": "name-ec4d5f43",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T17:31:00.618446Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:811c95db-291b-4de3-b97e-5cf5a9c101a1",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T17:31:00.595032Z",
+    "startedTime": "2026-09-05T17:31:00.595032Z",
+    "completedTime": "2026-09-05T17:31:00.620046Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "e45440df-37c2-47d7-6e51-19579758eb82",
+        "rel": "volumes:config:volume-group",
+        "name": "name-21a58d36",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T17:31:00.620043Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:21f4d21d-91eb-44a1-8655-ce70fb7acd98",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T17:25:59.86872Z",
+    "startedTime": "2026-09-05T17:25:59.86872Z",
+    "completedTime": "2026-09-05T17:25:59.905099Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "dd96ba3c-e4de-4c4c-49ec-65e5e3804f47",
+        "rel": "volumes:config:volume-group",
+        "name": "name-ec4d5f43",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T17:25:59.905096Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:0415b47c-d681-4735-9e9a-89eb22e6a984",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T17:25:59.867668Z",
+    "startedTime": "2026-09-05T17:25:59.867668Z",
+    "completedTime": "2026-09-05T17:25:59.905557Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "e45440df-37c2-47d7-6e51-19579758eb82",
+        "rel": "volumes:config:volume-group",
+        "name": "name-21a58d36",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T17:25:59.905555Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:bc6d62d4-7116-4b13-a301-5ea608dcdb83",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T17:25:59.867247Z",
+    "startedTime": "2026-09-05T17:25:59.867247Z",
+    "completedTime": "2026-09-05T17:25:59.904981Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "7198f1c8-5595-4f82-5abe-51abf4ba8070",
+        "rel": "volumes:config:volume-group",
+        "name": "name-6543b2d2",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T17:25:59.904977Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:dbf71204-c872-4081-803d-a4634ba90af0",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T17:20:59.294911Z",
+    "startedTime": "2026-09-05T17:20:59.294911Z",
+    "completedTime": "2026-09-05T17:20:59.322948Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "7198f1c8-5595-4f82-5abe-51abf4ba8070",
+        "rel": "volumes:config:volume-group",
+        "name": "name-6543b2d2",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T17:20:59.322936Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:3a28ceda-5b71-4682-ba64-826355ab24db",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T17:20:59.294902Z",
+    "startedTime": "2026-09-05T17:20:59.294902Z",
+    "completedTime": "2026-09-05T17:20:59.321998Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "dd96ba3c-e4de-4c4c-49ec-65e5e3804f47",
+        "rel": "volumes:config:volume-group",
+        "name": "name-ec4d5f43",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T17:20:59.321997Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:60a1e714-cbd9-46ef-a487-6b880c258084",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T17:20:59.294804Z",
+    "startedTime": "2026-09-05T17:20:59.294804Z",
+    "completedTime": "2026-09-05T17:20:59.322345Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "e45440df-37c2-47d7-6e51-19579758eb82",
+        "rel": "volumes:config:volume-group",
+        "name": "name-21a58d36",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T17:20:59.322343Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:4daef07d-8c06-4fb9-ad07-77571a304e1d",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T17:15:58.779337Z",
+    "startedTime": "2026-09-05T17:15:58.779337Z",
+    "completedTime": "2026-09-05T17:15:58.902994Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "e45440df-37c2-47d7-6e51-19579758eb82",
+        "rel": "volumes:config:volume-group",
+        "name": "name-21a58d36",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T17:15:58.902991Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:1a5bd2d6-f8d8-430e-a486-b5f808d970d9",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T17:15:58.778307Z",
+    "startedTime": "2026-09-05T17:15:58.778307Z",
+    "completedTime": "2026-09-05T17:15:58.893719Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "7198f1c8-5595-4f82-5abe-51abf4ba8070",
+        "rel": "volumes:config:volume-group",
+        "name": "name-6543b2d2",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T17:15:58.893717Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:5bf3557d-86de-4497-9167-7d973ec94260",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T17:15:58.778114Z",
+    "startedTime": "2026-09-05T17:15:58.778114Z",
+    "completedTime": "2026-09-05T17:15:58.894603Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "dd96ba3c-e4de-4c4c-49ec-65e5e3804f47",
+        "rel": "volumes:config:volume-group",
+        "name": "name-ec4d5f43",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T17:15:58.8946Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:aa6ef54e-4273-411f-bf1d-ad4c5db46a18",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T17:10:58.149163Z",
+    "startedTime": "2026-09-05T17:10:58.149163Z",
+    "completedTime": "2026-09-05T17:10:58.175966Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "e45440df-37c2-47d7-6e51-19579758eb82",
+        "rel": "volumes:config:volume-group",
+        "name": "name-21a58d36",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T17:10:58.175963Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:3fa1de1f-94b7-4d3a-801e-85aaf9ec4c28",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T17:10:58.148537Z",
+    "startedTime": "2026-09-05T17:10:58.148537Z",
+    "completedTime": "2026-09-05T17:10:58.17531Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "7198f1c8-5595-4f82-5abe-51abf4ba8070",
+        "rel": "volumes:config:volume-group",
+        "name": "name-6543b2d2",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T17:10:58.175308Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:8b017e08-71a4-448c-b376-207fe5f10717",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T17:10:58.147886Z",
+    "startedTime": "2026-09-05T17:10:58.147886Z",
+    "completedTime": "2026-09-05T17:10:58.177117Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "dd96ba3c-e4de-4c4c-49ec-65e5e3804f47",
+        "rel": "volumes:config:volume-group",
+        "name": "name-ec4d5f43",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T17:10:58.177112Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:846535f2-6fb2-4334-bb93-f45024bbf2dc",
+    "operation": "DeleteRecoveryPoint",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T17:06:12.032973Z",
+    "startedTime": "2026-09-05T17:06:12.044542Z",
+    "completedTime": "2026-09-05T17:06:15.292537Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "f321e537-262f-4503-966e-73a342e39a31",
+        "rel": "dataprotection:config:recovery-point",
+        "name": "name-bbd3b590",
+        "$objectType": "prism.v4.config.EntityReference"
+      },
+      {
+        "extId": "bd525d25-1f84-4eed-9393-30eb3d081cb7",
+        "rel": "dataprotection:config:volume-group-recovery-point",
+        "name": "name-bbd3b590"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T17:06:15.292537Z",
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 2,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "extId": "00000000-0000-0000-0000-000000000000",
+      "name": "name-da328454",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:a51dc846-3bf9-45a1-9416-66bae149ba99",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T17:05:57.566702Z",
+    "startedTime": "2026-09-05T17:05:57.566702Z",
+    "completedTime": "2026-09-05T17:05:57.592269Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "7198f1c8-5595-4f82-5abe-51abf4ba8070",
+        "rel": "volumes:config:volume-group",
+        "name": "name-6543b2d2",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T17:05:57.592266Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:ea473558-7489-44db-8dfa-5a6348e60175",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T17:05:57.566693Z",
+    "startedTime": "2026-09-05T17:05:57.566693Z",
+    "completedTime": "2026-09-05T17:05:57.592044Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "e45440df-37c2-47d7-6e51-19579758eb82",
+        "rel": "volumes:config:volume-group",
+        "name": "name-21a58d36",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T17:05:57.592042Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:7133995d-4ecc-41fb-979c-58d2a4361b82",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T17:05:57.565408Z",
+    "startedTime": "2026-09-05T17:05:57.565408Z",
+    "completedTime": "2026-09-05T17:05:57.591122Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "dd96ba3c-e4de-4c4c-49ec-65e5e3804f47",
+        "rel": "volumes:config:volume-group",
+        "name": "name-ec4d5f43",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T17:05:57.59112Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:bfcd6e6d-ffea-4461-83dc-bbf27c3220ba",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T17:00:57.052363Z",
+    "startedTime": "2026-09-05T17:00:57.052363Z",
+    "completedTime": "2026-09-05T17:00:57.0776Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "dd96ba3c-e4de-4c4c-49ec-65e5e3804f47",
+        "rel": "volumes:config:volume-group",
+        "name": "name-ec4d5f43",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T17:00:57.077598Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:fe49de65-ea9b-494d-8a10-f38845c741a4",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T17:00:57.052324Z",
+    "startedTime": "2026-09-05T17:00:57.052324Z",
+    "completedTime": "2026-09-05T17:00:57.076809Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "7198f1c8-5595-4f82-5abe-51abf4ba8070",
+        "rel": "volumes:config:volume-group",
+        "name": "name-6543b2d2",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T17:00:57.076806Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:6550d263-1817-4690-8e5e-87a927335566",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T17:00:57.051347Z",
+    "startedTime": "2026-09-05T17:00:57.051347Z",
+    "completedTime": "2026-09-05T17:00:57.076541Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "e45440df-37c2-47d7-6e51-19579758eb82",
+        "rel": "volumes:config:volume-group",
+        "name": "name-21a58d36",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T17:00:57.076539Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:7a81a54e-8caa-4e66-9401-01144b20c25f",
+    "operation": "CreateRecoveryPoint",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T17:00:03.253161Z",
+    "startedTime": "2026-09-05T17:00:03.267318Z",
+    "completedTime": "2026-09-05T17:00:03.959434Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "2193af73-35ca-4ba3-6333-0679db416e39",
+        "rel": "volumes:config:volume-group",
+        "name": "name-f6027ffd",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "completionDetails": [
+      {
+        "value": "75c62e3d-88e7-4b57-a68f-644bdd3401e0",
+        "$objectType": "common.v1.config.KVPair",
+        "name": "name-8349e1b6"
+      }
+    ],
+    "lastUpdatedTime": "2026-09-05T17:00:03.959433Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "extId": "00000000-0000-0000-0000-000000000000",
+      "name": "name-da328454",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:a91852f7-461c-435b-aacb-9536b1ffd071",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T16:55:56.492952Z",
+    "startedTime": "2026-09-05T16:55:56.492952Z",
+    "completedTime": "2026-09-05T16:55:56.521897Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "e45440df-37c2-47d7-6e51-19579758eb82",
+        "rel": "volumes:config:volume-group",
+        "name": "name-21a58d36",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T16:55:56.521894Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:7ac40ded-d348-414f-9843-7f5b6d476e85",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T16:55:56.488889Z",
+    "startedTime": "2026-09-05T16:55:56.488889Z",
+    "completedTime": "2026-09-05T16:55:56.516514Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "dd96ba3c-e4de-4c4c-49ec-65e5e3804f47",
+        "rel": "volumes:config:volume-group",
+        "name": "name-ec4d5f43",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T16:55:56.516512Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:8601cfae-41aa-4528-8342-8cc50c416568",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T16:55:56.486294Z",
+    "startedTime": "2026-09-05T16:55:56.486294Z",
+    "completedTime": "2026-09-05T16:55:56.515448Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "7198f1c8-5595-4f82-5abe-51abf4ba8070",
+        "rel": "volumes:config:volume-group",
+        "name": "name-6543b2d2",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T16:55:56.515445Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:49d0cdd0-b45d-49ec-95b1-399bb0047432",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T16:50:55.910598Z",
+    "startedTime": "2026-09-05T16:50:55.910598Z",
+    "completedTime": "2026-09-05T16:50:55.936015Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "dd96ba3c-e4de-4c4c-49ec-65e5e3804f47",
+        "rel": "volumes:config:volume-group",
+        "name": "name-ec4d5f43",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T16:50:55.936012Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:5167abb0-0739-49fa-92cc-7446455bbe28",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T16:50:55.909593Z",
+    "startedTime": "2026-09-05T16:50:55.909593Z",
+    "completedTime": "2026-09-05T16:50:55.936059Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "e45440df-37c2-47d7-6e51-19579758eb82",
+        "rel": "volumes:config:volume-group",
+        "name": "name-21a58d36",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T16:50:55.936057Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:d25ed0e8-c804-45a0-a3d9-a25164efe689",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T16:50:55.908939Z",
+    "startedTime": "2026-09-05T16:50:55.908939Z",
+    "completedTime": "2026-09-05T16:50:55.935833Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "7198f1c8-5595-4f82-5abe-51abf4ba8070",
+        "rel": "volumes:config:volume-group",
+        "name": "name-6543b2d2",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T16:50:55.93583Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:7576cf67-e796-4c1b-b5f2-efb324b316ed",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T16:45:55.30608Z",
+    "startedTime": "2026-09-05T16:45:55.30608Z",
+    "completedTime": "2026-09-05T16:45:55.336225Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "e45440df-37c2-47d7-6e51-19579758eb82",
+        "rel": "volumes:config:volume-group",
+        "name": "name-21a58d36",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T16:45:55.336223Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:5570a4fa-7f2e-4736-9694-1331148dc0be",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T16:45:55.305476Z",
+    "startedTime": "2026-09-05T16:45:55.305476Z",
+    "completedTime": "2026-09-05T16:45:55.333932Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "7198f1c8-5595-4f82-5abe-51abf4ba8070",
+        "rel": "volumes:config:volume-group",
+        "name": "name-6543b2d2",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T16:45:55.333929Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:b65f84ff-1feb-4bad-972d-64558e56b924",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T16:45:55.303611Z",
+    "startedTime": "2026-09-05T16:45:55.303611Z",
+    "completedTime": "2026-09-05T16:45:55.330675Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "dd96ba3c-e4de-4c4c-49ec-65e5e3804f47",
+        "rel": "volumes:config:volume-group",
+        "name": "name-ec4d5f43",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T16:45:55.330672Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:843333e4-3f03-4c6f-b900-de4908bedf5d",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T16:41:15.777916Z",
+    "startedTime": "2026-09-05T16:41:15.777916Z",
+    "completedTime": "2026-09-05T16:41:15.804195Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "7198f1c8-5595-4f82-5abe-51abf4ba8070",
+        "rel": "volumes:config:volume-group",
+        "name": "name-6543b2d2",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T16:41:15.804193Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:5da3ce63-237d-4a31-bf28-1459672b2ea1",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T16:41:15.777776Z",
+    "startedTime": "2026-09-05T16:41:15.777776Z",
+    "completedTime": "2026-09-05T16:41:15.804318Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "dd96ba3c-e4de-4c4c-49ec-65e5e3804f47",
+        "rel": "volumes:config:volume-group",
+        "name": "name-ec4d5f43",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T16:41:15.804315Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:e412fe41-e22f-4e4f-85fc-59eef3c5f30a",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T16:41:15.777587Z",
+    "startedTime": "2026-09-05T16:41:15.777587Z",
+    "completedTime": "2026-09-05T16:41:15.805789Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "e45440df-37c2-47d7-6e51-19579758eb82",
+        "rel": "volumes:config:volume-group",
+        "name": "name-21a58d36",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T16:41:15.805787Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:d048367f-acf4-4da7-b71a-6f90b5192584",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T16:35:54.435941Z",
+    "startedTime": "2026-09-05T16:35:54.435941Z",
+    "completedTime": "2026-09-05T16:35:54.46124Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "dd96ba3c-e4de-4c4c-49ec-65e5e3804f47",
+        "rel": "volumes:config:volume-group",
+        "name": "name-ec4d5f43",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T16:35:54.461238Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:e82de744-758b-40a8-9f7b-fb93d41a4aab",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T16:35:54.434468Z",
+    "startedTime": "2026-09-05T16:35:54.434468Z",
+    "completedTime": "2026-09-05T16:35:54.460311Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "7198f1c8-5595-4f82-5abe-51abf4ba8070",
+        "rel": "volumes:config:volume-group",
+        "name": "name-6543b2d2",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T16:35:54.460309Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:1e651bc5-934b-44f5-a771-8d04f04584d3",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T16:35:54.433382Z",
+    "startedTime": "2026-09-05T16:35:54.433382Z",
+    "completedTime": "2026-09-05T16:35:54.461876Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "e45440df-37c2-47d7-6e51-19579758eb82",
+        "rel": "volumes:config:volume-group",
+        "name": "name-21a58d36",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T16:35:54.461874Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:f18117f8-d7bd-49c9-a402-5486f6fcd135",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T16:30:53.787522Z",
+    "startedTime": "2026-09-05T16:30:53.787522Z",
+    "completedTime": "2026-09-05T16:30:53.813821Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "7198f1c8-5595-4f82-5abe-51abf4ba8070",
+        "rel": "volumes:config:volume-group",
+        "name": "name-6543b2d2",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T16:30:53.813819Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:607770e8-306c-404b-9938-d8ec51b6a6de",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T16:30:53.78708Z",
+    "startedTime": "2026-09-05T16:30:53.78708Z",
+    "completedTime": "2026-09-05T16:30:53.813185Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "dd96ba3c-e4de-4c4c-49ec-65e5e3804f47",
+        "rel": "volumes:config:volume-group",
+        "name": "name-ec4d5f43",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T16:30:53.813182Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:b3cd98b7-7bc5-43f6-a419-fe5520cd9276",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T16:30:53.771013Z",
+    "startedTime": "2026-09-05T16:30:53.771013Z",
+    "completedTime": "2026-09-05T16:30:53.802567Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "e45440df-37c2-47d7-6e51-19579758eb82",
+        "rel": "volumes:config:volume-group",
+        "name": "name-21a58d36",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T16:30:53.802564Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:c352946b-4edf-4807-b447-f2456229bfa1",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T16:25:53.184333Z",
+    "startedTime": "2026-09-05T16:25:53.184333Z",
+    "completedTime": "2026-09-05T16:25:53.211407Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "dd96ba3c-e4de-4c4c-49ec-65e5e3804f47",
+        "rel": "volumes:config:volume-group",
+        "name": "name-ec4d5f43",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T16:25:53.211405Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:9d10cfb3-c663-423b-904b-354c5ca10ae8",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T16:25:53.183855Z",
+    "startedTime": "2026-09-05T16:25:53.183855Z",
+    "completedTime": "2026-09-05T16:25:53.21243Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "e45440df-37c2-47d7-6e51-19579758eb82",
+        "rel": "volumes:config:volume-group",
+        "name": "name-21a58d36",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T16:25:53.212428Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:f59b04eb-d51d-404e-aa18-2fca96b291a9",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T16:25:53.183708Z",
+    "startedTime": "2026-09-05T16:25:53.183708Z",
+    "completedTime": "2026-09-05T16:25:53.211661Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "7198f1c8-5595-4f82-5abe-51abf4ba8070",
+        "rel": "volumes:config:volume-group",
+        "name": "name-6543b2d2",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T16:25:53.211656Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:e3a805a6-7135-4d94-869d-162d3e657926",
+    "operation": "DeleteRecoveryPoint",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T16:22:31.031236Z",
+    "startedTime": "2026-09-05T16:22:31.042473Z",
+    "completedTime": "2026-09-05T16:22:34.288706Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "fccc1c1f-94c7-4a94-95e0-26eaba17e393",
+        "rel": "dataprotection:config:recovery-point",
+        "name": "name-35443c32",
+        "$objectType": "prism.v4.config.EntityReference"
+      },
+      {
+        "extId": "8fa96da2-58e8-4ca1-93d5-f35c92a2e2e5",
+        "rel": "dataprotection:config:volume-group-recovery-point",
+        "name": "name-35443c32"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T16:22:34.288705Z",
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 2,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "extId": "00000000-0000-0000-0000-000000000000",
+      "name": "name-da328454",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:d71d59c7-c3ec-4a8f-992f-850577629b33",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T16:21:29.723226Z",
+    "startedTime": "2026-09-05T16:21:29.723226Z",
+    "completedTime": "2026-09-05T16:21:29.749381Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "7198f1c8-5595-4f82-5abe-51abf4ba8070",
+        "rel": "volumes:config:volume-group",
+        "name": "name-6543b2d2",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T16:21:29.749379Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:bc673227-c5e3-43dc-ab84-142fcae2b3b2",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T16:21:29.723213Z",
+    "startedTime": "2026-09-05T16:21:29.723213Z",
+    "completedTime": "2026-09-05T16:21:29.749713Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "e45440df-37c2-47d7-6e51-19579758eb82",
+        "rel": "volumes:config:volume-group",
+        "name": "name-21a58d36",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T16:21:29.74971Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:239f12ec-7a75-45b9-813d-21b1dfb16349",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T16:21:29.723008Z",
+    "startedTime": "2026-09-05T16:21:29.723008Z",
+    "completedTime": "2026-09-05T16:21:29.749231Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "dd96ba3c-e4de-4c4c-49ec-65e5e3804f47",
+        "rel": "volumes:config:volume-group",
+        "name": "name-ec4d5f43",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T16:21:29.749229Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:d09453a9-2f36-424f-981e-ebc37f5c3b60",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T16:15:52.175266Z",
+    "startedTime": "2026-09-05T16:15:52.175266Z",
+    "completedTime": "2026-09-05T16:15:52.198605Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "e45440df-37c2-47d7-6e51-19579758eb82",
+        "rel": "volumes:config:volume-group",
+        "name": "name-21a58d36",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T16:15:52.198603Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:3bbc58a1-74eb-4068-a902-227a76db3fd1",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T16:15:52.174907Z",
+    "startedTime": "2026-09-05T16:15:52.174907Z",
+    "completedTime": "2026-09-05T16:15:52.199353Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "dd96ba3c-e4de-4c4c-49ec-65e5e3804f47",
+        "rel": "volumes:config:volume-group",
+        "name": "name-ec4d5f43",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T16:15:52.199351Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:18d4a0d9-5ba5-407a-ae66-73b5ec0f4ad6",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T16:15:52.174818Z",
+    "startedTime": "2026-09-05T16:15:52.174818Z",
+    "completedTime": "2026-09-05T16:15:52.201585Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "7198f1c8-5595-4f82-5abe-51abf4ba8070",
+        "rel": "volumes:config:volume-group",
+        "name": "name-6543b2d2",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T16:15:52.201582Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:26663067-620f-4867-abfa-67da7c4384ad",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T16:10:51.641924Z",
+    "startedTime": "2026-09-05T16:10:51.641924Z",
+    "completedTime": "2026-09-05T16:10:51.666759Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "dd96ba3c-e4de-4c4c-49ec-65e5e3804f47",
+        "rel": "volumes:config:volume-group",
+        "name": "name-ec4d5f43",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T16:10:51.666755Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:782ad31c-a136-42b4-8993-2541fae7c8e0",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T16:10:51.639746Z",
+    "startedTime": "2026-09-05T16:10:51.639746Z",
+    "completedTime": "2026-09-05T16:10:51.665051Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "7198f1c8-5595-4f82-5abe-51abf4ba8070",
+        "rel": "volumes:config:volume-group",
+        "name": "name-6543b2d2",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T16:10:51.665049Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:6ab1d323-18e6-41a2-bdb6-69e7fbdc23d8",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T16:10:51.639746Z",
+    "startedTime": "2026-09-05T16:10:51.639746Z",
+    "completedTime": "2026-09-05T16:10:51.664468Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "e45440df-37c2-47d7-6e51-19579758eb82",
+        "rel": "volumes:config:volume-group",
+        "name": "name-21a58d36",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T16:10:51.664466Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:45c439d6-74d3-41de-a656-c518aaac2947",
+    "operation": "CreateRecoveryPoint",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T16:07:03.561179Z",
+    "startedTime": "2026-09-05T16:07:03.574289Z",
+    "completedTime": "2026-09-05T16:07:04.137763Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "ec3bd8ea-f739-496c-5882-7ab36635a326",
+        "rel": "volumes:config:volume-group",
+        "name": "name-429db71f",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "completionDetails": [
+      {
+        "value": "5c028987-00bf-41ed-95b2-727908a3353c",
+        "$objectType": "common.v1.config.KVPair",
+        "name": "name-8349e1b6"
+      }
+    ],
+    "lastUpdatedTime": "2026-09-05T16:07:04.137762Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "extId": "00000000-0000-0000-0000-000000000000",
+      "name": "name-da328454",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:d1e23033-4879-44f7-ba06-09ad59c96687",
+    "operation": "DeleteRecoveryPoint",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T16:06:12.030078Z",
+    "startedTime": "2026-09-05T16:06:12.044525Z",
+    "completedTime": "2026-09-05T16:06:15.293381Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "8514617b-404a-41be-a047-6ae1459e1a33",
+        "rel": "dataprotection:config:recovery-point",
+        "name": "name-3046fc21",
+        "$objectType": "prism.v4.config.EntityReference"
+      },
+      {
+        "extId": "fca1add3-0412-44d1-ae1a-90663b74fc79",
+        "rel": "dataprotection:config:volume-group-recovery-point",
+        "name": "name-3046fc21"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T16:06:15.29338Z",
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 2,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "extId": "00000000-0000-0000-0000-000000000000",
+      "name": "name-da328454",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:83e299c3-3d32-4886-91e6-c269d0b76da5",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T16:05:51.034655Z",
+    "startedTime": "2026-09-05T16:05:51.034655Z",
+    "completedTime": "2026-09-05T16:05:51.073497Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "e45440df-37c2-47d7-6e51-19579758eb82",
+        "rel": "volumes:config:volume-group",
+        "name": "name-21a58d36",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T16:05:51.073495Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:b062d413-a80c-4906-92b1-fca165fb10f6",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T16:05:51.034311Z",
+    "startedTime": "2026-09-05T16:05:51.034311Z",
+    "completedTime": "2026-09-05T16:05:51.08994Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "7198f1c8-5595-4f82-5abe-51abf4ba8070",
+        "rel": "volumes:config:volume-group",
+        "name": "name-6543b2d2",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T16:05:51.089938Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:32960cf2-30c5-4b1d-8042-b43b4299e316",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T16:05:51.031782Z",
+    "startedTime": "2026-09-05T16:05:51.031782Z",
+    "completedTime": "2026-09-05T16:05:51.068997Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "dd96ba3c-e4de-4c4c-49ec-65e5e3804f47",
+        "rel": "volumes:config:volume-group",
+        "name": "name-ec4d5f43",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T16:05:51.068995Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:cf9a83b8-b814-4e0c-9da1-ed1efd4b73ab",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T16:00:50.269415Z",
+    "startedTime": "2026-09-05T16:00:50.269415Z",
+    "completedTime": "2026-09-05T16:00:50.293282Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "e45440df-37c2-47d7-6e51-19579758eb82",
+        "rel": "volumes:config:volume-group",
+        "name": "name-21a58d36",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T16:00:50.293279Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:806fd078-d1db-464b-b5fb-49dd15ceda67",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T16:00:50.268455Z",
+    "startedTime": "2026-09-05T16:00:50.268455Z",
+    "completedTime": "2026-09-05T16:00:50.291609Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "7198f1c8-5595-4f82-5abe-51abf4ba8070",
+        "rel": "volumes:config:volume-group",
+        "name": "name-6543b2d2",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T16:00:50.291607Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:90608ea9-ad0d-485e-a55f-b4022ec10b03",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T16:00:50.26723Z",
+    "startedTime": "2026-09-05T16:00:50.26723Z",
+    "completedTime": "2026-09-05T16:00:50.292025Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "dd96ba3c-e4de-4c4c-49ec-65e5e3804f47",
+        "rel": "volumes:config:volume-group",
+        "name": "name-ec4d5f43",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T16:00:50.292023Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:cadb55ce-70d5-4d17-b258-fbbdda0aed63",
+    "operation": "CreateRecoveryPoint",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T16:00:03.283284Z",
+    "startedTime": "2026-09-05T16:00:03.296377Z",
+    "completedTime": "2026-09-05T16:00:03.860839Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "2193af73-35ca-4ba3-6333-0679db416e39",
+        "rel": "volumes:config:volume-group",
+        "name": "name-f6027ffd",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "completionDetails": [
+      {
+        "value": "b5778840-dd76-40a8-a379-6a1cb3f8d6ff",
+        "$objectType": "common.v1.config.KVPair",
+        "name": "name-8349e1b6"
+      }
+    ],
+    "lastUpdatedTime": "2026-09-05T16:00:03.860838Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "extId": "00000000-0000-0000-0000-000000000000",
+      "name": "name-da328454",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:9c51e4c9-205f-48e7-93df-627e8e78448f",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T15:55:49.642387Z",
+    "startedTime": "2026-09-05T15:55:49.642387Z",
+    "completedTime": "2026-09-05T15:55:49.669183Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "e45440df-37c2-47d7-6e51-19579758eb82",
+        "rel": "volumes:config:volume-group",
+        "name": "name-21a58d36",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T15:55:49.669181Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:3433c31e-500e-419b-868b-f41069c1ea6b",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T15:55:49.64175Z",
+    "startedTime": "2026-09-05T15:55:49.64175Z",
+    "completedTime": "2026-09-05T15:55:49.668398Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "dd96ba3c-e4de-4c4c-49ec-65e5e3804f47",
+        "rel": "volumes:config:volume-group",
+        "name": "name-ec4d5f43",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T15:55:49.668394Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:13b8ea5c-0ad8-48d6-b54c-1053beaa12a9",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T15:55:49.641306Z",
+    "startedTime": "2026-09-05T15:55:49.641306Z",
+    "completedTime": "2026-09-05T15:55:49.668297Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "7198f1c8-5595-4f82-5abe-51abf4ba8070",
+        "rel": "volumes:config:volume-group",
+        "name": "name-6543b2d2",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T15:55:49.668295Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:209540f6-c14e-4046-bafa-25f68992951d",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T15:50:49.032642Z",
+    "startedTime": "2026-09-05T15:50:49.032642Z",
+    "completedTime": "2026-09-05T15:50:49.060873Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "e45440df-37c2-47d7-6e51-19579758eb82",
+        "rel": "volumes:config:volume-group",
+        "name": "name-21a58d36",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T15:50:49.06087Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:449efb2a-452b-431a-aea4-635f8652b846",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T15:50:49.032483Z",
+    "startedTime": "2026-09-05T15:50:49.032483Z",
+    "completedTime": "2026-09-05T15:50:49.064281Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "dd96ba3c-e4de-4c4c-49ec-65e5e3804f47",
+        "rel": "volumes:config:volume-group",
+        "name": "name-ec4d5f43",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T15:50:49.064279Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:1c266cf6-9b43-4bd7-beb7-4f90d7e10c59",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T15:50:49.032482Z",
+    "startedTime": "2026-09-05T15:50:49.032482Z",
+    "completedTime": "2026-09-05T15:50:49.060301Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "7198f1c8-5595-4f82-5abe-51abf4ba8070",
+        "rel": "volumes:config:volume-group",
+        "name": "name-6543b2d2",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T15:50:49.060299Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:0c09834d-7549-4639-9159-fdf94e2f8dc1",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T15:45:48.472113Z",
+    "startedTime": "2026-09-05T15:45:48.472113Z",
+    "completedTime": "2026-09-05T15:45:48.496866Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "7198f1c8-5595-4f82-5abe-51abf4ba8070",
+        "rel": "volumes:config:volume-group",
+        "name": "name-6543b2d2",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T15:45:48.496864Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:cb3b9291-29e6-469c-bbe8-8490338b20b8",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T15:45:48.471104Z",
+    "startedTime": "2026-09-05T15:45:48.471104Z",
+    "completedTime": "2026-09-05T15:45:48.498025Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "e45440df-37c2-47d7-6e51-19579758eb82",
+        "rel": "volumes:config:volume-group",
+        "name": "name-21a58d36",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T15:45:48.498023Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:5c109c49-fa72-4e7f-8edb-78efd8e7fb43",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T15:45:48.470771Z",
+    "startedTime": "2026-09-05T15:45:48.470771Z",
+    "completedTime": "2026-09-05T15:45:48.496952Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "dd96ba3c-e4de-4c4c-49ec-65e5e3804f47",
+        "rel": "volumes:config:volume-group",
+        "name": "name-ec4d5f43",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T15:45:48.49695Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:b3e6193c-19b0-428c-8f78-63fc66d50845",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T15:40:47.877895Z",
+    "startedTime": "2026-09-05T15:40:47.877895Z",
+    "completedTime": "2026-09-05T15:40:47.901042Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "e45440df-37c2-47d7-6e51-19579758eb82",
+        "rel": "volumes:config:volume-group",
+        "name": "name-21a58d36",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T15:40:47.901039Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:fbc663bf-ba33-4ca5-bec6-2551dc9103e4",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T15:40:47.876923Z",
+    "startedTime": "2026-09-05T15:40:47.876923Z",
+    "completedTime": "2026-09-05T15:40:47.900156Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "dd96ba3c-e4de-4c4c-49ec-65e5e3804f47",
+        "rel": "volumes:config:volume-group",
+        "name": "name-ec4d5f43",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T15:40:47.900154Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:64684b3c-c21f-4842-831e-7e39b5ecc6b6",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T15:40:47.876894Z",
+    "startedTime": "2026-09-05T15:40:47.876894Z",
+    "completedTime": "2026-09-05T15:40:47.901333Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "7198f1c8-5595-4f82-5abe-51abf4ba8070",
+        "rel": "volumes:config:volume-group",
+        "name": "name-6543b2d2",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T15:40:47.901331Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:4f882d7d-3481-4155-ac9f-214deae5cd07",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T15:35:47.214939Z",
+    "startedTime": "2026-09-05T15:35:47.214939Z",
+    "completedTime": "2026-09-05T15:35:47.239976Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "e45440df-37c2-47d7-6e51-19579758eb82",
+        "rel": "volumes:config:volume-group",
+        "name": "name-21a58d36",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T15:35:47.239974Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:adcf4c87-15e9-4246-8fa4-b9b8906d6737",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T15:35:47.214746Z",
+    "startedTime": "2026-09-05T15:35:47.214746Z",
+    "completedTime": "2026-09-05T15:35:47.243681Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "dd96ba3c-e4de-4c4c-49ec-65e5e3804f47",
+        "rel": "volumes:config:volume-group",
+        "name": "name-ec4d5f43",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T15:35:47.243678Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:5f690272-20c5-4db2-83ed-b118f6d77be5",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T15:35:47.213686Z",
+    "startedTime": "2026-09-05T15:35:47.213686Z",
+    "completedTime": "2026-09-05T15:35:47.241346Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "7198f1c8-5595-4f82-5abe-51abf4ba8070",
+        "rel": "volumes:config:volume-group",
+        "name": "name-6543b2d2",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T15:35:47.241342Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:3ad28166-3c66-4ec8-bc41-c09cb16d9131",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T15:31:32.862457Z",
+    "startedTime": "2026-09-05T15:31:32.862457Z",
+    "completedTime": "2026-09-05T15:31:32.886239Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "e45440df-37c2-47d7-6e51-19579758eb82",
+        "rel": "volumes:config:volume-group",
+        "name": "name-21a58d36",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T15:31:32.886238Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:dfb1b9cf-4703-42ad-a200-926a480ba4dd",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T15:31:32.862107Z",
+    "startedTime": "2026-09-05T15:31:32.862107Z",
+    "completedTime": "2026-09-05T15:31:32.886771Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "dd96ba3c-e4de-4c4c-49ec-65e5e3804f47",
+        "rel": "volumes:config:volume-group",
+        "name": "name-ec4d5f43",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T15:31:32.886768Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:5f31f0e6-68ca-46ff-a665-57ba0f83f889",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T15:31:32.861963Z",
+    "startedTime": "2026-09-05T15:31:32.861963Z",
+    "completedTime": "2026-09-05T15:31:32.886662Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "7198f1c8-5595-4f82-5abe-51abf4ba8070",
+        "rel": "volumes:config:volume-group",
+        "name": "name-6543b2d2",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T15:31:32.886659Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:5839061b-4aa8-4cb9-6827-45f95bfa3fc8",
+    "operation": "Publish_Password_Manager_Stats",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T15:28:41.051655Z",
+    "startedTime": "2026-09-05T15:28:41.051655Z",
+    "completedTime": "2026-09-05T15:28:41.122765Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "00000000-0000-0000-0000-000000000000",
+        "rel": "security:report:summaries",
+        "name": "name-6f2d6ffb",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "subSteps": [
+      {
+        "name": "name-f2fa2b03",
+        "$objectType": "prism.v4.config.TaskStep"
+      },
+      {
+        "name": "name-94167871"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T15:28:41.122764Z",
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "parentTask": {
+      "$objectType": "prism.v4.config.TaskReferenceInternal",
+      "extId": "ZXJnb24=:fd329c6b-5177-45aa-4b0c-0d063c02869c",
+      "href": "https://203.0.113.1:9440/api/prism/v4.4/config/tasks/ZXJnb24=:fd329c6b-5177-45aa-4b0c-0d063c02869c",
+      "rel": "parent"
+    },
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    },
+    "rootTask": {
+      "$objectType": "prism.v4.config.TaskReferenceInternal",
+      "extId": "ZXJnb24=:fd329c6b-5177-45aa-4b0c-0d063c02869c",
+      "href": "https://203.0.113.1:9440/api/prism/v4.4/config/tasks/ZXJnb24=:fd329c6b-5177-45aa-4b0c-0d063c02869c",
+      "rel": "rootTask"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:671f3553-4c69-446f-45a4-afc31661c0b6",
+    "operation": "Refresh_STIG",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T15:28:40.084398Z",
+    "startedTime": "2026-09-05T15:28:40.084398Z",
+    "completedTime": "2026-09-05T15:28:52.964589Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "00000000-0000-0000-0000-000000000000",
+        "rel": "security:report:stigs",
+        "name": "name-f71f3604",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "subSteps": [
+      {
+        "name": "name-25f0ef33",
+        "$objectType": "prism.v4.config.TaskStep"
+      },
+      {
+        "name": "name-02107387"
+      },
+      {
+        "name": "name-ea9a3e94"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T15:28:52.964587Z",
+    "clusterExtIds": [
+      "0006237e-c983-e712-0000-00000001c1d0"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "parentTask": {
+      "$objectType": "prism.v4.config.TaskReferenceInternal",
+      "extId": "ZXJnb24=:fd329c6b-5177-45aa-4b0c-0d063c02869c",
+      "href": "https://203.0.113.1:9440/api/prism/v4.4/config/tasks/ZXJnb24=:fd329c6b-5177-45aa-4b0c-0d063c02869c",
+      "rel": "parent"
+    },
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    },
+    "rootTask": {
+      "$objectType": "prism.v4.config.TaskReferenceInternal",
+      "extId": "ZXJnb24=:fd329c6b-5177-45aa-4b0c-0d063c02869c",
+      "href": "https://203.0.113.1:9440/api/prism/v4.4/config/tasks/ZXJnb24=:fd329c6b-5177-45aa-4b0c-0d063c02869c",
+      "rel": "rootTask"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:ee681686-f1f7-4742-6bb5-35f01ec2d315",
+    "operation": "Refresh_STIG",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T15:28:40.074898Z",
+    "startedTime": "2026-09-05T15:28:40.074898Z",
+    "completedTime": "2026-09-05T15:28:53.235815Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "00000000-0000-0000-0000-000000000000",
+        "rel": "security:report:stigs",
+        "name": "name-f71f3604",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "subSteps": [
+      {
+        "name": "name-25f0ef33",
+        "$objectType": "prism.v4.config.TaskStep"
+      },
+      {
+        "name": "name-02107387"
+      },
+      {
+        "name": "name-19a21a77"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T15:28:53.235813Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "parentTask": {
+      "$objectType": "prism.v4.config.TaskReferenceInternal",
+      "extId": "ZXJnb24=:fd329c6b-5177-45aa-4b0c-0d063c02869c",
+      "href": "https://203.0.113.1:9440/api/prism/v4.4/config/tasks/ZXJnb24=:fd329c6b-5177-45aa-4b0c-0d063c02869c",
+      "rel": "parent"
+    },
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    },
+    "rootTask": {
+      "$objectType": "prism.v4.config.TaskReferenceInternal",
+      "extId": "ZXJnb24=:fd329c6b-5177-45aa-4b0c-0d063c02869c",
+      "href": "https://203.0.113.1:9440/api/prism/v4.4/config/tasks/ZXJnb24=:fd329c6b-5177-45aa-4b0c-0d063c02869c",
+      "rel": "rootTask"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:b8db7e81-6e99-42fe-4be7-65e5457b3b1f",
+    "operation": "Refresh_Vulnerability",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T15:28:40.05813Z",
+    "startedTime": "2026-09-05T15:28:40.113104Z",
+    "completedTime": "2026-09-05T15:28:48.353423Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "00000000-0000-0000-0000-000000000000",
+        "rel": "security:report:vulnerabilities",
+        "name": "name-754bc91d",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "subSteps": [
+      {
+        "name": "name-0e48bfee",
+        "$objectType": "prism.v4.config.TaskStep"
+      },
+      {
+        "name": "name-f8ebfe7c"
+      },
+      {
+        "name": "name-35333721"
+      },
+      {
+        "name": "name-8d4decbd"
+      },
+      {
+        "name": "name-92766bc7"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T15:28:48.353422Z",
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "parentTask": {
+      "$objectType": "prism.v4.config.TaskReferenceInternal",
+      "extId": "ZXJnb24=:fd329c6b-5177-45aa-4b0c-0d063c02869c",
+      "href": "https://203.0.113.1:9440/api/prism/v4.4/config/tasks/ZXJnb24=:fd329c6b-5177-45aa-4b0c-0d063c02869c",
+      "rel": "parent"
+    },
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    },
+    "rootTask": {
+      "$objectType": "prism.v4.config.TaskReferenceInternal",
+      "extId": "ZXJnb24=:fd329c6b-5177-45aa-4b0c-0d063c02869c",
+      "href": "https://203.0.113.1:9440/api/prism/v4.4/config/tasks/ZXJnb24=:fd329c6b-5177-45aa-4b0c-0d063c02869c",
+      "rel": "rootTask"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:9c89610c-9dc1-42c7-526a-42f709ef2390",
+    "operation": "Fanout_Password_Manager",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T15:28:40.05813Z",
+    "startedTime": "2026-09-05T15:28:40.05813Z",
+    "completedTime": "2026-09-05T15:28:41.054118Z",
+    "progressPercentage": 100,
+    "subSteps": [
+      {
+        "name": "name-3f1a7b78",
+        "$objectType": "prism.v4.config.TaskStep"
+      },
+      {
+        "name": "name-779d5fd8"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T15:28:41.054117Z",
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 0,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "parentTask": {
+      "$objectType": "prism.v4.config.TaskReferenceInternal",
+      "extId": "ZXJnb24=:fd329c6b-5177-45aa-4b0c-0d063c02869c",
+      "href": "https://203.0.113.1:9440/api/prism/v4.4/config/tasks/ZXJnb24=:fd329c6b-5177-45aa-4b0c-0d063c02869c",
+      "rel": "parent"
+    },
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    },
+    "rootTask": {
+      "$objectType": "prism.v4.config.TaskReferenceInternal",
+      "extId": "ZXJnb24=:fd329c6b-5177-45aa-4b0c-0d063c02869c",
+      "href": "https://203.0.113.1:9440/api/prism/v4.4/config/tasks/ZXJnb24=:fd329c6b-5177-45aa-4b0c-0d063c02869c",
+      "rel": "rootTask"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:fd329c6b-5177-45aa-4b0c-0d063c02869c",
+    "operation": "Refresh",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T15:28:40.036229Z",
+    "startedTime": "2026-09-05T15:28:40.050682Z",
+    "completedTime": "2026-09-05T15:28:53.512738Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "00000000-0000-0000-0000-000000000000",
+        "rel": "security:report:stigs",
+        "name": "name-f71f3604",
+        "$objectType": "prism.v4.config.EntityReference"
+      },
+      {
+        "extId": "00000000-0000-0000-0000-000000000000",
+        "rel": "security:report:summaries",
+        "name": "name-6f2d6ffb"
+      },
+      {
+        "extId": "00000000-0000-0000-0000-000000000000",
+        "rel": "security:report:vulnerabilities",
+        "name": "name-754bc91d"
+      }
+    ],
+    "subTasks": [
+      {
+        "$objectType": "prism.v4.config.TaskReferenceInternal",
+        "extId": "ZXJnb24=:5839061b-4aa8-4cb9-6827-45f95bfa3fc8",
+        "href": "https://203.0.113.1:9440/api/prism/v4.4/config/tasks/ZXJnb24=:5839061b-4aa8-4cb9-6827-45f95bfa3fc8",
+        "rel": "subtask"
+      },
+      {
+        "extId": "ZXJnb24=:671f3553-4c69-446f-45a4-afc31661c0b6",
+        "href": "https://203.0.113.1:9440/api/prism/v4.4/config/tasks/ZXJnb24=:671f3553-4c69-446f-45a4-afc31661c0b6",
+        "rel": "subtask"
+      },
+      {
+        "extId": "ZXJnb24=:9c89610c-9dc1-42c7-526a-42f709ef2390",
+        "href": "https://203.0.113.1:9440/api/prism/v4.4/config/tasks/ZXJnb24=:9c89610c-9dc1-42c7-526a-42f709ef2390",
+        "rel": "subtask"
+      },
+      {
+        "extId": "ZXJnb24=:b8db7e81-6e99-42fe-4be7-65e5457b3b1f",
+        "href": "https://203.0.113.1:9440/api/prism/v4.4/config/tasks/ZXJnb24=:b8db7e81-6e99-42fe-4be7-65e5457b3b1f",
+        "rel": "subtask"
+      },
+      {
+        "extId": "ZXJnb24=:ee681686-f1f7-4742-6bb5-35f01ec2d315",
+        "href": "https://203.0.113.1:9440/api/prism/v4.4/config/tasks/ZXJnb24=:ee681686-f1f7-4742-6bb5-35f01ec2d315",
+        "rel": "subtask"
+      }
+    ],
+    "subSteps": [
+      {
+        "name": "name-4acd218a",
+        "$objectType": "prism.v4.config.TaskStep"
+      },
+      {
+        "name": "name-02e78bf4"
+      },
+      {
+        "name": "name-8ac39b07"
+      },
+      {
+        "name": "name-f18d2953"
+      },
+      {
+        "name": "name-de12fb74"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T15:28:53.512737Z",
+    "clusterExtIds": [
+      "0006237e-c983-e712-0000-00000001c1d0",
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 5,
+    "numberOfEntitiesAffected": 3,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:8350e548-181b-4ee7-aaba-87fc70fdf1c0",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T15:25:46.375659Z",
+    "startedTime": "2026-09-05T15:25:46.375659Z",
+    "completedTime": "2026-09-05T15:25:46.399147Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "e45440df-37c2-47d7-6e51-19579758eb82",
+        "rel": "volumes:config:volume-group",
+        "name": "name-21a58d36",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T15:25:46.399145Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:134bbfbf-2562-4e78-84a9-47b1eecf81bf",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T15:25:46.375484Z",
+    "startedTime": "2026-09-05T15:25:46.375484Z",
+    "completedTime": "2026-09-05T15:25:46.399057Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "7198f1c8-5595-4f82-5abe-51abf4ba8070",
+        "rel": "volumes:config:volume-group",
+        "name": "name-6543b2d2",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T15:25:46.399054Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:aa10fae7-e63e-46e1-a522-de3c98a6e713",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T15:25:46.374579Z",
+    "startedTime": "2026-09-05T15:25:46.374579Z",
+    "completedTime": "2026-09-05T15:25:46.39909Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "dd96ba3c-e4de-4c4c-49ec-65e5e3804f47",
+        "rel": "volumes:config:volume-group",
+        "name": "name-ec4d5f43",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T15:25:46.399084Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:739e035b-664b-47de-a8eb-b848e72e8153",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T15:20:45.814986Z",
+    "startedTime": "2026-09-05T15:20:45.814986Z",
+    "completedTime": "2026-09-05T15:20:45.843097Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "dd96ba3c-e4de-4c4c-49ec-65e5e3804f47",
+        "rel": "volumes:config:volume-group",
+        "name": "name-ec4d5f43",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T15:20:45.843095Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:354b9d6a-1b5d-47e2-927f-ed1dd48f6e5b",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T15:20:45.814762Z",
+    "startedTime": "2026-09-05T15:20:45.814762Z",
+    "completedTime": "2026-09-05T15:20:45.843623Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "7198f1c8-5595-4f82-5abe-51abf4ba8070",
+        "rel": "volumes:config:volume-group",
+        "name": "name-6543b2d2",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T15:20:45.843621Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:b442ab79-8376-4bbb-bb4c-53c243862599",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T15:20:45.81437Z",
+    "startedTime": "2026-09-05T15:20:45.81437Z",
+    "completedTime": "2026-09-05T15:20:45.844102Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "e45440df-37c2-47d7-6e51-19579758eb82",
+        "rel": "volumes:config:volume-group",
+        "name": "name-21a58d36",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T15:20:45.844057Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  },
+  {
+    "extId": "ZXJnb24=:64246026-8de6-40c2-b2c3-3aeab021b583",
+    "operation": "EntityUnprotect",
+    "operationDescription": "[redacted]",
+    "createdTime": "2026-09-05T15:15:45.177343Z",
+    "startedTime": "2026-09-05T15:15:45.177343Z",
+    "completedTime": "2026-09-05T15:15:45.204015Z",
+    "progressPercentage": 100,
+    "entitiesAffected": [
+      {
+        "extId": "e45440df-37c2-47d7-6e51-19579758eb82",
+        "rel": "volumes:config:volume-group",
+        "name": "name-21a58d36",
+        "$objectType": "prism.v4.config.EntityReference"
+      }
+    ],
+    "isCancelable": false,
+    "lastUpdatedTime": "2026-09-05T15:15:45.204013Z",
+    "clusterExtIds": [
+      "000623f4-7174-ae2a-0000-00000001c1da"
+    ],
+    "isBackgroundTask": false,
+    "numberOfSubtasks": 0,
+    "numberOfEntitiesAffected": 1,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "$objectType": "prism.v4.config.Task",
+    "status": "SUCCEEDED",
+    "ownedBy": {
+      "name": "name-f6921adc",
+      "$objectType": "prism.v4.config.OwnerReference"
+    }
+  }
+]

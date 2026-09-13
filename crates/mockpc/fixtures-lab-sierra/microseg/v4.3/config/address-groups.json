@@ -1,0 +1,18 @@
+[
+  {
+    "$objectType": "microseg.v4.config.AddressGroup",
+    "extId": "844ab6d6-072d-4254-8d53-240e6f90f8c4",
+    "createdBy": "createdBy-9a8253ee",
+    "creationTime": "2026-09-10T12:33:02.069Z",
+    "lastUpdateTime": "2026-09-10T12:33:02.069Z",
+    "name": "name-42cb5e01",
+    "ipv4Addresses": [
+      {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "203.0.113.65",
+        "prefixLength": 24
+      }
+    ],
+    "projectExtId": "00000000-0000-0000-0000-000000000000"
+  }
+]

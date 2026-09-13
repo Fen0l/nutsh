@@ -1,0 +1,24 @@
+---
+source: crates/tui/tests/actions.rs
+expression: "app.snapshot(120, 20).unwrap()"
+---
+╭ nutsh ─────────────────────────────────────────────────────────────────────────────────────╮
+│Context:    -                                                    ⏎ drill        y detail    │       clusters 1  hosts 1
+│PC:         127.0.0.1:PORT  pc.2024.3                           S sort         w wide      │         vms 3  on/off 3/0
+│Cluster:    <all>                                               ←→ columns     ^r refresh   │           alerts ⚠ 2  ✖ 2
+│Kind:       Compute & Storage › VMs                             ^t every       ^x stop      │         tasks ▶ 4 running
+│Count:      3                                                    a actions     ^c quit      │
+╰────────────────────────────────────────────────────────────────────────────────────────────╯  v0.0.2-beta1 · pc.2024.3
+╭ nutsh ───────────────╮╭ Virtual Machines [3] ────────────────────────────────────────────────────────────────────────╮
+│  ▸ Dashboard         ││  NAME                                    POWER  CLUSTER      HOST        IP            MEM   │
+│  ▾ Compute & Storage ││▌ web-01                                  ON     lab-cluster  ahv-node-1  203.0.113.11  8 GiB │
+│      Overview        ││  web-02     ╭ confirm ────────────────────────────────────────────────────────╮        4 GiB │
+│    • VMs [3]         ││  db-01      │ Delete web-01. Type the name to confirm:                        │        32 GiB│
+│      ESXi VMs        ││             │   █                                                             │              │
+│      Templates       ││             ╰─────────────────────────────────────────────────────────────────╯              │
+│      Images          ││                                                                                              │
+│      OVAs            ││                                                                                              │
+│      VM Profiles     ││                                                                                              │
+╰───────────────── ↓33 ╯╰──────────────────────────────────────────────────────────────────────────────────────────────╯
+ type what the prompt asks for  enter confirm  esc cancel
+[meter]          ● live

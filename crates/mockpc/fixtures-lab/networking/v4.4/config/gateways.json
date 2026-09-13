@@ -1,0 +1,322 @@
+[
+  {
+    "$objectType": "networking.v4.config.Gateway",
+    "extId": "2ab5c322-1918-4033-8fa8-2bc15af0507a",
+    "services": {
+      "$objectType": "networking.v4.config.RemoteNetworkServices",
+      "remoteVtepService": {
+        "$objectType": "networking.v4.config.RemoteVtepService",
+        "vxlanPort": 4789,
+        "vteps": [
+          {
+            "$objectType": "networking.v4.config.Vtep",
+            "address": {
+              "$objectType": "common.v1.config.IPAddress",
+              "ipv4": {
+                "$objectType": "common.v1.config.IPv4Address",
+                "value": "198.51.100.236",
+                "prefixLength": 32
+              }
+            }
+          },
+          {
+            "address": {
+              "$objectType": "common.v1.config.IPAddress",
+              "ipv4": {
+                "$objectType": "common.v1.config.IPv4Address",
+                "value": "203.0.113.21",
+                "prefixLength": 32
+              }
+            }
+          },
+          {
+            "address": {
+              "$objectType": "common.v1.config.IPAddress",
+              "ipv4": {
+                "$objectType": "common.v1.config.IPv4Address",
+                "value": "198.51.100.62",
+                "prefixLength": 32
+              }
+            }
+          }
+        ]
+      }
+    },
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "00000000-0000-0000-0000-000000000000",
+      "ownerUserName": "ownerUserName-da328454",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000",
+      "projectName": "projectName-57a4a4a3"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-f9f732b9",
+    "description": "description-bc361cf2"
+  },
+  {
+    "$objectType": "networking.v4.config.Gateway",
+    "extId": "6133e9f9-4642-4b04-b256-414d4c2a7726",
+    "services": {
+      "$objectType": "networking.v4.config.RemoteNetworkServices",
+      "remoteBgpService": {
+        "$objectType": "networking.v4.config.RemoteBgpService",
+        "address": {
+          "$objectType": "common.v1.config.IPAddress",
+          "ipv4": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "198.51.100.96",
+            "prefixLength": 32
+          }
+        },
+        "asn": 65000
+      }
+    },
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "00000000-0000-0000-0000-000000000000",
+      "ownerUserName": "ownerUserName-da328454",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000",
+      "projectName": "projectName-57a4a4a3"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-d94d738b",
+    "description": "description-4a3019ed"
+  },
+  {
+    "$objectType": "networking.v4.config.Gateway",
+    "extId": "6c859f06-28e9-4231-aaa0-34b895fca9dc",
+    "installedSoftwareVersion": "7.6.9ede470.20260715",
+    "supportedSoftwareVersion": "7.6.9ede470.20260715",
+    "vmReference": "f331b816-bcf7-4b47-9cae-01c72e9f924c",
+    "isActive": true,
+    "services": {
+      "$objectType": "networking.v4.config.LocalNetworkServices",
+      "serviceAddress": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "198.51.100.88",
+          "prefixLength": 32
+        }
+      },
+      "serviceAddresses": [
+        {
+          "$objectType": "common.v1.config.IPAddress",
+          "ipv4": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "198.51.100.88",
+            "prefixLength": 32
+          }
+        }
+      ],
+      "localVtepService": {
+        "$objectType": "networking.v4.config.LocalVtepService",
+        "vxlanPort": 4789
+      }
+    },
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "00000000-0000-0000-0000-000000000000",
+      "ownerUserName": "ownerUserName-da328454",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000",
+      "projectName": "projectName-57a4a4a3"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-d092da24",
+    "description": "description-9c2f2777",
+    "vpcReference": "8b92d2d0-c022-4de0-aaec-220b8cc62e73",
+    "deployment": {
+      "$objectType": "networking.v4.config.GatewayDeployment",
+      "clusterReference": "000623f4-7174-ae2a-0000-00000001c1da",
+      "managementInterface": {
+        "mtu": 1442,
+        "$objectType": "networking.v4.config.GatewayManagementInterface",
+        "subnetReference": "19417eb9-6d2f-4a22-a6c8-087360b5281b",
+        "address": {
+          "$objectType": "common.v1.config.IPAddress",
+          "ipv4": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "198.51.100.174",
+            "prefixLength": 24
+          }
+        },
+        "defaultGateway": {
+          "$objectType": "common.v1.config.IPAddress",
+          "ipv4": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "203.0.113.129",
+            "prefixLength": 32
+          }
+        }
+      },
+      "interfaces": [
+        {
+          "mtu": 1442,
+          "$objectType": "networking.v4.config.GatewayInterface",
+          "subnetReference": "19417eb9-6d2f-4a22-a6c8-087360b5281b",
+          "ipAddress": {
+            "$objectType": "common.v1.config.IPAddress",
+            "ipv4": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "198.51.100.174",
+              "prefixLength": 24
+            }
+          },
+          "defaultGatewayAddress": {
+            "$objectType": "common.v1.config.IPAddress",
+            "ipv4": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "203.0.113.129",
+              "prefixLength": 24
+            }
+          },
+          "macAddress": "00:00:5e:00:53:01"
+        }
+      ],
+      "shouldSynchronizeSystemNtpServers": false,
+      "ntpServers": [
+        {
+          "$objectType": "common.v1.config.IPAddressOrFQDN",
+          "fqdn": {
+            "$objectType": "common.v1.config.FQDN",
+            "value": "value-b138bfa2"
+          }
+        }
+      ],
+      "shouldSynchronizeSystemDnsServers": true,
+      "dnsServers": [
+        {
+          "$objectType": "common.v1.config.IPAddress",
+          "ipv4": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "198.51.100.218",
+            "prefixLength": 32
+          }
+        }
+      ]
+    },
+    "status": {
+      "$objectType": "networking.v4.config.Status",
+      "state": "UP"
+    }
+  },
+  {
+    "$objectType": "networking.v4.config.Gateway",
+    "extId": "499fe05e-3ef7-4e06-b216-3990eea78936",
+    "installedSoftwareVersion": "7.6.9ede470.20260715",
+    "supportedSoftwareVersion": "7.6.9ede470.20260715",
+    "vmReference": "972c07c7-5b9a-446f-ab87-7f321637ddd7",
+    "isActive": true,
+    "services": {
+      "$objectType": "networking.v4.config.LocalNetworkServices",
+      "serviceAddress": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "198.51.100.120",
+          "prefixLength": 32
+        }
+      },
+      "serviceAddresses": [
+        {
+          "$objectType": "common.v1.config.IPAddress",
+          "ipv4": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "198.51.100.120",
+            "prefixLength": 32
+          }
+        }
+      ],
+      "localBgpService": {
+        "$objectType": "networking.v4.config.LocalBgpService",
+        "vpcReference": "8b92d2d0-c022-4de0-aaec-220b8cc62e73",
+        "asn": 65005,
+        "isBgpAddPathEnabled": false
+      }
+    },
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "00000000-0000-0000-0000-000000000000",
+      "ownerUserName": "ownerUserName-da328454",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000",
+      "projectName": "projectName-57a4a4a3"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-a525914a",
+    "description": "description-f7b52a91",
+    "deployment": {
+      "$objectType": "networking.v4.config.GatewayDeployment",
+      "clusterReference": "000623f4-7174-ae2a-0000-00000001c1da",
+      "managementInterface": {
+        "mtu": 1500,
+        "$objectType": "networking.v4.config.GatewayManagementInterface",
+        "subnetReference": "d616c63b-0c2b-4cb3-8ac3-c9addda52c16",
+        "address": {
+          "$objectType": "common.v1.config.IPAddress",
+          "ipv4": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "198.51.100.120",
+            "prefixLength": 24
+          }
+        },
+        "defaultGateway": {
+          "$objectType": "common.v1.config.IPAddress",
+          "ipv4": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "198.51.100.96",
+            "prefixLength": 32
+          }
+        }
+      },
+      "interfaces": [
+        {
+          "mtu": 1500,
+          "$objectType": "networking.v4.config.GatewayInterface",
+          "subnetReference": "d616c63b-0c2b-4cb3-8ac3-c9addda52c16",
+          "ipAddress": {
+            "$objectType": "common.v1.config.IPAddress",
+            "ipv4": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "198.51.100.120",
+              "prefixLength": 24
+            }
+          },
+          "defaultGatewayAddress": {
+            "$objectType": "common.v1.config.IPAddress",
+            "ipv4": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "198.51.100.96",
+              "prefixLength": 24
+            }
+          },
+          "macAddress": "00:00:5e:00:53:01"
+        }
+      ],
+      "shouldSynchronizeSystemNtpServers": false,
+      "ntpServers": [
+        {
+          "$objectType": "common.v1.config.IPAddressOrFQDN",
+          "fqdn": {
+            "$objectType": "common.v1.config.FQDN",
+            "value": "value-b138bfa2"
+          }
+        }
+      ],
+      "shouldSynchronizeSystemDnsServers": true,
+      "dnsServers": [
+        {
+          "$objectType": "common.v1.config.IPAddress",
+          "ipv4": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "198.51.100.218",
+            "prefixLength": 32
+          }
+        }
+      ]
+    },
+    "status": {
+      "$objectType": "networking.v4.config.Status",
+      "state": "UP"
+    }
+  }
+]

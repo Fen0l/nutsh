@@ -1,0 +1,48 @@
+[package]
+name = "nutsh-tui"
+description = "ratatui rendering and input handling"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+
+[lints]
+workspace = true
+
+[features]
+# The hooks tests reach for and nothing else may: row injection, the selection's name, and -
+# through `nutsh-core/testing` - the in-flight cycle's clock.
+# Enabled for this crate's own integration tests through the dev-dependency below, so a
+# release build of the binary cannot call them.
+testing = ["nutsh-core/testing"]
+
+[dependencies]
+anyhow.workspace = true
+crossterm.workspace = true
+futures.workspace = true
+ratatui.workspace = true
+serde_json.workspace = true
+# `signal` on top of the workspace features: the terminal has to be handed back before a
+# SIGTERM or SIGHUP kills the process.
+tokio = { workspace = true, features = ["signal"] }
+# The cache write runs off the frame, so a write that failed has nowhere on screen to say so.
+tracing.workspace = true
+unicode-width = "0.2"
+nutsh-catalog.workspace = true
+nutsh-core.workspace = true
+nutsh-prism.workspace = true
+terminal-colorsaurus = "1"
+
+[dev-dependencies]
+insta.workspace = true
+nutsh-mockpc.workspace = true
+# The guardrail tests write the rule they mean in the config file's own `[[guardrails]]`
+# syntax, so they parse it with the same types and parser the file does.
+nutsh-config.workspace = true
+serde.workspace = true
+# The cache tests give a run its own state directory instead of the machine's.
+tempfile = "3"
+toml.workspace = true
+# This crate, with its test hooks: an integration test is an external crate, so it links the
+# library like any other consumer - with the feature the binary never asks for.
+nutsh-tui = { path = ".", features = ["testing"] }

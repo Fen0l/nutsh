@@ -1,0 +1,182 @@
+[
+  {
+    "$objectType": "datapolicies.v4.config.ProtectionPolicy",
+    "extId": "8865e501-3b3d-457e-9c5d-64b71b9688c6",
+    "links": [
+      {
+        "$objectType": "common.v1.response.ApiLink",
+        "href": "https://203.0.113.1:9440/api/datapolicies/v4.3/config/protection-policies/8865e501-3b3d-457e-9c5d-64b71b9688c6",
+        "rel": "protection_policy"
+      }
+    ],
+    "ownerExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-336655ea",
+    "replicationLocations": [
+      {
+        "$objectType": "datapolicies.v4.config.ReplicationLocation",
+        "label": "PC_203.0.113.1-0",
+        "domainManagerExtId": "36feb6ab-2508-4451-8c73-bed665e94892",
+        "isPrimary": true
+      },
+      {
+        "replicationSubLocation": {
+          "$objectType": "datapolicies.v4.config.NutanixCluster",
+          "clusterExtIds": [
+            "0006237e-c983-e712-0000-00000001c1d0"
+          ]
+        },
+        "label": "PC_203.0.113.1-1",
+        "domainManagerExtId": "36feb6ab-2508-4451-8c73-bed665e94892",
+        "isPrimary": false
+      }
+    ],
+    "replicationConfigurations": [
+      {
+        "$objectType": "datapolicies.v4.config.ReplicationConfiguration",
+        "sourceLocationLabel": "PC_203.0.113.1-0",
+        "remoteLocationLabel": "PC_203.0.113.1-1",
+        "schedule": {
+          "retention": {
+            "$objectType": "datapolicies.v4.config.LinearRetention",
+            "local": 1,
+            "remote": 1
+          },
+          "$objectType": "datapolicies.v4.config.Schedule",
+          "recoveryPointType": "CRASH_CONSISTENT",
+          "recoveryPointObjectiveTimeSeconds": 3600,
+          "scheduleExtId": "d61c96d6-77e0-4240-9835-53eb945a3cd5",
+          "isReplicationPaused": false
+        }
+      },
+      {
+        "sourceLocationLabel": "PC_203.0.113.1-1",
+        "remoteLocationLabel": "PC_203.0.113.1-0",
+        "schedule": {
+          "retention": {
+            "$objectType": "datapolicies.v4.config.LinearRetention",
+            "local": 1,
+            "remote": 1
+          },
+          "$objectType": "datapolicies.v4.config.Schedule",
+          "recoveryPointType": "CRASH_CONSISTENT",
+          "recoveryPointObjectiveTimeSeconds": 3600,
+          "scheduleExtId": "f4869fd0-9ad3-4d96-8a08-622e30efcb8a",
+          "isReplicationPaused": false
+        }
+      }
+    ],
+    "categoryIds": [
+      "10c51cf3-b1cd-472a-6c9d-74f5a9f16ded"
+    ]
+  },
+  {
+    "$objectType": "datapolicies.v4.config.ProtectionPolicy",
+    "extId": "471b8e79-bce2-478d-8a45-685a1887c417",
+    "links": [
+      {
+        "$objectType": "common.v1.response.ApiLink",
+        "href": "https://203.0.113.1:9440/api/datapolicies/v4.3/config/protection-policies/471b8e79-bce2-478d-8a45-685a1887c417",
+        "rel": "protection_policy"
+      }
+    ],
+    "isApprovalPolicyNeeded": false,
+    "ownerExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-61ca4649",
+    "replicationLocations": [
+      {
+        "replicationSubLocation": {
+          "$objectType": "datapolicies.v4.config.NutanixCluster",
+          "clusterExtIds": [
+            "0006237e-c983-e712-0000-00000001c1d0"
+          ]
+        },
+        "$objectType": "datapolicies.v4.config.ReplicationLocation",
+        "label": "0",
+        "domainManagerExtId": "36feb6ab-2508-4451-8c73-bed665e94892",
+        "isPrimary": true
+      }
+    ],
+    "replicationConfigurations": [
+      {
+        "$objectType": "datapolicies.v4.config.ReplicationConfiguration",
+        "sourceLocationLabel": "0",
+        "schedule": {
+          "retention": {
+            "$objectType": "datapolicies.v4.config.LinearRetention",
+            "local": 2
+          },
+          "$objectType": "datapolicies.v4.config.Schedule",
+          "recoveryPointType": "CRASH_CONSISTENT",
+          "recoveryPointObjectiveTimeSeconds": 3600
+        }
+      }
+    ],
+    "categoryIds": [
+      "7ff78d8c-b014-4c82-8d2c-ebe0a3628d78"
+    ]
+  },
+  {
+    "$objectType": "datapolicies.v4.config.ProtectionPolicy",
+    "extId": "037e9356-9ba3-4274-a9c5-8462a45f5b75",
+    "links": [
+      {
+        "$objectType": "common.v1.response.ApiLink",
+        "href": "https://203.0.113.1:9440/api/datapolicies/v4.3/config/protection-policies/037e9356-9ba3-4274-a9c5-8462a45f5b75",
+        "rel": "protection_policy"
+      }
+    ],
+    "ownerExtId": "08f0dcd1-3a70-57a1-b84b-97d8e7b270fc",
+    "name": "name-9a57ec3a",
+    "replicationLocations": [
+      {
+        "replicationSubLocation": {
+          "$objectType": "datapolicies.v4.config.NutanixCluster",
+          "clusterExtIds": [
+            "0006237e-c983-e712-0000-00000001c1d0"
+          ]
+        },
+        "$objectType": "datapolicies.v4.config.ReplicationLocation",
+        "label": "0",
+        "domainManagerExtId": "36feb6ab-2508-4451-8c73-bed665e94892",
+        "isPrimary": true
+      },
+      {
+        "replicationSubLocation": {
+          "$objectType": "datapolicies.v4.config.NutanixCluster",
+          "clusterExtIds": [
+            "000623f4-7174-ae2a-0000-00000001c1da"
+          ]
+        },
+        "label": "1",
+        "domainManagerExtId": "36feb6ab-2508-4451-8c73-bed665e94892",
+        "isPrimary": false
+      }
+    ],
+    "replicationConfigurations": [
+      {
+        "$objectType": "datapolicies.v4.config.ReplicationConfiguration",
+        "sourceLocationLabel": "0",
+        "remoteLocationLabel": "1",
+        "schedule": {
+          "$objectType": "datapolicies.v4.config.Schedule",
+          "recoveryPointType": "CRASH_CONSISTENT",
+          "recoveryPointObjectiveTimeSeconds": 0,
+          "syncReplicationAutoSuspendTimeoutSeconds": 10
+        }
+      },
+      {
+        "sourceLocationLabel": "1",
+        "remoteLocationLabel": "0",
+        "schedule": {
+          "$objectType": "datapolicies.v4.config.Schedule",
+          "recoveryPointType": "CRASH_CONSISTENT",
+          "recoveryPointObjectiveTimeSeconds": 0,
+          "syncReplicationAutoSuspendTimeoutSeconds": 10
+        }
+      }
+    ],
+    "categoryIds": [
+      "70f77736-b5e8-52d0-b587-9e58afc90d3e"
+    ]
+  }
+]

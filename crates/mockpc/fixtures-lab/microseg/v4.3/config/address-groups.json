@@ -1,0 +1,40 @@
+[
+  {
+    "$objectType": "microseg.v4.config.AddressGroup",
+    "extId": "acf4a099-1718-4314-ac1d-e17f6022ab55",
+    "createdBy": "createdBy-9a8253ee",
+    "creationTime": "2025-11-03T07:47:10.527-08:00",
+    "lastUpdateTime": "2026-08-04T06:45:41.371-07:00",
+    "isSharedWithAllProjects": true,
+    "name": "name-35bcef1e",
+    "ipv4Addresses": [
+      {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "203.0.113.247",
+        "prefixLength": 32
+      }
+    ],
+    "projectExtId": "00000000-0000-0000-0000-000000000000"
+  },
+  {
+    "$objectType": "microseg.v4.config.AddressGroup",
+    "extId": "824384f1-0be5-45e6-a83d-5ba7c751da47",
+    "createdBy": "createdBy-18f299f1",
+    "creationTime": "2025-07-16T03:01:44.083-07:00",
+    "lastUpdateTime": "2026-08-04T06:45:41.364-07:00",
+    "isSharedWithAllProjects": true,
+    "name": "name-cde542da",
+    "ipRanges": [
+      {
+        "$objectType": "microseg.v4.config.IPv4Range",
+        "startIp": "198.51.100.218",
+        "endIp": "198.51.100.20"
+      },
+      {
+        "startIp": "198.51.100.52",
+        "endIp": "203.0.113.169"
+      }
+    ],
+    "projectExtId": "createdBy-18f299f1"
+  }
+]

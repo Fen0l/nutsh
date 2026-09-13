@@ -1,0 +1,778 @@
+[
+  {
+    "$objectType": "clustermgmt.v4.config.HostNic",
+    "extId": "89759e9e-9d94-418c-a1f9-db804f8d2e54",
+    "name": "name-7a25a404",
+    "hostDescription": "Intel Corporation Ethernet Controller X550",
+    "macAddress": "00:00:5e:00:53:01",
+    "interfaceStatus": "0",
+    "linkSpeedInKbps": 0,
+    "mtuInBytes": 1500,
+    "nodeUuid": "38521854-c20d-41ff-8348-41c53db66e38",
+    "rxRingSizeInBytes": 512,
+    "txRingSizeInBytes": 512,
+    "linkCapacityInMbps": 10000,
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "supportedCapabilities": [
+      "PCIEPASSTHROUGH"
+    ],
+    "driverVersion": "ixgbe:6.3.4",
+    "firmwareVersion": "0x800018a5, 1.3769.0",
+    "pciModelId": "8086:1563",
+    "virtualSwitchExtId": "23b46b55-f004-42f1-b48b-e6b2c2166adf",
+    "operatingMode": "ETHERNET"
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.HostNic",
+    "extId": "08448adb-17f4-40d7-b7de-88da2e5f4156",
+    "discoveryProtocol": "LLDP",
+    "switchDeviceId": "MikroTik-1",
+    "switchVendorInfo": "MikroTik RouterOS 7.15.3 (stable) 2024-07-24 10:39:01 CRS326-24S+2Q+",
+    "name": "name-7a25a91d",
+    "hostDescription": "Intel Corporation 82599ES 10-Gigabit SFI/SFP+ Network Connection (Ethernet Server Adapter X520-2)",
+    "macAddress": "00:00:5e:00:53:01",
+    "interfaceStatus": "1",
+    "linkSpeedInKbps": 10000000,
+    "mtuInBytes": 1500,
+    "nodeUuid": "db7c8f4b-541d-4db7-b9f7-4e24cad11d84",
+    "switchManagementIp": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv6": {
+        "$objectType": "common.v1.config.IPv6Address",
+        "value": "2001:db8::deac",
+        "prefixLength": 128
+      }
+    },
+    "switchMacAddress": "00:00:5e:00:53:01",
+    "rxRingSizeInBytes": 512,
+    "txRingSizeInBytes": 512,
+    "linkCapacityInMbps": 10000,
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "supportedCapabilities": [
+      "PCIEPASSTHROUGH"
+    ],
+    "driverVersion": "ixgbe:6.3.4",
+    "firmwareVersion": "0x800006d1, 255.65535.255",
+    "pciModelId": "8086:10fb",
+    "virtualSwitchExtId": "3cc06321-377f-4d60-a19d-98db546a6819",
+    "operatingMode": "ETHERNET"
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.HostNic",
+    "extId": "070d0c4f-7e7c-4a54-9b1e-77e6e1471b6c",
+    "discoveryProtocol": "LLDP",
+    "switchDeviceId": "MikroTik-1",
+    "switchVendorInfo": "MikroTik RouterOS 7.15.3 (stable) 2024-07-24 10:39:01 CRS326-24S+2Q+",
+    "name": "name-7a25a76a",
+    "hostDescription": "Intel Corporation 82599ES 10-Gigabit SFI/SFP+ Network Connection (Ethernet Server Adapter X520-2)",
+    "macAddress": "00:00:5e:00:53:01",
+    "interfaceStatus": "1",
+    "linkSpeedInKbps": 10000000,
+    "mtuInBytes": 1500,
+    "nodeUuid": "73e903d6-2b8a-46e3-877c-b6bbb347bb4a",
+    "switchManagementIp": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv6": {
+        "$objectType": "common.v1.config.IPv6Address",
+        "value": "2001:db8::deac",
+        "prefixLength": 128
+      }
+    },
+    "switchMacAddress": "00:00:5e:00:53:01",
+    "rxRingSizeInBytes": 512,
+    "txRingSizeInBytes": 512,
+    "linkCapacityInMbps": 10000,
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "supportedCapabilities": [
+      "PCIEPASSTHROUGH"
+    ],
+    "driverVersion": "ixgbe:6.3.4",
+    "firmwareVersion": "0x800006d1, 255.65535.255",
+    "pciModelId": "8086:10fb",
+    "virtualSwitchExtId": "3cc06321-377f-4d60-a19d-98db546a6819",
+    "operatingMode": "ETHERNET"
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.HostNic",
+    "extId": "7643c073-642e-4568-9fab-45edb8dded1b",
+    "name": "name-7a25a5b7",
+    "hostDescription": "Intel Corporation Ethernet Controller X550",
+    "macAddress": "00:00:5e:00:53:01",
+    "interfaceStatus": "0",
+    "linkSpeedInKbps": 0,
+    "mtuInBytes": 1500,
+    "nodeUuid": "db7c8f4b-541d-4db7-b9f7-4e24cad11d84",
+    "rxRingSizeInBytes": 512,
+    "txRingSizeInBytes": 512,
+    "linkCapacityInMbps": 10000,
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "supportedCapabilities": [
+      "PCIEPASSTHROUGH"
+    ],
+    "driverVersion": "ixgbe:6.3.4",
+    "firmwareVersion": "0x80001743, 1.2684.0",
+    "pciModelId": "8086:1563",
+    "virtualSwitchExtId": "3cc06321-377f-4d60-a19d-98db546a6819",
+    "operatingMode": "ETHERNET"
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.HostNic",
+    "extId": "9386f99e-7d75-4a04-a381-8d63e6105e90",
+    "name": "name-7a25a91d",
+    "hostDescription": "Intel Corporation 82599ES 10-Gigabit SFI/SFP+ Network Connection (Ethernet Server Adapter X520-2)",
+    "macAddress": "00:00:5e:00:53:01",
+    "interfaceStatus": "0",
+    "linkSpeedInKbps": 0,
+    "mtuInBytes": 1500,
+    "nodeUuid": "38521854-c20d-41ff-8348-41c53db66e38",
+    "rxRingSizeInBytes": 512,
+    "txRingSizeInBytes": 512,
+    "linkCapacityInMbps": 10000,
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "supportedCapabilities": [
+      "PCIEPASSTHROUGH"
+    ],
+    "driverVersion": "ixgbe:6.3.4",
+    "firmwareVersion": "0x800006d1, 255.65535.255",
+    "pciModelId": "8086:10fb",
+    "virtualSwitchExtId": "23b46b55-f004-42f1-b48b-e6b2c2166adf",
+    "operatingMode": "ETHERNET"
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.HostNic",
+    "extId": "18d2ace4-4b4b-4e93-aece-469d7b907786",
+    "discoveryProtocol": "LLDP",
+    "switchDeviceId": "MikroTik-2",
+    "switchVendorInfo": "MikroTik RouterOS 7.15.3 (stable) 2024-07-24 10:39:01 CRS326-24S+2Q+",
+    "name": "name-7a25a91d",
+    "hostDescription": "Intel Corporation 82599ES 10-Gigabit SFI/SFP+ Network Connection (Ethernet Server Adapter X520-2)",
+    "macAddress": "00:00:5e:00:53:01",
+    "interfaceStatus": "1",
+    "linkSpeedInKbps": 10000000,
+    "mtuInBytes": 1500,
+    "nodeUuid": "422ac3ad-bb71-4c47-83f9-7367f1b7da90",
+    "switchManagementIp": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv6": {
+        "$objectType": "common.v1.config.IPv6Address",
+        "value": "2001:db8::2c57",
+        "prefixLength": 128
+      }
+    },
+    "switchMacAddress": "00:00:5e:00:53:01",
+    "rxRingSizeInBytes": 512,
+    "txRingSizeInBytes": 512,
+    "linkCapacityInMbps": 10000,
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "supportedCapabilities": [
+      "PCIEPASSTHROUGH"
+    ],
+    "driverVersion": "ixgbe:6.3.4",
+    "firmwareVersion": "0x800006d1, 255.65535.255",
+    "pciModelId": "8086:10fb",
+    "virtualSwitchExtId": "3cc06321-377f-4d60-a19d-98db546a6819",
+    "operatingMode": "ETHERNET"
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.HostNic",
+    "extId": "94d8a73f-7b75-4717-a547-4dd39af937e7",
+    "name": "name-7a25a404",
+    "hostDescription": "Intel Corporation Ethernet Controller X550",
+    "macAddress": "00:00:5e:00:53:01",
+    "interfaceStatus": "0",
+    "linkSpeedInKbps": 0,
+    "mtuInBytes": 1500,
+    "nodeUuid": "db7c8f4b-541d-4db7-b9f7-4e24cad11d84",
+    "rxRingSizeInBytes": 512,
+    "txRingSizeInBytes": 512,
+    "linkCapacityInMbps": 10000,
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "supportedCapabilities": [
+      "PCIEPASSTHROUGH"
+    ],
+    "driverVersion": "ixgbe:6.3.4",
+    "firmwareVersion": "0x80001743, 1.2684.0",
+    "pciModelId": "8086:1563",
+    "virtualSwitchExtId": "3cc06321-377f-4d60-a19d-98db546a6819",
+    "operatingMode": "ETHERNET"
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.HostNic",
+    "extId": "f57cefda-4821-402c-ac48-00648815cb05",
+    "discoveryProtocol": "LLDP",
+    "switchDeviceId": "MikroTik-1",
+    "switchVendorInfo": "MikroTik RouterOS 7.15.3 (stable) 2024-07-24 10:39:01 CRS326-24S+2Q+",
+    "name": "name-7a25a91d",
+    "hostDescription": "Intel Corporation 82599ES 10-Gigabit SFI/SFP+ Network Connection (Ethernet Server Adapter X520-2)",
+    "macAddress": "00:00:5e:00:53:01",
+    "interfaceStatus": "1",
+    "linkSpeedInKbps": 10000000,
+    "mtuInBytes": 1500,
+    "nodeUuid": "0a505ef2-ede4-467c-941f-d39d73bdf1c9",
+    "switchManagementIp": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv6": {
+        "$objectType": "common.v1.config.IPv6Address",
+        "value": "2001:db8::deac",
+        "prefixLength": 128
+      }
+    },
+    "switchMacAddress": "00:00:5e:00:53:01",
+    "rxRingSizeInBytes": 512,
+    "txRingSizeInBytes": 512,
+    "linkCapacityInMbps": 10000,
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "supportedCapabilities": [
+      "PCIEPASSTHROUGH"
+    ],
+    "driverVersion": "ixgbe:6.3.4",
+    "firmwareVersion": "0x800006d1, 255.65535.255",
+    "pciModelId": "8086:10fb",
+    "virtualSwitchExtId": "3cc06321-377f-4d60-a19d-98db546a6819",
+    "operatingMode": "ETHERNET"
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.HostNic",
+    "extId": "83f36a0d-17e4-4273-848c-b3771f5bed0a",
+    "name": "name-7a25a5b7",
+    "hostDescription": "Intel Corporation Ethernet Controller X550",
+    "macAddress": "00:00:5e:00:53:01",
+    "interfaceStatus": "0",
+    "linkSpeedInKbps": 0,
+    "mtuInBytes": 1500,
+    "nodeUuid": "38521854-c20d-41ff-8348-41c53db66e38",
+    "rxRingSizeInBytes": 512,
+    "txRingSizeInBytes": 512,
+    "linkCapacityInMbps": 10000,
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "supportedCapabilities": [
+      "PCIEPASSTHROUGH"
+    ],
+    "driverVersion": "ixgbe:6.3.4",
+    "firmwareVersion": "0x800018a5, 1.3769.0",
+    "pciModelId": "8086:1563",
+    "virtualSwitchExtId": "23b46b55-f004-42f1-b48b-e6b2c2166adf",
+    "operatingMode": "ETHERNET"
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.HostNic",
+    "extId": "57559bd2-5318-404f-be0b-6ed6918491bb",
+    "discoveryProtocol": "LLDP",
+    "switchDeviceId": "MikroTik-2",
+    "switchVendorInfo": "MikroTik RouterOS 7.15.3 (stable) 2024-07-24 10:39:01 CRS326-24S+2Q+",
+    "name": "name-7a25a91d",
+    "hostDescription": "Intel Corporation 82599ES 10-Gigabit SFI/SFP+ Network Connection (Ethernet Server Adapter X520-2)",
+    "macAddress": "00:00:5e:00:53:01",
+    "interfaceStatus": "1",
+    "linkSpeedInKbps": 10000000,
+    "mtuInBytes": 1500,
+    "nodeUuid": "73e903d6-2b8a-46e3-877c-b6bbb347bb4a",
+    "switchManagementIp": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv6": {
+        "$objectType": "common.v1.config.IPv6Address",
+        "value": "2001:db8::2c57",
+        "prefixLength": 128
+      }
+    },
+    "switchMacAddress": "00:00:5e:00:53:01",
+    "rxRingSizeInBytes": 512,
+    "txRingSizeInBytes": 512,
+    "linkCapacityInMbps": 10000,
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "supportedCapabilities": [
+      "PCIEPASSTHROUGH"
+    ],
+    "driverVersion": "ixgbe:6.3.4",
+    "firmwareVersion": "0x800006d1, 255.65535.255",
+    "pciModelId": "8086:10fb",
+    "virtualSwitchExtId": "3cc06321-377f-4d60-a19d-98db546a6819",
+    "operatingMode": "ETHERNET"
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.HostNic",
+    "extId": "9193e285-78e1-46a4-871c-ef886910e64a",
+    "name": "name-7a25a5b7",
+    "hostDescription": "Intel Corporation Ethernet Controller X550",
+    "macAddress": "00:00:5e:00:53:01",
+    "interfaceStatus": "0",
+    "linkSpeedInKbps": 0,
+    "mtuInBytes": 1500,
+    "nodeUuid": "0a505ef2-ede4-467c-941f-d39d73bdf1c9",
+    "rxRingSizeInBytes": 512,
+    "txRingSizeInBytes": 512,
+    "linkCapacityInMbps": 10000,
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "supportedCapabilities": [
+      "PCIEPASSTHROUGH"
+    ],
+    "driverVersion": "ixgbe:6.3.4",
+    "firmwareVersion": "0x80001743, 1.2684.0",
+    "pciModelId": "8086:1563",
+    "virtualSwitchExtId": "3cc06321-377f-4d60-a19d-98db546a6819",
+    "operatingMode": "ETHERNET"
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.HostNic",
+    "extId": "9fdc2665-fb90-4f7b-bed9-735a85daae39",
+    "name": "name-7a25a404",
+    "hostDescription": "Intel Corporation Ethernet Controller X550",
+    "macAddress": "00:00:5e:00:53:01",
+    "interfaceStatus": "0",
+    "linkSpeedInKbps": 0,
+    "mtuInBytes": 1500,
+    "nodeUuid": "422ac3ad-bb71-4c47-83f9-7367f1b7da90",
+    "rxRingSizeInBytes": 512,
+    "txRingSizeInBytes": 512,
+    "linkCapacityInMbps": 10000,
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "supportedCapabilities": [
+      "PCIEPASSTHROUGH"
+    ],
+    "driverVersion": "ixgbe:6.3.4",
+    "firmwareVersion": "0x80001743, 1.2684.0",
+    "pciModelId": "8086:1563",
+    "virtualSwitchExtId": "3cc06321-377f-4d60-a19d-98db546a6819",
+    "operatingMode": "ETHERNET"
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.HostNic",
+    "extId": "5314b52b-82ef-4354-a735-2f2d48cdaf60",
+    "name": "name-7a25a5b7",
+    "hostDescription": "Intel Corporation Ethernet Controller X550",
+    "macAddress": "00:00:5e:00:53:01",
+    "interfaceStatus": "0",
+    "linkSpeedInKbps": 0,
+    "mtuInBytes": 1500,
+    "nodeUuid": "422ac3ad-bb71-4c47-83f9-7367f1b7da90",
+    "rxRingSizeInBytes": 512,
+    "txRingSizeInBytes": 512,
+    "linkCapacityInMbps": 10000,
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "supportedCapabilities": [
+      "PCIEPASSTHROUGH"
+    ],
+    "driverVersion": "ixgbe:6.3.4",
+    "firmwareVersion": "0x80001743, 1.2684.0",
+    "pciModelId": "8086:1563",
+    "virtualSwitchExtId": "3cc06321-377f-4d60-a19d-98db546a6819",
+    "operatingMode": "ETHERNET"
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.HostNic",
+    "extId": "5cf5664b-2aee-4300-a1df-93ec238311c7",
+    "name": "name-7a25a404",
+    "hostDescription": "Intel Corporation Ethernet Controller X550",
+    "macAddress": "00:00:5e:00:53:01",
+    "interfaceStatus": "0",
+    "linkSpeedInKbps": 0,
+    "mtuInBytes": 1500,
+    "nodeUuid": "0a505ef2-ede4-467c-941f-d39d73bdf1c9",
+    "rxRingSizeInBytes": 512,
+    "txRingSizeInBytes": 512,
+    "linkCapacityInMbps": 10000,
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "supportedCapabilities": [
+      "PCIEPASSTHROUGH"
+    ],
+    "driverVersion": "ixgbe:6.3.4",
+    "firmwareVersion": "0x80001743, 1.2684.0",
+    "pciModelId": "8086:1563",
+    "virtualSwitchExtId": "3cc06321-377f-4d60-a19d-98db546a6819",
+    "operatingMode": "ETHERNET"
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.HostNic",
+    "extId": "65ff2d78-2544-463a-9255-035664ce15c1",
+    "name": "name-7a25a91d",
+    "hostDescription": "Intel Corporation 82599ES 10-Gigabit SFI/SFP+ Network Connection (Ethernet Server Adapter X520-2)",
+    "macAddress": "00:00:5e:00:53:01",
+    "interfaceStatus": "0",
+    "linkSpeedInKbps": 0,
+    "mtuInBytes": 1500,
+    "nodeUuid": "9cad7457-dc26-4839-bfce-2aa79a0f54c7",
+    "rxRingSizeInBytes": 512,
+    "txRingSizeInBytes": 512,
+    "linkCapacityInMbps": 10000,
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "supportedCapabilities": [
+      "PCIEPASSTHROUGH"
+    ],
+    "driverVersion": "ixgbe:6.3.4",
+    "firmwareVersion": "0x800006d1, 255.65535.255",
+    "pciModelId": "8086:10fb",
+    "virtualSwitchExtId": "23b46b55-f004-42f1-b48b-e6b2c2166adf",
+    "operatingMode": "ETHERNET"
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.HostNic",
+    "extId": "c62113ea-2a64-4192-b2fe-414e97980fef",
+    "discoveryProtocol": "LLDP",
+    "switchDeviceId": "MikroTik-2",
+    "switchVendorInfo": "MikroTik RouterOS 7.15.3 (stable) 2024-07-24 10:39:01 CRS326-24S+2Q+",
+    "name": "name-7a25a76a",
+    "hostDescription": "Intel Corporation 82599ES 10-Gigabit SFI/SFP+ Network Connection (Ethernet Server Adapter X520-2)",
+    "macAddress": "00:00:5e:00:53:01",
+    "interfaceStatus": "1",
+    "linkSpeedInKbps": 10000000,
+    "mtuInBytes": 1500,
+    "nodeUuid": "db7c8f4b-541d-4db7-b9f7-4e24cad11d84",
+    "switchManagementIp": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv6": {
+        "$objectType": "common.v1.config.IPv6Address",
+        "value": "2001:db8::2c57",
+        "prefixLength": 128
+      }
+    },
+    "switchMacAddress": "00:00:5e:00:53:01",
+    "rxRingSizeInBytes": 512,
+    "txRingSizeInBytes": 512,
+    "linkCapacityInMbps": 10000,
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "supportedCapabilities": [
+      "PCIEPASSTHROUGH"
+    ],
+    "driverVersion": "ixgbe:6.3.4",
+    "firmwareVersion": "0x800006d1, 255.65535.255",
+    "pciModelId": "8086:10fb",
+    "virtualSwitchExtId": "3cc06321-377f-4d60-a19d-98db546a6819",
+    "operatingMode": "ETHERNET"
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.HostNic",
+    "extId": "493f3a11-c638-490a-b39c-b1a252f9258f",
+    "discoveryProtocol": "LLDP",
+    "switchDeviceId": "MikroTik-2",
+    "switchVendorInfo": "MikroTik RouterOS 7.15.3 (stable) 2024-07-24 10:39:01 CRS326-24S+2Q+",
+    "name": "name-7a25a76a",
+    "hostDescription": "Intel Corporation 82599ES 10-Gigabit SFI/SFP+ Network Connection (Ethernet Server Adapter X520-2)",
+    "macAddress": "00:00:5e:00:53:01",
+    "interfaceStatus": "1",
+    "linkSpeedInKbps": 10000000,
+    "mtuInBytes": 1500,
+    "nodeUuid": "0a505ef2-ede4-467c-941f-d39d73bdf1c9",
+    "switchManagementIp": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv6": {
+        "$objectType": "common.v1.config.IPv6Address",
+        "value": "2001:db8::2c57",
+        "prefixLength": 128
+      }
+    },
+    "switchMacAddress": "00:00:5e:00:53:01",
+    "rxRingSizeInBytes": 512,
+    "txRingSizeInBytes": 512,
+    "linkCapacityInMbps": 10000,
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "supportedCapabilities": [
+      "PCIEPASSTHROUGH"
+    ],
+    "driverVersion": "ixgbe:6.3.4",
+    "firmwareVersion": "0x800006d1, 255.65535.255",
+    "pciModelId": "8086:10fb",
+    "virtualSwitchExtId": "3cc06321-377f-4d60-a19d-98db546a6819",
+    "operatingMode": "ETHERNET"
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.HostNic",
+    "extId": "cf856ba5-8454-4baa-964b-11f1d2dbc755",
+    "name": "name-7a25a404",
+    "hostDescription": "Intel Corporation Ethernet Controller X550",
+    "macAddress": "00:00:5e:00:53:01",
+    "interfaceStatus": "0",
+    "linkSpeedInKbps": 0,
+    "mtuInBytes": 1500,
+    "nodeUuid": "9cad7457-dc26-4839-bfce-2aa79a0f54c7",
+    "rxRingSizeInBytes": 512,
+    "txRingSizeInBytes": 512,
+    "linkCapacityInMbps": 10000,
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "supportedCapabilities": [
+      "PCIEPASSTHROUGH"
+    ],
+    "driverVersion": "ixgbe:6.3.4",
+    "firmwareVersion": "0x800018a5, 1.3769.0",
+    "pciModelId": "8086:1563",
+    "virtualSwitchExtId": "23b46b55-f004-42f1-b48b-e6b2c2166adf",
+    "operatingMode": "ETHERNET"
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.HostNic",
+    "extId": "9703eefb-9d39-4361-a5b9-05d608d1cfdf",
+    "name": "name-7a25a91d",
+    "hostDescription": "Intel Corporation 82599ES 10-Gigabit SFI/SFP+ Network Connection (Ethernet Server Adapter X520-2)",
+    "macAddress": "00:00:5e:00:53:01",
+    "interfaceStatus": "0",
+    "linkSpeedInKbps": 0,
+    "mtuInBytes": 1500,
+    "nodeUuid": "44e477e6-edcf-4722-b35b-88deb3a160ef",
+    "rxRingSizeInBytes": 512,
+    "txRingSizeInBytes": 512,
+    "linkCapacityInMbps": 10000,
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "supportedCapabilities": [
+      "PCIEPASSTHROUGH"
+    ],
+    "driverVersion": "ixgbe:6.3.4",
+    "firmwareVersion": "0x800006d1, 255.65535.255",
+    "pciModelId": "8086:10fb",
+    "virtualSwitchExtId": "23b46b55-f004-42f1-b48b-e6b2c2166adf",
+    "operatingMode": "ETHERNET"
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.HostNic",
+    "extId": "d45c12d7-118c-4965-874e-d6c94c6c83e9",
+    "name": "name-7a25a5b7",
+    "hostDescription": "Intel Corporation Ethernet Controller X550",
+    "macAddress": "00:00:5e:00:53:01",
+    "interfaceStatus": "0",
+    "linkSpeedInKbps": 0,
+    "mtuInBytes": 1500,
+    "nodeUuid": "73e903d6-2b8a-46e3-877c-b6bbb347bb4a",
+    "rxRingSizeInBytes": 512,
+    "txRingSizeInBytes": 512,
+    "linkCapacityInMbps": 10000,
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "supportedCapabilities": [
+      "PCIEPASSTHROUGH"
+    ],
+    "driverVersion": "ixgbe:6.3.4",
+    "firmwareVersion": "0x80001743, 1.2684.0",
+    "pciModelId": "8086:1563",
+    "virtualSwitchExtId": "3cc06321-377f-4d60-a19d-98db546a6819",
+    "operatingMode": "ETHERNET"
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.HostNic",
+    "extId": "edb37b21-a5cd-4632-9d00-15fddcf21bb9",
+    "name": "name-7a25a404",
+    "hostDescription": "Intel Corporation Ethernet Controller X550",
+    "macAddress": "00:00:5e:00:53:01",
+    "interfaceStatus": "0",
+    "linkSpeedInKbps": 0,
+    "mtuInBytes": 1500,
+    "nodeUuid": "73e903d6-2b8a-46e3-877c-b6bbb347bb4a",
+    "rxRingSizeInBytes": 512,
+    "txRingSizeInBytes": 512,
+    "linkCapacityInMbps": 10000,
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "supportedCapabilities": [
+      "PCIEPASSTHROUGH"
+    ],
+    "driverVersion": "ixgbe:6.3.4",
+    "firmwareVersion": "0x80001743, 1.2684.0",
+    "pciModelId": "8086:1563",
+    "virtualSwitchExtId": "3cc06321-377f-4d60-a19d-98db546a6819",
+    "operatingMode": "ETHERNET"
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.HostNic",
+    "extId": "f349133a-bb26-4879-be11-ab8f4ed67441",
+    "discoveryProtocol": "LLDP",
+    "switchDeviceId": "MikroTik-1",
+    "switchVendorInfo": "MikroTik RouterOS 7.15.3 (stable) 2024-07-24 10:39:01 CRS326-24S+2Q+",
+    "name": "name-7a25a76a",
+    "hostDescription": "Intel Corporation 82599ES 10-Gigabit SFI/SFP+ Network Connection (Ethernet Server Adapter X520-2)",
+    "macAddress": "00:00:5e:00:53:01",
+    "interfaceStatus": "1",
+    "linkSpeedInKbps": 10000000,
+    "mtuInBytes": 1500,
+    "nodeUuid": "9cad7457-dc26-4839-bfce-2aa79a0f54c7",
+    "switchManagementIp": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv6": {
+        "$objectType": "common.v1.config.IPv6Address",
+        "value": "2001:db8::deac",
+        "prefixLength": 128
+      }
+    },
+    "switchMacAddress": "00:00:5e:00:53:01",
+    "rxRingSizeInBytes": 512,
+    "txRingSizeInBytes": 512,
+    "linkCapacityInMbps": 10000,
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "supportedCapabilities": [
+      "PCIEPASSTHROUGH"
+    ],
+    "driverVersion": "ixgbe:6.3.4",
+    "firmwareVersion": "0x800006d1, 255.65535.255",
+    "pciModelId": "8086:10fb",
+    "virtualSwitchExtId": "23b46b55-f004-42f1-b48b-e6b2c2166adf",
+    "operatingMode": "ETHERNET"
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.HostNic",
+    "extId": "28f0b9e2-34d0-4e6a-a60e-a3de59cb1c36",
+    "discoveryProtocol": "LLDP",
+    "switchDeviceId": "MikroTik-2",
+    "switchVendorInfo": "MikroTik RouterOS 7.15.3 (stable) 2024-07-24 10:39:01 CRS326-24S+2Q+",
+    "name": "name-7a25a76a",
+    "hostDescription": "Intel Corporation 82599ES 10-Gigabit SFI/SFP+ Network Connection (Ethernet Server Adapter X520-2)",
+    "macAddress": "00:00:5e:00:53:01",
+    "interfaceStatus": "1",
+    "linkSpeedInKbps": 10000000,
+    "mtuInBytes": 1500,
+    "nodeUuid": "44e477e6-edcf-4722-b35b-88deb3a160ef",
+    "switchManagementIp": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv6": {
+        "$objectType": "common.v1.config.IPv6Address",
+        "value": "2001:db8::2c57",
+        "prefixLength": 128
+      }
+    },
+    "switchMacAddress": "00:00:5e:00:53:01",
+    "rxRingSizeInBytes": 512,
+    "txRingSizeInBytes": 512,
+    "linkCapacityInMbps": 10000,
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "supportedCapabilities": [
+      "PCIEPASSTHROUGH"
+    ],
+    "driverVersion": "ixgbe:6.3.4",
+    "firmwareVersion": "0x800006d1, 255.65535.255",
+    "pciModelId": "8086:10fb",
+    "virtualSwitchExtId": "23b46b55-f004-42f1-b48b-e6b2c2166adf",
+    "operatingMode": "ETHERNET"
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.HostNic",
+    "extId": "65482738-7c53-4ece-a440-7005029896f5",
+    "name": "name-7a25a5b7",
+    "hostDescription": "Intel Corporation Ethernet Controller X550",
+    "macAddress": "00:00:5e:00:53:01",
+    "interfaceStatus": "0",
+    "linkSpeedInKbps": 0,
+    "mtuInBytes": 1500,
+    "nodeUuid": "44e477e6-edcf-4722-b35b-88deb3a160ef",
+    "rxRingSizeInBytes": 512,
+    "txRingSizeInBytes": 512,
+    "linkCapacityInMbps": 10000,
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "supportedCapabilities": [
+      "PCIEPASSTHROUGH"
+    ],
+    "driverVersion": "ixgbe:6.3.4",
+    "firmwareVersion": "0x800018a5, 1.3769.0",
+    "pciModelId": "8086:1563",
+    "virtualSwitchExtId": "23b46b55-f004-42f1-b48b-e6b2c2166adf",
+    "operatingMode": "ETHERNET"
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.HostNic",
+    "extId": "33c8b20e-b742-41e9-b89d-91f8e07ca24f",
+    "name": "name-7a25a404",
+    "hostDescription": "Intel Corporation Ethernet Controller X550",
+    "macAddress": "00:00:5e:00:53:01",
+    "interfaceStatus": "0",
+    "linkSpeedInKbps": 0,
+    "mtuInBytes": 1500,
+    "nodeUuid": "44e477e6-edcf-4722-b35b-88deb3a160ef",
+    "rxRingSizeInBytes": 512,
+    "txRingSizeInBytes": 512,
+    "linkCapacityInMbps": 10000,
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "supportedCapabilities": [
+      "PCIEPASSTHROUGH"
+    ],
+    "driverVersion": "ixgbe:6.3.4",
+    "firmwareVersion": "0x800018a5, 1.3769.0",
+    "pciModelId": "8086:1563",
+    "virtualSwitchExtId": "23b46b55-f004-42f1-b48b-e6b2c2166adf",
+    "operatingMode": "ETHERNET"
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.HostNic",
+    "extId": "4bd5679c-ac15-42b0-b6cf-bab37076f424",
+    "discoveryProtocol": "LLDP",
+    "switchDeviceId": "MikroTik-1",
+    "switchVendorInfo": "MikroTik RouterOS 7.15.3 (stable) 2024-07-24 10:39:01 CRS326-24S+2Q+",
+    "name": "name-7a25a76a",
+    "hostDescription": "Intel Corporation 82599ES 10-Gigabit SFI/SFP+ Network Connection (Ethernet Server Adapter X520-2)",
+    "macAddress": "00:00:5e:00:53:01",
+    "interfaceStatus": "1",
+    "linkSpeedInKbps": 10000000,
+    "mtuInBytes": 1500,
+    "nodeUuid": "38521854-c20d-41ff-8348-41c53db66e38",
+    "switchManagementIp": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv6": {
+        "$objectType": "common.v1.config.IPv6Address",
+        "value": "2001:db8::deac",
+        "prefixLength": 128
+      }
+    },
+    "switchMacAddress": "00:00:5e:00:53:01",
+    "rxRingSizeInBytes": 512,
+    "txRingSizeInBytes": 512,
+    "linkCapacityInMbps": 10000,
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "supportedCapabilities": [
+      "PCIEPASSTHROUGH"
+    ],
+    "driverVersion": "ixgbe:6.3.4",
+    "firmwareVersion": "0x800006d1, 255.65535.255",
+    "pciModelId": "8086:10fb",
+    "virtualSwitchExtId": "23b46b55-f004-42f1-b48b-e6b2c2166adf",
+    "operatingMode": "ETHERNET"
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.HostNic",
+    "extId": "5419acd2-9825-489c-96eb-3f5780569f22",
+    "name": "name-7a25a5b7",
+    "hostDescription": "Intel Corporation Ethernet Controller X550",
+    "macAddress": "00:00:5e:00:53:01",
+    "interfaceStatus": "0",
+    "linkSpeedInKbps": 0,
+    "mtuInBytes": 1500,
+    "nodeUuid": "9cad7457-dc26-4839-bfce-2aa79a0f54c7",
+    "rxRingSizeInBytes": 512,
+    "txRingSizeInBytes": 512,
+    "linkCapacityInMbps": 10000,
+    "clusterExtId": "0006237e-c983-e712-0000-00000001c1d0",
+    "supportedCapabilities": [
+      "PCIEPASSTHROUGH"
+    ],
+    "driverVersion": "ixgbe:6.3.4",
+    "firmwareVersion": "0x800018a5, 1.3769.0",
+    "pciModelId": "8086:1563",
+    "virtualSwitchExtId": "23b46b55-f004-42f1-b48b-e6b2c2166adf",
+    "operatingMode": "ETHERNET"
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.HostNic",
+    "extId": "6908f735-2c56-4839-8ff7-3593415e341c",
+    "discoveryProtocol": "LLDP",
+    "switchDeviceId": "MikroTik-1",
+    "switchVendorInfo": "MikroTik RouterOS 7.15.3 (stable) 2024-07-24 10:39:01 CRS326-24S+2Q+",
+    "name": "name-7a25a76a",
+    "hostDescription": "Intel Corporation 82599ES 10-Gigabit SFI/SFP+ Network Connection (Ethernet Server Adapter X520-2)",
+    "macAddress": "00:00:5e:00:53:01",
+    "interfaceStatus": "1",
+    "linkSpeedInKbps": 10000000,
+    "mtuInBytes": 1500,
+    "nodeUuid": "422ac3ad-bb71-4c47-83f9-7367f1b7da90",
+    "switchManagementIp": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv6": {
+        "$objectType": "common.v1.config.IPv6Address",
+        "value": "2001:db8::deac",
+        "prefixLength": 128
+      }
+    },
+    "switchMacAddress": "00:00:5e:00:53:01",
+    "rxRingSizeInBytes": 512,
+    "txRingSizeInBytes": 512,
+    "linkCapacityInMbps": 10000,
+    "clusterExtId": "000623f4-7174-ae2a-0000-00000001c1da",
+    "supportedCapabilities": [
+      "PCIEPASSTHROUGH"
+    ],
+    "driverVersion": "ixgbe:6.3.4",
+    "firmwareVersion": "0x800006d1, 255.65535.255",
+    "pciModelId": "8086:10fb",
+    "virtualSwitchExtId": "3cc06321-377f-4d60-a19d-98db546a6819",
+    "operatingMode": "ETHERNET"
+  }
+]

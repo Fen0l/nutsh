@@ -1,0 +1,12 @@
+openapi: 3.0.1
+info:
+  title: three
+  version: "1"
+paths:
+  /three/v4.0/config/bolts:
+    get:
+      operationId: listBolts
+  # The same endpoint as v4.2's, under a different parameter name: `since` must not care.
+  /three/v4.0/config/bolts/{boltId}:
+    get:
+      operationId: getBolt

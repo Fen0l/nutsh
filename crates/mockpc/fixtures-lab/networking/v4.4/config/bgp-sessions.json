@@ -1,0 +1,32 @@
+[
+  {
+    "$objectType": "networking.v4.config.BgpSession",
+    "extId": "b53947bf-b6c7-459b-bed6-2c5a9317a21a",
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "00000000-0000-0000-0000-000000000000",
+      "ownerUserName": "ownerUserName-da328454",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000",
+      "projectName": "projectName-57a4a4a3"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "name-1465cbc0",
+    "description": "description-1a313a58",
+    "localGatewayReference": "499fe05e-3ef7-4e06-b216-3990eea78936",
+    "remoteGatewayReference": "6133e9f9-4642-4b04-b256-414d4c2a7726",
+    "localGatewayInterfaceIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "198.51.100.120"
+      }
+    },
+    "dynamicRoutePriority": 700,
+    "status": {
+      "$objectType": "networking.v4.config.Status",
+      "message": "bgp session is up",
+      "state": "UP"
+    },
+    "shouldAdvertiseAllExternallyRoutablePrefixes": true
+  }
+]

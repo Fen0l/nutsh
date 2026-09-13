@@ -1,0 +1,44 @@
+[
+  {
+    "$objectType": "dataprotection.v4.config.ProtectedResource",
+    "extId": "3d0c4a2e-1b8f-4c1a-9e2f-000000000001",
+    "entityType": "VM",
+    "sourceSite": { "domainManagerExtId": "0006158a-2f0d-4d5a-8e2d-000000000010" },
+    "replicationStates": [
+      {
+        "$objectType": "dataprotection.v4.config.ReplicationState",
+        "targetSite": { "domainManagerExtId": "8f4d1c92-0000-4000-8000-000000000401" },
+        "replicationStatus": "IN_SYNC",
+        "protectionPolicyExtId": "b1a2c3d4-0000-4000-8000-000000000501"
+      }
+    ]
+  },
+  {
+    "$objectType": "dataprotection.v4.config.ProtectedResource",
+    "extId": "3d0c4a2e-1b8f-4c1a-9e2f-000000000002",
+    "entityType": "VM",
+    "sourceSite": { "domainManagerExtId": "0006158a-2f0d-4d5a-8e2d-000000000010" },
+    "replicationStates": [
+      {
+        "$objectType": "dataprotection.v4.config.ReplicationState",
+        "targetSite": { "domainManagerExtId": "8f4d1c92-0000-4000-8000-000000000401" },
+        "replicationStatus": "OUT_OF_SYNC",
+        "protectionPolicyExtId": "b1a2c3d4-0000-4000-8000-000000000502"
+      }
+    ]
+  },
+  {
+    "$objectType": "dataprotection.v4.config.ProtectedResource",
+    "extId": "3d0c4a2e-1b8f-4c1a-9e2f-000000000003",
+    "entityType": "VM",
+    "sourceSite": { "domainManagerExtId": "0006158a-2f0d-4d5a-8e2d-000000000010" },
+    "replicationStates": [
+      {
+        "$objectType": "dataprotection.v4.config.ReplicationState",
+        "targetSite": { "domainManagerExtId": "8f4d1c92-0000-4000-8000-000000000401" },
+        "replicationStatus": "SYNCING",
+        "protectionPolicyExtId": "b1a2c3d4-0000-4000-8000-000000000502"
+      }
+    ]
+  }
+]

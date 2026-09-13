@@ -1,0 +1,28 @@
+---
+source: crates/tui/tests/header.rs
+expression: "app.snapshot(80, 24).unwrap()"
+---
+ nutsh Compute & Storage › VMs  [3]  cluster:<all>  ctx:-                ● live
+╭ Virtual Machines [3] ────────────────────────────────────────────────────────╮
+│  NAME                    POWER  CLUSTER      HOST        IP            MEM   │
+│▌ web-01                  ON     lab-cluster  ahv-node-1  203.0.113.11  8 GiB │
+│  web-02                  OFF    lab-cluster  -           -             4 GiB │
+│  db-01                   ON     lab-cluster  ahv-node-1  -             32 GiB│
+│                                                                              │
+│                                                                              │
+│                                                                              │
+│                                                                              │
+│                                                                              │
+│                                                                              │
+│                                                                              │
+│                                                                              │
+│                                                                              │
+│                                                                              │
+│                                                                              │
+│                                                                              │
+│                                                                              │
+│                                                                              │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+ :palette  ^b:menu  ⇥:focus  /:filter  a:actions  ⏎:drill  esc:menu  ?:help
+[meter]
