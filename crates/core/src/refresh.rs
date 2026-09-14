@@ -20,12 +20,16 @@ pub const LADDER: &[Interval] = &[
     Interval::Secs(30),
     Interval::Secs(60),
     Interval::Secs(300),
+    Interval::Secs(3_600),
+    Interval::Secs(21_600),
+    Interval::Secs(43_200),
     Interval::Word(Word::Off),
 ];
 
 /// How often this kind's views poll, and where that came from.
 ///
-/// Highest first: the session's override, `[refresh.kinds."id"]`, `[refresh] default`, and the
+/// Highest first: the session's override, `[refresh.kinds."id"]`, `[refresh.namespaces]`,
+/// `[refresh] default`, and the
 /// catalog's `poll_secs`. `None` is no schedule at all. Absence is what falls through to the
 /// next level; `auto` does not fall through - it **names** the catalog, which is the escape
 /// hatch a global default needs, and it reports `Source::Catalog` wherever it was written,
@@ -41,6 +45,9 @@ pub fn effective(
     }
     if let Some(v) = cfg.kinds.get(kind.id).copied() {
         return one(kind, v, Source::File);
+    }
+    if let Some(v) = cfg.namespaces.get(kind.namespace).copied() {
+        return one(kind, v, Source::Namespace(kind.namespace));
     }
     if let Some(v) = cfg.default {
         return one(kind, v, Source::File);
@@ -105,7 +112,7 @@ pub fn show(v: Interval) -> String {
 }
 
 /// `auto`, `off`, or a length of time in the one spelling this program has - `cell::span`'s, so
-/// `45`, `45s`, `1m` and `5m` all read. Refused, never clamped: a screen showing `0s` in a
+/// `45`, `45s`, `1m`, `5m` and `12h` all read. Refused, never clamped: a screen showing `0s` in a
 /// source column over a poller running at one second would be lying in the one place this work
 /// exists to stop lying.
 pub fn parse(word: &str) -> Result<Interval, String> {
@@ -115,13 +122,16 @@ pub fn parse(word: &str) -> Result<Interval, String> {
         "off" => return Ok(Interval::Word(Word::Off)),
         _ => {}
     }
-    let (digits, mult) = match word.strip_suffix('m') {
-        Some(d) => (d, 60u32),
-        None => (word.strip_suffix('s').unwrap_or(word), 1u32),
+    let (digits, mult) = match word.strip_suffix('h') {
+        Some(d) => (d, 3_600u32),
+        None => match word.strip_suffix('m') {
+            Some(d) => (d, 60u32),
+            None => (word.strip_suffix('s').unwrap_or(word), 1u32),
+        },
     };
-    let n: u32 = digits
-        .parse()
-        .map_err(|_| format!("{word:?} is not auto, off, or a length of time like 30s or 5m"))?;
+    let n: u32 = digits.parse().map_err(|_| {
+        format!("{word:?} is not auto, off, or a length of time like 30s, 5m or 12h")
+    })?;
     let secs = n.saturating_mul(mult);
     if u64::from(secs) < MIN_INTERVAL.as_secs() {
         return Err(format!("{}s is the floor", MIN_INTERVAL.as_secs()));
@@ -141,6 +151,45 @@ mod tests {
     }
 
     /// The four levels, highest first, each one asserted against the one below it.
+    #[test]
+    fn a_namespace_schedules_its_kinds_and_a_kind_of_its_own_still_wins() {
+        let vm = nutsh_catalog::kind("vmm.ahv.config.Vm").expect("VMs");
+        let image = nutsh_catalog::kind("vmm.content.Image").expect("Images");
+        let host = nutsh_catalog::kind("clustermgmt.config.Host").expect("Hosts");
+
+        let mut cfg = Refresh::default();
+        cfg.namespaces
+            .insert("vmm".to_string(), Interval::Secs(300));
+
+        // Every kind of the namespace, and nothing outside it.
+        assert_eq!(
+            effective(vm, &cfg, None),
+            (Some(Duration::from_secs(300)), Source::Namespace("vmm"))
+        );
+        assert_eq!(
+            effective(image, &cfg, None),
+            (Some(Duration::from_secs(300)), Source::Namespace("vmm"))
+        );
+        assert_eq!(effective(host, &cfg, None).1, Source::Catalog);
+
+        // A kind of its own outranks its namespace, and the session outranks both.
+        cfg.kinds
+            .insert("vmm.ahv.config.Vm".to_string(), Interval::Secs(10));
+        assert_eq!(
+            effective(vm, &cfg, None),
+            (Some(Duration::from_secs(10)), Source::File)
+        );
+        assert_eq!(
+            effective(vm, &cfg, Some(Interval::Secs(5))),
+            (Some(Duration::from_secs(5)), Source::Session)
+        );
+
+        // And a namespace outranks the global default.
+        cfg.default = Some(Interval::Secs(60));
+        assert_eq!(effective(image, &cfg, None).1, Source::Namespace("vmm"));
+        assert_eq!(effective(host, &cfg, None).1, Source::File);
+    }
+
     #[test]
     fn precedence_runs_session_then_kind_then_default_then_the_catalog() {
         let tasks = kind("prism.config.Task");
@@ -199,6 +248,8 @@ mod tests {
         assert_eq!(parse("auto"), Ok(Interval::Word(Word::Auto)));
         assert_eq!(parse("off"), Ok(Interval::Word(Word::Off)));
         assert_eq!(parse("45"), Ok(Interval::Secs(45)));
+        assert_eq!(parse("1h"), Ok(Interval::Secs(3_600)), "hours read too");
+        assert_eq!(parse("12h"), Ok(Interval::Secs(43_200)));
         assert_eq!(parse("45s"), Ok(Interval::Secs(45)));
         assert_eq!(parse("1m"), Ok(Interval::Secs(60)), "stored as seconds");
         assert_eq!(parse("5m"), Ok(Interval::Secs(300)));
@@ -224,9 +275,15 @@ mod tests {
         );
         assert_eq!(step(Some(Duration::from_secs(5))), Interval::Secs(10));
         assert_eq!(step(Some(Duration::from_secs(45))), Interval::Secs(60));
+        assert_eq!(step(Some(Duration::from_secs(300))), Interval::Secs(3_600));
         assert_eq!(
-            step(Some(Duration::from_secs(300))),
-            Interval::Word(Word::Off)
+            step(Some(Duration::from_secs(3_600))),
+            Interval::Secs(21_600)
+        );
+        assert_eq!(
+            step(Some(Duration::from_secs(43_200))),
+            Interval::Word(Word::Off),
+            "past the longest rung there is nothing but off"
         );
         assert_eq!(
             step(None),
@@ -245,8 +302,9 @@ mod tests {
             Interval::Secs(5)
         );
         assert_eq!(step_from(Some(Interval::Secs(60))), Interval::Secs(300));
+        assert_eq!(step_from(Some(Interval::Secs(300))), Interval::Secs(3_600));
         assert_eq!(
-            step_from(Some(Interval::Secs(300))),
+            step_from(Some(Interval::Secs(43_200))),
             Interval::Word(Word::Off)
         );
         assert_eq!(
@@ -263,7 +321,9 @@ mod tests {
     fn the_ladder_is_spelled_once() {
         assert_eq!(
             LADDER.iter().copied().map(show).collect::<Vec<_>>(),
-            ["auto", "5s", "10s", "30s", "1m", "5m", "off"]
+            [
+                "auto", "5s", "10s", "30s", "1m", "5m", "1h", "6h", "12h", "off"
+            ]
         );
     }
 }

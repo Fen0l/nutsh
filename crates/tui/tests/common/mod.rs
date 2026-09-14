@@ -56,7 +56,12 @@ pub async fn app_with_cache(pc: &MockPc, state: &std::path::Path) -> App {
     ))
     .expect("a key");
     let dir = root.join(key);
-    let restored = nutsh_core::cache::read(&dir, &identity, nutsh_core::cache::now_secs());
+    let restored = nutsh_core::cache::read(
+        &dir,
+        &identity,
+        nutsh_core::cache::now_secs(),
+        nutsh_core::cache::MAX_AGE,
+    );
     let session =
         nutsh_core::session::connect(&profile, "secret", Scope::default(), restored.as_ref())
             .await
@@ -405,15 +410,19 @@ impl Contexts for FileContexts {
     }
     fn set_interval(
         &self,
-        kind: Option<&str>,
+        at: nutsh_core::contexts::Schedule<'_>,
         every: nutsh_config::Interval,
     ) -> anyhow::Result<()> {
+        use nutsh_core::contexts::Schedule;
         let mut cfg = self.load();
-        match kind {
-            Some(id) => {
+        match at {
+            Schedule::Kind(id) => {
                 cfg.refresh.kinds.insert(id.to_string(), every);
             }
-            None => cfg.refresh.default = Some(every),
+            Schedule::Namespace(ns) => {
+                cfg.refresh.namespaces.insert(ns.to_string(), every);
+            }
+            Schedule::Everything => cfg.refresh.default = Some(every),
         }
         self.save(&cfg)
     }

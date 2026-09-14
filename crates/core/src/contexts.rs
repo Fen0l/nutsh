@@ -195,17 +195,24 @@ pub trait Contexts: Send + Sync {
     fn refresh(&self) -> nutsh_config::Refresh {
         nutsh_config::Refresh::default()
     }
-    /// Write one schedule: `None` is `[refresh] default`, `Some(kind_id)` is one entry of
-    /// `[refresh.kinds]`. Through `nutsh_config::save`, the atomic 0600 whole-file rewrite
-    /// `set_skin`, `set_nav_hidden` and `set_flag` already go through.
-    fn set_interval(
-        &self,
-        kind: Option<&str>,
-        every: nutsh_config::Interval,
-    ) -> anyhow::Result<()> {
-        let _ = (kind, every);
+    /// Write one schedule, at whichever level the row belongs to. Through `nutsh_config::save`,
+    /// the atomic 0600 whole-file rewrite `set_skin`, `set_nav_hidden` and `set_flag` already
+    /// go through.
+    fn set_interval(&self, at: Schedule<'_>, every: nutsh_config::Interval) -> anyhow::Result<()> {
+        let _ = (at, every);
         Ok(())
     }
+}
+
+/// Which level of `[refresh]` a write lands on.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum Schedule<'a> {
+    /// `[refresh] default`.
+    Everything,
+    /// One entry of `[refresh.namespaces]`.
+    Namespace(&'a str),
+    /// One entry of `[refresh.kinds]`.
+    Kind(&'a str),
 }
 
 /// One line of the settings screen: what it is, what it is now, and where that came from.
@@ -265,6 +272,9 @@ pub enum Source {
     File,
     Context(String),
     Flag(&'static str),
+    /// `[refresh.namespaces]`. Its own variant rather than `File`, because a kind that polls
+    /// every five minutes because its namespace says so is not a kind somebody set.
+    Namespace(&'static str),
     /// The catalog's own `poll_secs`. Not `Default`: for an interval the floor-level default is
     /// a curated number, and a row that said `default` over the catalog's three seconds would
     /// send a reader to the config file to look for it.
@@ -281,6 +291,7 @@ impl Source {
             Source::File => "config file".to_string(),
             Source::Context(name) => format!("context {name}"),
             Source::Flag(flag) => (*flag).to_string(),
+            Source::Namespace(ns) => format!("namespace {ns}"),
             Source::Catalog => "catalog".to_string(),
             Source::Session => "this session".to_string(),
         }

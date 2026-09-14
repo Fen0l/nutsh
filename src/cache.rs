@@ -21,6 +21,7 @@ use nutsh_prism::Profile;
 pub(crate) fn open_for(
     context: Option<&str>,
     profile: &Profile,
+    max_age: u64,
 ) -> Result<(PathBuf, Option<cache::Restored>), String> {
     let name = context.map_or_else(
         || format!("{}@{}:{}", profile.username, profile.host, profile.port),
@@ -39,7 +40,7 @@ pub(crate) fn open_for(
         domain_manager: None,
         pc_version: None,
     };
-    let restored = cache::read(&dir, &identity, cache::now_secs());
+    let restored = cache::read(&dir, &identity, cache::now_secs(), max_age);
     Ok((dir, restored))
 }
 

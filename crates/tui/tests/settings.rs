@@ -31,14 +31,19 @@ async fn app_over(pc: &MockPc, path: &Path) -> App {
     app
 }
 
-/// Move the cursor to the row whose text contains `label`. The rows are few and the movement is
-/// the screen's own, which is the honest way to reach one: a hard-coded count would break the
-/// day a row is added between.
+/// Move the cursor to the row that *starts* with `label`, anchored on the cursor mark: there is
+/// one row per kind now, and `Virtual Machines` is inside `ESXi Virtual Machines`. The movement
+/// is the screen's own, which is the honest way to reach a row; a hard-coded count would break
+/// the day one is added between.
 fn select(app: &mut App, label: &str) {
     app.handle(Key::Char('g'));
-    for _ in 0..20 {
+    for _ in 0..260 {
         let frame = app.snapshot(120, 30).unwrap();
-        if frame.lines().any(|l| l.contains('▌') && l.contains(label)) {
+        if frame.lines().any(|l| {
+            l.split('▌')
+                .nth(1)
+                .is_some_and(|rest| rest.trim_start().starts_with(label))
+        }) {
             return;
         }
         app.handle(Key::Char('j'));
@@ -240,32 +245,39 @@ async fn the_schedule_rows_show_their_provenance_and_space_keeps_the_next_rung()
     open_settings(&mut app);
     let frame = app.snapshot(120, 30).unwrap();
     assert!(
-        frame.lines().any(|l| l.contains("refresh · every kind")
-            && l.contains("auto")
-            && l.contains("default")),
+        frame
+            .lines()
+            .any(|l| l.contains("every kind") && l.contains("auto") && l.contains("default")),
         "the global default, untouched: {frame}"
     );
+    // The kinds are folded under their namespace, so `vmm` is opened before its rows exist.
+    select(&mut app, "▸ vmm");
+    app.handle(Key::Enter);
+    select(&mut app, "Virtual Machines");
+    let frame = app.snapshot(120, 30).unwrap();
     assert!(
         frame
             .lines()
-            .any(|l| l.contains("refresh · Virtual Machines") && l.contains("catalog")),
-        "and the kind in front of the user, on the catalog's own rhythm: {frame}"
+            .any(|l| l.contains("Virtual Machines") && l.contains("catalog")),
+        "the kind's own row, on the catalog's rhythm: {frame}"
     );
 
     // `ctrl-t` on the view is this session's, and the row says so.
     app.handle(Key::Esc);
     app.handle(Key::Ctrl('t'));
     open_settings(&mut app);
+    // The fold survives a reopen, so `vmm` is still the way it was left.
+    select(&mut app, "Virtual Machines");
     let frame = app.snapshot(120, 30).unwrap();
     assert!(
         frame
             .lines()
-            .any(|l| l.contains("refresh · Virtual Machines") && l.contains("this session")),
+            .any(|l| l.contains("Virtual Machines") && l.contains("this session")),
         "{frame}"
     );
 
     // `space` writes it, and the row reads `config file` on the next frame.
-    select(&mut app, "refresh · Virtual Machines");
+    select(&mut app, "Virtual Machines");
     app.handle(Key::Char(' '));
     let cfg = nutsh_config::load(&path).unwrap();
     assert_eq!(
@@ -278,11 +290,14 @@ async fn the_schedule_rows_show_their_provenance_and_space_keeps_the_next_rung()
         Some("catppuccin-mocha"),
         "no other section moved"
     );
+    // The write reopens the screen, which puts the cursor back at the top. The fold survives,
+    // so `vmm` is still open.
+    select(&mut app, "Virtual Machines");
     let frame = app.snapshot(120, 30).unwrap();
     assert!(
         frame
             .lines()
-            .any(|l| l.contains("refresh · Virtual Machines") && l.contains("config file")),
+            .any(|l| l.contains("Virtual Machines") && l.contains("config file")),
         "{frame}"
     );
 }
