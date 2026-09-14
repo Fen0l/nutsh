@@ -1,0 +1,8 @@
+name: nutsh
+
+# A test that authenticates needs a literal password, so every credential under a tests
+# directory is a finding CodeQL cannot be right about.
+paths-ignore:
+  - "**/tests/**"
+  - "crates/mockpc/**"
+  - "specs/_coverage_snapshot.json"

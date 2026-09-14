@@ -1219,11 +1219,43 @@ pub fn fallback_columns(schemas: &Value, schema_name: &str) -> Vec<ColumnModel> 
     out.extend(refs);
     out.extend(scalars);
     out.extend(counts);
+    shorten_headers(&mut out);
     // Promote first, truncate second: an enum that would have carried the row tint but landed
     // at position 21 was otherwise never promoted.
     promote_status(&mut out);
     out.truncate(MAX_FALLBACK_COLUMNS);
     out
+}
+
+/// Trims what the property name says and the cell does not. A `Reference` renders the entity's
+/// name, so `EXT ID` is wrong as well as long; a `Bool` renders a mark, so `IS` and `ENABLED`
+/// carry nothing. A trim that would empty a header or collide with one already taken is skipped.
+fn shorten_headers(cols: &mut [ColumnModel]) {
+    let mut taken: Vec<String> = cols.iter().map(|c| c.header.clone()).collect();
+    for i in 0..cols.len() {
+        let short = match cols[i].kind.as_str() {
+            "Reference" => cols[i]
+                .header
+                .strip_suffix(" EXT ID")
+                .or_else(|| cols[i].header.strip_suffix(" UUID"))
+                .map(str::to_string),
+            "Bool" => {
+                let h = cols[i]
+                    .header
+                    .strip_prefix("IS ")
+                    .or_else(|| cols[i].header.strip_prefix("SHOULD "))
+                    .unwrap_or(&cols[i].header);
+                let h = h.strip_suffix(" ENABLED").unwrap_or(h);
+                (h != cols[i].header).then(|| h.to_string())
+            }
+            _ => None,
+        };
+        let Some(short) = short.filter(|h| !h.is_empty() && !taken.contains(h)) else {
+            continue;
+        };
+        taken[i] = short.clone();
+        cols[i].header = short;
+    }
 }
 
 /// The one literal pattern Nutanix writes on every identifier property, verified on

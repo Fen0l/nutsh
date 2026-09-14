@@ -290,7 +290,7 @@ fn an_uncurated_kind_gets_its_table_row_stood_up() {
             ("UUID", "0f6a4b58-9f9b-4b58-9f9b-000000000021"),
             ("Name", "pool-a"),
             ("Type", "PE IP pool"),
-            ("Is in use", "✗"),
+            ("In use", "✗"),
             ("Ranges", "1"),
         ]
     );

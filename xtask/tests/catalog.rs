@@ -251,10 +251,10 @@ fn fallback_columns_are_ordered_by_kind() {
             ("CREATION TIMESTAMP", "creationTimestamp", "Timestamp"),
             ("CLUSTER", "cluster.extId", "Reference"),
             ("RACK", "rack.uuid", "Reference"),
-            ("OWNER UUID", "ownerUuid", "Reference"),
+            ("OWNER", "ownerUuid", "Reference"),
             ("RETENTION TIME SECONDS", "retentionTimeSeconds", "Duration"),
             ("MEMORY SIZE BYTES", "memorySizeBytes", "Bytes"),
-            ("IS ENABLED", "isEnabled", "Bool"),
+            ("ENABLED", "isEnabled", "Bool"),
             ("EXTERNAL IP", "externalIp", "Ip"),
             ("OWNERSHIP", "ownership", "Text"),
             ("PROGRESS PERCENTAGE", "progressPercentage", "Percent"),
@@ -270,7 +270,7 @@ fn fallback_columns_are_ordered_by_kind() {
                 "Text"
             ),
             (
-                "IS FORCE RESET PASSWORD ENABLED",
+                "FORCE RESET PASSWORD",
                 "isForceResetPasswordEnabled",
                 "Bool"
             ),
@@ -345,7 +345,7 @@ fn column<'a>(kinds: &'a [KindModel], header: &str) -> &'a xtask::catalog::model
 #[test]
 fn a_uuid_patterned_string_is_a_reference() {
     let kinds = mini();
-    assert_eq!(column(&kinds, "OWNER UUID").kind, "Reference");
+    assert_eq!(column(&kinds, "OWNER").kind, "Reference");
     // And it lands in the reference bucket, which sits before the plain scalars.
     let w = find(&kinds, "mini.config.Widget");
     let refs: Vec<&str> = w
@@ -408,10 +408,7 @@ fn secrets_and_write_only_properties_are_never_columns() {
         paths.contains(&"isForceResetPasswordEnabled"),
         "a Bool flag is not a secret: {paths:?}"
     );
-    assert_eq!(
-        column(&kinds, "IS FORCE RESET PASSWORD ENABLED").kind,
-        "Bool"
-    );
+    assert_eq!(column(&kinds, "FORCE RESET PASSWORD").kind, "Bool");
 }
 
 /// The marker list is the recorder's, so the two refusals cannot drift: what the leak scan

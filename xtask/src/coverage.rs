@@ -78,12 +78,14 @@ fn summary(all: &Row) -> String {
         .iter()
         .filter(|k| reach(k) == Reach::NeedsParameter)
         .count();
+    let k = all.kinds;
     let mut s = String::new();
+
     let _ = writeln!(
         s,
         "**Breadth** - how much of the v4 API the catalog models.\n"
     );
-    let _ = writeln!(s, "| | | |");
+    let _ = writeln!(s, "| measure | count | share |");
     let _ = writeln!(s, "|---|---:|---:|");
     let _ = writeln!(
         s,
@@ -95,50 +97,55 @@ fn summary(all: &Row) -> String {
         pct(OPERATIONS_COVERED, OPERATIONS_DECLARED)
     );
     let _ = writeln!(s, "| namespaces | {} | 100% |", NAMESPACES.len());
-    let _ = writeln!(s, "| kinds | {} | |", all.kinds);
+    let _ = writeln!(s, "| kinds | {k} | |");
     let _ = writeln!(
         s,
         "| openable from the palette | {} | {} |",
         all.openable,
-        pct(all.openable, all.kinds)
+        pct(all.openable, k)
     );
-    let _ = writeln!(s, "| reached by drilling into a parent | {from_parent} | |");
     let _ = writeln!(
         s,
-        "| need a parameter nutsh cannot supply | {needs_param} | |"
+        "| reached by drilling into a parent | {from_parent} | {} |",
+        pct(from_parent, k)
+    );
+    let _ = writeln!(
+        s,
+        "| need a parameter nutsh cannot supply | {needs_param} | {} |",
+        pct(needs_param, k)
     );
     let _ = writeln!(s, "| actions | {} | |", all.actions);
     let _ = writeln!(s);
+
     let _ = writeln!(
         s,
-        "**Depth** - how many of those kinds have a view somebody designed, rather than one \
-         derived from the schema.\n"
+        "**Depth** - the curated path, and the explorer beneath it.\n"
     );
-    let _ = writeln!(s, "| | | |");
+    let _ = writeln!(s, "| measure | count | share of kinds |");
     let _ = writeln!(s, "|---|---:|---:|");
     let _ = writeln!(
         s,
-        "| named in a curated menu group | {} | {} |",
+        "| kinds the curated menu opens, every one with hand-picked columns | {} | {} |",
         all.in_menu,
-        pct(all.in_menu, all.kinds)
+        pct(all.in_menu, k)
     );
     let _ = writeln!(
         s,
-        "| with hand-picked columns | {} | {} |",
+        "| kinds with hand-picked columns, in all | {} | {} |",
         all.columns,
-        pct(all.columns, all.kinds)
+        pct(all.columns, k)
     );
     let _ = writeln!(
         s,
-        "| with a written detail layout | {} | {} |",
+        "| kinds with a written detail layout | {} | {} |",
         all.detail,
-        pct(all.detail, all.kinds)
+        pct(all.detail, k)
     );
     let _ = writeln!(
         s,
-        "| falling back to schema-derived columns | {} | {} |",
-        all.kinds - all.columns,
-        pct(all.kinds - all.columns, all.kinds)
+        "| kinds left to the namespace explorer, columns derived from the schema | {} | {} |",
+        k - all.columns,
+        pct(k - all.columns, k)
     );
     s
 }
