@@ -53,6 +53,9 @@ pub(crate) fn run(args: TuiArgs, conn: &ConnArgs, from_env: Option<String>) -> a
         // `--check` never gets here, and it never caches: its job is to probe every namespace
         // and report, and a cache would make it report the past.
         let caching = file.cache && !args.no_cache;
+        let cache_max_age = file
+            .cache_max_age
+            .map_or(nutsh_core::cache::MAX_AGE, u64::from);
         if caching {
             // Before the directory this run wants is read: keep the tree from growing a
             // directory per Prism Central ever visited.
@@ -70,7 +73,7 @@ pub(crate) fn run(args: TuiArgs, conn: &ConnArgs, from_env: Option<String>) -> a
         // one caller that can still print - it runs before the alternate screen - so a name
         // that cannot be a directory is said out loud here rather than swallowed.
         let (cache, restored) = match caching.then(|| target.as_ref().ok()).flatten() {
-            Some(t) => match crate::cache::open_for(t.context.as_deref(), &t.profile) {
+            Some(t) => match crate::cache::open_for(t.context.as_deref(), &t.profile, cache_max_age) {
                 Ok((dir, restored)) => (Some(dir), restored),
                 Err(name) => {
                     eprintln!(
@@ -111,7 +114,7 @@ pub(crate) fn run(args: TuiArgs, conn: &ConnArgs, from_env: Option<String>) -> a
         // A context switch reads its own directory before connecting, on the same terms as
         // this run's: `cache = false` and `--no-cache` are properties of the run, not of the
         // context it started on.
-        .caching(caching);
+        .caching(caching, cache_max_age);
         let config = Config {
             now: SystemTime::now(),
             config_path: Some(config_path.display().to_string()),

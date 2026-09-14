@@ -81,7 +81,7 @@ fn a_round_trip_keeps_the_rows_the_names_the_counters_and_the_pins() {
     let dir = dir.path().join("lab");
     let snap = snapshot(vec![vm("a", "web-01"), vm("b", "web-02")]);
     cache::write(&dir, snap, 1_000).unwrap();
-    let r = cache::read(&dir, &identity(), 1_060).expect("a restore");
+    let r = cache::read(&dir, &identity(), 1_060, cache::MAX_AGE).expect("a restore");
     assert_eq!(r.written, 1_000);
     assert_eq!(r.pins.get("vmm").map(String::as_str), Some("v4.3"));
     assert_eq!(r.cluster.as_ref().unwrap().name, "prod-01");
@@ -129,7 +129,7 @@ fn a_newer_format_is_not_read_not_written_and_not_evicted() {
     m.format = FORMAT + 1;
     std::fs::write(dir.join("meta.json"), serde_json::to_string(&m).unwrap()).unwrap();
     let before = listing(&dir);
-    assert!(cache::read(&dir, &identity(), 1_060).is_none());
+    assert!(cache::read(&dir, &identity(), 1_060, cache::MAX_AGE).is_none());
     cache::write(&dir, snapshot(vec![vm("z", "zz")]), 2_000).unwrap();
     assert_eq!(listing(&dir), before, "byte-identical afterwards");
 
@@ -171,7 +171,7 @@ fn a_corrupt_meta_loads_nothing_and_removes_what_the_cache_wrote() {
     let dir = tmp.path().join("lab");
     cache::write(&dir, snapshot(vec![vm("a", "web-01")]), 1_000).unwrap();
     std::fs::write(dir.join("meta.json"), "{ not json").unwrap();
-    assert!(cache::read(&dir, &identity(), 1_060).is_none());
+    assert!(cache::read(&dir, &identity(), 1_060, cache::MAX_AGE).is_none());
     assert!(cache::peek(&dir).is_none());
     assert_eq!(
         std::fs::read_dir(&dir).unwrap().count(),
@@ -204,7 +204,7 @@ fn a_corrupt_table_file_costs_that_table_alone() {
         .file
         .clone();
     std::fs::write(dir.join(&vm_file), "{ not json").unwrap();
-    let r = cache::read(&dir, &identity(), 1_060).expect("the rest loads");
+    let r = cache::read(&dir, &identity(), 1_060, cache::MAX_AGE).expect("the rest loads");
     assert_eq!(r.tables.len(), 1);
     assert_eq!(r.tables[0].kind.id, "clustermgmt.config.Cluster");
     assert!(!dir.join(&vm_file).exists(), "the bad file is unlinked");
@@ -254,7 +254,7 @@ fn a_table_file_that_disowns_its_record_is_dropped_and_unlinked() {
         mutate(&mut file);
         std::fs::write(&path, serde_json::to_string(&file).unwrap()).unwrap();
 
-        let r = cache::read(&dir, &identity(), 1_060).expect("the rest loads");
+        let r = cache::read(&dir, &identity(), 1_060, cache::MAX_AGE).expect("the rest loads");
         assert_eq!(r.tables.len(), 1, "{label}");
         assert_eq!(r.tables[0].kind.id, "clustermgmt.config.Cluster", "{label}");
         assert!(!path.exists(), "{label}: the disowned file is unlinked");
@@ -270,7 +270,7 @@ fn a_missing_table_file_drops_its_record_and_keeps_the_directory() {
     cache::write(&dir, snapshot(vec![vm("a", "web-01")]), 1_000).unwrap();
     let file = meta(&dir).tables[0].file.clone();
     std::fs::remove_file(dir.join(&file)).unwrap();
-    let r = cache::read(&dir, &identity(), 1_060).expect("still a restore");
+    let r = cache::read(&dir, &identity(), 1_060, cache::MAX_AGE).expect("still a restore");
     assert!(r.tables.is_empty());
     assert_eq!(r.pins.get("vmm").map(String::as_str), Some("v4.3"));
 }
@@ -302,7 +302,10 @@ fn a_changed_target_or_an_old_write_uses_nothing() {
     ] {
         let dir = tmp.path().join(label.replace(' ', "-"));
         cache::write(&dir, snapshot(vec![vm("a", "web-01")]), 1_000).unwrap();
-        assert!(cache::read(&dir, &target, now).is_none(), "{label}");
+        assert!(
+            cache::read(&dir, &target, now, cache::MAX_AGE).is_none(),
+            "{label}"
+        );
         assert!(
             !dir.join("meta.json").exists(),
             "{label}: and the inventory is removed"
@@ -318,7 +321,7 @@ fn a_changed_target_or_an_old_write_uses_nothing() {
     m.app_version = format!("{}-and-a-bit", m.app_version);
     std::fs::write(dir.join("meta.json"), serde_json::to_string(&m).unwrap()).unwrap();
     assert!(
-        cache::read(&dir, &identity(), 1_060).is_none(),
+        cache::read(&dir, &identity(), 1_060, cache::MAX_AGE).is_none(),
         "app_version"
     );
     assert!(
@@ -344,7 +347,7 @@ fn discarding_a_cache_keeps_the_palette_history_beside_it() {
     m.app_version = format!("{}-and-a-bit", m.app_version);
     std::fs::write(dir.join("meta.json"), serde_json::to_string(&m).unwrap()).unwrap();
 
-    assert!(cache::read(&dir, &identity(), 1_060).is_none());
+    assert!(cache::read(&dir, &identity(), 1_060, cache::MAX_AGE).is_none());
     assert!(!dir.join("meta.json").exists(), "the inventory went");
     assert_eq!(
         std::fs::read_to_string(dir.join("history.json")).unwrap(),
@@ -366,7 +369,7 @@ fn a_stale_select_drops_that_table_and_keeps_the_rest() {
     snap.tables[0].select = Some("extId,name".into());
     cache::write(&dir, snap, 1_000).unwrap();
     let file = meta(&dir).tables[0].file.clone();
-    let r = cache::read(&dir, &identity(), 1_060).expect("a restore");
+    let r = cache::read(&dir, &identity(), 1_060, cache::MAX_AGE).expect("a restore");
     assert!(
         r.tables.is_empty(),
         "a narrowing this run does not send is not this run's rows"
@@ -394,7 +397,7 @@ fn rows_narrowed_by_select_are_labelled_with_the_narrowing_they_carry() {
     // What this run writes, read back by this run.
     let dir = tmp.path().join("now");
     cache::write(&dir, snapshot(vec![vm("a", "web-01")]), 1_000).unwrap();
-    let r = cache::read(&dir, &identity(), 1_060).expect("a restore");
+    let r = cache::read(&dir, &identity(), 1_060, cache::MAX_AGE).expect("a restore");
     assert_eq!(r.tables.len(), 1, "its own rows come back");
     assert_eq!(r.tables[0].rows.len(), 1);
 
@@ -406,7 +409,7 @@ fn rows_narrowed_by_select_are_labelled_with_the_narrowing_they_carry() {
     snap.tables[0].select = None;
     cache::write(&stale, snap, 1_000).unwrap();
     let file = meta(&stale).tables[0].file.clone();
-    let r = cache::read(&stale, &identity(), 1_060).expect("a restore");
+    let r = cache::read(&stale, &identity(), 1_060, cache::MAX_AGE).expect("a restore");
     assert!(
         r.tables.is_empty(),
         "a table labelled as a whole document is not restored over a narrowed one"
@@ -434,7 +437,7 @@ fn an_unknown_kind_and_an_unusable_row_are_dropped() {
         rows: vec![json!({"extId": "x"})],
     });
     cache::write(&dir, snap, 1_000).unwrap();
-    let r = cache::read(&dir, &identity(), 1_060).expect("a restore");
+    let r = cache::read(&dir, &identity(), 1_060, cache::MAX_AGE).expect("a restore");
     assert_eq!(r.tables.len(), 1, "the unknown kind is gone");
     let ids: Vec<&str> = r.tables[0]
         .rows
@@ -456,7 +459,7 @@ fn the_caps_hold_and_eviction_takes_the_oldest_first() {
         .map(|i| (format!("id{i}"), format!("name{i}")))
         .collect();
     cache::write(&dir, snap, 1_000).unwrap();
-    let r = cache::read(&dir, &identity(), 1_060).expect("a restore");
+    let r = cache::read(&dir, &identity(), 1_060, cache::MAX_AGE).expect("a restore");
     assert_eq!(r.tables[0].rows.len(), cache::MAX_ROWS_PER_TABLE);
     assert_eq!(r.tables[0].total, Some(100), "the server's total is kept");
     assert_eq!(r.names.len(), cache::MAX_NAMES);
@@ -540,7 +543,7 @@ fn a_table_over_the_per_table_cap_is_skipped_and_its_stale_file_removed() {
         "and no file either"
     );
     assert!(
-        cache::read(&dir, &identity(), 2_060)
+        cache::read(&dir, &identity(), 2_060, cache::MAX_AGE)
             .unwrap()
             .tables
             .is_empty()
@@ -621,7 +624,7 @@ fn no_key_material_and_no_guest_customization_survive_a_write() {
         rows: lab("clustermgmt/v4.3/config/clusters.json"),
     });
     cache::write(&dir, snap, 1_000).unwrap();
-    let r = cache::read(&dir, &identity(), 1_060).expect("a restore");
+    let r = cache::read(&dir, &identity(), 1_060, cache::MAX_AGE).expect("a restore");
     let mut paths = Vec::new();
     for t in &r.tables {
         for row in &t.rows {
@@ -657,7 +660,7 @@ fn a_cached_task_row_still_carries_its_operation_description() {
         rows: lab("prism/v4.4/config/tasks.json"),
     };
     cache::write(&dir, snap, 1_000).unwrap();
-    let r = cache::read(&dir, &identity(), 1_060).expect("a restore");
+    let r = cache::read(&dir, &identity(), 1_060, cache::MAX_AGE).expect("a restore");
     let with_description = r.tables[0]
         .rows
         .iter()
@@ -697,7 +700,7 @@ fn a_category_key_survives_and_a_pem_blob_does_not() {
     snap.tables[0].kind = "prism.config.Category".into();
     snap.tables[0].select = select_of("prism.config.Category");
     cache::write(&dir, snap, 1_000).unwrap();
-    let r = cache::read(&dir, &identity(), 1_060).expect("a restore");
+    let r = cache::read(&dir, &identity(), 1_060, cache::MAX_AGE).expect("a restore");
     let back = &r.tables[0].rows[0];
     assert_eq!(back["key"], json!("environment"));
     assert_eq!(back["value"], json!("prod"));
@@ -751,7 +754,7 @@ fn the_keep_list_and_every_description_survive_a_write() {
         row.insert(k.to_string(), json!("kept"));
     }
     cache::write(&dir, snapshot(vec![Value::Object(row)]), 1_000).unwrap();
-    let r = cache::read(&dir, &identity(), 1_060).expect("a restore");
+    let r = cache::read(&dir, &identity(), 1_060, cache::MAX_AGE).expect("a restore");
     let back = &r.tables[0].rows[0];
     for k in kept {
         assert_eq!(back.get(k), Some(&json!("kept")), "{k} was scrubbed");

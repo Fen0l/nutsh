@@ -882,6 +882,20 @@ impl Scheduler {
         }
     }
 
+    /// Every subscription this session holds runs a cycle now, stopped ones included.
+    ///
+    /// The person's version of [`Scheduler::refresh_all`]: that one is the idle pause's wake and
+    /// leaves a stopped poller stopped, which is right for a wake and wrong for somebody who has
+    /// just asked for everything. Each is [`Scheduler::refresh`], so the stop flag is cleared and
+    /// the walk is forced, one subscription at a time.
+    pub fn refresh_everything(&mut self) -> usize {
+        let ids: Vec<SubId> = self.tasks.keys().copied().collect();
+        for id in &ids {
+            self.refresh(*id);
+        }
+        ids.len()
+    }
+
     /// Whether this id is still subscribed. It answers for the subscription, not the task: a
     /// `once` whose task has already returned still reads live until the receiver drains its
     /// [`Msg::Done`] and unsubscribes it, and that message is sent after every other, so no

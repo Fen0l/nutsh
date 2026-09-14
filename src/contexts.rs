@@ -72,6 +72,8 @@ pub(crate) struct CliContexts {
     /// so the `ctx` commands - which open a session only to prove a password - read and write
     /// nothing.
     caching: bool,
+    /// Whole-directory expiry for the restore, from the config file.
+    cache_max_age: u64,
 }
 
 /// A connection ready to run, plus what to do with the password once it is proven.
@@ -110,13 +112,15 @@ impl CliContexts {
             selected: Arc::new(Mutex::new(selected)),
             overrides,
             caching: false,
+            cache_max_age: nutsh_core::cache::MAX_AGE,
         }
     }
 
     /// Give the sessions this seam opens a cache. The TUI turns it on for a run whose config
     /// file and command line both allow one; every other caller leaves it off.
-    pub(crate) fn caching(mut self, on: bool) -> CliContexts {
+    pub(crate) fn caching(mut self, on: bool, max_age: u64) -> CliContexts {
         self.caching = on;
+        self.cache_max_age = max_age;
         self
     }
 
@@ -400,7 +404,7 @@ impl Contexts for CliContexts {
             // name that cannot be a directory runs cacheless: there is no terminal to warn on
             // from here, only a frame.
             let (cache_dir, restored) = if this.caching {
-                crate::cache::open_for(scope.context.as_deref(), &profile)
+                crate::cache::open_for(scope.context.as_deref(), &profile, this.cache_max_age)
                     .map_or((None, None), |(dir, restored)| (Some(dir), restored))
             } else {
                 (None, None)
@@ -545,15 +549,19 @@ impl Contexts for CliContexts {
 
     fn set_interval(
         &self,
-        kind: Option<&str>,
+        at: nutsh_core::contexts::Schedule<'_>,
         every: nutsh_config::Interval,
     ) -> anyhow::Result<()> {
+        use nutsh_core::contexts::Schedule;
         let mut cfg = self.load()?;
-        match kind {
-            Some(id) => {
+        match at {
+            Schedule::Kind(id) => {
                 cfg.refresh.kinds.insert(id.to_string(), every);
             }
-            None => cfg.refresh.default = Some(every),
+            Schedule::Namespace(ns) => {
+                cfg.refresh.namespaces.insert(ns.to_string(), every);
+            }
+            Schedule::Everything => cfg.refresh.default = Some(every),
         }
         nutsh_config::save(&self.config_path, &cfg)?;
         Ok(())

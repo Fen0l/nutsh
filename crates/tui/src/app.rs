@@ -406,6 +406,10 @@ pub struct App {
     /// and the verb. Keyed by **kind** and not by view, so one kind cannot poll at two rhythms
     /// on one screen with nothing on the frame to say which view was retimed.
     pub(crate) refresh_session: HashMap<&'static str, nutsh_core::contexts::Interval>,
+    /// Namespaces the settings screen is showing the kinds of. Held here and not in `Settings`,
+    /// because every write reopens that screen and a fold that reset on each keystroke would be
+    /// worse than no fold at all.
+    pub(crate) settings_open: std::collections::BTreeSet<&'static str>,
     pub(crate) quit: bool,
 }
 
@@ -592,6 +596,7 @@ impl App {
             nav_hide_unserved,
             refresh_cfg,
             refresh_session: HashMap::new(),
+            settings_open: std::collections::BTreeSet::new(),
             nav_all: false,
             quit: false,
         }
@@ -1139,17 +1144,22 @@ impl App {
                 // The file is now where this value lives, so the session override goes: the
                 // screen's source column has to say `config file`, not `this session`.
                 self.refresh_session.remove(kind.id);
-                self.status = Some(match self.contexts.set_interval(Some(kind.id), v) {
-                    Ok(()) => {
-                        self.refresh_cfg = self.contexts.refresh();
-                        format!(
-                            "refresh: {} kept for {}",
-                            nutsh_core::refresh::show(v),
-                            kind.display
-                        )
-                    }
-                    Err(e) => format!("refresh not saved: {e:#}"),
-                });
+                self.status = Some(
+                    match self
+                        .contexts
+                        .set_interval(nutsh_core::contexts::Schedule::Kind(kind.id), v)
+                    {
+                        Ok(()) => {
+                            self.refresh_cfg = self.contexts.refresh();
+                            format!(
+                                "refresh: {} kept for {}",
+                                nutsh_core::refresh::show(v),
+                                kind.display
+                            )
+                        }
+                        Err(e) => format!("refresh not saved: {e:#}"),
+                    },
+                );
                 let (every, _) = self.refresh_of(kind);
                 if let Some(live) = self.live.as_ref() {
                     live.scheduler.set_interval_kind(kind.id, every);
@@ -4233,36 +4243,99 @@ impl App {
     /// The schedule rows: `[refresh] default` always, and the view in front of the user when
     /// there is one. The kind's row carries its display name, because `refresh` alone over two
     /// rows would say nothing about which of them is which.
-    fn refresh_rows(&self) -> Vec<(nutsh_core::contexts::Setting, String)> {
-        use nutsh_core::contexts::{Setting, SettingId, Source};
+    fn refresh_rows(&self) -> Vec<crate::settings::Row> {
+        use nutsh_core::contexts::{SettingId, Source};
         let global = self.refresh_cfg.default;
-        let mut out = vec![(
-            Setting {
-                id: SettingId::Refresh,
-                value: global.map_or_else(|| "auto".to_string(), nutsh_core::refresh::show),
-                source: if global.is_some() {
-                    Source::File
-                } else {
-                    Source::Default
-                },
-                fixed: None,
+        let ages = self.poll_ages();
+        let mut out = vec![crate::settings::Row::Setting {
+            id: SettingId::Refresh,
+            label: "every kind".to_string(),
+            value: global.map_or_else(|| "auto".to_string(), nutsh_core::refresh::show),
+            source: if global.is_some() {
+                Source::File.label()
+            } else {
+                Source::Default.label()
             },
-            "refresh · every kind".to_string(),
-        )];
-        if let Some(kind) = self.current_kind() {
-            let (every, source) = self.refresh_of(kind);
-            out.push((
-                Setting {
-                    id: SettingId::RefreshKind,
-                    value: every.map_or_else(
-                        || "off".to_string(),
-                        |d| nutsh_core::cell::span(d.as_secs()),
-                    ),
-                    source,
-                    fixed: None,
-                },
-                format!("refresh · {}", kind.display),
-            ));
+            fixed: None,
+            kind: None,
+            age: None,
+        }];
+
+        // By namespace, because two hundred and thirty-two rows of which two hundred and
+        // twenty-six say the same thing is a list nobody reads. A namespace opens onto its own
+        // kinds, and the ones somebody has set are counted on its row whether it is open or not.
+        for ns in nutsh_catalog::NAMESPACES {
+            let kinds: Vec<&'static Kind> = nutsh_catalog::KINDS
+                .iter()
+                .filter(|k| k.namespace == ns.name)
+                .collect();
+            if kinds.is_empty() {
+                continue;
+            }
+            let own = self.refresh_cfg.namespaces.get(ns.name).copied();
+            let custom = kinds
+                .iter()
+                .filter(|k| self.refresh_cfg.kinds.contains_key(k.id))
+                .count();
+            let open = self.settings_open.contains(ns.name);
+            out.push(crate::settings::Row::Namespace {
+                name: ns.name,
+                value: own.map_or_else(|| "-".to_string(), nutsh_core::refresh::show),
+                source: own.map_or_else(
+                    || Source::Default.label(),
+                    |_| Source::Namespace(ns.name).label(),
+                ),
+                open,
+                custom,
+            });
+            if !open {
+                continue;
+            }
+            let mut rows: Vec<(Option<std::time::Duration>, Source, &'static Kind)> = kinds
+                .into_iter()
+                .map(|k| {
+                    let (every, source) = self.refresh_of(k);
+                    (every, source, k)
+                })
+                .collect();
+            // Soonest first inside the namespace: `off` is not a very long interval, it is no
+            // schedule, so it sorts last.
+            rows.sort_by(|a, b| {
+                let key = |d: &Option<std::time::Duration>| d.map_or(u64::MAX, |d| d.as_secs());
+                key(&a.0).cmp(&key(&b.0)).then(a.2.display.cmp(b.2.display))
+            });
+            out.extend(
+                rows.into_iter()
+                    .map(|(every, source, k)| crate::settings::Row::Setting {
+                        id: SettingId::RefreshKind,
+                        label: format!("  {}", k.display),
+                        value: every.map_or_else(
+                            || "off".to_string(),
+                            |d| nutsh_core::cell::span(d.as_secs()),
+                        ),
+                        source: source.label(),
+                        fixed: None,
+                        kind: Some(k.id),
+                        age: ages.get(k.id).cloned(),
+                    }),
+            );
+        }
+        out
+    }
+
+    /// How long ago each kind's table last completed a cycle, rendered. A kind with no table
+    /// open is absent: it has not refreshed, which is not the same as having refreshed long ago.
+    fn poll_ages(&self) -> std::collections::HashMap<&'static str, String> {
+        let now = std::time::Instant::now();
+        let mut out = std::collections::HashMap::new();
+        let Some(live) = self.live.as_ref() else {
+            return out;
+        };
+        for (key, table) in live.store.tables() {
+            let Some(at) = table.last_poll else { continue };
+            let secs = now.saturating_duration_since(at).as_secs();
+            out.entry(key.kind.id)
+                .or_insert_with(|| nutsh_core::cell::span(secs));
         }
         out
     }
@@ -4313,10 +4386,55 @@ impl App {
                 self.nav_command(Some(name), false);
                 self.reopen_settings();
             }
-            crate::settings::Action::Cycled(id) => {
-                let kind = (id == nutsh_core::contexts::SettingId::RefreshKind)
-                    .then(|| self.current_kind())
-                    .flatten();
+            crate::settings::Action::RefreshAll => {
+                let n = self
+                    .live
+                    .as_mut()
+                    .map_or(0, |live| live.scheduler.refresh_everything());
+                self.status = Some(match n {
+                    0 => "nothing subscribed to refresh".to_string(),
+                    1 => "refreshing 1 view".to_string(),
+                    n => format!("refreshing {n} views"),
+                });
+            }
+            crate::settings::Action::Expand(ns) => {
+                if !self.settings_open.remove(ns) {
+                    self.settings_open.insert(ns);
+                }
+                self.reopen_settings();
+            }
+            crate::settings::Action::CycledNamespace(ns) => {
+                // The rung after whatever the namespace itself says, not after what its kinds
+                // resolve to: those differ from each other, and a step has to start somewhere.
+                let now = self
+                    .refresh_cfg
+                    .namespaces
+                    .get(ns)
+                    .copied()
+                    .or(self.refresh_cfg.default);
+                let next = nutsh_core::refresh::step_from(now);
+                self.status = Some(
+                    match self
+                        .contexts
+                        .set_interval(nutsh_core::contexts::Schedule::Namespace(ns), next)
+                    {
+                        Ok(()) => {
+                            self.refresh_cfg = self.contexts.refresh();
+                            format!("{ns}: {}", nutsh_core::refresh::show(next))
+                        }
+                        Err(e) => format!("refresh not saved: {e:#}"),
+                    },
+                );
+                if let Some(live) = self.live.as_ref() {
+                    for k in nutsh_catalog::KINDS.iter().filter(|k| k.namespace == ns) {
+                        live.scheduler.set_interval_kind(k.id, self.refresh_of(k).0);
+                    }
+                }
+                self.reopen_settings();
+            }
+            crate::settings::Action::Cycled(id, row_kind) => {
+                let _ = id;
+                let kind = row_kind.and_then(nutsh_catalog::kind);
                 let next = match kind {
                     // A kind's row steps from the length of time it is actually polling at, so
                     // a 3 s kind does not spend a press on the 5 s it is nearly already at.
@@ -4330,13 +4448,20 @@ impl App {
                 if let Some(k) = kind {
                     self.refresh_session.remove(k.id);
                 }
-                self.status = Some(match self.contexts.set_interval(kind.map(|k| k.id), next) {
-                    Ok(()) => {
-                        self.refresh_cfg = self.contexts.refresh();
-                        format!("refresh: {}", nutsh_core::refresh::show(next))
-                    }
-                    Err(e) => format!("refresh not saved: {e:#}"),
-                });
+                self.status = Some(
+                    match self.contexts.set_interval(
+                        kind.map_or(nutsh_core::contexts::Schedule::Everything, |k| {
+                            nutsh_core::contexts::Schedule::Kind(k.id)
+                        }),
+                        next,
+                    ) {
+                        Ok(()) => {
+                            self.refresh_cfg = self.contexts.refresh();
+                            format!("refresh: {}", nutsh_core::refresh::show(next))
+                        }
+                        Err(e) => format!("refresh not saved: {e:#}"),
+                    },
+                );
                 if let Some(k) = kind
                     && let Some(live) = self.live.as_ref()
                 {

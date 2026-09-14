@@ -534,7 +534,7 @@ pub struct Peeked {
 /// Everything usable in `dir`, or `None` and - except for a newer format - a directory that is
 /// gone. `target` is the half of the identity known before the network is touched; the domain
 /// manager and the PC version are compared by the caller once `connect` returns.
-pub fn read(dir: &Path, target: &Identity, now: u64) -> Option<Restored> {
+pub fn read(dir: &Path, target: &Identity, now: u64, max_age: u64) -> Option<Restored> {
     let discard = |why: &str| -> Option<Restored> {
         tracing::debug!(dir = %dir.display(), why, "cache discarded");
         discard_cache_files(dir);
@@ -560,7 +560,7 @@ pub fn read(dir: &Path, target: &Identity, now: u64) -> Option<Restored> {
     if !meta.identity.same_target(target) {
         return discard("another host, port or account");
     }
-    if now.saturating_sub(meta.written) > MAX_AGE {
+    if now.saturating_sub(meta.written) > max_age {
         return discard("older than the maximum age");
     }
     let mut tables = Vec::new();
