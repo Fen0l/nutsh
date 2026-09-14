@@ -53,12 +53,18 @@ async def discover_versions(
     client: httpx.AsyncClient,
     namespace: str,
     sem: asyncio.Semaphore,
-) -> list[tuple[str, str]]:
-    """Return list of (namespace, version) pairs."""
+) -> list[tuple[str, str, str]]:
+    """Return list of (namespace, version, yaml_link) triples.
+
+    An announced version with no published spec carries an empty link; a constructed URL 404s.
+    """
     async with sem:
         resp = await client.get(f"{BASE_URL}/namespaces/{namespace}/versions")
         resp.raise_for_status()
-        return [(namespace, v["version"]) for v in resp.json()["versions"]]
+        return [
+            (namespace, v["version"], v.get("link") or "")
+            for v in resp.json()["versions"]
+        ]
 
 
 # ---------------------------------------------------------------------------
@@ -70,6 +76,7 @@ async def download_spec(
     client: httpx.AsyncClient,
     namespace: str,
     version: str,
+    link: str,
     output_dir: Path,
     manifest: dict,
     sem: asyncio.Semaphore,
@@ -77,7 +84,7 @@ async def download_spec(
     """Download a single spec. Returns a status string."""
     key = f"{namespace}/{version}"
     async with sem:
-        resp = await client.get(f"{BASE_URL}/namespaces/{namespace}/versions/{version}/yaml")
+        resp = await client.get(link)
         resp.raise_for_status()
 
     content = resp.content
@@ -120,23 +127,30 @@ async def sync(output_dir: Path, concurrency: int) -> None:
         version_tasks = [discover_versions(client, ns, sem) for ns in namespaces]
         version_results = await asyncio.gather(*version_tasks, return_exceptions=True)
 
-        specs: list[tuple[str, str]] = []
+        specs: list[tuple[str, str, str]] = []
         for result in version_results:
             if isinstance(result, Exception):
                 log.error("Version discovery failed: %s", result)
                 continue
             specs.extend(result)
 
-        log.info("Found %d specs to check", len(specs))
+        # Nothing to download from, so not a failed download.
+        published = [s for s in specs if s[2]]
+        announced = [(ns, ver) for ns, ver, link in specs if not link]
+        for ns, ver in announced:
+            log.info("announced with no specification, skipping %s/%s", ns, ver)
+
+        log.info("Found %d specs to check", len(published))
 
         # Phase 2: download
         download_tasks = [
-            download_spec(client, ns, ver, output_dir, manifest, sem) for ns, ver in specs
+            download_spec(client, ns, ver, link, output_dir, manifest, sem)
+            for ns, ver, link in published
         ]
         results = await asyncio.gather(*download_tasks, return_exceptions=True)
 
     # Tally results
-    counts = {"downloaded": 0, "unchanged": 0, "failed": 0}
+    counts = {"downloaded": 0, "unchanged": 0, "failed": 0, "skipped": len(announced)}
     for r in results:
         if isinstance(r, Exception):
             log.error("Download failed: %s", r)
@@ -147,9 +161,10 @@ async def sync(output_dir: Path, concurrency: int) -> None:
     save_manifest(manifest_path, manifest)
 
     log.info(
-        "Done: %d downloaded, %d unchanged, %d failed",
+        "Done: %d downloaded, %d unchanged, %d skipped, %d failed",
         counts["downloaded"],
         counts["unchanged"],
+        counts["skipped"],
         counts["failed"],
     )
 
