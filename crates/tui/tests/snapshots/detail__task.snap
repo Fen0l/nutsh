@@ -25,7 +25,8 @@ expression: "app.snapshot(120, 36).unwrap()"
 │      Reports         ││            Parent -                                        Root -                            │
 │  ▸ Policies          ││          Subtasks 0                                       Steps -                            │
 │  ▸ Admin Center      ││ACTIONS ──────────────────────────────────────────────────────────────────────────────────────│
-│  ▸ Contexts          ││                 c Cancel task · not cancelable                                               │
+│  ▸ Objects           ││                 c Cancel task · not cancelable                                               │
+│  ▸ Contexts          ││                                                                                              │
 │  ▸ Settings          ││                                                                                              │
 │  ─── by namespace ───││                                                                                              │
 │  ▸ aiops             ││                                                                                              │
@@ -34,7 +35,6 @@ expression: "app.snapshot(120, 36).unwrap()"
 │  ▸ files             ││                                                                                              │
 │  ▸ iam               ││                                                                                              │
 │  ▸ licensing         ││                                                                                              │
-│  ▸ lifecycle         ││                                                                                              │
-╰───────────────── ↓11 ╯└──────────────────────────────────────────────────────────────────────────────────────────────┘
+╰───────────────── ↓12 ╯└──────────────────────────────────────────────────────────────────────────────────────────────┘
  j/k:scroll  g/G:top/bottom  a:actions  Y:yaml  J:json  esc:back
 [meter]          ● live

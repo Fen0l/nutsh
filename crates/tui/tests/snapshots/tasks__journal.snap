@@ -13,6 +13,6 @@ expression: "app.snapshot(120, 14).unwrap()"
 │      Overview        ││  WHEN   CONTEXT     KIND        NAME              ACTION          OUTCOME            TASK    │
 │    • VMs [3]         ││▌ 0s     (env)       vm          web-01            power-on        denied: nope       -       │
 │      ESXi VMs        ││  0s     (env)       vm          web-01            power-off       started            ZXJnb24=│
-╰───────────────── ↓37 ╯╰──────────────────────────────────────────────────────────────────────────────────────────────╯
+╰───────────────── ↓38 ╯╰──────────────────────────────────────────────────────────────────────────────────────────────╯
  j k g G scroll  esc close
 [meter]          ● live

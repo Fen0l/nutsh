@@ -29,6 +29,6 @@ expression: "app.snapshot(120, 30).unwrap()"
 │  ▸ Data Protection   ││             │  remove-custom-attributes                                       │              │
 │  ▸ Hardware          ││             │  transfer-files-to-guest                                        │              │
 │  ▸ Monitoring        ││             │  update                                                         │              │
-╰───────────────── ↓23 ╯╰─────────────╰─────────────────────────────────────────────────────────────────╯──────────────╯
+╰───────────────── ↓24 ╯╰─────────────╰─────────────────────────────────────────────────────────────────╯──────────────╯
  type to filter  ↑↓ move  enter run  esc close
 [meter]          ● live

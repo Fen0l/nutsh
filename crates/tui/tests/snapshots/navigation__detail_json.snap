@@ -22,6 +22,6 @@ expression: "app.snapshot(100, 23).unwrap()"
 │      Guest Customizat││  "numThreadsPerCore": 1,                                                 │
 │      Storage Containe││  "memorySizeBytes": 8589934592,                                          │
 │      Volume Groups   ││  "powerState": "ON",                                                     │
-╰───────────────── ↓30 ╯└──────────────────────────────────────────────────────────────────────────┘
+╰───────────────── ↓31 ╯└──────────────────────────────────────────────────────────────────────────┘
  j/k:scroll  g/G:top/bottom  a:actions  Y:yaml  J:json  esc:back
 [meter]          ● live

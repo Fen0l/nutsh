@@ -31,14 +31,14 @@ expression: "app.snapshot(120, 40).unwrap()"
 │  ▸ Monitoring        ││             │  disassociate-categories                                        │              │
 │  ▸ Policies          ││             │  generate-console-token                                         │              │
 │  ▸ Admin Center      ││             │  migrate-vm-disks                                               │              │
-│  ▸ Contexts          ││             │  remove-custom-attributes                                       │              │
-│  ▸ Settings          ││             │  transfer-files-to-guest                                        │              │
-│  ─── by namespace ───││             │  update                                                         │              │
-│  ▸ aiops             ││             ╰─────────────────────────────────────────────────────────────────╯              │
+│  ▸ Objects           ││             │  remove-custom-attributes                                       │              │
+│  ▸ Contexts          ││             │  transfer-files-to-guest                                        │              │
+│  ▸ Settings          ││             │  update                                                         │              │
+│  ─── by namespace ───││             ╰─────────────────────────────────────────────────────────────────╯              │
+│  ▸ aiops             ││                                                                                              │
 │  ▸ clustermgmt       ││                                                                                              │
 │  ▸ dataprotection    ││                                                                                              │
 │  ▸ files             ││                                                                                              │
-│  ▸ iam               ││                                                                                              │
-╰───────────────── ↓13 ╯╰──────────────────────────────────────────────────────────────────────────────────────────────╯
+╰───────────────── ↓14 ╯╰──────────────────────────────────────────────────────────────────────────────────────────────╯
  type to filter  ↑↓ move  enter run  esc close
 [meter]          ● live

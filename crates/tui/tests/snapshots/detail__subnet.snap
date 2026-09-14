@@ -33,8 +33,8 @@ expression: "app.snapshot(120, 36).unwrap()"
 │  ▸ Monitoring        ││ACTIONS ──────────────────────────────────────────────────────────────────────────────────────│
 │  ▸ Policies          ││                   Update subnet                                                              │
 │  ▸ Admin Center      ││                   Share with projects                                                        │
-│  ▸ Contexts          ││                   Unshare                                                                    │
-│  ▸ Settings          ││                   Delete subnet                                                              │
-╰───────────────── ↓19 ╯└──────────────────────────────────────────────────────────────────────────────────────────────┘
+│  ▸ Objects           ││                   Unshare                                                                    │
+│  ▸ Contexts          ││                   Delete subnet                                                              │
+╰───────────────── ↓20 ╯└──────────────────────────────────────────────────────────────────────────────────────────────┘
  j/k:scroll  g/G:top/bottom  a:actions  Y:yaml  J:json  esc:back
 [meter]          ● live

@@ -36,9 +36,9 @@ expression: frame
 │  ▸ Monitoring        ││  failover-test-04                          Test failover     SUCCEEDED  dr-tier1  100%  3h   │
 │  ▸ Policies          ││  failover-test-03                          Planned failover  FAILED     dr-tier2  40%   2d   │
 │  ▸ Admin Center      ││                                                                                              │
+│  ▸ Objects           ││                                                                                              │
 │  ▸ Contexts          ││                                                                                              │
 │  ▸ Settings          ││                                                                                              │
-│  ─── by namespace ───││                                                                                              │
-╰───────────────── ↓18 ╯╰──────────────────────────────────────────────────────────────────────────────────────────────╯
+╰───────────────── ↓19 ╯╰──────────────────────────────────────────────────────────────────────────────────────────────╯
  :palette  ^b:menu  ⇥:pane  O:open  a:actions  ⏎:detail  esc:menu  ?:help
 [meter]          ● live

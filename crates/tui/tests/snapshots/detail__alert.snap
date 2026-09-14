@@ -25,16 +25,16 @@ expression: "app.snapshot(120, 36).unwrap()"
 │      Reports         ││TIMING ───────────────────────────────────────────────────────────────────────────────────────│
 │  ▸ Policies          ││        First seen 0s                                  Last seen 0s                           │
 │  ▸ Admin Center      ││           Updated 0s                               Acknowledged -                            │
-│  ▸ Contexts          ││          Resolved -                                                                          │
-│  ▸ Settings          ││HANDLING ─────────────────────────────────────────────────────────────────────────────────────│
-│  ─── by namespace ───││      Acknowledged ✗                                    Resolved ✗                            │
-│  ▸ aiops             ││     Auto-resolved ✗                                    Runnable ✓                            │
-│  ▸ clustermgmt       ││CLASSIFICATION ───────────────────────────────────────────────────────────────────────────────│
-│  ▸ dataprotection    ││            Impact System indicator                      Impacts System indicator             │
-│  ▸ files             ││           Classes Storage                                                                    │
-│  ▸ iam               ││PARAMETERS ───────────────────────────────────────────────────────────────────────────────────│
-│  ▸ licensing         ││              Name paramName-f9ac79b6 +12                  Value stringValue-1f99c2f8 +8      │
-│  ▸ lifecycle         ││ACTIONS ──────────────────────────────────────────────────────────────────────────────────────│
-╰───────────────── ↓11 ╯└──────────────────────────────────────────────────────────────────────────────────────────────┘
+│  ▸ Objects           ││          Resolved -                                                                          │
+│  ▸ Contexts          ││HANDLING ─────────────────────────────────────────────────────────────────────────────────────│
+│  ▸ Settings          ││      Acknowledged ✗                                    Resolved ✗                            │
+│  ─── by namespace ───││     Auto-resolved ✗                                    Runnable ✓                            │
+│  ▸ aiops             ││CLASSIFICATION ───────────────────────────────────────────────────────────────────────────────│
+│  ▸ clustermgmt       ││            Impact System indicator                      Impacts System indicator             │
+│  ▸ dataprotection    ││           Classes Storage                                                                    │
+│  ▸ files             ││PARAMETERS ───────────────────────────────────────────────────────────────────────────────────│
+│  ▸ iam               ││              Name paramName-f9ac79b6 +12                  Value stringValue-1f99c2f8 +8      │
+│  ▸ licensing         ││ACTIONS ──────────────────────────────────────────────────────────────────────────────────────│
+╰───────────────── ↓12 ╯└──────────────────────────────────────────────────────────────────────────────────────────────┘
  j/k:scroll  g/G:top/bottom  a:actions  Y:yaml  J:json  esc:back
 [meter]          ● live

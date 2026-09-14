@@ -23,6 +23,6 @@ expression: frame.clone()
 │      Storage Containe││                                                                                              │
 │      Volume Groups   ││                                                                                              │
 │      Storage Policies││searched 2 loaded kinds · 230 not loaded                                                      │
-╰───────────────── ↓39 ╯╰──────────────────────────────────────────────────────────────────────────────────────────────╯
+╰───────────────── ↓40 ╯╰──────────────────────────────────────────────────────────────────────────────────────────────╯
  j k move  enter open  esc close
 [meter]          ● live

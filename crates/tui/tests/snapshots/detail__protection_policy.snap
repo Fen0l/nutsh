@@ -26,6 +26,7 @@ expression: "app.snapshot(120, 36).unwrap()"
 │  ▸ Monitoring        ││                   update                                                                     │
 │  ▸ Policies          ││                                                                                              │
 │  ▸ Admin Center      ││                                                                                              │
+│  ▸ Objects           ││                                                                                              │
 │  ▸ Contexts          ││                                                                                              │
 │  ▸ Settings          ││                                                                                              │
 │  ─── by namespace ───││                                                                                              │
@@ -34,7 +35,6 @@ expression: "app.snapshot(120, 36).unwrap()"
 │  ▸ dataprotection    ││                                                                                              │
 │  ▸ files             ││                                                                                              │
 │  ▸ iam               ││                                                                                              │
-│  ▸ licensing         ││                                                                                              │
-╰───────────────── ↓12 ╯└──────────────────────────────────────────────────────────────────────────────────────────────┘
+╰───────────────── ↓13 ╯└──────────────────────────────────────────────────────────────────────────────────────────────┘
  j/k:scroll  g/G:top/bottom  a:actions  Y:yaml  J:json  esc:back
 [meter]          ● live

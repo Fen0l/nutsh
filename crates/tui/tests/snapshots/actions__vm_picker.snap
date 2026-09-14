@@ -31,6 +31,7 @@ expression: "app.snapshot(120, 40).unwrap()"
 │  ▸ Monitoring        ││                  │  Migrate to another cluster                           │                   │
 │  ▸ Policies          ││                  ╰────────────────────────────────────────────────── ↓15 ╯                   │
 │  ▸ Admin Center      ││                                                                                              │
+│  ▸ Objects           ││                                                                                              │
 │  ▸ Contexts          ││                                                                                              │
 │  ▸ Settings          ││                                                                                              │
 │  ─── by namespace ───││                                                                                              │
@@ -38,7 +39,6 @@ expression: "app.snapshot(120, 40).unwrap()"
 │  ▸ clustermgmt       ││                                                                                              │
 │  ▸ dataprotection    ││                                                                                              │
 │  ▸ files             ││                                                                                              │
-│  ▸ iam               ││                                                                                              │
-╰───────────────── ↓13 ╯╰──────────────────────────────────────────────────────────────────────────────────────────────╯
+╰───────────────── ↓14 ╯╰──────────────────────────────────────────────────────────────────────────────────────────────╯
  type to filter  enter open or run  esc close
 [meter]          ● live

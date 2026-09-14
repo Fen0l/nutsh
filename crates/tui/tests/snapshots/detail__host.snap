@@ -28,13 +28,13 @@ expression: "app.snapshot(120, 36).unwrap()"
 │  ▸ Monitoring        ││           Sockets 2                                       Cores 24                           │
 │  ▸ Policies          ││           Threads 48                                     Memory 503 GiB                      │
 │  ▸ Admin Center      ││       Virtualized ✗                                        GPUs -                            │
-│  ▸ Contexts          ││NETWORK ──────────────────────────────────────────────────────────────────────────────────────│
-│  ▸ Settings          ││     Hypervisor IP 203.0.113.15                           CVM IP 198.51.100.164               │
-│  ─── by namespace ───││     CVM backplane 203.0.113.233                         IPMI IP 203.0.113.149                │
-│  ▸ aiops             ││         IPMI user username-cd57cc74                                                          │
-│  ▸ clustermgmt       ││STORAGE ──────────────────────────────────────────────────────────────────────────────────────│
-│  ▸ dataprotection    ││             Disks 6                                       Sizes 1.6 TiB +2                   │
-│  ▸ files             ││             Tiers SATA SSD                              Serials serialId-0b44e8d9 +5         │
-╰───────────────── ↓14 ╯└──────────────────────────────────────────────────────────────────────────────────────────────┘
+│  ▸ Objects           ││NETWORK ──────────────────────────────────────────────────────────────────────────────────────│
+│  ▸ Contexts          ││     Hypervisor IP 203.0.113.15                           CVM IP 198.51.100.164               │
+│  ▸ Settings          ││     CVM backplane 203.0.113.233                         IPMI IP 203.0.113.149                │
+│  ─── by namespace ───││         IPMI user username-cd57cc74                                                          │
+│  ▸ aiops             ││STORAGE ──────────────────────────────────────────────────────────────────────────────────────│
+│  ▸ clustermgmt       ││             Disks 6                                       Sizes 1.6 TiB +2                   │
+│  ▸ dataprotection    ││             Tiers SATA SSD                              Serials serialId-0b44e8d9 +5         │
+╰───────────────── ↓15 ╯└──────────────────────────────────────────────────────────────────────────────────────────────┘
  j/k:scroll  g/G:top/bottom  a:actions  Y:yaml  J:json  esc:back
 [meter]          ● live

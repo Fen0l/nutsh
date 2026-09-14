@@ -13,6 +13,6 @@ expression: frame
 │      Tasks           ││  TITLE                                    STATUS  OPERATION  USER        SOURCE       STARTED│
 │    • Audits          ││  listing up to 500 rows…                                                                     │
 │      Alert Policies  ││                                                                                              │
-╰───────────────── ↓24 ╯╰──────────────────────────────────────────────────────────────────────────────────────────────╯
+╰───────────────── ↓25 ╯╰──────────────────────────────────────────────────────────────────────────────────────────────╯
  :palette  ^b:menu  ⇥:focus  /:filter  a:actions  ⏎:drill  esc:menu  ?:help
 [meter]       ○ syncing

@@ -22,6 +22,6 @@ expression: "app.snapshot(100, 23).unwrap()"
 │      Guest Customizat││             Power ON                                                     │
 │      Storage Containe││          Agent VM ✗                                                      │
 │      Volume Groups   ││   Live migratable -                                                      │
-╰───────────────── ↓30 ╯└──────────────────────────────────────────────────────────────────────────┘
+╰───────────────── ↓31 ╯└──────────────────────────────────────────────────────────────────────────┘
  j/k:scroll  g/G:top/bottom  a:actions  Y:yaml  J:json  esc:back
 [meter]          ● live
