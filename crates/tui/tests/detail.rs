@@ -30,6 +30,8 @@ async fn detail(pc: &MockPc, kind: &str) -> App {
     .unwrap();
     common::settle(&mut app).await;
     common::settle_names(&mut app).await;
+    // The frame includes the header summary; without this its counters are a race.
+    common::settle_stats(&mut app).await;
     app.handle(Key::Char('y'));
     // A pane over a kind with a single-entity GET waits for that document, because that is
     // what it is composed from. The flat Host has no get endpoint, so nothing is in flight and

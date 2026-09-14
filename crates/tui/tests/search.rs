@@ -27,6 +27,8 @@ async fn vms_and_hosts(pc: &MockPc) -> App {
     common::settle(&mut app).await;
     app.open_root(kind("vmm.ahv.config.Vm"));
     common::settle(&mut app).await;
+    // The frame includes the header summary, which the stats poller fills on its own cycle.
+    common::settle_stats(&mut app).await;
     app
 }
 
