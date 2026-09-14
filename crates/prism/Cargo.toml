@@ -11,7 +11,7 @@ workspace = true
 
 [dependencies]
 nutsh-catalog.workspace = true
-reqwest = { version = "0.13", features = ["cookies", "json", "gzip", "query"] }
+reqwest = { workspace = true, features = ["cookies", "json", "gzip", "query"] }
 # Only for downcasting the certificate error reqwest buries in its connect error; no provider.
 rustls = { version = "0.23", default-features = false }
 serde.workspace = true
@@ -19,8 +19,8 @@ serde_json.workspace = true
 thiserror.workspace = true
 tokio.workspace = true
 tracing.workspace = true
-futures = "0.3"
-uuid = { version = "1", features = ["v4"] }
+futures.workspace = true
+uuid.workspace = true
 
 [dev-dependencies]
 nutsh-mockpc.workspace = true

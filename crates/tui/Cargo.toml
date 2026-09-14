@@ -41,7 +41,7 @@ nutsh-mockpc.workspace = true
 nutsh-config.workspace = true
 serde.workspace = true
 # The cache tests give a run its own state directory instead of the machine's.
-tempfile = "3"
+tempfile.workspace = true
 toml.workspace = true
 # This crate, with its test hooks: an integration test is an external crate, so it links the
 # library like any other consumer - with the feature the binary never asks for.

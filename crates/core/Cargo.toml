@@ -17,7 +17,7 @@ testing = []
 
 [dependencies]
 anyhow.workspace = true
-futures = "0.3"
+futures.workspace = true
 indexmap.workspace = true
 nutsh-catalog.workspace = true
 nutsh-config.workspace = true
@@ -32,7 +32,7 @@ tracing-subscriber.workspace = true
 [dev-dependencies]
 nutsh-mockpc.workspace = true
 serde_yaml_ng.workspace = true
-tempfile = "3"
+tempfile.workspace = true
 # The paused clock: the idle pause is a five-minute rule, and no test may take five minutes to
 # assert one. A dev-dependency, so nothing the binary links carries it.
 tokio = { workspace = true, features = ["test-util"] }
