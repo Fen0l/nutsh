@@ -56,7 +56,12 @@ pub async fn app_with_cache(pc: &MockPc, state: &std::path::Path) -> App {
     ))
     .expect("a key");
     let dir = root.join(key);
-    let restored = nutsh_core::cache::read(&dir, &identity, nutsh_core::cache::now_secs());
+    let restored = nutsh_core::cache::read(
+        &dir,
+        &identity,
+        nutsh_core::cache::now_secs(),
+        nutsh_core::cache::MAX_AGE,
+    );
     let session =
         nutsh_core::session::connect(&profile, "secret", Scope::default(), restored.as_ref())
             .await

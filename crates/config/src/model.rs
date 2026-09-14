@@ -26,6 +26,11 @@ pub struct Config {
     /// it for one run.
     #[serde(default = "default_true", skip_serializing_if = "is_true")]
     pub cache: bool,
+    /// Seconds before the whole cache directory is thrown away, where `cache::MAX_AGE` is not
+    /// what this user wants. A bare key, beside `cache`, because `[cache]` cannot exist in a
+    /// file that already says `cache = true`.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub cache_max_age: Option<u32>,
     /// Mouse capture: rows, menu items, headers and the wheel.
     ///
     /// It sits beside `readonly` and `cache` because `toml::to_string_pretty` emits bare keys
@@ -86,6 +91,7 @@ impl Default for Config {
             current_context: None,
             readonly: false,
             cache: true,
+            cache_max_age: None,
             mouse: true,
             header: Header::Auto,
             log: LogLevel::Off,
@@ -361,6 +367,23 @@ mod tests {
     /// key beneath `[contexts.lab]` would read as that context's and parse as an unknown key.
     /// And it is skipped when true, so `ctx add` never starts writing it into files that never
     /// had it.
+    #[test]
+    fn a_cache_max_age_round_trips_and_is_absent_until_set() {
+        let mut cfg = Config::default();
+        assert_eq!(cfg.cache_max_age, None);
+        assert!(
+            !toml::to_string_pretty(&cfg)
+                .unwrap()
+                .contains("cache_max_age")
+        );
+
+        cfg.cache_max_age = Some(3_600);
+        let written = toml::to_string_pretty(&cfg).unwrap();
+        assert!(written.contains("cache_max_age = 3600"), "{written}");
+        let back: Config = toml::from_str(&written).unwrap();
+        assert_eq!(back.cache_max_age, Some(3_600));
+    }
+
     #[test]
     fn cache_defaults_to_true_is_not_written_and_sits_above_the_contexts() {
         let cfg: Config =
