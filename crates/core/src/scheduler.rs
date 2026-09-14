@@ -1469,7 +1469,7 @@ mod tests {
         assert!(!is_missing_list(&single, Some(&err())));
         // A pane's filtered table is still a top-level list.
         let pane = Subscription::pane(
-            TableKey::filtered(vm, Some("powerState eq 'ON'")),
+            TableKey::filtered(vm, Some("powerState eq 'ON'".into())),
             FIVE,
             None,
             None,

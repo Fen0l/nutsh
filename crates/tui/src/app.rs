@@ -725,7 +725,7 @@ impl App {
             let key = TableKey {
                 kind: t.kind,
                 parents: t.parents,
-                filter: t.filter,
+                filter: t.filter.map(std::sync::Arc::from),
             };
             let rows: Vec<nutsh_prism::Entity> = t
                 .rows
@@ -4849,7 +4849,7 @@ fn cache_snapshot(live: &Live, now: u64) -> nutsh_core::cache::Snapshot {
             .map(|(key, t)| TableSnapshot {
                 kind: key.kind.id.to_string(),
                 parents: key.parents.clone(),
-                filter: key.filter.map(str::to_string),
+                filter: key.filter.as_deref().map(str::to_string),
                 // What this run sent. The scheduler narrows the cycle that fills a table, so
                 // these rows are that narrowing and labelling them `None` - a whole document -
                 // is how a row with no `disks` came back next start as if it had some.

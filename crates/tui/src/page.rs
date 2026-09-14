@@ -103,7 +103,7 @@ impl PageView {
             .iter()
             .filter_map(|d| {
                 let kind = nutsh_catalog::kind(d.kind)?;
-                let key = TableKey::filtered(kind, d.filter);
+                let key = TableKey::filtered(kind, d.filter.map(std::sync::Arc::from));
                 let reason = unavailable(kind);
                 // Nothing has drawn it yet, so it subscribes at a height of zero: twenty rows
                 // and one page, which is what a pane asks for before a frame has said how

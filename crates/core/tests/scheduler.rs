@@ -296,7 +296,7 @@ async fn a_pane_subscription_sends_its_filter() {
     let mut scheduler = Scheduler::new(client, tx);
     let kind = kind("prism.config.Task").unwrap();
     scheduler.subscribe(Subscription::pane(
-        TableKey::filtered(kind, Some(RUNNING)),
+        TableKey::filtered(kind, Some(RUNNING.into())),
         Duration::from_secs(30),
         Some(RUNNING.into()),
         None,

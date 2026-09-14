@@ -21,10 +21,14 @@ use crate::stats::Stats;
 pub struct TableKey {
     pub kind: &'static Kind,
     pub parents: Vec<String>,
-    /// The OData `$filter` this table was listed with, when it is a page pane's. Part of the
-    /// identity: `prism.config.Task` filtered to RUNNING and the same kind unfiltered are two
-    /// tables, and merging them would show a pane rows its own filter excludes.
-    pub filter: Option<&'static str>,
+    /// The OData `$filter` this table was listed with: a page pane's, or a search's. Part of
+    /// the identity - `prism.config.Task` filtered to RUNNING and the same kind unfiltered are
+    /// two tables, and merging them would show a pane rows its own filter excludes.
+    ///
+    /// Owned, because a search builds its filter from what was typed. The cache has always
+    /// stored this as a `String`; only the key insisted on a literal, and that came from
+    /// filters having had one source.
+    pub filter: Option<std::sync::Arc<str>>,
 }
 
 impl TableKey {
@@ -47,7 +51,7 @@ impl TableKey {
     }
 
     /// A page pane's table: top-level, and keyed by its own filter as well as its kind.
-    pub fn filtered(kind: &'static Kind, filter: Option<&'static str>) -> TableKey {
+    pub fn filtered(kind: &'static Kind, filter: Option<std::sync::Arc<str>>) -> TableKey {
         TableKey {
             kind,
             parents: Vec::new(),
@@ -860,7 +864,7 @@ mod tests {
         // A pane's filtered listing is its own table: merging it with the unfiltered one
         // would show the pane rows its filter excludes.
         let vms = kind("vmm.ahv.config.Vm").unwrap();
-        let filtered = TableKey::filtered(vms, Some("powerState eq 'ON'"));
+        let filtered = TableKey::filtered(vms, Some("powerState eq 'ON'".into()));
         store.apply(
             &filtered,
             Update::Page {

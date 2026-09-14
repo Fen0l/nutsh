@@ -14,7 +14,7 @@
 
 use std::collections::{BTreeMap, BTreeSet};
 
-use nutsh_catalog::{ColumnKind, Kind};
+use nutsh_catalog::{ColumnKind, Kind, Reach};
 use nutsh_prism::Entity;
 use serde_json::Value;
 
@@ -177,6 +177,53 @@ pub fn odata(kind: &'static Kind, query: &Query) -> Option<String> {
         return Some(format!("extId eq '{}'", quote(term)));
     }
     None
+}
+
+/// One kind a search will ask a Prism Central about, and what it will send.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct Ask {
+    pub kind: &'static Kind,
+    /// The `$filter` to send, or `None` to walk the list and match the rows here.
+    pub filter: Option<String>,
+}
+
+/// Every kind a term is worth asking about, and how.
+///
+/// Only kinds the palette can open on their own: a child needs a parent's identifier, and a
+/// search cannot supply one without first listing every parent, which is a different and much
+/// larger question than the one that was asked.
+///
+/// Two shapes, and the term decides which:
+///
+/// - a **name or identifier** goes as a `$filter`, so the Prism Central answers with the rows
+///   that match and nothing else. Only the kinds that declare the field filterable are asked;
+///   the rest would answer 400.
+/// - an **address** cannot be filtered anywhere worth asking, so the kinds that keep an address
+///   at all are listed in full and matched here. There are nine of them, which is why the
+///   narrower-looking search is the cheaper one.
+pub fn plan(query: &Query) -> Vec<Ask> {
+    if query.is_empty() {
+        return Vec::new();
+    }
+    nutsh_catalog::KINDS
+        .iter()
+        .filter(|k| nutsh_catalog::reach(k) == Reach::Direct)
+        .filter_map(|k| {
+            if query.is_address() {
+                // `addresses` reads the columns and the composed detail, which is where a Host
+                // keeps its IPMI address, so the set is wider than the table shows.
+                addresses(k).next()?;
+                return Some(Ask {
+                    kind: k,
+                    filter: None,
+                });
+            }
+            Some(Ask {
+                kind: k,
+                filter: Some(odata(k, query)?),
+            })
+        })
+        .collect()
 }
 
 /// OData escapes a single quote by doubling it. Without this a name holding one is a filter the
@@ -490,6 +537,54 @@ mod tests {
 
     /// One walk answers both questions: whether the row matched, and what to show beside its
     /// name for having matched.
+    #[test]
+    fn a_name_asks_the_kinds_that_will_filter_on_one() {
+        let plan = plan(&Query::new("web"));
+        assert!(
+            plan.iter().all(|a| a.filter.is_some()),
+            "a name goes as a filter or the kind is not asked"
+        );
+        assert!(
+            plan.iter()
+                .all(|a| nutsh_catalog::reach(a.kind) == Reach::Direct),
+            "a child needs a parent id a search has no way to supply"
+        );
+        let vm = plan
+            .iter()
+            .find(|a| a.kind.id == "vmm.ahv.config.Vm")
+            .expect("VMs filter on name");
+        assert_eq!(vm.filter.as_deref(), Some("startswith(name,'web')"));
+        // Every kind asked really does declare the field, which is what keeps a 400 off the wire.
+        assert!(
+            plan.iter()
+                .all(|a| a.kind.list_params.filter_fields.contains(&"name")
+                    || a.kind.list_params.filter_fields.contains(&"extId"))
+        );
+    }
+
+    #[test]
+    fn an_address_asks_only_the_kinds_that_keep_one_and_sends_no_filter() {
+        let plan = plan(&Query::new("10.12.54"));
+        assert!(
+            plan.iter().all(|a| a.filter.is_none()),
+            "no kind worth asking will filter on an address"
+        );
+        let ids: Vec<&str> = plan.iter().map(|a| a.kind.id).collect();
+        assert!(ids.contains(&"vmm.ahv.config.Vm"), "{ids:?}");
+        assert!(ids.contains(&"clustermgmt.config.Host"), "{ids:?}");
+        assert!(ids.contains(&"networking.config.Subnet"), "{ids:?}");
+        // The whole point of the address case: it is the narrow one.
+        assert!(
+            plan.len() < 15,
+            "an address search is a handful of kinds, not the catalog: {ids:?}"
+        );
+    }
+
+    #[test]
+    fn nothing_typed_asks_nothing() {
+        assert!(plan(&Query::new("")).is_empty());
+    }
+
     #[test]
     fn the_filter_a_term_can_be_sent_as() {
         let vm = nutsh_catalog::kind("vmm.ahv.config.Vm").expect("VMs");
