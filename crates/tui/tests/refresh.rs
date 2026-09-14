@@ -60,11 +60,11 @@ async fn ctrl_t_walks_the_ladder_and_the_marker_says_where_it_got_to() {
 async fn off_reads_manual_and_ctrl_r_buys_exactly_one_cycle() {
     let pc = MockPc::builder().start().await;
     let mut app = app_over(&pc).await;
-    // Each named rung arms, so each of the four buys a cycle; they are settled one at a time
-    // so nothing is still on the wire when the request count below is taken. The fifth press
+    // Each named rung arms, so each of the seven buys a cycle; they are settled one at a time
+    // so nothing is still on the wire when the request count below is taken. The eighth press
     // is `off`, which deliberately does not arm.
-    for _ in 0..4 {
-        app.handle(Key::Ctrl('t')); // 10s 30s 1m 5m
+    for _ in 0..7 {
+        app.handle(Key::Ctrl('t')); // 10s 30s 1m 5m 1h 6h 12h
         common::settle(&mut app).await;
     }
     app.handle(Key::Ctrl('t')); // off

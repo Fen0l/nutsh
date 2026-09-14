@@ -10,6 +10,16 @@ use crate::palette::window;
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum Row {
+    /// One namespace of the refresh section: its own schedule, and the kinds under it when it
+    /// is open. Twenty of these beat two hundred and thirty-two rows of which most are the same.
+    Namespace {
+        name: &'static str,
+        value: String,
+        source: String,
+        open: bool,
+        /// How many of its kinds carry a schedule of their own.
+        custom: usize,
+    },
     /// A dim rule with a word on it; never selected, always skipped.
     Heading(&'static str),
     Setting {
@@ -21,11 +31,19 @@ pub enum Row {
         source: String,
         /// Why this row can only be read, when it can only be read.
         fixed: Option<String>,
+        /// Which kind this row schedules. `None` for every row that is not one of the per-kind
+        /// refresh rows, including `[refresh] default`.
+        kind: Option<&'static str>,
+        /// How long ago this kind's table last completed a cycle, already rendered. `None` for
+        /// a kind no table is open on, which has not refreshed rather than refreshed long ago.
+        age: Option<String>,
     },
     /// One `[nav] hide` entry, as written.
     Hidden { name: String, source: &'static str },
     /// The hide list is empty: one line saying so beats a heading over nothing.
     Note(&'static str),
+    /// An action rather than a setting: `enter` runs it, there is nothing to show.
+    Run { label: &'static str },
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -36,8 +54,15 @@ pub enum Action {
     /// `enter` on the skin row: the skin list opens over this one.
     Skins,
     /// `space` on a refresh row: seven values, not two, so it steps a ladder rather than
-    /// flipping a bit. The app writes the new rung to the file.
-    Cycled(SettingId),
+    /// flipping a bit. The app writes the new rung to the file. The kind is the row's own, not
+    /// whatever view the screen was opened over.
+    Cycled(SettingId, Option<&'static str>),
+    /// `space` on a namespace row: the same ladder, written to `[refresh.namespaces]`.
+    CycledNamespace(&'static str),
+    /// `enter` on a namespace row: show or hide its kinds.
+    Expand(&'static str),
+    /// `enter` on the refresh-all row: every subscription cycles now.
+    RefreshAll,
     /// A setting whose own palette command already owns the writer and the live effect -
     /// `mouse`, `header` and `log`. The screen asks for the command rather than becoming a
     /// second writer for the same key.
@@ -53,6 +78,16 @@ pub enum Action {
     Ignored,
 }
 
+/// One schedule the screen can set: the setting itself, the label that names what it schedules,
+/// the kind it belongs to, and how long ago that kind last polled.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct RefreshRow {
+    pub setting: Setting,
+    pub label: String,
+    pub kind: Option<&'static str>,
+    pub age: Option<String>,
+}
+
 #[derive(Debug)]
 pub struct Settings {
     pub rows: Vec<Row>,
@@ -65,16 +100,13 @@ impl Settings {
     /// at. `refresh` is the schedule of the view in front of the user, which lives in `App` and
     /// not behind the `Contexts` seam, and is a separate argument for the same reason `skin` is.
     /// `hide` is `[nav] hide` as the app holds it.
-    pub fn open(
-        settings: &[Setting],
-        skin: &str,
-        refresh: &[(Setting, String)],
-        hide: &[String],
-    ) -> Settings {
+    pub fn open(settings: &[Setting], skin: &str, refresh: &[Row], hide: &[String]) -> Settings {
         let mut rows: Vec<Row> = settings
             .iter()
             .map(|s| Row::Setting {
                 id: s.id,
+                kind: None,
+                age: None,
                 label: s.id.label().to_string(),
                 value: if s.id == SettingId::Skin {
                     skin.to_string()
@@ -85,13 +117,6 @@ impl Settings {
                 fixed: s.fixed.clone(),
             })
             .collect();
-        rows.extend(refresh.iter().map(|(s, label)| Row::Setting {
-            id: s.id,
-            label: label.clone(),
-            value: s.value.clone(),
-            source: s.source.label(),
-            fixed: s.fixed.clone(),
-        }));
         if rows.is_empty() {
             rows.push(Row::Note("no config file: nothing to change here"));
             return Settings { rows, selected: 0 };
@@ -104,6 +129,15 @@ impl Settings {
                 name: name.clone(),
                 source: "config file",
             }));
+        }
+        // Last, and not between the switches and the hide list: there is one row per kind, and
+        // a section that long in the middle puts everything after it past the end of the screen.
+        if !refresh.is_empty() {
+            rows.push(Row::Heading("REFRESH"));
+            rows.push(Row::Run {
+                label: "refresh everything now",
+            });
+            rows.extend(refresh.iter().cloned());
         }
         Settings { rows, selected: 0 }
     }
@@ -128,7 +162,7 @@ impl Settings {
                 Some(Row::Hidden { name, .. }) => Action::Remove(name.clone()),
                 _ => Action::Ignored,
             },
-            Key::Char(' ') | Key::Enter => self.act(),
+            Key::Char(' ') | Key::Enter => self.act(key),
             _ => Action::Ignored,
         }
     }
@@ -136,11 +170,16 @@ impl Settings {
     /// `space` and `enter` do the row's own thing: a switch flips, the skin row opens the list a
     /// skin is picked from, `mouse`, `header` and `log` ask for the commands that own them, and
     /// a fixed row explains itself instead of lying about writing.
-    fn act(&mut self) -> Action {
+    fn act(&mut self, key: Key) -> Action {
         match self.rows.get(self.selected) {
             Some(Row::Setting {
                 fixed: Some(why), ..
             }) => Action::Fixed(why.clone()),
+            Some(Row::Run { .. }) => Action::RefreshAll,
+            Some(Row::Namespace { name, .. }) => match key {
+                Key::Enter => Action::Expand(name),
+                _ => Action::CycledNamespace(name),
+            },
             Some(Row::Setting {
                 id: SettingId::Skin,
                 ..
@@ -152,8 +191,9 @@ impl Settings {
             // Seven values, not two: `space` steps a ladder here rather than flipping a bit.
             Some(Row::Setting {
                 id: id @ (SettingId::Refresh | SettingId::RefreshKind),
+                kind,
                 ..
-            }) => Action::Cycled(*id),
+            }) => Action::Cycled(*id, *kind),
             Some(Row::Setting { id, value, .. }) => Action::Toggled(*id, value != "on"),
             _ => Action::Ignored,
         }

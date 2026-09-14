@@ -410,15 +410,19 @@ impl Contexts for FileContexts {
     }
     fn set_interval(
         &self,
-        kind: Option<&str>,
+        at: nutsh_core::contexts::Schedule<'_>,
         every: nutsh_config::Interval,
     ) -> anyhow::Result<()> {
+        use nutsh_core::contexts::Schedule;
         let mut cfg = self.load();
-        match kind {
-            Some(id) => {
+        match at {
+            Schedule::Kind(id) => {
                 cfg.refresh.kinds.insert(id.to_string(), every);
             }
-            None => cfg.refresh.default = Some(every),
+            Schedule::Namespace(ns) => {
+                cfg.refresh.namespaces.insert(ns.to_string(), every);
+            }
+            Schedule::Everything => cfg.refresh.default = Some(every),
         }
         self.save(&cfg)
     }

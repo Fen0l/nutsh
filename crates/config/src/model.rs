@@ -225,13 +225,17 @@ pub struct Refresh {
     /// By catalog kind id.
     #[serde(default, skip_serializing_if = "BTreeMap::is_empty")]
     pub kinds: BTreeMap<String, Interval>,
+    /// By namespace name. Read after `kinds` and before `default`, so one entry schedules the
+    /// thirty-five kinds of `vmm` without writing thirty-five of them.
+    #[serde(default, skip_serializing_if = "BTreeMap::is_empty")]
+    pub namespaces: BTreeMap<String, Interval>,
 }
 
 impl Refresh {
     /// Written, not derived, for the reason `Nav::is_default` and `Skin::is_default` are:
     /// `skip_serializing_if` takes a path to a predicate, not `Default`.
     pub fn is_default(&self) -> bool {
-        self.default.is_none() && self.kinds.is_empty()
+        self.default.is_none() && self.kinds.is_empty() && self.namespaces.is_empty()
     }
 }
 

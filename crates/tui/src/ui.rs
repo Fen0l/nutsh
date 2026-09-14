@@ -2856,8 +2856,40 @@ fn draw_settings(app: &App, f: &mut Frame, body: Rect) {
                 ),
                 theme::dim(),
             ))),
+            crate::settings::Row::Run { label } => ListItem::new(Line::from(Span::styled(
+                format!("⏎ {label}"),
+                Style::default().fg(theme::text()),
+            ))),
             crate::settings::Row::Note(text) => {
                 ListItem::new(Line::from(Span::styled(*text, theme::dim())))
+            }
+            crate::settings::Row::Namespace {
+                name,
+                value,
+                source,
+                open,
+                custom,
+            } => {
+                let mark = if *open { '▾' } else { '▸' };
+                let label = if *custom > 0 {
+                    format!("{mark} {name} ({custom} set)")
+                } else {
+                    format!("{mark} {name}")
+                };
+                let age_width = 8;
+                let set_width = value_width.saturating_sub(age_width);
+                ListItem::new(Line::from(vec![
+                    Span::styled(
+                        pad(cut(&label, label_width), label_width),
+                        Style::default().fg(theme::text()),
+                    ),
+                    Span::styled(
+                        pad(cut(value, set_width), set_width),
+                        Style::default().fg(theme::text()),
+                    ),
+                    Span::styled(pad(String::new(), age_width), theme::dim()),
+                    Span::styled(cut(source, source_width), theme::dim()),
+                ]))
             }
             crate::settings::Row::Hidden { name, source } => ListItem::new(Line::from(vec![
                 Span::styled(
@@ -2874,6 +2906,7 @@ fn draw_settings(app: &App, f: &mut Frame, body: Rect) {
                 value,
                 source,
                 fixed,
+                age,
                 ..
             } => {
                 // A row the screen can only show is dim end to end: the value is real, the
@@ -2883,9 +2916,17 @@ fn draw_settings(app: &App, f: &mut Frame, body: Rect) {
                 } else {
                     Style::default().fg(theme::text())
                 };
+                // The age shares the value column rather than taking one of its own: a
+                // fourth column would cost the source column the width it needs at 80.
+                let age_width = 8;
+                let set_width = value_width.saturating_sub(age_width);
                 ListItem::new(Line::from(vec![
                     Span::styled(pad(cut(label, label_width), label_width), theme::dim()),
-                    Span::styled(pad(cut(value, value_width), value_width), style),
+                    Span::styled(pad(cut(value, set_width), set_width), style),
+                    Span::styled(
+                        pad(cut(age.as_deref().unwrap_or("-"), age_width), age_width),
+                        theme::dim(),
+                    ),
                     Span::styled(cut(source, source_width), theme::dim()),
                 ]))
             }
