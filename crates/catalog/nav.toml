@@ -128,8 +128,20 @@ items = [
   { label = "Entitlements", kind = "licensing.config.Entitlement" },
   { label = "Compliance", kind = "licensing.config.Compliance" },
   { label = "Key Management Servers", kind = "security.config.KeyManagementServer" },
-  { label = "Files", kind = "files.config.FileServer" },
   { label = "Projects", note = "not in the v4 API" },
+]
+
+# Mount targets and snapshots are FromParent, so they are notes, not items.
+[[group]]
+name = "Files"
+items = [
+  { label = "Overview", page = "files-overview" },
+  { label = "File Servers", kind = "files.config.FileServer" },
+  { label = "Replication Policies", kind = "files.config.ReplicationPolicy" },
+  { label = "Replication Jobs", kind = "files.operations.ReplicationJob" },
+  { label = "Unified Namespaces", kind = "files.config.UnifiedNamespace" },
+  { label = "Mount Targets", note = "listed inside a file server" },
+  { label = "Snapshots", note = "listed inside a mount target" },
 ]
 
 # Buckets and certificates are FromParent, so they are notes, not items. Last of the content
@@ -139,7 +151,7 @@ name = "Objects"
 items = [
   { label = "Overview", page = "objects-overview" },
   { label = "Object Stores", kind = "objects.config.ObjectStore" },
-  { label = "Buckets", note = "listed inside an object store" },
+  { label = "Buckets", note = "inside an object store, local namespace only" },
   { label = "Certificates", note = "listed inside an object store" },
 ]
 

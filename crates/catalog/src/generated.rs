@@ -2853,8 +2853,8 @@ pub static KINDS: &[Kind] = &[
         version: "v4.0",
         since: "v4.0",
         display: "Replication Policies",
-        aliases: &["replication-policies", "replication-policy"],
-        category: "Files",
+        aliases: &["replication-policy", "replication-policies"],
+        category: "Storage",
         poll_secs: 30,
         list_path: "/files/v4.0/config/replication-policies",
         get_path: Some("/files/v4.0/config/replication-policies/{extId}"),
@@ -2863,7 +2863,7 @@ pub static KINDS: &[Kind] = &[
         orderby: None,
         probe_by: None,
         max_rows: Some(1000),
-        select: Some("excludeFilePatterns,extId,isReverse,name,replicationConfigurations,shouldIncludeNewMountTargets,shouldKeepDeletedFiles,status,type"),
+        select: Some("description,extId,name,replicationConfigurations,shouldIncludeNewMountTargets,status,type"),
         parent: None,
         actions: &[
             Action { name: "create", path: "/files/v4.0/config/replication-policies", method: Method::Post, needs_etag: false, needs_body: true, takes_body: true, returns: ActionReturn::Task, scope: &[], roles: &[], key: "", label: "", danger: Danger::None, confirm: ConfirmKind::None, order: 0, hidden: false, body: None, form: &[ Field { name: "name", label: "Name", ty: FieldType::Text, required: false, value: None, hidden: false }, Field { name: "description", label: "Description", ty: FieldType::Text, required: false, value: None, hidden: false }, Field { name: "type", label: "Type", ty: FieldType::Enum(&["SMART_DR", "DATA_SYNC", "VDI_SYNC", "$UNKNOWN", "$REDACTED"]), required: false, value: None, hidden: false }, Field { name: "replicationConfigurations", label: "Replication configurations", ty: FieldType::Json("[{\"primaryFileServerExtId\": null, \"secondaryFileServerExtId\": null}]"), required: false, value: None, hidden: false }, Field { name: "status", label: "Status", ty: FieldType::Enum(&["ENABLED", "DISABLED", "PARTIALLY_ENABLED", "$UNKNOWN", "$REDACTED"]), required: false, value: None, hidden: false }, Field { name: "shouldIncludeNewMountTargets", label: "Should include new mount targets", ty: FieldType::Bool, required: false, value: None, hidden: false }, Field { name: "shouldKeepDeletedFiles", label: "Should keep deleted files", ty: FieldType::Bool, required: false, value: None, hidden: false }, Field { name: "excludeFilePatterns", label: "Exclude file patterns", ty: FieldType::Json("[]"), required: false, value: None, hidden: false }, Field { name: "changeUserSessionOwnershipSpec", label: "Change user session ownership spec", ty: FieldType::Json("{\"currentOwnerFileServerExtId\": null, \"newOwnerFileServerExtId\": null}"), required: false, value: None, hidden: false }, Field { name: "isReverse", label: "Is reverse", ty: FieldType::Bool, required: false, value: None, hidden: false },], rate: RateLimit { count: 1, per_secs: 1 } },
@@ -2877,6 +2877,12 @@ pub static KINDS: &[Kind] = &[
         name_path: "",
         warm: false,
         columns: &[
+            Column { header: "NAME", path: "name", kind: ColumnKind::Text },
+            Column { header: "STATUS", path: "status", kind: ColumnKind::Status },
+            Column { header: "TYPE", path: "type", kind: ColumnKind::Enum },
+            Column { header: "CONFIGS", path: "replicationConfigurations", kind: ColumnKind::Count },
+            Column { header: "NEW TARGETS", path: "shouldIncludeNewMountTargets", kind: ColumnKind::Bool },
+            Column { header: "DESCRIPTION", path: "description", kind: ColumnKind::Text },
         ],
         fallback_columns: &[
             Column { header: "NAME", path: "name", kind: ColumnKind::Text },
@@ -2891,8 +2897,8 @@ pub static KINDS: &[Kind] = &[
         detail: &[
         ],
         preview: false,
-        curated: false,
-        status_roles: &[],
+        curated: true,
+        status_roles: &[("PARTIALLY_ENABLED", Role::Warn)],
     },
     Kind {
         id: "files.config.Snapshot",
@@ -3070,8 +3076,8 @@ pub static KINDS: &[Kind] = &[
         version: "v4.0",
         since: "v4.0",
         display: "Unified Namespaces",
-        aliases: &["unified-namespaces", "unified-namespace"],
-        category: "Files",
+        aliases: &["unified-namespace", "unified-namespaces"],
+        category: "Storage",
         poll_secs: 30,
         list_path: "/files/v4.0/config/unified-namespaces",
         get_path: Some("/files/v4.0/config/unified-namespaces/{extId}"),
@@ -3094,6 +3100,7 @@ pub static KINDS: &[Kind] = &[
         name_path: "",
         warm: false,
         columns: &[
+            Column { header: "MEMBERS", path: "namespaceMemberConfigs", kind: ColumnKind::Count },
         ],
         fallback_columns: &[
             Column { header: "NAMESPACE MEMBER CONFIGS", path: "namespaceMemberConfigs", kind: ColumnKind::Count },
@@ -3101,7 +3108,7 @@ pub static KINDS: &[Kind] = &[
         detail: &[
         ],
         preview: false,
-        curated: false,
+        curated: true,
         status_roles: &[],
     },
     Kind {
@@ -3196,8 +3203,8 @@ pub static KINDS: &[Kind] = &[
         version: "v4.0",
         since: "v4.0",
         display: "Replication Jobs",
-        aliases: &["replication-jobs", "replication-job"],
-        category: "Files",
+        aliases: &["replication-job", "replication-jobs"],
+        category: "Storage",
         poll_secs: 30,
         list_path: "/files/v4.0/operations/replication-jobs",
         get_path: Some("/files/v4.0/operations/replication-jobs/{extId}"),
@@ -3206,7 +3213,7 @@ pub static KINDS: &[Kind] = &[
         orderby: None,
         probe_by: None,
         max_rows: Some(1000),
-        select: Some("averageThroughputBps,bytesTransferred,endTime,estimatedBytes,extId,isDeletePropagationEnabled,numberOfEstimatedFiles,numberOfFilesFailed,numberOfFilesTransferred,policyExtId,progressPercentage,replicationSummary,sourceFileServerExtId,sourceMountTargetExtId,sourceMountTargetPath,startTime,status,statusMessage,targetFileServerExtId,targetMountTargetExtId,targetMountTargetPath"),
+        select: Some("endTime,extId,policyExtId,progressPercentage,sourceFileServerExtId,startTime,status,targetFileServerExtId"),
         parent: None,
         actions: &[
         ],
@@ -3217,6 +3224,13 @@ pub static KINDS: &[Kind] = &[
         name_path: "",
         warm: false,
         columns: &[
+            Column { header: "POLICY", path: "policyExtId", kind: ColumnKind::Reference },
+            Column { header: "STATUS", path: "status", kind: ColumnKind::Status },
+            Column { header: "SOURCE", path: "sourceFileServerExtId", kind: ColumnKind::Reference },
+            Column { header: "TARGET", path: "targetFileServerExtId", kind: ColumnKind::Reference },
+            Column { header: "PROGRESS", path: "progressPercentage", kind: ColumnKind::Percent },
+            Column { header: "STARTED", path: "startTime", kind: ColumnKind::Timestamp },
+            Column { header: "ENDED", path: "endTime", kind: ColumnKind::Timestamp },
         ],
         fallback_columns: &[
             Column { header: "REPLICATION SUMMARY", path: "replicationSummary", kind: ColumnKind::Enum },
@@ -3243,7 +3257,7 @@ pub static KINDS: &[Kind] = &[
         detail: &[
         ],
         preview: false,
-        curated: false,
+        curated: true,
         status_roles: &[],
     },
     Kind {
@@ -11371,7 +11385,7 @@ pub static KINDS: &[Kind] = &[
 
 /// How many leading groups of `NAV` came from `nav.toml`: what the sidebar's `1`..`9`
 /// cover, and where `0` finds the first generated one.
-pub const CURATED_GROUPS: usize = 11;
+pub const CURATED_GROUPS: usize = 12;
 
 pub static NAV: &[NavGroup] = &[
     NavGroup { name: "Dashboard", items: &[
@@ -11468,13 +11482,21 @@ pub static NAV: &[NavGroup] = &[
         NavItem { label: "Entitlements", target: NavTarget::Kind("licensing.config.Entitlement"), note: None },
         NavItem { label: "Compliance", target: NavTarget::Kind("licensing.config.Compliance"), note: None },
         NavItem { label: "Key Management Servers", target: NavTarget::Kind("security.config.KeyManagementServer"), note: None },
-        NavItem { label: "Files", target: NavTarget::Kind("files.config.FileServer"), note: None },
         NavItem { label: "Projects", target: NavTarget::Missing, note: Some("not in the v4 API") },
+    ] },
+    NavGroup { name: "Files", items: &[
+        NavItem { label: "Overview", target: NavTarget::Page("files-overview"), note: None },
+        NavItem { label: "File Servers", target: NavTarget::Kind("files.config.FileServer"), note: None },
+        NavItem { label: "Replication Policies", target: NavTarget::Kind("files.config.ReplicationPolicy"), note: None },
+        NavItem { label: "Replication Jobs", target: NavTarget::Kind("files.operations.ReplicationJob"), note: None },
+        NavItem { label: "Unified Namespaces", target: NavTarget::Kind("files.config.UnifiedNamespace"), note: None },
+        NavItem { label: "Mount Targets", target: NavTarget::Missing, note: Some("listed inside a file server") },
+        NavItem { label: "Snapshots", target: NavTarget::Missing, note: Some("listed inside a mount target") },
     ] },
     NavGroup { name: "Objects", items: &[
         NavItem { label: "Overview", target: NavTarget::Page("objects-overview"), note: None },
         NavItem { label: "Object Stores", target: NavTarget::Kind("objects.config.ObjectStore"), note: None },
-        NavItem { label: "Buckets", target: NavTarget::Missing, note: Some("listed inside an object store") },
+        NavItem { label: "Buckets", target: NavTarget::Missing, note: Some("inside an object store, local namespace only") },
         NavItem { label: "Certificates", target: NavTarget::Missing, note: Some("listed inside an object store") },
     ] },
     NavGroup { name: "Contexts", items: &[
@@ -11495,11 +11517,6 @@ pub static NAV: &[NavGroup] = &[
     ] },
     NavGroup { name: "dataprotection", items: &[
         NavItem { label: "Data Protection Cluster Capabilities", target: NavTarget::Kind("dataprotection.config.DataProtectionClusterCapability"), note: None },
-    ] },
-    NavGroup { name: "files", items: &[
-        NavItem { label: "Replication Jobs", target: NavTarget::Kind("files.operations.ReplicationJob"), note: None },
-        NavItem { label: "Replication Policies", target: NavTarget::Kind("files.config.ReplicationPolicy"), note: None },
-        NavItem { label: "Unified Namespaces", target: NavTarget::Kind("files.config.UnifiedNamespace"), note: None },
     ] },
     NavGroup { name: "iam", items: &[
         NavItem { label: "Cert Auth Providers", target: NavTarget::Kind("iam.authn.CertAuthProvider"), note: None },
@@ -12145,6 +12162,64 @@ pub static PAGES: &[PageDef] = &[
                     Column { header: "OBJECTS", path: "objectCount", kind: ColumnKind::Text },
                     Column { header: "USED", path: "storageUsageBytes", kind: ColumnKind::Bytes },
                     Column { header: "TIERED", path: "tieredUsageBytes", kind: ColumnKind::Bytes },
+                ],
+            },
+        ],
+    },
+    PageDef {
+        id: "files-overview",
+        title: "Files",
+        row_heights: &[0, 0],
+        summary: None,
+        summary_rows: 0,
+        panes: &[
+            PaneDef {
+                title: "File servers",
+                kind: "files.config.FileServer",
+                filter: None,
+                orderby: None,
+                row: 0, col: 0, weight: 1,
+                empty: "no file servers",
+                columns: &[
+                    Column { header: "NAME", path: "name", kind: ColumnKind::Text },
+                ],
+            },
+            PaneDef {
+                title: "Replication policies",
+                kind: "files.config.ReplicationPolicy",
+                filter: None,
+                orderby: None,
+                row: 0, col: 1, weight: 1,
+                empty: "no replication policies",
+                columns: &[
+                    Column { header: "NAME", path: "name", kind: ColumnKind::Text },
+                    Column { header: "STATUS", path: "status", kind: ColumnKind::Status },
+                    Column { header: "TYPE", path: "type", kind: ColumnKind::Enum },
+                ],
+            },
+            PaneDef {
+                title: "Replication jobs",
+                kind: "files.operations.ReplicationJob",
+                filter: None,
+                orderby: None,
+                row: 1, col: 0, weight: 1,
+                empty: "no replication jobs",
+                columns: &[
+                    Column { header: "POLICY", path: "policyExtId", kind: ColumnKind::Reference },
+                    Column { header: "STATUS", path: "status", kind: ColumnKind::Status },
+                    Column { header: "PROGRESS", path: "progressPercentage", kind: ColumnKind::Percent },
+                    Column { header: "STARTED", path: "startTime", kind: ColumnKind::Timestamp },
+                ],
+            },
+            PaneDef {
+                title: "Unified namespaces",
+                kind: "files.config.UnifiedNamespace",
+                filter: None,
+                orderby: None,
+                row: 1, col: 1, weight: 1,
+                empty: "no unified namespaces",
+                columns: &[
+                    Column { header: "MEMBERS", path: "namespaceMemberConfigs", kind: ColumnKind::Count },
                 ],
             },
         ],

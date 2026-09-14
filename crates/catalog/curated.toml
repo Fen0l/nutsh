@@ -2513,3 +2513,43 @@ fields = [
     { label = "Pending objects", path = "replicationRelations[].pendingObjectCount", kind = "Text" },
     { label = "Pending size", path = "replicationRelations[].pendingObjectSizeBytes", kind = "Bytes" },
 ]
+
+[kinds."files.config.ReplicationPolicy"]
+display = "Replication Policies"
+aliases = ["replication-policy", "replication-policies"]
+category = "Storage"
+columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "STATUS", path = "status", kind = "Status" },
+    { header = "TYPE", path = "type", kind = "Enum" },
+    { header = "CONFIGS", path = "replicationConfigurations", kind = "Count" },
+    { header = "NEW TARGETS", path = "shouldIncludeNewMountTargets", kind = "Bool" },
+    { header = "DESCRIPTION", path = "description", kind = "Text" },
+]
+
+# `ENABLED` and `DISABLED` are in the shared vocabulary; this one is not.
+[kinds."files.config.ReplicationPolicy".status]
+PARTIALLY_ENABLED = "Warn"
+
+[kinds."files.operations.ReplicationJob"]
+display = "Replication Jobs"
+aliases = ["replication-job", "replication-jobs"]
+category = "Storage"
+columns = [
+    { header = "POLICY", path = "policyExtId", kind = "Reference" },
+    { header = "STATUS", path = "status", kind = "Status" },
+    { header = "SOURCE", path = "sourceFileServerExtId", kind = "Reference" },
+    { header = "TARGET", path = "targetFileServerExtId", kind = "Reference" },
+    { header = "PROGRESS", path = "progressPercentage", kind = "Percent" },
+    { header = "STARTED", path = "startTime", kind = "Timestamp" },
+    { header = "ENDED", path = "endTime", kind = "Timestamp" },
+]
+
+# The schema carries no name; a namespace is its members.
+[kinds."files.config.UnifiedNamespace"]
+display = "Unified Namespaces"
+aliases = ["unified-namespace", "unified-namespaces"]
+category = "Storage"
+columns = [
+    { header = "MEMBERS", path = "namespaceMemberConfigs", kind = "Count" },
+]

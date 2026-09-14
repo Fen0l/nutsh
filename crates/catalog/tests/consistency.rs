@@ -128,8 +128,8 @@ fn curated_flag_matches_overlay() {
     // the domain manager for `warm`, audits, events and LCM histories for a row budget or an
     // order - so the only kinds curated without columns are now the four `VmReference` display
     // names, which are the same nested schema under four paths and open no table of their own.
-    // One more for the bucket.
-    assert_eq!(curated.len(), 79, "{curated:?}");
+    // One more for the bucket, three for the Files kinds the namespace opens directly.
+    assert_eq!(curated.len(), 82, "{curated:?}");
     let flagged: Vec<&str> = curated
         .iter()
         .copied()

@@ -614,3 +614,59 @@ row_heights = [0]
     { header = "USED", path = "storageUsageBytes", kind = "Bytes" },
     { header = "TIERED", path = "tieredUsageBytes", kind = "Bytes" },
   ]
+
+# The four kinds the namespace opens at the top level. `FileServer` carries one column because
+# the v4.0 model declares one property; everything richer hangs off a file server.
+[[page]]
+id = "files-overview"
+title = "Files"
+row_heights = [0, 0]
+
+  [[page.pane]]
+  title = "File servers"
+  kind = "files.config.FileServer"
+  row = 0
+  col = 0
+  weight = 1
+  empty = "no file servers"
+  columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+  ]
+
+  [[page.pane]]
+  title = "Replication policies"
+  kind = "files.config.ReplicationPolicy"
+  row = 0
+  col = 1
+  weight = 1
+  empty = "no replication policies"
+  columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "STATUS", path = "status", kind = "Status" },
+    { header = "TYPE", path = "type", kind = "Enum" },
+  ]
+
+  [[page.pane]]
+  title = "Replication jobs"
+  kind = "files.operations.ReplicationJob"
+  row = 1
+  col = 0
+  weight = 1
+  empty = "no replication jobs"
+  columns = [
+    { header = "POLICY", path = "policyExtId", kind = "Reference" },
+    { header = "STATUS", path = "status", kind = "Status" },
+    { header = "PROGRESS", path = "progressPercentage", kind = "Percent" },
+    { header = "STARTED", path = "startTime", kind = "Timestamp" },
+  ]
+
+  [[page.pane]]
+  title = "Unified namespaces"
+  kind = "files.config.UnifiedNamespace"
+  row = 1
+  col = 1
+  weight = 1
+  empty = "no unified namespaces"
+  columns = [
+    { header = "MEMBERS", path = "namespaceMemberConfigs", kind = "Count" },
+  ]

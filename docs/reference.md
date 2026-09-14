@@ -187,6 +187,20 @@ serve. Registered Prism Centrals needs `multidomain` v4.3, and a Prism Central p
 has no equivalent path at all, so nutsh greys the entry and names the version it would need
 rather than asking a question that cannot be answered.
 
+Buckets are scoped the same way, one level further down:
+
+    GET /objects/v4.1/config/object-stores/{extId}/buckets
+
+That is the local namespace. A federated one is the same call with a header:
+
+    curl -sk -u admin \
+      -H 'x-ntnx-objects-namespace: AZ-east-1' \
+      https://PC:9440/api/objects/v4.1/config/object-stores/EXTID/buckets
+
+nutsh does not send it, so federated buckets are omitted. The header is not the problem, the
+name is: v4 has no endpoint listing federated namespaces, and no object store field names the
+one it belongs to. There is nothing to fill it from. Left out until v4 can answer.
+
 This is the call the console makes, for reference. **nutsh does not implement it**:
 
     curl -sk -u admin https://PC:9440/api/nutanix/v3/groups \
