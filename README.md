@@ -28,8 +28,10 @@ brew install Fen0l/tap/nutsh
 Or take a binary directly:
 
 ```sh
-curl --proto '=https' --tlsv1.2 -LsSf https://github.com/Fen0l/nutsh/releases/latest/download/nutsh-installer.sh | sh
+curl --proto '=https' --tlsv1.2 -LsSf https://github.com/Fen0l/nutsh/releases/download/v0.0.2-beta1/nutsh-installer.sh | sh
 ```
+
+`releases/latest/` skips pre-releases, so the URL names the version until there is a stable one.
 
 Builds are published for macOS and Linux, x86_64 and arm64. The Linux archives come in two
 flavours: `gnu`, and `musl` for a static binary that runs on any distribution.
@@ -158,6 +160,9 @@ collection behind them.
 So a pane can say `no recovery plans` while the console lists several. **An empty v4 collection
 means the v4 API has none; it does not prove the Prism Central has none.** Recovery plans, DR
 jobs, projects, blueprints and marketplace items are the known cases.
+
+Buckets are a separate case with the same symptom. The list is scoped to a namespace by a header
+nutsh does not send, so only the local namespace appears and federated ones are not listed.
 [docs/reference.md](docs/reference.md) has the detail, and why v3 is not implemented.
 
 ## More
