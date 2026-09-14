@@ -1,0 +1,26 @@
+name: Feature
+description: Something nutsh should do
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What you are trying to do
+      description: The task in front of you, not the feature you have in mind. The feature comes after.
+    validations:
+      required: true
+  - type: textarea
+    id: today
+    attributes:
+      label: How you do it today
+      description: The console, a script, another tool, or you do not.
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What nutsh could do
+      description: Optional. A key, a command, a column, a page.
+  - type: textarea
+    id: api
+    attributes:
+      label: Which v4 endpoint has the data
+      description: Optional, but it saves a lot of time. The v4 API does not serve everything the console shows.

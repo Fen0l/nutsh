@@ -1,0 +1,51 @@
+name: Compatibility report
+description: What nutsh sees on your Prism Central version
+labels: [compat-report]
+title: "compat: pc.x.y"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        nutsh has been run against very few Prism Central versions. Ten minutes of yours widens that.
+        Redact the host line from `--check`. Nothing else in the output names your site.
+  - type: input
+    id: version
+    attributes:
+      label: nutsh version
+      placeholder: nutsh 0.1.0
+    validations:
+      required: true
+  - type: input
+    id: pc
+    attributes:
+      label: Prism Central version
+      placeholder: pc.2024.3.1
+    validations:
+      required: true
+  - type: input
+    id: aos
+    attributes:
+      label: AOS version of the registered clusters
+      description: If they differ, list them.
+  - type: textarea
+    id: check
+    attributes:
+      label: Output of `nutsh --check`
+      render: text
+    validations:
+      required: true
+  - type: dropdown
+    id: usable
+    attributes:
+      label: Day to day, is it usable
+      options:
+        - Yes, everything I tried worked
+        - Mostly, some tables are empty or wrong (say which below)
+        - No (say what breaks below)
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: What was empty, wrong or missing
+      description: Kind by kind if you can. "Subnets shows nothing but the console has 12" is perfect.

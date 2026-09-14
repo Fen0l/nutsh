@@ -96,6 +96,25 @@ trackers.
 One change per commit, `make ci` green on each. If a fix is worth making, the test that fails
 without it is worth writing first.
 
+## How work moves
+
+**Every change to the code goes through an issue and a pull request, including the owner's.**
+`main` is protected: nothing lands on it without a pull request and green CI. The flow, in
+order, and `CONTRIBUTING.md` under "How a change lands" is the contributor-facing version:
+
+1. An issue exists before the branch does. It says what should be true afterwards. Label it
+   (`bug`, `enhancement`, `documentation`, `security`), put it in the milestone of the release
+   it is meant for. No lab identifier in the title or the body: issues are public.
+2. A branch per issue, from `main`, named `feat/<n>-short-name` or `fix/<n>-short-name`.
+3. The pull request's first line is `Closes #<n>`. The template's checklist is the definition
+   of done: `make ci` green, a `CHANGELOG.md` line under `Unreleased` for anything a user can
+   see, a test that fails without the change, nothing naming real infrastructure in the diff.
+4. Squash merge, delete the branch. The merge closes the issue.
+5. A release is a tag, cut when its milestone is empty, and the owner cuts it.
+
+A session that is asked to fix or add something and finds no issue for it writes the issue
+first, or asks for one, rather than committing straight to `main`.
+
 **Never push. The owner pushes, always.** Commit when asked, and stop there - `git push`, `git
 push --tags`, creating a tag that triggers a release, and anything else that moves work to a
 remote are the owner's to run. This is not a preference: a tag on this repository publishes

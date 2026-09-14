@@ -1,0 +1,62 @@
+name: Bug
+description: Something nutsh does wrong
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Before pasting anything: no hostnames, no addresses, no usernames, no passwords, no session cookies.
+        `NUTSH_LOG=debug` output is written to be safe to share. If you find it is not, that is a bug on its own - report it privately instead.
+  - type: input
+    id: version
+    attributes:
+      label: nutsh version
+      description: Output of `nutsh --version`
+      placeholder: nutsh 0.1.0
+    validations:
+      required: true
+  - type: input
+    id: pc
+    attributes:
+      label: Prism Central version
+      description: As shown in the console under Settings, or the first line of `nutsh --check`
+      placeholder: pc.7.6
+    validations:
+      required: true
+  - type: dropdown
+    id: os
+    attributes:
+      label: Where it runs
+      options:
+        - macOS, arm64
+        - macOS, x86_64
+        - Linux, x86_64
+        - Linux, arm64
+        - Other (say which below)
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What you did
+      description: The command, the keys you pressed, in order.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected, and what happened instead
+    validations:
+      required: true
+  - type: textarea
+    id: check
+    attributes:
+      label: Output of `nutsh --check`
+      description: Which namespaces this Prism Central serves. Redact the host line.
+      render: text
+  - type: textarea
+    id: log
+    attributes:
+      label: Log excerpt
+      description: Run with `NUTSH_LOG=debug`, paste the lines around the failure.
+      render: text

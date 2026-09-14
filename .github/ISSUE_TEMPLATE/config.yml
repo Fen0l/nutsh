@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security problem
+    url: https://github.com/Fen0l/nutsh/security/advisories/new
+    about: A credential, session cookie, TLS or read-only defect. Report it privately here, not as an issue.

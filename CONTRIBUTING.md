@@ -185,10 +185,41 @@ it over the object the Prism Central already has.
 seed.** An edit that found no values is `Some` and possibly empty. The difference between those
 two is a VM's disks: read it wrong and an update invents values over rows it was never given.
 
+**A test may pause the clock, or do real I/O — never both.** `tokio::time::pause` auto-advances
+the clock whenever the runtime has nothing to do, and a runtime waiting on a socket has nothing
+to do, so a paused test against `MockPc` advances into `reqwest`'s own connect timeout and fails
+with `operation timed out` on loopback. It is a race, so it passes on one machine and fails on a
+slower one. Scheduler timing tests use `common::FakeSource`, which answers from memory and leaves
+the scheduler's own timers as the only ones the clock can reach; anything about the wire — paging,
+ETags, the auth valve, rate limiting — uses the real client and a real clock.
+`crates/core/tests/paused_clock.rs` reads the tests and fails if the two are mixed.
+
 **The `?` overlay has zero slack**: fourteen lines, the longest exactly 68 cells. It cannot
 grow, because a taller box covers a title that `crates/tui/tests/navigation.rs` asserts on. A
 clipped line leaves no trace on a rendered frame, so `ui::tests::the_help_text_fits_its_box` is
 the only thing that can catch it. Adding a key means folding two rows onto one, and saying which.
+
+## How a change lands
+
+Every change starts as an issue, even the maintainer's. The issue says what should be true
+afterwards; the pull request says how. A branch per issue, named after it (`feat/23-short-name`,
+`fix/41-short-name`), a pull request whose first line is `Closes #23`, and a squash merge once
+CI is green. `main` takes nothing that did not come through a pull request.
+
+Issues have forms: a bug, a feature, and a compatibility report for what `--check` sees on a
+Prism Central version nobody has tried yet. The forms ask for what is needed and remind you what
+must not be pasted. A security defect is not an issue; `SECURITY.md` says where it goes.
+
+Labels mean something. `bug`, `enhancement` and `documentation` say what kind of work it is.
+`security` marks a credential, session, TLS or read-only guarantee and jumps the queue.
+`compat-report` is a report, not a request. `needs-info` means it cannot move without more from
+the reporter, `blocked` that it waits on something outside this repository. A milestone names
+the release an issue is meant for, and a release is cut when its milestone is empty.
+
+Releases are tags. The version in `Cargo.toml` is bumped, the `Unreleased` section of
+`CHANGELOG.md` becomes the version's section, and the tag is pushed. The release workflow builds
+the binaries and publishes the formula from that; the changelog section is the release notes,
+so the line you add in a pull request is the line users will read.
 
 ## Commits
 
