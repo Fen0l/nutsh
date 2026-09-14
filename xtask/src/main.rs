@@ -15,6 +15,8 @@ struct Cli {
 enum Command {
     /// Regenerate crates/catalog/src/generated.rs from specs/
     GenCatalog,
+    /// Regenerate the coverage tables in README.md and docs/coverage.md
+    GenCoverage,
     /// Record redacted fixtures from a live Prism Central into crates/mockpc/fixtures-lab
     Record {
         #[arg(long, env = "NUTSH_HOST")]
@@ -65,6 +67,7 @@ fn main() -> anyhow::Result<()> {
     let cli = Cli::parse();
     match cli.command {
         Command::GenCatalog => xtask::catalog::generate(&workspace_root()),
+        Command::GenCoverage => xtask::coverage::generate(&workspace_root()),
         Command::Record {
             host,
             port,

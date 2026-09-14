@@ -1,5 +1,11 @@
 # nutsh
 
+[![CI](https://github.com/Fen0l/nutsh/actions/workflows/ci.yml/badge.svg)](https://github.com/Fen0l/nutsh/actions/workflows/ci.yml)
+[![Audit](https://github.com/Fen0l/nutsh/actions/workflows/audit.yml/badge.svg)](https://github.com/Fen0l/nutsh/actions/workflows/audit.yml)
+[![Release](https://img.shields.io/github/v/release/Fen0l/nutsh?include_prereleases&sort=semver)](https://github.com/Fen0l/nutsh/releases)
+[![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
+![Rust](https://img.shields.io/badge/rust-1.98.1-orange)
+
 A terminal UI for Nutanix Prism Central, in the shape of [k9s](https://k9scli.io). Browse your
 infrastructure as tables you can move around in, drill into a row, run guarded actions, and
 switch between environments without leaving the keyboard.
@@ -18,6 +24,34 @@ serve, or which version a resource needs - instead of showing you an empty box.
 
 Version 0.0.2-beta1. Everything here is implemented and tested; none of it has been through a
 week of ordinary use by anybody but its author. [CHANGELOG.md](CHANGELOG.md) has the details.
+
+## v4 coverage
+
+<!-- coverage:start -->
+**Breadth** - how much of the v4 API the catalog models.
+
+| | | |
+|---|---:|---:|
+| operations the pinned specs declare | 1023 | |
+| modelled by the catalog | 880 | 86% |
+| namespaces | 20 | 100% |
+| kinds | 232 | |
+| openable from the palette | 135 | 58% |
+| reached by drilling into a parent | 83 | |
+| need a parameter nutsh cannot supply | 14 | |
+| actions | 478 | |
+
+**Depth** - how many of those kinds have a view somebody designed, rather than one derived from the schema.
+
+| | | |
+|---|---:|---:|
+| named in a curated menu group | 74 | 32% |
+| with hand-picked columns | 78 | 34% |
+| with a written detail layout | 12 | 5% |
+| falling back to schema-derived columns | 154 | 66% |
+
+[docs/coverage.md](docs/coverage.md) breaks this down per namespace.
+<!-- coverage:end -->
 
 ## Install
 

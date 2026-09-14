@@ -13,10 +13,13 @@ clippy:
 test:
 	cargo test --workspace
 
-# The committed catalog must match specs/; CI fails on drift.
+# The committed catalog must match specs/, and the coverage tables the catalog; CI fails on
+# drift. gen-coverage reads the catalog, so it runs second.
 drift:
 	cargo xtask gen-catalog >/dev/null 2>&1
 	git diff --exit-code -- crates/catalog/src/generated.rs
+	cargo xtask gen-coverage >/dev/null 2>&1
+	git diff --exit-code -- README.md docs/coverage.md
 
 catalog:
 	cargo xtask gen-catalog

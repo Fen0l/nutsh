@@ -628,7 +628,7 @@ fn render_emits_status_roles_and_the_new_column_kinds() {
         preview: false,
         versions: vec!["v4.1".into()],
     }];
-    let src = render::render(&ns, &kinds, &[], 0, &no_pages()).unwrap();
+    let src = render::render(&ns, &kinds, &[], 0, &no_pages(), 0).unwrap();
     assert!(
         src.contains(
             "use crate::{Action, ActionReturn, Column, ColumnKind, ConfirmKind, Danger, Kind, ListParams, Method, Namespace, NavGroup, PageDef, RateLimit, Role};"
@@ -644,7 +644,7 @@ fn render_emits_status_roles_and_the_new_column_kinds() {
 
     kinds[0].status_roles = vec![("QUEUED".into(), "Nope".into())];
     assert!(
-        render::render(&ns, &kinds, &[], 0, &no_pages()).is_err(),
+        render::render(&ns, &kinds, &[], 0, &no_pages(), 0).is_err(),
         "an unknown role fails generation"
     );
 }
@@ -1304,7 +1304,7 @@ fn render_emits_rust_source() {
         preview: false,
         versions: vec!["v4.1".into(), "v4.0".into()],
     }];
-    let src = render::render(&ns, &kinds, &[], 0, &no_pages()).unwrap();
+    let src = render::render(&ns, &kinds, &[], 0, &no_pages(), 0).unwrap();
     assert!(src.starts_with("// @generated"));
     assert!(src.contains("pub static NAMESPACES: &[Namespace] = &["));
     assert!(src.contains(
@@ -1399,7 +1399,7 @@ fn render_emits_form_fields_and_imports_their_types() {
         preview: false,
         versions: vec!["v4.1".into()],
     }];
-    let src = render::render(&ns, &kinds, &[], 0, &no_pages()).unwrap();
+    let src = render::render(&ns, &kinds, &[], 0, &no_pages(), 0).unwrap();
     assert!(
         src.contains(
             "use crate::{Action, ActionReturn, Column, ColumnKind, ConfirmKind, Danger, Field, FieldType, Kind, ListParams, Method, Namespace, NavGroup, PageDef, RateLimit, Role};"
@@ -1431,7 +1431,7 @@ fn render_rejects_unknown_column_kind() {
         preview: false,
         versions: vec!["v4.1".into(), "v4.0".into()],
     }];
-    assert!(render::render(&ns, &kinds, &[], 0, &no_pages()).is_err());
+    assert!(render::render(&ns, &kinds, &[], 0, &no_pages(), 0).is_err());
 }
 
 /// Copy `from` into `to` recursively, creating `to`. Real files, not symlinks: the generator

@@ -13,7 +13,9 @@ pub mod path;
 pub mod secret;
 pub mod words;
 
-pub use generated::{CURATED_GROUPS, KINDS, NAMESPACES, NAV, PAGES};
+pub use generated::{
+    CURATED_GROUPS, KINDS, NAMESPACES, NAV, OPERATIONS_COVERED, OPERATIONS_DECLARED, PAGES,
+};
 
 /// Properties that name an entity, in preference order. Shared by the generator (which puts
 /// them first among fallback columns) and the client (which uses them for `Entity::name`).

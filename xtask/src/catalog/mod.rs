@@ -23,6 +23,8 @@ pub fn generate(root: &Path) -> Result<()> {
     let mut namespaces = Vec::new();
     let mut kinds = Vec::new();
     let mut unattached = Vec::new();
+    let mut declared: std::collections::BTreeSet<(String, String)> =
+        std::collections::BTreeSet::new();
     let mut schemas: std::collections::BTreeMap<String, serde_json::Value> =
         std::collections::BTreeMap::new();
     for f in &files {
@@ -35,6 +37,18 @@ pub fn generate(root: &Path) -> Result<()> {
                 .cloned()
                 .unwrap_or_else(|| serde_json::Value::Object(serde_json::Map::new())),
         );
+        if let Some(paths) = doc.pointer("/paths").and_then(serde_json::Value::as_object) {
+            for (path, item) in paths {
+                let Some(ops) = item.as_object() else {
+                    continue;
+                };
+                for method in ops.keys() {
+                    if matches!(method.as_str(), "get" | "post" | "put" | "patch" | "delete") {
+                        declared.insert((method.to_uppercase(), path.clone()));
+                    }
+                }
+            }
+        }
         let mut parsed = parse::parse_namespace_full(f, &doc)
             .with_context(|| format!("parsing {}", f.path.display()))?;
         let index = since::PathIndex::load(f)?;
@@ -103,7 +117,14 @@ pub fn generate(root: &Path) -> Result<()> {
     let curated = nav.groups.len();
     let groups = nav::with_namespace_groups(nav, &kinds);
 
-    let src = render::render(&namespaces, &kinds, &groups, curated, &pages)?;
+    let src = render::render(
+        &namespaces,
+        &kinds,
+        &groups,
+        curated,
+        &pages,
+        declared.len(),
+    )?;
     std::fs::write(&out_path, src).with_context(|| format!("writing {}", out_path.display()))?;
     eprintln!(
         "wrote {} ({} namespaces, {} kinds)",
