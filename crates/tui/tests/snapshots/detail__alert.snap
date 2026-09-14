@@ -25,14 +25,14 @@ expression: "app.snapshot(120, 36).unwrap()"
 │      Reports         ││TIMING ───────────────────────────────────────────────────────────────────────────────────────│
 │  ▸ Policies          ││        First seen 0s                                  Last seen 0s                           │
 │  ▸ Admin Center      ││           Updated 0s                               Acknowledged -                            │
-│  ▸ Objects           ││          Resolved -                                                                          │
-│  ▸ Contexts          ││HANDLING ─────────────────────────────────────────────────────────────────────────────────────│
-│  ▸ Settings          ││      Acknowledged ✗                                    Resolved ✗                            │
-│  ─── by namespace ───││     Auto-resolved ✗                                    Runnable ✓                            │
-│  ▸ aiops             ││CLASSIFICATION ───────────────────────────────────────────────────────────────────────────────│
-│  ▸ clustermgmt       ││            Impact System indicator                      Impacts System indicator             │
-│  ▸ dataprotection    ││           Classes Storage                                                                    │
-│  ▸ files             ││PARAMETERS ───────────────────────────────────────────────────────────────────────────────────│
+│  ▸ Files             ││          Resolved -                                                                          │
+│  ▸ Objects           ││HANDLING ─────────────────────────────────────────────────────────────────────────────────────│
+│  ▸ Contexts          ││      Acknowledged ✗                                    Resolved ✗                            │
+│  ▸ Settings          ││     Auto-resolved ✗                                    Runnable ✓                            │
+│  ─── by namespace ───││CLASSIFICATION ───────────────────────────────────────────────────────────────────────────────│
+│  ▸ aiops             ││            Impact System indicator                      Impacts System indicator             │
+│  ▸ clustermgmt       ││           Classes Storage                                                                    │
+│  ▸ dataprotection    ││PARAMETERS ───────────────────────────────────────────────────────────────────────────────────│
 │  ▸ iam               ││              Name paramName-f9ac79b6 +12                  Value stringValue-1f99c2f8 +8      │
 │  ▸ licensing         ││ACTIONS ──────────────────────────────────────────────────────────────────────────────────────│
 ╰───────────────── ↓12 ╯└──────────────────────────────────────────────────────────────────────────────────────────────┘

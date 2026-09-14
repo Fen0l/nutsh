@@ -28,13 +28,13 @@ expression: "app.snapshot(120, 36).unwrap()"
 │  ▸ Monitoring        ││RESILIENCE ───────────────────────────────────────────────────────────────────────────────────│
 │  ▸ Policies          ││                RF 2                                  Current FT Cft 1n or 1d                 │
 │  ▸ Admin Center      ││        Desired FT Cft 1n or 1d                           Domain Node                         │
-│  ▸ Objects           ││        Rack aware ✗                                Backup score 3                            │
-│  ▸ Contexts          ││NETWORK ──────────────────────────────────────────────────────────────────────────────────────│
-│  ▸ Settings          ││        Virtual IP 198.51.100.86                   Data services 203.0.113.45                 │
-│  ─── by namespace ───││   External subnet 203.0.113.1/203.0.113.1          Name servers 198.51.100.146               │
-│  ▸ aiops             ││               NTP value-b138bfa2                   Segmentation ✓                            │
-│  ▸ clustermgmt       ││CONFIGURATION ────────────────────────────────────────────────────────────────────────────────│
-│  ▸ dataprotection    ││          Timezone Europe/Paris                            Pulse ✓                            │
+│  ▸ Files             ││        Rack aware ✗                                Backup score 3                            │
+│  ▸ Objects           ││NETWORK ──────────────────────────────────────────────────────────────────────────────────────│
+│  ▸ Contexts          ││        Virtual IP 198.51.100.86                   Data services 203.0.113.45                 │
+│  ▸ Settings          ││   External subnet 203.0.113.1/203.0.113.1          Name servers 198.51.100.146               │
+│  ─── by namespace ───││               NTP value-b138bfa2                   Segmentation ✓                            │
+│  ▸ aiops             ││CONFIGURATION ────────────────────────────────────────────────────────────────────────────────│
+│  ▸ clustermgmt       ││          Timezone Europe/Paris                            Pulse ✓                            │
 ╰───────────────── ↓15 ╯└──────────────────────────────────────────────────────────────────────────────────────────────┘
  j/k:scroll  g/G:top/bottom  a:actions  Y:yaml  J:json  esc:back
 [meter]          ● live

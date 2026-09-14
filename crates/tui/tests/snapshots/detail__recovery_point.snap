@@ -26,6 +26,7 @@ expression: "app.snapshot(120, 36).unwrap()"
 │  ▸ Monitoring        ││                   discover-cluster                                                           │
 │  ▸ Policies          ││                   replicate                                                                  │
 │  ▸ Admin Center      ││                                                                                              │
+│  ▸ Files             ││                                                                                              │
 │  ▸ Objects           ││                                                                                              │
 │  ▸ Contexts          ││                                                                                              │
 │  ▸ Settings          ││                                                                                              │
@@ -33,7 +34,6 @@ expression: "app.snapshot(120, 36).unwrap()"
 │  ▸ aiops             ││                                                                                              │
 │  ▸ clustermgmt       ││                                                                                              │
 │  ▸ dataprotection    ││                                                                                              │
-│  ▸ files             ││                                                                                              │
 │  ▸ iam               ││                                                                                              │
 ╰───────────────── ↓13 ╯└──────────────────────────────────────────────────────────────────────────────────────────────┘
  j/k:scroll  g/G:top/bottom  a:actions  Y:yaml  J:json  esc:back

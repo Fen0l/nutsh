@@ -25,14 +25,14 @@ expression: "app.snapshot(120, 36).unwrap()"
 │      Reports         ││            Parent -                                        Root -                            │
 │  ▸ Policies          ││          Subtasks 0                                       Steps -                            │
 │  ▸ Admin Center      ││ACTIONS ──────────────────────────────────────────────────────────────────────────────────────│
-│  ▸ Objects           ││                 c Cancel task · not cancelable                                               │
+│  ▸ Files             ││                 c Cancel task · not cancelable                                               │
+│  ▸ Objects           ││                                                                                              │
 │  ▸ Contexts          ││                                                                                              │
 │  ▸ Settings          ││                                                                                              │
 │  ─── by namespace ───││                                                                                              │
 │  ▸ aiops             ││                                                                                              │
 │  ▸ clustermgmt       ││                                                                                              │
 │  ▸ dataprotection    ││                                                                                              │
-│  ▸ files             ││                                                                                              │
 │  ▸ iam               ││                                                                                              │
 │  ▸ licensing         ││                                                                                              │
 ╰───────────────── ↓12 ╯└──────────────────────────────────────────────────────────────────────────────────────────────┘

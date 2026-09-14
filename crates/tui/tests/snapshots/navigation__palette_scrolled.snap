@@ -19,7 +19,7 @@ expression: "app.snapshot(120, 21).unwrap()"
 │      Images          │││  VM Guest Customization Pr …mizationProfile│                                                │
 │      OVAs            │││  VM Profiles               …onfig.VmProfile│                                                │
 │      VM Profiles     │││▌ VM Recovery Points        …VmRecoveryPoint│                                                │
-│      Guest Customizat││╰─────────────────────────────────────── ↓25 ╯                                                │
+│      Guest Customizat││╰─────────────────────────────────────── ↓26 ╯                                                │
 ╰───────────────── ↓33 ╯╰──────────────────────────────────────────────────────────────────────────────────────────────╯
 :v█m-recovery-point
 [meter]          ● live
