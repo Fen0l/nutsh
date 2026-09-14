@@ -129,8 +129,18 @@ items = [
   { label = "Compliance", kind = "licensing.config.Compliance" },
   { label = "Key Management Servers", kind = "security.config.KeyManagementServer" },
   { label = "Files", kind = "files.config.FileServer" },
-  { label = "Objects", kind = "objects.config.ObjectStore" },
   { label = "Projects", note = "not in the v4 API" },
+]
+
+# Buckets and certificates are FromParent, so they are notes, not items. Last of the content
+# groups: inserting above one would move the digit keys.
+[[group]]
+name = "Objects"
+items = [
+  { label = "Overview", page = "objects-overview" },
+  { label = "Object Stores", kind = "objects.config.ObjectStore" },
+  { label = "Buckets", note = "listed inside an object store" },
+  { label = "Certificates", note = "listed inside an object store" },
 ]
 
 # One row per configured context, then `(env)`, then `add…`, are added by the sidebar at

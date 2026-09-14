@@ -577,3 +577,40 @@ row_heights = [0, 0]
     { header = "TARGET", path = "targetVersion", kind = "Text" },
     { header = "CLUSTER", path = "clusterExtId", kind = "Reference" },
   ]
+
+# One kind: the rest of the namespace is FromParent and a pane fetches top-level lists only.
+# Both panes share a subscription - same kind, same filter - and split what a store is from
+# what it holds.
+[[page]]
+id = "objects-overview"
+title = "Objects"
+row_heights = [0]
+
+  [[page.pane]]
+  title = "Object stores"
+  kind = "objects.config.ObjectStore"
+  row = 0
+  col = 0
+  weight = 1
+  empty = "no object stores"
+  columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "STATE", path = "state", kind = "Status" },
+    { header = "CLUSTER", path = "clusterExtId", kind = "Reference" },
+    { header = "DOMAIN", path = "domain", kind = "Text" },
+  ]
+
+  [[page.pane]]
+  title = "Capacity"
+  kind = "objects.config.ObjectStore"
+  row = 0
+  col = 1
+  weight = 1
+  empty = "no object stores"
+  columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "BUCKETS", path = "bucketCount", kind = "Text" },
+    { header = "OBJECTS", path = "objectCount", kind = "Text" },
+    { header = "USED", path = "storageUsageBytes", kind = "Bytes" },
+    { header = "TIERED", path = "tieredUsageBytes", kind = "Bytes" },
+  ]

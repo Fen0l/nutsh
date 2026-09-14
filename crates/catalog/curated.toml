@@ -2417,13 +2417,17 @@ columns = [
 display = "Object Stores"
 aliases = ["objects", "object-store", "object-stores"]
 category = "Storage"
+# A pane's columns must be a subsequence of these, so the Objects page needs CLUSTER and TIERED
+# here. `totalCapacityGiB` is left out: gibibytes where every other size on the row is bytes.
 columns = [
     { header = "NAME", path = "name", kind = "Text" },
     { header = "STATE", path = "state", kind = "Status" },
+    { header = "CLUSTER", path = "clusterExtId", kind = "Reference" },
     { header = "DOMAIN", path = "domain", kind = "Text" },
     { header = "BUCKETS", path = "bucketCount", kind = "Text" },
     { header = "OBJECTS", path = "objectCount", kind = "Text" },
     { header = "USED", path = "storageUsageBytes", kind = "Bytes" },
+    { header = "TIERED", path = "tieredUsageBytes", kind = "Bytes" },
 ]
 
 [kinds."objects.config.ObjectStore".status]
@@ -2442,3 +2446,70 @@ DEPLOYING_OBJECT_STORE = "Pending"
 CREATING_OBJECT_STORE_CERT = "Pending"
 OBJECT_STORE_OPERATION_PENDING = "Pending"
 DELETING_OBJECT_STORE = "Ending"
+
+[kinds."objects.config.Bucket"]
+display = "Buckets"
+aliases = ["bucket", "buckets"]
+# The parent's, not the namespace's: a bucket is only reached through a store.
+category = "Storage"
+# A bucket has no `extId`. The default would go into `$select` and key the cache as `None`.
+ext_id_key = "name"
+columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "STATE", path = "state", kind = "Status" },
+    { header = "OWNER", path = "ownerName", kind = "Text" },
+    # Not `Count`: that is an array length, and this is a scalar.
+    { header = "OBJECTS", path = "objectCount", kind = "Text" },
+    { header = "USED", path = "storageUsageBytes", kind = "Bytes" },
+    { header = "VERSIONING", path = "versioningState", kind = "Enum" },
+    { header = "LOCK", path = "isObjectLockEnabled", kind = "Bool" },
+    { header = "TIERED", path = "tieredUsageBytes", kind = "Bytes" },
+]
+
+# No `[.status]`: `NORMAL` and `DELETING` are both in the shared vocabulary.
+# No UUID field below: the schema declares no `extId`.
+[[kinds."objects.config.Bucket".detail]]
+title = "Identity"
+fields = [
+    { label = "Name", path = "name", kind = "Text" },
+    { label = "Owner", path = "ownerName", kind = "Text" },
+    { label = "State", path = "state", kind = "Enum" },
+    { label = "Versioning", path = "versioningState", kind = "Enum" },
+]
+
+[[kinds."objects.config.Bucket".detail]]
+title = "Capacity"
+fields = [
+    { label = "Objects", path = "objectCount", kind = "Text" },
+    { label = "Used", path = "storageUsageBytes", kind = "Bytes" },
+    { label = "Tiered out", path = "tieredUsageBytes", kind = "Bytes" },
+    { label = "Tiered garbage", path = "tieredGarbageBytes", kind = "Bytes" },
+    { label = "Pending tiering", path = "pendingTieredUsageBytes", kind = "Bytes" },
+]
+
+[[kinds."objects.config.Bucket".detail]]
+title = "Object lock"
+fields = [
+    { label = "Enabled", path = "isObjectLockEnabled", kind = "Bool" },
+    # Seconds, so `Duration`.
+    { label = "Retention", path = "objectLockRetentionSecs", kind = "Duration" },
+    { label = "Enabled at", path = "objectLockEnabledTime", kind = "Timestamp" },
+]
+
+[[kinds."objects.config.Bucket".detail]]
+title = "Access"
+fields = [
+    { label = "Multi-protocol", path = "isMultiProtocolAccessEnabled", kind = "Bool" },
+    { label = "Static website", path = "isStaticWebsiteEnabled", kind = "Bool" },
+    { label = "CORS", path = "isCorsEnabled", kind = "Bool" },
+]
+
+[[kinds."objects.config.Bucket".detail]]
+title = "Replication"
+fields = [
+    { label = "Outbound", path = "outboundReplicationStatus", kind = "Enum" },
+    { label = "Inbound", path = "inboundReplicationStatus", kind = "Enum" },
+    { label = "Relations", path = "replicationRelations", kind = "Count" },
+    { label = "Pending objects", path = "replicationRelations[].pendingObjectCount", kind = "Text" },
+    { label = "Pending size", path = "replicationRelations[].pendingObjectSizeBytes", kind = "Bytes" },
+]

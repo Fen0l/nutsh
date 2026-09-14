@@ -7443,8 +7443,8 @@ pub static KINDS: &[Kind] = &[
         version: "v4.1",
         since: "v4.1",
         display: "Buckets",
-        aliases: &["buckets", "bucket"],
-        category: "Objects",
+        aliases: &["bucket", "buckets"],
+        category: "Storage",
         poll_secs: 30,
         list_path: "/objects/v4.1/config/object-stores/{objectStoreExtId}/buckets",
         get_path: Some("/objects/v4.1/config/object-stores/{objectStoreExtId}/buckets/{bucketName}"),
@@ -7453,17 +7453,25 @@ pub static KINDS: &[Kind] = &[
         orderby: None,
         probe_by: None,
         max_rows: Some(1000),
-        select: None,
+        select: Some("isObjectLockEnabled,name,objectCount,ownerName,state,storageUsageBytes,tieredUsageBytes,versioningState"),
         parent: Some("objects.config.ObjectStore"),
         actions: &[
         ],
         action_kind: None,
         action_parents: &[],
         rate: RateLimit { count: 10, per_secs: 1 },
-        ext_id_key: "extId",
+        ext_id_key: "name",
         name_path: "",
         warm: false,
         columns: &[
+            Column { header: "NAME", path: "name", kind: ColumnKind::Text },
+            Column { header: "STATE", path: "state", kind: ColumnKind::Status },
+            Column { header: "OWNER", path: "ownerName", kind: ColumnKind::Text },
+            Column { header: "OBJECTS", path: "objectCount", kind: ColumnKind::Text },
+            Column { header: "USED", path: "storageUsageBytes", kind: ColumnKind::Bytes },
+            Column { header: "VERSIONING", path: "versioningState", kind: ColumnKind::Enum },
+            Column { header: "LOCK", path: "isObjectLockEnabled", kind: ColumnKind::Bool },
+            Column { header: "TIERED", path: "tieredUsageBytes", kind: ColumnKind::Bytes },
         ],
         fallback_columns: &[
             Column { header: "NAME", path: "name", kind: ColumnKind::Text },
@@ -7483,9 +7491,39 @@ pub static KINDS: &[Kind] = &[
             Column { header: "REPLICATION RELATIONS", path: "replicationRelations", kind: ColumnKind::Count },
         ],
         detail: &[
+            DetailSection { title: "Identity", when: None, fields: &[
+                DetailField { label: "Name", path: "name", kind: ColumnKind::Text, when: None },
+                DetailField { label: "Owner", path: "ownerName", kind: ColumnKind::Text, when: None },
+                DetailField { label: "State", path: "state", kind: ColumnKind::Enum, when: None },
+                DetailField { label: "Versioning", path: "versioningState", kind: ColumnKind::Enum, when: None },
+            ] },
+            DetailSection { title: "Capacity", when: None, fields: &[
+                DetailField { label: "Objects", path: "objectCount", kind: ColumnKind::Text, when: None },
+                DetailField { label: "Used", path: "storageUsageBytes", kind: ColumnKind::Bytes, when: None },
+                DetailField { label: "Tiered out", path: "tieredUsageBytes", kind: ColumnKind::Bytes, when: None },
+                DetailField { label: "Tiered garbage", path: "tieredGarbageBytes", kind: ColumnKind::Bytes, when: None },
+                DetailField { label: "Pending tiering", path: "pendingTieredUsageBytes", kind: ColumnKind::Bytes, when: None },
+            ] },
+            DetailSection { title: "Object lock", when: None, fields: &[
+                DetailField { label: "Enabled", path: "isObjectLockEnabled", kind: ColumnKind::Bool, when: None },
+                DetailField { label: "Retention", path: "objectLockRetentionSecs", kind: ColumnKind::Duration, when: None },
+                DetailField { label: "Enabled at", path: "objectLockEnabledTime", kind: ColumnKind::Timestamp, when: None },
+            ] },
+            DetailSection { title: "Access", when: None, fields: &[
+                DetailField { label: "Multi-protocol", path: "isMultiProtocolAccessEnabled", kind: ColumnKind::Bool, when: None },
+                DetailField { label: "Static website", path: "isStaticWebsiteEnabled", kind: ColumnKind::Bool, when: None },
+                DetailField { label: "CORS", path: "isCorsEnabled", kind: ColumnKind::Bool, when: None },
+            ] },
+            DetailSection { title: "Replication", when: None, fields: &[
+                DetailField { label: "Outbound", path: "outboundReplicationStatus", kind: ColumnKind::Enum, when: None },
+                DetailField { label: "Inbound", path: "inboundReplicationStatus", kind: ColumnKind::Enum, when: None },
+                DetailField { label: "Relations", path: "replicationRelations", kind: ColumnKind::Count, when: None },
+                DetailField { label: "Pending objects", path: "replicationRelations[].pendingObjectCount", kind: ColumnKind::Text, when: None },
+                DetailField { label: "Pending size", path: "replicationRelations[].pendingObjectSizeBytes", kind: ColumnKind::Bytes, when: None },
+            ] },
         ],
         preview: false,
-        curated: false,
+        curated: true,
         status_roles: &[],
     },
     Kind {
@@ -7584,7 +7622,7 @@ pub static KINDS: &[Kind] = &[
         orderby: None,
         probe_by: None,
         max_rows: Some(1000),
-        select: Some("bucketCount,domain,extId,name,objectCount,state,storageUsageBytes"),
+        select: Some("bucketCount,clusterExtId,domain,extId,name,objectCount,state,storageUsageBytes,tieredUsageBytes"),
         parent: None,
         actions: &[
             Action { name: "create", path: "/objects/v4.1/config/object-stores", method: Method::Post, needs_etag: false, needs_body: true, takes_body: true, returns: ActionReturn::Task, scope: &[], roles: &["Objects Admin", "Prism Admin", "Super Admin"], key: "", label: "", danger: Danger::None, confirm: ConfirmKind::None, order: 0, hidden: false, body: None, form: &[ Field { name: "metadata", label: "Metadata", ty: FieldType::Json("{}"), required: false, value: None, hidden: false }, Field { name: "name", label: "Name", ty: FieldType::Text, required: false, value: None, hidden: false }, Field { name: "description", label: "Description", ty: FieldType::Text, required: false, value: None, hidden: false }, Field { name: "deploymentVersion", label: "Deployment version", ty: FieldType::Text, required: false, value: None, hidden: false }, Field { name: "domain", label: "Domain", ty: FieldType::Text, required: false, value: None, hidden: false }, Field { name: "region", label: "Region", ty: FieldType::Text, required: false, value: None, hidden: false }, Field { name: "numWorkerNodes", label: "Num worker nodes", ty: FieldType::Integer, required: false, value: None, hidden: false }, Field { name: "clusterExtId", label: "Cluster ext id", ty: FieldType::Text, required: false, value: None, hidden: false }, Field { name: "storageNetworkReference", label: "Storage network reference", ty: FieldType::Text, required: false, value: None, hidden: false }, Field { name: "storageNetworkVip", label: "Storage network vip", ty: FieldType::Json("{}"), required: false, value: None, hidden: false }, Field { name: "storageNetworkDnsIp", label: "Storage network dns ip", ty: FieldType::Json("{}"), required: false, value: None, hidden: false }, Field { name: "publicNetworkReference", label: "Public network reference", ty: FieldType::Text, required: false, value: None, hidden: false }, Field { name: "publicNetworkConfig", label: "Public network config", ty: FieldType::Json("{}"), required: false, value: None, hidden: false }, Field { name: "publicNetworkIps", label: "Public network ips", ty: FieldType::Json("[{}]"), required: false, value: None, hidden: false }, Field { name: "managementNetworkReference", label: "Management network reference", ty: FieldType::Text, required: false, value: None, hidden: false }, Field { name: "vip", label: "Vip", ty: FieldType::Json("{}"), required: false, value: None, hidden: false }, Field { name: "dnsIp", label: "Dns ip", ty: FieldType::Json("{}"), required: false, value: None, hidden: false }, Field { name: "totalCapacityGiB", label: "Total capacity gi b", ty: FieldType::Integer, required: false, value: None, hidden: false }, Field { name: "state", label: "State", ty: FieldType::Enum(&["OBJECT_STORE_DEPLOYMENT_FAILED", "OBJECT_STORE_CERT_CREATION_FAILED", "OBJECT_STORE_DELETION_FAILED", "UNDEPLOYED_OBJECT_STORE", "DEPLOYING_OBJECT_STORE", "CREATING_OBJECT_STORE_CERT", "DELETING_OBJECT_STORE", "OBJECT_STORE_AVAILABLE", "OBJECT_STORE_OPERATION_PENDING", "OBJECT_STORE_OPERATION_FAILED", "$UNKNOWN", "$REDACTED"]), required: false, value: None, hidden: false }, Field { name: "isHighPerfConfigEnabled", label: "Is high perf config enabled", ty: FieldType::Bool, required: false, value: None, hidden: false }, Field { name: "shouldUseMaxLbForHybridCluster", label: "Should use max lb for hybrid cluster", ty: FieldType::Bool, required: false, value: None, hidden: false },], rate: RateLimit { count: 1, per_secs: 1 } },
@@ -7600,10 +7638,12 @@ pub static KINDS: &[Kind] = &[
         columns: &[
             Column { header: "NAME", path: "name", kind: ColumnKind::Text },
             Column { header: "STATE", path: "state", kind: ColumnKind::Status },
+            Column { header: "CLUSTER", path: "clusterExtId", kind: ColumnKind::Reference },
             Column { header: "DOMAIN", path: "domain", kind: ColumnKind::Text },
             Column { header: "BUCKETS", path: "bucketCount", kind: ColumnKind::Text },
             Column { header: "OBJECTS", path: "objectCount", kind: ColumnKind::Text },
             Column { header: "USED", path: "storageUsageBytes", kind: ColumnKind::Bytes },
+            Column { header: "TIERED", path: "tieredUsageBytes", kind: ColumnKind::Bytes },
         ],
         fallback_columns: &[
             Column { header: "NAME", path: "name", kind: ColumnKind::Text },
@@ -11331,7 +11371,7 @@ pub static KINDS: &[Kind] = &[
 
 /// How many leading groups of `NAV` came from `nav.toml`: what the sidebar's `1`..`9`
 /// cover, and where `0` finds the first generated one.
-pub const CURATED_GROUPS: usize = 10;
+pub const CURATED_GROUPS: usize = 11;
 
 pub static NAV: &[NavGroup] = &[
     NavGroup { name: "Dashboard", items: &[
@@ -11429,8 +11469,13 @@ pub static NAV: &[NavGroup] = &[
         NavItem { label: "Compliance", target: NavTarget::Kind("licensing.config.Compliance"), note: None },
         NavItem { label: "Key Management Servers", target: NavTarget::Kind("security.config.KeyManagementServer"), note: None },
         NavItem { label: "Files", target: NavTarget::Kind("files.config.FileServer"), note: None },
-        NavItem { label: "Objects", target: NavTarget::Kind("objects.config.ObjectStore"), note: None },
         NavItem { label: "Projects", target: NavTarget::Missing, note: Some("not in the v4 API") },
+    ] },
+    NavGroup { name: "Objects", items: &[
+        NavItem { label: "Overview", target: NavTarget::Page("objects-overview"), note: None },
+        NavItem { label: "Object Stores", target: NavTarget::Kind("objects.config.ObjectStore"), note: None },
+        NavItem { label: "Buckets", target: NavTarget::Missing, note: Some("listed inside an object store") },
+        NavItem { label: "Certificates", target: NavTarget::Missing, note: Some("listed inside an object store") },
     ] },
     NavGroup { name: "Contexts", items: &[
         NavItem { label: "Contexts", target: NavTarget::Contexts, note: None },
@@ -12062,6 +12107,44 @@ pub static PAGES: &[PageDef] = &[
                     Column { header: "VERSION", path: "entityVersion", kind: ColumnKind::Text },
                     Column { header: "TARGET", path: "targetVersion", kind: ColumnKind::Text },
                     Column { header: "CLUSTER", path: "clusterExtId", kind: ColumnKind::Reference },
+                ],
+            },
+        ],
+    },
+    PageDef {
+        id: "objects-overview",
+        title: "Objects",
+        row_heights: &[0],
+        summary: None,
+        summary_rows: 0,
+        panes: &[
+            PaneDef {
+                title: "Object stores",
+                kind: "objects.config.ObjectStore",
+                filter: None,
+                orderby: None,
+                row: 0, col: 0, weight: 1,
+                empty: "no object stores",
+                columns: &[
+                    Column { header: "NAME", path: "name", kind: ColumnKind::Text },
+                    Column { header: "STATE", path: "state", kind: ColumnKind::Status },
+                    Column { header: "CLUSTER", path: "clusterExtId", kind: ColumnKind::Reference },
+                    Column { header: "DOMAIN", path: "domain", kind: ColumnKind::Text },
+                ],
+            },
+            PaneDef {
+                title: "Capacity",
+                kind: "objects.config.ObjectStore",
+                filter: None,
+                orderby: None,
+                row: 0, col: 1, weight: 1,
+                empty: "no object stores",
+                columns: &[
+                    Column { header: "NAME", path: "name", kind: ColumnKind::Text },
+                    Column { header: "BUCKETS", path: "bucketCount", kind: ColumnKind::Text },
+                    Column { header: "OBJECTS", path: "objectCount", kind: ColumnKind::Text },
+                    Column { header: "USED", path: "storageUsageBytes", kind: ColumnKind::Bytes },
+                    Column { header: "TIERED", path: "tieredUsageBytes", kind: ColumnKind::Bytes },
                 ],
             },
         ],

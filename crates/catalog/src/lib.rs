@@ -1254,7 +1254,7 @@ mod tests {
     /// group to the file moves the digit keys and this assertion together.
     #[test]
     fn every_directly_openable_kind_is_in_some_group() {
-        assert_eq!(CURATED_GROUPS, 10, "the ten groups nav.toml curates");
+        assert_eq!(CURATED_GROUPS, 11, "the eleven groups nav.toml curates");
         assert!(
             NAV.len() <= CURATED_GROUPS + NAMESPACES.len(),
             "a namespace contributes at most one group"
@@ -1329,7 +1329,7 @@ mod tests {
             assert!(!def.panes.is_empty(), "{id} has no panes");
             landed.push(id);
         }
-        assert_eq!(landed.len(), 7, "seven groups land on a page: {landed:?}");
+        assert_eq!(landed.len(), 8, "eight groups land on a page: {landed:?}");
     }
 
     /// A page's panes are capped at six, its grid references rows that exist, and its columns
