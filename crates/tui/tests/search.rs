@@ -70,7 +70,7 @@ async fn search_groups_its_results_and_states_its_reach() {
     );
     // The reach, plainly.
     assert!(
-        frame.contains("searched 2 loaded kinds · 230 not loaded"),
+        frame.contains("asking ") && frame.contains(" answered · 2 loaded"),
         "{frame}"
     );
     // And nothing was fetched to answer it.
@@ -104,7 +104,7 @@ async fn a_search_that_finds_nothing_still_states_its_reach() {
     let frame = app.snapshot(120, 24).unwrap();
     assert!(frame.contains("nothing matches"), "{frame}");
     assert!(
-        frame.contains("searched 2 loaded kinds · 230 not loaded"),
+        frame.contains("asking ") && frame.contains(" answered · 2 loaded"),
         "{frame}"
     );
     app.handle(Key::Esc);

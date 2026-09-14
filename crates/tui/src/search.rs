@@ -59,10 +59,32 @@ pub struct Search {
     pub loaded: usize,
     /// Kinds in the catalog it held nothing for.
     pub not_loaded: usize,
+    /// Kinds this search asked the Prism Central about, and how many have answered. Equal when
+    /// the fan-out is done; the title counts up in between.
+    pub asked: usize,
+    pub answered: usize,
+    /// The one-shot subscriptions the fan-out holds, so their answers can be counted and the
+    /// rest cancelled when the screen closes.
+    pub subs: Vec<nutsh_core::scheduler::SubId>,
 }
 
 impl Search {
     /// Flatten what the store answered into one list, with the cursor on the first result.
+    /// Rebuild the rows from a fresh walk of the store, keeping the cursor where it was: the
+    /// fan-out lands one kind at a time, and a list that jumped under the hand on every answer
+    /// would be unusable for the twenty seconds it takes.
+    pub fn refill(&mut self, found: Found) {
+        let at = self.selected;
+        let rebuilt = Search::new(self.term.clone(), found);
+        self.rows = rebuilt.rows;
+        self.loaded = rebuilt.loaded;
+        self.not_loaded = rebuilt.not_loaded;
+        self.selected = at.min(self.rows.len().saturating_sub(1));
+        if !self.rows.get(self.selected).is_some_and(Row::is_hit) {
+            self.selected = self.rows.iter().position(Row::is_hit).unwrap_or(0);
+        }
+    }
+
     pub fn new(term: String, found: Found) -> Search {
         let mut rows = Vec::new();
         for group in found.groups {
@@ -88,6 +110,9 @@ impl Search {
             selected,
             loaded: found.loaded,
             not_loaded: found.not_loaded,
+            asked: 0,
+            answered: 0,
+            subs: Vec::new(),
         }
     }
 
@@ -100,8 +125,24 @@ impl Search {
         self.rows.iter().filter(|r| r.is_hit()).count()
     }
 
-    /// The reach, in the words the box prints under the results.
+    /// The reach, in the words the box prints under the results. While the fan-out is running
+    /// it counts up: a number that is still moving is the honest answer to "is that all of
+    /// them", and the old line said `2 loaded` in exactly the voice of a complete one.
     pub fn reach(&self) -> String {
+        if self.asked > 0 && self.answered < self.asked {
+            return format!(
+                "asking {} kinds · {} answered · {} loaded",
+                self.asked, self.answered, self.loaded
+            );
+        }
+        if self.asked > 0 {
+            return format!(
+                "searched {} kind{} · asked the PC for {}",
+                self.loaded,
+                if self.loaded == 1 { "" } else { "s" },
+                self.asked
+            );
+        }
         format!(
             "searched {} loaded kind{} · {} not loaded",
             self.loaded,

@@ -629,6 +629,9 @@ pub struct ListParams {
     pub expand: bool,
     /// At least one query parameter is `required: true`; a bare list call returns HTTP 400.
     pub required: bool,
+    /// Properties the endpoint's `$filter` declares filterable, or empty when it declares none.
+    /// A filter over anything else is what the Prism Central answers 400 to.
+    pub filter_fields: &'static [&'static str],
 }
 
 /// A mutation on a kind: `create`, `update`, `patch`, `delete`, or a `$actions/<name>` operation.

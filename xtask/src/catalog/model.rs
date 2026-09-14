@@ -20,6 +20,8 @@ pub struct ListParamsModel {
     pub select: bool,
     pub expand: bool,
     pub required: bool,
+    /// The `$filter` `x-odata-fields` allowlist, or empty when the endpoint declares none.
+    pub filter_fields: Vec<String>,
     /// The `$orderby` `x-odata-fields` allowlist, or empty when the endpoint declares none.
     /// Generator-only, and only ever a **warning**: the allowlist is empty at `prism` v4.0,
     /// v4.0.a2 and v4.0.b1 and at `monitoring` v4.0 and v4.0.b1, so a hard check would refuse

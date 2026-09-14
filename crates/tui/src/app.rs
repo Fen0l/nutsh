@@ -730,7 +730,7 @@ impl App {
             let key = TableKey {
                 kind: t.kind,
                 parents: t.parents,
-                filter: t.filter,
+                filter: t.filter.map(std::sync::Arc::from),
             };
             let rows: Vec<nutsh_prism::Entity> = t
                 .rows
@@ -1249,6 +1249,7 @@ impl App {
         // to deliver.
         if let Msg::Done { epoch, sub } = msg {
             live.scheduler.reap(epoch, sub);
+            self.search_answered(sub);
             return;
         }
         // Not about a table: the page's sampler, whose cycle belongs to the session that
@@ -2617,7 +2618,7 @@ impl App {
     /// minute of waiting for a question the user expected to be instant. What makes it honest
     /// is that the box says so, in numbers, on every result and on none.
     fn search_command(&mut self, term: &str) {
-        let Some(live) = self.live.as_ref() else {
+        let Some(live) = self.live.as_mut() else {
             self.status = Some("not connected".into());
             return;
         };
@@ -2627,9 +2628,50 @@ impl App {
         }
         let query = nutsh_core::search::Query::new(term);
         let found = nutsh_core::search::across(&live.store, &query);
-        self.search = Some(crate::search::Search::new(term.to_string(), found));
+        let mut view = crate::search::Search::new(term.to_string(), found);
+
+        // Ask the Prism Central for the rest. One cycle per kind, not a schedule: a search is a
+        // question asked once, and the rate limiter paces the fan-out the same as everything
+        // else. What lands goes in the store under its own filter, so the table a user has open
+        // is never replaced by a filtered subset of itself.
+        // Not the kinds this Prism Central has already refused: a search asks on the user's
+        // behalf, so a 404 the session has already paid for counts, the way it does for a pane.
+        let plan: Vec<_> = nutsh_core::search::plan(&query)
+            .into_iter()
+            .filter(|ask| pane_reason(&live.session, ask.kind).is_none())
+            .collect();
+        for ask in &plan {
+            let key = nutsh_core::store::TableKey::filtered(
+                ask.kind,
+                ask.filter.as_deref().map(std::sync::Arc::from),
+            );
+            let mut sub = nutsh_core::scheduler::Subscription::once_list(key);
+            sub.filter = ask.filter.clone();
+            view.subs.push(live.scheduler.subscribe(sub));
+        }
+        view.asked = plan.len();
+
+        self.search = Some(view);
         self.search_from = self.mode;
         self.mode = Mode::Search;
+    }
+
+    /// A kind the running search asked about has answered: count it and walk the store again,
+    /// so results appear as they land rather than all at the end.
+    fn search_answered(&mut self, sub: nutsh_core::scheduler::SubId) {
+        let Some(view) = self.search.as_mut() else {
+            return;
+        };
+        if !view.subs.contains(&sub) {
+            return;
+        }
+        view.answered += 1;
+        let query = nutsh_core::search::Query::new(&view.term);
+        if let Some(live) = self.live.as_ref() {
+            let found = nutsh_core::search::across(&live.store, &query);
+            view.refill(found);
+        }
+        self.dirty = true;
     }
 
     fn handle_search(&mut self, key: Key) {
@@ -4971,10 +5013,21 @@ fn cache_snapshot(live: &Live, now: u64) -> nutsh_core::cache::Snapshot {
             // A table that has never polled is the one we restored: writing it back would
             // rewrite yesterday's rows with yesterday's timestamp and never age out.
             .filter(|(_, t)| t.last_poll.is_some() && !t.rows.is_empty())
+            // A search's rows are not this session's tables. Its filter was built from what
+            // somebody typed once, so keeping it would spend the cache's budget on a question
+            // rather than on a view, and hand it back as a table next start.
+            .filter(|(key, _)| {
+                key.filter.as_deref().is_none_or(|f| {
+                    nutsh_catalog::PAGES
+                        .iter()
+                        .flat_map(|p| p.panes)
+                        .any(|pane| pane.filter == Some(f))
+                })
+            })
             .map(|(key, t)| TableSnapshot {
                 kind: key.kind.id.to_string(),
                 parents: key.parents.clone(),
-                filter: key.filter.map(str::to_string),
+                filter: key.filter.as_deref().map(str::to_string),
                 // What this run sent. The scheduler narrows the cycle that fills a table, so
                 // these rows are that narrowing and labelling them `None` - a whole document -
                 // is how a row with no `disks` came back next start as if it had some.

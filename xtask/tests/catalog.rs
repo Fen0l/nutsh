@@ -1320,7 +1320,7 @@ fn render_emits_rust_source() {
     assert!(src.contains(
         "Column { header: \"CLUSTER\", path: \"cluster.extId\", kind: ColumnKind::Reference },"
     ));
-    assert!(src.contains("list_params: ListParams { page: true, limit: true, filter: true, orderby: false, select: false, expand: false, required: false },"));
+    assert!(src.contains("list_params: ListParams { page: true, limit: true, filter: true, orderby: false, select: false, expand: false, required: false, filter_fields: &[] },"));
     // An uncurated kind carries neither an order, nor a probe field, nor a budget.
     assert!(
         src.contains("        orderby: None,\n        probe_by: None,\n        max_rows: None,\n"),
