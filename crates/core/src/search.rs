@@ -53,6 +53,11 @@ impl Query {
         self.needle.is_empty()
     }
 
+    /// Whether the term reads as part of a dotted address.
+    pub fn is_address(&self) -> bool {
+        self.dotted.is_some()
+    }
+
     /// Whether this row is one the term names.
     pub fn matches(&self, entity: &Entity) -> bool {
         self.why(entity).is_some()
@@ -147,6 +152,47 @@ pub fn addresses(kind: &'static Kind) -> impl Iterator<Item = (&'static str, &'s
         .filter(|f| f.kind == ColumnKind::Ip)
         .map(|f| (f.label, f.path));
     columns.chain(detail)
+}
+
+/// The OData `$filter` this term can be sent to a Prism Central as, for this kind.
+///
+/// `None` means the term has to be matched here instead. Three reasons, and the caller says
+/// which in the title: the endpoint takes no `$filter`, it declares no field the term could
+/// match, or the term is an address. An address is always `None`: five kinds in the catalog
+/// declare an address filterable and not one of them is a kind anybody searches by address.
+///
+/// `startswith` and `eq` only. The specs' own examples use those two, Nutanix's OData is a
+/// subset, and a `contains` that four namespaces reject is worse than a filter never sent.
+pub fn odata(kind: &'static Kind, query: &Query) -> Option<String> {
+    if !kind.list_params.filter || query.is_empty() || query.is_address() {
+        return None;
+    }
+    let fields = kind.list_params.filter_fields;
+    let term = query.text();
+    if fields.contains(&"name") {
+        return Some(format!("startswith(name,'{}')", quote(term)));
+    }
+    // Whole identifier only. `extId` is a guid to the server, and a prefix of one is not.
+    if fields.contains(&"extId") && is_uuid(term) {
+        return Some(format!("extId eq '{}'", quote(term)));
+    }
+    None
+}
+
+/// OData escapes a single quote by doubling it. Without this a name holding one is a filter the
+/// Prism Central answers 400 to, and the term is under the user's hand.
+fn quote(term: &str) -> String {
+    term.replace('\'', "''")
+}
+
+fn is_uuid(term: &str) -> bool {
+    let groups = [8, 4, 4, 4, 12];
+    let parts: Vec<&str> = term.split('-').collect();
+    parts.len() == groups.len()
+        && parts
+            .iter()
+            .zip(groups)
+            .all(|(p, n)| p.len() == n && p.bytes().all(|b| b.is_ascii_hexdigit()))
 }
 
 /// `needle` is already lowercased; the haystack is lowercased per call, which is what makes the
@@ -444,6 +490,49 @@ mod tests {
 
     /// One walk answers both questions: whether the row matched, and what to show beside its
     /// name for having matched.
+    #[test]
+    fn the_filter_a_term_can_be_sent_as() {
+        let vm = nutsh_catalog::kind("vmm.ahv.config.Vm").expect("VMs");
+        assert_eq!(
+            odata(vm, &Query::new("web")),
+            Some("startswith(name,'web')".into())
+        );
+        // An address names no field any of these endpoints will filter on.
+        assert_eq!(odata(vm, &Query::new("10.12.54")), None);
+        // Nothing typed is every row, which is a list and not a filter.
+        assert_eq!(odata(vm, &Query::new("")), None);
+    }
+
+    #[test]
+    fn a_quote_in_the_term_is_escaped_not_sent() {
+        let vm = nutsh_catalog::kind("vmm.ahv.config.Vm").expect("VMs");
+        assert_eq!(
+            odata(vm, &Query::new("o'brien")),
+            Some("startswith(name,'o''brien')".into())
+        );
+    }
+
+    #[test]
+    fn a_whole_identifier_goes_as_ext_id_and_a_prefix_does_not() {
+        let task = nutsh_catalog::kind("prism.config.Task").expect("Tasks");
+        assert!(!task.list_params.filter_fields.contains(&"name"));
+        let uuid = "22262664-c65f-f854-65af-7cc25581f458";
+        assert_eq!(
+            odata(task, &Query::new(uuid)),
+            Some(format!("extId eq '{uuid}'"))
+        );
+        assert_eq!(odata(task, &Query::new("22262664-c65f")), None);
+    }
+
+    #[test]
+    fn a_kind_that_takes_no_filter_is_never_sent_one() {
+        let k = nutsh_catalog::KINDS
+            .iter()
+            .find(|k| !k.list_params.filter)
+            .expect("a kind that takes no $filter");
+        assert_eq!(odata(k, &Query::new("web")), None);
+    }
+
     #[test]
     fn why_a_row_matched_is_what_the_result_row_shows() {
         let e = entity("web-01", "203.0.113.11");

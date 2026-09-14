@@ -94,8 +94,8 @@ pub fn render(
         let p = &k.list_params;
         writeln!(
             s,
-            "        list_params: ListParams {{ page: {}, limit: {}, filter: {}, orderby: {}, select: {}, expand: {}, required: {} }},",
-            p.page, p.limit, p.filter, p.orderby, p.select, p.expand, p.required
+            "        list_params: ListParams {{ page: {}, limit: {}, filter: {}, orderby: {}, select: {}, expand: {}, required: {}, filter_fields: &{:?} }},",
+            p.page, p.limit, p.filter, p.orderby, p.select, p.expand, p.required, p.filter_fields
         )?;
         writeln!(s, "        orderby: {},", opt(&k.orderby))?;
         writeln!(s, "        probe_by: {},", opt(&k.probe_by))?;

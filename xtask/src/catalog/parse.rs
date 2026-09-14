@@ -326,6 +326,7 @@ fn list_params(item: &Value, get: &Value) -> ListParamsModel {
         select: has("$select"),
         expand: has("$expand"),
         required,
+        filter_fields: odata_fields(&params, "$filter"),
         orderby_fields: odata_fields(&params, "$orderby"),
     }
 }

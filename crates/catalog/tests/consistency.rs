@@ -934,3 +934,52 @@ fn the_kinds_a_session_spends_its_time_on_are_narrowed() {
         assert!(k.select.is_some(), "{id} is not narrowed");
     }
 }
+
+/// What a `$filter` may name, so a server-side search can be built without guessing. The census
+/// moves when a pinned spec does; the point of pinning it is that the move is visible.
+#[test]
+fn the_filterable_fields_are_the_census_of_the_specs() {
+    let accept = KINDS.iter().filter(|k| k.list_params.filter).count();
+    let listed = KINDS
+        .iter()
+        .filter(|k| !k.list_params.filter_fields.is_empty())
+        .count();
+    let by_name = KINDS
+        .iter()
+        .filter(|k| k.list_params.filter_fields.contains(&"name"))
+        .count();
+    assert_eq!((accept, listed, by_name), (199, 163, 87));
+
+    // A field list without the parameter would be a filter nothing can send.
+    for k in KINDS {
+        assert!(
+            k.list_params.filter || k.list_params.filter_fields.is_empty(),
+            "{} lists filterable fields but takes no $filter",
+            k.id
+        );
+    }
+}
+
+/// The three a session actually searches, and the fields the search needs from each.
+#[test]
+fn the_kinds_worth_searching_can_be_filtered_on_what_matters() {
+    for (id, wanted) in [
+        (
+            "vmm.ahv.config.Vm",
+            ["name", "extId", "powerState"].as_slice(),
+        ),
+        ("prism.config.Task", ["extId", "status"].as_slice()),
+        (
+            "monitoring.serviceability.Alert",
+            ["name", "extId", "severity", "isResolved"].as_slice(),
+        ),
+    ] {
+        let k = kind(id).unwrap_or_else(|| panic!("no kind {id}"));
+        for f in wanted {
+            assert!(
+                k.list_params.filter_fields.contains(f),
+                "{id} cannot be filtered on {f}"
+            );
+        }
+    }
+}
