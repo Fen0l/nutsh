@@ -62,8 +62,63 @@ impl App {
             error: None,
             payload: None,
             heading: None,
+            watch: None,
         });
         self.mode = Mode::Detail;
+    }
+
+    /// `w` on the pane: poll this row at the watch rhythm and light what moves; again to stop.
+    /// The rhythm is the advertised tier's, so a slow Prism Central gets a slow watch.
+    pub(super) fn toggle_watch(&mut self) {
+        let sections = self.detail_sections();
+        let Some(live) = self.live.as_mut() else {
+            return;
+        };
+        let Some(detail) = self.detail.as_mut() else {
+            return;
+        };
+        let Some(sub) = detail.sub else {
+            self.status = Some(format!(
+                "cannot watch: {} has no single-entity read",
+                detail.key.as_ref().map_or("this kind", |k| k.kind.display)
+            ));
+            return;
+        };
+        if detail.watch.take().is_some() {
+            let every = detail
+                .key
+                .as_ref()
+                .map(|k| Duration::from_secs(u64::from(k.kind.poll_secs.max(1))));
+            live.scheduler.set_interval(sub, every);
+            self.status = Some("watch off".into());
+        } else {
+            let every = nutsh_core::refresh::watch_interval(live.session.client.host_limit());
+            let mut watch = crate::detail::Watch::new(every);
+            watch.observe(&sections, std::time::Instant::now());
+            detail.watch = Some(watch);
+            live.scheduler.set_interval(sub, Some(every));
+            live.scheduler.refresh(sub);
+            self.status = Some(format!(
+                "watching every {} · w stops",
+                nutsh_core::cell::span(every.as_secs())
+            ));
+        }
+        self.dirty = true;
+    }
+
+    /// The composed sections of the row the pane is over, as the watch compares them.
+    pub(super) fn detail_sections(&self) -> Vec<nutsh_core::detail::Section> {
+        let (Some(live), Some(detail), Some(entity)) = (
+            self.live.as_ref(),
+            self.detail.as_ref(),
+            self.detail_entity(),
+        ) else {
+            return Vec::new();
+        };
+        let Some(key) = detail.key.as_ref() else {
+            return Vec::new();
+        };
+        nutsh_core::detail::compose(key.kind, entity, live.store.names(), self.now)
     }
 
     pub(super) fn handle_detail(&mut self, key: Key) {
@@ -86,6 +141,7 @@ impl App {
         };
         match detail.key(key, last) {
             detail::Action::Scrolled | detail::Action::Toggled | detail::Action::Ignored => {}
+            detail::Action::Watch => self.toggle_watch(),
             detail::Action::Help => {
                 self.help_from = Mode::Detail;
                 self.mode = Mode::Help;

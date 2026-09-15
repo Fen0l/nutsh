@@ -108,6 +108,18 @@ impl App {
                         &key,
                         nutsh_core::store::Update::Entity { generation, entity },
                     );
+                    // A watched pane compares this poll with the last and lights what moved.
+                    if let Some(watch) = detail.watch.as_mut()
+                        && let Some(row) = live.store.table(&key).row(&detail.ext_id)
+                    {
+                        let sections = nutsh_core::detail::compose(
+                            key.kind,
+                            row,
+                            live.store.names(),
+                            self.now,
+                        );
+                        watch.observe(&sections, std::time::Instant::now());
+                    }
                 }
                 Msg::Error { error, .. } => detail.error = Some(error),
                 // A single subscription never lists, so it never announces a walk either.

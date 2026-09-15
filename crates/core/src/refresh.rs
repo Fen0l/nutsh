@@ -327,3 +327,28 @@ mod tests {
         );
     }
 }
+
+/// How often a watched row polls: a quarter of the tier the Prism Central advertises, floored
+/// at a second. Three a second is every two seconds; one every two seconds is every eight.
+/// From the ceiling and not a constant, so a watch on a slow tier is slow rather than a wall
+/// of 429s.
+pub fn watch_interval(limit: nutsh_catalog::RateLimit) -> Duration {
+    let count = u64::from(limit.count.max(1));
+    let per = u64::from(limit.per_secs.max(1));
+    Duration::from_secs((4 * per).div_ceil(count).max(1))
+}
+
+#[cfg(test)]
+mod watch_tests {
+    use super::*;
+    use nutsh_catalog::RateLimit;
+
+    #[test]
+    fn a_watch_spends_a_quarter_of_the_tier_and_never_less_than_a_second() {
+        let every = |count, per_secs| watch_interval(RateLimit { count, per_secs }).as_secs();
+        assert_eq!(every(3, 1), 2, "the recorded tier");
+        assert_eq!(every(1, 2), 8, "one every two seconds is a slow watch");
+        assert_eq!(every(100, 1), 1, "the floor");
+        assert_eq!(every(0, 0), 4, "a nonsense tier is treated as one a second");
+    }
+}

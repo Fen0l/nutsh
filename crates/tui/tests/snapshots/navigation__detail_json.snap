@@ -1,5 +1,6 @@
 ---
 source: crates/tui/tests/navigation.rs
+assertion_line: 185
 expression: "app.snapshot(100, 23).unwrap()"
 ---
 ╭ nutsh ─────────────────────────────────────────────────────────────────╮
@@ -23,5 +24,5 @@ expression: "app.snapshot(100, 23).unwrap()"
 │      Storage Containe││  "memorySizeBytes": 8589934592,                                          │
 │      Volume Groups   ││  "powerState": "ON",                                                     │
 ╰───────────────── ↓31 ╯└──────────────────────────────────────────────────────────────────────────┘
- j/k:scroll  g/G:top/bottom  a:actions  Y:yaml  J:json  esc:back
+ j/k:scroll  g/G:top/bottom  a:actions  w:watch  Y:yaml  J:json  esc:back
 [meter]          ● live

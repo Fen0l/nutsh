@@ -1,5 +1,6 @@
 ---
 source: crates/tui/tests/detail.rs
+assertion_line: 75
 expression: "app.snapshot(120, 36).unwrap()"
 ---
 ╭ nutsh ─────────────────────────────────────────────────────────────────────────────────────╮
@@ -36,5 +37,5 @@ expression: "app.snapshot(120, 36).unwrap()"
 │  ▸ iam               ││              Name paramName-f9ac79b6 +12                  Value stringValue-1f99c2f8 +8      │
 │  ▸ licensing         ││ACTIONS ──────────────────────────────────────────────────────────────────────────────────────│
 ╰───────────────── ↓12 ╯└──────────────────────────────────────────────────────────────────────────────────────────────┘
- j/k:scroll  g/G:top/bottom  a:actions  Y:yaml  J:json  esc:back
+ j/k:scroll  g/G:top/bottom  a:actions  w:watch  Y:yaml  J:json  esc:back
 [meter]          ● live

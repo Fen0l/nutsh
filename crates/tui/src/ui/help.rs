@@ -50,7 +50,7 @@ pub(super) const HELP: &str = "\
              ⇥ complete · ↑↓ pick · ^p ^n history · ^w delete word
 j k g G      move        PgUp PgDn   page
 enter        drill into children, or detail     esc   back / close
-y            detail (composed)   Y  raw YAML    J  raw JSON
+y            detail (composed)  Y  raw YAML  J  raw JSON  w  watch
 a            actions for this row; the menu shows each one's key
 space        mark a row; a then acts on every marked row
 S            sort by next column, then reverse   w  wide: 20 columns

@@ -156,7 +156,7 @@ pub(super) fn hint_text(app: &App) -> &'static str {
         // `PgUp/PgDn:page` gives up its place to `a:actions`: the pane now lists what can be
         // done to the row, and a list nothing says how to run is half a feature. The paging
         // keys keep their line on the `?` overlay, which is where they were learned anyway.
-        Mode::Detail => " j/k:scroll  g/G:top/bottom  a:actions  Y:yaml  J:json  esc:back",
+        Mode::Detail => " j/k:scroll  g/G:top/bottom  a:actions  w:watch  Y:yaml  J:json  esc:back",
         Mode::Command => "",
         Mode::Skins => " enter apply  esc close",
         Mode::Ladder => " enter keep  esc close",

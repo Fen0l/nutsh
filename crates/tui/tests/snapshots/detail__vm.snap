@@ -1,5 +1,6 @@
 ---
 source: crates/tui/tests/detail.rs
+assertion_line: 70
 expression: "app.snapshot(120, 36).unwrap()"
 ---
 ╭ nutsh ─────────────────────────────────────────────────────────────────────────────────────╮
@@ -36,5 +37,5 @@ expression: "app.snapshot(120, 36).unwrap()"
 │  ▸ Contexts          ││           CD-ROMs 1                                    ISO type Other                        │
 │  ▸ Settings          ││        Flash mode -                                                                          │
 ╰───────────────── ↓18 ╯└──────────────────────────────────────────────────────────────────────────────────────────────┘
- j/k:scroll  g/G:top/bottom  a:actions  Y:yaml  J:json  esc:back
+ j/k:scroll  g/G:top/bottom  a:actions  w:watch  Y:yaml  J:json  esc:back
 [meter]          ● live

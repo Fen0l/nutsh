@@ -167,7 +167,7 @@ The [usage guide](https://nutsh.dev/usage) covers the first ten minutes. The who
 | <kbd>/</kbd> | filter the rows in front of you |
 | <kbd>j</kbd> <kbd>k</kbd> <kbd>g</kbd> <kbd>G</kbd> | move, first, last |
 | <kbd>⏎</kbd> | drill into a row's children |
-| <kbd>y</kbd> | detail; <kbd>Y</kbd> and <kbd>J</kbd> for raw YAML and JSON |
+| <kbd>y</kbd> | detail; <kbd>Y</kbd> and <kbd>J</kbd> for raw YAML and JSON; <kbd>w</kbd> watches the row, lighting what changes |
 | <kbd>a</kbd> | actions for this row; <kbd>space</kbd> marks rows for a bulk action |
 | <kbd>S</kbd> <kbd>w</kbd> | sort by the next column, show twenty columns |
 | <kbd>⇥</kbd> <kbd>ctrl-b</kbd> | focus the sidebar, hide it |
