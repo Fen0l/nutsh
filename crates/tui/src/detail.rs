@@ -8,7 +8,7 @@ use nutsh_core::detail::{self, Section};
 use nutsh_core::scheduler::SubId;
 use nutsh_core::store::{Failure, TableKey};
 use nutsh_prism::Entity;
-use ratatui::style::Style;
+use ratatui::style::{Modifier, Style};
 use ratatui::text::{Line, Span};
 use serde_json::Value;
 use unicode_width::UnicodeWidthStr;
@@ -21,9 +21,61 @@ use crate::theme;
 pub enum Action {
     Scrolled,
     Toggled,
+    /// `w`: watch this row, or stop.
+    Watch,
     Help,
     Closed,
     Ignored,
+}
+
+/// How long a changed value stays lit after the poll that changed it.
+pub const FLASH: std::time::Duration = std::time::Duration::from_secs(3);
+
+/// A pane being watched: the values as of the last poll, and when each last changed.
+#[derive(Debug, Default)]
+pub struct Watch {
+    pub every: std::time::Duration,
+    /// `SECTION/label` to the value text as of the last poll.
+    seen: std::collections::HashMap<String, String>,
+    changed: std::collections::HashMap<String, std::time::Instant>,
+}
+
+impl Watch {
+    pub fn new(every: std::time::Duration) -> Watch {
+        Watch {
+            every,
+            ..Watch::default()
+        }
+    }
+
+    /// The composed sections as of one poll. The first observation seeds and lights nothing;
+    /// every later one lights what moved. Returns how many values changed.
+    pub fn observe(&mut self, sections: &[Section], now: std::time::Instant) -> usize {
+        let first = self.seen.is_empty();
+        let mut moved = 0;
+        for section in sections {
+            for (label, rendered) in &section.fields {
+                let key = format!("{}/{}", section.title, label);
+                match self.seen.insert(key.clone(), rendered.text.clone()) {
+                    Some(before) if before != rendered.text => {
+                        self.changed.insert(key, now);
+                        moved += 1;
+                    }
+                    _ => {}
+                }
+            }
+        }
+        if first { 0 } else { moved }
+    }
+
+    /// The keys still lit at `now`.
+    pub fn hot(&self, now: std::time::Instant) -> std::collections::HashSet<String> {
+        self.changed
+            .iter()
+            .filter(|(_, at)| now.saturating_duration_since(**at) < FLASH)
+            .map(|(k, _)| k.clone())
+            .collect()
+    }
 }
 
 /// Which of the three bodies the pane is showing.
@@ -97,6 +149,8 @@ pub struct Detail {
     pub payload: Option<Value>,
     /// A payload pane's title; an entity pane titles itself from its kind and its row.
     pub heading: Option<String>,
+    /// `w`: polling faster than the table, with what moved lit. `None` when not watching.
+    pub watch: Option<Watch>,
 }
 
 impl Detail {
@@ -111,6 +165,7 @@ impl Detail {
         self.scroll = self.scroll.min(last);
         match key {
             Key::Esc => Action::Closed,
+            Key::Char('w') => Action::Watch,
             Key::Char('Y') => {
                 self.body = self.body.toggled(Body::Yaml, self.opens_on());
                 self.scroll = 0;
@@ -162,6 +217,7 @@ impl Detail {
             error: None,
             payload: Some(value),
             heading: Some(title),
+            watch: None,
         }
     }
 
@@ -195,7 +251,14 @@ impl Detail {
                 lines.push(Line::from(""));
                 lines.extend(self.text_lines(view.entity));
             }
-            Some(sections) => lines.extend(body_lines(sections, view.width)),
+            Some(sections) => {
+                let hot = self
+                    .watch
+                    .as_ref()
+                    .map(|w| w.hot(std::time::Instant::now()))
+                    .unwrap_or_default();
+                lines.extend(body_lines(sections, view.width, &hot));
+            }
             // An entity pane whose row has not landed yet. A payload pane never waits: it
             // carries its document, and its `entity` is always `None`.
             None if view.entity.is_none() && self.payload.is_none() => {
@@ -244,7 +307,13 @@ impl Detail {
         debug_assert!(self.key.is_some(), "an entity pane carries its table's key");
         let name = entity.map(|e| e.name.as_str()).unwrap_or("…");
         let display = self.key.as_ref().map_or("", |k| k.kind.display);
-        format!("{display} · {name}")
+        match &self.watch {
+            Some(w) => format!(
+                "{display} · {name} · watching every {}",
+                nutsh_core::cell::span(w.every.as_secs())
+            ),
+            None => format!("{display} · {name}"),
+        }
     }
 
     /// The raw document as text. [`Body::Composed`] reaches here only when there was nothing to
@@ -297,7 +366,11 @@ const GUTTER: usize = 2;
 ///
 /// The sections are consumed: `detail::compose` builds them for this frame and drops them, so
 /// every value moves into its span rather than being cloned into it.
-fn body_lines(sections: Vec<Section>, width: u16) -> Vec<Line<'static>> {
+fn body_lines(
+    sections: Vec<Section>,
+    width: u16,
+    hot: &std::collections::HashSet<String>,
+) -> Vec<Line<'static>> {
     let w = usize::from(width);
     let two = width >= TWO_COLUMN_MIN;
     let column = if two { w.saturating_sub(2) / 2 } else { w };
@@ -309,6 +382,7 @@ fn body_lines(sections: Vec<Section>, width: u16) -> Vec<Line<'static>> {
         lines.push(heading(&section.title, w));
         let mut pending: Option<Vec<Span<'static>>> = None;
         for (label, rendered) in section.fields {
+            let lit = hot.contains(&format!("{}/{}", section.title, label));
             let spills = label.width() > DETAIL_LABEL || rendered.text.width() > value;
             if spills || !two {
                 if let Some(spans) = pending.take() {
@@ -316,15 +390,15 @@ fn body_lines(sections: Vec<Section>, width: u16) -> Vec<Line<'static>> {
                 }
                 // Still right-aligned in the label column: only a label wider than the column
                 // loses its padding, and `pair`'s `saturating_sub` is what gives it up.
-                lines.push(Line::from(pair(&label, rendered)));
+                lines.push(Line::from(pair(&label, rendered, lit)));
                 continue;
             }
             match pending.take() {
-                None => pending = Some(pair(&label, rendered)),
+                None => pending = Some(pair(&label, rendered, lit)),
                 Some(mut left) => {
                     let used: usize = left.iter().map(|s| s.content.width()).sum();
                     left.push(Span::raw(" ".repeat(column.saturating_sub(used))));
-                    left.extend(pair(&label, rendered));
+                    left.extend(pair(&label, rendered, lit));
                     lines.push(Line::from(left));
                 }
             }
@@ -370,6 +444,7 @@ fn action_lines(rows: &[crate::menu::Row], width: u16) -> Vec<Line<'static>> {
                 text,
                 dim: row.reason.is_some(),
             },
+            false,
         )));
     }
     lines
@@ -378,20 +453,23 @@ fn action_lines(rows: &[crate::menu::Row], width: u16) -> Vec<Line<'static>> {
 /// One field: the label right-aligned and dim in [`DETAIL_LABEL`] cells, one space, then the
 /// value in its own tint. A label wider than the column keeps its own width - the padding is
 /// what it gives up, never a character of the label.
-fn pair(label: &str, rendered: Rendered) -> Vec<Span<'static>> {
+fn pair(label: &str, rendered: Rendered, lit: bool) -> Vec<Span<'static>> {
     let mut head = " ".repeat(DETAIL_LABEL.saturating_sub(label.width()));
     head.push_str(label);
     head.push(' ');
+    // A value the last watch poll moved: lit for `FLASH`, then back to what it is.
+    let style = if lit {
+        Style::default()
+            .fg(theme::peach())
+            .add_modifier(Modifier::BOLD)
+    } else if rendered.dim {
+        theme::dim()
+    } else {
+        Style::default().fg(theme::text())
+    };
     vec![
         Span::styled(head, theme::dim()),
-        Span::styled(
-            rendered.text,
-            if rendered.dim {
-                theme::dim()
-            } else {
-                Style::default().fg(theme::text())
-            },
-        ),
+        Span::styled(rendered.text, style),
     ]
 }
 
@@ -463,7 +541,7 @@ mod tests {
     /// right edge, with no blank line above it: rows are the scarce resource.
     #[test]
     fn a_wide_pane_pairs_its_fields_under_a_ruled_heading() {
-        let lines = text(&body_lines(vec![identity()], 94));
+        let lines = text(&body_lines(vec![identity()], 94, &Default::default()));
         assert_eq!(lines.len(), 4, "{lines:?}");
         assert!(lines[0].starts_with("IDENTITY ───"), "{:?}", lines[0]);
         assert_eq!(
@@ -510,6 +588,7 @@ mod tests {
                     &[("Power", &value), ("Live migratable ok", "yes")],
                 )],
                 94,
+                &Default::default(),
             ));
             if lines.len() == 3 {
                 continue; // The value spilled: it has the line to itself.
@@ -536,7 +615,7 @@ mod tests {
     /// rather than being truncated into a collision with its neighbour.
     #[test]
     fn a_narrow_pane_is_one_column_and_a_long_label_spills() {
-        let lines = text(&body_lines(vec![identity()], 80));
+        let lines = text(&body_lines(vec![identity()], 80, &Default::default()));
         assert_eq!(
             lines.len(),
             5,
@@ -552,7 +631,7 @@ mod tests {
                 ("Value", "192.0.2.31"),
             ],
         );
-        let lines = text(&body_lines(vec![long], 94));
+        let lines = text(&body_lines(vec![long], 94, &Default::default()));
         assert_eq!(
             lines[1], "Backplane address · ipv4.value 192.168.5.2",
             "a thirty-cell label is not padded and is not cut"
@@ -595,5 +674,39 @@ mod tests {
         // The same pane, now twice as wide: half the lines, and the counter is past the end.
         assert_eq!(pane.key(Key::Char('k'), 20), Action::Scrolled);
         assert_eq!(pane.scroll, 19, "one line up from the new last, not 39");
+    }
+
+    /// The first poll seeds and lights nothing; a later poll lights what moved, for `FLASH`.
+    #[test]
+    fn a_watch_lights_what_moved_and_only_for_a_while() {
+        use nutsh_core::cell::Rendered;
+        let section = |power: &str| Section {
+            title: "State".into(),
+            fields: vec![
+                (
+                    "Power".into(),
+                    Rendered {
+                        text: power.into(),
+                        dim: false,
+                    },
+                ),
+                (
+                    "Host".into(),
+                    Rendered {
+                        text: "node-1".into(),
+                        dim: false,
+                    },
+                ),
+            ],
+        };
+        let t0 = std::time::Instant::now();
+        let mut w = Watch::new(std::time::Duration::from_secs(2));
+        assert_eq!(w.observe(&[section("ON")], t0), 0, "the first look seeds");
+        assert!(w.hot(t0).is_empty());
+        assert_eq!(w.observe(&[section("ON")], t0), 0, "nothing moved");
+        assert_eq!(w.observe(&[section("OFF")], t0), 1);
+        let hot = w.hot(t0 + std::time::Duration::from_secs(1));
+        assert_eq!(hot.into_iter().collect::<Vec<_>>(), ["State/Power"]);
+        assert!(w.hot(t0 + FLASH).is_empty(), "and it goes back to normal");
     }
 }
