@@ -75,6 +75,7 @@ nutsh-tui.workspace = true
 
 [dev-dependencies]
 nutsh-mockpc.workspace = true
+serde_json.workspace = true
 tempfile.workspace = true
 
 # The profile that 'dist' will build with

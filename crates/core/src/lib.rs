@@ -10,6 +10,7 @@ pub mod can_i;
 pub mod cell;
 pub mod contexts;
 pub mod detail;
+pub mod export;
 pub mod guardrails;
 pub mod history;
 pub mod journal;

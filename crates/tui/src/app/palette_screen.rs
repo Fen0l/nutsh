@@ -186,6 +186,7 @@ impl App {
             Entry::Command(Command::Activity) => self.activity_command(),
             // Joined, not `first()`: the term is the rest of the line, spaces and all.
             Entry::Command(Command::Search) => self.search_command(&args.join(" ")),
+            Entry::Command(Command::Export) => self.export_command(&args),
             Entry::Command(Command::CanI) => self.can_i_command(&args),
             Entry::Command(Command::Try) => self.try_command(&args),
             Entry::Command(Command::Mouse) => self.mouse_command(),
@@ -221,6 +222,7 @@ impl App {
                 palette::Tag::Nav { hide } => self.nav_command(Some(text), hide),
                 palette::Tag::Interval => self.refresh_command(&[text]),
                 palette::Tag::Level => self.log_command(&[text]),
+                palette::Tag::Format => self.export_command(&[text]),
             },
             Entry::Kind {
                 kind,

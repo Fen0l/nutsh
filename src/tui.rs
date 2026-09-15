@@ -19,6 +19,8 @@ pub(crate) struct TuiArgs {
     pub(crate) start: String,
     pub(crate) snapshot: bool,
     pub(crate) size: (u16, u16),
+    /// `--format csv|json`: the table instead of the frame.
+    pub(crate) format: Option<nutsh_core::export::Format>,
     pub(crate) readonly: bool,
     pub(crate) no_cache: bool,
 }
@@ -157,7 +159,10 @@ pub(crate) fn run(args: TuiArgs, conn: &ConnArgs, from_env: Option<String>) -> a
                     app.settle_stats_once().await;
                 })
                 .await;
-                print!("{}", app.snapshot(args.size.0, args.size.1)?);
+                match args.format {
+                    Some(format) => print!("{}", app.export(format)?),
+                    None => print!("{}", app.snapshot(args.size.0, args.size.1)?),
+                }
                 Ok(0)
             }
             (Start::Failed(app, reason), true) => match reason {

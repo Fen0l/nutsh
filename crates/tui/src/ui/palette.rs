@@ -46,6 +46,7 @@ pub(super) fn draw_palette(app: &App, f: &mut Frame, body: Rect) {
                     Tag::Nav { .. } => Span::styled("menu", Style::default().fg(theme::green())),
                     Tag::Interval => Span::styled("every", Style::default().fg(theme::peach())),
                     Tag::Level => Span::styled("level", Style::default().fg(theme::sapphire())),
+                    Tag::Format => Span::styled("format", Style::default().fg(theme::peach())),
                 },
                 width,
             ),

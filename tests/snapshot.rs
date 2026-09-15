@@ -604,3 +604,70 @@ async fn a_config_that_hides_the_dashboard_still_launches_on_it() {
         "and the menu still holds it: {stdout}"
     );
 }
+
+/// `--format csv|json` prints the table the frame would have drawn, as data: the same columns,
+/// the same rows, names not identifiers. `text` is the frame, and is the default.
+#[tokio::test(flavor = "multi_thread", worker_threads = 2)]
+async fn snapshot_format_prints_the_table_as_csv_or_json() {
+    let pc = MockPc::builder().start().await;
+    let dir = tempfile::tempdir().unwrap();
+    let base = |format: &str| {
+        vec![
+            "vm".to_string(),
+            "--snapshot".into(),
+            "--format".into(),
+            format.into(),
+            "--plain-http".into(),
+            "--host".into(),
+            pc.host(),
+            "--port".into(),
+            pc.port().to_string(),
+            "--username".into(),
+            "admin".into(),
+        ]
+    };
+    let env = vec![("NUTSH_PASSWORD", "secret".to_string())];
+
+    let out = run(base("csv"), dir.path().join("config.toml"), env.clone()).await;
+    assert_eq!(
+        out.status.code(),
+        Some(0),
+        "{}",
+        String::from_utf8_lossy(&out.stderr)
+    );
+    let csv = String::from_utf8_lossy(&out.stdout);
+    let mut lines = csv.lines();
+    let header = lines.next().unwrap();
+    assert!(header.starts_with("NAME,POWER,"), "{header}");
+    let rows: Vec<&str> = lines.collect();
+    assert_eq!(rows.len(), 3, "{csv}");
+    assert!(rows.iter().any(|r| r.starts_with("web-01,ON,")), "{csv}");
+    assert!(!csv.contains('╭'), "data, not a frame: {csv}");
+
+    let out = run(base("json"), dir.path().join("config.toml"), env).await;
+    assert_eq!(
+        out.status.code(),
+        Some(0),
+        "{}",
+        String::from_utf8_lossy(&out.stderr)
+    );
+    let v: serde_json::Value = serde_json::from_slice(&out.stdout).expect("json");
+    let rows = v.as_array().unwrap();
+    assert_eq!(rows.len(), 3);
+    assert_eq!(rows[0]["NAME"], "web-01");
+    assert_eq!(rows[0]["POWER"], "ON");
+}
+
+/// `--format` is `--snapshot`'s: alone it is refused by clap, before anything connects.
+#[test]
+fn format_without_snapshot_is_refused() {
+    let dir = tempfile::tempdir().unwrap();
+    let out = nutsh(
+        &["vm", "--format", "csv"],
+        &dir.path().join("config.toml"),
+        &[],
+    );
+    assert_eq!(out.status.code(), Some(2));
+    let stderr = String::from_utf8_lossy(&out.stderr);
+    assert!(stderr.contains("--snapshot"), "{stderr}");
+}
