@@ -164,6 +164,13 @@ pub async fn settle_stats(app: &mut App) {
         .expect("the stats poller reports");
 }
 
+/// Runs the app's poll channel until every kind the open search asked has answered.
+pub async fn settle_search(app: &mut App) {
+    tokio::time::timeout(Duration::from_secs(20), app.settle_search())
+        .await
+        .expect("every kind the search asked answers");
+}
+
 /// Runs the app's poll channel until the name warm-up's first cycle lands.
 pub async fn settle_names(app: &mut App) {
     tokio::time::timeout(Duration::from_secs(20), app.settle_names_once())

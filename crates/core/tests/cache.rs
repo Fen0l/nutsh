@@ -330,6 +330,32 @@ fn a_changed_target_or_an_old_write_uses_nothing() {
     );
 }
 
+/// `cache_max_age` is the reader's, not the writer's: the same directory is in date under one
+/// limit and past it under another, and a read that finds it past the limit clears it.
+#[test]
+fn the_age_limit_is_the_readers_and_a_read_past_it_clears_the_directory() {
+    let tmp = tempfile::tempdir().unwrap();
+    let dir = tmp.path().join("lab");
+    cache::write(&dir, snapshot(vec![vm("a", "web-01")]), 1_000).unwrap();
+    let hour = 3_600;
+    assert!(
+        cache::read(&dir, &identity(), 1_000 + hour, hour).is_some(),
+        "an hour old under an hour's limit, on the boundary"
+    );
+    assert!(
+        cache::read(&dir, &identity(), 1_000 + hour + 1, cache::MAX_AGE).is_some(),
+        "the same directory under the default limit"
+    );
+    assert!(
+        cache::read(&dir, &identity(), 1_000 + hour + 1, hour).is_none(),
+        "one second past an hour's limit"
+    );
+    assert!(
+        !dir.join("meta.json").exists(),
+        "and the inventory is removed, as an eight-day-old one is"
+    );
+}
+
 /// The palette's `history.json` shares the directory and is not the cache's to throw away: an
 /// upgrade discards the inventory once, and the user's typed lines are not part of it.
 /// `nutsh cache clear` is the other thing, and still removes the directory whole.

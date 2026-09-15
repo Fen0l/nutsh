@@ -8,6 +8,7 @@ use std::path::Path;
 use common::FileContexts;
 use nutsh_core::contexts::Flags;
 use nutsh_mockpc::MockPc;
+use nutsh_tui::app::Mode;
 use nutsh_tui::{App, Key};
 
 const FILE: &str = "[skin]\nname = \"catppuccin-mocha\"\n\n\
@@ -298,6 +299,129 @@ async fn the_schedule_rows_show_their_provenance_and_space_keeps_the_next_rung()
         frame
             .lines()
             .any(|l| l.contains("Virtual Machines") && l.contains("config file")),
+        "{frame}"
+    );
+}
+
+/// `space` on a namespace row is one rung for every kind in it, kept in `[refresh.namespaces]`,
+/// and the kinds underneath read the namespace as their source until one of them is set alone.
+#[tokio::test]
+async fn a_namespace_row_schedules_all_its_kinds_at_once() {
+    let dir = tempfile::tempdir().unwrap();
+    let path = dir.path().join("config.toml");
+    let pc = MockPc::builder().start().await;
+    let mut app = app_over(&pc, &path).await;
+
+    open_settings(&mut app);
+    select(&mut app, "▸ vmm");
+    app.handle(Key::Char(' '));
+    assert_eq!(
+        app.status.as_deref(),
+        Some("vmm: 5s"),
+        "one rung on from auto"
+    );
+    let cfg = nutsh_config::load(&path).unwrap();
+    assert_eq!(
+        cfg.refresh.namespaces["vmm"],
+        nutsh_config::Interval::Secs(5)
+    );
+    assert!(
+        cfg.refresh.kinds.is_empty(),
+        "no kind was written on its own"
+    );
+
+    select(&mut app, "▸ vmm");
+    let frame = app.snapshot(120, 30).unwrap();
+    assert!(
+        frame
+            .lines()
+            .any(|l| l.contains("vmm") && l.contains("5s") && l.contains("namespace vmm")),
+        "{frame}"
+    );
+    app.handle(Key::Enter);
+    select(&mut app, "Virtual Machines");
+    let frame = app.snapshot(120, 30).unwrap();
+    assert!(
+        frame.lines().any(|l| l.contains("Virtual Machines")
+            && l.contains("5s")
+            && l.contains("namespace vmm")),
+        "the kind polls at the namespace's rhythm: {frame}"
+    );
+
+    // A second press walks the ladder from the namespace's own value, not from a kind's.
+    select(&mut app, "▾ vmm");
+    app.handle(Key::Char(' '));
+    let cfg = nutsh_config::load(&path).unwrap();
+    assert_eq!(
+        cfg.refresh.namespaces["vmm"],
+        nutsh_config::Interval::Secs(10)
+    );
+}
+
+/// The run row at the top of the section asks every subscription for a cycle now, and says how
+/// many it asked.
+#[tokio::test]
+async fn refresh_everything_now_repolls_the_open_view() {
+    let dir = tempfile::tempdir().unwrap();
+    let path = dir.path().join("config.toml");
+    let pc = MockPc::builder().start().await;
+    let mut app = app_over(&pc, &path).await;
+    common::settle_stats(&mut app).await;
+    let before = pc.requests_to("/config/vms").len();
+
+    open_settings(&mut app);
+    select(&mut app, "⏎ refresh everything now");
+    app.handle(Key::Enter);
+    let status = app.status.clone().unwrap_or_default();
+    assert!(status.starts_with("refreshing "), "{status}");
+    assert_ne!(status, "refreshing 0 views", "{status}");
+
+    common::settle(&mut app).await;
+    assert!(
+        pc.requests_to("/config/vms").len() > before,
+        "the VM table was asked again"
+    );
+    assert_eq!(app.mode, Mode::Settings, "the screen stays open");
+}
+
+/// The hour rungs are real settings: `:refresh 6h` writes seconds, and the screen reads it back
+/// in hours from the file.
+#[tokio::test]
+async fn an_hour_rung_writes_seconds_and_reads_back_in_hours() {
+    let dir = tempfile::tempdir().unwrap();
+    let path = dir.path().join("config.toml");
+    let pc = MockPc::builder().start().await;
+    let mut app = app_over(&pc, &path).await;
+
+    app.handle(Key::Char(':'));
+    for c in "refresh 6h".chars() {
+        app.handle(Key::Char(c));
+    }
+    app.handle(Key::Enter);
+    assert_eq!(
+        app.status.as_deref(),
+        Some("refresh: 6h kept for Virtual Machines")
+    );
+    let cfg = nutsh_config::load(&path).unwrap();
+    assert_eq!(
+        cfg.refresh.kinds["vmm.ahv.config.Vm"],
+        nutsh_config::Interval::Secs(21_600)
+    );
+
+    open_settings(&mut app);
+    select(&mut app, "▸ vmm");
+    let frame = app.snapshot(120, 30).unwrap();
+    assert!(
+        frame.lines().any(|l| l.contains("vmm (1 set)")),
+        "the folded namespace counts the kind set on its own: {frame}"
+    );
+    app.handle(Key::Enter);
+    select(&mut app, "Virtual Machines");
+    let frame = app.snapshot(120, 30).unwrap();
+    assert!(
+        frame.lines().any(|l| l.contains("Virtual Machines")
+            && l.contains("6h")
+            && l.contains("config file")),
         "{frame}"
     );
 }

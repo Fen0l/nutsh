@@ -237,6 +237,22 @@ impl App {
             .await;
     }
 
+    /// Tests only: drains poll messages until every kind the open search asked has answered.
+    /// Returns at once when no search is open or nothing was asked.
+    pub async fn settle_search(&mut self) {
+        while self.search.as_ref().is_some_and(|s| s.answered < s.asked) {
+            let Some(msg) = self.poll_rx.recv().await else {
+                return;
+            };
+            self.apply(msg);
+        }
+    }
+
+    /// Tests only: how many kinds the open search asked, and how many have answered.
+    pub fn search_reach_for_test(&self) -> Option<(usize, usize)> {
+        self.search.as_ref().map(|s| (s.asked, s.answered))
+    }
+
     /// Tests only: waits for the next connect result and applies it.
     ///
     /// The event loop cannot call this, which is why it is not on its path: it selects over the
