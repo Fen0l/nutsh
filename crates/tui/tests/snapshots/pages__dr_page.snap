@@ -8,7 +8,7 @@ expression: frame
 │Cluster:    <all>                                               jk move        ^r refresh   │           alerts ⚠ 2  ✖ 2
 │Kind:       Data Protection › Disaster Recovery                 ^t every       ^x stop      │         tasks ▶ 4 running
 │Count:      4 panes                                              a actions     ^c quit      │
-╰────────────────────────────────────────────────────────────────────────────────────────────╯  v0.0.2-beta1 · pc.2024.3
+╰────────────────────────────────────────────────────────────────────────────────────────────╯  v0.0.2-beta2 · pc.2024.3
 ╭ nutsh ─────────── ↑3 ╮╭ Registered Prism Centrals [1] ─────────────────────────────────────╮╭ Summary ───────────────╮
 │      VMs             ││  NAME       PC VERSION   CLUSTERS  STATE   CONNECTIVITY  REGISTERED││Policies               3│
 │      ESXi VMs        ││▌ pc-dr      pc.7.6       3         ACTIVE  CONNECTED     11d       ││Recovery plans         2│

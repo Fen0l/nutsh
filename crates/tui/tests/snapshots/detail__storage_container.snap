@@ -8,7 +8,7 @@ expression: "app.snapshot(120, 36).unwrap()"
 │Cluster:    <all>                                               ←→ columns     ^r refresh   │       alerts ⚠ 100  ✖ 100
 │Kind:       Compute & Storage › Storage Containers              ^t every       ^x stop      │       tasks ▶ 100 running
 │Count:      20                                                   a actions     ^c quit      │
-╰────────────────────────────────────────────────────────────────────────────────────────────╯     v0.0.2-beta1 · pc.7.6
+╰────────────────────────────────────────────────────────────────────────────────────────────╯     v0.0.2-beta2 · pc.7.6
 ╭ nutsh ───────────────╮┌Storage Containers · name-25841bba────────────────────────────────────────────────────────────┐
 │  ▸ Dashboard         ││IDENTITY ─────────────────────────────────────────────────────────────────────────────────────│
 │  ▾ Compute & Storage ││              Name name-25841bba                                                              │

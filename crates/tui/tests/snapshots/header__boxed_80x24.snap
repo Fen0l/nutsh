@@ -8,7 +8,7 @@ expression: "app.snapshot(80, 24).unwrap()"
 │Cluster:    <all>                                   │           alerts ⚠ 2  ✖ 2
 │Kind:       Compute & Storage › VMs                 │         tasks ▶ 4 running
 │Count:      3                                       │
-╰────────────────────────────────────────────────────╯  v0.0.2-beta1 · pc.2024.3
+╰────────────────────────────────────────────────────╯  v0.0.2-beta2 · pc.2024.3
 ╭ Virtual Machines [3] ────────────────────────────────────────────────────────╮
 │  NAME                    POWER  CLUSTER      HOST        IP            MEM   │
 │▌ web-01                  ON     lab-cluster  ahv-node-1  203.0.113.11  8 GiB │

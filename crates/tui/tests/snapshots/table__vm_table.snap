@@ -8,7 +8,7 @@ expression: "app.snapshot(120, 19).unwrap()"
 │Cluster:    <all>                                               ←→ columns     ^r refresh   │           alerts ⚠ 2  ✖ 2
 │Kind:       Compute & Storage › VMs                             ^t every       ^x stop      │         tasks ▶ 4 running
 │Count:      3                                                    a actions     ^c quit      │
-╰────────────────────────────────────────────────────────────────────────────────────────────╯  v0.0.2-beta1 · pc.2024.3
+╰────────────────────────────────────────────────────────────────────────────────────────────╯  v0.0.2-beta2 · pc.2024.3
 ╭ nutsh ───────────────╮╭ Virtual Machines [3] ────────────────────────────────────────────────────────────────────────╮
 │  ▸ Dashboard         ││  NAME                                    POWER  CLUSTER      HOST        IP            MEM   │
 │  ▾ Compute & Storage ││▌ web-01                                  ON     lab-cluster  ahv-node-1  203.0.113.11  8 GiB │

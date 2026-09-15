@@ -8,7 +8,7 @@ expression: "app.snapshot(120, 14).unwrap()"
 │Cluster:    <all>                                               ←→ columns     ^r refresh   │           alerts ⚠ 2  ✖ 2
 │Kind:       Compute & Storage › VMs                             ^t every       ^x stop      │         tasks ▶ 4 running
 │Count:      3                                                    a actions     ^c quit      │
-╰────────────────────────────────────────────────────────────────────────────────────────────╯  v0.0.2-beta1 · pc.2024.3
+╰────────────────────────────────────────────────────────────────────────────────────────────╯  v0.0.2-beta2 · pc.2024.3
 ╭ nutsh ─────────── ↑2 ╮╭ journal ─────────────────────────────────────────────────────────────────────────────────────╮
 │      Overview        ││  WHEN   CONTEXT     KIND        NAME              ACTION          OUTCOME            TASK    │
 │    • VMs [3]         ││▌ 0s     (env)       vm          web-01            power-on        denied: nope       -       │
