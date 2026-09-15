@@ -73,8 +73,73 @@ async fn search_groups_its_results_and_states_its_reach() {
         frame.contains("asking ") && frame.contains(" answered · 2 loaded"),
         "{frame}"
     );
-    // And nothing was fetched to answer it.
-    assert_eq!(pc.requests().len(), before, "a search asks for nothing");
+    // The store answered on its own: nothing has been fetched yet, and the fan-out is armed.
+    assert_eq!(
+        pc.requests().len(),
+        before,
+        "the first frame is the store's"
+    );
+    let (asked, answered) = app.search_reach_for_test().unwrap();
+    assert!(
+        asked > 0 && answered == 0,
+        "asked {asked}, answered {answered}"
+    );
+}
+
+/// The store is the first answer, not the last: the kinds nobody opened are asked one by one,
+/// the list fills in as they land, and the reach line changes voice once every kind has
+/// answered. The table the user has open is never replaced by the filtered one underneath.
+#[tokio::test]
+async fn the_fan_out_fills_in_from_the_pc_and_the_reach_says_when_it_is_done() {
+    let pc = MockPc::builder().start().await;
+    let mut app = app(&pc).await;
+    common::settle(&mut app).await;
+    common::settle_stats(&mut app).await;
+    let vm_rows = app.view().unwrap().key.clone();
+    let before = pc.requests().len();
+
+    app.handle(Key::Char(':'));
+    type_str(&mut app, "search gold");
+    app.handle(Key::Enter);
+    let first = app.snapshot(120, 24).unwrap();
+    assert!(
+        first.contains("nothing matches"),
+        "only VMs are loaded: {first}"
+    );
+    assert!(first.contains("asking "), "{first}");
+
+    common::settle_search(&mut app).await;
+    let (asked, answered) = app.search_reach_for_test().unwrap();
+    assert_eq!(answered, asked, "every kind asked has answered");
+    assert!(pc.requests().len() > before, "the fan-out went to the PC");
+    let frame = app.snapshot(120, 24).unwrap();
+    assert!(
+        frame.contains("Protection Policies") && frame.contains("gold-sync"),
+        "a kind nobody opened answered: {frame}"
+    );
+    assert!(
+        frame.contains(&format!("asked the PC for {asked}")),
+        "the reach reads as complete: {frame}"
+    );
+    assert!(!frame.contains("asking "), "{frame}");
+    assert_eq!(app.mode, Mode::Search);
+
+    // The fan-out lands under its own filter: the VM table underneath is the same one.
+    assert_eq!(app.view().unwrap().key, vm_rows);
+    assert_eq!(app.view().unwrap().key.filter, None);
+
+    // `⏎` opens the kind the PC answered for. The hit sits in the filtered table, so the
+    // kind's own table is walked fresh and the row arrives with it; the cursor is not moved
+    // onto it, which is the documented limit of `open_hit`.
+    app.handle(Key::Enter);
+    assert_eq!(app.mode, Mode::Table);
+    assert_eq!(
+        app.view().unwrap().key.kind.id,
+        "datapolicies.config.ProtectionPolicy"
+    );
+    common::settle(&mut app).await;
+    let frame = app.snapshot(120, 24).unwrap();
+    assert!(frame.contains("gold-sync"), "{frame}");
 }
 
 /// `⏎` on a result opens the entity: its kind's table, with the cursor on the row.
