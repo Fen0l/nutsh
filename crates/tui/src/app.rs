@@ -40,10 +40,12 @@ mod detail_screen;
 mod form_screen;
 mod journal_screen;
 mod mouse;
-mod navigation;
+mod nav;
+mod page_view;
 mod palette_screen;
 mod search;
 mod settings;
+mod table_view;
 
 mod messages;
 mod session;
