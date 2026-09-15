@@ -21,6 +21,8 @@ pub enum Command {
     Activity,
     /// `:search <term>` - every kind already loaded, looked at for one term.
     Search,
+    /// `:export [csv|json] [path]` - the table in view, as it is drawn.
+    Export,
     /// `:can-i <action> <kind>` - the one refusal string, asked about any kind.
     CanI,
     /// `:try <kind>` - ask this Prism Central for a kind the catalog says its pinned API
@@ -58,6 +60,7 @@ impl Command {
             Command::Journal => "journal",
             Command::Activity => "activity",
             Command::Search => "search",
+            Command::Export => "export",
             Command::CanI => "can-i",
             Command::Try => "try",
             Command::Mouse => "mouse",
@@ -82,7 +85,10 @@ impl Command {
     /// nothing completes free text, and without this the arity check would refuse every term
     /// typed after it.
     pub fn rest_of_line(self) -> bool {
-        matches!(self, Command::Hide | Command::Show | Command::Search)
+        matches!(
+            self,
+            Command::Hide | Command::Show | Command::Search | Command::Export
+        )
     }
 
     /// One slot per argument position. Total on purpose - no wildcard arm - so a `Command`
@@ -102,6 +108,8 @@ impl Command {
             // Likewise a suggestion: the six words are the whole vocabulary, and a bare `:log`
             // with no argument is the gesture this command is mostly typed as.
             Command::Log => &[Slot::Levels],
+            // The path after the format is free text; `rest_of_line` carries it.
+            Command::Export => &[Slot::Formats],
             // `:search` takes a term and offers no completion for it: a slot draws on a fixed
             // vocabulary and an address is not in one. The popup collapses to the `search` row,
             // `rest_of_line` keeps the words, and the app reads them.
@@ -127,6 +135,7 @@ pub(crate) const COMMANDS: &[Command] = &[
     Command::Journal,
     Command::Activity,
     Command::Search,
+    Command::Export,
     Command::CanI,
     Command::Try,
     Command::Mouse,
@@ -153,6 +162,8 @@ pub enum Slot {
     Intervals,
     /// The six log levels: what `:log` takes.
     Levels,
+    /// `csv` or `json`: what `:export` takes first.
+    Formats,
     /// The same, narrowed to what is hidden: what `:show` takes. Two slots rather than one
     /// because the vocabularies differ and because the verb has to reach the row - a group
     /// hidden whole leaves nothing on screen, so `:show ` is the only place its name still is.
@@ -175,6 +186,7 @@ impl Slot {
             Slot::Show => "hidden items",
             Slot::Intervals => "intervals",
             Slot::Levels => "levels",
+            Slot::Formats => "formats",
         }
     }
 }
@@ -194,6 +206,8 @@ pub enum Tag {
     Interval,
     /// A log level, named by `:log`.
     Level,
+    /// An export format, named by `:export`.
+    Format,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -760,6 +774,7 @@ fn vocabulary(slot: Slot, word: &str, vocab: &Vocabulary<'_>) -> Vec<Entry> {
         // Rendered through `refresh::show`, so a rung is spelled once wherever it appears.
         Slot::Intervals => intervals(word),
         Slot::Levels => levels(word),
+        Slot::Formats => values(["csv", "json"], word, Tag::Format),
         Slot::Actions | Slot::Kinds => Vec::new(),
     }
 }
@@ -1578,6 +1593,7 @@ mod tests {
         assert_eq!(Command::Quit.slots(), &[]);
         assert_eq!(Command::Help.slots(), &[]);
         assert_eq!(Command::Journal.slots(), &[]);
+        assert_eq!(Command::Export.slots(), &[Slot::Formats]);
         assert_eq!(Command::Activity.slots(), &[]);
         assert_eq!(Command::CanI.slots(), &[Slot::Actions, Slot::Kinds]);
         assert_eq!(Command::Hide.slots(), &[Slot::Hide]);

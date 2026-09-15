@@ -39,6 +39,9 @@ struct Cli {
     /// Frame size for --snapshot, COLSxROWS (default 120x40)
     #[arg(long, value_name = "COLSxROWS", value_parser = parse_size, conflicts_with_all = ["check", "info"])]
     size: Option<(u16, u16)>,
+    /// What --snapshot prints: the frame, or the table in view as csv or json
+    #[arg(long, value_name = "text|csv|json", default_value = "text", requires = "snapshot", conflicts_with_all = ["check", "info"])]
+    format: SnapshotFormat,
     // Deliberately not `global`: `ctx add --readonly` means "store this context read-only",
     // and a global flag of the same name would be that flag, silently writing the property
     // into the config file whenever a session was only meant to be read-only for one run.
@@ -58,6 +61,13 @@ struct Cli {
     no_cache: bool,
     #[command(subcommand)]
     command: Option<Command>,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, clap::ValueEnum)]
+enum SnapshotFormat {
+    Text,
+    Csv,
+    Json,
 }
 
 /// The frame `--size` may ask for. The lower bound keeps a zero-sized frame from parsing; the
@@ -202,6 +212,11 @@ fn main() {
                 start: cli.kind.unwrap_or_else(|| "dashboard".into()),
                 snapshot: cli.snapshot,
                 size: cli.size.unwrap_or(DEFAULT_SIZE),
+                format: match cli.format {
+                    SnapshotFormat::Text => None,
+                    SnapshotFormat::Csv => Some(nutsh_core::export::Format::Csv),
+                    SnapshotFormat::Json => Some(nutsh_core::export::Format::Json),
+                },
                 readonly: cli.readonly,
                 no_cache: cli.no_cache,
             },

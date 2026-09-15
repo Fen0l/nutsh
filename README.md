@@ -102,6 +102,7 @@ Useful from the shell, without entering the TUI:
 nutsh vm                 # open straight to a kind, by name, alias or id
 nutsh --check            # connect, probe every namespace, print what this PC serves
 nutsh vm --snapshot      # render one frame to stdout and exit
+nutsh vm --snapshot --format csv   # the table instead of the frame; json too
 nutsh ctx list           # your contexts; `use`, `show` and `remove` do what they say
 ```
 
@@ -146,6 +147,7 @@ answer a confirmation; those are keyboard-only, deliberately.
 | `:ctx [name]` | switch environment, or open the Contexts screen |
 | `:search <term>` | search by name, address or id: what is loaded first, then the Prism Central |
 | `:can-i <action> <kind>` | whether your account may do that, and what it needs |
+| `:export [csv\|json] [path]` | the table in view, as it is drawn, to a file |
 | `:journal` | everything this session attempted, and what answered |
 | `:activity` | every request this session made, and every table it holds with when it last polled |
 | `:skin [name]` | pick a colour scheme |

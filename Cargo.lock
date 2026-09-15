@@ -1829,6 +1829,7 @@ dependencies = [
  "nutsh-prism",
  "nutsh-tui",
  "rpassword",
+ "serde_json",
  "tempfile",
  "tokio",
  "toml",
