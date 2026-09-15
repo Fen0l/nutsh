@@ -47,6 +47,7 @@ pub(super) const HELP_BOX: (u16, u16) = (70, 16);
 pub(super) const HELP: &str = "\
 :            palette: a kind, a page, or a command
              (ctx, skin, settings, journal, activity, export, can-i)
+             (ctx, skin, settings, journal, activity, can-i)
              ⇥ complete · ↑↓ pick · ^p ^n history · ^w delete word
 j k g G      move        PgUp PgDn   page
 enter        drill into children, or detail     esc   back / close
