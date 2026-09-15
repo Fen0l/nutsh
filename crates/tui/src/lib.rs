@@ -1,5 +1,6 @@
 //! ratatui views and the mode state machine. `App` never touches the terminal; `run` does.
 
+pub mod activity;
 pub mod app;
 pub mod confirm;
 pub mod contexts;

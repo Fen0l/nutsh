@@ -33,6 +33,7 @@ use nutsh_core::store::Failure;
 // reached without a second request, so the greyed row and the table below it cannot drift.
 use nutsh_prism::NOT_SERVED;
 
+mod activity;
 mod contexts_screen;
 mod detail;
 mod form;
@@ -49,6 +50,7 @@ mod settings;
 mod sidebar;
 mod widgets;
 
+use activity::*;
 use contexts_screen::*;
 use detail::*;
 use form::*;
@@ -186,6 +188,7 @@ pub fn draw(app: &App, f: &mut Frame) {
         Mode::Confirm => draw_confirm(app, f, body),
         Mode::Fields => draw_fields(app, f, body),
         Mode::Journal => draw_journal(app, f, body),
+        Mode::Activity => draw_activity(app, f, body),
         Mode::Search => draw_search(app, f, body),
         Mode::Form => draw_form(app, f, body),
         Mode::Help => draw_help(f, body),

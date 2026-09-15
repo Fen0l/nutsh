@@ -144,15 +144,17 @@ answer a confirmation; those are keyboard-only, deliberately.
 | | |
 | --- | --- |
 | `:ctx [name]` | switch environment, or open the Contexts screen |
-| `:search <term>` | search everything already loaded, across kinds |
+| `:search <term>` | search by name, address or id: what is loaded first, then the Prism Central |
 | `:can-i <action> <kind>` | whether your account may do that, and what it needs |
 | `:journal` | everything this session attempted, and what answered |
+| `:activity` | every request this session made, and every table it holds with when it last polled |
 | `:skin [name]` | pick a colour scheme |
-| `:settings` | every setting, its value, and where that value came from |
+| `:settings` | every setting, its value, and where that value came from; the version line in the header opens it too |
 | `:hide` `:show` | keep things out of the menu, or put them back |
 
-`/` filters the rows in front of you; `:search` looks across every kind loaded this session.
-Neither makes a request, and both say exactly what they looked at.
+`/` filters the rows in front of you and makes no request. `:search` answers from what is loaded,
+then asks the Prism Central for every kind that can be filtered by name, and the line under the
+results counts the kinds asked and answered as they land.
 
 ## Not doing something by accident
 

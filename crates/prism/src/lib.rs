@@ -16,5 +16,5 @@ pub use client::{
 };
 pub use entity::Entity;
 pub use error::{CertificateReason, PrismError};
-pub use metrics::{Meter, Metrics, meter_text};
+pub use metrics::{CALLS, Call, Meter, Metrics, meter_text};
 pub use profile::Profile;

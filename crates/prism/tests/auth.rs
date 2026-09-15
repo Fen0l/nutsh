@@ -418,3 +418,31 @@ async fn a_prism_central_that_sets_no_cookie_is_not_asked_twice_for_ever() {
     assert_eq!(pc.requests().len() - spent, 1);
     assert_eq!(presentations(&pc), pc.requests().len());
 }
+
+/// The ring `:activity` reads keeps a refused request as a row of its own: a poller that has
+/// gone quiet must not be the one invisible stall on the screen, any more than in the log.
+#[tokio::test]
+async fn a_refused_credential_is_in_the_ring_as_refused() {
+    let pc = MockPc::builder().start().await;
+    let c = Client::connect(&profile(&pc), "wrong").unwrap();
+    for _ in 0..3 {
+        let _ = c.list_page(vm(), 0, &ListOptions::default()).await;
+    }
+    let calls = c.metrics().calls();
+    assert_eq!(calls.len(), 3, "one row per attempt: {calls:?}");
+    let refused: Vec<_> = calls.iter().filter(|c| c.credential == "refused").collect();
+    assert_eq!(refused.len(), 2, "two never went out");
+    assert!(
+        refused
+            .iter()
+            .all(|c| c.status.is_none() && c.method == "-"),
+        "no status and no method for a request that never went out: {refused:?}"
+    );
+    let presented = calls.last().unwrap();
+    assert_eq!(
+        (presented.credential, presented.status),
+        ("presented", Some(401))
+    );
+    assert!(presented.path.starts_with("/api/"), "{}", presented.path);
+    assert!(!presented.path.contains("127.0.0.1"), "path, not URL");
+}

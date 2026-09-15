@@ -1300,6 +1300,28 @@ impl Client {
         &self.metrics
     }
 
+    /// The log line and the ring entry for one request, from the same facts.
+    fn trace(
+        &self,
+        method: &reqwest::Method,
+        url: &str,
+        carried: Carried,
+        began: std::time::Instant,
+        paced: bool,
+        outcome: Result<StatusCode, &PrismError>,
+    ) {
+        trace_request(method, url, carried, began, outcome);
+        self.metrics.record_call(crate::metrics::Call {
+            at: began,
+            method: method.to_string(),
+            path: path_of(url),
+            status: outcome.ok().map(|s| s.as_u16()),
+            ms: u32::try_from(began.elapsed().as_millis()).unwrap_or(u32::MAX),
+            credential: carried.word(),
+            paced,
+        });
+    }
+
     /// Whether this Prism Central is worth a list request for `kind`: the standing verdict,
     /// and then what the server has already answered about this very endpoint. The predicate
     /// every *volunteered* request passes through - the stats counters, the DR sampler, the
@@ -1623,7 +1645,8 @@ impl Client {
     /// The two takes are one step. Peeking first and spending only when both say yes keeps a
     /// caller parked on a tight tier from burning a host token on every attempt it never uses,
     /// which would drain the shared ceiling faster than the traffic that reaches the wire.
-    async fn acquire(&self, method: &HttpMethod, template: &'static str, limit: RateLimit) {
+    async fn acquire(&self, method: &HttpMethod, template: &'static str, limit: RateLimit) -> bool {
+        let mut slept = false;
         loop {
             let wait = {
                 let mut guard = self.buckets();
@@ -1643,7 +1666,8 @@ impl Client {
                     some => some,
                 }
             };
-            let Some(w) = wait else { return };
+            let Some(w) = wait else { return slept };
+            slept = true;
             // The reactive half logs its 429 waits; a caller frozen by the preventive half must
             // not be the one silent stall in a trace - nor the one invisible one on screen.
             self.metrics.record_throttled(std::time::Instant::now());
@@ -1826,8 +1850,8 @@ impl Client {
             // Every attempt is a request on the wire and is paced like any other. The 429 retry
             // inside `attempt` is the one thing that skips the budget, because the server named
             // the wait and `attempt` has already slept it.
-            self.acquire(method, template, limit).await;
-            match self.attempt(template, &req, pass).await? {
+            let paced = self.acquire(method, template, limit).await;
+            match self.attempt(template, &req, pass, paced).await? {
                 Attempt::Answered(answer) => return Ok(answer),
                 Attempt::SessionEnded => continue,
             }
@@ -1902,17 +1926,20 @@ impl Client {
         template: &'static str,
         original: &reqwest::RequestBuilder,
         pass: Pass,
+        paced: bool,
     ) -> Result<Attempt, PrismError> {
         // The valve, before the state machine and before anything else. It is the one check
         // here that does not depend on a conclusion this crate drew: see `crate::valve`.
         if !self.valve.open() {
             refused_before_the_network(template);
+            self.metrics.record_call(refused_call(template));
             return Err(PrismError::Auth);
         }
         let (carry, permit) = match self.carry(pass).await {
             Ok(pair) => pair,
             Err(e) => {
                 refused_before_the_network(template);
+                self.metrics.record_call(refused_call(template));
                 return Err(e);
             }
         };
@@ -1973,7 +2000,7 @@ impl Client {
             Err(e) => {
                 self.metrics.record_failed(std::time::Instant::now());
                 let e = self.map_transport(e);
-                trace_request(&method, &url, carried, began, Err(&e));
+                self.trace(&method, &url, carried, began, paced, Err(&e));
                 return Err(e);
             }
         };
@@ -2003,7 +2030,7 @@ impl Client {
                     Err(e) => {
                         self.metrics.record_failed(std::time::Instant::now());
                         let e = self.map_transport(e);
-                        trace_request(&method, &url, carried, began, Err(&e));
+                        self.trace(&method, &url, carried, began, paced, Err(&e));
                         return Err(e);
                     }
                 }
@@ -2017,7 +2044,7 @@ impl Client {
         if let (StatusCode::UNAUTHORIZED, Some(generation)) = (resp.status(), riding) {
             drop(permit);
             self.metrics.record_failed(std::time::Instant::now());
-            trace_request(&method, &url, carried, began, Ok(resp.status()));
+            self.trace(&method, &url, carried, began, paced, Ok(resp.status()));
             self.jar.expire(generation);
             return Ok(Attempt::SessionEnded);
         }
@@ -2064,13 +2091,13 @@ impl Client {
             Err(e) => {
                 self.metrics.record_failed(std::time::Instant::now());
                 let e = PrismError::Transport(describe(&e));
-                trace_request(&method, &url, carried, began, Err(&e));
+                self.trace(&method, &url, carried, began, paced, Err(&e));
                 return Err(e);
             }
         };
         self.metrics
             .record_completed(std::time::Instant::now().saturating_duration_since(began));
-        trace_request(&method, &url, carried, began, Ok(status));
+        self.trace(&method, &url, carried, began, paced, Ok(status));
         Ok(Attempt::Answered((status, headers, body.to_vec())))
     }
 
@@ -2317,6 +2344,26 @@ fn refused_before_the_network(template: &'static str) {
 /// username, and the username goes in a header - but a URL is the one thing this event prints
 /// verbatim, and the rule about credentials is not a rule that should depend on that staying
 /// true.
+/// The path and query of a URL, for the ring: `https://host:9440/api/x?y` is `/api/x?y`.
+fn path_of(url: &str) -> String {
+    url.find("://")
+        .and_then(|i| url[i + 3..].find('/').map(|j| url[i + 3 + j..].to_string()))
+        .unwrap_or_else(|| url.to_string())
+}
+
+/// A ring entry for a request this client refused to send.
+fn refused_call(template: &'static str) -> crate::metrics::Call {
+    crate::metrics::Call {
+        at: std::time::Instant::now(),
+        method: "-".into(),
+        path: template.to_string(),
+        status: None,
+        ms: 0,
+        credential: Carried::Refused.word(),
+        paced: false,
+    }
+}
+
 fn safe_url(url: &reqwest::Url) -> String {
     if url.username().is_empty() && url.password().is_none() {
         return url.to_string();

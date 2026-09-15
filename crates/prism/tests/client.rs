@@ -345,3 +345,45 @@ async fn too_many_parents_is_a_catalog_error() {
     assert!(matches!(err, PrismError::Catalog(_)));
     assert!(pc.requests().is_empty(), "nothing was sent");
 }
+
+/// Every request through the funnel is a row in the ring, newest first, with what the log line
+/// has and nothing more: no header, no cookie, no host.
+#[tokio::test]
+async fn every_request_is_in_the_ring_newest_first() {
+    let pc = MockPc::builder().start().await;
+    let c = Client::connect(&profile(&pc), "secret").unwrap();
+    c.list_all(
+        vm(),
+        &ListOptions {
+            limit: 2,
+            ..Default::default()
+        },
+    )
+    .await
+    .unwrap();
+    let calls = c.metrics().calls();
+    assert_eq!(calls.len(), 2, "{calls:?}");
+    assert!(
+        calls[0].path.contains("page=1"),
+        "newest first: {}",
+        calls[0].path
+    );
+    assert!(calls[1].path.contains("page=0"), "{}", calls[1].path);
+    for call in &calls {
+        assert_eq!((call.method.as_str(), call.status), ("GET", Some(200)));
+        assert_eq!(
+            call.credential,
+            if call.path.contains("page=0") {
+                "presented"
+            } else {
+                "session"
+            }
+        );
+        assert!(!call.paced);
+        assert!(
+            !call.path.contains("secret") && !call.path.contains("admin"),
+            "{}",
+            call.path
+        );
+    }
+}
