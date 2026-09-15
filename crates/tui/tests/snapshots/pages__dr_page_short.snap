@@ -8,7 +8,7 @@ expression: frame
 │Cluster:    <all>                                   │           alerts ⚠ 2  ✖ 2
 │Kind:       Data Protection › Disaster Recovery     │         tasks ▶ 4 running
 │Count:      2 of 4 panes                            │
-╰────────────────────────────────────────────────────╯  v0.0.2-beta2 · pc.2024.3
+╰────────────────────────────────────────────────────╯  v0.0.2-beta3 · pc.2024.3
 ╭ Registered Prism Centrals [1] »2 ──────────────────╮╭ Summary ───────────────╮
 │  NAME              STATE   CONNECTIVITY  REGISTERED││Policies               3│
 │▌ pc-dr             ACTIVE  CONNECTED     11d       ││Recovery plans         2│

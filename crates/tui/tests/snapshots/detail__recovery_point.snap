@@ -9,7 +9,7 @@ expression: "app.snapshot(120, 36).unwrap()"
 │Cluster:    <all>                                               ←→ columns     ^r refresh   │           alerts ⚠ 2  ✖ 2
 │Kind:       Data Protection › Recovery Points                   ^t every       ^x stop      │         tasks ▶ 4 running
 │Count:      5                                                    a actions     ^c quit      │
-╰────────────────────────────────────────────────────────────────────────────────────────────╯  v0.0.2-beta2 · pc.2024.3
+╰────────────────────────────────────────────────────────────────────────────────────────────╯  v0.0.2-beta3 · pc.2024.3
 ╭ nutsh ───────────────╮┌Recovery Points · rp-web-01-2026-09-05────────────────────────────────────────────────────────┐
 │  ▸ Dashboard         ││IDENTITY ─────────────────────────────────────────────────────────────────────────────────────│
 │  ▸ Compute & Storage ││              Name rp-web-01-2026-09-05                                                       │
