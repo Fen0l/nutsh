@@ -123,6 +123,8 @@ pub struct BodyView<'a> {
     /// What can be done to this row, greyed where it cannot: `App::action_rows`, the same list
     /// the `a` menu and the `⏎` picker draw. Empty on a payload pane, which is over no row.
     pub actions: &'a [crate::menu::Row],
+    /// Sections the app composes beside the kind's own: a failed task's evidence.
+    pub extra: &'a [Section],
 }
 
 /// A pane over one document: a row of a table, refreshed by a subscription of its own, or a
@@ -251,12 +253,13 @@ impl Detail {
                 lines.push(Line::from(""));
                 lines.extend(self.text_lines(view.entity));
             }
-            Some(sections) => {
+            Some(mut sections) => {
                 let hot = self
                     .watch
                     .as_ref()
                     .map(|w| w.hot(std::time::Instant::now()))
                     .unwrap_or_default();
+                sections.extend(view.extra.iter().cloned());
                 lines.extend(body_lines(sections, view.width, &hot));
             }
             // An entity pane whose row has not landed yet. A payload pane never waits: it

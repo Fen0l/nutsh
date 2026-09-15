@@ -33,11 +33,15 @@ pub(crate) const DISASTER_RECOVERY: &str = "disaster-recovery";
 /// the box empty with nothing to say so. `every_declared_summary_is_built` is what says so.
 pub(crate) const DASHBOARD: &str = "dashboard";
 
+/// The page whose summary counts what its own panes hold, and borrows the sampler's tally.
+pub(crate) const ATTENTION: &str = "attention";
+
 /// The box for `id`, or nothing when the page declares none.
 pub fn build(id: &str, store: &Store) -> Vec<SummaryLine> {
     match id {
         DISASTER_RECOVERY => disaster_recovery(store),
         DASHBOARD => dashboard(store),
+        ATTENTION => attention(store),
         _ => Vec::new(),
     }
 }
@@ -124,6 +128,71 @@ fn dashboard(store: &Store) -> Vec<SummaryLine> {
     ]
 }
 
+/// What the four panes hold, counted the way their filters mean it - the mock ignores a
+/// `$filter`, and a real Prism Central may answer one loosely - plus the sampler's out-of-sync
+/// tally. A pane whose table has not landed, or is not served, counts `-`.
+fn attention(store: &Store) -> Vec<SummaryLine> {
+    let Some(page) = nutsh_catalog::page(ATTENTION) else {
+        return Vec::new();
+    };
+    let table = |i: usize| {
+        let pane = page.panes.get(i)?;
+        let kind = nutsh_catalog::kind(pane.kind)?;
+        let t = store.table(&nutsh_core::store::TableKey::filtered(
+            kind,
+            pane.filter.map(std::sync::Arc::from),
+        ));
+        (!t.not_served && t.last_poll.is_some()).then_some(t)
+    };
+    let count = |i: usize, keep: &dyn Fn(&serde_json::Value) -> bool| {
+        table(i).map(|t| t.rows.values().filter(|e| keep(&e.raw)).count())
+    };
+    let word = |raw: &serde_json::Value, path: &str| raw[path].as_str().unwrap_or("").to_string();
+    let alerts = |severity: &str| {
+        count(0, &|raw| {
+            raw["isResolved"].as_bool() != Some(true) && word(raw, "severity") == severity
+        })
+    };
+    let line = |label: &str, n: Option<usize>, role: Role| {
+        SummaryLine::new(
+            label,
+            n.map_or_else(|| "-".to_string(), |n| n.to_string()),
+            match n {
+                Some(0) | None => Role::Muted,
+                Some(_) => role,
+            },
+        )
+    };
+    let s = store.sample();
+    vec![
+        line("Critical alerts", alerts("CRITICAL"), Role::Error),
+        line("Warning alerts", alerts("WARNING"), Role::Warn),
+        line(
+            "Failed tasks",
+            count(1, &|raw| word(raw, "status") == "FAILED"),
+            Role::Error,
+        ),
+        line(
+            "VMs powered off",
+            count(2, &|raw| word(raw, "powerState") == "OFF"),
+            Role::Off,
+        ),
+        line(
+            "Hosts not normal",
+            count(3, &|raw| {
+                !raw["maintenanceState"].is_null() && word(raw, "maintenanceState") != "NORMAL"
+            }),
+            Role::Warn,
+        ),
+        line(
+            "VMs out of sync",
+            s.available
+                .then_some(usize::try_from(s.out_of_sync).unwrap_or(usize::MAX)),
+            Role::Error,
+        ),
+    ]
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -145,7 +214,7 @@ mod tests {
                 page.id
             );
         }
-        assert_eq!(declared, 2, "the pages that declare a summary");
+        assert_eq!(declared, 3, "the pages that declare a summary");
     }
 
     /// The roles the Dashboard's block assigns, which no text snapshot can see: the three

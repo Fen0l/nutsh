@@ -207,3 +207,68 @@ async fn an_action_that_answers_with_a_document_opens_the_detail_pane_over_it() 
         "a payload pane has no subscription to drop"
     );
 }
+
+/// `y` on a failed task the fixture holds: under the task's own sections - which already name
+/// the entity it touched - the alerts raised in the ten minutes either side of its start (the
+/// one at 09:50:46 is in, the one at 09:40:00 is a second outside) and a journal that says this
+/// session did not start it.
+#[tokio::test]
+async fn a_failed_task_pane_gathers_the_entity_the_alerts_and_the_journal() {
+    let pc = MockPc::builder().start().await;
+    let mut app = tasks(&pc).await;
+    common::settle_names(&mut app).await;
+    common::settle_stats(&mut app).await;
+    select(&mut app, "VmDelete");
+    app.handle(Key::Char('y'));
+    common::settle(&mut app).await;
+    app.settle_once_list().await;
+    let frame = app.snapshot(120, 40).unwrap();
+    assert!(
+        frame.contains("db-01"),
+        "the entity the task touched: {frame}"
+    );
+    assert!(frame.contains("ALERTS 09:40–10:00 UTC"), "{frame}");
+    assert!(
+        frame.contains("Disk space usage high"),
+        "inside the window: {frame}"
+    );
+    assert!(
+        !frame.contains("is unreachable"),
+        "a second outside the window is outside: {frame}"
+    );
+    assert!(frame.contains("not started from here"), "{frame}");
+    let settings = common::settings(&pc);
+    settings.bind(|| insta::assert_snapshot!("failed_task_evidence", frame));
+}
+
+/// A task this session started and the mock failed: the journal section carries the action,
+/// the outcome and when, off the entry the journal already holds for it.
+#[tokio::test]
+async fn a_failed_task_this_session_started_shows_its_journal_entry() {
+    let pc = MockPc::builder().fail_task("power-off").start().await;
+    let mut app = vms(&pc).await;
+    app.handle(Key::Char('P'));
+    app.handle(Key::Char('y'));
+    common::settle_acted(&mut app).await;
+    // The watch follows the task to its end, which is when the journal learns it failed; the
+    // Tasks table shows the same end, so it is what the test waits on.
+    app.open_root(nutsh_catalog::kind("prism.config.Task").unwrap());
+    for _ in 0..12 {
+        common::settle(&mut app).await;
+        let frame = app.snapshot(120, 40).unwrap();
+        if frame
+            .lines()
+            .any(|l| l.contains("power-off on web-01") && l.contains("FAILED"))
+        {
+            break;
+        }
+    }
+    select(&mut app, "power-off");
+    app.handle(Key::Char('y'));
+    common::settle(&mut app).await;
+    let frame = app.snapshot(120, 40).unwrap();
+    assert!(frame.contains("JOURNAL"), "{frame}");
+    assert!(frame.contains("power-off on web-01"), "{frame}");
+    assert!(frame.contains("failed"), "{frame}");
+    assert!(!frame.contains("not started from here"), "{frame}");
+}

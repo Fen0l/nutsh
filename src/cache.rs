@@ -60,7 +60,7 @@ pub(crate) enum CacheCommand {
         // matches under the global's id, so a field named `context` here would have been
         // filled in by `NUTSH_CONTEXT` with nothing on screen to say so. Pinned by
         // `the_global_context_never_narrows_a_delete`.
-        #[arg(id = "clear_only", long = "only", value_name = "CONTEXT")]
+        #[arg(id = "clear_only", long = "only", value_name = "CONTEXT", add = clap_complete::ArgValueCandidates::new(crate::completions::contexts))]
         context: Option<String>,
     },
 }

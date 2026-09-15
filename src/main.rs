@@ -2,6 +2,7 @@
 
 mod cache;
 mod check;
+mod completions;
 mod contexts;
 mod ctx;
 mod session;
@@ -20,7 +21,7 @@ use clap::{Args, Parser, Subcommand};
 struct Cli {
     /// Kind or page to open (default: the Dashboard); any catalog id, alias, page name, or
     /// display-name prefix
-    #[arg(conflicts_with_all = ["check", "info"])]
+    #[arg(conflicts_with_all = ["check", "info"], add = clap_complete::ArgValueCandidates::new(completions::kinds))]
     kind: Option<String>,
     #[command(flatten)]
     conn: ConnArgs,
@@ -108,7 +109,7 @@ fn half(text: &str, what: &str) -> Result<u16, String> {
 #[derive(Args, Debug, Clone)]
 pub(crate) struct ConnArgs {
     /// Named context from the config file (default: NUTSH_CONTEXT, then current_context)
-    #[arg(short = 'c', long, env = "NUTSH_CONTEXT", global = true)]
+    #[arg(short = 'c', long, env = "NUTSH_CONTEXT", global = true, add = clap_complete::ArgValueCandidates::new(completions::contexts))]
     pub(crate) context: Option<String>,
     /// Prism Central hostname or IP (bypasses contexts)
     #[arg(short = 'H', long, env = "NUTSH_HOST", global = true)]
@@ -142,6 +143,11 @@ enum Command {
         #[command(subcommand)]
         action: cache::CacheCommand,
     },
+    /// Print the shell completion script: `source <(nutsh completions zsh)`
+    Completions {
+        /// bash, zsh, fish, elvish or powershell
+        shell: String,
+    },
 }
 
 fn main() {
@@ -151,6 +157,9 @@ fn main() {
     // inherit it. Every command path - the TUI included - therefore starts from a scrubbed
     // environment. The interactive prompt is deferred until the target is known to be usable,
     // so a bad invocation reports what is wrong instead of asking for a password.
+    // A completion request answers and exits here, before the password is looked at and
+    // before anything else can write to stdout.
+    completions::maybe_complete();
     let from_env = match env_password() {
         Ok(v) => v,
         Err(e) => {
@@ -198,6 +207,7 @@ fn main() {
     // `Option<Command>`, and a second `if let` would be re-testing a value the first had moved.
     let result = match cli.command {
         Some(Command::Ctx { action }) => ctx::run(action, &cli.conn, from_env),
+        Some(Command::Completions { shell }) => completions::print(&shell),
         // Neither cache subcommand connects to anything, so neither takes a password.
         Some(Command::Cache { action }) => cache::run(action),
         None if cli.check => check::run(&cli.conn, from_env),

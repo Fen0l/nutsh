@@ -13,7 +13,10 @@
 
 [[group]]
 name = "Dashboard"
-items = [{ label = "Dashboard", page = "dashboard" }]
+items = [
+  { label = "Dashboard", page = "dashboard" },
+  { label = "Attention", page = "attention" },
+]
 
 [[group]]
 name = "Compute & Storage"

@@ -1,0 +1,45 @@
+---
+source: crates/tui/tests/pages.rs
+assertion_line: 1214
+expression: frame
+---
+╭ nutsh ─────────────────────────────────────────────────────────────────────────────────────╮
+│Context:    -                                                    ⏎ detail       O open table│       clusters 1  hosts 1
+│PC:         127.0.0.1:PORT  pc.2024.3                           ⇥ pane         y detail    │         vms 3  on/off 3/0
+│Cluster:    <all>                                               jk move        ^r refresh   │           alerts ⚠ 2  ✖ 2
+│Kind:       Dashboard › Attention                               ^t every       ^x stop      │         tasks ▶ 4 running
+│Count:      4 panes                                              a actions     ^c quit      │
+╰────────────────────────────────────────────────────────────────────────────────────────────╯  v0.0.2-beta2 · pc.2024.3
+╭ nutsh ───────────────╮╭ Critical and warning alerts [2] ╮╭ Failed tasks [4] »1 ────────────╮╭ Summary ───────────────╮
+│  ▾ Dashboard         ││  SEVERITY  TITLE         CREATED││  OPERATION  STATUS     COMPLETED││Critical alerts        1│
+│      Dashboard       ││▌ WARNING   Disk space u  9m     ││  Power on   SUCCEEDED  1m       ││Warning alerts         1│
+│    • Attention       ││  CRITICAL  CVM 203.0.11  20m    ││  Delete VM  FAILED     9m       ││Failed tasks           1│
+│  ▾ Compute & Storage ││                                 ││  Migrate V  RUNNING    -        ││VMs powered off        1│
+│      Overview        ││                                 ││  Create im  QUEUED     -        ││Hosts not normal       0│
+│      VMs             ││                                 ││                                 ││VMs out of sync        1│
+│      ESXi VMs        ││                                 ││                                 ││                        │
+│      Templates       ││                                 ││                                 ││                        │
+│      Images          ││                                 ││                                 ││                        │
+│      OVAs            ││                                 ││                                 ││                        │
+│      VM Profiles     ││                                 ││                                 ││                        │
+│      Guest Customizat││                                 ││                                 ││                        │
+│      Storage Containe││                                 ││                                 ││                        │
+│      Volume Groups   ││                                 ││                                 ││                        │
+│      Storage Policies│╰─────────────────────────────────╯╰─────────────────────────────────╯│                        │
+│      Categories      │╭ VMs powered off [3] ────────────╮╭ Hosts [1] »1 ───────────────────╮│                        │
+│      Catalog Items   ││  NAME      POWER  CLUSTER   HOST││  HOST      MAINTENANCE  CLUSTER ││                        │
+│  ▸ Network & Security││  web-01    ON     lab-clus  ahv-││  ahv-node  NORMAL       lab-clus││                        │
+│  ▸ Data Protection   ││  web-02    OFF    lab-clus  -   ││                                 ││                        │
+│  ▸ Hardware          ││  db-01     ON     lab-clus  ahv-││                                 ││                        │
+│  ▸ Monitoring        ││                                 ││                                 ││                        │
+│  ▸ Policies          ││                                 ││                                 ││                        │
+│  ▸ Admin Center      ││                                 ││                                 ││                        │
+│  ▸ Files             ││                                 ││                                 ││                        │
+│  ▸ Objects           ││                                 ││                                 ││                        │
+│  ▸ Contexts          ││                                 ││                                 ││                        │
+│  ▸ Settings          ││                                 ││                                 ││                        │
+│  ─── by namespace ───││                                 ││                                 ││                        │
+│  ▸ aiops             ││                                 ││                                 ││                        │
+╰───────────────── ↓16 ╯╰─────────────────────────────────╯╰─────────────────────────────────╯╰────────────────────────╯
+ :palette  ^b:menu  ⇥:pane  O:open  a:actions  ⏎:detail  esc:menu  ?:help
+[meter]          ● live

@@ -265,3 +265,87 @@ fn cache_info_on_an_empty_state_directory_says_nothing_is_cached() {
     assert!(stdout.starts_with("nothing cached under "), "{stdout}");
     assert!(stdout.trim_end().ends_with("nutsh/cache"), "{stdout}");
 }
+
+/// `completions <shell>` prints the script that wires the shell back to this binary; a shell
+/// it does not know is refused with the ones it does.
+#[test]
+fn completions_prints_a_script_for_a_known_shell_and_names_the_rest() {
+    for shell in ["zsh", "bash", "fish"] {
+        let out = nutsh()
+            .args(["completions", shell])
+            .output()
+            .expect("run nutsh");
+        assert_eq!(out.status.code(), Some(0), "{shell}");
+        let script = String::from_utf8_lossy(&out.stdout);
+        assert!(
+            script.contains("COMPLETE=") && script.contains("nutsh"),
+            "{shell}: {script}"
+        );
+    }
+    let out = nutsh()
+        .args(["completions", "csh"])
+        .output()
+        .expect("run nutsh");
+    assert_ne!(out.status.code(), Some(0));
+    let stderr = String::from_utf8_lossy(&out.stderr);
+    assert!(
+        stderr.contains("zsh") && stderr.contains("fish"),
+        "{stderr}"
+    );
+}
+
+/// The dynamic half, asked the way the fish script asks it: `[KIND]` completes from the
+/// catalog - ids, aliases and pages - and `-c` from the context names in the config file, and
+/// nothing in what comes back came from anywhere but those two.
+#[test]
+fn completion_offers_kinds_pages_and_the_config_files_contexts() {
+    let dir = tempfile::tempdir().unwrap();
+    let config = dir.path().join("config.toml");
+    std::fs::write(
+        &config,
+        "current_context = \"lab\"\n[contexts.lab]\nhost = \"pc.example.test\"\nport = 9440\nusername = \"admin\"\n[contexts.prod]\nhost = \"pc2.example.test\"\nport = 9440\nusername = \"ops\"\n",
+    )
+    .unwrap();
+    let complete = |words: &[&str]| {
+        let mut cmd = nutsh();
+        cmd.env("COMPLETE", "fish")
+            .env("NUTSH_CONFIG", &config)
+            .env("NUTSH_KEYRING", "0")
+            .env("NUTSH_PASSWORD", "hunter2")
+            .arg("--")
+            .arg("nutsh")
+            .args(words);
+        let out = cmd.output().expect("run nutsh");
+        assert_eq!(out.status.code(), Some(0), "{words:?}");
+        String::from_utf8_lossy(&out.stdout).into_owned()
+    };
+
+    let kinds = complete(&["v"]);
+    let values: Vec<&str> = kinds.lines().filter_map(|l| l.split('\t').next()).collect();
+    assert!(values.contains(&"vm"), "an alias: {kinds}");
+    assert!(values.contains(&"vmm.ahv.config.Vm"), "an id: {kinds}");
+    assert!(
+        kinds
+            .lines()
+            .any(|l| l.starts_with("vm\t") && l.contains("Virtual Machines")),
+        "what the alias opens rides beside it: {kinds}"
+    );
+    let pages = complete(&["dash"]);
+    assert!(
+        pages.lines().any(|l| l.starts_with("dashboard\t")),
+        "a page: {pages}"
+    );
+
+    let contexts = complete(&["-c", ""]);
+    let names: Vec<&str> = contexts
+        .lines()
+        .filter_map(|l| l.split('\t').next())
+        .collect();
+    assert_eq!(names, ["lab", "prod"], "{contexts}");
+    assert!(
+        !contexts.contains("hunter2"),
+        "never the password: {contexts}"
+    );
+    let only = complete(&["cache", "clear", "--only", ""]);
+    assert!(only.lines().any(|l| l.starts_with("prod\t")), "{only}");
+}

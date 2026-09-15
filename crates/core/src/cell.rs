@@ -340,7 +340,7 @@ pub(crate) fn is_rfc3339(s: &str) -> bool {
     parse_rfc3339(s).is_some()
 }
 
-fn parse_rfc3339(s: &str) -> Option<SystemTime> {
+pub fn parse_rfc3339(s: &str) -> Option<SystemTime> {
     let t = time::OffsetDateTime::parse(s, &time::format_description::well_known::Rfc3339).ok()?;
     let unix = t.unix_timestamp();
     Some(if unix >= 0 {
