@@ -347,6 +347,18 @@ async fn a_namespace_row_schedules_all_its_kinds_at_once() {
             && l.contains("namespace vmm")),
         "the kind polls at the namespace's rhythm: {frame}"
     );
+    // The VM table is open and has polled; its siblings have not, and say so in a word.
+    let vm = frame
+        .lines()
+        .find(|l| l.contains("Virtual Machines"))
+        .unwrap();
+    assert!(!vm.contains("never"), "{vm}");
+    assert!(
+        frame
+            .lines()
+            .any(|l| l.contains("namespace vmm") && l.contains("never")),
+        "a kind no table is open on reads `never`, not `-`: {frame}"
+    );
 
     // A second press walks the ladder from the namespace's own value, not from a kind's.
     select(&mut app, "▾ vmm");
@@ -423,5 +435,83 @@ async fn an_hour_rung_writes_seconds_and_reads_back_in_hours() {
             && l.contains("6h")
             && l.contains("config file")),
         "{frame}"
+    );
+}
+
+const RUNGS: [&str; 10] = [
+    "auto", "5s", "10s", "30s", "1m", "5m", "1h", "6h", "12h", "off",
+];
+
+/// `⏎` on a kind's row shows the whole ladder with the rung in force marked; a choice is
+/// written the way `space` writes one, and `esc` writes nothing.
+#[tokio::test]
+async fn enter_on_a_refresh_row_opens_the_ladder_and_a_choice_is_kept() {
+    let dir = tempfile::tempdir().unwrap();
+    let path = dir.path().join("config.toml");
+    let pc = MockPc::builder().start().await;
+    let mut app = app_over(&pc, &path).await;
+
+    open_settings(&mut app);
+    select(&mut app, "▸ vmm");
+    app.handle(Key::Enter);
+    select(&mut app, "Virtual Machines");
+    app.handle(Key::Enter);
+    assert_eq!(app.mode, Mode::Ladder);
+    let frame = app.snapshot(120, 30).unwrap();
+    assert!(frame.contains(" refresh · Virtual Machines "), "{frame}");
+    for rung in ["auto", "5s", "1h", "12h", "off"] {
+        assert!(frame.contains(rung), "{rung} is on the list: {frame}");
+    }
+    assert!(
+        RUNGS.iter().all(|r| !frame.contains(&format!("{r} •"))),
+        "the catalog's 5s is not a rung in the file, so none is marked: {frame}"
+    );
+    app.handle(Key::Esc);
+    assert_eq!(app.mode, Mode::Settings);
+    assert!(
+        nutsh_config::load(&path).unwrap().refresh.kinds.is_empty(),
+        "esc wrote nothing"
+    );
+
+    // Opens at the top, so four steps down is `1m`.
+    select(&mut app, "Virtual Machines");
+    app.handle(Key::Enter);
+    for _ in 0..4 {
+        app.handle(Key::Char('j'));
+    }
+    app.handle(Key::Enter);
+    assert_eq!(app.mode, Mode::Settings);
+    assert_eq!(app.status.as_deref(), Some("refresh: 1m"));
+    assert_eq!(
+        nutsh_config::load(&path).unwrap().refresh.kinds["vmm.ahv.config.Vm"],
+        nutsh_config::Interval::Secs(60)
+    );
+    select(&mut app, "Virtual Machines");
+    let frame = app.snapshot(120, 30).unwrap();
+    assert!(
+        frame.lines().any(|l| l.contains("Virtual Machines")
+            && l.contains("1m")
+            && l.contains("config file")),
+        "{frame}"
+    );
+    // Reopened, the list marks the rung the file now holds.
+    app.handle(Key::Enter);
+    let frame = app.snapshot(120, 30).unwrap();
+    assert!(frame.lines().any(|l| l.contains("1m •")), "{frame}");
+    app.handle(Key::Esc);
+
+    // The global row goes through the same list and lands in `[refresh] default`.
+    select(&mut app, "every kind");
+    app.handle(Key::Enter);
+    assert!(
+        app.snapshot(120, 30)
+            .unwrap()
+            .contains(" refresh · every kind ")
+    );
+    app.handle(Key::Char('G'));
+    app.handle(Key::Enter);
+    assert_eq!(
+        nutsh_config::load(&path).unwrap().refresh.default,
+        Some(nutsh_config::Interval::Word(nutsh_config::Word::Off))
     );
 }

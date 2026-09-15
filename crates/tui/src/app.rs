@@ -121,6 +121,8 @@ pub enum Mode {
     Search,
     /// `:settings`: what is set, what it is set to, and who set it.
     Settings,
+    /// `⏎` on a refresh row of the settings screen: the ladder, over it.
+    Ladder,
 }
 
 pub struct TableView {
@@ -301,6 +303,7 @@ pub struct App {
     pub detail: Option<Detail>,
     /// The `:skin` list, while it is open.
     pub skins: Option<Skins>,
+    pub ladder: Option<crate::ladder::Ladder>,
     /// The settings screen, while it is open.
     pub settings: Option<crate::settings::Settings>,
     /// The action menu, while it is open.
@@ -547,6 +550,7 @@ impl App {
             Mode::Help => self.help_from,
             Mode::Command => self.palette_from,
             Mode::Skins => self.skins_from,
+            Mode::Ladder => self.settings_from,
             Mode::Journal => self.journal_from,
             Mode::Search => self.search_from,
             Mode::Settings => self.settings_from,
@@ -744,6 +748,7 @@ impl App {
             Mode::Contexts => self.handle_contexts(key),
             Mode::Form => self.handle_form(key),
             Mode::Skins => self.handle_skins(key),
+            Mode::Ladder => self.handle_ladder(key),
             Mode::Menu => self.handle_menu(key),
             Mode::Confirm => self.handle_confirm(key),
             Mode::Fields => self.handle_fields(key),
@@ -854,6 +859,8 @@ enum Target {
 /// What the pointer landed on, resolved against the recorded layout **before** anything is
 /// mutated: `hits` is a `RefCell` and every action below takes `&mut self`.
 enum Landed {
+    /// The header's version line: the settings screen opens.
+    Version,
     /// An entry of the open modal's list.
     Modal(usize),
     ModalWheel(bool),

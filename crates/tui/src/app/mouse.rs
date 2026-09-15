@@ -42,6 +42,9 @@ impl App {
                 _ => Landed::Nothing,
             };
         }
+        if m.kind == MouseKind::Click && hits.version.is_some_and(|r| contains(r, m)) {
+            return Landed::Version;
+        }
         if let Some(list) = hits.sidebar.as_ref()
             && contains(list.rows, m)
         {
@@ -86,6 +89,10 @@ impl App {
     pub(super) fn act(&mut self, landed: Landed) -> bool {
         match landed {
             Landed::Nothing => false,
+            Landed::Version => {
+                self.show_settings();
+                true
+            }
             Landed::Modal(i) => self.select_in_modal(i),
             Landed::ModalWheel(down) => {
                 let selected = self.modal_selected();
@@ -223,6 +230,7 @@ impl App {
             Mode::Command => self.palette.as_ref().map_or(0, |p| p.selected),
             Mode::Picker => self.picker.as_ref().map_or(0, |p| p.selected),
             Mode::Skins => self.skins.as_ref().map_or(0, |s| s.selected),
+            Mode::Ladder => self.ladder.as_ref().map_or(0, |l| l.selected),
             _ => 0,
         }
     }
@@ -232,6 +240,7 @@ impl App {
             Mode::Command => self.palette.as_ref().map_or(0, |p| p.entries.len()),
             Mode::Picker => self.picker.as_ref().map_or(0, |p| p.entries.len()),
             Mode::Skins => crate::theme::BUILTIN_NAMES.len(),
+            Mode::Ladder => nutsh_core::refresh::LADDER.len(),
             _ => 0,
         }
     }
@@ -256,6 +265,11 @@ impl App {
             Mode::Skins => {
                 if let Some(s) = self.skins.as_mut() {
                     s.selected = i;
+                }
+            }
+            Mode::Ladder => {
+                if let Some(l) = self.ladder.as_mut() {
+                    l.selected = i;
                 }
             }
             _ => return false,

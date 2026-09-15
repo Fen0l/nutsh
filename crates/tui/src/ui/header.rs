@@ -41,6 +41,14 @@ pub(super) fn draw_header(app: &App, f: &mut Frame, area: Rect, body: u16) {
         Paragraph::new(stats_lines(app)).alignment(Alignment::Right),
         stats,
     );
+    // The seventh line of the block, when the block is tall enough to draw it.
+    if stats.height >= 7 {
+        app.hits.borrow_mut().version = Some(Rect {
+            y: stats.y + 6,
+            height: 1,
+            ..stats
+        });
+    }
 }
 
 /// The whole header on one line: what this is, what the body is showing, which cluster the
@@ -418,6 +426,11 @@ pub(super) fn stats_lines<'a>(app: &'a App) -> Vec<Line<'a>> {
     const VERSION: &str = concat!("v", env!("CARGO_PKG_VERSION"), " · ");
     let empty = Stats::default();
     let s = app.live.as_ref().map_or(&empty, |l| l.store.stats());
+    let link = if app.mouse_enabled() {
+        Modifier::UNDERLINED
+    } else {
+        Modifier::empty()
+    };
     // A stale block is dim throughout, so a screen of numbers never looks live when it is not.
     let plain = Style::default().fg(if s.stale {
         theme::overlay1()
@@ -470,14 +483,16 @@ pub(super) fn stats_lines<'a>(app: &'a App) -> Vec<Line<'a>> {
             ),
         ]),
         Line::from(""),
+        // Underlined while the mouse is captured: the line is the one click that opens the
+        // settings screen, and nothing else on the header is a link.
         Line::from(vec![
-            label(VERSION),
+            Span::styled(VERSION, theme::dim().add_modifier(link)),
             Span::styled(
                 app.live
                     .as_ref()
                     .and_then(|l| l.session.pc_version.as_deref())
                     .unwrap_or("-"),
-                Style::default().fg(theme::sapphire()),
+                Style::default().fg(theme::sapphire()).add_modifier(link),
             ),
         ]),
     ]

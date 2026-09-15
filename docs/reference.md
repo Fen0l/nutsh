@@ -25,8 +25,13 @@ colors     = { peach = "#ffa07a" }   # per-role overrides, by swatch name
 hide_unserved = false                # drop what this PC does not serve, rather than greying it
 hide          = ["Hardware", "iam.authn.DirectoryService"]
 
+cache_max_age = 3600     # seconds a cached inventory may be old at start; default seven days
+
 [refresh]
 default = 30             # seconds, or "auto" for each kind's own rhythm, or "off"
+
+[refresh.namespaces]
+lifecycle = 3600         # every kind of the namespace, unless one below says otherwise
 
 [refresh.kinds]
 "prism.config.Task" = "auto"                  # this one keeps its curated three seconds

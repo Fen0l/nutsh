@@ -7,6 +7,7 @@ pub mod detail;
 pub mod form;
 pub mod journal;
 pub mod key;
+pub mod ladder;
 pub mod menu;
 pub mod mouse;
 pub mod page;

@@ -34,6 +34,8 @@ pub struct Hits {
     pub tables: Vec<TableHit>,
     /// A modal's list, when one is open: everything outside it is inert.
     pub modal: Option<ListHit>,
+    /// The header's version line: a click here opens the settings screen.
+    pub version: Option<Rect>,
 }
 
 pub struct ListHit {

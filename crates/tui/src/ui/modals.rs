@@ -1,4 +1,4 @@
-//! The action menu, the picker, the confirm box and the skin list.
+//! The action menu, the picker, the confirm box, the skin list and the refresh ladder.
 
 use super::*;
 
@@ -235,6 +235,54 @@ pub(super) fn draw_skins(app: &App, f: &mut Frame, body: Rect) {
         items,
         Line::from(Span::styled(" skin ", theme::title())),
         Scroll::of(offset, window.len(), crate::theme::BUILTIN_NAMES.len()),
+        &mut state,
+    );
+}
+
+/// The refresh ladder, with the rung in force marked.
+pub(super) fn draw_ladder(app: &App, f: &mut Frame, body: Rect) {
+    let Some(l) = &app.ladder else {
+        return;
+    };
+    let area = centered_rect_with_min(40, 50, 32, 12, body);
+    clear_region(f, area);
+    let rows = usize::from(area.height.saturating_sub(2));
+    let (offset, window) = l.window(rows);
+    app.hits.borrow_mut().modal = Some(crate::mouse::ListHit {
+        rows: Rect {
+            x: area.x + 1,
+            y: area.y + 1,
+            width: area.width.saturating_sub(2),
+            height: area.height.saturating_sub(2),
+        },
+        offset,
+        len: nutsh_core::refresh::LADDER.len(),
+    });
+    let labels = l.rows();
+    let items: Vec<ListItem> = labels
+        .iter()
+        .skip(offset)
+        .take(window.len())
+        .map(|(name, current)| {
+            ListItem::new(Line::from(vec![
+                Span::styled(name.clone(), Style::default().fg(theme::text())),
+                Span::styled(
+                    if *current { " •" } else { "" },
+                    Style::default().fg(theme::teal()),
+                ),
+            ]))
+        })
+        .collect();
+    let mut state = ListState::default().with_selected(Some(l.selected - offset));
+    render_framed_list(
+        f,
+        area,
+        items,
+        Line::from(Span::styled(
+            format!(" refresh · {} ", l.label),
+            theme::title(),
+        )),
+        Scroll::of(offset, window.len(), nutsh_core::refresh::LADDER.len()),
         &mut state,
     );
 }

@@ -4,7 +4,7 @@
 mod common;
 
 use nutsh_mockpc::MockPc;
-use nutsh_tui::app::Focus;
+use nutsh_tui::app::{Focus, Mode};
 use nutsh_tui::{App, Key, Mouse, MouseKind};
 
 async fn app(pc: &MockPc) -> App {
@@ -323,4 +323,36 @@ async fn ctrl_o_toggles_capture_for_this_session() {
     // itself is unchanged, which is what makes the toggle one line in the loop.
     app.handle(Key::Ctrl('o'));
     assert!(app.mouse_enabled());
+}
+
+/// The header's version line is the one thing on the header a click does something to: the
+/// settings screen opens, and once it is up the click that opened it is not read as a row.
+#[tokio::test]
+async fn a_click_on_the_version_line_opens_settings() {
+    let pc = MockPc::builder().start().await;
+    let mut app = app(&pc).await;
+    app.frame(120, 30).unwrap();
+    let (x, y) = {
+        let hits = app.hits_for_test();
+        let r = hits
+            .version
+            .expect("the full header draws the version line");
+        // Right-aligned text: the last cells are the ones that hold it.
+        (r.x + r.width - 2, r.y)
+    };
+    app.mouse(click(x, y));
+    assert_eq!(app.mode, Mode::Settings);
+    app.mouse(click(x, y));
+    assert_eq!(
+        app.mode,
+        Mode::Settings,
+        "inert over a modal, like the rest of the header"
+    );
+    app.handle(Key::Esc);
+    assert_eq!(app.mode, Mode::Table);
+
+    // Folded, the header has no version line and the same cells are the table's.
+    app.set_header(nutsh_tui::app::Header::Compact);
+    app.frame(120, 30).unwrap();
+    assert!(app.hits_for_test().version.is_none(), "nothing to click on");
 }

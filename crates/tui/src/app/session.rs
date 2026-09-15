@@ -84,6 +84,7 @@ impl App {
             picker: None,
             detail: None,
             skins: None,
+            ladder: None,
             settings: None,
             menu: None,
             confirm: None,
