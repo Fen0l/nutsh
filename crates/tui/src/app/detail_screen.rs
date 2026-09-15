@@ -52,6 +52,22 @@ impl App {
                 ext_id.clone(),
             ))
         });
+        // A failed task's pane gathers what was around it: the alerts in the ten minutes
+        // either side of its start, asked for once and read off the store.
+        if let Some(task) = live.store.table(&key).rows.get(&ext_id)
+            && nutsh_core::evidence::wants(task)
+            && let Some(window) = nutsh_core::evidence::window(task)
+            && let Some(alerts) = nutsh_catalog::kind("monitoring.serviceability.Alert")
+            && pane_reason(&live.session, alerts).is_none()
+        {
+            let filter = nutsh_core::evidence::odata(window);
+            let mut sub = Subscription::once_list(nutsh_core::store::TableKey::filtered(
+                alerts,
+                Some(std::sync::Arc::from(filter.as_str())),
+            ));
+            sub.filter = Some(filter);
+            live.scheduler.subscribe(sub);
+        }
         let body = detail::Body::default_for(Some(&key));
         self.detail = Some(Detail {
             key: Some(key),
@@ -168,7 +184,38 @@ impl App {
             now: self.now,
             width: self.detail_width.get(),
             actions: &self.detail_actions(),
+            extra: &self.detail_extra(),
         }))
+    }
+
+    /// The evidence sections under a failed task, empty for every other pane. Read off the
+    /// store each frame: the alerts land under the window's own filter key, the journal entry
+    /// is the one that carries this task's id.
+    pub fn detail_extra(&self) -> Vec<nutsh_core::detail::Section> {
+        let (Some(live), Some(task)) = (self.live.as_ref(), self.detail_entity()) else {
+            return Vec::new();
+        };
+        if !nutsh_core::evidence::wants(task) {
+            return Vec::new();
+        }
+        let alerts = nutsh_core::evidence::window(task).and_then(|w| {
+            let kind = nutsh_catalog::kind("monitoring.serviceability.Alert")?;
+            let key = nutsh_core::store::TableKey::filtered(
+                kind,
+                Some(std::sync::Arc::from(
+                    nutsh_core::evidence::odata(w).as_str(),
+                )),
+            );
+            let table = live.store.table(&key);
+            table
+                .last_poll
+                .map(|_| table.rows.values().collect::<Vec<_>>())
+        });
+        let journal = live
+            .journal
+            .entries()
+            .find(|e| e.task_ext_id.as_deref() == Some(task.ext_id.as_str()));
+        nutsh_core::evidence::sections(task, alerts.as_deref(), journal, self.now)
     }
 
     /// The actions the open pane lists under its `ACTIONS` heading: the row's, from the one

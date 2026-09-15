@@ -185,6 +185,79 @@ row_heights = [0, 0]
     { header = "CREATED", path = "createTime", kind = "Timestamp" },
   ]
 
+# What needs a look right now, from four sources the dashboard already reads. Each pane is the
+# kind's own narrowed list, so `⏎` and `y` open the row like anywhere else; the summary column
+# counts what the panes hold. The two cross-kind questions the issue named - a VM off while its
+# host is up, a protected VM past its RPO - come out as `VMs powered off` beside `Hosts not
+# normal`, and the sampler's `out of sync`: an AHV VM that is off has no host to compare.
+[[page]]
+id = "attention"
+title = "Attention"
+summary = "attention"
+summary_rows = 2
+row_heights = [0, 0]
+
+  [[page.pane]]
+  title = "Critical and warning alerts"
+  kind = "monitoring.serviceability.Alert"
+  filter = "isResolved eq false and (severity eq Monitoring.Common.Severity'CRITICAL' or severity eq Monitoring.Common.Severity'WARNING')"
+  row = 0
+  col = 0
+  weight = 1
+  empty = "nothing unresolved above info"
+  columns = [
+    { header = "SEVERITY", path = "severity", kind = "Status" },
+    { header = "TITLE", path = "title", kind = "Text" },
+    { header = "SOURCE", path = "sourceEntity.name", kind = "Text" },
+    { header = "CREATED", path = "creationTime", kind = "Timestamp" },
+  ]
+
+  [[page.pane]]
+  title = "Failed tasks"
+  kind = "prism.config.Task"
+  filter = "status eq Prism.Config.TaskStatus'FAILED'"
+  orderby = "createdTime desc"
+  row = 0
+  col = 1
+  weight = 1
+  empty = "no failed task"
+  columns = [
+    { header = "OPERATION", path = "operationDescription", kind = "Text" },
+    { header = "STATUS", path = "status", kind = "Status" },
+    { header = "ENTITY", path = "entitiesAffected[].name", kind = "Text" },
+    { header = "COMPLETED", path = "completedTime", kind = "Timestamp" },
+  ]
+
+  [[page.pane]]
+  title = "VMs powered off"
+  kind = "vmm.ahv.config.Vm"
+  filter = "powerState eq Vmm.Ahv.Config.PowerState'OFF'"
+  orderby = "name"
+  row = 1
+  col = 0
+  weight = 1
+  empty = "every VM is on"
+  columns = [
+    { header = "NAME", path = "name", kind = "Text" },
+    { header = "POWER", path = "powerState", kind = "Status" },
+    { header = "CLUSTER", path = "cluster.extId", kind = "Reference" },
+    { header = "HOST", path = "host.extId", kind = "Reference" },
+  ]
+
+  [[page.pane]]
+  title = "Hosts"
+  kind = "clustermgmt.config.Host"
+  row = 1
+  col = 1
+  weight = 1
+  empty = "no hosts"
+  columns = [
+    { header = "HOST", path = "hostName", kind = "Text" },
+    { header = "MAINTENANCE", path = "maintenanceState", kind = "Status" },
+    { header = "CLUSTER", path = "cluster.uuid", kind = "Reference" },
+    { header = "VMS", path = "hypervisor.numberOfVms", kind = "Text" },
+  ]
+
 # ─────────────────────────────────────────────────────────────────────────────────────────────
 # The group landing pages.
 #

@@ -1159,3 +1159,80 @@ async fn ctrl_x_on_a_pane_with_nothing_polling_it_says_so() {
     let frame = app.snapshot(120, 40).unwrap();
     assert!(frame.contains("⏹ stopped"), "{frame}");
 }
+
+/// The Attention page: four panes over the kinds the dashboard already reads, and a summary
+/// that counts what they hold the way their filters mean it. The mock answers a `$filter`
+/// with the whole list, so the pane counts are the fixtures' and the summary's are the
+/// narrowed ones - which is what makes the two numbers worth checking against each other.
+#[tokio::test]
+async fn the_attention_page_counts_what_needs_a_look() {
+    let pc = MockPc::builder().start().await;
+    let mut app = page_from_palette(&pc, "attention").await;
+    common::settle_sample(&mut app).await;
+    common::settle_stats(&mut app).await;
+    common::settle_names(&mut app).await;
+    let frame = app.snapshot(120, 40).unwrap();
+    for title in [
+        "Critical and warning alerts",
+        "Failed tasks",
+        "VMs powered off",
+        "Hosts",
+        "Summary",
+    ] {
+        assert!(frame.contains(title), "{title} is missing:\n{frame}");
+    }
+    assert!(frame.contains("Dashboard › Attention"), "{frame}");
+    let summary = |label: &str| {
+        frame
+            .lines()
+            // The summary line, not a pane title that shares the words.
+            .find(|l| l.contains(label) && !l.contains('╭'))
+            // The value sits against the box's right border.
+            .map(|l| {
+                l.trim_end_matches('│')
+                    .split_whitespace()
+                    .last()
+                    .unwrap_or("")
+                    .to_string()
+            })
+            .unwrap_or_else(|| panic!("no {label} line: {frame}"))
+    };
+    assert_eq!(summary("Critical alerts"), "1");
+    assert_eq!(summary("Warning alerts"), "1");
+    assert_eq!(
+        summary("Failed tasks"),
+        "1",
+        "one of the seven tasks failed"
+    );
+    assert_eq!(summary("VMs powered off"), "1", "web-02");
+    assert_eq!(summary("Hosts not normal"), "0");
+    assert!(
+        frame.contains("Delete VM"),
+        "the failed task's row: {frame}"
+    );
+    let settings = common::settings(&pc);
+    settings.bind(|| insta::assert_snapshot!("attention_page", frame));
+}
+
+/// A source namespace this Prism Central does not serve: the pane says so, the summary line
+/// that would have counted it reads `-`, and the other three carry on.
+#[tokio::test]
+async fn an_unserved_source_is_said_not_silently_dropped() {
+    let pc = MockPc::builder()
+        .unavailable_namespace("prism")
+        .start()
+        .await;
+    let mut app = page_from_palette(&pc, "attention").await;
+    common::settle_names(&mut app).await;
+    let frame = app.snapshot(120, 40).unwrap();
+    assert!(frame.contains("namespace not served"), "{frame}");
+    let failed = frame
+        .lines()
+        .find(|l| l.contains("Failed tasks") && !l.contains("╭"))
+        .unwrap_or_else(|| panic!("{frame}"));
+    assert!(
+        failed.trim_end_matches('│').trim_end().ends_with('-'),
+        "counts nothing it could not ask: {failed}"
+    );
+    assert!(frame.contains("web-02"), "the others polled: {frame}");
+}

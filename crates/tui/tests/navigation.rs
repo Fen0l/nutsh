@@ -511,6 +511,7 @@ fn detail_text(app: &App) -> String {
         now: app.now,
         width: DETAIL_WIDTH,
         actions: &app.detail_actions(),
+        extra: &app.detail_extra(),
     });
     common::text_of_lines(&lines)
 }

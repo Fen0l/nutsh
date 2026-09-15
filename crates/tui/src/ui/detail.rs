@@ -21,12 +21,14 @@ pub(super) fn draw_detail(app: &App, f: &mut Frame, body: Rect) {
     // call: a pane whose last line the scroll does not know about is one that cannot be read to
     // the end.
     let actions = app.detail_actions();
+    let extra = app.detail_extra();
     let lines = d.lines(crate::detail::BodyView {
         entity,
         names,
         now: app.now,
         width,
         actions: &actions,
+        extra: &extra,
     });
     // Scrolling past the end would leave an empty box with no way to tell why.
     let scroll = d.scroll.min(Detail::last_line(&lines));

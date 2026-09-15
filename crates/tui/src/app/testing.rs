@@ -253,6 +253,13 @@ impl App {
         self.search.as_ref().map(|s| (s.asked, s.answered))
     }
 
+    /// Tests only: drains poll messages until a one-shot subscription reports done - the
+    /// alerts a failed task's pane asked for, say.
+    pub async fn settle_once_list(&mut self) {
+        self.settle_until(|msg| matches!(msg, Msg::Done { .. }))
+            .await;
+    }
+
     /// Tests only: waits for the next connect result and applies it.
     ///
     /// The event loop cannot call this, which is why it is not on its path: it selects over the

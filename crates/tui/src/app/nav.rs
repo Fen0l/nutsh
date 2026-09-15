@@ -180,7 +180,11 @@ impl App {
         let Some(View::Page(page)) = stack.last_mut() else {
             return;
         };
-        if page.def.summary != Some(crate::page::summary::DISASTER_RECOVERY) || page.sampling() {
+        let fed = matches!(
+            page.def.summary,
+            Some(crate::page::summary::DISASTER_RECOVERY | crate::page::summary::ATTENTION)
+        );
+        if !fed || page.sampling() {
             return;
         }
         page.sampler = Some(nutsh_core::sampler::spawn(

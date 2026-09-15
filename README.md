@@ -44,7 +44,7 @@ instead of showing you an empty box.
 - <kbd>⏎</kbd> **Relationships, by name.** Drill from a row into the kinds hanging off it. Wherever the API hands back a UUID, you see the name.
 - <kbd>a</kbd> **478 actions, all guarded.** Read-only mode refuses before the wire. Delete makes you type the name. Bulk stops at five rows. Every attempt lands in the session journal, refused ones included.
 - <kbd>:can-i</kbd> **Permission preflight.** Checks your IAM roles against what an action needs. If the lookup fails it says *unknown*, never *no*.
-- <kbd>⇥</kbd> **Pages.** Eight screens put several panes side by side. Disaster Recovery gathers remote Prism Centrals, policies, plans and recent jobs in one place.
+- <kbd>⇥</kbd> **Pages.** Screens that put several panes side by side around one question. Attention is what needs a look right now: critical and warning alerts, failed tasks, powered-off VMs, hosts out of their normal state. Disaster Recovery gathers remote Prism Centrals, policies, plans and recent jobs in one place.
 - <kbd>/</kbd> **Filter here, search everywhere.** `/` narrows the rows in front of you without a request. `:search` asks every loaded kind, then the Prism Central itself.
 - <kbd>:skin</kbd> **Seventeen skins, and a working mouse.** Catppuccin, gruvbox, nord, dracula, tokyo-night and a dozen more. Clicks work; shift-drag still selects text.
 - `--check` **Version negotiation.** Asks each namespace which version it serves and steps down on a 404. One binary from the pc.2024 line through PC 7.x.
@@ -138,6 +138,9 @@ nutsh ctx login home                                           # asks once, chec
 nutsh                                                          # the Dashboard
 nutsh vm                                                       # or straight to a kind
 ```
+
+Tab completion for the flags, the subcommands, every kind and page, and the context names in
+your config file: `source <(nutsh completions zsh)` in `.zshrc`, `bash` and `fish` likewise.
 
 **If the certificate is rejected**, that is normal. Prism Central's default certificate is
 self-signed *and* marked as a CA, which no modern TLS library will accept as a server
