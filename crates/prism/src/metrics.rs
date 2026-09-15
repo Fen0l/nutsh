@@ -100,6 +100,28 @@ struct Totals {
     failed: u64,
 }
 
+/// How many individual requests the ring keeps. Bounded, so a session that ran for a week
+/// costs what one that ran a minute does.
+pub const CALLS: usize = 500;
+
+/// One request, as `:activity` lists it. The method, the path, the status, the round trip and
+/// the word for what it carried - never a header, never a cookie, never a body. The same rule
+/// `trace_request` keeps for the log.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct Call {
+    pub at: Instant,
+    pub method: String,
+    /// Path and query, not the host: the session's is the one host there is.
+    pub path: String,
+    /// `None` for a request that never went out, or whose pipe failed.
+    pub status: Option<u16>,
+    pub ms: u32,
+    /// `presented`, `session` or `refused`.
+    pub credential: &'static str,
+    /// The local rate budget slept before this request went out.
+    pub paced: bool,
+}
+
 /// What the status line draws, computed once per frame from [`Metrics::snapshot`].
 #[derive(Debug, Clone, Copy, PartialEq)]
 pub struct Meter {
@@ -128,6 +150,8 @@ pub struct Metrics {
     /// The precedent is `Client::buckets`: a `Mutex` held for nanoseconds on a path that is
     /// about to await network I/O. Never held across an await.
     ring: Mutex<Ring>,
+    /// The last [`CALLS`] requests, oldest first.
+    calls: Mutex<std::collections::VecDeque<Call>>,
 }
 
 impl Default for Metrics {
@@ -150,7 +174,29 @@ impl Metrics {
             rate_limited: AtomicU64::new(0),
             elapsed_micros: AtomicU64::new(0),
             ring: Mutex::new(Ring::new()),
+            calls: Mutex::new(std::collections::VecDeque::with_capacity(CALLS)),
         }
+    }
+
+    /// One request, once its outcome is known - or once it is known it will never go out.
+    pub(crate) fn record_call(&self, call: Call) {
+        let mut calls = self.calls.lock().unwrap_or_else(PoisonError::into_inner);
+        if calls.len() == CALLS {
+            calls.pop_front();
+        }
+        calls.push_back(call);
+    }
+
+    /// The ring, newest first. A copy: the screen reads it once a frame and the lock is not
+    /// held while it draws.
+    pub fn calls(&self) -> Vec<Call> {
+        self.calls
+            .lock()
+            .unwrap_or_else(PoisonError::into_inner)
+            .iter()
+            .rev()
+            .cloned()
+            .collect()
     }
 
     /// Whole seconds from the origin. A `now` before it - which cannot happen with a monotone
@@ -393,6 +439,27 @@ mod tests {
         // And a slot that wraps onto an old one is reset rather than added to.
         m.record_started(at(origin, 600));
         assert_eq!(m.snapshot(at(origin, 600)).rate, 0.1);
+    }
+
+    /// The ring holds the last five hundred and no more, newest first.
+    #[test]
+    fn the_calls_ring_is_bounded_and_newest_first() {
+        let (m, origin) = metrics();
+        for i in 0..(CALLS as u64 + 3) {
+            m.record_call(Call {
+                at: at(origin, i),
+                method: "GET".into(),
+                path: format!("/n/{i}"),
+                status: Some(200),
+                ms: 1,
+                credential: "session",
+                paced: false,
+            });
+        }
+        let calls = m.calls();
+        assert_eq!(calls.len(), CALLS);
+        assert_eq!(calls[0].path, format!("/n/{}", CALLS + 2), "newest first");
+        assert_eq!(calls[CALLS - 1].path, "/n/3", "the first three fell off");
     }
 
     /// The field cannot grow, so the rate is clamped where the format stops.

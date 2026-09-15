@@ -17,6 +17,8 @@ pub enum Command {
     Skin,
     /// `:journal` - what was attempted this session.
     Journal,
+    /// `:activity` - every request this session made, and every table it holds.
+    Activity,
     /// `:search <term>` - every kind already loaded, looked at for one term.
     Search,
     /// `:can-i <action> <kind>` - the one refusal string, asked about any kind.
@@ -54,6 +56,7 @@ impl Command {
             Command::Help => "help",
             Command::Skin => "skin",
             Command::Journal => "journal",
+            Command::Activity => "activity",
             Command::Search => "search",
             Command::CanI => "can-i",
             Command::Try => "try",
@@ -105,6 +108,7 @@ impl Command {
             Command::Quit
             | Command::Help
             | Command::Journal
+            | Command::Activity
             | Command::Search
             | Command::Mouse
             | Command::Header
@@ -121,6 +125,7 @@ pub(crate) const COMMANDS: &[Command] = &[
     Command::Help,
     Command::Skin,
     Command::Journal,
+    Command::Activity,
     Command::Search,
     Command::CanI,
     Command::Try,
@@ -1573,6 +1578,7 @@ mod tests {
         assert_eq!(Command::Quit.slots(), &[]);
         assert_eq!(Command::Help.slots(), &[]);
         assert_eq!(Command::Journal.slots(), &[]);
+        assert_eq!(Command::Activity.slots(), &[]);
         assert_eq!(Command::CanI.slots(), &[Slot::Actions, Slot::Kinds]);
         assert_eq!(Command::Hide.slots(), &[Slot::Hide]);
         assert_eq!(Command::Show.slots(), &[Slot::Show]);

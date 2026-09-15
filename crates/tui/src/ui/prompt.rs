@@ -184,6 +184,7 @@ pub(super) fn hint_text(app: &App) -> &'static str {
         Mode::Form => " tab next  shift-tab previous  space toggle  enter submit  esc cancel",
         Mode::Help => " esc close",
         Mode::Journal => " j k g G scroll  esc close",
+        Mode::Activity => " ⇥ requests/tables  j k g G scroll  esc close",
         Mode::Search => " j k move  enter open  esc close",
     }
 }

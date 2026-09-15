@@ -36,6 +36,7 @@ use crate::picker::{self, Picker};
 use crate::skins::{self, Skins};
 
 mod actions;
+mod activity_screen;
 mod detail_screen;
 mod form_screen;
 mod journal_screen;
@@ -121,6 +122,8 @@ pub enum Mode {
     Search,
     /// `:settings`: what is set, what it is set to, and who set it.
     Settings,
+    /// `:activity`: every request this session made, and every table it holds.
+    Activity,
     /// `⏎` on a refresh row of the settings screen: the ladder, over it.
     Ladder,
 }
@@ -316,6 +319,8 @@ pub struct App {
     /// The `:journal` list, while it is open; the entries themselves live in `Live`, so what
     /// this holds is a cursor over them.
     pub journal_view: Option<JournalView>,
+    /// The `:activity` screen's cursor and tab, while it is open.
+    pub activity_view: Option<crate::activity::ActivityView>,
     /// The `:search` results, while they are open. The rows are a snapshot of the store as it
     /// was when the term was run: a poll that lands underneath does not reshuffle a list the
     /// user is reading, and `⏎` opens the row by its identifier rather than by its index.
@@ -377,6 +382,7 @@ pub struct App {
     /// The mode `:journal` was opened over, for the same reason again: the journal is a modal
     /// and closing one goes back to what it covered, table or Contexts screen.
     pub(crate) journal_from: Mode,
+    pub(crate) activity_from: Mode,
     /// The mode `:search` was opened over; the same reason a third time.
     pub(crate) search_from: Mode,
     /// The mode the settings screen was opened over; the same reason a fourth time - the menu
@@ -552,6 +558,7 @@ impl App {
             Mode::Skins => self.skins_from,
             Mode::Ladder => self.settings_from,
             Mode::Journal => self.journal_from,
+            Mode::Activity => self.activity_from,
             Mode::Search => self.search_from,
             Mode::Settings => self.settings_from,
             // The action pipeline can be started from inside the detail pane, and what a
@@ -753,6 +760,7 @@ impl App {
             Mode::Confirm => self.handle_confirm(key),
             Mode::Fields => self.handle_fields(key),
             Mode::Journal => self.handle_journal(key),
+            Mode::Activity => self.handle_activity(key),
             Mode::Search => self.handle_search(key),
             Mode::Settings => self.handle_settings(key),
         }
