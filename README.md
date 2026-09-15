@@ -34,7 +34,7 @@ that changes state has to get past a guardrail first. When something is missing 
 why, which API namespace this Prism Central does not serve or which version a resource needs,
 instead of showing you an empty box.
 
-> **Status:** 0.0.2-beta2, macOS and Linux. Everything here is implemented and tested; none of
+> **Status:** 0.0.2-beta3, macOS and Linux. Everything here is implemented and tested; none of
 > it has been through a week of ordinary use by anybody but its author.
 
 ## Features
@@ -152,7 +152,7 @@ on the Prism Central, or add the context with `--insecure`.
 | | |
 |---|---|
 | **Homebrew**, macOS and Linux | `brew install Fen0l/tap/nutsh` |
-| **Shell installer**, any distribution | `curl --proto '=https' --tlsv1.2 -LsSf https://github.com/Fen0l/nutsh/releases/download/v0.0.2-beta2/nutsh-installer.sh \| sh` |
+| **Shell installer**, any distribution | `curl --proto '=https' --tlsv1.2 -LsSf https://github.com/Fen0l/nutsh/releases/download/v0.0.2-beta3/nutsh-installer.sh \| sh` |
 | **Binaries** | [Releases](https://github.com/Fen0l/nutsh/releases): macOS and Linux, x86_64 and arm64, each archive with its SHA-256. Linux comes as `gnu` and as `musl`, a static binary that runs on any distribution. |
 | **From source** | `git clone https://github.com/Fen0l/nutsh && cd nutsh && make release`, with a Rust toolchain. The binary lands at `target/release/nutsh`. |
 

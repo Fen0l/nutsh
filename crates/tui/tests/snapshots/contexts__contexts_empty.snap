@@ -8,7 +8,7 @@ expression: "app.snapshot(100, 17).unwrap()"
 │Cluster:    -                                                           │           alerts ⚠ -  ✖ -
 │Kind:       Contexts                                                    │         tasks ▶ - running
 │Count:      0 contexts                                                  │
-╰────────────────────────────────────────────────────────────────────────╯          v0.0.2-beta2 · -
+╰────────────────────────────────────────────────────────────────────────╯          v0.0.2-beta3 · -
 No contexts. Press a to add one, or run nutsh ctx add.
 
 
