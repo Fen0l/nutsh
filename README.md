@@ -22,7 +22,7 @@ serve, or which version a resource needs - instead of showing you an empty box.
  backup-runner    OFF     prod-02      -               2   4 GiB   -
 ```
 
-Version 0.0.2-beta1. Everything here is implemented and tested; none of it has been through a
+Version 0.0.2-beta2. Everything here is implemented and tested; none of it has been through a
 week of ordinary use by anybody but its author. [CHANGELOG.md](CHANGELOG.md) has the details.
 
 ## v4 coverage
@@ -62,7 +62,7 @@ brew install Fen0l/tap/nutsh
 Or take a binary directly:
 
 ```sh
-curl --proto '=https' --tlsv1.2 -LsSf https://github.com/Fen0l/nutsh/releases/download/v0.0.2-beta1/nutsh-installer.sh | sh
+curl --proto '=https' --tlsv1.2 -LsSf https://github.com/Fen0l/nutsh/releases/download/v0.0.2-beta2/nutsh-installer.sh | sh
 ```
 
 `releases/latest/` skips pre-releases, so the URL names the version until there is a stable one.
