@@ -179,6 +179,7 @@ pub fn draw(app: &App, f: &mut Frame) {
     match app.mode {
         Mode::Command => draw_palette(app, f, body),
         Mode::Skins => draw_skins(app, f, body),
+        Mode::Ladder => draw_ladder(app, f, body),
         Mode::Settings => draw_settings(app, f, body),
         Mode::Picker => draw_picker(app, f, dialog),
         Mode::Menu => draw_menu(app, f, dialog),

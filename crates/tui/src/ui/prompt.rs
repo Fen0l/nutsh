@@ -159,6 +159,7 @@ pub(super) fn hint_text(app: &App) -> &'static str {
         Mode::Detail => " j/k:scroll  g/G:top/bottom  a:actions  Y:yaml  J:json  esc:back",
         Mode::Command => "",
         Mode::Skins => " enter apply  esc close",
+        Mode::Ladder => " enter keep  esc close",
         Mode::Settings => " space:toggle  enter:choose  a:add  d:remove  esc:close",
         // The box lists both groups, so the one key it binds does both things: `enter` opens a
         // related kind and runs an action, and which it did is never a surprise.

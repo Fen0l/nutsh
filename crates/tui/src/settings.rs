@@ -57,6 +57,8 @@ pub enum Action {
     /// flipping a bit. The app writes the new rung to the file. The kind is the row's own, not
     /// whatever view the screen was opened over.
     Cycled(SettingId, Option<&'static str>),
+    /// `⏎` on a refresh row: the whole ladder, over this screen. The kind and the row's label.
+    Pick(Option<&'static str>, String),
     /// `space` on a namespace row: the same ladder, written to `[refresh.namespaces]`.
     CycledNamespace(&'static str),
     /// `enter` on a namespace row: show or hide its kinds.
@@ -188,12 +190,17 @@ impl Settings {
                 id: id @ (SettingId::Mouse | SettingId::Header | SettingId::Log),
                 ..
             }) => Action::Cycle(*id),
-            // Seven values, not two: `space` steps a ladder here rather than flipping a bit.
+            // Ten values, not two: `space` steps a ladder here rather than flipping a bit,
+            // and `⏎` shows the whole of it.
             Some(Row::Setting {
                 id: id @ (SettingId::Refresh | SettingId::RefreshKind),
                 kind,
+                label,
                 ..
-            }) => Action::Cycled(*id, *kind),
+            }) => match key {
+                Key::Enter => Action::Pick(*kind, label.trim().to_string()),
+                _ => Action::Cycled(*id, *kind),
+            },
             Some(Row::Setting { id, value, .. }) => Action::Toggled(*id, value != "on"),
             _ => Action::Ignored,
         }

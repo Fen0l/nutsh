@@ -344,6 +344,62 @@ impl App {
         }
     }
 
+    /// One writer for every level of `[refresh]`: the file, then the pollers it retimes, then
+    /// the screen. A `ctrl-t` override for a kind goes when its rung is written, so the source
+    /// column reads `config file` and not `this session`.
+    pub(super) fn set_schedule(
+        &mut self,
+        at: nutsh_core::contexts::Schedule<'static>,
+        v: nutsh_core::contexts::Interval,
+    ) {
+        use nutsh_core::contexts::Schedule;
+        if let Schedule::Kind(id) = at {
+            self.refresh_session.remove(id);
+        }
+        let shown = nutsh_core::refresh::show(v);
+        self.status = Some(match self.contexts.set_interval(at, v) {
+            Ok(()) => {
+                self.refresh_cfg = self.contexts.refresh();
+                match at {
+                    Schedule::Namespace(ns) => format!("{ns}: {shown}"),
+                    _ => format!("refresh: {shown}"),
+                }
+            }
+            Err(e) => format!("refresh not saved: {e:#}"),
+        });
+        if let Some(live) = self.live.as_ref() {
+            let touched = nutsh_catalog::KINDS.iter().filter(|k| match at {
+                Schedule::Everything => true,
+                Schedule::Namespace(ns) => k.namespace == ns,
+                Schedule::Kind(id) => k.id == id,
+            });
+            for k in touched {
+                live.scheduler.set_interval_kind(k.id, self.refresh_of(k).0);
+            }
+        }
+        self.reopen_settings();
+    }
+
+    pub(super) fn handle_ladder(&mut self, key: Key) {
+        let Some(list) = self.ladder.as_mut() else {
+            return;
+        };
+        match list.key(key) {
+            crate::ladder::Action::Moved | crate::ladder::Action::Ignored => {}
+            crate::ladder::Action::Cancelled => {
+                self.ladder = None;
+                self.mode = Mode::Settings;
+            }
+            crate::ladder::Action::Chose(v) => {
+                let at = list.at;
+                self.ladder = None;
+                self.mode = Mode::Settings;
+                self.set_schedule(at, v);
+            }
+        }
+        self.dirty = true;
+    }
+
     pub(super) fn handle_settings(&mut self, key: Key) {
         let Some(screen) = self.settings.as_mut() else {
             return;
@@ -385,6 +441,21 @@ impl App {
                 }
                 self.reopen_settings();
             }
+            crate::settings::Action::Pick(row_kind, label) => {
+                let kind = row_kind.and_then(nutsh_catalog::kind);
+                let (at, current) = match kind {
+                    Some(k) => (
+                        nutsh_core::contexts::Schedule::Kind(k.id),
+                        self.refresh_cfg.kinds.get(k.id).copied(),
+                    ),
+                    None => (
+                        nutsh_core::contexts::Schedule::Everything,
+                        self.refresh_cfg.default,
+                    ),
+                };
+                self.ladder = Some(crate::ladder::Ladder::open(at, label, current));
+                self.mode = Mode::Ladder;
+            }
             crate::settings::Action::CycledNamespace(ns) => {
                 // The rung after whatever the namespace itself says, not after what its kinds
                 // resolve to: those differ from each other, and a step has to start somewhere.
@@ -395,61 +466,24 @@ impl App {
                     .copied()
                     .or(self.refresh_cfg.default);
                 let next = nutsh_core::refresh::step_from(now);
-                self.status = Some(
-                    match self
-                        .contexts
-                        .set_interval(nutsh_core::contexts::Schedule::Namespace(ns), next)
-                    {
-                        Ok(()) => {
-                            self.refresh_cfg = self.contexts.refresh();
-                            format!("{ns}: {}", nutsh_core::refresh::show(next))
-                        }
-                        Err(e) => format!("refresh not saved: {e:#}"),
-                    },
-                );
-                if let Some(live) = self.live.as_ref() {
-                    for k in nutsh_catalog::KINDS.iter().filter(|k| k.namespace == ns) {
-                        live.scheduler.set_interval_kind(k.id, self.refresh_of(k).0);
-                    }
-                }
-                self.reopen_settings();
+                self.set_schedule(nutsh_core::contexts::Schedule::Namespace(ns), next);
             }
-            crate::settings::Action::Cycled(id, row_kind) => {
-                let _ = id;
+            crate::settings::Action::Cycled(_, row_kind) => {
                 let kind = row_kind.and_then(nutsh_catalog::kind);
-                let next = match kind {
+                match kind {
                     // A kind's row steps from the length of time it is actually polling at, so
                     // a 3 s kind does not spend a press on the 5 s it is nearly already at.
-                    Some(k) => nutsh_core::refresh::step(self.refresh_of(k).0),
+                    Some(k) => {
+                        let next = nutsh_core::refresh::step(self.refresh_of(k).0);
+                        self.set_schedule(nutsh_core::contexts::Schedule::Kind(k.id), next);
+                    }
                     // The global row names a rung and stands for no kind in particular, so it
                     // walks the ladder by position instead.
-                    None => nutsh_core::refresh::step_from(self.refresh_cfg.default),
-                };
-                // The file is where this value lives now, so a `ctrl-t` override for the same
-                // kind goes: the source column has to say `config file`, not `this session`.
-                if let Some(k) = kind {
-                    self.refresh_session.remove(k.id);
+                    None => {
+                        let next = nutsh_core::refresh::step_from(self.refresh_cfg.default);
+                        self.set_schedule(nutsh_core::contexts::Schedule::Everything, next);
+                    }
                 }
-                self.status = Some(
-                    match self.contexts.set_interval(
-                        kind.map_or(nutsh_core::contexts::Schedule::Everything, |k| {
-                            nutsh_core::contexts::Schedule::Kind(k.id)
-                        }),
-                        next,
-                    ) {
-                        Ok(()) => {
-                            self.refresh_cfg = self.contexts.refresh();
-                            format!("refresh: {}", nutsh_core::refresh::show(next))
-                        }
-                        Err(e) => format!("refresh not saved: {e:#}"),
-                    },
-                );
-                if let Some(k) = kind
-                    && let Some(live) = self.live.as_ref()
-                {
-                    live.scheduler.set_interval_kind(k.id, self.refresh_of(k).0);
-                }
-                self.reopen_settings();
             }
             crate::settings::Action::Cycle(id) => {
                 match id {

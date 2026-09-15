@@ -82,6 +82,7 @@ pub(super) fn draw_settings(app: &App, f: &mut Frame, body: Rect) {
                 source,
                 fixed,
                 age,
+                kind,
                 ..
             } => {
                 // A row the screen can only show is dim end to end: the value is real, the
@@ -98,8 +99,16 @@ pub(super) fn draw_settings(app: &App, f: &mut Frame, body: Rect) {
                 ListItem::new(Line::from(vec![
                     Span::styled(pad(cut(label, label_width), label_width), theme::dim()),
                     Span::styled(pad(cut(value, set_width), set_width), style),
+                    // A kind no table is open on has not refreshed; `-` would read as an error.
                     Span::styled(
-                        pad(cut(age.as_deref().unwrap_or("-"), age_width), age_width),
+                        pad(
+                            cut(
+                                age.as_deref()
+                                    .unwrap_or(if kind.is_some() { "never" } else { "" }),
+                                age_width,
+                            ),
+                            age_width,
+                        ),
                         theme::dim(),
                     ),
                     Span::styled(cut(source, source_width), theme::dim()),
