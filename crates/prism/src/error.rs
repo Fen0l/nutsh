@@ -21,6 +21,11 @@ pub enum PrismError {
     Connect { host: String, message: String },
     #[error("authentication failed (HTTP 401)")]
     Auth,
+    /// A 401 from one endpoint while the session it rode still answers elsewhere: this
+    /// account may not read that endpoint. Not a refused credential - nothing was presented
+    /// to reach this verdict, and nothing latches on it.
+    #[error("not permitted (HTTP 401): {0}")]
+    Denied(String),
     #[error("forbidden (HTTP 403): {0}")]
     Forbidden(String),
     #[error("not found (HTTP 404): {0}")]

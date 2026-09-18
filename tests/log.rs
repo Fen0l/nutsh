@@ -229,8 +229,8 @@ async fn a_cli_run_logs_to_stderr_and_leaks_nothing() {
 async fn a_refused_credential_names_the_request_it_was_refused_on() {
     let pc = MockPc::builder()
         .credentials("admin", PASSWORD)
-        // The password is right and one namespace answers 401 anyway: a working session that
-        // stops being taken.
+        // The password is right and one namespace answers 401 anyway: the account may not read
+        // it, and the session everything else rides is fine.
         .fail_namespace("volumes", 401)
         .start()
         .await;
@@ -258,27 +258,23 @@ async fn a_refused_credential_names_the_request_it_was_refused_on() {
         .lines()
         .filter(|l| l.contains("status=401"))
         .collect();
-    assert_eq!(
-        refused.len(),
-        2,
-        "a 401 on a session and the 401 on the renewal that followed it:\n{stderr}"
-    );
+    // One per version the negotiation tried, every one on the session, and no renewal after
+    // any of them: the session still answered elsewhere, so each 401 was that endpoint's.
+    assert!(!refused.is_empty(), "{stderr}");
     for line in &refused {
         // Not a `debug` detail. Somebody who turned logging on because a session stopped
         // working should not have to raise the level to find the reason.
         assert!(line.contains("WARN"), "{line}");
         assert!(line.contains("method=GET"), "{line}");
         assert!(line.contains("/api/volumes/"), "the request it was: {line}");
+        assert!(
+            line.contains("credential=session"),
+            "it rode the session, and no password followed: {line}"
+        );
     }
     assert!(
-        refused[0].contains("credential=session"),
-        "the session that ended: {}",
-        refused[0]
-    );
-    assert!(
-        refused[1].contains("credential=presented"),
-        "the credential that was refused: {}",
-        refused[1]
+        !stderr.contains("credential=refused"),
+        "nothing was refused before the wire afterwards:\n{stderr}"
     );
     assert!(
         !stderr.contains(PASSWORD),

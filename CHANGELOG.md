@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+### Fixed
+
+- A 401 from one endpoint on a session that still works elsewhere no longer costs a password.
+  The session is checked on a URL it already answered before any renewal; if it still answers,
+  the 401 is that endpoint's verdict for the account - the table says `not permitted for this
+  account (HTTP 401)` and everything else carries on. Before this, one such endpoint (IAM
+  `users` on one Prism Central) made every run present the password a second time and then
+  report the credential refused. Nothing changes for a session that really ended, or a
+  password that really is wrong: one presentation, then stop.
+- `:export` writes the file `0600` and refuses to write through a symlink.
+
 ## 0.0.2-beta3
 
 Still a beta. This one is about seeing what the session is doing and getting to the answer

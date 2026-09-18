@@ -174,7 +174,7 @@ async fn a_second_failure_inside_the_window_does_not_probe_again() {
         // Not a 401, though that is host-wide too: a 401 on a request that carried the
         // credential ends the session outright, so the second list below would issue no request
         // at all and this test could not tell the repair window from a stopped client.
-        // `a_401_during_a_repair_ends_the_session` pins that behaviour instead.
+        // `a_401_during_a_repair_on_a_live_session_spends_no_password` pins what a 401 does now.
         .fail_path("/vmm/v4.3/content/ovas", 429)
         .start()
         .await;
@@ -219,11 +219,12 @@ async fn a_second_failure_inside_the_window_does_not_probe_again() {
     );
 }
 
-/// The lazy repair reaches the network like anything else, so a 401 there is a credential this
-/// Prism Central refused - and the session is over. Nothing is probed again and nothing is
-/// listed again, because there is nothing left that could be answered.
+/// The lazy repair reaches the network like anything else. A 401 on one of its probes while
+/// the session it rides still answers elsewhere is that endpoint's verdict on the account, not
+/// a refused credential: the repair fails for that kind, no password goes out for it, and the
+/// session goes on being ridden.
 #[tokio::test]
-async fn a_401_during_a_repair_ends_the_session() {
+async fn a_401_during_a_repair_on_a_live_session_spends_no_password() {
     let pc = MockPc::builder()
         .fail_path("/vmm/v4.0/ahv/config/vms", 500)
         .fail_path("/vmm/v4.3/content/ovas", 401)
@@ -231,6 +232,7 @@ async fn a_401_during_a_repair_ends_the_session() {
         .await;
     let client = Arc::new(Client::connect(&profile(&pc), "secret").unwrap());
     client.adopt_pins(&pins(&[("vmm", "v4.0")]), vec![restored("vmm", "v4.0")]);
+    let presentations = || pc.requests().iter().filter(|r| r.authenticates()).count();
 
     assert!(
         client
@@ -238,18 +240,14 @@ async fn a_401_during_a_repair_ends_the_session() {
             .await
             .is_err()
     );
-    assert!(client.auth_rejected());
-
-    let spent = client.metrics().started();
-    assert!(matches!(
-        client.list_page(vms(), 0, &ListOptions::default()).await,
-        Err(PrismError::Auth)
-    ));
-    assert_eq!(
-        client.metrics().started(),
-        spent,
-        "a refused credential is never presented again"
+    assert!(
+        !client.auth_rejected(),
+        "a 401 from one endpoint is not a refusal"
     );
+    assert_eq!(presentations(), 1, "the one that opened the session");
+
+    let _ = client.list_page(vms(), 0, &ListOptions::default()).await;
+    assert_eq!(presentations(), 1, "and it is never presented again for it");
 }
 
 /// The domain manager read `connect` already makes for the PC version now carries the extId

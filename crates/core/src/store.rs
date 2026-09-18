@@ -116,6 +116,9 @@ pub enum Cause {
     /// Any other status the far end named: a 400 for a parameter this client got wrong, a 403,
     /// a 405. The status is the whole of what can be said without quoting the server.
     Rejected(u16),
+    /// A 401 from this endpoint alone, on a session that still answers elsewhere: the account
+    /// may not read it. Ends the subscription the way a 403 would; the credential is fine.
+    Denied,
     /// The request got no answer at all: DNS, a connection lost mid-session, a timeout, a
     /// reset.
     Unreachable,
@@ -140,6 +143,7 @@ impl Failure {
             } => Cause::Unavailable(*status),
             PrismError::RateLimited { .. } => Cause::RateLimited,
             PrismError::Auth => Cause::Rejected(401),
+            PrismError::Denied(_) => Cause::Denied,
             PrismError::Forbidden(_) => Cause::Rejected(403),
             PrismError::Conflict { .. } => Cause::Rejected(412),
             PrismError::Api { status, .. } => Cause::Rejected(*status),
@@ -186,6 +190,7 @@ impl Failure {
                     .to_string()
             }
             Cause::Rejected(403) => "not permitted for this account (HTTP 403)".to_string(),
+            Cause::Denied => "not permitted for this account (HTTP 401)".to_string(),
             // A redirect is now an answer rather than a hop - `Client::connect` follows none,
             // because following one carries the session cookie to whatever host the `Location`
             // named - and "refused" would be the wrong word for it. Prism's `/api/*` has no
@@ -211,7 +216,7 @@ impl Failure {
     /// administrator twice. One spelling of the test, so the scheduler and the store cannot
     /// drift about which failure ends a subscription.
     pub fn is_terminal(&self) -> bool {
-        matches!(self.cause, Cause::Rejected(401))
+        matches!(self.cause, Cause::Rejected(401) | Cause::Denied)
     }
 
     /// Whether this is the endpoint's absence: what sets `Table::not_served` and stops a

@@ -163,6 +163,9 @@ async fn a_refused_credential_ends_the_warm_up() {
         .iter()
         .find(|k| k.warm)
         .expect("the catalog warms some kinds");
+    // A dead session under a refusing endpoint: the liveness check finds no session to ride,
+    // the renewal presents once, and that presentation is the one refused.
+    pc.expire_session();
     pc.fail_from_now(warm.list_path, 401);
     let spent = presentations(&pc);
 

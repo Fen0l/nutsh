@@ -1171,10 +1171,14 @@ async fn a_401_midway_stops_the_subscription_and_keeps_the_rows() {
     assert!(matches!(first, Msg::Complete { .. }), "{first:?}");
     assert_eq!(store.table(&key).rows.len(), 3);
 
+    // A live session and one endpoint that answers 401: the account may not read it. The
+    // subscription ends the way it would on a 403; the credential is never presented again.
+    let spent = presentations(&pc);
     pc.fail_from_now(VMS, 401);
     let msg = until_settled(&mut rx, &mut store, &key).await;
     assert!(matches!(msg, Msg::Error { .. }), "{msg:?}");
     assert!(store.table(&key).error.as_ref().unwrap().is_terminal());
+    assert_eq!(presentations(&pc), spent, "no password went out for it");
     assert_eq!(store.table(&key).rows.len(), 3, "the stale rows stay drawn");
 
     let spent = pc.requests().len();
@@ -1193,6 +1197,9 @@ async fn a_refused_credential_ends_the_header_counters() {
     let pc = MockPc::builder().start().await;
     let client = Arc::new(common::client(&pc).await);
     // The first counter's kind answers 401, so the refusal lands on the first of the seven.
+    // The session is dead as well: a 401 on a live session is that endpoint's own verdict and
+    // spends no password, which is a different test.
+    pc.expire_session();
     pc.fail_from_now(kind("clustermgmt.config.Cluster").unwrap().list_path, 401);
     let spent = presentations(&pc);
 
@@ -1219,7 +1226,8 @@ async fn a_refused_credential_ends_the_header_counters() {
 async fn a_refused_credential_ends_the_dr_sampler() {
     let pc = MockPc::builder().start().await;
     let client = Arc::new(common::client(&pc).await);
-    // The first thing a cycle counts answers 401.
+    // The first thing a cycle counts answers 401, on a session that has ended.
+    pc.expire_session();
     pc.fail_from_now(
         kind("datapolicies.config.ProtectionPolicy")
             .unwrap()
