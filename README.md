@@ -29,29 +29,9 @@ It is for the people who live in Prism Central: administrators and SREs who want
 the failed tasks and the alerts without a browser tab, consultants who move between several
 Prism Centrals a day, and Community Edition home labs.
 
-```
-╭ nutsh ─────────────────────────────────────────────────────────────────────────────────────╮
-│Context:    lab                                                  ⏎ drill        y detail    │       clusters 1  hosts 1
-│PC:         pc.example.com  pc.2024.3                           S sort         w wide      │         vms 3  on/off 3/0
-│Cluster:    <all>                                               ←→ columns     ^r refresh   │           alerts ⚠ 2  ✖ 2
-│Kind:       Compute & Storage › VMs                             ^t every       ^x stop      │         tasks ▶ 4 running
-│Count:      2 of 3                                               a actions     ^c quit      │
-╰────────────────────────────────────────────────────────────────────────────────────────────╯  v0.0.2-beta3 · pc.2024.3
-╭ nutsh ───────────────╮╭ Virtual Machines [2 of 3] /web ──────────────────────────────────────────────────────────────╮
-│  ▸ Dashboard         ││  NAME                                     POWER  CLUSTER      HOST        IP            MEM  │
-│  ▾ Compute & Storage ││▌ web-01                                   ON     lab-cluster  ahv-node-1  203.0.113.11  8 GiB│
-│      Overview        ││  web-02                                   OFF    lab-cluster  -           -             4 GiB│
-│    • VMs [3]         ││                                                                                              │
-│      ESXi VMs        ││                                                                                              │
-│      Templates       ││                                                                                              │
-│      Images          ││                                                                                              │
-╰───────────────── ↓35 ╯╰──────────────────────────────────────────────────────────────────────────────────────────────╯
-/web█
-                                                                                        2.1 req/s · 68% cached  ● live
-```
-
-*The VM table, filtered with `/`. Every frame in this README comes from the test suite's mock
-Prism Central, not from a real one.*
+<p align="center">
+  <img src="docs/assets/demo.gif" width="100%" alt="A recorded Nutsh session: the Dashboard, the VM table from the palette, a filter narrowing the rows, a VM's action menu, a switch to a second Prism Central, and back to the Dashboard.">
+</p>
 
 ## Status
 
