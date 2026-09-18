@@ -1,27 +1,38 @@
 //! One tokio task per subscription pushes generation-tagged messages into a channel; the UI
 //! drains them into the store. Cycles never overlap: the sleep starts after `Complete`.
 //!
-//! Channel contract: the receiver drains the channel every loop iteration. A full channel
-//! parks the pollers on purpose - dropping a `Page` would silently truncate a generation, and
-//! a table would then show fewer rows than the server holds with nothing saying so. A capacity
-//! of 64 is a reasonable one: it holds several cycles' worth of pages for the handful of
-//! subscriptions a screen opens, so a poller only ever waits for a receiver that has stopped
-//! draining altogether. When the receiver is gone for good, every send fails and each task
-//! returns rather than fetching for nobody.
+//! A full channel parks the pollers on purpose - dropping a `Page` would silently truncate a
+//! generation. 64 holds several cycles' worth of pages for a screen's subscriptions, so a
+//! poller only waits for a receiver that stopped draining; a receiver gone for good ends
+//! every task.
 
 use std::collections::HashMap;
+
 use std::sync::atomic::{AtomicBool, AtomicU32, AtomicU64, Ordering};
+
 use std::sync::{Arc, Mutex, PoisonError};
+
 use std::time::Duration;
 
 use nutsh_prism::{Entity, ListOptions, PrismError};
+
 use tokio::sync::{Notify, mpsc};
+
 use tokio::task::JoinHandle;
 
 use crate::actions::{Outcome, PlanRef};
+
 use crate::journal::JournalId;
+
 use crate::source::Source;
+
 use crate::store::{Failure, TableKey, Update};
+
+mod cycle;
+mod probe;
+
+use cycle::*;
+use probe::*;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 pub struct SubId(pub u64);
@@ -46,33 +57,17 @@ pub struct Subscription {
     /// An OData `$orderby`, likewise. `None` sends the kind's curated `Kind::orderby`, so a
     /// pane that names its own order keeps it and every other list gets the catalog's.
     pub orderby: Option<String>,
-    /// The rows one cycle fetches at most: the walk stops at the first page boundary at or
-    /// past this, whatever the server's total, and the header's `shown/total` shows the
-    /// truncation. `None` walks the whole collection.
-    ///
-    /// The boundary is a page, not a row, because paging is by `$page`: the offset of a page
-    /// is `page * $limit`, so `$limit` cannot be trimmed mid-walk without moving the rows
-    /// under it.
-    ///
-    /// Seeded from `Kind::max_rows` by the constructors that build a list walk. Every kind in
-    /// the generated catalog carries one - its curated budget, else
-    /// `catalog::DEFAULT_MAX_ROWS`, which the generator writes in - so a list built from the
-    /// catalog is always bounded, and no default is applied here: a `Kind` that said `None`
-    /// while this silently capped it would be a catalog that lies about its own kinds.
-    ///
-    /// Unlike `orderby`, `None` here means *no* budget, which is what a caller that must have
-    /// every row asks for and what the single-entity constructors have nothing to use.
+    /// The rows one cycle fetches at most: the walk stops at the first page boundary at or past
+    /// this, whatever the server's total, and the header's `shown/total` shows the truncation.
+    /// A page boundary because `$page` offsets are `page * $limit`. Seeded from `Kind::max_rows`,
+    /// which every generated kind carries, so no default is applied here; `None` is no budget.
     pub max_rows: Option<u32>,
     /// Run exactly one cycle, send [`Msg::Done`], and return. The receiver reaps the entry when
     /// it drains that message, which is after everything the cycle sent; see [`Msg::Done`].
     pub once: bool,
-    /// Whether the idle pause stops this subscription. `true` for every list, pane and detail;
-    /// `false` for a task watch, which is the user's own pending action, and for a `once`,
-    /// which has one cycle to run and then returns.
-    ///
-    /// A task watch is a [`Subscription::single`] like any other, so no constructor can tell
-    /// the two apart: [`Subscription::watching`] is what clears the flag, and
-    /// `TaskIndex::watch` is its one caller.
+    /// Whether the idle pause stops this subscription: `true` for every list, pane and detail,
+    /// `false` for a task watch (the user's own pending action) and a `once`. A task watch is a
+    /// `single` like any other, so [`Subscription::watching`] is what clears the flag.
     pub pausable: bool,
 }
 
@@ -184,19 +179,18 @@ impl Subscription {
 /// Rows a pane fetches beyond the ones it draws, so a row appearing at the top does not empty
 /// the bottom of the pane before the next cycle.
 const PANE_HEADROOM: u32 = 10;
+
 /// The smallest budget a pane asks for. Below this the request is the cost, not the rows.
 const PANE_MIN_ROWS: u32 = 20;
+
 /// The `$limit` cap: the client's own constant rather than a copy of it, so there is one
 /// spelling of it in reach of this file and a drift is impossible rather than merely tested
 /// for. [`pane_budget`] stays pure - this is a `const`, not a client.
 const PAGE_LIMIT: u32 = nutsh_prism::client::PAGE_LIMIT_MAX;
 
-/// `(page_size, max_rows)` for a pane drawn `rows` tall. `$limit` is capped at 100 either way,
-/// so a very tall pane pages; the budget is what stops the walk.
-///
-/// This is correct only because a pane's order is deterministic - the curated `Kind::orderby`
-/// and the pane's own `orderby` guarantee it, which is why [`Subscription::pane`] already
-/// carries one. `shown/total` stays honest because `total` is still the server's, off page 0.
+/// `(page_size, max_rows)` for a pane drawn `rows` tall: `$limit` caps at 100, the budget
+/// stops the walk. Sound only because a pane's order is deterministic - `Kind::orderby` and
+/// the pane's own - and `total` is still the server's, off page 0.
 pub fn pane_budget(rows: usize) -> (u32, u32) {
     let needed = u32::try_from(rows)
         .unwrap_or(u32::MAX)
@@ -218,216 +212,10 @@ pub fn idle_state(last_input: std::time::Instant, now: std::time::Instant) -> bo
 /// one, and a message that outlived a context switch can be recognised as the old one's.
 static NEXT_EPOCH: AtomicU64 = AtomicU64::new(1);
 
-const MAX_BACKOFF: Duration = Duration::from_secs(60);
-
 /// The floor for `Subscription::interval`. Public because `refresh::parse` refuses a smaller
 /// number rather than clamping it, and the floor is cited there rather than copied: the
 /// parser's refusal and the poller's clamp are the same number.
 pub const MIN_INTERVAL: Duration = Duration::from_secs(1);
-
-/// Pages one cycle walks at most. An interactive table never needs more than 20 000 rows; the
-/// walk returns `Ok(())` at the cap, so the partial list still completes and the header's
-/// `rows`/`total` shows the truncation instead of the screen hanging on a paging loop.
-const MAX_PAGES: u32 = 200;
-
-/// Consecutive skips before a cycle walks whatever the probe says.
-pub(crate) const MAX_SKIPS: u32 = 9;
-
-/// What the probe knows about one table between cycles. **Never derived from `rows`:** the rows
-/// are in the table's own `orderby` - creation order for both armed kinds - while `probe_by`
-/// is last-modified, so the two name different rows almost always and a comparison against
-/// `rows[0]` would mismatch on its first cycle and disarm by construction.
-#[derive(Debug, Clone, Default, PartialEq, Eq)]
-pub(crate) enum ProbeState {
-    /// Not calibrated yet: the next cycle probes *and* walks.
-    #[default]
-    Unarmed,
-    /// This Prism Central did not honour `$orderby` on `probe_by`, or reports no total. Never
-    /// probe this table again this session.
-    Disarmed,
-    Armed {
-        sort_value: String,
-        ext_id: String,
-        total: u64,
-        skips: u32,
-    },
-}
-
-/// One `$limit=1` answer: the envelope's total and one row.
-#[derive(Debug, Clone, PartialEq, Eq)]
-pub(crate) struct ProbeAnswer {
-    pub sort_value: Option<String>,
-    /// `None` when the collection was empty. Distinct from a row that carries no `probe_by`
-    /// value: an empty table teaches calibration nothing, where a row without the field
-    /// proves the probe can never decide.
-    pub ext_id: Option<String>,
-    pub total: Option<u64>,
-}
-
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
-pub(crate) enum ProbeDecision {
-    Skip,
-    Walk,
-}
-
-/// Skip the walk only when the newest row by last-modified is the same row with the same
-/// timestamp *and* the count is unchanged. A stronger claim than "the first row of page 0 is
-/// unchanged", for the same one request.
-pub(crate) fn probe_decision(
-    state: &ProbeState,
-    answer: &ProbeAnswer,
-    dirty: bool,
-) -> ProbeDecision {
-    if dirty {
-        return ProbeDecision::Walk;
-    }
-    let ProbeState::Armed {
-        sort_value,
-        ext_id,
-        total,
-        skips,
-    } = state
-    else {
-        return ProbeDecision::Walk;
-    };
-    if *skips >= MAX_SKIPS {
-        return ProbeDecision::Walk;
-    }
-    let (Some(seen), Some(seen_id), Some(now_total)) =
-        (&answer.sort_value, &answer.ext_id, answer.total)
-    else {
-        return ProbeDecision::Walk;
-    };
-    if seen == sort_value && seen_id == ext_id && now_total == *total {
-        ProbeDecision::Skip
-    } else {
-        ProbeDecision::Walk
-    }
-}
-
-/// What a cycle that probed **and** walked leaves behind.
-///
-/// A probe is only sound if the Prism Central honours `$orderby` on `probe_by`: if the probe's
-/// row carries a value at least as recent as the maximum across every row the walk returned,
-/// the PC sorted. `walk` is `Some` on the one cycle that asks the question - the first
-/// eligible one, which walks *before* it probes so the answer is at least as recent as
-/// anything the walk saw - and `None` afterwards, when the answer is only refreshing the
-/// baseline of a table this Prism Central has already sorted correctly once.
-///
-/// Both sides are **parsed** rather than compared as bytes. Prism trims trailing zeros from
-/// fractional seconds - `crates/mockpc/fixtures-lab/prism/v4.4/config/tasks.json` holds
-/// `2026-09-05T17:36:01.21951Z` beside `2026-09-05T17:36:01.220153Z` - so the values are of
-/// variable length, and one whose fraction is a prefix of another's compares *greater* by byte
-/// order while being earlier in time, `Z` being 0x5A and a digit at most 0x39. A comparison
-/// that got that backwards would disarm a Prism Central that sorted, for the session.
-///
-/// Note what this does *not* prove: an earlier draft claimed it validated `total` honesty, and
-/// it cannot - both totals are the same `totalAvailableResults` read from the same page 0.
-pub(crate) fn calibrate(
-    state: &ProbeState,
-    answer: &ProbeAnswer,
-    walk: Option<&Walk>,
-) -> ProbeState {
-    if *state == ProbeState::Disarmed {
-        return ProbeState::Disarmed;
-    }
-    if answer.ext_id.is_none() && answer.sort_value.is_none() {
-        // The collection was empty when the probe asked. Nothing was proven either way, and a
-        // table that merely happens to hold no rows for one cycle must not lose its probe for
-        // the session.
-        return state.clone();
-    }
-    let (Some(sort_value), Some(ext_id), Some(total)) = (
-        answer.sort_value.clone(),
-        answer.ext_id.clone(),
-        answer.total,
-    ) else {
-        // No total to compare, or a row that does not carry the field: nothing the probe could
-        // ever decide on.
-        return ProbeState::Disarmed;
-    };
-    let probed = instant_of(&sort_value);
-    // The calibrating cycle **requires** the comparison it exists to make. A probe answer this
-    // program cannot parse, and a walk that returned rows without one readable `probe_by` value
-    // among them, are both a Prism Central answering something other than the RFC 3339
-    // timestamp its own spec declares - and arming a table whose `$orderby` was never validated
-    // is the one direction this check exists to prevent. A walk over an empty collection proves
-    // nothing either way and is not held against it.
-    if *state == ProbeState::Unarmed
-        && (probed.is_none() || walk.is_some_and(|w| w.max_sort.is_none() && w.saw_rows))
-    {
-        return ProbeState::Disarmed;
-    }
-    if let Some(max) = walk.and_then(|w| w.max_sort.as_deref()) {
-        match (probed, instant_of(max)) {
-            // A value that will not parse is a value the probe cannot compare, whichever side
-            // it is on.
-            (Some(probed), Some(newest)) if probed >= newest => {}
-            _ => return ProbeState::Disarmed,
-        }
-    }
-    ProbeState::Armed {
-        sort_value,
-        ext_id,
-        total,
-        skips: 0,
-    }
-}
-
-/// One RFC 3339 timestamp as an instant, or `None` when the value is not one.
-fn instant_of(s: &str) -> Option<time::OffsetDateTime> {
-    time::OffsetDateTime::parse(s, &time::format_description::well_known::Rfc3339).ok()
-}
-
-/// The probe's state for one subscription, shared between the `Scheduler`'s entry and the task
-/// that polls. It lives here rather than on `store::Table` because a `Table` is inside `Store`
-/// on the UI thread and this task holds no reference to one: the only reader and the only
-/// writer of a probe baseline are both here.
-#[derive(Debug, Default)]
-pub(crate) struct ProbeCell {
-    state: Mutex<ProbeState>,
-    /// The next cycle must walk, whatever the probe would say.
-    dirty: AtomicBool,
-    /// Pages the last completed walk took. Below two, probing costs what walking costs.
-    pages: AtomicU32,
-}
-
-impl ProbeCell {
-    fn state(&self) -> ProbeState {
-        self.state
-            .lock()
-            .unwrap_or_else(PoisonError::into_inner)
-            .clone()
-    }
-
-    fn set(&self, state: ProbeState) {
-        *self.state.lock().unwrap_or_else(PoisonError::into_inner) = state;
-    }
-
-    fn pages(&self) -> u32 {
-        self.pages.load(Ordering::Relaxed)
-    }
-
-    fn set_pages(&self, pages: u32) {
-        self.pages.store(pages, Ordering::Relaxed);
-    }
-
-    pub(crate) fn mark_dirty(&self) {
-        self.dirty.store(true, Ordering::Relaxed);
-    }
-
-    fn take_dirty(&self) -> bool {
-        self.dirty.swap(false, Ordering::Relaxed)
-    }
-
-    /// A skip: the baseline stands, and one more skip is on the clock.
-    fn skipped(&self) {
-        let mut guard = self.state.lock().unwrap_or_else(PoisonError::into_inner);
-        if let ProbeState::Armed { skips, .. } = &mut *guard {
-            *skips += 1;
-        }
-    }
-}
 
 /// What a subscription reports. Every message names its subscription and table so the
 /// receiver can route it, and its generation so stale cycles are dropped.
@@ -489,21 +277,10 @@ pub enum Msg {
         /// extId → display name, in the order the cycle read them.
         names: Vec<(String, String)>,
     },
-    /// A `once` subscription has run its cycle and returned; the receiver reaps it with
-    /// [`Scheduler::reap`].
-    ///
-    /// Reaping on the *receiver* side is the whole point. The channel buffers 64 messages and
-    /// `App::apply` drops anything failing [`Scheduler::is_live`], so an entry removed on the
-    /// sender side - by the task itself, or by a sweep some other `subscribe` triggered -
-    /// races the drain and can gate out the very `Entity` a `once` exists to deliver. This
-    /// message is sent last, so by the time it is drained there is nothing left to lose, and
-    /// `tasks` still cannot grow: every `once` is removed exactly once, by the receiver that
-    /// saw its last message.
-    ///
-    /// `epoch` names the scheduler that sent it, because this is the one message that *removes*
-    /// a subscription: the receiver keeps one poll channel across a context switch while
-    /// subscription ids restart with the new scheduler, so a `Done` drained after the switch
-    /// would otherwise silently stop whichever view of the new session took that id.
+    /// A `once` subscription has run its cycle; the receiver reaps it with [`Scheduler::reap`].
+    /// On the receiver side because an entry removed on the sender side races the drain and can
+    /// gate out the very `Entity` the `once` exists to deliver; sent last, so nothing is left to
+    /// lose. `epoch` names the scheduler, since ids restart across a context switch.
     Done { epoch: u64, sub: SubId },
     /// The result of a mutation, on the same channel as the polls. A third `mpsc` was rejected:
     /// `run`'s `select!` would grow a fifth arm and a *third* place that folds asynchronous
@@ -575,13 +352,9 @@ impl Msg {
     }
 }
 
-/// What a `Scheduler` entry and its polling task both hold: the `Notify` the entry rings to
-/// run a cycle now, and the probe's state between cycles. One `Arc` rather than two, so the
-/// pair cannot drift apart and `run` takes a handle instead of a longer parameter list.
-///
-/// No `Default`, deliberately: a `Controls` built without its `Scheduler`'s flag would carry a
-/// private one no [`Scheduler::set_idle`] can reach, and its task would then never pause -
-/// silently, and only for the one subscription that got it.
+/// What a `Scheduler` entry and its polling task both hold: the `Notify` that runs a cycle
+/// now, and the probe's state between cycles. No `Default`: a `Controls` built without the
+/// scheduler's idle flag would carry one no [`Scheduler::set_idle`] can reach.
 #[derive(Debug)]
 struct Controls {
     wake: Notify,
@@ -646,12 +419,9 @@ impl Scheduler {
         }
     }
 
-    /// Spawns the polling task, so a tokio runtime must be entered: the TUI subscribes from
-    /// inside its runtime, and tests from `#[tokio::test]`.
-    ///
-    /// No sweep of finished tasks here, deliberately: a `once` is reaped by the receiver when
-    /// it drains that subscription's [`Msg::Done`], never by an unrelated `subscribe` that
-    /// happens to run between a cycle's send and the UI's next drain.
+    /// Spawns the polling task, so a tokio runtime must be entered. No sweep of finished tasks
+    /// here: a `once` is reaped by the receiver when it drains its [`Msg::Done`], never by an
+    /// unrelated `subscribe` between a send and the drain.
     pub fn subscribe(&mut self, sub: Subscription) -> SubId {
         let id = SubId(self.next_id);
         self.next_id += 1;
@@ -711,20 +481,10 @@ impl Scheduler {
         }
     }
 
-    /// Runs a cycle now, without waiting out the interval or the back-off - a failing view
-    /// that the user retries by hand must not sit through a doubled wait. A task busy with a
-    /// cycle keeps the permit `Notify` stores and runs one extra cycle straight after it.
-    ///
-    /// A task that has **returned** is spawned again instead: a list that answered 404 stops
-    /// polling (see [`run`]), and waking a task that is no longer there would make `^r` over
-    /// that view do nothing at all - no request, no state change, nothing on the frame. The
-    /// stop is for the screen nobody is watching; a person asking for a retry is not that. The
-    /// cycle it runs clears `not_served` if the answer has changed, and stops again if it has
-    /// not. A `once` is never respawned: its entry lives only until the receiver drains its
-    /// [`Msg::Done`], and a second cycle would send a second one.
-    ///
-    /// It also **forces a walk**: "refresh" means refresh, and a probe would answer "nothing
-    /// changed" to a person who has just said they do not believe that.
+    /// Runs a cycle now, without the interval or the back-off. A task that has returned - a list
+    /// that answered 404 stops polling - is spawned again, so `^r` over that view asks again and
+    /// clears `not_served` if the answer changed; a `once` is never respawned. It also forces a
+    /// walk: a probe answering "nothing changed" to somebody who just said otherwise is no answer.
     pub fn refresh(&mut self, id: SubId) {
         let (client, tx, epoch, generations) = (
             self.client.clone(),
@@ -757,17 +517,9 @@ impl Scheduler {
         ));
     }
 
-    /// End the listing walk after the page it is on, land what staged, and pause the
-    /// subscription: no further cycle until [`Scheduler::refresh`], a re-open or a context
-    /// switch.
-    ///
-    /// The staged pages land because the walk returns `Ok(())` and [`run`] sends its
-    /// `Complete` as it would for a walk that finished. They are already paid for, and
-    /// discarding them would make the keystroke a punishment.
-    ///
-    /// `false` when there is nothing to stop: the id is not subscribed, or its task has
-    /// already returned and no longer reads the flag. Either way nothing changes, and the
-    /// caller says so rather than claiming a stop that did not happen.
+    /// End the listing walk after the page it is on, land what staged, and pause until
+    /// [`Scheduler::refresh`], a re-open or a context switch. The staged pages land because the
+    /// walk returns `Ok` and [`run`] sends its `Complete`. `false` when there is nothing to stop.
     pub fn stop(&self, id: SubId) -> bool {
         match self.tasks.get(&id) {
             Some(task) if !task.handle.is_finished() => {
@@ -778,12 +530,8 @@ impl Scheduler {
         }
     }
 
-    /// How often this subscription cycles, or `None` for no schedule at all - `ctrl-t`'s `off`
-    /// and `:refresh off`. Clears a `ctrl-x` stop either way: a provisional silence is being
-    /// replaced, by a rhythm or by a permanent one.
-    ///
-    /// A named interval **arms**, so the new rhythm starts with a cycle: you cannot ask for a
-    /// rhythm and be given silence. `off` deliberately does not.
+    /// How often this subscription cycles, or `None` for no schedule (`off`). Clears a `ctrl-x`
+    /// stop either way. A named interval arms, so the new rhythm starts with a cycle; `off` does not.
     pub fn set_interval(&self, id: SubId, every: Option<Duration>) -> bool {
         let Some(task) = self.tasks.get(&id) else {
             return false;
@@ -800,12 +548,9 @@ impl Scheduler {
         true
     }
 
-    /// The same, for every **pausable** subscription over `kind`: what `ctrl-t` on a view asks
-    /// for. Returns how many it reached, which is what a test asserts against.
-    ///
-    /// `pausable` and not a list of exempt kinds: a task watch is the user's own pending
-    /// mutation and a `once` has one cycle to run, and those are exactly the two the idle pause
-    /// exempts. One flag, two features, no second list to keep in step.
+    /// The same, for every pausable subscription over `kind`: what `ctrl-t` asks for. Returns how
+    /// many it reached. `pausable` rather than a list of exempt kinds: a task watch and a `once`
+    /// are exactly the two the idle pause exempts, one flag for both.
     pub fn set_interval_kind(&self, kind: &str, every: Option<Duration>) -> usize {
         let ids: Vec<SubId> = self
             .tasks
@@ -852,12 +597,8 @@ impl Scheduler {
         self.idle.load(Ordering::Relaxed)
     }
 
-    /// The flag itself, for the pollers that are neither a `Subscription` nor exempt and so
-    /// have no task of this scheduler's to consult it: the Disaster Recovery page's sampler and
-    /// the name cache's warm-up, each a `tokio::spawn` its owner holds the handle to.
-    ///
-    /// The two exemptions are the stats poller, whose counters are what a person reads from
-    /// across the room, and a task watch, which is a `Subscription` with `pausable` cleared.
+    /// The flag itself, for the pollers that are not subscriptions and consult it themselves: the
+    /// DR sampler and the name warm-up. The stats poller and a task watch are the two exemptions.
     pub fn idle_flag(&self) -> Arc<AtomicBool> {
         self.idle.clone()
     }
@@ -882,12 +623,9 @@ impl Scheduler {
         }
     }
 
-    /// Every subscription this session holds runs a cycle now, stopped ones included.
-    ///
-    /// The person's version of [`Scheduler::refresh_all`]: that one is the idle pause's wake and
-    /// leaves a stopped poller stopped, which is right for a wake and wrong for somebody who has
-    /// just asked for everything. Each is [`Scheduler::refresh`], so the stop flag is cleared and
-    /// the walk is forced, one subscription at a time.
+    /// Every subscription this session holds runs a cycle now, stopped ones included: the
+    /// person's version of [`Scheduler::refresh_all`], which is the idle wake and leaves a
+    /// stopped poller stopped. Each is [`Scheduler::refresh`], so the walk is forced.
     pub fn refresh_everything(&mut self) -> usize {
         let ids: Vec<SubId> = self.tasks.keys().copied().collect();
         for id in &ids {
@@ -913,546 +651,6 @@ impl Drop for Scheduler {
         }
     }
 }
-
-async fn run(
-    client: Arc<dyn Source>,
-    tx: mpsc::Sender<Msg>,
-    epoch: u64,
-    id: SubId,
-    sub: Subscription,
-    controls: Arc<Controls>,
-    generations: Arc<AtomicU64>,
-) {
-    let mut backoff = poll_interval(sub.interval);
-    loop {
-        let dirty = controls.probe.take_dirty();
-        let Some((mut generation, mut error)) = attempt(
-            client.as_ref(),
-            &tx,
-            id,
-            &sub,
-            &controls,
-            &generations,
-            dirty,
-        )
-        .await
-        else {
-            return;
-        };
-        // A list 404 is not the endpoint's absence yet. A restored pin routes a namespace at a
-        // version this Prism Central may not serve, and `Client::repair_after` re-negotiates
-        // that namespace inside the very call that failed - so the request *behind* a 404 is
-        // the one that routes to the version that answers, and stopping on the first would
-        // strand a kind the PC serves perfectly well (the same holds for an endpoint that was
-        // 5xx and has come back). Every list 404 therefore gets one immediate second attempt,
-        // inside the same cycle so the view sees one answer rather than a raw error that
-        // becomes a sentence, and only when that answers 404 too is it the endpoint's own.
-        if is_missing_list(&sub, error.as_ref()) {
-            let Some(second) = attempt(
-                client.as_ref(),
-                &tx,
-                id,
-                &sub,
-                &controls,
-                &generations,
-                true,
-            )
-            .await
-            else {
-                return;
-            };
-            (generation, error) = second;
-        }
-        let not_served = is_missing_list(&sub, error.as_ref());
-        // What the server answered about the endpoint, kept where everything that would
-        // *volunteer* the same request can see it - a page's panes, the stats counters, the
-        // name warm-up, the DR sampler - rather than only on the table that paid for the 404.
-        // A cycle that completes takes it back, which is what makes `^r` a way out and not a
-        // formality.
-        if not_served {
-            client.mark_missing(sub.key.kind);
-        } else if error.is_none() && is_endpoint_list(&sub) {
-            client.forget_missing(sub.key.kind);
-        }
-        let failure = error
-            .as_ref()
-            .map(|e| Failure::of(sub.key.kind, e, not_served));
-        let msg = match &failure {
-            None => Msg::Complete {
-                sub: id,
-                key: sub.key.clone(),
-                generation,
-            },
-            Some(f) => Msg::Error {
-                sub: id,
-                key: sub.key.clone(),
-                generation,
-                error: f.clone(),
-            },
-        };
-        if tx.send(msg).await.is_err() {
-            return;
-        }
-        if sub.once {
-            // Last, and only now: the receiver reaps the entry when it drains this, by which
-            // time every message of the cycle is already in front of it in the channel.
-            let _ = tx.send(Msg::Done { epoch, sub: id }).await;
-            return;
-        }
-        // Twice over, the same answer, and it would be the same answer every cycle after
-        // that: a retry loop would run for ever behind a screen nobody is watching. The table
-        // keeps the flag and draws the reason, and `Scheduler::refresh` is what starts this
-        // task again for a person who asks.
-        if not_served {
-            return;
-        }
-        // And the same for a credential this Prism Central refused, on a sharper reason than
-        // the one above. A 404 retried for ever wastes requests; a password retried for ever
-        // is failures counted against a real account. `Client::send` already refuses to put
-        // one on the wire, so this loop would spin against a gate rather than against the
-        // Prism Central - but a task that has nothing left to do should stop, and the table
-        // keeps its rows and draws `Failure::text` either way.
-        if failure.as_ref().is_some_and(Failure::is_terminal) {
-            return;
-        }
-        // Per round rather than once before the loop, so a back-off is clamped against the
-        // interval that is current - which is what a person who has just slowed a failing view
-        // expects. `max(1)` because 0 means `off`, and `wait_for_cycle` is what reads that.
-        let interval = poll_interval(Duration::from_secs(u64::from(
-            controls.interval.load(Ordering::Relaxed).max(1),
-        )));
-        let (wait, next) = next_backoff(interval, backoff, error.as_ref());
-        backoff = next;
-        wait_for_cycle(sub.pausable, &controls, wait).await;
-    }
-}
-
-/// Waits until this subscription's next cycle: `wait`, or - while the session is idle and this
-/// subscription pauses - until something wakes it. Nobody is reading it, so it waits on the
-/// `Notify` it already holds rather than sleeping the interval, which costs no task, channel or
-/// message.
-///
-/// `pausable` rather than the whole [`Subscription`]: the wait consults that one flag and
-/// nothing else of it - not `interval`, which arrives already backed off as `wait`, and not
-/// `once`, which never reaches here.
-///
-/// The flag is read at **both** ends of the sleep. The pause is set from `App::tick`, one
-/// second at a time, so on any interval longer than that a task is almost always already asleep
-/// when it fires; a task committed to its interval must not buy one more cycle with it.
-async fn wait_for_cycle(pausable: bool, controls: &Controls, first: Duration) {
-    let mut wait = first;
-    loop {
-        // Three ways to be waiting for a wake rather than for a clock, and they are one
-        // condition: a kind with no schedule at all (`ctrl-t`'s `off`), a walk the user stopped
-        // by hand (`ctrl-x`), and a session the idle pause has stopped. The first two are the
-        // view's own silence and outrank the third, which is why neither consults `pausable`.
-        let manual = controls.interval.load(Ordering::Relaxed) == 0;
-        if manual
-            || controls.stop.load(Ordering::Relaxed)
-            || (pausable && controls.idle.load(Ordering::Relaxed))
-        {
-            controls.wake.notified().await;
-        } else {
-            tokio::select! {
-                _ = tokio::time::sleep(wait) => {
-                    // The idle flag is read at both ends of the sleep: the pause is set one
-                    // second at a time, so on any longer interval a task is almost always
-                    // already asleep when it fires, and one committed to its interval must not
-                    // buy one more cycle with it.
-                    if !(pausable && controls.idle.load(Ordering::Relaxed)) {
-                        return;
-                    }
-                    continue;
-                }
-                _ = controls.wake.notified() => {}
-            }
-        }
-        // Only an **armed** wake ends the wait. An unarmed one is a schedule that changed
-        // underneath us, so the interval is re-read and the wait starts again on the new one:
-        // that is what stops an `off` issued while this task sleeps from costing one last
-        // cycle, and it is why `ctrl-r` on a manual subscription buys exactly one cycle - the
-        // loop comes straight back here.
-        if controls.armed.swap(false, Ordering::Relaxed) {
-            return;
-        }
-        wait = poll_interval(Duration::from_secs(u64::from(
-            controls.interval.load(Ordering::Relaxed),
-        )));
-    }
-}
-
-/// A 404 on a **top-level list** path: the path is the whole of what was asked for, so the
-/// answer is about this Prism Central and not about a row.
-///
-/// A 404 on a single entity is one row that has gone. A 404 on a *child* list carries its
-/// parents' ext ids in the path (`TableKey::under`), so a parent deleted from another client
-/// answers exactly this - that is the parent's absence, not the endpoint's, and calling it
-/// "not served by this Prism Central" would be a claim about the server for what is one gone
-/// row. Both are ordinary errors, retried like any other.
-fn is_missing_list(sub: &Subscription, error: Option<&PrismError>) -> bool {
-    is_endpoint_list(sub) && matches!(error, Some(PrismError::NotFound(_)))
-}
-
-/// A subscription over the kind's **own** list path, with no parent ids in it and no single
-/// entity: the one whose answer is about the endpoint rather than about a row. Both the 404
-/// that is remembered and the completion that forgets it are judged on it, so they cannot
-/// come to disagree about which subscription speaks for the endpoint.
-fn is_endpoint_list(sub: &Subscription) -> bool {
-    sub.single.is_none() && sub.key.parents.is_empty()
-}
-
-/// One cycle's requests and the answer they settled on: the generation it ran under, and the
-/// error if it failed. `None` is the receiver having gone away, which is the only reason a task
-/// stops in the middle of a cycle rather than at the end of one.
-async fn attempt(
-    client: &dyn Source,
-    tx: &mpsc::Sender<Msg>,
-    id: SubId,
-    sub: &Subscription,
-    controls: &Controls,
-    generations: &AtomicU64,
-    dirty: bool,
-) -> Option<(u64, Option<PrismError>)> {
-    let generation = generations.fetch_add(1, Ordering::Relaxed) + 1;
-    let result = match &sub.single {
-        Some(ext_id) => fetch_one(client, tx, id, sub, generation, ext_id).await,
-        None => {
-            // Before the first request, so the frame can say `listing…` and anchor the elapsed
-            // time while the first page is still on the wire. Only a listing cycle: a `get_in`
-            // has one request and nothing to walk.
-            tx.send(Msg::Started {
-                sub: id,
-                key: sub.key.clone(),
-                generation,
-            })
-            .await
-            .ok()?;
-            cycle(client, tx, id, sub, controls, generation, dirty).await
-        }
-    };
-    Some((generation, result.err()))
-}
-
-/// A subscription's interval as the whole seconds `Controls` stores, floored: a caller that
-/// passes zero must not turn its own subscription off by accident. 0 in `Controls` means `off`
-/// and is only ever written by [`Scheduler::set_interval`].
-fn secs_of(interval: Duration) -> u32 {
-    u32::try_from(poll_interval(interval).as_secs()).unwrap_or(u32::MAX)
-}
-
-/// The interval a cycle actually waits.
-fn poll_interval(interval: Duration) -> Duration {
-    interval.max(MIN_INTERVAL)
-}
-
-/// How long to wait before the next cycle, and the back-off to carry into it. A success
-/// resets both to the interval. A failure waits the back-off it arrived with - so the first
-/// failure waits exactly the interval - and doubles it for the next one, never below the
-/// interval and never above a minute. `RateLimited` waits what the server asked when that is
-/// longer than the back-off.
-fn next_backoff(
-    interval: Duration,
-    current: Duration,
-    error: Option<&PrismError>,
-) -> (Duration, Duration) {
-    let Some(e) = error else {
-        return (interval, interval);
-    };
-    // Whatever the far end asked to be left for - a 429's `Retry-After`, and a 503's, which
-    // a Prism Central under load does send - but never less than the back-off already earned.
-    let wait = match e.retry_after() {
-        Some(asked) => asked.max(current),
-        None => current,
-    };
-    (
-        wait,
-        (current * 2).clamp(interval, MAX_BACKOFF.max(interval)),
-    )
-}
-
-/// Whether the walk fetches another page after this one. A kind that does not page, an empty
-/// page, the row budget, and the page cap all end it; then a known total decides, and without
-/// one only a full page suggests there is more.
-///
-/// `budget` is the subscription's `max_rows`: a walk that has reached it stops there, however
-/// many rows the server holds, so a table over a collection a Prism Central never trims costs
-/// a fixed handful of pages a cycle instead of the whole collection.
-fn more_pages(
-    pages: bool,
-    count: u64,
-    limit: u64,
-    fetched: u64,
-    total: Option<u64>,
-    page: u32,
-    budget: Option<u64>,
-) -> bool {
-    pages
-        && count > 0
-        && page + 1 < MAX_PAGES
-        && budget.is_none_or(|b| fetched < b)
-        && match total {
-            Some(t) => fetched < t,
-            None => count == limit,
-        }
-}
-
-/// What a walk cost and what it saw, for the probe.
-pub(crate) struct Walk {
-    pages: u32,
-    /// The largest `probe_by` value across every row of the walk, for calibration. `None` when
-    /// the walk was not scanned for one, when it returned no row, and when no row it returned
-    /// carried a value [`instant_of`] could read - which is why `saw_rows` is beside it.
-    max_sort: Option<String>,
-    /// Whether the walk returned any row at all. A calibrating walk that read rows and found no
-    /// readable value among them has shown this Prism Central answers something the probe can
-    /// never compare; one over an empty collection has shown nothing.
-    saw_rows: bool,
-}
-
-/// One list cycle, with the probe when the kind and the table qualify.
-///
-/// Three conditions, checked here: the kind carries a curated `probe_by`, this table's probe
-/// is not `Disarmed`, and its last walk took **two or more pages**. A one-page table's probe
-/// costs what its walk costs, so probing it is pure loss. That the field is a declared
-/// timestamp and that the endpoint takes `$orderby` and `$limit` are the generator's checks,
-/// made once against the spec in `xtask::catalog::overlay::apply`; whether this Prism Central
-/// actually honours the order is [`calibrate`]'s, made once against the server.
-async fn cycle(
-    client: &dyn Source,
-    tx: &mpsc::Sender<Msg>,
-    id: SubId,
-    sub: &Subscription,
-    controls: &Controls,
-    generation: u64,
-    dirty: bool,
-) -> Result<(), PrismError> {
-    let probe_cell = &controls.probe;
-    let Some(field) = sub.key.kind.probe_by else {
-        let walk = list(client, tx, id, sub, controls, generation, None).await?;
-        probe_cell.set_pages(walk.pages);
-        return Ok(());
-    };
-    let state = probe_cell.state();
-    if state == ProbeState::Disarmed || probe_cell.pages() < 2 {
-        // `None`, not the field: neither branch calibrates, and scanning every row of every
-        // page for a maximum nothing will read is per-row work on every cycle for ever.
-        let walk = list(client, tx, id, sub, controls, generation, None).await?;
-        probe_cell.set_pages(walk.pages);
-        return Ok(());
-    }
-    if state == ProbeState::Unarmed {
-        // The calibrating cycle walks whatever the probe would say - [`probe_decision`] answers
-        // `Walk` for every state but `Armed` - so the probe need not come first here, and
-        // asking it *after* the last page is what stops the check racing itself: a probe issued
-        // first is a request older than the walk beside it, so any entity updated during the
-        // walk carries a value newer than the probe's row through no fault of the Prism
-        // Central's, and this one cycle is the one that decides the session. Asked last, the
-        // answer is at least as recent as anything the walk saw on a PC that sorts; one that
-        // ignores `$orderby` still hands back a stale row, and still disarms.
-        let walk = list(client, tx, id, sub, controls, generation, Some(field)).await?;
-        let answer = probe(client, sub, field).await?;
-        let now = std::time::Instant::now();
-        probe_cell.set_pages(walk.pages);
-        probe_cell.set(calibrate(&state, &answer, Some(&walk)));
-        client
-            .metrics()
-            .record_avoidable(now, u64::from(walk.pages) + 1);
-        return Ok(());
-    }
-    // Armed, so the probe goes first: deciding whether the walk happens at all is the whole
-    // point of it. A probe is a real request - it spends a token on the kind's tier and it
-    // counts in `made`.
-    let answer = probe(client, sub, field).await?;
-    let now = std::time::Instant::now();
-    if probe_decision(&state, &answer, dirty) == ProbeDecision::Skip {
-        probe_cell.skipped();
-        // The pages the walk did not take, beside the one request the probe did make: the same
-        // `pages + 1` universe the walking branch below records, so a skip and the walk it
-        // replaced are scored against one denominator.
-        client
-            .metrics()
-            .record_avoided(now, u64::from(probe_cell.pages()));
-        client.metrics().record_avoidable(now, 1);
-        // Nothing staged: `run` sends `Complete`, and `Store::apply` already handles a
-        // `Complete` for a generation whose pages are not the ones staged - rows untouched,
-        // `last_poll` refreshed, `error` cleared, `generation` where it was, so the next real
-        // walk still lands and `● live` stays green because a cycle did complete.
-        return Ok(());
-    }
-    // The sort check is asked once, of an `Unarmed` table, in the branch above. Re-asking it
-    // here would disarm on a benign race and not on a fault: this probe *is* a request older
-    // than the walk under it, so an entity updated between the two is legitimately newer than
-    // the answer the probe holds - and a walk is decided on precisely when the table is
-    // changing. Past that first cycle the walk is not scanned for a maximum at all: `None` for
-    // `probe_by`, and `None` for the walk `calibrate` is handed.
-    let walk = list(client, tx, id, sub, controls, generation, None).await?;
-    probe_cell.set_pages(walk.pages);
-    probe_cell.set(calibrate(&state, &answer, None));
-    client
-        .metrics()
-        .record_avoidable(now, u64::from(walk.pages) + 1);
-    Ok(())
-}
-
-/// One `$limit=1` list ordered by `field` descending: the probe's own question, asked with the
-/// table's filter and parents so it sees the same collection the walk would.
-async fn probe(
-    client: &dyn Source,
-    sub: &Subscription,
-    field: &str,
-) -> Result<ProbeAnswer, PrismError> {
-    let opts = ListOptions {
-        limit: 1,
-        parents: sub.key.parents.clone(),
-        filter: sub.filter.clone(),
-        orderby: Some(format!("{field} desc")),
-        ..Default::default()
-    };
-    let page = client.list_page(sub.key.kind, 0, &opts).await?;
-    let first = page.entities.first();
-    Ok(ProbeAnswer {
-        sort_value: first
-            .and_then(|e| e.raw.get(field))
-            .and_then(serde_json::Value::as_str)
-            .map(str::to_string),
-        ext_id: first.map(|e| e.ext_id.clone()),
-        total: page.total,
-    })
-}
-
-/// A cycle's pages, in order, each pushed as it arrives. `probe_by` is the field whose newest
-/// value across the walk calibrates the probe, and it is `Some` only on the cycle that
-/// calibrates: a kind with no `probe_by`, a disarmed table and every cycle past the first armed
-/// one pass `None`, and pay for no per-row scan.
-async fn list(
-    client: &dyn Source,
-    tx: &mpsc::Sender<Msg>,
-    id: SubId,
-    sub: &Subscription,
-    controls: &Controls,
-    generation: u64,
-    probe_by: Option<&str>,
-) -> Result<Walk, PrismError> {
-    let opts = ListOptions {
-        limit: sub.page_size.clamp(1, PAGE_LIMIT),
-        parents: sub.key.parents.clone(),
-        filter: sub.filter.clone(),
-        // The kind's curated order unless this subscription named one: a page pane keeps its
-        // own, and every other list of a kind with a budget gets the order that makes the
-        // rows the budget keeps the ones worth keeping.
-        orderby: sub
-            .orderby
-            .clone()
-            .or_else(|| sub.key.kind.orderby.map(str::to_string)),
-        // The one place a `$select` is ever set. `can_i` and the version probes reach
-        // `Client::list_page_at` with default options, and a narrowing applied down there would
-        // drop `identities[].identityFilter` from the authorisation lists and grey every action
-        // on every kind as not permitted, without a word. So the scheduler says it, on the
-        // cycle that fills a table, and nothing else does.
-        select: sub.key.kind.select.map(str::to_string),
-    };
-    let limit = u64::from(opts.limit);
-    let budget = sub.max_rows.map(u64::from);
-    let mut page = 0u32;
-    let mut fetched = 0u64;
-    let mut walk = Walk {
-        pages: 0,
-        max_sort: None,
-        saw_rows: false,
-    };
-    // The parsed twin of `walk.max_sort`: the comparison is between instants, never between
-    // bytes, for the reason [`calibrate`] gives.
-    let mut newest: Option<time::OffsetDateTime> = None;
-    loop {
-        let result = client.list_page(sub.key.kind, page, &opts).await?;
-        let count = result.entities.len() as u64;
-        let total = result.total;
-        fetched += count;
-        walk.pages += 1;
-        walk.saw_rows |= count > 0;
-        if let Some(field) = probe_by {
-            for e in &result.entities {
-                // A row whose value will not parse is a row this comparison cannot use; the
-                // generator has already refused a `probe_by` the schema does not declare as a
-                // timestamp, so an unparseable value is a Prism Central answering something
-                // else, and calibration below sees an unparseable probe answer for itself.
-                let Some(at) = e
-                    .raw
-                    .get(field)
-                    .and_then(serde_json::Value::as_str)
-                    .and_then(|seen| instant_of(seen).map(|at| (seen, at)))
-                else {
-                    continue;
-                };
-                if newest.is_none_or(|max| max < at.1) {
-                    newest = Some(at.1);
-                    walk.max_sort = Some(at.0.to_string());
-                }
-            }
-        }
-        // Nobody is draining any more: stop the walk instead of fetching the rest for a
-        // receiver that is gone. `run` returns when its own send fails.
-        if tx
-            .send(Msg::Page {
-                sub: id,
-                key: sub.key.clone(),
-                generation,
-                entities: result.entities,
-                total,
-            })
-            .await
-            .is_err()
-        {
-            return Ok(walk);
-        }
-        // Stopped by hand, after the page rather than before the request that answered it: the
-        // pages that arrived are staged, and `run` sends the `Complete` that lands them.
-        if controls.stop.load(Ordering::Relaxed) {
-            return Ok(walk);
-        }
-        if !more_pages(
-            sub.key.kind.list_params.page,
-            count,
-            limit,
-            fetched,
-            total,
-            page,
-            budget,
-        ) {
-            return Ok(walk);
-        }
-        page += 1;
-    }
-}
-
-/// One `get_in` for a `single` subscription: the parents fill the path, the ext id the last
-/// placeholder. The `Entity` it pushes updates one row without disturbing the list's cycle.
-async fn fetch_one(
-    client: &dyn Source,
-    tx: &mpsc::Sender<Msg>,
-    id: SubId,
-    sub: &Subscription,
-    generation: u64,
-    ext_id: &str,
-) -> Result<(), PrismError> {
-    let entity = client
-        .get_in(sub.key.kind, &sub.key.parents, ext_id)
-        .await?;
-    if tx
-        .send(Msg::Entity {
-            sub: id,
-            key: sub.key.clone(),
-            generation,
-            entity,
-        })
-        .await
-        .is_err()
-    {
-        return Ok(());
-    }
-    Ok(())
-}
-
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -1919,13 +1117,9 @@ mod tests {
         );
     }
 
-    /// Calibration has to compare something, and this is the case that quietly stopped it from
-    /// having to. A probe answer this program cannot parse, and a walk that read rows without
-    /// one readable `probe_by` value among them, are both a Prism Central answering something
-    /// other than the RFC 3339 timestamp its own spec declares; arming on either would arm a
-    /// table whose `$orderby` was never validated, which is the one direction the check exists
-    /// to prevent. A walk over an empty collection is the exception: it proves nothing either
-    /// way, and the probe's own row still arms the table.
+    /// Calibration has to compare something: an unparseable probe answer, or a walk with no
+    /// readable `probe_by` value, must not arm a table whose `$orderby` was never validated. An
+    /// empty walk is the exception: it proves nothing, and the probe's own row still arms.
     #[test]
     fn a_calibration_with_nothing_to_compare_disarms() {
         let probe = answer("2026-09-09T12:00:00Z", "t1", 10);
@@ -1976,13 +1170,9 @@ mod tests {
         );
     }
 
-    /// An armed table is never re-calibrated, and this is why: an armed cycle's probe goes
-    /// first - deciding whether the walk happens at all is the point of it - so it is a request
-    /// older than the walk beside it, and an entity updated between the two carries a value
-    /// newer than the probe's row through no fault of the Prism Central's. A walk is decided on
-    /// precisely when the table is changing, so re-checking would disarm the busiest tables
-    /// after their first busy cycle. `cycle` hands `calibrate` no walk once armed; the baseline
-    /// moves to what the probe saw and the skip count starts again.
+    /// An armed table is never re-calibrated: its probe goes first and is older than the walk,
+    /// so an entity updated between the two looks newer through no fault of the PC's, and
+    /// re-checking would disarm the busiest tables. `cycle` hands `calibrate` no walk once armed.
     #[test]
     fn an_armed_probe_keeps_its_arming_when_the_walk_saw_a_newer_row() {
         let state = armed("2026-09-09T12:00:00Z", "t1", 6109, 4);

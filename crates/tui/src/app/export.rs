@@ -70,7 +70,7 @@ impl App {
             str::to_string,
         );
         let n = sheet.rows.len();
-        self.status = Some(match std::fs::write(&path, sheet.render(format)) {
+        self.status = Some(match write_private(&path, &sheet.render(format)) {
             Ok(()) => format!(
                 "exported {n} row{} to {path}",
                 if n == 1 { "" } else { "s" }
@@ -79,4 +79,21 @@ impl App {
         });
         self.dirty = true;
     }
+}
+
+/// An export is an inventory: written 0600 where the platform can say so, the way the config
+/// file and the cache are, and never through a symlink somebody left at the name.
+fn write_private(path: &str, text: &str) -> std::io::Result<()> {
+    use std::io::Write as _;
+    if std::fs::symlink_metadata(path).is_ok_and(|m| m.file_type().is_symlink()) {
+        return Err(std::io::Error::other("refusing to write through a symlink"));
+    }
+    let mut opts = std::fs::OpenOptions::new();
+    opts.write(true).create(true).truncate(true);
+    #[cfg(unix)]
+    {
+        use std::os::unix::fs::OpenOptionsExt as _;
+        opts.mode(0o600);
+    }
+    opts.open(path)?.write_all(text.as_bytes())
 }

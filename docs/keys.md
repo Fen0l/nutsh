@@ -99,6 +99,7 @@ Entries the Prism Central does not serve are greyed, not hidden, and say why. `:
 | Key | Action |
 |---|---|
 | <kbd>Y</kbd> <kbd>J</kbd> | switch to the raw YAML or JSON |
+| <kbd>w</kbd> | watch this row: polled at the advertised tier's rhythm, a value that changed lit for three seconds; again to stop |
 | <kbd>a</kbd> | actions for this resource |
 | <kbd>ctrl-t</kbd> | how often the underlying view polls |
 | <kbd>esc</kbd> | back to the table |
@@ -203,6 +204,7 @@ the session; `:mouse` turns capture off and writes that to the config file.
 | `:can-i <action> <kind>` | whether your roles permit that action on that kind, and what it needs |
 | `:try <kind>` | ask this Prism Central for a kind the catalog says its API version does not have |
 | `:journal` | every action attempted this session, and what answered; never written to disk |
+| `:export [csv\|json] [path]` | the table in view as it is drawn, to a file; bare, a stamped csv in the working directory |
 | `:activity` | every request this session made, and every table it holds; <kbd>⇥</kbd> switches tab |
 | `:settings` | every setting, its value, where it came from, and the refresh schedule per namespace and kind |
 | `:refresh <interval>` | how often the current view polls: seconds, `auto`, or `off` |

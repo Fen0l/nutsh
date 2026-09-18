@@ -309,6 +309,7 @@ fn is_refusal(e: &PrismError) -> bool {
     matches!(
         e,
         PrismError::Auth
+            | PrismError::Denied(_)
             | PrismError::Forbidden(_)
             | PrismError::NotFound(_)
             | PrismError::Api {

@@ -19,6 +19,8 @@ const OTHER: &str = "/clustermgmt/v4.1/config/clusters";
 /// One VM by ext id: a path `get_path` can both reach and decode, which is what a test that
 /// asserts on the *answers* needs rather than only on the requests.
 const ONE_VM: &str = "/vmm/v4.3/ahv/config/vms/3d0c4a2e-1b8f-4c1a-9e2f-000000000001";
+/// A second row that answers, on another path: what a liveness check has to have.
+const ONE_HOST: &str = "/clustermgmt/v4.3/config/hosts/7b2f2f70-0f6a-4b58-9f9b-000000000020";
 
 fn profile(pc: &MockPc) -> Profile {
     Profile {
@@ -105,28 +107,68 @@ async fn requests_run_concurrently_once_the_credential_is_established() {
     assert!(b.await.unwrap().is_ok());
 }
 
-/// A credential refused midway is refused for good. The client had been authenticated, so the
-/// gate had opened; a 401 on a credential-bearing request shuts it again and latches.
+/// One endpoint answers 401 on a session that everything else still honours. That is the
+/// endpoint's verdict on the account, not a refused credential: the session is checked on a
+/// URL it has already answered, and because it still answers there no password goes out, the
+/// error names the denial, nothing latches, and the session goes on being ridden.
+///
+/// The case is real: a Prism Central whose IAM service answered 401 on `users` spent one
+/// presentation per run for the whole of a day, and each run ended with the credential
+/// "refused" while it was fine.
 #[tokio::test]
-async fn a_401_that_arrives_midway_latches_too() {
+async fn a_401_from_one_endpoint_on_a_live_session_spends_no_password() {
     let pc = MockPc::builder().fail_path(VMS, 401).start().await;
     let c = Client::connect(&profile(&pc), "secret").unwrap();
-    let _ = c.get_path(OTHER).await;
-    assert!(
-        !c.auth_rejected(),
-        "the first answer established the session"
-    );
+    c.get_path(ONE_HOST).await.unwrap();
+    assert_eq!(presentations(&pc), 1);
 
     let e = c
         .list_page(vm(), 0, &ListOptions::default())
         .await
         .expect_err("401");
+    assert!(matches!(e, PrismError::Denied(_)), "{e:?}");
+    assert!(!c.auth_rejected(), "the credential was never refused");
+    assert_eq!(presentations(&pc), 1, "and never presented again");
+    // The check itself: the session, on the URL that had answered, and it answered again.
+    assert_eq!(
+        pc.requests_to(ONE_HOST).len(),
+        2,
+        "one answer, one liveness check"
+    );
+
+    c.get_path(ONE_HOST).await.unwrap();
+    assert_eq!(
+        presentations(&pc),
+        1,
+        "the session is still the one being ridden"
+    );
+}
+
+/// The other half of the same coin. The session really has ended *and* the renewal lands on an
+/// endpoint that refuses it: the liveness check finds the session dead, one password goes out,
+/// its 401 is the credential being refused, and that latches - exactly as before.
+#[tokio::test]
+async fn a_refusal_after_a_real_expiry_still_latches() {
+    let pc = MockPc::builder().start().await;
+    let c = Client::connect(&profile(&pc), "secret").unwrap();
+    c.get_path(ONE_HOST).await.unwrap();
+    c.get_path(ONE_VM).await.unwrap();
+    assert_eq!(presentations(&pc), 1);
+
+    pc.expire_session();
+    pc.fail_from_now(ONE_VM, 401);
+    let e = c.get_path(ONE_VM).await.expect_err("refused");
     assert!(matches!(e, PrismError::Auth), "{e:?}");
     assert!(c.auth_rejected());
+    assert_eq!(
+        presentations(&pc),
+        2,
+        "the one that opened the session and the one that was refused"
+    );
 
     let before = pc.requests().len();
     for _ in 0..5 {
-        let _ = c.get_path(OTHER).await;
+        let _ = c.get_path(ONE_HOST).await;
     }
     assert_eq!(
         pc.requests().len(),
