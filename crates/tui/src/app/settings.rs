@@ -26,7 +26,9 @@ impl App {
         self.refresh_session.insert(kind.id, next);
         let (every, _) = self.refresh_of(kind);
         if let Some(live) = self.live.as_ref() {
-            live.scheduler.set_interval_kind(kind.id, every);
+            for s in live.schedulers() {
+                s.set_interval_kind(kind.id, every);
+            }
         }
         // The flash names the gesture that keeps it: this is the one place the verb is taught.
         self.status = Some(match every {
@@ -73,7 +75,9 @@ impl App {
                 );
                 let (every, _) = self.refresh_of(kind);
                 if let Some(live) = self.live.as_ref() {
-                    live.scheduler.set_interval_kind(kind.id, every);
+                    for s in live.schedulers() {
+                        s.set_interval_kind(kind.id, every);
+                    }
                 }
             }
         }
@@ -374,7 +378,10 @@ impl App {
                 Schedule::Kind(id) => k.id == id,
             });
             for k in touched {
-                live.scheduler.set_interval_kind(k.id, self.refresh_of(k).0);
+                let every = self.refresh_of(k).0;
+                for s in live.schedulers() {
+                    s.set_interval_kind(k.id, every);
+                }
             }
         }
         self.reopen_settings();
@@ -425,10 +432,9 @@ impl App {
                 self.reopen_settings();
             }
             crate::settings::Action::RefreshAll => {
-                let n = self
-                    .live
-                    .as_mut()
-                    .map_or(0, |live| live.scheduler.refresh_everything());
+                let n = self.live.as_mut().map_or(0, |live| {
+                    live.schedulers_mut().map(|s| s.refresh_everything()).sum()
+                });
                 self.status = Some(match n {
                     0 => "nothing subscribed to refresh".to_string(),
                     1 => "refreshing 1 view".to_string(),

@@ -671,3 +671,66 @@ fn format_without_snapshot_is_refused() {
     let stderr = String::from_utf8_lossy(&out.stderr);
     assert!(stderr.contains("--snapshot"), "{stderr}");
 }
+
+/// Two contexts in the config file, both with a stored secret.
+fn config_with_two(lab: &MockPc, dr: &MockPc, dir: &std::path::Path) -> std::path::PathBuf {
+    let config = dir.join("config.toml");
+    std::fs::write(
+        &config,
+        format!(
+            "current_context = \"lab\"\n[contexts.lab]\nhost = \"{}\"\nport = {}\nusername = \"admin\"\n\n[contexts.dr]\nhost = \"{}\"\nport = {}\nusername = \"admin\"\n",
+            lab.host(),
+            lab.port(),
+            dr.host(),
+            dr.port()
+        ),
+    )
+    .unwrap();
+    let secrets = dir.join("state").join("nutsh").join("secrets");
+    std::fs::create_dir_all(&secrets).unwrap();
+    for pc in [lab, dr] {
+        std::fs::write(
+            secrets.join(format!("admin@{}_{}", pc.host(), pc.port())),
+            "secret",
+        )
+        .unwrap();
+    }
+    config
+}
+
+/// `-c lab,dr` opens the session on `lab` and reads `dr` beside it: one table, both counted,
+/// a CONTEXT column saying which row is whose, and the header naming both.
+#[tokio::test(flavor = "multi_thread", worker_threads = 2)]
+async fn snapshot_with_two_contexts_merges_their_tables() {
+    let lab = MockPc::builder().start().await;
+    let dr = MockPc::builder().start().await;
+    let dir = tempfile::tempdir().unwrap();
+    let config = config_with_two(&lab, &dr, dir.path());
+    let out = run(
+        vec![
+            "vm".into(),
+            "--snapshot".into(),
+            "--plain-http".into(),
+            "-c".into(),
+            "lab,dr".into(),
+        ],
+        config,
+        vec![],
+    )
+    .await;
+    let stdout = String::from_utf8_lossy(&out.stdout);
+    assert_eq!(
+        out.status.code(),
+        Some(0),
+        "stderr: {}",
+        String::from_utf8_lossy(&out.stderr)
+    );
+    assert!(stdout.contains("Context:    lab +dr"), "{stdout}");
+    assert!(stdout.contains("Virtual Machines [6]"), "{stdout}");
+    assert!(stdout.contains("CONTEXT"), "{stdout}");
+    assert_eq!(
+        stdout.lines().filter(|l| l.contains("web-01")).count(),
+        2,
+        "one row from each: {stdout}"
+    );
+}

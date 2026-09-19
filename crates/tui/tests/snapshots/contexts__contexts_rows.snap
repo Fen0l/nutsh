@@ -8,10 +8,10 @@ expression: "app.snapshot(100, 17).unwrap()"
 │Cluster:    -                                                           │           alerts ⚠ -  ✖ -
 │Kind:       Contexts                                                    │         tasks ▶ - running
 │Count:      2 contexts                                                  │
-╰────────────────────────────────────────────────────────────────────────╯          v0.0.2-beta3 · -
-   NAME           HOST                     USER       CLUSTER        FLAGS              PASSWORD
->* lab            pc.lab.example           admin      -              insecure           stored
-   prod           pc.lab.example           admin      -              insecure           -
+╰────────────────────────────────────────────────────────────────────────╯                v0.1.0 · -
+   NAME           JOINED  HOST             USER       CLUSTER        FLAGS              PASSWORD
+>* lab            session pc.lab.example   admin      -              insecure           stored
+   prod           [ ]     pc.lab.example   admin      -              insecure           -
 
 
 

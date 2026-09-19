@@ -15,7 +15,7 @@ use nutsh_core::guardrails::{Guardrails, Verdict};
 use nutsh_core::journal::{Attempt, Journal, JournalId, JournalOutcome};
 use nutsh_core::scheduler::{Msg, Scheduler, SubId, Subscription};
 use nutsh_core::session::Session;
-use nutsh_core::store::{Store, TableKey};
+use nutsh_core::store::{Store, Table, TableKey};
 use nutsh_core::tasks::{TaskIndex, TaskStatus};
 use ratatui::Terminal;
 use ratatui::backend::TestBackend;
@@ -132,6 +132,9 @@ pub enum Mode {
 pub struct TableView {
     pub key: TableKey,
     pub sub: SubId,
+    /// The same list in every peer context, one subscription each. Empty when the view is not
+    /// a top-level table or there are no peers.
+    pub peer_subs: Vec<(std::sync::Arc<str>, SubId)>,
     pub selected: usize,
     pub sort: Option<(usize, bool)>,
     pub wide: bool,
@@ -187,11 +190,36 @@ impl View {
     }
 }
 
+/// What a connect the app started came back with: for the primary session, or for a peer
+/// named by `:ctx a b`.
+pub struct ConnectOutcome {
+    pub peer: Option<std::sync::Arc<str>>,
+    pub result: anyhow::Result<Connected>,
+}
+
+/// A second Prism Central read beside the primary one: `:ctx a b` joins `b`. Its rows land in
+/// the primary store under keys carrying its name, and every top-level table view lists it too.
+pub struct Peer {
+    pub name: std::sync::Arc<str>,
+    pub session: Session,
+    pub scheduler: Scheduler,
+    /// This peer's name warm-up, feeding the shared name cache; aborted with the peer.
+    pub(crate) names: tokio::task::JoinHandle<()>,
+}
+
+impl Drop for Peer {
+    fn drop(&mut self) {
+        self.names.abort();
+    }
+}
+
 /// Everything that exists only while connected.
 pub struct Live {
     pub session: Session,
     pub store: Store,
     pub scheduler: Scheduler,
+    /// Contexts joined beside the primary session, in the order they were named.
+    pub peers: Vec<Peer>,
     pub stack: Vec<View>,
     /// The stats poller. Only `Scheduler` aborts its tasks on drop; a bare `tokio::spawn`
     /// would outlive the session and drop the previous Prism Central's counters into the new
@@ -223,6 +251,205 @@ impl Drop for Live {
 }
 
 impl Live {
+    /// The primary session's name, as the merged table's `CONTEXT` cell spells it.
+    pub fn primary_name(&self) -> String {
+        self.session
+            .context
+            .clone()
+            .unwrap_or_else(|| "(env)".to_string())
+    }
+
+    /// The table a view draws: the primary's, or when peers are joined and the key is a
+    /// top-level table, a copy holding every context's rows with `$context` stamped on each.
+    /// A copy per frame is what keeps the store's per-table generations untouched; the rows
+    /// are keyed by extId, so a row replicated between two Prism Centrals shows once.
+    pub fn merged(&self, key: &TableKey) -> std::borrow::Cow<'_, Table> {
+        let primary = self.store.table(key);
+        if self.peers.is_empty() || !key.is_top() {
+            return std::borrow::Cow::Borrowed(primary);
+        }
+        let mut out = Table::default();
+        let stamp = |name: &str, e: &nutsh_prism::Entity| {
+            let mut e = e.clone();
+            if let Some(obj) = e.raw.as_object_mut() {
+                obj.insert(
+                    "$context".to_string(),
+                    serde_json::Value::String(name.to_string()),
+                );
+            }
+            e
+        };
+        let mine = self.primary_name();
+        out.rows.extend(
+            primary
+                .rows
+                .iter()
+                .map(|(id, e)| (id.clone(), stamp(&mine, e))),
+        );
+        out.total = primary.total;
+        out.last_poll = primary.last_poll;
+        out.error = primary.error.clone();
+        out.not_served = primary.not_served;
+        out.loading = primary.loading;
+        out.cycle_started = primary.cycle_started;
+        out.restored_at = primary.restored_at;
+        for peer in &self.peers {
+            let t = self.store.table(&key.clone().in_context(peer.name.clone()));
+            // Keyed by context as well as extId: a VM replicated between two Prism Centrals
+            // is one document in each, and the row that acts on it has to say which.
+            out.rows.extend(
+                t.rows
+                    .iter()
+                    .map(|(id, e)| (Live::peer_row_id(&peer.name, id), stamp(&peer.name, e))),
+            );
+            out.total = match (out.total, t.total) {
+                (Some(a), Some(b)) => Some(a + b),
+                (a, b) => a.or(b),
+            };
+            if out.error.is_none() {
+                out.error = t.error.clone();
+            }
+            out.loading = out.loading && t.loading;
+            if out.last_poll.is_none() {
+                out.last_poll = t.last_poll;
+            }
+        }
+        std::borrow::Cow::Owned(out)
+    }
+
+    /// The row id a merged table gives a peer's row: the context, a tab, the extId. No extId
+    /// carries a tab, so the two halves split back apart without a second delimiter.
+    pub fn peer_row_id(peer: &str, ext_id: &str) -> String {
+        format!("{peer}\t{ext_id}")
+    }
+
+    /// A merged row id split back into `(context, extId)`; a primary row is `(None, id)`.
+    pub fn split_row_id(id: &str) -> (Option<&str>, &str) {
+        match id.split_once('\t') {
+            Some((peer, ext_id)) => (Some(peer), ext_id),
+            None => (None, id),
+        }
+    }
+
+    /// The row `id` under `key` in whichever context holds it. A merged row id names its peer;
+    /// a bare extId is the primary's, or, failing that, the first peer that has it.
+    pub fn find_row(
+        &self,
+        key: &TableKey,
+        id: &str,
+    ) -> Option<(Option<&str>, &nutsh_prism::Entity)> {
+        let (site, ext_id) = Live::split_row_id(id);
+        if let Some(name) = site {
+            let peer = self.peers.iter().find(|p| &*p.name == name)?;
+            return self
+                .store
+                .table(&key.clone().in_context(peer.name.clone()))
+                .row(ext_id)
+                .map(|e| (Some(&*peer.name), e));
+        }
+        if let Some(e) = self.store.table(key).row(ext_id) {
+            return Some((None, e));
+        }
+        if !key.is_top() {
+            return None;
+        }
+        self.peers.iter().find_map(|p| {
+            self.store
+                .table(&key.clone().in_context(p.name.clone()))
+                .row(ext_id)
+                .map(|e| (Some(&*p.name), e))
+        })
+    }
+
+    /// Unsubscribe `sub` from whichever scheduler holds it.
+    pub(crate) fn unsubscribe_any(&mut self, sub: SubId) {
+        for s in self.schedulers_mut() {
+            if s.is_live(sub) {
+                s.unsubscribe(sub);
+                return;
+            }
+        }
+    }
+
+    /// The scheduler that polls `context`: a peer's, or the session's own for `None`. `None`
+    /// when the peer named is no longer joined.
+    pub(crate) fn scheduler_for(&mut self, context: Option<&str>) -> Option<&mut Scheduler> {
+        match context {
+            None => Some(&mut self.scheduler),
+            Some(name) => self
+                .peers
+                .iter_mut()
+                .find(|p| &*p.name == name)
+                .map(|p| &mut p.scheduler),
+        }
+    }
+
+    /// Whichever scheduler holds `sub`.
+    pub(crate) fn holder_of(&mut self, sub: SubId) -> Option<&mut Scheduler> {
+        self.schedulers_mut().find(|s| s.is_live(sub))
+    }
+
+    /// The session a row on `context` is read and acted through: the peer's, or the
+    /// session's own. Its `readonly` and its name are what the guardrails judge by.
+    pub(crate) fn session_for(&self, context: Option<&str>) -> &Session {
+        context
+            .and_then(|name| self.peers.iter().find(|p| &*p.name == name))
+            .map_or(&self.session, |p| &p.session)
+    }
+
+    /// Drop the peer called `name`: its scheduler ends its subscriptions, and every view
+    /// forgets the ones it held, so joining the same name again starts clean.
+    pub(crate) fn forget_peer(&mut self, name: &str) {
+        for view in &mut self.stack {
+            if let View::Table(t) = view {
+                t.peer_subs.retain(|(n, _)| &**n != name);
+            }
+        }
+        self.peers.retain(|p| &*p.name != name);
+    }
+
+    /// Whether `sub` belongs to any scheduler this session drains.
+    pub fn any_live(&self, sub: SubId) -> bool {
+        self.scheduler.is_live(sub) || self.peers.iter().any(|p| p.scheduler.is_live(sub))
+    }
+
+    /// Every scheduler, the primary's first.
+    pub(crate) fn schedulers_mut(&mut self) -> impl Iterator<Item = &mut Scheduler> {
+        std::iter::once(&mut self.scheduler).chain(self.peers.iter_mut().map(|p| &mut p.scheduler))
+    }
+
+    pub(crate) fn schedulers(&self) -> impl Iterator<Item = &Scheduler> {
+        std::iter::once(&self.scheduler).chain(self.peers.iter().map(|p| &p.scheduler))
+    }
+
+    /// Subscribe the top-level table view to every peer, so the merge has rows to show.
+    pub(crate) fn subscribe_peers(&mut self) {
+        let Some(View::Table(view)) = self.stack.last_mut() else {
+            return;
+        };
+        if !view.key.is_top() {
+            return;
+        }
+        let every = Duration::from_secs(u64::from(view.key.kind.poll_secs.max(1)));
+        for peer in &mut self.peers {
+            if view.peer_subs.iter().any(|(n, _)| *n == peer.name) {
+                continue;
+            }
+            let key = view.key.clone().in_context(peer.name.clone());
+            let sub = peer.scheduler.subscribe(Subscription::list(key, every));
+            view.peer_subs.push((peer.name.clone(), sub));
+        }
+    }
+
+    /// End a view's peer subscriptions; the peer that listed it keeps its store rows.
+    fn release_peer_subs(&mut self, subs: &[(std::sync::Arc<str>, SubId)]) {
+        for (name, sub) in subs {
+            if let Some(peer) = self.peers.iter_mut().find(|p| p.name == *name) {
+                peer.scheduler.unsubscribe(*sub);
+            }
+        }
+    }
+
     /// The top view when it is a table; `None` on a page, which is what every table key wants.
     pub fn table(&self) -> Option<&TableView> {
         match self.stack.last()? {
@@ -258,13 +485,17 @@ impl Live {
     /// returns a shorter list is the ordinary way this happens; a page clamps every pane,
     /// since one message moves one pane's rows and the others keep theirs.
     fn clamp_selection(&mut self) {
+        let merged = match self.stack.last() {
+            Some(View::Table(view)) => self.merged(&view.key).into_owned(),
+            _ => Table::default(),
+        };
         let Live { store, stack, .. } = self;
         match stack.last_mut() {
             Some(View::Table(view)) => {
                 // The filtered length, not the table's: the selection indexes what the frame
                 // shows, and a poll that dropped a matching row must not leave the cursor past
                 // the end of what is left.
-                let len = crate::table::matching(store.table(&view.key), view.query());
+                let len = crate::table::matching(&merged, view.query());
                 view.selected = view.selected.min(len.saturating_sub(1));
             }
             Some(View::Page(page)) => {
@@ -417,8 +648,13 @@ pub struct App {
     /// five-minute cycle to wait out instead of thirty seconds.
     pub(crate) names_seen: bool,
     /// The connect the Contexts screen started, arriving off the UI thread.
-    pub(crate) connect_tx: mpsc::Sender<anyhow::Result<Connected>>,
-    pub(crate) connect_rx: mpsc::Receiver<anyhow::Result<Connected>>,
+    pub(crate) connect_tx: mpsc::Sender<ConnectOutcome>,
+    pub(crate) connect_rx: mpsc::Receiver<ConnectOutcome>,
+    /// Contexts `:ctx a b …` named after the first, to join once the primary is connected.
+    pub(crate) pending_peers: Vec<String>,
+    /// Peers whose connect is in flight: a second `space` or `:ctx` on one waits for it
+    /// rather than presenting the credential again.
+    pub(crate) joining: Vec<String>,
     /// The last key, resize, action or context switch. What the idle pause is measured from.
     pub(crate) last_input: std::time::Instant,
     /// `[nav] hide`, read from the contexts seam at startup and rewritten by `:hide`/`:show`.
@@ -471,7 +707,7 @@ pub(crate) struct Pending {
 struct Cursor<'a> {
     key: &'a TableKey,
     selected: usize,
-    columns: &'static [Column],
+    columns: std::borrow::Cow<'static, [Column]>,
     sort: Option<(usize, bool)>,
     /// The extIds `space` has marked, for a view that has marks at all. `None` on a page's
     /// pane, which marks nothing, so an action there runs on the row under the cursor.
@@ -608,7 +844,11 @@ impl App {
             View::Table(view) => Some(Cursor {
                 key: &view.key,
                 selected: view.selected,
-                columns: crate::table::columns(view.key.kind, view.wide),
+                columns: crate::table::columns_for(
+                    view.key.kind,
+                    view.wide,
+                    self.merges(&view.key),
+                ),
                 sort: view.sort,
                 marks: Some(&view.marks),
                 filter: view.query(),
@@ -618,7 +858,7 @@ impl App {
                 Some(Cursor {
                     key: &pane.key,
                     selected: pane.selected,
-                    columns: pane.columns(),
+                    columns: std::borrow::Cow::Borrowed(pane.columns()),
                     sort: None,
                     marks: None,
                     filter: None,
@@ -639,20 +879,28 @@ impl App {
     /// The extId of the row under the cursor, in the order the frame shows: with a sort
     /// applied the store's order is not the screen's, and `enter` must open the row the user
     /// is looking at.
-    pub fn selected_ext_id(&self) -> Option<&str> {
+    pub fn selected_ext_id(&self) -> Option<String> {
         let live = self.live.as_ref()?;
         let cursor = self.cursor_table()?;
-        let table = live.store.table(cursor.key);
+        let table = live.merged(cursor.key);
         crate::table::order(
-            table,
-            cursor.columns,
+            &table,
+            &cursor.columns,
             live.store.names(),
             self.now,
             cursor.sort,
             cursor.filter,
         )
         .get(cursor.selected)
-        .copied()
+        .map(|id| (*id).to_string())
+    }
+
+    /// Whether a view over `key` draws every joined context's rows: peers are joined and the
+    /// key is a top-level table of the primary session.
+    pub fn merges(&self, key: &TableKey) -> bool {
+        self.live
+            .as_ref()
+            .is_some_and(|l| !l.peers.is_empty() && key.is_top())
     }
 
     pub fn should_quit(&self) -> bool {
@@ -800,6 +1048,7 @@ impl App {
             screen::Action::Reload => self.reload_contexts(),
             screen::Action::Remove(name) => self.remove_context(&name),
             screen::Action::Connect(request, host) => self.start_connect(request, &host),
+            screen::Action::Toggle(name) => self.toggle_peer(&name),
             screen::Action::Back => {
                 if self
                     .live
@@ -980,6 +1229,7 @@ fn cache_snapshot(live: &Live, now: u64) -> nutsh_core::cache::Snapshot {
             // A table that has never polled is the one we restored: writing it back would
             // rewrite yesterday's rows with yesterday's timestamp and never age out.
             .filter(|(_, t)| t.last_poll.is_some() && !t.rows.is_empty())
+            .filter(|(key, _)| key.context.is_none())
             // A search's rows are not this session's tables. Its filter was built from what
             // somebody typed once, so keeping it would spend the cache's budget on a question
             // rather than on a view, and hand it back as a table next start.
@@ -1014,18 +1264,29 @@ fn push_view(
     kind: &'static Kind,
     parents: Vec<String>,
     parent_name: Option<String>,
+    context: Option<std::sync::Arc<str>>,
 ) {
+    // A child of a row on a peer is listed from that peer; a peer dropped meanwhile has
+    // nothing to list it from.
+    let key = match context {
+        Some(name) => TableKey::under(kind, parents).in_context(name),
+        None => TableKey::under(kind, parents),
+    };
+    if live.scheduler_for(key.context.as_deref()).is_none() {
+        return;
+    }
     if let Some(top) = live.stack.last_mut() {
         top.release(&mut live.scheduler, &mut live.store);
     }
-    let key = TableKey::under(kind, parents);
-    let sub = live.scheduler.subscribe(Subscription::list(
-        key.clone(),
-        Duration::from_secs(u64::from(kind.poll_secs.max(1))),
-    ));
+    let every = Duration::from_secs(u64::from(kind.poll_secs.max(1)));
+    let sub = live
+        .scheduler_for(key.context.as_deref())
+        .expect("checked above")
+        .subscribe(Subscription::list(key.clone(), every));
     live.stack.push(View::Table(TableView {
         key,
         sub,
+        peer_subs: Vec::new(),
         selected: 0,
         sort: None,
         wide: false,
@@ -1035,6 +1296,7 @@ fn push_view(
         filter: None,
         stopped: false,
     }));
+    live.subscribe_peers();
 }
 
 /// Drop the whole stack, unsubscribing everything it polls: what opening a new root does.
@@ -1042,7 +1304,8 @@ fn drain_stack(live: &mut Live) {
     for mut view in std::mem::take(&mut live.stack) {
         match &mut view {
             View::Table(t) => {
-                live.scheduler.unsubscribe(t.sub);
+                live.unsubscribe_any(t.sub);
+                live.release_peer_subs(&t.peer_subs);
                 live.store.abandon(&t.key);
             }
             View::Page(p) => release_page(p, &mut live.scheduler, &mut live.store),

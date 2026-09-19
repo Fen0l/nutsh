@@ -384,6 +384,12 @@ fn authorized(state: &Shared, headers: &HeaderMap) -> bool {
     let Some(b64) = v.strip_prefix("Basic ") else {
         return false;
     };
+    if state
+        .refuse_credential
+        .load(std::sync::atomic::Ordering::SeqCst)
+    {
+        return false;
+    }
     let Ok(raw) = base64::engine::general_purpose::STANDARD.decode(b64) else {
         return false;
     };

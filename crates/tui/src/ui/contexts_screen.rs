@@ -4,14 +4,15 @@ use super::*;
 
 /// One line of the contexts list. The header goes through it too, so the columns cannot drift
 /// from their titles. `lead` is the three-character selection-and-current marker.
-pub(super) fn context_line(lead: &str, cells: [&str; 6]) -> String {
-    let [name, host, user, cluster, flags, password] = cells;
+pub(super) fn context_line(lead: &str, cells: [&str; 7]) -> String {
+    let [name, joined, host, user, cluster, flags, password] = cells;
     // Every column but the last is cut to its own width: a long host name must not push the
     // user and the flags out from under their headings.
     format!(
-        "{lead}{} {} {} {} {} {password}",
+        "{lead}{} {} {} {} {} {} {password}",
         field(name, 14),
-        field(host, 24),
+        field(joined, 7),
+        field(host, 16),
         field(user, 10),
         field(cluster, 14),
         field(flags, 18),
@@ -79,7 +80,9 @@ pub(super) fn context_lines(s: &contexts::Screen, area: Rect, width: usize) -> V
         Line::from(cut(
             &context_line(
                 "   ",
-                ["NAME", "HOST", "USER", "CLUSTER", "FLAGS", "PASSWORD"],
+                [
+                    "NAME", "JOINED", "HOST", "USER", "CLUSTER", "FLAGS", "PASSWORD",
+                ],
             ),
             width,
         ))
@@ -117,11 +120,20 @@ pub(super) fn context_lines(s: &contexts::Screen, area: Rect, width: usize) -> V
             if offset + i == s.selected { ">" } else { " " },
             if r.current { "*" } else { " " }
         );
+        // `space` reads a row beside the session; the box says which rows it has.
+        let joined = if r.current {
+            "session"
+        } else if s.joined.contains(&r.name) {
+            "[x]"
+        } else {
+            "[ ]"
+        };
         lines.push(Line::from(cut(
             &context_line(
                 &lead,
                 [
                     &r.name,
+                    joined,
                     &host,
                     &r.username,
                     r.cluster.as_deref().unwrap_or("-"),

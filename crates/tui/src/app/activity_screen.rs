@@ -53,10 +53,17 @@ impl App {
             .tables()
             .map(|(key, t)| TableLine {
                 kind: key.kind,
-                scope: match (&key.parents[..], key.filter.as_deref()) {
-                    ([], None) => String::new(),
-                    (parents, None) => format!("under {}", parents.join("/")),
-                    (_, Some(f)) => f.to_string(),
+                scope: {
+                    let narrow = match (&key.parents[..], key.filter.as_deref()) {
+                        ([], None) => String::new(),
+                        (parents, None) => format!("under {}", parents.join("/")),
+                        (_, Some(f)) => f.to_string(),
+                    };
+                    match key.context.as_deref() {
+                        Some(c) if narrow.is_empty() => format!("on {c}"),
+                        Some(c) => format!("on {c} · {narrow}"),
+                        None => narrow,
+                    }
                 },
                 rows: t.rows.len(),
                 total: t.total,

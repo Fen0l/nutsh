@@ -6,7 +6,9 @@ pub(super) fn draw_table(app: &App, f: &mut Frame, area: Rect) {
     let (Some(live), Some(view)) = (&app.live, app.view()) else {
         return;
     };
-    let t = live.store.table(&view.key);
+    let merged = live.merged(&view.key);
+    let t = &*merged;
+    let columns = table::columns_for(view.key.kind, view.wide, app.merges(&view.key));
     let filter = view.query();
     let mut title = vec![
         Span::styled(format!(" {} ", view.key.kind.display), theme::title()),
@@ -49,7 +51,7 @@ pub(super) fn draw_table(app: &App, f: &mut Frame, area: Rect) {
         Rows {
             key: &view.key,
             pane: None,
-            all: table::columns(view.key.kind, view.wide),
+            all: &columns,
             col_offset: view.col_offset,
             sort: view.sort,
             selected: view.selected,
@@ -84,7 +86,13 @@ pub(super) const MARK: &str = "* ";
 /// tints and the selection bar. The table view and every page pane go through it, so a pane
 /// row is a table row in the strongest sense - the same function drew it.
 pub(super) fn render_rows(app: &App, live: &Live, spec: Rows<'_>, f: &mut Frame, area: Rect) {
-    let t = live.store.table(spec.key);
+    // A pane draws its own table; the table view draws every joined context's.
+    let merged = if spec.pane.is_none() {
+        live.merged(spec.key)
+    } else {
+        std::borrow::Cow::Borrowed(live.store.table(spec.key))
+    };
+    let t = &*merged;
     let all = spec.all;
     let mut rows = table::cells(t, all, live.store.names(), app.now, spec.sort, spec.filter);
     // A table with nothing to draw says what is happening instead - `body_note` decided that
@@ -212,7 +220,11 @@ pub(super) fn render_rows(app: &App, live: &Live, spec: Rows<'_>, f: &mut Frame,
             .map(|i| status::role_in(spec.key.kind, &row[i].text))
             .unwrap_or(nutsh_catalog::Role::Neutral);
         Row::new(row.iter().enumerate().map(|(i, r)| {
-            let style = if Some(i) == status {
+            let style = if cols[i].path == table::CONTEXT_COLUMN.path {
+                Style::default()
+                    .fg(context_colour(live, &r.text))
+                    .add_modifier(Modifier::BOLD)
+            } else if Some(i) == status {
                 Style::default()
                     .fg(theme::role_fg(role))
                     .add_modifier(Modifier::BOLD)
@@ -265,4 +277,26 @@ pub(super) fn render_rows(app: &App, live: &Live, spec: Rows<'_>, f: &mut Frame,
             },
         );
     }
+}
+
+/// One colour per joined Prism Central, the session's first, so a merged table reads by colour
+/// before it reads by name. The header's `+peer` is painted with the same one.
+pub(super) fn context_colour(live: &Live, name: &str) -> ratatui::style::Color {
+    let at = if name == live.primary_name() {
+        0
+    } else {
+        live.peers
+            .iter()
+            .position(|p| &*p.name == name)
+            .map_or(0, |i| i + 1)
+    };
+    let palette = [
+        theme::mauve(),
+        theme::teal(),
+        theme::peach(),
+        theme::yellow(),
+        theme::sapphire(),
+        theme::green(),
+    ];
+    palette[at % palette.len()]
 }

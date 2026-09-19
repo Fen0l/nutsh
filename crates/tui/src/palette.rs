@@ -87,7 +87,7 @@ impl Command {
     pub fn rest_of_line(self) -> bool {
         matches!(
             self,
-            Command::Hide | Command::Show | Command::Search | Command::Export
+            Command::Hide | Command::Show | Command::Search | Command::Export | Command::Ctx
         )
     }
 
@@ -616,7 +616,7 @@ impl Palette {
     /// `can-i ACTION KIND`. One accessor for all of them - the app reads `first()` where a
     /// command takes one - so a command that grows a second argument changes no signature.
     ///
-    /// Reads [`word_runs`], which the grammar reads too: the app is handed exactly the words
+    /// Reads `word_runs`, which the grammar reads too: the app is handed exactly the words
     /// `refresh` ranked, and a trailing space adds none of its own.
     pub fn args(&self) -> Vec<&str> {
         word_runs(self.input.as_str())

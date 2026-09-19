@@ -1002,7 +1002,7 @@ fn properties(schemas: &Value, schema: &Value, depth: u8, out: &mut Vec<(String,
     }
 }
 
-/// Whether `path` resolves against `schema_name`. [`property_at`] describes the walk; this is
+/// Whether `path` resolves against `schema_name`. `property_at` describes the walk; this is
 /// that walk asked whether it arrived.
 pub fn resolves(schemas: &Value, schema_name: &str, path: &str) -> bool {
     property_at_named(schemas, schema_name, path).is_some()
@@ -1034,7 +1034,7 @@ fn arms(schemas: &Value, schema: &Value) -> Vec<Value> {
 /// The short names of the `oneOf`/`anyOf` arms of the property at `path` in `schema_name`, in
 /// declaration order: the variant tags a `$objectType` at that path can carry.
 ///
-/// Names, not schemas: [`arms`] resolves each `$ref` into the value it points at, and the value
+/// Names, not schemas: `arms` resolves each `$ref` into the value it points at, and the value
 /// does not carry the name a `when` compares against. The comparison is on the last segment of
 /// the schema key, because the wire tag and the schema key spell the version differently
 /// (`vmm.v4.ahv.config.VmDisk` against `vmm.v4.r0.b1.ahv.config.VmDisk` - both are in the

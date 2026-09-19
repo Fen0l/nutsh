@@ -108,6 +108,6 @@ impl App {
         let Some(live) = self.live.as_mut() else {
             return;
         };
-        push_view(live, kind, Vec::new(), None);
+        push_view(live, kind, Vec::new(), None, None);
     }
 }

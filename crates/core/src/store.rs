@@ -29,6 +29,9 @@ pub struct TableKey {
     /// stored this as a `String`; only the key insisted on a literal, and that came from
     /// filters having had one source.
     pub filter: Option<std::sync::Arc<str>>,
+    /// The context this table was listed from, when it is not the session's own: a peer joined
+    /// with `:ctx a b`. `None` is the primary session, which every constructor builds.
+    pub context: Option<std::sync::Arc<str>>,
 }
 
 impl TableKey {
@@ -38,6 +41,7 @@ impl TableKey {
             kind,
             parents: Vec::new(),
             filter: None,
+            context: None,
         }
     }
 
@@ -47,7 +51,19 @@ impl TableKey {
             kind,
             parents,
             filter: None,
+            context: None,
         }
+    }
+
+    /// The same table, listed from a peer context.
+    pub fn in_context(mut self, name: std::sync::Arc<str>) -> TableKey {
+        self.context = Some(name);
+        self
+    }
+
+    /// A top-level table of the primary session, listed whole: the one a peer's rows merge into.
+    pub fn is_top(&self) -> bool {
+        self.parents.is_empty() && self.filter.is_none() && self.context.is_none()
     }
 
     /// A page pane's table: top-level, and keyed by its own filter as well as its kind.
@@ -56,6 +72,7 @@ impl TableKey {
             kind,
             parents: Vec::new(),
             filter,
+            context: None,
         }
     }
 }
@@ -65,6 +82,7 @@ impl PartialEq for TableKey {
         self.kind.id == other.kind.id
             && self.parents == other.parents
             && self.filter == other.filter
+            && self.context == other.context
     }
 }
 
@@ -75,6 +93,7 @@ impl Hash for TableKey {
         self.kind.id.hash(state);
         self.parents.hash(state);
         self.filter.hash(state);
+        self.context.hash(state);
     }
 }
 
@@ -249,14 +268,14 @@ pub enum Update {
 }
 
 /// Pages staged for one in-progress generation, not yet visible as rows.
-#[derive(Debug)]
+#[derive(Clone, Debug)]
 struct Staging {
     generation: u64,
     entities: Vec<Entity>,
     total: Option<u64>,
 }
 
-#[derive(Debug, Default)]
+#[derive(Clone, Debug, Default)]
 pub struct Table {
     /// By extId, in server order.
     pub rows: IndexMap<String, Entity>,

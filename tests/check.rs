@@ -310,3 +310,55 @@ async fn check_header_omits_the_pc_version_when_it_cannot_be_read() {
     assert!(header.contains(&pc.host()), "{header}");
     assert!(!header.contains("pc."), "{header}");
 }
+
+/// `--check -c lab,dr` probes both, one table each, and the exit code is the worse of the two.
+#[tokio::test(flavor = "multi_thread", worker_threads = 2)]
+async fn check_with_two_contexts_prints_a_table_for_each() {
+    let lab = MockPc::builder().start().await;
+    let dr = MockPc::builder()
+        .unavailable_namespace("volumes")
+        .start()
+        .await;
+    let dir = tempfile::tempdir().unwrap();
+    let config = dir.path().join("config.toml");
+    std::fs::write(
+        &config,
+        format!(
+            "[contexts.lab]\nhost = \"{}\"\nport = {}\nusername = \"admin\"\n\n[contexts.dr]\nhost = \"{}\"\nport = {}\nusername = \"admin\"\n",
+            lab.host(),
+            lab.port(),
+            dr.host(),
+            dr.port()
+        ),
+    )
+    .unwrap();
+    let state = dir.path().to_path_buf();
+    let out = tokio::task::spawn_blocking(move || {
+        Command::new(env!("CARGO_BIN_EXE_nutsh"))
+            .args(["--check", "--plain-http", "-c", "lab,dr"])
+            .env("NUTSH_CONFIG", &config)
+            .env("XDG_STATE_HOME", &state)
+            .env("NUTSH_KEYRING", "0")
+            .env("NUTSH_PASSWORD", "secret")
+            .env_remove("NUTSH_HOST")
+            .env_remove("NUTSH_CONTEXT")
+            .stdin(std::process::Stdio::null())
+            .output()
+            .expect("run nutsh")
+    })
+    .await
+    .expect("join");
+    let stdout = String::from_utf8_lossy(&out.stdout);
+    assert!(stdout.contains("context lab"), "{stdout}");
+    assert!(stdout.contains("context dr"), "{stdout}");
+    assert_eq!(
+        stdout.matches("NAMESPACE").count(),
+        2,
+        "one table per context: {stdout}"
+    );
+    assert_eq!(
+        out.status.code(),
+        Some(2),
+        "dr is missing a namespace, so the run says so: {stdout}"
+    );
+}

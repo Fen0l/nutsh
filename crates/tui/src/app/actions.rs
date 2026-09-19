@@ -16,10 +16,10 @@ impl App {
         let Some(cursor) = self.cursor_table() else {
             return Vec::new();
         };
-        let table = live.store.table(cursor.key);
+        let table = live.merged(cursor.key);
         let ordered = crate::table::order(
-            table,
-            cursor.columns,
+            &table,
+            &cursor.columns,
             live.store.names(),
             self.now,
             cursor.sort,
@@ -35,10 +35,8 @@ impl App {
         wanted
             .into_iter()
             .filter_map(|id| {
-                table
-                    .rows
-                    .get(id)
-                    .map(|e| (e.ext_id.clone(), e.name.clone()))
+                // The merged row id, not `e.ext_id`: it says which context the row is from.
+                table.rows.get(id).map(|e| (id.to_string(), e.name.clone()))
             })
             .collect()
     }
@@ -137,11 +135,21 @@ impl App {
     ) -> Option<String> {
         let live = self.live.as_ref()?;
         let cursor = self.cursor_table()?;
+        // A row on a joined context is judged by that context's session - its read-only
+        // flag, its name in the guardrails. Its roles are not resolved: nothing is greyed
+        // on another account's answer, and the Prism Central refuses for itself.
+        let site = self
+            .selected_ext_id()
+            .and_then(|id| Live::split_row_id(&id).0.map(str::to_string))
+            .or_else(|| cursor.key.context.as_deref().map(str::to_string));
+        let unknown = nutsh_core::can_i::CanIndex::unknown("not resolved for a joined context");
+        let own = live.can_i.get();
+        let can_i = if site.is_some() { &unknown } else { &own };
         nutsh_core::actions::reason(
             Policy {
-                session: &live.session,
+                session: live.session_for(site.as_deref()),
                 guardrails: &self.guardrails,
-                can_i: &live.can_i.get(),
+                can_i,
             },
             cursor.key.kind,
             action,
@@ -157,7 +165,29 @@ impl App {
         let live = self.live.as_ref()?;
         let cursor = self.cursor_table()?;
         let id = self.selected_ext_id()?;
-        live.store.table(cursor.key).row(id)
+        live.find_row(cursor.key, &id).map(|(_, e)| e)
+    }
+
+    /// Which joined context the pending action's rows come from, when there are peers and the
+    /// rows all come from one: what the confirm names.
+    fn pending_site(&self) -> Option<String> {
+        let live = self.live.as_ref()?;
+        if live.peers.is_empty() {
+            return None;
+        }
+        let pending = self.pending.as_ref()?;
+        let key = self.cursor_table()?.key.clone();
+        let mut sites: Vec<String> = pending
+            .rows
+            .iter()
+            .filter_map(|(id, _)| live.find_row(&key, id))
+            .map(|(ctx, _)| ctx.map_or_else(|| live.primary_name(), str::to_string))
+            .collect();
+        sites.dedup();
+        match sites.as_slice() {
+            [one] => Some(one.clone()),
+            _ => None,
+        }
     }
 
     /// The menu's `enter`, and every curated key.
@@ -330,11 +360,13 @@ impl App {
         };
         match verdict {
             Verdict::Confirm(strength) => {
+                let site = self.pending_site();
                 self.confirm = Some(Confirm::open(
                     strength,
                     action.title(),
                     kind.display,
                     &names,
+                    site.as_deref(),
                 ));
                 self.mode = Mode::Confirm;
             }
@@ -384,20 +416,28 @@ impl App {
         };
         let kind = key.kind;
         let parents = key.parents.clone();
-        let context = live
-            .session
-            .context
-            .clone()
-            .unwrap_or_else(|| "(env)".into());
-        let client = live.session.client.clone();
+        let primary = live.primary_name();
         // Planned and journalled here, on the UI thread, so the journal holds the rows in table
-        // order whatever the network does with them.
-        let mut work: Vec<(nutsh_core::actions::Plan, JournalId)> = Vec::new();
+        // order whatever the network does with them. Each row goes to the client of the
+        // context it was listed from.
+        let mut work: Vec<(
+            std::sync::Arc<nutsh_prism::Client>,
+            nutsh_core::actions::Plan,
+            JournalId,
+        )> = Vec::new();
         let mut failures: Vec<String> = Vec::new();
         for (ext_id, _) in &pending.rows {
-            let Some(entity) = live.store.table(&key).rows.get(ext_id).cloned() else {
+            let Some((site, entity)) = live
+                .find_row(&key, ext_id)
+                .map(|(ctx, e)| (ctx.map(str::to_string), e.clone()))
+            else {
                 continue;
             };
+            let context = site.clone().unwrap_or_else(|| primary.clone());
+            let client = site
+                .as_deref()
+                .and_then(|name| live.peers.iter().find(|p| &*p.name == name))
+                .map_or_else(|| live.session.client.clone(), |p| p.session.client.clone());
             // Built here, per row, rather than once at submit: `$ext_id` and `$now+30d` are
             // substituted against the row the request is for, so ten marked VMs snapshot
             // themselves rather than the one the cursor happened to be on. A curated constant
@@ -436,7 +476,7 @@ impl App {
                 now,
                 JournalOutcome::Started,
             );
-            work.push((plan, journal));
+            work.push((client, plan, journal));
         }
         let started = work.len();
         if started > 0 {
@@ -448,7 +488,7 @@ impl App {
                 view.marks.clear();
             }
             runtime.spawn(async move {
-                for (plan, journal) in work {
+                for (client, plan, journal) in work {
                     let result = nutsh_core::actions::execute(&client, &plan).await;
                     let _ = tx
                         .send(Msg::Acted {

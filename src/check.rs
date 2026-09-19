@@ -8,24 +8,43 @@ use nutsh_prism::NamespaceStatus;
 use crate::ConnArgs;
 use crate::session;
 
-pub(crate) fn run(conn: &ConnArgs, from_env: Option<String>) -> anyhow::Result<i32> {
-    let target = session::target(conn, &nutsh_config::config_path())?;
-    let password = session::password(&target, from_env, &Secrets::default_stores())?;
+pub(crate) fn run(
+    conn: &ConnArgs,
+    from_env: Option<String>,
+    peers: &[String],
+) -> anyhow::Result<i32> {
     let rt = crate::runtime()?;
-    rt.block_on(async {
-        let session = session::connect(target, &password, None).await?;
-        let mut out = std::io::stdout().lock();
-        writeln!(out, "{}", session.header())?;
-        // One clone, read twice: the rows are behind a lock now.
-        let statuses = session.client.statuses();
-        out.write_all(render(&statuses).as_bytes())?;
-        out.flush()?;
-        Ok(if statuses.iter().all(|s| s.ok || is_preview(s)) {
-            0
-        } else {
-            2
-        })
-    })
+    let mut worst = 0;
+    // The session first, then every peer `-c a,b` named, each its own table. One password
+    // presentation per context and no retry: a peer that refuses ends the run there.
+    let mut targets = vec![conn.clone()];
+    targets.extend(peers.iter().map(|name| ConnArgs {
+        context: Some(name.clone()),
+        ..conn.clone()
+    }));
+    for (i, conn) in targets.iter().enumerate() {
+        let target = session::target(conn, &nutsh_config::config_path())?;
+        let password = session::password(&target, from_env.clone(), &Secrets::default_stores())?;
+        let code = rt.block_on(async {
+            let session = session::connect(target, &password, None).await?;
+            let mut out = std::io::stdout().lock();
+            if i > 0 {
+                writeln!(out)?;
+            }
+            writeln!(out, "{}", session.header())?;
+            // One clone, read twice: the rows are behind a lock now.
+            let statuses = session.client.statuses();
+            out.write_all(render(&statuses).as_bytes())?;
+            out.flush()?;
+            anyhow::Ok(if statuses.iter().all(|s| s.ok || is_preview(s)) {
+                0
+            } else {
+                2
+            })
+        })?;
+        worst = worst.max(code);
+    }
+    Ok(worst)
 }
 
 /// One row per namespace. VERSION is what the PC answered at, with the catalog's version in

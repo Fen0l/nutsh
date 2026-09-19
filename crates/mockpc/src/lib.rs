@@ -113,6 +113,8 @@ pub struct Shared {
     /// Behind a `Mutex` because [`MockPc::fail_from_now`] arms one on the running mock: a test
     /// about what happens to an established session has to let it establish first.
     pub(crate) failing_paths: Mutex<HashMap<String, u16>>,
+    /// Armed by [`MockPc::refuse_credential`]: the password no longer opens a session.
+    pub(crate) refuse_credential: std::sync::atomic::AtomicBool,
     pub(crate) rate_limit_once: Mutex<Vec<String>>,
     pub(crate) reject_select: Vec<String>,
     pub(crate) requests: Mutex<Vec<RecordedRequest>>,
@@ -372,6 +374,14 @@ impl MockPc {
         self.shared.sessions.lock().expect("sessions lock").clear();
     }
 
+    /// From now on, the credential is refused, whatever path presents it: what a changed
+    /// password or a locked account looks like. A session already open rides until it ends.
+    pub fn refuse_credential(&self) {
+        self.shared
+            .refuse_credential
+            .store(true, std::sync::atomic::Ordering::SeqCst);
+    }
+
     /// From now on, this exact API path answers `status`. The builder's
     /// [`MockPcBuilder::fail_path`] is the same thing before the first request; this is the one
     /// a test reaches for when the session has to be working before it breaks.
@@ -579,7 +589,7 @@ impl MockPcBuilder {
 
     /// Honour `$orderby` on lists: a single top-level property, `asc` or `desc`, sorted the
     /// way a Prism Central that implements the parameter would. Off by default; see
-    /// [`Shared::sorts`].
+    /// `Shared::sorts`.
     pub fn honours_orderby(mut self) -> Self {
         self.sorts = true;
         self
@@ -650,6 +660,7 @@ impl MockPcBuilder {
             failing: self.failing,
             missing: self.missing,
             failing_paths: Mutex::new(self.failing_paths),
+            refuse_credential: std::sync::atomic::AtomicBool::new(false),
             rate_limit_once: Mutex::new(self.rate_limit_once),
             reject_select: self.reject_select,
             requests: Mutex::new(Vec::new()),

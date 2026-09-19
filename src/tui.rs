@@ -18,6 +18,8 @@ pub(crate) struct TuiArgs {
     /// kind and nothing here has to know which of the two it was handed.
     pub(crate) start: String,
     pub(crate) snapshot: bool,
+    /// `-c a,b`: the contexts read beside the session, joined before the first frame.
+    pub(crate) peers: Vec<String>,
     pub(crate) size: (u16, u16),
     /// `--format csv|json`: the table instead of the frame.
     pub(crate) format: Option<nutsh_core::export::Format>,
@@ -146,6 +148,10 @@ pub(crate) fn run(args: TuiArgs, conn: &ConnArgs, from_env: Option<String>) -> a
                     tokio::time::timeout(Duration::from_secs(10), app.settle_once()).await
                 };
                 settled.context("the first poll did not complete within 10 s")?;
+                // The peers' first cycle too, so a merged table is drawn whole; a peer that
+                // never answers costs the frame nothing but its rows.
+                let _ =
+                    tokio::time::timeout(Duration::from_secs(10), app.settle_peers_once()).await;
                 // A *second*, separate, non-fatal wait. The first one turns its timeout into an
                 // error, and a wait for the warm-up built the same way would turn a slow Prism
                 // Central into a failed `--snapshot` - trading one kind of non-determinism for a
@@ -228,6 +234,7 @@ async fn start(
             if let Some(dir) = cache {
                 app.enable_cache(dir, restored);
             }
+            app.join(&args.peers).await;
             Ok(Start::App(app))
         }
         Err(e) => {

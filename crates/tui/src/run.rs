@@ -265,7 +265,7 @@ async fn event_loop(app: &mut App, panics: &Panics) -> anyhow::Result<()> {
             }
             result = app.connect_rx.recv() => {
                 if let Some(result) = result {
-                    app.connected(result);
+                    app.connect_outcome(result);
                 }
             }
             // Both clocks: the wall one dates what is drawn, the monotonic one is what the

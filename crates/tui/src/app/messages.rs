@@ -37,7 +37,9 @@ impl App {
             // the table the user just acted on, which is the cycle they asked for.
             self.woke();
             if let Some(live) = self.live.as_mut() {
-                live.scheduler.refresh_kind(row_kind);
+                for s in live.schedulers_mut() {
+                    s.refresh_kind(row_kind);
+                }
             }
             self.acted(journal, plan, result);
             return;
@@ -50,7 +52,11 @@ impl App {
         // sender side would race this drain and could gate out the refresh the `once` exists
         // to deliver.
         if let Msg::Done { epoch, sub } = msg {
-            live.scheduler.reap(epoch, sub);
+            for s in live.schedulers_mut() {
+                if s.epoch() == epoch {
+                    s.reap(epoch, sub);
+                }
+            }
             self.search_answered(sub);
             return;
         }
@@ -86,7 +92,7 @@ impl App {
         // above. This guard and the `into_update` one below are exhaustive by construction,
         // kept as the routing they read as.
         let Some(sub) = msg.sub() else { return };
-        if !live.scheduler.is_live(sub) {
+        if !live.any_live(sub) {
             return; // a message from a view that was popped
         }
         // The detail's single subscription shares its table's key. Only its `Entity` reaches
@@ -143,7 +149,7 @@ impl App {
             _ => None,
         };
         if let Some(done) = &finished {
-            live.scheduler.unsubscribe(done.watch.sub);
+            live.unsubscribe_any(done.watch.sub);
             live.journal.settle(
                 done.watch.journal,
                 done.outcome.clone(),
@@ -152,7 +158,13 @@ impl App {
         }
         if let Some(done) = finished {
             if matches!(done.watch.status, TaskStatus::Succeeded) {
-                self.refresh_row(done.watch.row_kind, &done.watch.ext_id);
+                let site = self.live.as_ref().and_then(|l| {
+                    l.journal
+                        .context_of(done.watch.journal)
+                        .filter(|c| *c != l.primary_name())
+                        .map(std::sync::Arc::from)
+                });
+                self.refresh_row(done.watch.row_kind, &done.watch.ext_id, site);
             }
             self.status = Some(format!(
                 "{} {}: {}",
@@ -225,6 +237,13 @@ impl App {
             let Some(live) = self.live.as_mut() else {
                 return;
             };
+            // The journal recorded which context the request went to; the watch and the
+            // refresh go to the same one.
+            let site: Option<std::sync::Arc<str>> = live
+                .journal
+                .context_of(journal)
+                .filter(|c| *c != live.primary_name())
+                .map(std::sync::Arc::from);
             match &outcome {
                 Outcome::Started(task) => {
                     // A watch needs a plan back; `PlanRef` carries everything but the body and
@@ -243,10 +262,20 @@ impl App {
                     let Live {
                         tasks,
                         scheduler,
+                        peers,
                         journal: ring,
                         ..
                     } = live;
-                    tasks.watch(scheduler, &full, task.clone(), journal);
+                    let owner = match site.as_deref() {
+                        None => Some(scheduler),
+                        Some(name) => peers
+                            .iter_mut()
+                            .find(|p| &*p.name == name)
+                            .map(|p| &mut p.scheduler),
+                    };
+                    if let Some(owner) = owner {
+                        tasks.watch(owner, site.clone(), &full, task.clone(), journal);
+                    }
                     // The id goes in now, not when the watch settles: a running task is exactly
                     // the row a reader wants to look up in `:tasks`, and until the watch
                     // finishes the terminal settle has not run.
@@ -258,7 +287,7 @@ impl App {
                         .settle(journal, JournalOutcome::Succeeded, None);
                     // The row's kind, for the same reason the watch carries it: the refresh is
                     // issued against the table the row is in.
-                    refresh = Some((plan.row_kind, plan.ext_id.clone()));
+                    refresh = Some((plan.row_kind, plan.ext_id.clone(), site.clone()));
                     format!("{} {}: done", plan.action.name, plan.name)
                 }
                 // The document is opened over the table below, once `live` is no longer
@@ -290,8 +319,8 @@ impl App {
                 }
             }
         };
-        if let Some((kind, ext_id)) = refresh {
-            self.refresh_row(kind, &ext_id);
+        if let Some((kind, ext_id, site)) = refresh {
+            self.refresh_row(kind, &ext_id, site);
         }
         if let Outcome::Returned(value) = outcome {
             self.open_payload(format!("{} {}", plan.action.title(), plan.name), value);
@@ -307,7 +336,12 @@ impl App {
     /// the request was in flight - and skipped when the kind has no `get_path`, which the flat
     /// Host does not: there is no single-entity read to issue. The row settles on the next
     /// ordinary poll instead, and the status line says the same thing either way.
-    pub(super) fn refresh_row(&mut self, kind: &'static Kind, ext_id: &str) {
+    pub(super) fn refresh_row(
+        &mut self,
+        kind: &'static Kind,
+        ext_id: &str,
+        site: Option<std::sync::Arc<str>>,
+    ) {
         let Some(live) = self.live.as_mut() else {
             return;
         };
@@ -315,9 +349,15 @@ impl App {
         if view.key.kind.id != kind.id || kind.get_path.is_none() {
             return;
         }
-        let key = view.key.clone();
-        live.scheduler
-            .subscribe(Subscription::once(key, ext_id.to_string()));
+        // A merged row's refresh writes into its own context's table, asked of its own
+        // Prism Central.
+        let key = match (&site, view.key.context.is_none()) {
+            (Some(name), true) => view.key.clone().in_context(name.clone()),
+            _ => view.key.clone(),
+        };
+        if let Some(scheduler) = live.scheduler_for(key.context.as_deref()) {
+            scheduler.subscribe(Subscription::once(key, ext_id.to_string()));
+        }
     }
 
     /// Drains poll messages until every pane of the open page has settled; what `--snapshot`
@@ -351,6 +391,31 @@ impl App {
             if done {
                 return;
             }
+        }
+    }
+
+    /// Drains poll messages until every peer subscription of the top table view has completed
+    /// or failed once. Returns at once with no peers. Like [`App::settle_once`], it waits
+    /// forever if nothing arrives: every caller wraps it in a timeout.
+    pub async fn settle_peers_once(&mut self) {
+        let subs: Vec<SubId> = self
+            .live
+            .as_ref()
+            .and_then(Live::table)
+            .map(|v| v.peer_subs.iter().map(|(_, s)| *s).collect())
+            .unwrap_or_default();
+        let mut waiting: std::collections::HashSet<SubId> = subs.into_iter().collect();
+        while !waiting.is_empty() {
+            let Some(msg) = self.poll_rx.recv().await else {
+                return;
+            };
+            if let (Some(sub), true) = (
+                msg.sub(),
+                matches!(msg, Msg::Complete { .. } | Msg::Error { .. }),
+            ) {
+                waiting.remove(&sub);
+            }
+            self.apply(msg);
         }
     }
 
@@ -459,8 +524,10 @@ impl App {
         if let Some(live) = self.live.as_ref()
             && live.scheduler.is_idle()
         {
-            live.scheduler.set_idle(false);
-            live.scheduler.refresh_all();
+            for s in live.schedulers() {
+                s.set_idle(false);
+                s.refresh_all();
+            }
             self.dirty = true;
         }
     }
@@ -475,7 +542,9 @@ impl App {
         if let Some(live) = self.live.as_ref() {
             let idle = nutsh_core::scheduler::idle_state(self.last_input, mono);
             if idle != live.scheduler.is_idle() {
-                live.scheduler.set_idle(idle);
+                for s in live.schedulers() {
+                    s.set_idle(idle);
+                }
                 self.dirty = true;
             }
         }

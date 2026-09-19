@@ -23,6 +23,8 @@ pub enum Action {
     Remove(String),
     /// Start this connect. The second field is the host, for the message under the rows.
     Connect(ConnectRequest, String),
+    /// `space`: read this context beside the session, or stop reading it.
+    Toggle(String),
     /// `esc` on the rows: back to the table, when there is one.
     Back,
     Quit,
@@ -284,6 +286,8 @@ pub struct Screen {
     pub list_error: Option<String>,
     pub pending: bool,
     pub confirm_remove: Option<String>,
+    /// The contexts joined beside the session (`:ctx a b`, or `space` here), drawn with `+`.
+    pub joined: Vec<String>,
 }
 
 impl Screen {
@@ -379,6 +383,18 @@ impl Screen {
                     self.open_login(r.name, None);
                     Action::Opened
                 }
+                None => Action::Handled,
+            },
+            Key::Char(' ') => match self.current() {
+                Some(r) if r.name == ENV_ROW => {
+                    self.message = Some("the environment target cannot be joined".into());
+                    Action::Handled
+                }
+                Some(r) if r.current => {
+                    self.message = Some(format!("{} is the session", r.name));
+                    Action::Handled
+                }
+                Some(r) => Action::Toggle(r.name.clone()),
                 None => Action::Handled,
             },
             Key::Esc => Action::Back,

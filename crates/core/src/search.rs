@@ -78,6 +78,15 @@ impl Query {
         if contains_ci(&entity.ext_id, &self.needle) {
             return Some(Match::ExtId);
         }
+        // The context a merged table stamps on a row: `/dr` keeps one Prism Central's rows.
+        if entity
+            .raw
+            .get("$context")
+            .and_then(|v| v.as_str())
+            .is_some_and(|c| contains_ci(c, &self.needle))
+        {
+            return Some(Match::Name);
+        }
         self.values(entity)
             .find(|(_, value)| self.matches_address(value))
             .map(|(label, value)| Match::Address { label, value })
@@ -379,6 +388,10 @@ pub fn across(store: &crate::store::Store, query: &Query) -> Found {
     let mut by_kind: BTreeMap<&'static str, Group> = BTreeMap::new();
     let mut loaded: BTreeSet<&'static str> = BTreeSet::new();
     for (key, table) in store.tables() {
+        // A joined context's tables are read beside the session, not searched for it.
+        if key.context.is_some() {
+            continue;
+        }
         loaded.insert(key.kind.id);
         for entity in table.rows.values() {
             let Some(why) = query.why(entity) else {

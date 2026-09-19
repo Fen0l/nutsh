@@ -126,6 +126,8 @@ impl App {
             names_seen: false,
             connect_tx,
             connect_rx,
+            pending_peers: Vec::new(),
+            joining: Vec::new(),
             last_input: std::time::Instant::now(),
             nav_hide,
             nav_hide_unserved,
@@ -177,6 +179,7 @@ impl App {
             session,
             store: Store::default(),
             scheduler,
+            peers: Vec::new(),
             stack: Vec::new(),
             stats,
             names,
@@ -266,6 +269,7 @@ impl App {
                 kind: t.kind,
                 parents: t.parents,
                 filter: t.filter.map(std::sync::Arc::from),
+                context: None,
             };
             let rows: Vec<nutsh_prism::Entity> = t
                 .rows
@@ -328,6 +332,7 @@ impl App {
     /// Open the Contexts screen (from `:ctx`, or at startup). `row` preselects a name.
     pub(crate) fn show_contexts(&mut self, row: Option<&str>) {
         self.reload_contexts();
+        self.sync_joined();
         if let Some(name) = row {
             self.screen.select(name);
         }
@@ -349,7 +354,12 @@ impl App {
         let future = self.contexts.connect(request);
         let tx = self.connect_tx.clone();
         runtime.spawn(async move {
-            let _ = tx.send(future.await).await;
+            let _ = tx
+                .send(ConnectOutcome {
+                    peer: None,
+                    result: future.await,
+                })
+                .await;
         });
         self.screen.pending = true;
         self.screen.message = Some(format!("connecting to {host}…"));
@@ -358,6 +368,179 @@ impl App {
         } else {
             Mode::Contexts
         };
+    }
+
+    /// A connect that came back on the channel: the primary's, or a peer's.
+    pub fn connect_outcome(&mut self, outcome: ConnectOutcome) {
+        match outcome.peer {
+            None => self.connected(outcome.result),
+            Some(name) => self.joined(name, outcome.result),
+        }
+    }
+
+    /// Join `name` beside the current session: connect it and, when that answers, list the
+    /// top table in view from it too. `true` when a connect was started; otherwise the status
+    /// line says why not, and nothing will answer on the connect channel.
+    pub(super) fn start_join(&mut self, name: &str) -> bool {
+        let Ok(runtime) = tokio::runtime::Handle::try_current() else {
+            self.status = Some("no async runtime: cannot connect from here".into());
+            return false;
+        };
+        if let Some(live) = self.live.as_ref() {
+            if live.primary_name() == name {
+                self.status = Some(format!("{name} is the session"));
+                return false;
+            }
+            if live.peers.iter().any(|p| &*p.name == name) {
+                self.status = Some(format!("{name} is already joined"));
+                return false;
+            }
+        }
+        // One presentation of a credential per peer: a second ask while the first is in
+        // flight would put the password on the wire twice.
+        if self.joining.iter().any(|n| n == name) {
+            self.status = Some(format!("joining {name}…"));
+            return false;
+        }
+        self.reload_contexts();
+        let Some(row) = self.screen.rows.iter().find(|r| r.name == name).cloned() else {
+            self.status = Some(format!("no context named {name}"));
+            return false;
+        };
+        if !row.has_password {
+            self.status = Some(format!(
+                "{name}: no stored password; run `nutsh ctx login {name}` first"
+            ));
+            return false;
+        }
+        self.joining.push(name.to_string());
+        let future = self.contexts.connect(screen::request(name, None));
+        let tx = self.connect_tx.clone();
+        let peer: std::sync::Arc<str> = std::sync::Arc::from(name);
+        runtime.spawn(async move {
+            let _ = tx
+                .send(ConnectOutcome {
+                    peer: Some(peer),
+                    result: future.await,
+                })
+                .await;
+        });
+        self.status = Some(format!("joining {name}…"));
+        true
+    }
+
+    /// `space` on the Contexts screen: join this context beside the session, or drop it.
+    pub(super) fn toggle_peer(&mut self, name: &str) {
+        if self.live.is_none() {
+            self.screen.message = Some("connect to a context first".into());
+            return;
+        }
+        let joined = self
+            .live
+            .as_ref()
+            .is_some_and(|l| l.peers.iter().any(|p| &*p.name == name));
+        if joined {
+            let keep: Vec<String> = self
+                .live
+                .as_ref()
+                .map(|l| {
+                    l.peers
+                        .iter()
+                        .filter(|p| &*p.name != name)
+                        .map(|p| p.name.to_string())
+                        .collect()
+                })
+                .unwrap_or_default();
+            self.keep_peers(&keep);
+            self.screen.message = Some(format!("{name} dropped"));
+        } else {
+            self.start_join(name);
+            self.screen.message = self.status.clone();
+        }
+        self.sync_joined();
+    }
+
+    /// The screen's `+` marks, from the session's peers.
+    pub(super) fn sync_joined(&mut self) {
+        self.screen.joined = self
+            .live
+            .as_ref()
+            .map(|l| l.peers.iter().map(|p| p.name.to_string()).collect())
+            .unwrap_or_default();
+    }
+
+    /// Join every context named, one after another, and wait for each: what `-c a,b` asks
+    /// for before the first frame. A peer that fails to connect says so in the status line
+    /// and the rest still join.
+    pub async fn join(&mut self, names: &[String]) {
+        for name in names {
+            // Only a started connect answers; waiting on a refused one would wait forever.
+            if self.start_join(name)
+                && let Some(outcome) = self.connect_rx.recv().await
+            {
+                self.connect_outcome(outcome);
+            }
+        }
+    }
+
+    /// A peer's connect came back: it gets a scheduler of its own, and the top table in
+    /// view is listed from it. Nothing of the primary session moves.
+    pub fn joined(&mut self, name: std::sync::Arc<str>, result: anyhow::Result<Connected>) {
+        self.dirty = true;
+        self.joining.retain(|n| **n != *name);
+        let Some(live) = self.live.as_mut() else {
+            return;
+        };
+        match result {
+            Ok(connected) => {
+                let scheduler =
+                    Scheduler::new(connected.session.client.clone(), self.poll_tx.clone());
+                // The peer's references resolve through the shared name cache, so its rows
+                // read as names too.
+                let names = nutsh_core::names::spawn(
+                    connected.session.client.clone(),
+                    self.poll_tx.clone(),
+                    self.session_generation,
+                    scheduler.idle_flag(),
+                );
+                live.forget_peer(&name);
+                live.peers.push(Peer {
+                    name: name.clone(),
+                    session: connected.session,
+                    scheduler,
+                    names,
+                });
+                live.subscribe_peers();
+                self.status = Some(format!("joined {name}"));
+            }
+            Err(e) => self.status = Some(format!("could not join {name}: {e:#}")),
+        }
+        self.sync_joined();
+        if self.mode == Mode::Contexts {
+            self.screen.message = self.status.clone();
+        }
+    }
+
+    /// Drop every peer not in `keep`: their subscriptions end with their schedulers, and the
+    /// rows they listed stay in the store until the view is reopened.
+    pub(super) fn keep_peers(&mut self, keep: &[String]) {
+        let Some(live) = self.live.as_mut() else {
+            return;
+        };
+        let dropping: Vec<std::sync::Arc<str>> = live
+            .peers
+            .iter()
+            .filter(|p| !keep.iter().any(|k| **k == *p.name))
+            .map(|p| p.name.clone())
+            .collect();
+        if dropping.is_empty() {
+            return;
+        }
+        for name in &dropping {
+            live.forget_peer(name);
+        }
+        self.sync_joined();
+        self.dirty = true;
     }
 
     /// The outcome of a connect the screen started. Warnings (a password that could not be
@@ -412,6 +595,10 @@ impl App {
             self.screen.message = Some(notes.join("\n"));
             self.status = Some(notes.join("; "));
         }
+        // The peers `:ctx a b` named after the primary, now that there is a session to join.
+        for name in std::mem::take(&mut self.pending_peers) {
+            self.start_join(&name);
+        }
     }
 
     /// Open whichever of the two a `Home` names, as the root view.
@@ -425,6 +612,8 @@ impl App {
     /// Back to the box that asked for the connect, so what was typed is still there to be
     /// corrected; the rows themselves when nothing was open.
     pub(super) fn connect_failed(&mut self, error: String) {
+        // The peers named beside a session that never came: nothing to join them to.
+        self.pending_peers.clear();
         // Either way it replaces the `connecting to …` it answers.
         self.screen.message = None;
         match self.screen.prompt.as_mut() {
@@ -439,16 +628,39 @@ impl App {
         }
     }
 
-    /// `:ctx`, with or without a name.
-    pub(crate) fn ctx_command(&mut self, argument: Option<String>) {
-        let Some(name) = argument else {
+    /// `:ctx`, with no name, one, or several. The first is the session; every name after it is
+    /// a peer read beside it, and a peer not named again is dropped.
+    pub(crate) fn ctx_command(&mut self, names: Vec<String>) {
+        let mut names = names.into_iter();
+        let Some(name) = names.next() else {
             self.show_contexts(None);
             return;
         };
+        let peers: Vec<String> = names.filter(|n| *n != name).collect();
+        // The same session: only the peers move.
+        if self
+            .live
+            .as_ref()
+            .is_some_and(|l| l.session.context.as_deref() == Some(name.as_str()))
+        {
+            self.keep_peers(&peers);
+            for peer in peers {
+                let joined = self
+                    .live
+                    .as_ref()
+                    .is_some_and(|l| l.peers.iter().any(|p| *p.name == *peer));
+                if !joined {
+                    self.start_join(&peer);
+                }
+            }
+            return;
+        }
+        self.pending_peers = peers;
         self.reload_contexts();
         let Some(row) = self.screen.rows.iter().find(|r| r.name == name).cloned() else {
             // Nothing opened, so nothing to go back from: the palette already restored the
             // mode it was opened over.
+            self.pending_peers.clear();
             self.status = Some(format!("no context named {name}"));
             return;
         };

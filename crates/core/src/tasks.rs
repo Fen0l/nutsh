@@ -3,6 +3,7 @@
 //! machinery of its own.
 
 use std::collections::HashMap;
+use std::sync::Arc;
 use std::time::{Duration, Instant};
 
 use indexmap::IndexMap;
@@ -160,11 +161,16 @@ impl TaskIndex {
     pub fn watch(
         &mut self,
         scheduler: &mut Scheduler,
+        context: Option<Arc<str>>,
         plan: &Plan,
         task: TaskRef,
         journal: JournalId,
     ) -> SubId {
-        let key = TableKey::top(task_kind());
+        // A joined context's task lands in that context's Tasks table, beside its own rows.
+        let key = match context {
+            Some(name) => TableKey::top(task_kind()).in_context(name),
+            None => TableKey::top(task_kind()),
+        };
         let interval = Duration::from_secs(u64::from(key.kind.poll_secs.max(1)));
         // `watching`: the idle pause and the refresh schedule both leave a watch alone. It is
         // the user's own pending mutation, it already expires after fifteen minutes, and

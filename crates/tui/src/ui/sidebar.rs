@@ -35,7 +35,7 @@ pub(super) fn draw_sidebar(app: &App, f: &mut Frame, area: Rect) {
     // a drill-down into a row of it is not what `[n]` counts.
     // A page counts nothing: its rows belong to its panes, each of which carries its own.
     let count = app.live.as_ref().map_or(0, |l| match l.stack.first() {
-        Some(View::Table(v)) => l.store.table(&v.key).rows.len(),
+        Some(View::Table(v)) => l.merged(&v.key).rows.len(),
         Some(View::Page(_)) | None => 0,
     });
     // A kind whose table came back 404 is greyed like a `Missing` item, but only once the

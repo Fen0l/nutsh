@@ -8,7 +8,7 @@ expression: "app.snapshot(120, 30).unwrap()"
 │Cluster:    <all>                    │  Power cycle (cuts power)                                       │alerts ⚠ 2  ✖ 2
 │Kind:       Compute & Storage › VMs  │  Reset (cuts power)                                             │sks ▶ 4 running
 │Count:      3                        │  Shut down (ACPI, asks the guest)                            [d]│
-╰─────────────────────────────────────│  Shut down (guest tools)                                     [D]│ta3 · pc.2024.3
+╰─────────────────────────────────────│  Shut down (guest tools)                                     [D]│1.0 · pc.2024.3
 ╭ nutsh ───────────────╮╭ Virtual Mach│  Reboot (ACPI, asks the guest)                               [r]│──────────────╮
 │  ▸ Dashboard         ││  NAME       │  Reboot (guest tools)                                        [R]│        MEM   │
 │  ▾ Compute & Storage ││▌ web-01     │  Migrate to another cluster                                     │113.11  8 GiB │

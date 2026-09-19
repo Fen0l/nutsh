@@ -249,7 +249,7 @@ pub(crate) fn table_file_name(kind: &str, parents: &[String], filter: Option<&st
 /// What one write is handed: cloned raw rows, names, counters and pins, built on the UI thread
 /// and serialized on a blocking one. The clone costs roughly the serialized size (750 KB for a
 /// 100-VM table) once a minute, which is much cheaper than a dropped frame - and it is the only
-/// one, because [`write`] takes this by value and moves through it.
+/// one, because [`write()`] takes this by value and moves through it.
 #[derive(Debug, Clone)]
 pub struct Snapshot {
     pub identity: Identity,
