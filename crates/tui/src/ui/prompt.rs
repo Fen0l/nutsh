@@ -180,7 +180,9 @@ pub(super) fn hint_text(app: &App) -> &'static str {
         Mode::Contexts if app.live.is_none() => {
             " enter connect  a add  l login  d remove  ^r reload  q quit"
         }
-        Mode::Contexts => " enter connect  a add  l login  d remove  ^r reload  esc back  q quit",
+        Mode::Contexts => {
+            " enter connect  space join  a add  l login  d remove  ^r reload  esc back"
+        }
         Mode::Form => " tab next  shift-tab previous  space toggle  enter submit  esc cancel",
         Mode::Help => " esc close",
         Mode::Journal => " j k g G scroll  esc close",

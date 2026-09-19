@@ -139,6 +139,14 @@ impl Journal {
     }
 
     /// Oldest first; the view reverses, and windows with `len`, `rev`, `skip` and `take`.
+    /// The context the entry `id` was recorded against.
+    pub fn context_of(&self, id: JournalId) -> Option<&str> {
+        self.entries
+            .iter()
+            .find(|e| e.id == id)
+            .map(|e| e.context.as_str())
+    }
+
     pub fn entries(&self) -> vec_deque::Iter<'_, Entry> {
         self.entries.iter()
     }

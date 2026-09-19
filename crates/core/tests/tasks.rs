@@ -263,7 +263,7 @@ async fn execute_starts_a_task_the_watch_follows_to_success() {
 
     let mut index = TaskIndex::default();
     let journal = nutsh_core::journal::JournalId::default();
-    index.watch(&mut scheduler, &plan, task.clone(), journal);
+    index.watch(&mut scheduler, None, &plan, task.clone(), journal);
     let mut finished = None;
     let mut seen = Vec::new();
     while finished.is_none() {
@@ -358,6 +358,7 @@ async fn a_failed_and_a_stalled_task_are_reported_honestly() {
     let mut index = TaskIndex::default();
     index.watch(
         &mut scheduler,
+        None,
         &plan,
         task,
         nutsh_core::journal::JournalId::default(),
@@ -425,6 +426,7 @@ async fn a_task_watch_carries_no_query_at_all_so_no_select_can_narrow_it() {
     let mut index = TaskIndex::default();
     index.watch(
         &mut scheduler,
+        None,
         &plan,
         task.clone(),
         nutsh_core::journal::JournalId::default(),

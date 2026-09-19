@@ -8,16 +8,16 @@ expression: frame
 │Cluster:    -                                                           │           alerts ⚠ -  ✖ -
 │Kind:       Contexts                                                    │         tasks ▶ - running
 │Count:      30 contexts                                                 │
-╰────────────────────────────────────────────────────────────────────────╯          v0.0.2-beta3 · -
-   NAME           HOST                     USER       CLUSTER        FLAGS              PASSWORD
-   ctx08          pc.lab.example           admin      -              insecure           stored
-   ctx09          pc.lab.example           admin      -              insecure           stored
-   ctx10          pc.lab.example           admin      -              insecure           stored
-   ctx11          pc.lab.example           admin      -              insecure           stored
-   ctx12          pc.lab.example           admin      -              insecure           stored
-   ctx13          pc.lab.example           admin      -              insecure           stored
-   ctx14          pc.lab.example           admin      -              insecure           stored
->  ctx15          pc.lab.example           admin      -              insecure           stored
+╰────────────────────────────────────────────────────────────────────────╯                v0.1.0 · -
+   NAME           JOINED  HOST             USER       CLUSTER        FLAGS              PASSWORD
+   ctx08          [ ]     pc.lab.example   admin      -              insecure           stored
+   ctx09          [ ]     pc.lab.example   admin      -              insecure           stored
+   ctx10          [ ]     pc.lab.example   admin      -              insecure           stored
+   ctx11          [ ]     pc.lab.example   admin      -              insecure           stored
+   ctx12          [ ]     pc.lab.example   admin      -              insecure           stored
+   ctx13          [ ]     pc.lab.example   admin      -              insecure           stored
+   ctx14          [ ]     pc.lab.example   admin      -              insecure           stored
+>  ctx15          [ ]     pc.lab.example   admin      -              insecure           stored
 (14 more)
 
 remove ctx15? y/n

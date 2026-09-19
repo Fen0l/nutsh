@@ -241,7 +241,7 @@ fn adoptable(r: &cache::Restored, now: u64) -> Vec<NamespaceStatus> {
         .collect()
 }
 
-/// One namespace status as `meta.json` keeps it. The other half of [`adoptable`], and here
+/// One namespace status as `meta.json` keeps it. The other half of `adoptable`, and here
 /// beside it so that what is written and what is read back stay one decision.
 ///
 /// `restored` is deliberately not persisted. A record says what was learned, not who is

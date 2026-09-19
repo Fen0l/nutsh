@@ -310,12 +310,18 @@ impl Detail {
         debug_assert!(self.key.is_some(), "an entity pane carries its table's key");
         let name = entity.map(|e| e.name.as_str()).unwrap_or("…");
         let display = self.key.as_ref().map_or("", |k| k.kind.display);
+        let site = self
+            .key
+            .as_ref()
+            .and_then(|k| k.context.as_deref())
+            .map(|c| format!(" · on {c}"))
+            .unwrap_or_default();
         match &self.watch {
             Some(w) => format!(
-                "{display} · {name} · watching every {}",
+                "{display} · {name}{site} · watching every {}",
                 nutsh_core::cell::span(w.every.as_secs())
             ),
-            None => format!("{display} · {name}"),
+            None => format!("{display} · {name}{site}"),
         }
     }
 

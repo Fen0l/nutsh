@@ -35,9 +35,9 @@ Prism Centrals a day, and Community Edition home labs.
 
 ## Status
 
-**0.0.2-beta3.** One author, a few months of daily use against one Prism Central (pc.7.6) and
-a mock built from the published pc.2024.3 API specs. Nobody else has run it for a week yet.
-Expect rough edges, and expect the version number to move.
+**0.1.0, the first release meant for other people.** One author, a few months of daily use
+against one Prism Central (pc.7.6) and a mock built from the published pc.2024.3 API specs.
+Nobody else has run it for a week yet. Expect rough edges; report what you find.
 
 Before you point it at anything real, know what it holds and does:
 
@@ -60,12 +60,11 @@ macOS and Linux today. No Windows build yet; WSL works.
 | | |
 |---|---|
 | **Homebrew**, macOS and Linux | `brew install Fen0l/tap/nutsh` |
-| **Shell installer**, any distribution | `curl --proto '=https' --tlsv1.2 -LsSf https://github.com/Fen0l/nutsh/releases/download/v0.0.2-beta3/nutsh-installer.sh \| sh` |
+| **Shell installer**, any distribution | `curl --proto '=https' --tlsv1.2 -LsSf https://github.com/Fen0l/nutsh/releases/latest/download/nutsh-installer.sh \| sh` |
 | **Binaries** | [Releases](https://github.com/Fen0l/nutsh/releases): macOS and Linux, x86_64 and arm64, each archive with its SHA-256. Linux comes as `gnu` and as `musl`, a static binary for any distribution. |
 | **From source** | `git clone https://github.com/Fen0l/nutsh && cd nutsh && make release`, with a Rust toolchain. The binary lands at `target/release/nutsh`. |
 
-`releases/latest/` skips pre-releases, so the installer URL names the version until there is a
-stable one. Not on crates.io yet.
+Not on crates.io yet.
 
 ## First five minutes
 
@@ -81,7 +80,7 @@ Then, inside:
 - `/` filters the rows in front of you. `:search web` looks everywhere, then asks the Prism Central.
 - `⏎` drills into a row's children; `y` opens its detail; `esc` goes back.
 - `a` lists what can be done to the row, greyed where you may not, with the reason beside it.
-- `:ctx` switches to another Prism Central. `?` shows every key. `q` quits.
+- `:ctx` switches to another Prism Central. `?` shows the main keys. `q` quits.
 
 If the certificate is rejected, that is normal: Prism Central's default certificate is
 self-signed *and* marked as a CA, which no modern TLS library accepts as a server certificate.
@@ -101,7 +100,10 @@ Tab completion for the shell: `source <(nutsh completions zsh)`; `bash` and `fis
   and action. Every attempt lands in `:journal`, refused ones included.
 - **Honest emptiness.** When something is missing it says why - which API namespace this
   Prism Central does not serve, or which version a resource needs - instead of an empty box.
-- **Several Prism Centrals.** A context per environment, switched in one command.
+- **Several Prism Centrals.** A context per environment, switched in one command - or read
+  side by side: `:ctx lab dr` lists both in every table, each in its own colour under a
+  CONTEXT column, `/dr` keeps one of them, a row acts against its own Prism Central, and a
+  credential one of them refuses ends that one alone. `-c lab,dr` does the same from the shell.
 - **Useful outside the TUI.** `nutsh --check` prints what your Prism Central serves.
   `nutsh vm --snapshot` prints one frame; `--format csv|json` prints the table for scripts.
 - **Gentle on the Prism Central.** Cached per context, ETag revalidation, paced per endpoint

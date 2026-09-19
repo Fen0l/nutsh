@@ -118,7 +118,7 @@ impl App {
     /// action it was gathered for, once the requests are away - a mark that survived its own
     /// bulk action would silently re-run on the same rows at the next keypress.
     pub(super) fn toggle_mark(&mut self) {
-        let Some(ext_id) = self.selected_ext_id().map(str::to_string) else {
+        let Some(ext_id) = self.selected_ext_id() else {
             return;
         };
         if let Some(live) = self.live.as_mut()
@@ -154,13 +154,18 @@ impl App {
 
     /// The keys of a table that only move the cursor or ask for a poll now.
     pub(super) fn move_in_table(&mut self, key: Key) {
+        let merges = self.view().is_some_and(|v| self.merges(&v.key));
         let Some(live) = self.live.as_mut() else {
             return;
         };
+        let merged = match live.stack.last() {
+            Some(View::Table(v)) => live.merged(&v.key).into_owned(),
+            _ => Table::default(),
+        };
         let Live {
-            store,
             stack,
             scheduler,
+            peers,
             ..
         } = live;
         let Some(View::Table(view)) = stack.last_mut() else {
@@ -168,7 +173,7 @@ impl App {
         };
         // What the frame shows, not what the table holds: `G` on a filtered table goes to the
         // last row that matches.
-        let len = crate::table::matching(store.table(&view.key), view.query());
+        let len = crate::table::matching(&merged, view.query());
         let last = len.saturating_sub(1);
         let mut flash: Option<&'static str> = None;
         let mut retime = false;
@@ -183,8 +188,11 @@ impl App {
             // the same shape of gesture in both, and never ambiguous, because focus decides.
             Key::Left => view.col_offset = view.col_offset.saturating_sub(1),
             Key::Right => {
-                let last =
-                    crate::table::max_offset(crate::table::columns(view.key.kind, view.wide));
+                let last = crate::table::max_offset(&crate::table::columns_for(
+                    view.key.kind,
+                    view.wide,
+                    merges,
+                ));
                 view.col_offset = (view.col_offset + 1).min(last);
             }
             // `ctrl-r` is the way out of a stopped view as well as a request for a cycle now:
@@ -192,10 +200,34 @@ impl App {
             // view's.
             Key::Ctrl('r') => {
                 view.stopped = false;
-                scheduler.refresh(view.sub);
+                // The view's own list lives on the scheduler of the context it reads.
+                match view.key.context.as_deref() {
+                    None => scheduler.refresh(view.sub),
+                    Some(name) => {
+                        if let Some(peer) = peers.iter_mut().find(|p| &*p.name == name) {
+                            peer.scheduler.refresh(view.sub);
+                        }
+                    }
+                }
+                for (name, sub) in &view.peer_subs {
+                    if let Some(peer) = peers.iter_mut().find(|p| p.name == *name) {
+                        peer.scheduler.refresh(*sub);
+                    }
+                }
             }
             Key::Ctrl('x') => {
-                let stopped = scheduler.stop(view.sub);
+                let stopped = match view.key.context.as_deref() {
+                    None => scheduler.stop(view.sub),
+                    Some(name) => peers
+                        .iter_mut()
+                        .find(|p| &*p.name == name)
+                        .is_some_and(|peer| peer.scheduler.stop(view.sub)),
+                };
+                for (name, sub) in &view.peer_subs {
+                    if let Some(peer) = peers.iter().find(|p| p.name == *name) {
+                        peer.scheduler.stop(*sub);
+                    }
+                }
                 view.stopped = stopped;
                 flash = Some(if stopped {
                     "stopped"
@@ -219,13 +251,16 @@ impl App {
     /// `S`: sort by the next column, then by that column reversed, then on to the next one;
     /// past the last column reversed, back to the order the store holds.
     pub(super) fn cycle_sort(&mut self) {
+        let Some(merges) = self.view().map(|v| self.merges(&v.key)) else {
+            return;
+        };
         let Some(live) = self.live.as_mut() else {
             return;
         };
         let Some(view) = live.table_mut() else {
             return;
         };
-        let columns = crate::table::columns(view.key.kind, view.wide).len();
+        let columns = crate::table::columns_for(view.key.kind, view.wide, merges).len();
         view.sort = match view.sort {
             None => (columns > 0).then_some((0, false)),
             Some((col, false)) => Some((col, true)),
@@ -237,11 +272,18 @@ impl App {
     /// `w`: up to twenty columns instead of six. The column offset is clamped, since `w` can
     /// narrow the column set under it.
     pub(super) fn toggle_wide(&mut self) {
+        let Some(merges) = self.view().map(|v| self.merges(&v.key)) else {
+            return;
+        };
         if let Some(live) = self.live.as_mut()
             && let Some(view) = live.table_mut()
         {
             view.wide = !view.wide;
-            let last = crate::table::max_offset(crate::table::columns(view.key.kind, view.wide));
+            let last = crate::table::max_offset(&crate::table::columns_for(
+                view.key.kind,
+                view.wide,
+                merges,
+            ));
             view.col_offset = view.col_offset.min(last);
         }
     }
@@ -267,20 +309,18 @@ impl App {
     /// when there is no row.
     pub(super) fn build_picker(&self) -> Option<Picker> {
         let actions = self.entity_action_rows();
-        let ext_id = self.selected_ext_id()?;
+        let row_id = self.selected_ext_id()?;
         let live = self.live.as_ref()?;
         let cursor = self.cursor_table()?;
-        let name = live
-            .store
-            .table(cursor.key)
-            .rows
-            .get(ext_id)
-            .map_or_else(|| ext_id.to_string(), |e| e.name.clone());
+        // A merged row's id names its context; the picker holds the row's own extId, and
+        // greys its children by what that context serves.
+        let (site, entity) = live.find_row(cursor.key, &row_id)?;
+        let session = live.session_for(site.or(cursor.key.context.as_deref()));
         Some(Picker::open(
             cursor.key.kind,
-            ext_id.to_string(),
-            name,
-            |kind| unavailable_reason(&live.session, kind),
+            entity.ext_id.clone(),
+            entity.name.clone(),
+            |kind| unavailable_reason(session, kind),
             actions,
         ))
     }
@@ -313,17 +353,28 @@ impl App {
                     self.status = Some(reason);
                     return;
                 }
+                // The child is listed from the context the row came from: the merged row's
+                // id names it, and a row of a child table inherits its table's.
+                let site = self
+                    .selected_ext_id()
+                    .and_then(|id| Live::split_row_id(&id).0.map(std::sync::Arc::from));
                 let Some(live) = self.live.as_mut() else {
                     return;
                 };
                 // The child's list path spells out the whole chain, so the row's own extId is
                 // appended to the parents the current view already carries.
-                let mut parents = live
+                let (mut parents, context) = live
                     .table()
-                    .map(|v| v.key.parents.clone())
+                    .map(|v| (v.key.parents.clone(), v.key.context.clone()))
                     .unwrap_or_default();
                 parents.push(picker.parent_ext_id);
-                push_view(live, child, parents, Some(picker.parent_name));
+                push_view(
+                    live,
+                    child,
+                    parents,
+                    Some(picker.parent_name),
+                    site.or(context),
+                );
             }
         }
     }

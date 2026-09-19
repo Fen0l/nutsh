@@ -106,9 +106,11 @@ impl App {
         let Some(view) = live.table() else {
             return;
         };
+        let merged = live.merged(&view.key);
+        let columns = crate::table::columns_for(view.key.kind, view.wide, self.merges(&view.key));
         let at = crate::table::order(
-            live.store.table(&view.key),
-            crate::table::columns(view.key.kind, view.wide),
+            &merged,
+            &columns,
             live.store.names(),
             self.now,
             view.sort,

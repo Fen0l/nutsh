@@ -20,7 +20,7 @@ impl App {
         if let Some(sub) = self.detail.take().and_then(|d| d.sub)
             && let Some(live) = self.live.as_mut()
         {
-            live.scheduler.unsubscribe(sub);
+            live.unsubscribe_any(sub);
         }
     }
 
@@ -31,7 +31,7 @@ impl App {
         // `&App` and cannot start the four list calls that answer for them. Started here, they
         // are in flight while the pane is being read.
         self.start_can_i();
-        let Some(ext_id) = self.selected_ext_id().map(str::to_string) else {
+        let Some(row_id) = self.selected_ext_id() else {
             return;
         };
         let Some(key) = self.cursor_table().map(|cursor| cursor.key.clone()) else {
@@ -40,25 +40,40 @@ impl App {
         let Some(live) = self.live.as_mut() else {
             return;
         };
+        // A merged row names its peer: the pane reads and polls that peer's table.
+        let (site, ext_id) = Live::split_row_id(&row_id);
+        let ext_id = ext_id.to_string();
+        let key = match site {
+            Some(name) => key.in_context(std::sync::Arc::from(name)),
+            None => key,
+        };
         // No `get_path` means no single-entity read to issue, which the flat Host is the
         // standing example of. Subscribing one anyway spends a cycle to be told so by the
         // catalog and paints `has no get endpoint` across the top of the pane, which is a fact
         // about the catalog and not something to tell the reader in the middle of their frame.
         // The pane is composed from the list row instead, and the list is still polling.
-        let sub = key.kind.get_path.map(|_| {
-            live.scheduler.subscribe(Subscription::single(
-                key.clone(),
-                Duration::from_secs(u64::from(key.kind.poll_secs.max(1))),
-                ext_id.clone(),
-            ))
-        });
+        let every = Duration::from_secs(u64::from(key.kind.poll_secs.max(1)));
+        let scheduler = match key.context.as_deref() {
+            Some(name) => live
+                .peers
+                .iter_mut()
+                .find(|p| &*p.name == name)
+                .map(|p| &mut p.scheduler),
+            None => Some(&mut live.scheduler),
+        };
+        let sub = match (key.kind.get_path, scheduler) {
+            (Some(_), Some(scheduler)) => {
+                Some(scheduler.subscribe(Subscription::single(key.clone(), every, ext_id.clone())))
+            }
+            _ => None,
+        };
         // A failed task's pane gathers what was around it: the alerts in the ten minutes
         // either side of its start, asked for once and read off the store.
         if let Some(task) = live.store.table(&key).rows.get(&ext_id)
             && nutsh_core::evidence::wants(task)
             && let Some(window) = nutsh_core::evidence::window(task)
             && let Some(alerts) = nutsh_catalog::kind("monitoring.serviceability.Alert")
-            && pane_reason(&live.session, alerts).is_none()
+            && pane_reason(live.session_for(key.context.as_deref()), alerts).is_none()
         {
             let filter = nutsh_core::evidence::odata(window);
             let mut sub = Subscription::once_list(nutsh_core::store::TableKey::filtered(
@@ -66,7 +81,9 @@ impl App {
                 Some(std::sync::Arc::from(filter.as_str())),
             ));
             sub.filter = Some(filter);
-            live.scheduler.subscribe(sub);
+            if let Some(scheduler) = live.scheduler_for(key.context.as_deref()) {
+                scheduler.subscribe(sub);
+            }
         }
         let body = detail::Body::default_for(Some(&key));
         self.detail = Some(Detail {
@@ -100,20 +117,27 @@ impl App {
             ));
             return;
         };
+        let site = detail.key.as_ref().and_then(|k| k.context.clone());
         if detail.watch.take().is_some() {
             let every = detail
                 .key
                 .as_ref()
                 .map(|k| Duration::from_secs(u64::from(k.kind.poll_secs.max(1))));
-            live.scheduler.set_interval(sub, every);
+            if let Some(scheduler) = live.holder_of(sub) {
+                scheduler.set_interval(sub, every);
+            }
             self.status = Some("watch off".into());
         } else {
-            let every = nutsh_core::refresh::watch_interval(live.session.client.host_limit());
+            // The rhythm is the tier of the Prism Central the row is on.
+            let limit = live.session_for(site.as_deref()).client.host_limit();
+            let every = nutsh_core::refresh::watch_interval(limit);
             let mut watch = crate::detail::Watch::new(every);
             watch.observe(&sections, std::time::Instant::now());
             detail.watch = Some(watch);
-            live.scheduler.set_interval(sub, Some(every));
-            live.scheduler.refresh(sub);
+            if let Some(scheduler) = live.holder_of(sub) {
+                scheduler.set_interval(sub, Some(every));
+                scheduler.refresh(sub);
+            }
             self.status = Some(format!(
                 "watching every {} · w stops",
                 nutsh_core::cell::span(every.as_secs())

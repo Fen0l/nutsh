@@ -120,7 +120,7 @@ pub(crate) struct ConnArgs {
     /// Username
     #[arg(short = 'u', long, env = "NUTSH_USERNAME", global = true)]
     pub(crate) username: Option<String>,
-    /// Skip TLS certificate verification (the session is marked [insecure])
+    /// Skip TLS certificate verification; the header then says so
     #[arg(long, global = true)]
     pub(crate) insecure: bool,
     /// PEM bundle with additional trusted CA certificates
@@ -167,7 +167,9 @@ fn main() {
             std::process::exit(3);
         }
     };
-    let cli = Cli::parse();
+    let mut cli = Cli::parse();
+    // `-c lab,dr`: the first name is the session, the rest are read beside it.
+    let peers = split_peers(&mut cli.conn.context);
     // Before any branch can want to say something. Where the lines go is a property of the run
     // and not of what the user asked for: the TUI and `--snapshot` own the screen, so theirs go
     // to a file, and every other path has a terminal it is already writing to.
@@ -210,7 +212,7 @@ fn main() {
         Some(Command::Completions { shell }) => completions::print(&shell),
         // Neither cache subcommand connects to anything, so neither takes a password.
         Some(Command::Cache { action }) => cache::run(action),
-        None if cli.check => check::run(&cli.conn, from_env),
+        None if cli.check => check::run(&cli.conn, from_env, &peers),
         None => tui::run(
             tui::TuiArgs {
                 // The Dashboard, not the VM table: a bare run opens the overview - what
@@ -221,6 +223,7 @@ fn main() {
                 // land on a view the menu has dropped.
                 start: cli.kind.unwrap_or_else(|| "dashboard".into()),
                 snapshot: cli.snapshot,
+                peers,
                 size: cli.size.unwrap_or(DEFAULT_SIZE),
                 format: match cli.format {
                     SnapshotFormat::Text => None,
@@ -241,6 +244,27 @@ fn main() {
             std::process::exit(3);
         }
     }
+}
+
+/// `-c a,b,c` names one session and two peers: the first stays in `context`, the rest come
+/// back. A lone name leaves nothing behind, and `NUTSH_CONTEXT` reads the same way.
+fn split_peers(context: &mut Option<String>) -> Vec<String> {
+    let Some(list) = context.take() else {
+        return Vec::new();
+    };
+    let mut names = list
+        .split(',')
+        .map(str::trim)
+        .filter(|n| !n.is_empty())
+        .map(str::to_string);
+    *context = names.next();
+    let mut peers: Vec<String> = Vec::new();
+    for name in names {
+        if context.as_deref() != Some(name.as_str()) && !peers.contains(&name) {
+            peers.push(name);
+        }
+    }
+    peers
 }
 
 /// The first argument on this command line that only the TUI could act on, named as clap

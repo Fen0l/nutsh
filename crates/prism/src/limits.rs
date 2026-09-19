@@ -148,7 +148,7 @@ impl Advertised {
     /// later instead of inventing a window length out of nothing.
     ///
     /// Both arms are bounded by [`MAX_RETRY_AFTER`], which is what makes it one number rather
-    /// than two. A period is allowed to be an hour - [`MAX_REFRESH_PERIOD`] says why, and it is
+    /// than two. A period is allowed to be an hour - `MAX_REFRESH_PERIOD` says why, and it is
     /// the right bound for pacing - but an hour is not a hold, it is the client stopped: one
     /// `200` would freeze every request in the process, silently, and `ceiling` would keep the
     /// tier it came with for the rest of the session. Bounded, this re-asks once a minute into

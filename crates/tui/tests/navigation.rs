@@ -1,6 +1,6 @@
 mod common;
 
-use nutsh_core::scheduler::{Msg, SubId};
+use nutsh_core::scheduler::Msg;
 use nutsh_core::store::Failure;
 use nutsh_mockpc::MockPc;
 use nutsh_prism::PrismError;
@@ -551,8 +551,9 @@ async fn cancelling_the_picker_leaves_no_subscription() {
     assert!(app.picker.is_none());
     let live = app.live.as_ref().unwrap();
     assert_eq!(live.stack.len(), 1);
-    // The root table took the first id; anything the picker pushed would have taken the next.
-    assert!(!live.scheduler.is_live(SubId(2)));
+    // The root table's list is the one subscription; anything the picker pushed would be a
+    // second.
+    assert_eq!(live.scheduler.live_count(), 1);
 }
 
 #[tokio::test]
@@ -710,8 +711,9 @@ async fn the_popup_completes_command_arguments() {
     nutsh_tui::theme::apply_named("catppuccin-mocha").unwrap();
 }
 
-/// R4. One argument too many is a mistake to report, not one to drop: `args.first()` alone would
-/// connect to `a` and say nothing about `b`.
+/// R4. One argument too many is a mistake to report, not one to drop. `:ctx` is the one
+/// command that takes several - the first is the session, the rest are joined beside it - so
+/// its refusal is about the name, not the count.
 #[tokio::test]
 async fn an_extra_argument_is_refused_not_dropped() {
     let pc = MockPc::builder().start().await;
@@ -720,7 +722,7 @@ async fn an_extra_argument_is_refused_not_dropped() {
     app.handle(Key::Char(':'));
     type_str(&mut app, "ctx a b");
     app.handle(Key::Enter);
-    assert_eq!(app.status.as_deref(), Some(":ctx takes one name"));
+    assert_eq!(app.status.as_deref(), Some("no context named a"));
     assert_eq!(
         app.view().unwrap().key.kind.id,
         before,

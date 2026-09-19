@@ -114,7 +114,7 @@ impl App {
         self.close_modals();
         let live = self.live.as_mut().expect("a session, checked just above");
         drain_stack(live);
-        push_view(live, kind, Vec::new(), None);
+        push_view(live, kind, Vec::new(), None, None);
         self.mode = Mode::Table;
         self.dirty = true;
         // The menu marks whatever the body shows, however it was opened: a palette jump and a
@@ -330,7 +330,8 @@ impl App {
         }
         match live.stack.pop() {
             Some(View::Table(view)) => {
-                live.scheduler.unsubscribe(view.sub);
+                live.unsubscribe_any(view.sub);
+                live.release_peer_subs(&view.peer_subs);
                 live.store.abandon(&view.key);
             }
             Some(View::Page(mut page)) => {

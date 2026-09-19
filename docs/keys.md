@@ -40,8 +40,7 @@ fixed in this release; the palette commands and the config file are documented i
 | <kbd>PgUp</kbd> <kbd>PgDn</kbd> | twenty rows at a time |
 | <kbd>←</kbd> <kbd>→</kbd> | scroll columns |
 | <kbd>⏎</kbd> | drill into the row's children |
-| <kbd>y</kbd> | detail, composed and readable |
-| <kbd>Y</kbd> <kbd>J</kbd> | the raw YAML or JSON that came off the wire |
+| <kbd>y</kbd> | detail, composed and readable; <kbd>Y</kbd> or <kbd>J</kbd> there switches to the raw YAML or JSON |
 | <kbd>a</kbd> | actions for this row |
 | <kbd>space</kbd> | mark a row; <kbd>a</kbd> then acts on every marked row, five at most |
 | <kbd>S</kbd> | sort by the next column; again on the same column reverses it |
@@ -99,9 +98,11 @@ Entries the Prism Central does not serve are greyed, not hidden, and say why. `:
 | Key | Action |
 |---|---|
 | <kbd>Y</kbd> <kbd>J</kbd> | switch to the raw YAML or JSON |
+| <kbd>j</kbd> <kbd>k</kbd> <kbd>PgUp</kbd> <kbd>PgDn</kbd> <kbd>g</kbd> <kbd>G</kbd> | scroll |
 | <kbd>w</kbd> | watch this row: polled at the advertised tier's rhythm, a value that changed lit for three seconds; again to stop |
 | <kbd>a</kbd> | actions for this resource |
 | <kbd>ctrl-t</kbd> | how often the underlying view polls |
+| <kbd>?</kbd> | help |
 | <kbd>esc</kbd> | back to the table |
 
 ## The palette
@@ -112,10 +113,11 @@ values: `:ctx ` offers your contexts, `:skin ` your skins. History survives a re
 
 | Key | Action |
 |---|---|
-| <kbd>⇥</kbd> | accept the completion |
+| <kbd>⇥</kbd> <kbd>→</kbd> | accept the completion; <kbd>shift-⇥</kbd> moves up the list |
 | <kbd>↑</kbd> <kbd>↓</kbd> | pick from the list |
 | <kbd>ctrl-p</kbd> <kbd>ctrl-n</kbd> | previous, next line from history |
-| <kbd>ctrl-w</kbd> | delete a word |
+| <kbd>ctrl-w</kbd> | delete a word; <kbd>ctrl-u</kbd> clears the line |
+| <kbd>ctrl-a</kbd> <kbd>ctrl-e</kbd> | start, end of the line |
 | <kbd>⏎</kbd> | run |
 | <kbd>esc</kbd> | cancel |
 
@@ -128,9 +130,11 @@ Below a rule, every remaining operation the API declares, by its raw name.
 | Key | Action |
 |---|---|
 | typing | filter the list |
-| <kbd>↑</kbd> <kbd>↓</kbd> | move |
+| <kbd>↑</kbd> <kbd>↓</kbd> <kbd>⇥</kbd> <kbd>shift-⇥</kbd> | move |
 | <kbd>⏎</kbd> | run the selected action |
 | <kbd>esc</kbd> | close |
+
+In a form, <kbd>←</kbd> and <kbd>→</kbd> cycle a field that takes one of a list of values.
 
 ## Confirmations
 
@@ -177,15 +181,33 @@ refuses all of them before anything reaches the wire.
 | Key | Action |
 |---|---|
 | <kbd>⏎</kbd> | connect to the selected context |
+| <kbd>space</kbd> | read the selected context beside the session, or stop; the JOINED column reads `[x]` |
 | <kbd>a</kbd> | add a context |
 | <kbd>l</kbd> | log in: asks for the password once, checks it, stores it |
-| <kbd>d</kbd> | remove a context |
+| <kbd>d</kbd> | remove a context; asks for a <kbd>y</kbd> |
 | <kbd>ctrl-r</kbd> | reload the config file |
+| <kbd>esc</kbd> | back to the table |
 | <kbd>q</kbd> | quit |
 
 The add form takes name, host, port, username, password, an optional cluster, and the
 insecure and read-only switches. <kbd>⇥</kbd> moves between fields, <kbd>space</kbd> toggles a
 switch, <kbd>⏎</kbd> submits.
+
+## Settings
+
+`:settings` lists every setting with its value and where it came from, and the refresh
+schedule per namespace and kind.
+
+| Key | Action |
+|---|---|
+| <kbd>j</kbd> <kbd>k</kbd> <kbd>⇥</kbd> <kbd>shift-⇥</kbd> <kbd>g</kbd> <kbd>G</kbd> | move |
+| <kbd>space</kbd> <kbd>⏎</kbd> | toggle, step or expand the selected row; on a refresh row, <kbd>⏎</kbd> opens the ladder of intervals |
+| <kbd>a</kbd> | add a refresh entry for a namespace or a kind |
+| <kbd>d</kbd> | remove one |
+| <kbd>esc</kbd> | close |
+
+The Activity, Journal and Search screens close on <kbd>esc</kbd> or <kbd>q</kbd>;
+<kbd>⏎</kbd> on a search result opens it.
 
 ## The mouse
 
@@ -199,7 +221,7 @@ the session; `:mouse` turns capture off and writes that to the config file.
 
 | Command | What it does |
 |---|---|
-| `:ctx [name]` | the Contexts screen, or straight to a context |
+| `:ctx [name…]` | the Contexts screen, or straight to a context; a second name and more are read beside the first, every table gains a CONTEXT column, and a name left out is dropped |
 | `:search <term>` | name, address or identifier across every loaded kind, then the Prism Central |
 | `:can-i <action> <kind>` | whether your roles permit that action on that kind, and what it needs |
 | `:try <kind>` | ask this Prism Central for a kind the catalog says its API version does not have |
@@ -207,7 +229,7 @@ the session; `:mouse` turns capture off and writes that to the config file.
 | `:export [csv\|json] [path]` | the table in view as it is drawn, to a file; bare, a stamped csv in the working directory |
 | `:activity` | every request this session made, and every table it holds; <kbd>⇥</kbd> switches tab |
 | `:settings` | every setting, its value, where it came from, and the refresh schedule per namespace and kind |
-| `:refresh <interval>` | how often the current view polls: seconds, `auto`, or `off` |
+| `:refresh <interval>` | how often the current view polls: seconds or `30s`, `5m`, `6h`, `auto`, or `off` |
 | `:skin [name]` | the skin picker, or straight to a skin; written to the config file |
 | `:header` | `auto`, `compact` or `full`; written to the config file |
 | `:mouse` | mouse capture on or off; written to the config file |

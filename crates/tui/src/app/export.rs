@@ -9,11 +9,11 @@ impl App {
     pub fn sheet(&self) -> Option<Sheet> {
         let live = self.live.as_ref()?;
         let view = live.table()?;
-        let cols = crate::table::columns(view.key.kind, view.wide);
-        let table = live.store.table(&view.key);
+        let cols = crate::table::columns_for(view.key.kind, view.wide, self.merges(&view.key));
+        let table = live.merged(&view.key);
         let rows = crate::table::cells(
-            table,
-            cols,
+            &table,
+            &cols,
             live.store.names(),
             self.now,
             view.sort,

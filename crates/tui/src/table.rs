@@ -87,6 +87,30 @@ impl Filter {
     }
 }
 
+/// The column a merged table carries: which context each row came from. Read off the
+/// `$context` key the merge stamps on the row.
+pub static CONTEXT_COLUMN: Column = Column {
+    header: "CONTEXT",
+    path: "$context",
+    kind: nutsh_catalog::ColumnKind::Text,
+};
+
+/// `columns`, with [`CONTEXT_COLUMN`] second when the view merges several contexts: after the
+/// name, which stays the pinned first column.
+pub fn columns_for(
+    kind: &'static Kind,
+    wide: bool,
+    merged: bool,
+) -> std::borrow::Cow<'static, [Column]> {
+    let base = columns(kind, wide);
+    if !merged {
+        return std::borrow::Cow::Borrowed(base);
+    }
+    let mut out = base.to_vec();
+    out.insert(1.min(out.len()), CONTEXT_COLUMN);
+    std::borrow::Cow::Owned(out)
+}
+
 /// The columns a view shows: curated first when any exist, else the fallback columns, capped.
 pub fn columns(kind: &'static Kind, wide: bool) -> &'static [Column] {
     let all = if kind.columns.is_empty() {
@@ -163,10 +187,10 @@ pub(crate) fn cells(
 ) -> Vec<(String, Vec<cell::Rendered>)> {
     order(table, cols, names, now, sort, filter)
         .into_iter()
-        .filter_map(|ext_id| table.rows.get(ext_id))
-        .map(|e| {
+        .filter_map(|id| table.rows.get(id).map(|e| (id, e)))
+        .map(|(id, e)| {
             (
-                e.ext_id.clone(),
+                id.to_string(),
                 cols.iter()
                     .map(|c| cell::render_cell(c, e, names, now))
                     .collect(),
@@ -320,6 +344,11 @@ pub(crate) fn rule(col: &Column, first: bool, sorted: bool) -> ColWidth {
     if first && col.kind != ColumnKind::Ip {
         return ColWidth::Flex(6);
     }
+    // A context name, whole: the column that says which Prism Central a row is from is no
+    // use cut to ten cells.
+    if col.path == CONTEXT_COLUMN.path {
+        return ColWidth::Cap(16.max(heading_cells(col, sorted)));
+    }
     let by_kind = match col.kind {
         ColumnKind::Status => ColWidth::Cap(16),
         ColumnKind::Timestamp => ColWidth::Cap(7),
@@ -406,7 +435,9 @@ pub(crate) fn visible(
     let offset = offset.min(max_offset(cols));
     let mut idx: Vec<usize> = std::iter::once(0).chain((1 + offset)..cols.len()).collect();
     while idx.len() > 1 && !floors_fit(cols, &idx, sort, inner_width) {
-        let Some(pos) = idx.iter().rposition(|&i| i != 0 && droppable(cols[i].kind)) else {
+        let Some(pos) = idx.iter().rposition(|&i| {
+            i != 0 && droppable(cols[i].kind) && cols[i].path != CONTEXT_COLUMN.path
+        }) else {
             break;
         };
         idx.remove(pos);

@@ -78,7 +78,7 @@ const FOOT_ROWS: u16 = 2;
 /// The shortest frame that keeps the full header.
 ///
 /// Derived from the tallest thing this app ever draws inside the body - the `?` overlay, at
-/// [`HELP_BOX`]`.1` rows - plus the table chrome it is drawn over: two borders and a heading
+/// `HELP_BOX``.1` rows - plus the table chrome it is drawn over: two borders and a heading
 /// row. Below that the overlay fills the body edge to edge and the frame behind it is gone,
 /// which is precisely when it stops being an overlay; and a table showing fewer rows than the
 /// header above it has is not a table with a header, it is a header with a footnote.
@@ -493,7 +493,8 @@ fn sync_indicator(app: &App) -> (String, Color) {
     let Some(view) = app.view() else {
         return (String::new(), theme::overlay1());
     };
-    let t = live.store.table(&view.key);
+    let merged = live.merged(&view.key);
+    let t = &*merged;
     let detail_failing = app.detail.as_ref().is_some_and(|d| d.error.is_some());
     if let Some(at) = t.restored_at.filter(|_| !detail_failing) {
         return (cached_label(app, at), theme::overlay1());
@@ -530,7 +531,7 @@ struct Rows<'a> {
     /// position that pane happened to be drawn in.
     pane: Option<usize>,
     /// Every column it could show, before the column scroll and the drop rule.
-    all: &'static [Column],
+    all: &'a [Column],
     col_offset: usize,
     sort: Option<(usize, bool)>,
     selected: usize,

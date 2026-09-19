@@ -180,7 +180,7 @@ impl App {
                 self.help_from = self.mode;
                 self.mode = Mode::Help;
             }
-            Entry::Command(Command::Ctx) => self.ctx_command(args.into_iter().next()),
+            Entry::Command(Command::Ctx) => self.ctx_command(args),
             Entry::Command(Command::Skin) => self.skin_command(args.into_iter().next()),
             Entry::Command(Command::Journal) => self.journal_command(),
             Entry::Command(Command::Activity) => self.activity_command(),
@@ -217,7 +217,7 @@ impl App {
             Entry::Command(Command::Show) => self.nav_command(joined(args), false),
             // A completed argument runs the command it belongs to.
             Entry::Value { text, tag } => match tag {
-                palette::Tag::Context => self.ctx_command(Some(text)),
+                palette::Tag::Context => self.ctx_command(vec![text]),
                 palette::Tag::Skin => self.apply_skin(&text),
                 palette::Tag::Nav { hide } => self.nav_command(Some(text), hide),
                 palette::Tag::Interval => self.refresh_command(&[text]),

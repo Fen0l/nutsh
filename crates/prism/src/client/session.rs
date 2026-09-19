@@ -498,7 +498,7 @@ impl Client {
     }
 
     /// Whether this Prism Central has refused the credential. Once true it stays true, every
-    /// [`Client::send`] fails without a request, and the pollers that are not subscriptions read
+    /// `Client::send` fails without a request, and the pollers that are not subscriptions read
     /// it to end their loops.
     pub fn auth_rejected(&self) -> bool {
         self.auth.state() == AuthState::Rejected || !self.valve.open()

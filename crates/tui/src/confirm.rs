@@ -32,13 +32,24 @@ const LISTED: usize = 5;
 
 impl Confirm {
     /// `label` is the action's title, `names` every affected row in table order.
-    pub fn open(kind: ConfirmKind, label: &str, display: &str, names: &[String]) -> Confirm {
+    pub fn open(
+        kind: ConfirmKind,
+        label: &str,
+        display: &str,
+        names: &[String],
+        site: Option<&str>,
+    ) -> Confirm {
         let one = names.len() == 1;
-        let subject = if one {
+        let mut subject = if one {
             names[0].clone()
         } else {
             format!("{} {display}", names.len())
         };
+        // Named when several contexts are joined: which Prism Central this goes to is the
+        // one fact a merged table can leave ambiguous.
+        if let Some(site) = site {
+            subject.push_str(&format!(" on {site}"));
+        }
         let expect = match kind {
             ConfirmKind::TypeName if one => Some(names[0].clone()),
             ConfirmKind::TypeName => Some(format!("DELETE {}", names.len())),
@@ -100,7 +111,13 @@ mod tests {
     /// never powers a machine off.
     #[test]
     fn a_yes_confirm_runs_only_on_y() {
-        let mut c = Confirm::open(ConfirmKind::Yes, "Power off", "Virtual Machines", &names(1));
+        let mut c = Confirm::open(
+            ConfirmKind::Yes,
+            "Power off",
+            "Virtual Machines",
+            &names(1),
+            None,
+        );
         assert_eq!(c.prompt, "Power off vm-000? [y/N]");
         assert!(c.names.is_empty(), "one name is in the prompt already");
         assert_eq!(c.key(Key::Char('Y')), Event::Run);
@@ -115,6 +132,7 @@ mod tests {
             "Delete",
             "Virtual Machines",
             &names(1),
+            None,
         );
         assert_eq!(c.prompt, "Delete vm-000. Type the name to confirm:");
         for ch in "vm-00X".chars() {
@@ -135,6 +153,7 @@ mod tests {
             "Delete",
             "Virtual Machines",
             &names(7),
+            None,
         );
         assert_eq!(
             c.prompt,

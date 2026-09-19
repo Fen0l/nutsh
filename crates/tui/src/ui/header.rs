@@ -196,6 +196,14 @@ pub(super) fn info_lines(app: &App, width: usize, body: u16) -> Vec<Line<'static
         s.context.clone().unwrap_or_else(|| "-".to_string()),
         Style::default().fg(theme::mauve()),
     )];
+    if let Some(live) = app.live.as_ref() {
+        for peer in &live.peers {
+            context.push(Span::styled(
+                format!(" +{}", peer.name),
+                Style::default().fg(context_colour(live, &peer.name)),
+            ));
+        }
+    }
     if s.readonly {
         context.push(Span::styled(
             "  [read-only]",
@@ -355,7 +363,7 @@ pub(super) fn count_text(app: &App, body: u16) -> String {
     let (Some(live), Some(view)) = (&app.live, app.view()) else {
         return "-".to_string();
     };
-    count(live.store.table(&view.key), view.query())
+    count(&live.merged(&view.key), view.query())
 }
 
 /// Five rows of two 13-cell cells: `{key:>2} {label:<10}`, key sky bold, label dim.
@@ -413,16 +421,15 @@ pub(super) fn hint_lines(app: &App) -> Vec<Line<'static>> {
 /// sit level with `Context:`..`Kind:` and the version line with the box's bottom border, as
 /// in §11.1. Labels dim, numbers text, `on` green and `off` red, `⚠`/`✖` yellow and red and
 /// both dim at zero so a quiet Prism Central looks quiet, `▶ N running` peach above zero, and
-/// the version line dim with the PC version sapphire. The version line is `v0.0.2-beta1 ·
-/// pc.7.6`: this program's version and the Prism Central's, in that order, and neither named
-/// because the box beside them says which is which.
+/// the version line dim with the PC version sapphire. The version line is `v0.1.0 · pc.7.6`:
+/// this program's version and the Prism Central's, in that order, and neither named because
+/// the box beside them says which is which.
 pub(super) fn stats_lines<'a>(app: &'a App) -> Vec<Line<'a>> {
     use nutsh_core::stats::{Count, Stats, show};
     // Assembled at compile time: the one label that is not a literal is the same on every frame.
     // No program name: the box's own title, two cells to the left on the same frame, already
-    // reads `nutsh`. Naming it twice on one line was affordable while the version was five
-    // characters and is not at eleven, and this block is twenty-six cells wide - the six that
-    // buys are what keeps the Prism Central's version from being clipped off the end.
+    // reads `nutsh`, and this block is twenty-six cells wide - the cells a name would take are
+    // what keeps a long version, a pre-release's say, from clipping the Prism Central's.
     const VERSION: &str = concat!("v", env!("CARGO_PKG_VERSION"), " · ");
     let empty = Stats::default();
     let s = app.live.as_ref().map_or(&empty, |l| l.store.stats());

@@ -52,7 +52,7 @@ impl Pane {
     /// falling back to the kind's budget until it has one.
     ///
     /// The body's `listing up to N rows…` promises this number, and it is not the kind's:
-    /// [`subscribe`] narrows the budget to the pane's own height through `Subscription::sized`,
+    /// `subscribe` narrows the budget to the pane's own height through `Subscription::sized`,
     /// so the Dashboard's alerts pane asks for twenty of the catalog's curated five hundred.
     pub fn budget(&self) -> Option<u32> {
         self.asked_rows.or(self.key.kind.max_rows)

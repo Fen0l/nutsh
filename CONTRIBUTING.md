@@ -133,11 +133,20 @@ quietly undo one.
 scheduler, the stats poller, the name resolver and the socket sampler. Any one of them retrying
 is an authentication failure per cycle, for as long as the program runs, which on an account
 with a lockout policy is a lockout. Each has a test pinning that it does not retry:
-`crates/prism/tests/auth.rs::a_401_that_arrives_midway_latches_too`,
+`crates/prism/tests/auth.rs::a_refused_credential_is_presented_exactly_once`,
 `crates/prism/tests/auth.rs::the_valve_latches_and_the_session_reports_itself_stopped`,
 `crates/core/tests/scheduler.rs::a_401_midway_stops_the_subscription_and_keeps_the_rows`. A
 retry loop that can reach an authenticating request is not a resilience improvement here; it is
 an account lockout.
+
+**A 401 on a session is proven an expiry before a password goes out.** The same session is
+tried on a URL it has already been answered on; if that still answers, the 401 was that
+endpoint's verdict on the account (`PrismError::Denied`), no credential is presented and
+nothing latches. One Prism Central whose IAM service answered 401 on `users` spent a
+presentation on every run until this rule existed.
+`crates/prism/tests/auth.rs::a_401_from_one_endpoint_on_a_live_session_spends_no_password`
+pins it, and `a_refusal_after_a_real_expiry_still_latches` pins that a dead session under a
+refusing endpoint still ends in exactly one presentation.
 
 **`crates/prism/tests/auth.rs::no_request_ever_carries_neither_a_credential_nor_a_session`.** A
 request carrying neither authenticates with nothing. Its certain 401 reads as an expiry, which

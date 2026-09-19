@@ -8,9 +8,9 @@ impl App {
     /// what a frame already shows.
     pub fn selected_name(&self) -> Option<&str> {
         let live = self.live.as_ref()?;
-        let ext_id = self.selected_ext_id()?;
-        let table = live.store.table(self.cursor_table()?.key);
-        table.rows.get(ext_id).map(|e| e.name.as_str())
+        let id = self.selected_ext_id()?;
+        live.find_row(self.cursor_table()?.key, &id)
+            .map(|(_, e)| e.name.as_str())
     }
 
     /// Tests only: the last cycle failed and the values are the previous ones.
@@ -228,6 +228,15 @@ impl App {
         }
     }
 
+    /// Drains the poll channel until a single-entity read lands: a task watch's first look.
+    ///
+    /// Like [`App::settle_once`], it waits forever if that message never arrives: every caller
+    /// wraps it in a timeout.
+    pub async fn settle_entity_once(&mut self) {
+        self.settle_until(|msg| matches!(msg, Msg::Entity { .. }))
+            .await;
+    }
+
     /// Drains the poll channel until the first `Acted`.
     ///
     /// Like [`App::settle_once`], it waits forever if that message never arrives: every caller
@@ -260,6 +269,14 @@ impl App {
             .await;
     }
 
+    /// Tests only: the names of the contexts joined beside the session.
+    pub fn peers_for_test(&self) -> Vec<String> {
+        self.live
+            .as_ref()
+            .map(|l| l.peers.iter().map(|p| p.name.to_string()).collect())
+            .unwrap_or_default()
+    }
+
     /// Tests only: waits for the next connect result and applies it.
     ///
     /// The event loop cannot call this, which is why it is not on its path: it selects over the
@@ -268,7 +285,7 @@ impl App {
     /// the poll channel out of the same app.
     pub async fn await_connect(&mut self) {
         if let Some(result) = self.connect_rx.recv().await {
-            self.connected(result);
+            self.connect_outcome(result);
         }
     }
 

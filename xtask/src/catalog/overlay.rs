@@ -580,7 +580,7 @@ pub fn resolve_schemas(
 /// `Status` sits inside `DEFAULT_COLUMNS` - and two more of a `warm` one: that it can be listed
 /// on its own, and that it has a name to cache.
 ///
-/// Six more of a kind that curates a detail, four of them in [`detail_shape`] - a label that
+/// Six more of a kind that curates a detail, four of them in `detail_shape` - a label that
 /// fits `DETAIL_LABEL`, a `kind` the `ColumnKind` vocabulary has, a section with at least one
 /// field and at most twenty-four of them inside a kind's twelve, and unique section titles - and
 /// two here, which are the two that need the specs: every field path resolves against the kind's

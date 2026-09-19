@@ -175,7 +175,7 @@ async fn empty_state_and_rows() {
     settings.bind(|| insta::assert_snapshot!("contexts_rows", app.snapshot(100, 17).unwrap()));
     let frame = app.snapshot(100, 17).unwrap();
     assert!(frame.contains("* lab") && frame.contains("prod"), "{frame}");
-    // PASSWORD is the last of the six columns; the menu is not drawn over this screen, so the
+    // PASSWORD is the last of the seven columns; the menu is not drawn over this screen, so the
     // 100-column body the design sizes them for is all of it.
     assert!(frame.contains("stored"), "{frame}");
 

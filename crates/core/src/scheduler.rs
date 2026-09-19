@@ -211,6 +211,9 @@ pub fn idle_state(last_input: std::time::Instant, now: std::time::Instant) -> bo
 /// Tells one `Scheduler` from the next. Never reset, so no two schedulers of a process share
 /// one, and a message that outlived a context switch can be recognised as the old one's.
 static NEXT_EPOCH: AtomicU64 = AtomicU64::new(1);
+/// Subscription ids are unique across schedulers: a session with peers drains several into one
+/// channel, and a message has to name its subscription without saying which scheduler.
+static NEXT_SUB: AtomicU64 = AtomicU64::new(1);
 
 /// The floor for `Subscription::interval`. Public because `refresh::parse` refuses a smaller
 /// number rather than clamping it, and the floor is cited there rather than copied: the
@@ -396,7 +399,6 @@ pub struct Scheduler {
     client: Arc<dyn Source>,
     tx: mpsc::Sender<Msg>,
     tasks: HashMap<SubId, Running>,
-    next_id: u64,
     /// This scheduler's own number; see [`Msg::Done`].
     epoch: u64,
     /// One counter for every task, so generations are monotone per table even when a view is
@@ -412,7 +414,6 @@ impl Scheduler {
             client,
             tx,
             tasks: HashMap::new(),
-            next_id: 1,
             epoch: NEXT_EPOCH.fetch_add(1, Ordering::Relaxed),
             generations: Arc::new(AtomicU64::new(0)),
             idle: Arc::new(AtomicBool::new(false)),
@@ -423,8 +424,7 @@ impl Scheduler {
     /// here: a `once` is reaped by the receiver when it drains its [`Msg::Done`], never by an
     /// unrelated `subscribe` between a send and the drain.
     pub fn subscribe(&mut self, sub: Subscription) -> SubId {
-        let id = SubId(self.next_id);
-        self.next_id += 1;
+        let id = SubId(NEXT_SUB.fetch_add(1, Ordering::Relaxed));
         // The probe's state belongs to the pair that uses it - this entry, which marks it
         // dirty, and the task, which reads and writes the baseline - and to nothing else. A
         // `Subscription` is plain data a caller builds and hands over, so a cell carried on
@@ -519,7 +519,7 @@ impl Scheduler {
 
     /// End the listing walk after the page it is on, land what staged, and pause until
     /// [`Scheduler::refresh`], a re-open or a context switch. The staged pages land because the
-    /// walk returns `Ok` and [`run`] sends its `Complete`. `false` when there is nothing to stop.
+    /// walk returns `Ok` and `run` sends its `Complete`. `false` when there is nothing to stop.
     pub fn stop(&self, id: SubId) -> bool {
         match self.tasks.get(&id) {
             Some(task) if !task.handle.is_finished() => {
@@ -641,6 +641,16 @@ impl Scheduler {
     /// already unsubscribed from sent.
     pub fn is_live(&self, id: SubId) -> bool {
         self.tasks.contains_key(&id)
+    }
+
+    /// How many subscriptions are live.
+    pub fn live_count(&self) -> usize {
+        self.tasks.len()
+    }
+
+    /// Which scheduler's messages these are: every [`Msg::Done`] carries it.
+    pub fn epoch(&self) -> u64 {
+        self.epoch
     }
 }
 
