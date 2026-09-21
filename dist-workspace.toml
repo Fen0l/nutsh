@@ -16,6 +16,7 @@ targets = [
 tap = "Fen0l/homebrew-tap"
 publish-jobs = ["homebrew"]
 publish-prereleases = true
+github-attestations = true
 
 [dist.github-custom-runners]
 aarch64-unknown-linux-gnu = "ubuntu-24.04-arm"
