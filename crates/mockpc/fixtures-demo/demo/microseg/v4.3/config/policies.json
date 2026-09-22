@@ -1,0 +1,67 @@
+[
+  {
+    "$objectType": "microseg.v4.config.NetworkSecurityPolicy",
+    "extId": "19000000-0a01-4000-8000-000000000001",
+    "name": "quarantine-default",
+    "description": "System quarantine: a VM placed here talks to nothing",
+    "type": "QUARANTINE",
+    "state": "ENFORCE",
+    "scope": "ALL_VLAN",
+    "isSystemDefined": true,
+    "isHitlogEnabled": false,
+    "isIpv4AddressScope": true,
+    "isIpv6AddressScope": false,
+    "isIpv6TrafficAllowed": false,
+    "isSharedWithAllProjects": true,
+    "securedGroups": [],
+    "createdBy": "system",
+    "creationTime": "2025-06-10T08:00:00Z",
+    "lastUpdateTime": "2025-06-10T08:00:00Z",
+    "projectExtId": "00000000-0000-0000-0000-000000000000"
+  },
+  {
+    "$objectType": "microseg.v4.config.NetworkSecurityPolicy",
+    "extId": "19000000-0a01-4000-8000-000000000002",
+    "name": "prod-web-tier",
+    "description": "Allow HTTPS in, database out, log everything else",
+    "type": "APPLICATION",
+    "state": "MONITOR",
+    "scope": "ALL_VLAN",
+    "isSystemDefined": false,
+    "isHitlogEnabled": true,
+    "isIpv4AddressScope": true,
+    "isIpv6AddressScope": false,
+    "isIpv6TrafficAllowed": false,
+    "isSharedWithAllProjects": true,
+    "securedGroups": [
+      "07000000-0a01-4000-8000-000000000004"
+    ],
+    "createdBy": "ops-lead",
+    "creationTime": "2026-05-12T14:00:00Z",
+    "lastUpdateTime": "2026-09-01T09:00:00Z",
+    "projectExtId": "00000000-0000-0000-0000-000000000000"
+  },
+  {
+    "$objectType": "microseg.v4.config.NetworkSecurityPolicy",
+    "extId": "19000000-0a01-4000-8000-000000000003",
+    "name": "isolate-dev-from-prod",
+    "description": "Development VMs never reach production VMs",
+    "type": "ISOLATION",
+    "state": "ENFORCE",
+    "scope": "ALL_VLAN",
+    "isSystemDefined": false,
+    "isHitlogEnabled": true,
+    "isIpv4AddressScope": true,
+    "isIpv6AddressScope": false,
+    "isIpv6TrafficAllowed": false,
+    "isSharedWithAllProjects": true,
+    "securedGroups": [
+      "07000000-0a01-4000-8000-000000000002",
+      "07000000-0a01-4000-8000-000000000001"
+    ],
+    "createdBy": "admin",
+    "creationTime": "2026-03-02T10:00:00Z",
+    "lastUpdateTime": "2026-08-15T08:30:00Z",
+    "projectExtId": "00000000-0000-0000-0000-000000000000"
+  }
+]

@@ -193,6 +193,10 @@ The add form takes name, host, port, username, password, an optional cluster, an
 insecure and read-only switches. <kbd>⇥</kbd> moves between fields, <kbd>space</kbd> toggles a
 switch, <kbd>⏎</kbd> submits.
 
+In `nutsh demo` the screen is the demo's own: <kbd>a</kbd> adds a row to the demo's temporary
+file, which is removed on exit, and only a loopback host is accepted; <kbd>l</kbd> logs in
+against the built-in Prism Central, whose password is `secret`.
+
 ## Settings
 
 `:settings` lists every setting with its value and where it came from, and the refresh

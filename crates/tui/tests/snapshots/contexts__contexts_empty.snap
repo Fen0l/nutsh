@@ -9,7 +9,7 @@ expression: "app.snapshot(100, 17).unwrap()"
 │Kind:       Contexts                                                    │         tasks ▶ - running
 │Count:      0 contexts                                                  │
 ╰────────────────────────────────────────────────────────────────────────╯                v0.1.0 · -
-No contexts. Press a to add one, or run nutsh ctx add.
+No contexts. Press a to add one, run nutsh ctx add, or try nutsh demo.
 
 
 

@@ -1,0 +1,22 @@
+[
+  {
+    "$objectType": "security.v4.config.KeyManagementServer",
+    "extId": "3d000000-0a01-4000-8000-000000000001",
+    "name": "kms-harbor-primary",
+    "creationTimestamp": "2025-10-01T08:00:00Z",
+    "accessInformation": {
+      "$objectType": "security.v4.config.KmipAccessInformation",
+      "caName": "harbor-kms-ca"
+    }
+  },
+  {
+    "$objectType": "security.v4.config.KeyManagementServer",
+    "extId": "3d000000-0a01-4000-8000-000000000002",
+    "name": "kms-harbor-standby",
+    "creationTimestamp": "2026-02-10T08:00:00Z",
+    "accessInformation": {
+      "$objectType": "security.v4.config.KmipAccessInformation",
+      "caName": "harbor-kms-ca"
+    }
+  }
+]

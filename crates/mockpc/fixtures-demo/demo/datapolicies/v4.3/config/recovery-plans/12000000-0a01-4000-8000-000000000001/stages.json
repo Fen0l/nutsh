@@ -1,0 +1,39 @@
+[
+  {
+    "$objectType": "datapolicies.v4.config.RecoveryStage",
+    "extId": "37000000-0a01-4000-8000-000000000001",
+    "entityType": "VM",
+    "entities": [
+      {
+        "$objectType": "datapolicies.v4.config.EntityReference",
+        "extId": "03000000-0a01-4000-8000-000000000001"
+      },
+      {
+        "$objectType": "datapolicies.v4.config.EntityReference",
+        "extId": "03000000-0a01-4000-8000-000000000002"
+      }
+    ],
+    "categoryExtIds": [],
+    "priority": 1,
+    "postActions": [
+      {
+        "$objectType": "datapolicies.v4.config.StageAction",
+        "config": {
+          "$objectType": "datapolicies.v4.config.DelayAction",
+          "delaySecs": 60
+        }
+      }
+    ]
+  },
+  {
+    "$objectType": "datapolicies.v4.config.RecoveryStage",
+    "extId": "37000000-0a01-4000-8000-000000000002",
+    "entityType": "VM",
+    "entities": [],
+    "categoryExtIds": [
+      "07000000-0a01-4000-8000-000000000004"
+    ],
+    "priority": 2,
+    "postActions": []
+  }
+]

@@ -1,0 +1,54 @@
+[
+  {
+    "$objectType": "dataprotection.v4.config.RecoveryPlanValidationError",
+    "extId": "38000000-0a01-4000-8000-000000000001",
+    "errorCode": "kRecoveryPointStale",
+    "errorGroup": "RECOVERY_POINT",
+    "message": "Recovery point for prd-db-01 is older than the RPO",
+    "severity": "ERROR",
+    "affectedEntities": [
+      {
+        "$objectType": "common.v1.config.EntityReference",
+        "extId": "03000000-0a01-4000-8000-000000000003",
+        "name": "prd-db-01",
+        "entityType": "VM"
+      }
+    ],
+    "rootCauseAnalysis": {
+      "$objectType": "dataprotection.v4.config.RootCauseAnalysis",
+      "cause": "The latest replicated recovery point of prd-db-01 is 45 minutes old and the policy gold-15m allows 15.",
+      "resolutions": [
+        "Wait for the next replication of gold-15m to complete, then retry the test failover."
+      ],
+      "impacts": [
+        "prd-db-01 would recover from stale data."
+      ]
+    }
+  },
+  {
+    "$objectType": "dataprotection.v4.config.RecoveryPlanValidationError",
+    "extId": "38000000-0a01-4000-8000-000000000002",
+    "errorCode": "kNetworkMappingMissing",
+    "errorGroup": "NETWORK",
+    "message": "Network mapping for prod-vlan-110-db is missing on the recovery site",
+    "severity": "WARNING",
+    "affectedEntities": [
+      {
+        "$objectType": "common.v1.config.EntityReference",
+        "extId": "08000000-0a01-4000-8000-000000000002",
+        "name": "prod-vlan-110-db",
+        "entityType": "SUBNET"
+      }
+    ],
+    "rootCauseAnalysis": {
+      "$objectType": "dataprotection.v4.config.RootCauseAnalysis",
+      "cause": "rp-database maps prod-vlan-100 to pc-ridge but names no target for prod-vlan-110-db.",
+      "resolutions": [
+        "Add a network mapping for prod-vlan-110-db to the recovery plan rp-database."
+      ],
+      "impacts": [
+        "The database NIC on prod-vlan-110-db would come up disconnected."
+      ]
+    }
+  }
+]

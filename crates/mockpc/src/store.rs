@@ -6,7 +6,7 @@ use std::path::Path;
 
 use serde_json::Value;
 
-#[derive(Debug, Default)]
+#[derive(Debug, Default, PartialEq)]
 pub struct Store {
     lists: HashMap<String, Vec<Value>>,
 }
@@ -17,6 +17,18 @@ impl Store {
         let mut store = Store::default();
         if dir.is_dir() {
             walk(dir, dir, &mut store)?;
+        }
+        Ok(store)
+    }
+
+    /// The same store `load` builds from a directory, from `(path, contents)` pairs: each
+    /// `<a>/<b>/<c>.json` becomes the list at `/<a>/<b>/<c>`. What an embedded fixture tree
+    /// is loaded from, and what `load(dir) == from_files(table)` compares.
+    pub fn from_files(files: &[(&str, &str)]) -> serde_json::Result<Store> {
+        let mut store = Store::default();
+        for (path, text) in files {
+            let key = format!("/{}", path.strip_suffix(".json").unwrap_or(path));
+            store.lists.insert(key, rows(serde_json::from_str(text)?));
         }
         Ok(store)
     }
@@ -69,6 +81,15 @@ impl Store {
         self.lists.insert(list_path.to_string(), entities);
     }
 
+    /// Every list path this store holds, sorted, so a walk over the whole store reports in one
+    /// order whatever `HashMap` did. The demo's integrity tests are the caller: they need to see
+    /// the lists `demo::store` derived at load, which no table names.
+    pub fn paths(&self) -> Vec<&str> {
+        let mut paths: Vec<&str> = self.lists.keys().map(String::as_str).collect();
+        paths.sort_unstable();
+        paths
+    }
+
     /// The version segment the fixture files of `namespace` carry (`v4.3` for
     /// `/vmm/v4.3/...`); `None` when no fixture is under that namespace. A tree that holds two
     /// versions of one namespace maps onto the newest, so the answer never depends on
@@ -101,13 +122,18 @@ fn walk(root: &Path, dir: &Path, store: &mut Store) -> std::io::Result<()> {
         let text = std::fs::read_to_string(&path)?;
         let value: Value = serde_json::from_str(&text)
             .map_err(|e| std::io::Error::other(format!("{}: {e}", path.display())))?;
-        let items = match value {
-            Value::Array(a) => a,
-            other => vec![other],
-        };
-        store.lists.insert(key, items);
+        store.lists.insert(key, rows(value));
     }
     Ok(())
+}
+
+/// A file's rows: a JSON array is the list, and a single object is a one-row list, which is
+/// how a fixture recorded from a single-entity endpoint (a domain manager) is written.
+fn rows(value: Value) -> Vec<Value> {
+    match value {
+        Value::Array(a) => a,
+        other => vec![other],
+    }
 }
 
 /// Deterministic ETag for an entity body.
@@ -161,5 +187,85 @@ mod tests {
                 "/clustermgmt/v4.3/config/clusters/0006158a-2f0d-4d5a-8e2d-000000000010/hosts"
             )
         );
+    }
+
+    #[test]
+    fn from_files_keys_paths_without_the_extension_and_wraps_an_object() {
+        let store = Store::from_files(&[
+            (
+                "vmm/v4.3/ahv/config/vms.json",
+                r#"[{"extId": "a"}, {"extId": "b"}]"#,
+            ),
+            (
+                "prism/v4.4/config/domain-managers.json",
+                r#"{"extId": "dm"}"#,
+            ),
+        ])
+        .unwrap();
+        assert_eq!(store.list("/vmm/v4.3/ahv/config/vms").unwrap().len(), 2);
+        assert_eq!(
+            store
+                .list("/prism/v4.4/config/domain-managers")
+                .unwrap()
+                .len(),
+            1,
+            "a single object is a one-row list, as it is on disk"
+        );
+        assert!(Store::from_files(&[("x/v1/bad.json", "{")]).is_err());
+    }
+
+    /// The drift mechanism an embedded table relies on: a tree read from disk and the same
+    /// files handed over as text are one store.
+    #[test]
+    fn load_equals_from_files_for_the_bundled_tree() {
+        let root = Path::new(env!("CARGO_MANIFEST_DIR")).join("fixtures");
+        let mut files: Vec<(String, String)> = Vec::new();
+        collect(&root, &root, &mut files);
+        assert!(files.len() > 20, "the walk found the tree: {}", files.len());
+        let table: Vec<(&str, &str)> = files
+            .iter()
+            .map(|(p, t)| (p.as_str(), t.as_str()))
+            .collect();
+        assert_eq!(
+            Store::load(&root).unwrap(),
+            Store::from_files(&table).unwrap()
+        );
+        let mut one_short = table.clone();
+        one_short.pop();
+        assert_ne!(
+            Store::load(&root).unwrap(),
+            Store::from_files(&one_short).unwrap(),
+            "a file on disk that the table lacks is a difference"
+        );
+    }
+
+    #[test]
+    fn paths_are_sorted_and_name_every_list() {
+        let mut store = Store::default();
+        store.insert("/x/v4.1/config/things", vec![]);
+        store.insert("/a/v4.3/config/rows", vec![]);
+        assert_eq!(
+            store.paths(),
+            vec!["/a/v4.3/config/rows", "/x/v4.1/config/things"]
+        );
+    }
+
+    fn collect(root: &Path, dir: &Path, out: &mut Vec<(String, String)>) {
+        for entry in std::fs::read_dir(dir).unwrap() {
+            let path = entry.unwrap().path();
+            if path.is_dir() {
+                collect(root, &path, out);
+                continue;
+            }
+            if path.extension().and_then(|e| e.to_str()) != Some("json") {
+                continue;
+            }
+            let rel = path
+                .strip_prefix(root)
+                .unwrap()
+                .to_string_lossy()
+                .replace('\\', "/");
+            out.push((rel, std::fs::read_to_string(&path).unwrap()));
+        }
     }
 }

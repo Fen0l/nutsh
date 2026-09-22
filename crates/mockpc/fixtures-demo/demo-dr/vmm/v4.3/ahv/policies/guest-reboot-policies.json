@@ -1,0 +1,30 @@
+[
+  {
+    "$objectType": "vmm.v4.ahv.policies.GuestRebootPolicy",
+    "extId": "9eb00000-0b02-4000-8000-000000000001",
+    "name": "ridge-patch-window",
+    "description": "Utility VMs reboot on Saturday night after patching",
+    "createTime": "2026-03-05T11:00:00Z",
+    "updateTime": "2026-03-05T11:00:00Z",
+    "createdBy": {
+      "$objectType": "vmm.v4.ahv.policies.UserReference",
+      "extId": "05e70000-0b02-4000-8000-000000000001"
+    },
+    "updatedBy": {
+      "$objectType": "vmm.v4.ahv.policies.UserReference",
+      "extId": "05e70000-0b02-4000-8000-000000000001"
+    },
+    "categories": [
+      {
+        "$objectType": "vmm.v4.ahv.policies.CategoryReference",
+        "extId": "ca7e0000-0b02-4000-8000-000000000001"
+      }
+    ],
+    "rebootSchedule": {
+      "$objectType": "vmm.v4.ahv.policies.RebootScheduleLater",
+      "dayOfWeek": "SATURDAY",
+      "timeOfDay": "23:00"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000"
+  }
+]

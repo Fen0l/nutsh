@@ -1,0 +1,77 @@
+[
+  {
+    "$objectType": "networking.v4.config.Vpc",
+    "extId": "0b9c0000-0b02-4000-8000-000000000001",
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "05e70000-0b02-4000-8000-000000000001",
+      "ownerUserName": "admin",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000",
+      "projectName": "default"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "ridge-overlay",
+    "description": "Overlay for recovered workloads, NAT-free external subnet on ridge-vlan-200",
+    "vpcType": "REGULAR",
+    "commonDhcpOptions": {
+      "$objectType": "networking.v4.config.VpcDhcpOptions",
+      "domainNameServers": [
+        {
+          "$objectType": "common.v1.config.IPAddress",
+          "ipv4": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "192.0.2.41",
+            "prefixLength": 32
+          }
+        }
+      ]
+    },
+    "externalSubnets": [
+      {
+        "$objectType": "networking.v4.config.ExternalSubnet",
+        "subnetReference": "5ab00000-0b02-4000-8000-000000000001",
+        "externalIps": [
+          {
+            "$objectType": "common.v1.config.IPAddress",
+            "ipv4": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "192.0.2.240",
+              "prefixLength": 32
+            }
+          }
+        ],
+        "activeGatewayNodes": [
+          {
+            "$objectType": "networking.v4.config.GatewayNodeReference",
+            "nodeId": "40570000-0b02-4000-8000-000000000001",
+            "nodeIpAddress": {
+              "$objectType": "common.v1.config.IPAddress",
+              "ipv4": {
+                "$objectType": "common.v1.config.IPv4Address",
+                "value": "192.0.2.11",
+                "prefixLength": 32
+              }
+            }
+          }
+        ],
+        "activeGatewayCount": 1
+      }
+    ],
+    "externallyRoutablePrefixes": [
+      {
+        "$objectType": "networking.v4.config.IPSubnet",
+        "ipv4": {
+          "$objectType": "networking.v4.config.IPv4Subnet",
+          "ip": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "192.0.2.128",
+            "prefixLength": 32
+          },
+          "prefixLength": 25
+        }
+      }
+    ],
+    "scope": "VMS",
+    "supportedMultipleExternalSubnetType": "ONLY_NONAT"
+  }
+]

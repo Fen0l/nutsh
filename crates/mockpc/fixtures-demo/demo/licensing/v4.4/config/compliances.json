@@ -1,0 +1,50 @@
+[
+  {
+    "$objectType": "licensing.v4.config.Compliance",
+    "extId": "43000000-0a01-4000-8000-000000000001",
+    "clusterExtId": "01000000-0a01-4000-8000-000000000001",
+    "type": "NCI",
+    "isMulticluster": false,
+    "isDeleted": false,
+    "services": [
+      {
+        "$objectType": "licensing.v4.config.Service",
+        "name": "AOS",
+        "licenseType": "NCI",
+        "isCompliant": true,
+        "enforcementLevel": "LEVEL_10"
+      },
+      {
+        "$objectType": "licensing.v4.config.Service",
+        "name": "FILE",
+        "licenseType": "NUS",
+        "isCompliant": true,
+        "enforcementLevel": "LEVEL_10"
+      },
+      {
+        "$objectType": "licensing.v4.config.Service",
+        "name": "FLOW",
+        "licenseType": "NCI",
+        "isCompliant": true,
+        "enforcementLevel": "LEVEL_10"
+      }
+    ]
+  },
+  {
+    "$objectType": "licensing.v4.config.Compliance",
+    "extId": "43000000-0a01-4000-8000-000000000002",
+    "clusterExtId": "01000000-0a01-4000-8000-000000000002",
+    "type": "NCM",
+    "isMulticluster": false,
+    "isDeleted": false,
+    "services": [
+      {
+        "$objectType": "licensing.v4.config.Service",
+        "name": "PRISM",
+        "licenseType": "NCM",
+        "isCompliant": false,
+        "enforcementLevel": "LEVEL_20"
+      }
+    ]
+  }
+]

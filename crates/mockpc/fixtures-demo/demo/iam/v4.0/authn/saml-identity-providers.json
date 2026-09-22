@@ -1,0 +1,46 @@
+[
+  {
+    "$objectType": "iam.v4.authn.SamlIdentityProvider",
+    "extId": "40000000-0a01-4000-8000-000000000001",
+    "name": "sso-okta",
+    "idpMetadata": {
+      "$objectType": "iam.v4.authn.IdpMetadata",
+      "entityId": "https://sso.example.com/saml/metadata",
+      "loginUrl": "https://sso.example.com/saml",
+      "logoutUrl": "https://sso.example.com/saml/logout",
+      "nameIdPolicyFormat": "emailAddress"
+    },
+    "usernameAttribute": "email",
+    "emailAttribute": "email",
+    "groupsAttribute": "groups",
+    "groupsDelim": ",",
+    "customAttributes": [],
+    "entityIssuer": "https://pc-harbor.example.com/api/iam/v4.0/authn/saml",
+    "isSignedAuthnReqEnabled": true,
+    "createdBy": "admin",
+    "createdTime": "2025-09-15T08:30:00Z",
+    "lastUpdatedTime": "2026-04-22T11:00:00Z"
+  },
+  {
+    "$objectType": "iam.v4.authn.SamlIdentityProvider",
+    "extId": "40000000-0a01-4000-8000-000000000002",
+    "name": "sso-adfs-legacy",
+    "idpMetadata": {
+      "$objectType": "iam.v4.authn.IdpMetadata",
+      "entityId": "https://sso.example.com/adfs/services/trust",
+      "loginUrl": "https://sso.example.com/saml",
+      "logoutUrl": "https://sso.example.com/adfs/ls/logout",
+      "nameIdPolicyFormat": "unspecified"
+    },
+    "usernameAttribute": "upn",
+    "emailAttribute": "mail",
+    "groupsAttribute": "memberOf",
+    "groupsDelim": ";",
+    "customAttributes": [],
+    "entityIssuer": "https://pc-harbor.example.com/api/iam/v4.0/authn/saml",
+    "isSignedAuthnReqEnabled": false,
+    "createdBy": "admin",
+    "createdTime": "2025-06-12T09:30:00Z",
+    "lastUpdatedTime": "2025-06-12T09:30:00Z"
+  }
+]

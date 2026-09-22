@@ -1,0 +1,479 @@
+[
+  {
+    "$objectType": "clustermgmt.v4.config.Disk",
+    "extId": "d15c0000-0b02-4000-8000-000000000001",
+    "clusterName": "ridge-dr",
+    "clusterExtId": "c1000000-0b02-4000-8000-000000000001",
+    "nodeExtId": "40570000-0b02-4000-8000-000000000001",
+    "mountPath": "/home/nutanix/data/stargate-storage/disks/S4EN-0000-0b02-01",
+    "location": 1,
+    "serialNumber": "S4EN-0000-0b02-01",
+    "diskSizeBytes": 1749251024238,
+    "physicalCapacityBytes": 1920383410176,
+    "model": "SAMSUNG MZ7LM1T9HMJP",
+    "vendor": "SAMSUNG",
+    "firmwareVersion": "404Q",
+    "targetFirmwareVersion": "404Q",
+    "hostName": "ridge-n1",
+    "status": "NORMAL",
+    "storageTier": "SSD_SATA",
+    "cvmIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "192.0.2.21",
+        "prefixLength": 32
+      }
+    },
+    "nodeIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "192.0.2.11",
+        "prefixLength": 32
+      }
+    },
+    "diskAdvanceConfig": {
+      "$objectType": "clustermgmt.v4.config.DiskAdvanceConfig",
+      "isSelfEncryptingDrive": false,
+      "isSelfManagedNvme": false,
+      "isBootDisk": true,
+      "hasBootPartitionsOnly": false,
+      "isSpdkManaged": false,
+      "isOnline": true,
+      "isMarkedForRemoval": false,
+      "isDataMigrated": false,
+      "isUnhealthy": false,
+      "isSuspectedUnhealthy": false,
+      "isMounted": true,
+      "isUnderDiagnosis": false,
+      "isDiagnosticInfoAvailable": false,
+      "isErrorFoundInLog": false,
+      "isPlannedOutage": false
+    }
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.Disk",
+    "extId": "d15c0000-0b02-4000-8000-000000000002",
+    "clusterName": "ridge-dr",
+    "clusterExtId": "c1000000-0b02-4000-8000-000000000001",
+    "nodeExtId": "40570000-0b02-4000-8000-000000000001",
+    "mountPath": "/home/nutanix/data/stargate-storage/disks/S4EN-0000-0b02-02",
+    "location": 2,
+    "serialNumber": "S4EN-0000-0b02-02",
+    "diskSizeBytes": 1749251024238,
+    "physicalCapacityBytes": 1920383410176,
+    "model": "SAMSUNG MZ7LM1T9HMJP",
+    "vendor": "SAMSUNG",
+    "firmwareVersion": "404Q",
+    "targetFirmwareVersion": "404Q",
+    "hostName": "ridge-n1",
+    "status": "NORMAL",
+    "storageTier": "SSD_SATA",
+    "cvmIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "192.0.2.21",
+        "prefixLength": 32
+      }
+    },
+    "nodeIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "192.0.2.11",
+        "prefixLength": 32
+      }
+    },
+    "diskAdvanceConfig": {
+      "$objectType": "clustermgmt.v4.config.DiskAdvanceConfig",
+      "isSelfEncryptingDrive": false,
+      "isSelfManagedNvme": false,
+      "isBootDisk": false,
+      "hasBootPartitionsOnly": false,
+      "isSpdkManaged": false,
+      "isOnline": true,
+      "isMarkedForRemoval": false,
+      "isDataMigrated": false,
+      "isUnhealthy": false,
+      "isSuspectedUnhealthy": false,
+      "isMounted": true,
+      "isUnderDiagnosis": false,
+      "isDiagnosticInfoAvailable": false,
+      "isErrorFoundInLog": false,
+      "isPlannedOutage": false
+    }
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.Disk",
+    "extId": "d15c0000-0b02-4000-8000-000000000003",
+    "clusterName": "ridge-dr",
+    "clusterExtId": "c1000000-0b02-4000-8000-000000000001",
+    "nodeExtId": "40570000-0b02-4000-8000-000000000001",
+    "mountPath": "/home/nutanix/data/stargate-storage/disks/ZC10-0000-0b02-03",
+    "location": 3,
+    "serialNumber": "ZC10-0000-0b02-03",
+    "diskSizeBytes": 6996810829824,
+    "physicalCapacityBytes": 7681501126656,
+    "model": "SEAGATE ST8000NM0055",
+    "vendor": "SEAGATE",
+    "firmwareVersion": "SN05",
+    "targetFirmwareVersion": "SN05",
+    "hostName": "ridge-n1",
+    "status": "NORMAL",
+    "storageTier": "HDD",
+    "cvmIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "192.0.2.21",
+        "prefixLength": 32
+      }
+    },
+    "nodeIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "192.0.2.11",
+        "prefixLength": 32
+      }
+    },
+    "diskAdvanceConfig": {
+      "$objectType": "clustermgmt.v4.config.DiskAdvanceConfig",
+      "isSelfEncryptingDrive": false,
+      "isSelfManagedNvme": false,
+      "isBootDisk": false,
+      "hasBootPartitionsOnly": false,
+      "isSpdkManaged": false,
+      "isOnline": true,
+      "isMarkedForRemoval": false,
+      "isDataMigrated": false,
+      "isUnhealthy": false,
+      "isSuspectedUnhealthy": false,
+      "isMounted": true,
+      "isUnderDiagnosis": false,
+      "isDiagnosticInfoAvailable": false,
+      "isErrorFoundInLog": false,
+      "isPlannedOutage": false
+    }
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.Disk",
+    "extId": "d15c0000-0b02-4000-8000-000000000004",
+    "clusterName": "ridge-dr",
+    "clusterExtId": "c1000000-0b02-4000-8000-000000000001",
+    "nodeExtId": "40570000-0b02-4000-8000-000000000002",
+    "mountPath": "/home/nutanix/data/stargate-storage/disks/S4EN-0000-0b02-04",
+    "location": 1,
+    "serialNumber": "S4EN-0000-0b02-04",
+    "diskSizeBytes": 1749251024238,
+    "physicalCapacityBytes": 1920383410176,
+    "model": "SAMSUNG MZ7LM1T9HMJP",
+    "vendor": "SAMSUNG",
+    "firmwareVersion": "404Q",
+    "targetFirmwareVersion": "404Q",
+    "hostName": "ridge-n2",
+    "status": "NORMAL",
+    "storageTier": "SSD_SATA",
+    "cvmIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "192.0.2.22",
+        "prefixLength": 32
+      }
+    },
+    "nodeIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "192.0.2.12",
+        "prefixLength": 32
+      }
+    },
+    "diskAdvanceConfig": {
+      "$objectType": "clustermgmt.v4.config.DiskAdvanceConfig",
+      "isSelfEncryptingDrive": false,
+      "isSelfManagedNvme": false,
+      "isBootDisk": true,
+      "hasBootPartitionsOnly": false,
+      "isSpdkManaged": false,
+      "isOnline": true,
+      "isMarkedForRemoval": false,
+      "isDataMigrated": false,
+      "isUnhealthy": false,
+      "isSuspectedUnhealthy": false,
+      "isMounted": true,
+      "isUnderDiagnosis": false,
+      "isDiagnosticInfoAvailable": false,
+      "isErrorFoundInLog": false,
+      "isPlannedOutage": false
+    }
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.Disk",
+    "extId": "d15c0000-0b02-4000-8000-000000000005",
+    "clusterName": "ridge-dr",
+    "clusterExtId": "c1000000-0b02-4000-8000-000000000001",
+    "nodeExtId": "40570000-0b02-4000-8000-000000000002",
+    "mountPath": "/home/nutanix/data/stargate-storage/disks/S4EN-0000-0b02-05",
+    "location": 2,
+    "serialNumber": "S4EN-0000-0b02-05",
+    "diskSizeBytes": 1749251024238,
+    "physicalCapacityBytes": 1920383410176,
+    "model": "SAMSUNG MZ7LM1T9HMJP",
+    "vendor": "SAMSUNG",
+    "firmwareVersion": "404Q",
+    "targetFirmwareVersion": "404Q",
+    "hostName": "ridge-n2",
+    "status": "NORMAL",
+    "storageTier": "SSD_SATA",
+    "cvmIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "192.0.2.22",
+        "prefixLength": 32
+      }
+    },
+    "nodeIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "192.0.2.12",
+        "prefixLength": 32
+      }
+    },
+    "diskAdvanceConfig": {
+      "$objectType": "clustermgmt.v4.config.DiskAdvanceConfig",
+      "isSelfEncryptingDrive": false,
+      "isSelfManagedNvme": false,
+      "isBootDisk": false,
+      "hasBootPartitionsOnly": false,
+      "isSpdkManaged": false,
+      "isOnline": true,
+      "isMarkedForRemoval": false,
+      "isDataMigrated": false,
+      "isUnhealthy": false,
+      "isSuspectedUnhealthy": false,
+      "isMounted": true,
+      "isUnderDiagnosis": false,
+      "isDiagnosticInfoAvailable": false,
+      "isErrorFoundInLog": false,
+      "isPlannedOutage": false
+    }
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.Disk",
+    "extId": "d15c0000-0b02-4000-8000-000000000006",
+    "clusterName": "ridge-dr",
+    "clusterExtId": "c1000000-0b02-4000-8000-000000000001",
+    "nodeExtId": "40570000-0b02-4000-8000-000000000002",
+    "mountPath": "/home/nutanix/data/stargate-storage/disks/ZC10-0000-0b02-06",
+    "location": 3,
+    "serialNumber": "ZC10-0000-0b02-06",
+    "diskSizeBytes": 6996810829824,
+    "physicalCapacityBytes": 7681501126656,
+    "model": "SEAGATE ST8000NM0055",
+    "vendor": "SEAGATE",
+    "firmwareVersion": "SN05",
+    "targetFirmwareVersion": "SN05",
+    "hostName": "ridge-n2",
+    "status": "NORMAL",
+    "storageTier": "HDD",
+    "cvmIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "192.0.2.22",
+        "prefixLength": 32
+      }
+    },
+    "nodeIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "192.0.2.12",
+        "prefixLength": 32
+      }
+    },
+    "diskAdvanceConfig": {
+      "$objectType": "clustermgmt.v4.config.DiskAdvanceConfig",
+      "isSelfEncryptingDrive": false,
+      "isSelfManagedNvme": false,
+      "isBootDisk": false,
+      "hasBootPartitionsOnly": false,
+      "isSpdkManaged": false,
+      "isOnline": true,
+      "isMarkedForRemoval": false,
+      "isDataMigrated": false,
+      "isUnhealthy": false,
+      "isSuspectedUnhealthy": false,
+      "isMounted": true,
+      "isUnderDiagnosis": false,
+      "isDiagnosticInfoAvailable": false,
+      "isErrorFoundInLog": false,
+      "isPlannedOutage": false
+    }
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.Disk",
+    "extId": "d15c0000-0b02-4000-8000-000000000007",
+    "clusterName": "ridge-dr",
+    "clusterExtId": "c1000000-0b02-4000-8000-000000000001",
+    "nodeExtId": "40570000-0b02-4000-8000-000000000003",
+    "mountPath": "/home/nutanix/data/stargate-storage/disks/S4EN-0000-0b02-07",
+    "location": 1,
+    "serialNumber": "S4EN-0000-0b02-07",
+    "diskSizeBytes": 1749251024238,
+    "physicalCapacityBytes": 1920383410176,
+    "model": "SAMSUNG MZ7LM1T9HMJP",
+    "vendor": "SAMSUNG",
+    "firmwareVersion": "404Q",
+    "targetFirmwareVersion": "404Q",
+    "hostName": "ridge-n3",
+    "status": "NORMAL",
+    "storageTier": "SSD_SATA",
+    "cvmIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "192.0.2.23",
+        "prefixLength": 32
+      }
+    },
+    "nodeIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "192.0.2.13",
+        "prefixLength": 32
+      }
+    },
+    "diskAdvanceConfig": {
+      "$objectType": "clustermgmt.v4.config.DiskAdvanceConfig",
+      "isSelfEncryptingDrive": false,
+      "isSelfManagedNvme": false,
+      "isBootDisk": true,
+      "hasBootPartitionsOnly": false,
+      "isSpdkManaged": false,
+      "isOnline": true,
+      "isMarkedForRemoval": false,
+      "isDataMigrated": false,
+      "isUnhealthy": false,
+      "isSuspectedUnhealthy": false,
+      "isMounted": true,
+      "isUnderDiagnosis": false,
+      "isDiagnosticInfoAvailable": false,
+      "isErrorFoundInLog": false,
+      "isPlannedOutage": false
+    }
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.Disk",
+    "extId": "d15c0000-0b02-4000-8000-000000000008",
+    "clusterName": "ridge-dr",
+    "clusterExtId": "c1000000-0b02-4000-8000-000000000001",
+    "nodeExtId": "40570000-0b02-4000-8000-000000000003",
+    "mountPath": "/home/nutanix/data/stargate-storage/disks/S4EN-0000-0b02-08",
+    "location": 2,
+    "serialNumber": "S4EN-0000-0b02-08",
+    "diskSizeBytes": 1749251024238,
+    "physicalCapacityBytes": 1920383410176,
+    "model": "SAMSUNG MZ7LM1T9HMJP",
+    "vendor": "SAMSUNG",
+    "firmwareVersion": "404Q",
+    "targetFirmwareVersion": "404Q",
+    "hostName": "ridge-n3",
+    "status": "NORMAL",
+    "storageTier": "SSD_SATA",
+    "cvmIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "192.0.2.23",
+        "prefixLength": 32
+      }
+    },
+    "nodeIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "192.0.2.13",
+        "prefixLength": 32
+      }
+    },
+    "diskAdvanceConfig": {
+      "$objectType": "clustermgmt.v4.config.DiskAdvanceConfig",
+      "isSelfEncryptingDrive": false,
+      "isSelfManagedNvme": false,
+      "isBootDisk": false,
+      "hasBootPartitionsOnly": false,
+      "isSpdkManaged": false,
+      "isOnline": true,
+      "isMarkedForRemoval": false,
+      "isDataMigrated": false,
+      "isUnhealthy": false,
+      "isSuspectedUnhealthy": false,
+      "isMounted": true,
+      "isUnderDiagnosis": false,
+      "isDiagnosticInfoAvailable": false,
+      "isErrorFoundInLog": false,
+      "isPlannedOutage": false
+    }
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.Disk",
+    "extId": "d15c0000-0b02-4000-8000-000000000009",
+    "clusterName": "ridge-dr",
+    "clusterExtId": "c1000000-0b02-4000-8000-000000000001",
+    "nodeExtId": "40570000-0b02-4000-8000-000000000003",
+    "mountPath": "/home/nutanix/data/stargate-storage/disks/ZC10-0000-0b02-09",
+    "location": 3,
+    "serialNumber": "ZC10-0000-0b02-09",
+    "diskSizeBytes": 6996810829824,
+    "physicalCapacityBytes": 7681501126656,
+    "model": "SEAGATE ST8000NM0055",
+    "vendor": "SEAGATE",
+    "firmwareVersion": "SN05",
+    "targetFirmwareVersion": "SN05",
+    "hostName": "ridge-n3",
+    "status": "NORMAL",
+    "storageTier": "HDD",
+    "cvmIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "192.0.2.23",
+        "prefixLength": 32
+      }
+    },
+    "nodeIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "192.0.2.13",
+        "prefixLength": 32
+      }
+    },
+    "diskAdvanceConfig": {
+      "$objectType": "clustermgmt.v4.config.DiskAdvanceConfig",
+      "isSelfEncryptingDrive": false,
+      "isSelfManagedNvme": false,
+      "isBootDisk": false,
+      "hasBootPartitionsOnly": false,
+      "isSpdkManaged": false,
+      "isOnline": true,
+      "isMarkedForRemoval": false,
+      "isDataMigrated": false,
+      "isUnhealthy": false,
+      "isSuspectedUnhealthy": false,
+      "isMounted": true,
+      "isUnderDiagnosis": false,
+      "isDiagnosticInfoAvailable": false,
+      "isErrorFoundInLog": false,
+      "isPlannedOutage": false
+    }
+  }
+]

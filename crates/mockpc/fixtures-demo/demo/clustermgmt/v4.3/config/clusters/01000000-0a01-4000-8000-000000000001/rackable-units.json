@@ -1,0 +1,30 @@
+[
+  {
+    "$objectType": "clustermgmt.v4.config.RackableUnit",
+    "extId": "4a000000-0a01-4000-8000-000000000001",
+    "id": 1,
+    "serial": "RU-0a01-0001",
+    "model": "NX-3170-G9",
+    "modelName": "NX-3170-G9",
+    "nodes": [
+      {
+        "$objectType": "clustermgmt.v4.config.RackableUnitNode",
+        "uuid": "02000000-0a01-4000-8000-000000000001",
+        "svmId": 1,
+        "position": 1
+      },
+      {
+        "$objectType": "clustermgmt.v4.config.RackableUnitNode",
+        "uuid": "02000000-0a01-4000-8000-000000000002",
+        "svmId": 2,
+        "position": 2
+      },
+      {
+        "$objectType": "clustermgmt.v4.config.RackableUnitNode",
+        "uuid": "02000000-0a01-4000-8000-000000000003",
+        "svmId": 3,
+        "position": 3
+      }
+    ]
+  }
+]

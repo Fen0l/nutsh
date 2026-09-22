@@ -11,17 +11,42 @@ use axum::http::{HeaderMap, Method, StatusCode, Uri, header};
 use axum::response::{IntoResponse, Response};
 use serde_json::{Value, json};
 
+use crate::filter::Filter;
 use crate::store::{Store, etag_of};
 use crate::{MockTask, RecordedRequest, Shared, Target};
 
-/// When a mock-created task is created. Step `n` lands `n` seconds later and the terminal state
-/// at `DONE_AT`, so a Tasks table sorted by last-updated follows the progress.
+/// When a mock-created task is created, on the mock that keeps the constants. Step `n` lands
+/// `n` seconds later and the terminal state at `DONE_AT`, so a Tasks table sorted by
+/// last-updated follows the progress.
 const CREATED_AT: &str = "2026-09-05T09:59:00Z";
 /// When a mock-created task reaches a terminal state.
 const DONE_AT: &str = "2026-09-05T10:00:00Z";
 
-fn step_time(step: usize) -> String {
-    format!("2026-09-05T09:59:{:02}Z", step.min(59))
+/// The stamp a task is created with: the constant, or now under `live_clock`.
+fn created_at(state: &Shared) -> String {
+    if state.live_clock {
+        crate::rfc3339(std::time::SystemTime::now())
+    } else {
+        CREATED_AT.to_string()
+    }
+}
+
+/// The stamp a task reaches a terminal state with, and the one an effect writes.
+fn done_at(state: &Shared) -> String {
+    if state.live_clock {
+        crate::rfc3339(std::time::SystemTime::now())
+    } else {
+        DONE_AT.to_string()
+    }
+}
+
+/// The stamp of step `step`: `CREATED_AT` plus that many seconds, or now.
+fn stepped_at(state: &Shared, step: usize) -> String {
+    if state.live_clock {
+        crate::rfc3339(std::time::SystemTime::now())
+    } else {
+        format!("2026-09-05T09:59:{:02}Z", step.min(59))
+    }
 }
 
 /// Every answer carries the rate-limit headers the mock advertises, exactly as a Prism Central
@@ -403,16 +428,31 @@ fn get(state: &Shared, api_path: &str, query: &[(String, String)]) -> Response {
         Ok(paging) => paging,
         Err(message) => return error(StatusCode::BAD_REQUEST, message),
     };
+    // Read before the store is locked and refused before anything is listed: a filter this
+    // mock honours but cannot read is a 400, the answer a Prism Central gives a spelling it
+    // does not accept, and not a list that quietly stopped narrowing.
+    let filter = match filter_of(state, query) {
+        Ok(filter) => filter,
+        Err(message) => return error(StatusCode::BAD_REQUEST, &message),
+    };
     {
         // The guard lives for the answer only: `advance` and `touch_after_list` below need the
         // write lock.
         let listed = {
             let store = state.store.read().expect("store lock");
             store.list(api_path).map(|items| {
+                // Narrowed first, so the total is the filtered count and a sort or a `$select`
+                // works on the rows that match.
+                let items: Cow<[Value]> = match &filter {
+                    Some(f) => {
+                        Cow::Owned(items.iter().filter(|row| f.matches(row)).cloned().collect())
+                    }
+                    None => Cow::Borrowed(items),
+                };
                 let items = if state.sorts {
-                    ordered(items, query)
+                    ordered(&items, query)
                 } else {
-                    Cow::Borrowed(items)
+                    items
                 };
                 let items = if state.narrows {
                     narrowed(&items, api_path, query)
@@ -507,6 +547,20 @@ fn paging(query: &[(String, String)]) -> Result<(usize, usize), &'static str> {
         },
     };
     Ok((page, limit))
+}
+
+/// The `$filter` a request carries, read when this mock honours the parameter: `None` when it
+/// does not, or when the request has none; `Err` with the grammar's complaint otherwise.
+fn filter_of(state: &Shared, query: &[(String, String)]) -> Result<Option<Filter>, String> {
+    if !state.filters {
+        return Ok(None);
+    }
+    let Some((_, spec)) = query.iter().find(|(k, _)| k == "$filter") else {
+        return Ok(None);
+    };
+    Filter::parse(spec)
+        .map(Some)
+        .map_err(|e| format!("$filter: {e}"))
 }
 
 /// Applies whatever [`crate::MockPc::mutate_after_list`] armed for this list path, counting
@@ -651,16 +705,27 @@ pub(crate) fn id_key_for(list_path: &str) -> &'static str {
 }
 
 /// The catalog action behind a request, with the kind that owns it. The method matters:
-/// `update` and `delete` share the entity path.
+/// `update` and `delete` share the entity path. Several curated actions can share one
+/// endpoint, told apart by the constant body each sends (`acknowledge` and `resolve` over
+/// `manage-alert`): the one whose body is the body sent names the task, and the first stands
+/// in when none does.
 fn catalog_action_of(
     method: &Method,
     api_path: &str,
+    body: Option<&Value>,
 ) -> Option<(&'static nutsh_catalog::Kind, &'static nutsh_catalog::Action)> {
     nutsh_catalog::KINDS.iter().find_map(|k| {
-        k.actions
+        let sharing: Vec<&'static nutsh_catalog::Action> = k
+            .actions
             .iter()
-            .find(|a| a.method.as_str() == method.as_str() && same_shape(a.path, api_path))
-            .map(|a| (k, a))
+            .filter(|a| a.method.as_str() == method.as_str() && same_shape(a.path, api_path))
+            .collect();
+        let first = *sharing.first()?;
+        let named = sharing.iter().copied().find(|a| {
+            a.body
+                .is_some_and(|b| serde_json::from_str::<Value>(b).ok().as_ref() == body)
+        });
+        Some((k, named.unwrap_or(first)))
     })
 }
 
@@ -683,14 +748,15 @@ fn advance(state: &Shared, ext_id: &str) {
         // Two GETs: `CANCELING`, then `CANCELED`. Progress unchanged: a cancelled task stops
         // where it was.
         if entity["status"] == "CANCELING" {
+            let at = done_at(state);
             entity["status"] = json!("CANCELED");
-            entity["completedTime"] = json!(DONE_AT);
-            entity["lastUpdatedTime"] = json!(DONE_AT);
+            entity["completedTime"] = json!(at);
+            entity["lastUpdatedTime"] = json!(at);
             entity["isCancelable"] = json!(false);
             tasks.remove(ext_id);
         } else {
             entity["status"] = json!("CANCELING");
-            entity["lastUpdatedTime"] = json!(step_time(t.step));
+            entity["lastUpdatedTime"] = json!(stepped_at(state, t.step));
         }
         store.replace(tasks_path, "extId", ext_id, entity);
         return;
@@ -713,9 +779,9 @@ fn advance(state: &Shared, ext_id: &str) {
         status.as_str()
     };
     let at = if terminal {
-        DONE_AT.to_string()
+        done_at(state)
     } else {
-        step_time(t.step)
+        stepped_at(state, t.step)
     };
     entity["status"] = json!(status);
     entity["progressPercentage"] = json!(progress);
@@ -724,7 +790,7 @@ fn advance(state: &Shared, ext_id: &str) {
         entity["startedTime"] = json!(at);
     }
     if terminal {
-        entity["completedTime"] = json!(DONE_AT);
+        entity["completedTime"] = json!(at);
         entity["isCancelable"] = json!(false);
         if failing {
             entity["errorMessages"] = json!([{
@@ -733,45 +799,146 @@ fn advance(state: &Shared, ext_id: &str) {
                 "code": "MOCK-1"
             }]);
         } else {
-            apply_effect(&mut store, t);
+            apply_effect(state, &mut store, t);
         }
     }
     t.step += 1;
     store.replace(tasks_path, "extId", ext_id, entity);
 }
 
-/// What a successful task did to the entity. The curated power actions move `powerState` and
-/// `delete` removes the row; everything else leaves the entity alone, which is honest: the mock
-/// is not a hypervisor.
-fn apply_effect(store: &mut Store, t: &MockTask) {
+/// What a successful task did. The curated power actions move `powerState` and `delete`
+/// removes the row; the five a demo walks through move the field a person looks at next -
+/// an alert's `isResolved`, a host's `maintenanceState`, a VM's host, a new VM, a new recovery
+/// point. Keyed on the action's catalog path and the body, never on `operation`, for the
+/// reason `MockTask::action_path` gives. Everything else leaves the store alone: the mock is
+/// not a hypervisor.
+fn apply_effect(state: &Shared, store: &mut Store, t: &MockTask) {
+    let action = t
+        .action_path
+        .and_then(|p| p.rsplit_once("/$actions/"))
+        .map(|(_, a)| a);
     let Some(Target {
         list_path,
         id_key,
         ext_id,
     }) = &t.target
     else {
+        // A list-level create. The one with an effect is a recovery point, which lands as a
+        // row naming the VM the body asked for.
+        if t.path.ends_with("/config/recovery-points") {
+            store.push(&t.path, recovery_point(state, t.body.as_ref()));
+        }
         return;
     };
-    let power = match t.operation.as_str() {
-        "power-on" | "power-cycle" | "reset" | "reboot" | "guest-reboot" => "ON",
-        "power-off" | "shutdown" | "guest-shutdown" => "OFF",
-        "delete" => {
+    let Some(mut e) = store.entity(list_path, id_key, ext_id) else {
+        return;
+    };
+    let body = t.body.as_ref();
+    match (t.operation.as_str(), action) {
+        (_, Some("manage-alert")) => match body.and_then(|b| b["actionType"].as_str()) {
+            Some("RESOLVE") => {
+                e["isResolved"] = json!(true);
+                e["status"] = json!("RESOLVED");
+                e["resolvedTime"] = json!(done_at(state));
+                e["resolvedByUsername"] = json!(state.username);
+            }
+            Some("ACKNOWLEDGE") => {
+                e["isAcknowledged"] = json!(true);
+                e["status"] = json!("ACKNOWLEDGED");
+                e["acknowledgedTime"] = json!(done_at(state));
+                e["acknowledgedByUsername"] = json!(state.username);
+            }
+            _ => return,
+        },
+        (_, Some("enter-host-maintenance")) => e["maintenanceState"] = json!("IN_MAINTENANCE"),
+        (_, Some("exit-host-maintenance")) => e["maintenanceState"] = json!("NORMAL"),
+        (_, Some("migrate-to-host")) => {
+            let Some(host) = body.and_then(|b| b["host"]["extId"].as_str()) else {
+                return;
+            };
+            e["host"] = json!({"extId": host});
+        }
+        (_, Some("clone")) if list_path.ends_with("/ahv/config/vms") => {
+            let name = body.and_then(|b| b["name"].as_str()).map_or_else(
+                || format!("{}-clone", e["name"].as_str().unwrap_or("vm")),
+                str::to_string,
+            );
+            let mut copy = e.clone();
+            copy[*id_key] = json!(uuid::Uuid::new_v4().to_string());
+            copy["name"] = json!(name);
+            // Created off, and an OFF VM has no host.
+            copy["powerState"] = json!("OFF");
+            if let Some(o) = copy.as_object_mut() {
+                o.remove("host");
+            }
+            for key in ["createTime", "updateTime"] {
+                if copy.get(key).is_some() {
+                    copy[key] = json!(done_at(state));
+                }
+            }
+            store.push(list_path, copy);
+            return;
+        }
+        ("power-on" | "power-cycle" | "reset" | "reboot" | "guest-reboot", _) => {
+            e["powerState"] = json!("ON");
+        }
+        ("power-off" | "shutdown" | "guest-shutdown", _) => e["powerState"] = json!("OFF"),
+        ("delete", _) => {
             store.remove(list_path, id_key, ext_id);
             return;
         }
         _ => return,
-    };
-    if let Some(mut e) = store.entity(list_path, id_key, ext_id) {
-        e["powerState"] = json!(power);
-        store.replace(list_path, id_key, ext_id, e);
     }
+    store.replace(list_path, id_key, ext_id, e.clone());
+    // A host is in two lists - the cluster-scoped one an `/operations/` action addresses and
+    // the top-level one the Hosts page reads - and a change has to show in both. `replace`
+    // is a no-op on a list that does not hold the entity.
+    if let Some(top) = top_level_hosts(list_path) {
+        store.replace(&top, id_key, ext_id, e);
+    }
+}
+
+/// `/clustermgmt/v4.3/config/clusters/{c}/hosts` → `/clustermgmt/v4.3/config/hosts`; `None`
+/// for any other list.
+fn top_level_hosts(list_path: &str) -> Option<String> {
+    let (head, tail) = list_path.split_once("/config/clusters/")?;
+    let (_, rest) = tail.split_once('/')?;
+    (rest == "hosts").then(|| format!("{head}/config/hosts"))
+}
+
+/// The recovery point a list-level create lands: the shape of the bundled fixture, named and
+/// scoped as the body asked, complete the moment the task is.
+fn recovery_point(state: &Shared, body: Option<&Value>) -> Value {
+    let text =
+        |key: &str| -> Option<String> { body.and_then(|b| b[key].as_str()).map(str::to_string) };
+    let vm = body
+        .and_then(|b| b["vmRecoveryPoints"][0]["vmExtId"].as_str())
+        .unwrap_or("");
+    let mut rp = json!({
+        "$objectType": "dataprotection.v4.config.RecoveryPoint",
+        "extId": uuid::Uuid::new_v4().to_string(),
+        "name": text("name").unwrap_or_else(|| "recovery point".to_string()),
+        "status": "COMPLETE",
+        "recoveryPointType": text("recoveryPointType")
+            .unwrap_or_else(|| "CRASH_CONSISTENT".to_string()),
+        "creationTime": done_at(state),
+        "vmRecoveryPoints": [{
+            "extId": uuid::Uuid::new_v4().to_string(),
+            "vmExtId": vm
+        }]
+    });
+    if let Some(expiry) = text("expirationTime") {
+        rp["expirationTime"] = json!(expiry);
+    }
+    rp
 }
 
 /// Insert the task an accepted mutation returns. A list-level create has no target: it names
 /// the operation alone and affects no entity.
-fn start_task(state: &Shared, operation: &str, target: Option<Target>) -> String {
+fn start_task(state: &Shared, task: MockTask) -> String {
     let task_id = format!("ZXJnb24=:{}", uuid::Uuid::new_v4());
-    let affected: Vec<Value> = target
+    let affected: Vec<Value> = task
+        .target
         .iter()
         .map(|t| {
             let name = state
@@ -788,6 +955,7 @@ fn start_task(state: &Shared, operation: &str, target: Option<Target>) -> String
             json!({"extId": t.ext_id, "rel": "mock", "name": name})
         })
         .collect();
+    let operation = task.operation.as_str();
     let description = match affected.first().and_then(|a| a["name"].as_str()) {
         Some(name) => format!("{operation} on {name}"),
         None => operation.to_string(),
@@ -797,6 +965,7 @@ fn start_task(state: &Shared, operation: &str, target: Option<Target>) -> String
         .first()
         .cloned()
         .unwrap_or(("QUEUED".into(), 0));
+    let created = created_at(state);
     let mut entity = json!({
         "$objectType": "prism.v4.config.Task",
         "extId": task_id,
@@ -804,8 +973,8 @@ fn start_task(state: &Shared, operation: &str, target: Option<Target>) -> String
         "operationDescription": description,
         "status": status,
         "progressPercentage": progress,
-        "createdTime": CREATED_AT,
-        "lastUpdatedTime": CREATED_AT,
+        "createdTime": created,
+        "lastUpdatedTime": created,
         "isCancelable": true,
         "numberOfSubtasks": 0,
         "numberOfEntitiesAffected": affected.len(),
@@ -814,22 +983,18 @@ fn start_task(state: &Shared, operation: &str, target: Option<Target>) -> String
     });
     // A queued task has not started; `advance` stamps the start on the first step that has.
     if status != "QUEUED" {
-        entity["startedTime"] = json!(CREATED_AT);
+        entity["startedTime"] = json!(created);
     }
     state
         .store
         .write()
         .expect("store lock")
         .push(&state.tasks_path, entity);
-    state.tasks.lock().expect("tasks lock").insert(
-        task_id.clone(),
-        MockTask {
-            step: 0,
-            operation: operation.to_string(),
-            target,
-            canceling: false,
-        },
-    );
+    state
+        .tasks
+        .lock()
+        .expect("tasks lock")
+        .insert(task_id.clone(), task);
     task_id
 }
 
@@ -846,7 +1011,7 @@ fn mutate(
             "NTNX-Request-Id header is required",
         );
     }
-    let found = catalog_action_of(method, api_path);
+    let found = catalog_action_of(method, api_path, body);
     if let Some((kind, action)) = found
         && state
             .forbid_action
@@ -958,6 +1123,9 @@ fn mutate(
             operation: entity["operation"].as_str().unwrap_or("").to_string(),
             target: None,
             canceling: false,
+            action_path: None,
+            path: api_path.to_string(),
+            body: None,
         });
         if t.canceling {
             return error(StatusCode::BAD_REQUEST, "task is not cancelable");
@@ -976,7 +1144,18 @@ fn mutate(
         || method.to_string().to_ascii_lowercase(),
         |(_, a)| a.name.to_string(),
     );
-    let task = start_task(state, &operation, target);
+    let task = start_task(
+        state,
+        MockTask {
+            step: 0,
+            operation,
+            target,
+            canceling: false,
+            action_path: found.map(|(_, a)| a.path),
+            path: api_path.to_string(),
+            body: body.cloned(),
+        },
+    );
     (
         StatusCode::ACCEPTED,
         Json(json!({

@@ -1,0 +1,17 @@
+[
+  {
+    "$objectType": "multidomain.v4.config.RegisteredDomain",
+    "extId": "d0000000-0b02-4000-8000-000000000001",
+    "name": "pc-ridge",
+    "fqdn": "pc-ridge.example.com",
+    "registrationState": "REGISTERED",
+    "apiCredentialStatus": "VALID",
+    "registeredTime": "2025-08-25T09:00:00Z",
+    "platformData": {
+      "$objectType": "multidomain.v4.config.PlatformData",
+      "pcVersion": "pc.7.6",
+      "clusterCount": 1,
+      "connectivityStatus": "CONNECTED"
+    }
+  }
+]

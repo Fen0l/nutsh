@@ -1,0 +1,26 @@
+[
+  {
+    "$objectType": "volumes.v4.config.VolumeGroup",
+    "extId": "0c900000-0b02-4000-8000-000000000001",
+    "name": "ridge-backup-vg",
+    "description": "Backup catalog and staging volume of ridge-backup-01",
+    "createdBy": "admin",
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "clusterReference": "c1000000-0b02-4000-8000-000000000001",
+    "sharingStatus": "NOT_SHARED",
+    "hydrationStatus": "COMPLETE",
+    "usageType": "USER",
+    "attachmentType": "DIRECT",
+    "protocol": "NONE",
+    "isHidden": false,
+    "shouldLoadBalanceVmAttachments": false,
+    "targetName": "iqn.2010-06.com.example:ridge-backup-vg",
+    "attachments": [
+      {
+        "$objectType": "volumes.v4.config.VmAttachment",
+        "extId": "ee000000-0b02-4000-8000-000000000003",
+        "name": "ridge-backup-01"
+      }
+    ]
+  }
+]

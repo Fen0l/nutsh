@@ -11,7 +11,10 @@ workspace = true
 
 [dependencies]
 nutsh-catalog.workspace = true
-axum = "0.8"
+# Only what the handler imports: `Json`, `serve`, `Router`, `State`, `Bytes`. The defaults
+# also pull `form`, `query`, `matched-path`, `original-uri`, `tower-log` and `tracing`, and
+# this crate is about to be linked into the release binary.
+axum = { version = "0.8", default-features = false, features = ["tokio", "http1", "json"] }
 tokio.workspace = true
 serde_json.workspace = true
 base64 = "0.23"
@@ -19,4 +22,4 @@ url = "2"
 uuid.workspace = true
 
 [dev-dependencies]
-reqwest = { workspace = true, features = ["json"] }
+reqwest = { workspace = true, features = ["json", "query"] }

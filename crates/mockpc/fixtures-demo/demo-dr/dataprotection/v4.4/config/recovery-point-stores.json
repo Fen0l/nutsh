@@ -1,0 +1,20 @@
+[
+  {
+    "$objectType": "dataprotection.v4.config.RecoveryPointStore",
+    "extId": "9b570000-0b02-4000-8000-000000000001",
+    "name": "ridge-archive-rps",
+    "bucket": {
+      "$objectType": "common.v1.config.ObjectStoreBucket",
+      "provider": "NUTANIX",
+      "providerConfig": {
+        "$objectType": "common.v1.config.NutanixObjectsBucket",
+        "endPoint": "objects.ridge.example.com",
+        "bucketName": "backups-daily"
+      },
+      "bucketName": "backups-daily"
+    },
+    "isHealthy": true,
+    "currentLogicalUsageBytes": 40017115353088,
+    "ownerExtId": "05e70000-0b02-4000-8000-000000000001"
+  }
+]

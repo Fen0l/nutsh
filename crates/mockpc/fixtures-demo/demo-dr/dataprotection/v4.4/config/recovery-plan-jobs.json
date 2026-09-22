@@ -1,0 +1,36 @@
+[
+  {
+    "$objectType": "dataprotection.v4.config.RecoveryPlanJob",
+    "extId": "10b00000-0b02-4000-8000-000000000001",
+    "name": "test-failover-web-0905",
+    "actionType": "TEST_FAILOVER",
+    "status": "FAILED",
+    "percentageComplete": 20,
+    "startTime": "2026-09-05T09:48:00Z",
+    "endTime": "2026-09-05T09:49:00Z",
+    "numRecoverableVMs": 1,
+    "recoveryPlanExtId": "9b1a0000-0b02-4000-8000-000000000001",
+    "createdBy": {
+      "$objectType": "dataprotection.v4.config.UserReference",
+      "extId": "05e70000-0b02-4000-8000-000000000002",
+      "name": "operator"
+    }
+  },
+  {
+    "$objectType": "dataprotection.v4.config.RecoveryPlanJob",
+    "extId": "10b00000-0b02-4000-8000-000000000002",
+    "name": "test-failover-db-0902",
+    "actionType": "TEST_FAILOVER",
+    "status": "SUCCEEDED",
+    "percentageComplete": 100,
+    "startTime": "2026-09-02T10:00:00Z",
+    "endTime": "2026-09-02T10:09:00Z",
+    "numRecoverableVMs": 1,
+    "recoveryPlanExtId": "9b1a0000-0b02-4000-8000-000000000002",
+    "createdBy": {
+      "$objectType": "dataprotection.v4.config.UserReference",
+      "extId": "05e70000-0b02-4000-8000-000000000001",
+      "name": "admin"
+    }
+  }
+]

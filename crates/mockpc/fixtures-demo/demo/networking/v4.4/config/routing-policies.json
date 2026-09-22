@@ -1,0 +1,134 @@
+[
+  {
+    "$objectType": "networking.v4.config.RoutingPolicy",
+    "extId": "23000000-0a01-4000-8000-000000000001",
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "0e000000-0a01-4000-8000-000000000001",
+      "ownerUserName": "admin",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000",
+      "projectName": "default"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "deny-dev-to-prod",
+    "description": "Nothing in dev-vpc reaches the production tiers",
+    "priority": 10,
+    "policies": [
+      {
+        "$objectType": "networking.v4.config.RoutingPolicyRule",
+        "policyMatch": {
+          "$objectType": "networking.v4.config.RoutingPolicyMatchCondition",
+          "source": {
+            "$objectType": "networking.v4.config.AddressTypeObject",
+            "addressType": "ANY"
+          },
+          "destination": {
+            "$objectType": "networking.v4.config.AddressTypeObject",
+            "addressType": "SUBNET",
+            "subnetPrefix": {
+              "$objectType": "networking.v4.config.IPSubnet",
+              "ipv4": {
+                "$objectType": "networking.v4.config.IPv4Subnet",
+                "ip": {
+                  "$objectType": "common.v1.config.IPv4Address",
+                  "value": "203.0.113.0",
+                  "prefixLength": 32
+                },
+                "prefixLength": 25
+              }
+            }
+          },
+          "protocolType": "ANY"
+        },
+        "policyAction": {
+          "$objectType": "networking.v4.config.RoutingPolicyAction",
+          "actionType": "DENY"
+        },
+        "isBidirectional": false
+      },
+      {
+        "$objectType": "networking.v4.config.RoutingPolicyRule",
+        "policyMatch": {
+          "$objectType": "networking.v4.config.RoutingPolicyMatchCondition",
+          "source": {
+            "$objectType": "networking.v4.config.AddressTypeObject",
+            "addressType": "ANY"
+          },
+          "destination": {
+            "$objectType": "networking.v4.config.AddressTypeObject",
+            "addressType": "SUBNET",
+            "subnetPrefix": {
+              "$objectType": "networking.v4.config.IPSubnet",
+              "ipv4": {
+                "$objectType": "networking.v4.config.IPv4Subnet",
+                "ip": {
+                  "$objectType": "common.v1.config.IPv4Address",
+                  "value": "203.0.113.128",
+                  "prefixLength": 32
+                },
+                "prefixLength": 25
+              }
+            }
+          },
+          "protocolType": "ANY"
+        },
+        "policyAction": {
+          "$objectType": "networking.v4.config.RoutingPolicyAction",
+          "actionType": "DENY"
+        },
+        "isBidirectional": false
+      }
+    ],
+    "vpcExtId": "1c000000-0a01-4000-8000-000000000002"
+  },
+  {
+    "$objectType": "networking.v4.config.RoutingPolicy",
+    "extId": "23000000-0a01-4000-8000-000000000002",
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "0e000000-0a01-4000-8000-000000000002",
+      "ownerUserName": "ops-lead",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000",
+      "projectName": "default"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "allow-monitoring",
+    "description": "Monitoring hosts may poll everything",
+    "priority": 20,
+    "policies": [
+      {
+        "$objectType": "networking.v4.config.RoutingPolicyRule",
+        "policyMatch": {
+          "$objectType": "networking.v4.config.RoutingPolicyMatchCondition",
+          "source": {
+            "$objectType": "networking.v4.config.AddressTypeObject",
+            "addressType": "SUBNET",
+            "subnetPrefix": {
+              "$objectType": "networking.v4.config.IPSubnet",
+              "ipv4": {
+                "$objectType": "networking.v4.config.IPv4Subnet",
+                "ip": {
+                  "$objectType": "common.v1.config.IPv4Address",
+                  "value": "203.0.113.224",
+                  "prefixLength": 32
+                },
+                "prefixLength": 28
+              }
+            }
+          },
+          "destination": {
+            "$objectType": "networking.v4.config.AddressTypeObject",
+            "addressType": "ANY"
+          },
+          "protocolType": "ANY"
+        },
+        "policyAction": {
+          "$objectType": "networking.v4.config.RoutingPolicyAction",
+          "actionType": "PERMIT"
+        },
+        "isBidirectional": true
+      }
+    ],
+    "vpcExtId": "1c000000-0a01-4000-8000-000000000001"
+  }
+]

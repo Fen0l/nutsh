@@ -1,0 +1,136 @@
+[
+  {
+    "$objectType": "networking.v4.config.LoadBalancerSession",
+    "extId": "25000000-0a01-4000-8000-000000000001",
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "0e000000-0a01-4000-8000-000000000001",
+      "ownerUserName": "admin",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000",
+      "projectName": "default"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "lb-web-443",
+    "description": "HTTPS across the two web nodes",
+    "type": "NETWORK_LOAD_BALANCER",
+    "vpcReference": "1c000000-0a01-4000-8000-000000000001",
+    "listener": {
+      "$objectType": "networking.v4.config.Listener",
+      "virtualIP": {
+        "$objectType": "networking.v4.config.VirtualIP",
+        "subnetReference": "08000000-0a01-4000-8000-000000000001",
+        "assignmentType": "STATIC",
+        "ipAddress": {
+          "$objectType": "common.v1.config.IPAddress",
+          "ipv4": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "203.0.113.230",
+            "prefixLength": 32
+          }
+        }
+      },
+      "protocol": "TCP",
+      "portRanges": [
+        {
+          "$objectType": "networking.v4.config.PortRange",
+          "startPort": 443,
+          "endPort": 443
+        }
+      ]
+    },
+    "algorithm": "FIVE_TUPLE_HASH",
+    "targetsConfig": {
+      "$objectType": "networking.v4.config.Target",
+      "nicTargets": [
+        {
+          "$objectType": "networking.v4.config.NicTarget",
+          "vmReference": "03000000-0a01-4000-8000-000000000001",
+          "virtualNicReference": "53000000-0a01-4000-8000-000000000101",
+          "port": 443,
+          "health": "HEALTHY"
+        },
+        {
+          "$objectType": "networking.v4.config.NicTarget",
+          "vmReference": "03000000-0a01-4000-8000-000000000002",
+          "virtualNicReference": "53000000-0a01-4000-8000-000000000201",
+          "port": 443,
+          "health": "HEALTHY"
+        }
+      ]
+    },
+    "healthCheckConfig": {
+      "$objectType": "networking.v4.config.HealthCheck",
+      "intervalSecs": 5,
+      "timeoutSecs": 2,
+      "successThreshold": 3,
+      "failureThreshold": 3
+    }
+  },
+  {
+    "$objectType": "networking.v4.config.LoadBalancerSession",
+    "extId": "25000000-0a01-4000-8000-000000000002",
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "0e000000-0a01-4000-8000-000000000001",
+      "ownerUserName": "admin",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000",
+      "projectName": "default"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "lb-api-8443",
+    "description": "Application API, one node while prd-cache-01 migrates",
+    "type": "NETWORK_LOAD_BALANCER",
+    "vpcReference": "1c000000-0a01-4000-8000-000000000001",
+    "listener": {
+      "$objectType": "networking.v4.config.Listener",
+      "virtualIP": {
+        "$objectType": "networking.v4.config.VirtualIP",
+        "subnetReference": "08000000-0a01-4000-8000-000000000001",
+        "assignmentType": "STATIC",
+        "ipAddress": {
+          "$objectType": "common.v1.config.IPAddress",
+          "ipv4": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "203.0.113.231",
+            "prefixLength": 32
+          }
+        }
+      },
+      "protocol": "TCP",
+      "portRanges": [
+        {
+          "$objectType": "networking.v4.config.PortRange",
+          "startPort": 8443,
+          "endPort": 8443
+        }
+      ]
+    },
+    "algorithm": "FIVE_TUPLE_HASH",
+    "targetsConfig": {
+      "$objectType": "networking.v4.config.Target",
+      "nicTargets": [
+        {
+          "$objectType": "networking.v4.config.NicTarget",
+          "vmReference": "03000000-0a01-4000-8000-000000000004",
+          "virtualNicReference": "53000000-0a01-4000-8000-000000000401",
+          "port": 8443,
+          "health": "HEALTHY"
+        },
+        {
+          "$objectType": "networking.v4.config.NicTarget",
+          "vmReference": "03000000-0a01-4000-8000-000000000005",
+          "virtualNicReference": "53000000-0a01-4000-8000-000000000501",
+          "port": 8443,
+          "health": "UNHEALTHY"
+        }
+      ]
+    },
+    "healthCheckConfig": {
+      "$objectType": "networking.v4.config.HealthCheck",
+      "intervalSecs": 10,
+      "timeoutSecs": 2,
+      "successThreshold": 3,
+      "failureThreshold": 3
+    }
+  }
+]

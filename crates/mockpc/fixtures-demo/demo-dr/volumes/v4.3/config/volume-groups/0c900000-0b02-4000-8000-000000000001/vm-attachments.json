@@ -1,0 +1,7 @@
+[
+  {
+    "$objectType": "volumes.v4.config.VmAttachment",
+    "extId": "ee000000-0b02-4000-8000-000000000003",
+    "name": "ridge-backup-01"
+  }
+]

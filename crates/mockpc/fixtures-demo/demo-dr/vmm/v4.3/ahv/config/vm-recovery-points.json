@@ -1,0 +1,54 @@
+[
+  {
+    "$objectType": "vmm.v4.ahv.config.VmRecoveryPoint",
+    "extId": "0e9b0000-0b02-4000-8000-000000000001",
+    "name": "rp-dr-web-01-0905-0945",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "vmExtId": "ee000000-0b02-4000-8000-000000000001",
+    "creationTime": "2026-09-05T09:45:00Z",
+    "expirationTime": "2026-09-12T09:45:00Z",
+    "totalExclusiveUsageBytes": 1073741824,
+    "vmCategories": [
+      "Environment:DR"
+    ],
+    "diskRecoveryPoints": [
+      {
+        "$objectType": "vmm.v4.ahv.config.DiskRecoveryPoint",
+        "diskRecoveryPointExtId": "5d150000-0b02-4000-8000-000000010000"
+      }
+    ]
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.VmRecoveryPoint",
+    "extId": "0e9b0000-0b02-4000-8000-000000000002",
+    "name": "rp-dr-db-01-0905-0930",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "vmExtId": "ee000000-0b02-4000-8000-000000000002",
+    "creationTime": "2026-09-05T09:30:00Z",
+    "expirationTime": "2026-09-12T09:30:00Z",
+    "totalExclusiveUsageBytes": 8589934592,
+    "vmCategories": [
+      "Environment:DR"
+    ],
+    "diskRecoveryPoints": [
+      {
+        "$objectType": "vmm.v4.ahv.config.DiskRecoveryPoint",
+        "diskRecoveryPointExtId": "5d150000-0b02-4000-8000-000000020000"
+      },
+      {
+        "$objectType": "vmm.v4.ahv.config.DiskRecoveryPoint",
+        "diskRecoveryPointExtId": "5d150000-0b02-4000-8000-000000020001"
+      },
+      {
+        "$objectType": "vmm.v4.ahv.config.DiskRecoveryPoint",
+        "diskRecoveryPointExtId": "5d150000-0b02-4000-8000-000000020002"
+      },
+      {
+        "$objectType": "vmm.v4.ahv.config.DiskRecoveryPoint",
+        "diskRecoveryPointExtId": "5d150000-0b02-4000-8000-000000020003"
+      }
+    ]
+  }
+]

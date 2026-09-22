@@ -1,0 +1,66 @@
+[
+  {
+    "$objectType": "monitoring.v4.serviceability.UserDefinedPolicy",
+    "extId": "3a000000-0a01-4000-8000-000000000001",
+    "policyId": "A3a000000-0a01-4000-8000-000000000001",
+    "title": "Web tier CPU above 80%",
+    "description": "A web-tier VM running hot for ten minutes",
+    "isEnabled": true,
+    "isAutoResolved": true,
+    "entityType": "vm",
+    "triggerConditions": [
+      {
+        "$objectType": "monitoring.v4.serviceability.TriggerCondition",
+        "conditionType": "STATIC_THRESHOLD",
+        "condition": {
+          "$objectType": "monitoring.v4.serviceability.Condition",
+          "metricName": "hypervisor_cpu_usage_ppm",
+          "operator": "GREATER_THAN_OR_EQUAL_TO",
+          "thresholdValue": {
+            "$objectType": "monitoring.v4.common.IntValue",
+            "intValue": 800000
+          }
+        },
+        "severityLevel": "WARNING"
+      }
+    ],
+    "impactTypes": [
+      "PERFORMANCE"
+    ],
+    "triggerWaitPeriod": 600,
+    "createdBy": "ops-lead",
+    "lastUpdatedTime": "2026-06-15T09:00:00Z"
+  },
+  {
+    "$objectType": "monitoring.v4.serviceability.UserDefinedPolicy",
+    "extId": "3a000000-0a01-4000-8000-000000000002",
+    "policyId": "A3a000000-0a01-4000-8000-000000000002",
+    "title": "Database latency above 20 ms",
+    "description": "Orders database I/O latency over the SLA",
+    "isEnabled": true,
+    "isAutoResolved": false,
+    "entityType": "vm",
+    "triggerConditions": [
+      {
+        "$objectType": "monitoring.v4.serviceability.TriggerCondition",
+        "conditionType": "STATIC_THRESHOLD",
+        "condition": {
+          "$objectType": "monitoring.v4.serviceability.Condition",
+          "metricName": "controller_avg_io_latency_usecs",
+          "operator": "GREATER_THAN",
+          "thresholdValue": {
+            "$objectType": "monitoring.v4.common.IntValue",
+            "intValue": 20000
+          }
+        },
+        "severityLevel": "CRITICAL"
+      }
+    ],
+    "impactTypes": [
+      "PERFORMANCE"
+    ],
+    "triggerWaitPeriod": 300,
+    "createdBy": "admin",
+    "lastUpdatedTime": "2026-08-28T16:30:00Z"
+  }
+]

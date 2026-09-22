@@ -1,0 +1,28 @@
+[
+  {
+    "$objectType": "dataprotection.v4.config.RecoveryPlanValidationError",
+    "extId": "0a110000-0b02-4000-8000-000000000001",
+    "errorCode": "kNoFreeIpInRecoverySubnet",
+    "errorGroup": "NETWORK",
+    "message": "recovery subnet ridge-vlan-200 has no free address",
+    "severity": "ERROR",
+    "affectedEntities": [
+      {
+        "$objectType": "common.v1.config.EntityReference",
+        "extId": "5ab00000-0b02-4000-8000-000000000001",
+        "name": "ridge-vlan-200",
+        "entityType": "SUBNET"
+      }
+    ],
+    "rootCauseAnalysis": {
+      "$objectType": "dataprotection.v4.config.RootCauseAnalysis",
+      "cause": "Every address of the pool on ridge-vlan-200 is assigned or reserved.",
+      "resolutions": [
+        "Widen the pool of ridge-vlan-200 or release the addresses of the previous test, then retry the test failover."
+      ],
+      "impacts": [
+        "dr-web-01 cannot be given a test address."
+      ]
+    }
+  }
+]

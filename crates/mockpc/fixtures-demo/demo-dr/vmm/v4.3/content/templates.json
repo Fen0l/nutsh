@@ -1,0 +1,84 @@
+[
+  {
+    "$objectType": "vmm.v4.content.Template",
+    "extId": "7e390000-0b02-4000-8000-000000000001",
+    "createTime": "2026-04-12T07:30:00Z",
+    "updateTime": "2026-04-12T07:30:00Z",
+    "templateName": "tpl-jump",
+    "templateDescription": "Ubuntu 24.04 jump host with the operators' tooling",
+    "templateVersionSpec": {
+      "$objectType": "vmm.v4.content.TemplateVersionSpec",
+      "createTime": "2026-04-12T07:30:00Z",
+      "clusterLocationExtIds": [
+        "c1000000-0b02-4000-8000-000000000001"
+      ],
+      "versionName": "v1",
+      "versionDescription": "Initial version",
+      "vmSpec": {
+        "$objectType": "vmm.v4.ahv.config.Vm",
+        "numSockets": 1,
+        "numCoresPerSocket": 2,
+        "numThreadsPerCore": 1,
+        "memorySizeBytes": 4294967296,
+        "hardwareClockTimezone": "UTC",
+        "disks": [
+          {
+            "$objectType": "vmm.v4.ahv.config.Disk",
+            "backingInfo": {
+              "$objectType": "vmm.v4.ahv.config.VmDisk",
+              "diskSizeBytes": 42949672960,
+              "dataSource": {
+                "$objectType": "vmm.v4.ahv.config.DataSource",
+                "reference": {
+                  "$objectType": "vmm.v4.ahv.config.ImageReference",
+                  "imageExtId": "1ba9e000-0b02-4000-8000-000000000001"
+                }
+              }
+            }
+          }
+        ],
+        "nics": [
+          {
+            "$objectType": "vmm.v4.ahv.config.Nic",
+            "nicBackingInfo": {
+              "$objectType": "vmm.v4.ahv.config.VirtualEthernetNic",
+              "isConnected": true,
+              "numQueues": 1
+            },
+            "nicNetworkInfo": {
+              "$objectType": "vmm.v4.ahv.config.VirtualEthernetNicNetworkInfo",
+              "nicType": "NORMAL_NIC",
+              "vlanMode": "ACCESS",
+              "subnet": {
+                "$objectType": "vmm.v4.ahv.config.SubnetReference",
+                "extId": "5ab00000-0b02-4000-8000-000000000001"
+              }
+            }
+          }
+        ]
+      },
+      "createdBy": {
+        "$objectType": "vmm.v4.content.TemplateUser",
+        "extId": "05e70000-0b02-4000-8000-000000000001",
+        "username": "admin"
+      },
+      "isActiveVersion": true,
+      "isGcOverrideEnabled": true,
+      "guestCustomizationProfile": {
+        "$objectType": "vmm.v4.ahv.config.VmGcProfileReference",
+        "extId": "9c0f0000-0b02-4000-8000-000000000001"
+      }
+    },
+    "createdBy": {
+      "$objectType": "vmm.v4.content.TemplateUser",
+      "extId": "05e70000-0b02-4000-8000-000000000001",
+      "username": "admin"
+    },
+    "updatedBy": {
+      "$objectType": "vmm.v4.content.TemplateUser",
+      "extId": "05e70000-0b02-4000-8000-000000000001",
+      "username": "admin"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000"
+  }
+]

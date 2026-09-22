@@ -1,0 +1,26 @@
+[
+  {
+    "$objectType": "volumes.v4.config.VolumeDisk",
+    "extId": "4f000000-0a01-4000-8000-000000000001",
+    "index": 0,
+    "diskSizeBytes": 214748364800,
+    "storageContainerId": "06000000-0a01-4000-8000-000000000002",
+    "description": "prd-db-01 data volume 1"
+  },
+  {
+    "$objectType": "volumes.v4.config.VolumeDisk",
+    "extId": "4f000000-0a01-4000-8000-000000000002",
+    "index": 1,
+    "diskSizeBytes": 214748364800,
+    "storageContainerId": "06000000-0a01-4000-8000-000000000002",
+    "description": "prd-db-01 data volume 2"
+  },
+  {
+    "$objectType": "volumes.v4.config.VolumeDisk",
+    "extId": "4f000000-0a01-4000-8000-000000000003",
+    "index": 2,
+    "diskSizeBytes": 214748364800,
+    "storageContainerId": "06000000-0a01-4000-8000-000000000002",
+    "description": "prd-db-01 data volume 3"
+  }
+]

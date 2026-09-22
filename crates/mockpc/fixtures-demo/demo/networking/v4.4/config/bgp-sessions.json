@@ -1,0 +1,77 @@
+[
+  {
+    "$objectType": "networking.v4.config.BgpSession",
+    "extId": "22000000-0a01-4000-8000-000000000001",
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "0e000000-0a01-4000-8000-000000000001",
+      "ownerUserName": "admin",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000",
+      "projectName": "default"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "bgp-ridge",
+    "description": "eBGP with pc-ridge over vpn-to-ridge",
+    "localGatewayReference": "20000000-0a01-4000-8000-000000000001",
+    "remoteGatewayReference": "20000000-0a01-4000-8000-000000000001",
+    "localGatewayInterfaceIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "192.0.2.201"
+      }
+    },
+    "dynamicRoutePriority": 700,
+    "status": {
+      "$objectType": "networking.v4.config.Status",
+      "message": "bgp session is established",
+      "state": "ESTABLISHED"
+    },
+    "shouldAdvertiseAllExternallyRoutablePrefixes": true,
+    "externallyRoutablePrefixesToAdvertise": []
+  },
+  {
+    "$objectType": "networking.v4.config.BgpSession",
+    "extId": "22000000-0a01-4000-8000-000000000002",
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "0e000000-0a01-4000-8000-000000000002",
+      "ownerUserName": "ops-lead",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000",
+      "projectName": "default"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "bgp-partner",
+    "description": "eBGP with the partner network over vpn-to-partner",
+    "localGatewayReference": "20000000-0a01-4000-8000-000000000002",
+    "remoteGatewayReference": "20000000-0a01-4000-8000-000000000002",
+    "localGatewayInterfaceIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "192.0.2.205"
+      }
+    },
+    "dynamicRoutePriority": 900,
+    "status": {
+      "$objectType": "networking.v4.config.Status",
+      "message": "bgp session is idle, tunnel down",
+      "state": "IDLE"
+    },
+    "shouldAdvertiseAllExternallyRoutablePrefixes": false,
+    "externallyRoutablePrefixesToAdvertise": [
+      {
+        "$objectType": "networking.v4.config.IPSubnet",
+        "ipv4": {
+          "$objectType": "networking.v4.config.IPv4Subnet",
+          "ip": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "198.51.100.0",
+            "prefixLength": 32
+          },
+          "prefixLength": 25
+        }
+      }
+    ]
+  }
+]

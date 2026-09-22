@@ -1,0 +1,67 @@
+[
+  {
+    "$objectType": "dataprotection.v4.config.RecoveryPlanJob",
+    "extId": "13000000-0a01-4000-8000-000000000001",
+    "name": "test-failover-web-0904",
+    "actionType": "TEST_FAILOVER",
+    "status": "SUCCEEDED",
+    "percentageComplete": 100,
+    "startTime": "2026-09-04T02:00:00Z",
+    "endTime": "2026-09-04T02:11:00Z",
+    "numRecoverableVMs": 2,
+    "recoveryPlanExtId": "12000000-0a01-4000-8000-000000000001",
+    "createdBy": {
+      "$objectType": "dataprotection.v4.config.UserReference",
+      "extId": "0e000000-0a01-4000-8000-000000000002",
+      "name": "ops-lead"
+    }
+  },
+  {
+    "$objectType": "dataprotection.v4.config.RecoveryPlanJob",
+    "extId": "13000000-0a01-4000-8000-000000000002",
+    "name": "test-failover-db-0905",
+    "actionType": "TEST_FAILOVER",
+    "status": "FAILED",
+    "percentageComplete": 35,
+    "startTime": "2026-09-05T08:30:00Z",
+    "endTime": "2026-09-05T08:41:00Z",
+    "numRecoverableVMs": 1,
+    "recoveryPlanExtId": "12000000-0a01-4000-8000-000000000002",
+    "createdBy": {
+      "$objectType": "dataprotection.v4.config.UserReference",
+      "extId": "0e000000-0a01-4000-8000-000000000002",
+      "name": "ops-lead"
+    }
+  },
+  {
+    "$objectType": "dataprotection.v4.config.RecoveryPlanJob",
+    "extId": "13000000-0a01-4000-8000-000000000003",
+    "name": "validate-web-0905",
+    "actionType": "VALIDATE",
+    "status": "RUNNING",
+    "percentageComplete": 60,
+    "startTime": "2026-09-05T09:50:00Z",
+    "numRecoverableVMs": 2,
+    "recoveryPlanExtId": "12000000-0a01-4000-8000-000000000001",
+    "createdBy": {
+      "$objectType": "dataprotection.v4.config.UserReference",
+      "extId": "0e000000-0a01-4000-8000-000000000001",
+      "name": "admin"
+    }
+  },
+  {
+    "$objectType": "dataprotection.v4.config.RecoveryPlanJob",
+    "extId": "13000000-0a01-4000-8000-000000000004",
+    "name": "planned-failover-db",
+    "actionType": "PLANNED_FAILOVER",
+    "status": "QUEUED",
+    "percentageComplete": 0,
+    "numRecoverableVMs": 1,
+    "recoveryPlanExtId": "12000000-0a01-4000-8000-000000000002",
+    "createdBy": {
+      "$objectType": "dataprotection.v4.config.UserReference",
+      "extId": "0e000000-0a01-4000-8000-000000000001",
+      "name": "admin"
+    }
+  }
+]

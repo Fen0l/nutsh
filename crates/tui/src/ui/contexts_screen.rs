@@ -71,7 +71,7 @@ pub(super) fn context_lines(s: &contexts::Screen, area: Rect, width: usize) -> V
     if s.rows.is_empty() {
         if s.list_error.is_none() {
             lines.push(Line::from(
-                "No contexts. Press a to add one, or run nutsh ctx add.",
+                "No contexts. Press a to add one, run nutsh ctx add, or try nutsh demo.",
             ));
         }
         return lines;

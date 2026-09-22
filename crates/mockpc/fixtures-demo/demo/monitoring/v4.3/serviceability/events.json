@@ -1,0 +1,570 @@
+[
+  {
+    "$objectType": "monitoring.v4.serviceability.Event",
+    "extId": "0c000000-0a01-4000-8000-000000000001",
+    "title": "Host harbor-n2 is entering maintenance mode",
+    "message": "Host harbor-n2 is entering maintenance mode",
+    "eventType": "HostMaintenance",
+    "classifications": [
+      "Host",
+      "UserAction"
+    ],
+    "creationTime": "2026-09-05T09:54:00Z",
+    "clusterName": "harbor-prod",
+    "clusterUUID": "01000000-0a01-4000-8000-000000000001",
+    "sourceClusterUUID": "01000000-0a01-4000-8000-000000000001",
+    "sourceEntity": {
+      "$objectType": "monitoring.v4.serviceability.EventEntityReference",
+      "type": "node",
+      "name": "harbor-n2",
+      "extId": "02000000-0a01-4000-8000-000000000002"
+    },
+    "affectedEntities": [
+      {
+        "$objectType": "monitoring.v4.common.EntityReference",
+        "name": "harbor-n2",
+        "extId": "02000000-0a01-4000-8000-000000000002"
+      }
+    ],
+    "impactedEntities": {
+      "$objectType": "monitoring.v4.common.ImpactedEntities",
+      "clusters": [
+        "01000000-0a01-4000-8000-000000000001"
+      ],
+      "nodes": [
+        "02000000-0a01-4000-8000-000000000002"
+      ]
+    },
+    "parameters": [
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "host_name",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "harbor-n2"
+        }
+      },
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "user",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "admin"
+        }
+      }
+    ]
+  },
+  {
+    "$objectType": "monitoring.v4.serviceability.Event",
+    "extId": "0c000000-0a01-4000-8000-000000000002",
+    "title": "Power on of VM dev-scratch-02 failed",
+    "message": "Power on of VM dev-scratch-02 failed",
+    "eventType": "VmPowerStateChange",
+    "classifications": [
+      "VM",
+      "UserAction"
+    ],
+    "creationTime": "2026-09-05T09:51:04Z",
+    "clusterName": "harbor-prod",
+    "clusterUUID": "01000000-0a01-4000-8000-000000000001",
+    "sourceClusterUUID": "01000000-0a01-4000-8000-000000000001",
+    "sourceEntity": {
+      "$objectType": "monitoring.v4.serviceability.EventEntityReference",
+      "type": "vm",
+      "name": "dev-scratch-02",
+      "extId": "03000000-0a01-4000-8000-000000000008"
+    },
+    "affectedEntities": [
+      {
+        "$objectType": "monitoring.v4.common.EntityReference",
+        "name": "dev-scratch-02",
+        "extId": "03000000-0a01-4000-8000-000000000008"
+      }
+    ],
+    "impactedEntities": {
+      "$objectType": "monitoring.v4.common.ImpactedEntities",
+      "clusters": [
+        "01000000-0a01-4000-8000-000000000001"
+      ],
+      "vms": [
+        "03000000-0a01-4000-8000-000000000008"
+      ]
+    },
+    "parameters": [
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "vm_name",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "dev-scratch-02"
+        }
+      },
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "user",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "ops-lead"
+        }
+      },
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "reason",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "No host in cluster harbor-prod can satisfy 64 GiB of memory"
+        }
+      }
+    ]
+  },
+  {
+    "$objectType": "monitoring.v4.serviceability.Event",
+    "extId": "0c000000-0a01-4000-8000-000000000003",
+    "title": "VM dev-ci-01 powered off",
+    "message": "VM dev-ci-01 powered off",
+    "eventType": "VmPowerStateChange",
+    "classifications": [
+      "VM",
+      "UserAction"
+    ],
+    "creationTime": "2026-09-05T08:00:00Z",
+    "clusterName": "harbor-prod",
+    "clusterUUID": "01000000-0a01-4000-8000-000000000001",
+    "sourceClusterUUID": "01000000-0a01-4000-8000-000000000001",
+    "sourceEntity": {
+      "$objectType": "monitoring.v4.serviceability.EventEntityReference",
+      "type": "vm",
+      "name": "dev-ci-01",
+      "extId": "03000000-0a01-4000-8000-000000000006"
+    },
+    "affectedEntities": [
+      {
+        "$objectType": "monitoring.v4.common.EntityReference",
+        "name": "dev-ci-01",
+        "extId": "03000000-0a01-4000-8000-000000000006"
+      }
+    ],
+    "impactedEntities": {
+      "$objectType": "monitoring.v4.common.ImpactedEntities",
+      "clusters": [
+        "01000000-0a01-4000-8000-000000000001"
+      ],
+      "vms": [
+        "03000000-0a01-4000-8000-000000000006"
+      ]
+    },
+    "parameters": [
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "vm_name",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "dev-ci-01"
+        }
+      },
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "user",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "ops-night"
+        }
+      }
+    ]
+  },
+  {
+    "$objectType": "monitoring.v4.serviceability.Event",
+    "extId": "0c000000-0a01-4000-8000-000000000004",
+    "title": "VM prd-web-02 powered on",
+    "message": "VM prd-web-02 powered on",
+    "eventType": "VmPowerStateChange",
+    "classifications": [
+      "VM",
+      "SystemAction"
+    ],
+    "creationTime": "2026-09-05T04:05:00Z",
+    "clusterName": "harbor-prod",
+    "clusterUUID": "01000000-0a01-4000-8000-000000000001",
+    "sourceClusterUUID": "01000000-0a01-4000-8000-000000000001",
+    "sourceEntity": {
+      "$objectType": "monitoring.v4.serviceability.EventEntityReference",
+      "type": "vm",
+      "name": "prd-web-02",
+      "extId": "03000000-0a01-4000-8000-000000000002"
+    },
+    "affectedEntities": [
+      {
+        "$objectType": "monitoring.v4.common.EntityReference",
+        "name": "prd-web-02",
+        "extId": "03000000-0a01-4000-8000-000000000002"
+      }
+    ],
+    "impactedEntities": {
+      "$objectType": "monitoring.v4.common.ImpactedEntities",
+      "clusters": [
+        "01000000-0a01-4000-8000-000000000001"
+      ],
+      "vms": [
+        "03000000-0a01-4000-8000-000000000002"
+      ]
+    },
+    "parameters": [
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "vm_name",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "prd-web-02"
+        }
+      },
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "host_name",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "harbor-n3"
+        }
+      }
+    ]
+  },
+  {
+    "$objectType": "monitoring.v4.serviceability.Event",
+    "extId": "0c000000-0a01-4000-8000-000000000005",
+    "title": "Host harbor-n3 left maintenance mode",
+    "message": "Host harbor-n3 left maintenance mode",
+    "eventType": "HostMaintenance",
+    "classifications": [
+      "Host",
+      "SystemAction"
+    ],
+    "creationTime": "2026-09-05T04:30:00Z",
+    "clusterName": "harbor-prod",
+    "clusterUUID": "01000000-0a01-4000-8000-000000000001",
+    "sourceClusterUUID": "01000000-0a01-4000-8000-000000000001",
+    "sourceEntity": {
+      "$objectType": "monitoring.v4.serviceability.EventEntityReference",
+      "type": "node",
+      "name": "harbor-n3",
+      "extId": "02000000-0a01-4000-8000-000000000003"
+    },
+    "affectedEntities": [
+      {
+        "$objectType": "monitoring.v4.common.EntityReference",
+        "name": "harbor-n3",
+        "extId": "02000000-0a01-4000-8000-000000000003"
+      }
+    ],
+    "impactedEntities": {
+      "$objectType": "monitoring.v4.common.ImpactedEntities",
+      "clusters": [
+        "01000000-0a01-4000-8000-000000000001"
+      ],
+      "nodes": [
+        "02000000-0a01-4000-8000-000000000003"
+      ]
+    },
+    "parameters": [
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "host_name",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "harbor-n3"
+        }
+      }
+    ]
+  },
+  {
+    "$objectType": "monitoring.v4.serviceability.Event",
+    "extId": "0c000000-0a01-4000-8000-000000000006",
+    "title": "Recovery point created for prd-db-01",
+    "message": "Recovery point created for prd-db-01",
+    "eventType": "RecoveryPointCreated",
+    "classifications": [
+      "DR",
+      "SystemAction"
+    ],
+    "creationTime": "2026-09-05T09:45:00Z",
+    "clusterName": "harbor-prod",
+    "clusterUUID": "01000000-0a01-4000-8000-000000000001",
+    "sourceClusterUUID": "01000000-0a01-4000-8000-000000000001",
+    "sourceEntity": {
+      "$objectType": "monitoring.v4.serviceability.EventEntityReference",
+      "type": "vm",
+      "name": "prd-db-01",
+      "extId": "03000000-0a01-4000-8000-000000000003"
+    },
+    "affectedEntities": [
+      {
+        "$objectType": "monitoring.v4.common.EntityReference",
+        "name": "prd-db-01",
+        "extId": "03000000-0a01-4000-8000-000000000003"
+      }
+    ],
+    "impactedEntities": {
+      "$objectType": "monitoring.v4.common.ImpactedEntities",
+      "clusters": [
+        "01000000-0a01-4000-8000-000000000001"
+      ],
+      "vms": [
+        "03000000-0a01-4000-8000-000000000003"
+      ]
+    },
+    "parameters": [
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "vm_name",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "prd-db-01"
+        }
+      },
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "recovery_point",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "rp-prd-db-01-0905-0945"
+        }
+      },
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "policy_name",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "gold-15m"
+        }
+      }
+    ]
+  },
+  {
+    "$objectType": "monitoring.v4.serviceability.Event",
+    "extId": "0c000000-0a01-4000-8000-000000000007",
+    "title": "Recovery point created for prd-web-01",
+    "message": "Recovery point created for prd-web-01",
+    "eventType": "RecoveryPointCreated",
+    "classifications": [
+      "DR",
+      "SystemAction"
+    ],
+    "creationTime": "2026-09-05T09:30:00Z",
+    "clusterName": "harbor-prod",
+    "clusterUUID": "01000000-0a01-4000-8000-000000000001",
+    "sourceClusterUUID": "01000000-0a01-4000-8000-000000000001",
+    "sourceEntity": {
+      "$objectType": "monitoring.v4.serviceability.EventEntityReference",
+      "type": "vm",
+      "name": "prd-web-01",
+      "extId": "03000000-0a01-4000-8000-000000000001"
+    },
+    "affectedEntities": [
+      {
+        "$objectType": "monitoring.v4.common.EntityReference",
+        "name": "prd-web-01",
+        "extId": "03000000-0a01-4000-8000-000000000001"
+      }
+    ],
+    "impactedEntities": {
+      "$objectType": "monitoring.v4.common.ImpactedEntities",
+      "clusters": [
+        "01000000-0a01-4000-8000-000000000001"
+      ],
+      "vms": [
+        "03000000-0a01-4000-8000-000000000001"
+      ]
+    },
+    "parameters": [
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "vm_name",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "prd-web-01"
+        }
+      },
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "recovery_point",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "rp-prd-web-01-0905-0930"
+        }
+      },
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "policy_name",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "gold-15m"
+        }
+      }
+    ]
+  },
+  {
+    "$objectType": "monitoring.v4.serviceability.Event",
+    "extId": "0c000000-0a01-4000-8000-000000000008",
+    "title": "Recovery point created for prd-web-02",
+    "message": "Recovery point created for prd-web-02",
+    "eventType": "RecoveryPointCreated",
+    "classifications": [
+      "DR",
+      "SystemAction"
+    ],
+    "creationTime": "2026-09-05T09:31:00Z",
+    "clusterName": "harbor-prod",
+    "clusterUUID": "01000000-0a01-4000-8000-000000000001",
+    "sourceClusterUUID": "01000000-0a01-4000-8000-000000000001",
+    "sourceEntity": {
+      "$objectType": "monitoring.v4.serviceability.EventEntityReference",
+      "type": "vm",
+      "name": "prd-web-02",
+      "extId": "03000000-0a01-4000-8000-000000000002"
+    },
+    "affectedEntities": [
+      {
+        "$objectType": "monitoring.v4.common.EntityReference",
+        "name": "prd-web-02",
+        "extId": "03000000-0a01-4000-8000-000000000002"
+      }
+    ],
+    "impactedEntities": {
+      "$objectType": "monitoring.v4.common.ImpactedEntities",
+      "clusters": [
+        "01000000-0a01-4000-8000-000000000001"
+      ],
+      "vms": [
+        "03000000-0a01-4000-8000-000000000002"
+      ]
+    },
+    "parameters": [
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "vm_name",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "prd-web-02"
+        }
+      },
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "recovery_point",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "rp-prd-web-02-0905-0931"
+        }
+      },
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "policy_name",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "gold-15m"
+        }
+      }
+    ]
+  },
+  {
+    "$objectType": "monitoring.v4.serviceability.Event",
+    "extId": "0c000000-0a01-4000-8000-000000000009",
+    "title": "Upload of image windows-2022-eval canceled",
+    "message": "Upload of image windows-2022-eval canceled",
+    "eventType": "ImageUploadCanceled",
+    "classifications": [
+      "Image",
+      "UserAction"
+    ],
+    "creationTime": "2026-09-05T06:00:00Z",
+    "clusterName": "harbor-prod",
+    "clusterUUID": "01000000-0a01-4000-8000-000000000001",
+    "sourceClusterUUID": "01000000-0a01-4000-8000-000000000001",
+    "sourceEntity": {
+      "$objectType": "monitoring.v4.serviceability.EventEntityReference",
+      "type": "image",
+      "name": "windows-2022-eval",
+      "extId": "09000000-0a01-4000-8000-000000000002"
+    },
+    "affectedEntities": [
+      {
+        "$objectType": "monitoring.v4.common.EntityReference",
+        "name": "windows-2022-eval",
+        "extId": "09000000-0a01-4000-8000-000000000002"
+      }
+    ],
+    "impactedEntities": {
+      "$objectType": "monitoring.v4.common.ImpactedEntities",
+      "clusters": [
+        "01000000-0a01-4000-8000-000000000001"
+      ]
+    },
+    "parameters": [
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "image_name",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "windows-2022-eval"
+        }
+      },
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "user",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "admin"
+        }
+      }
+    ]
+  },
+  {
+    "$objectType": "monitoring.v4.serviceability.Event",
+    "extId": "0c000000-0a01-4000-8000-000000000010",
+    "title": "LCM inventory on harbor-edge failed",
+    "message": "LCM inventory on harbor-edge failed",
+    "eventType": "LcmInventoryFailed",
+    "classifications": [
+      "Lifecycle",
+      "SystemAction"
+    ],
+    "creationTime": "2026-07-07T10:30:00Z",
+    "clusterName": "harbor-edge",
+    "clusterUUID": "01000000-0a01-4000-8000-000000000002",
+    "sourceClusterUUID": "01000000-0a01-4000-8000-000000000002",
+    "sourceEntity": {
+      "$objectType": "monitoring.v4.serviceability.EventEntityReference",
+      "type": "cluster",
+      "name": "harbor-edge",
+      "extId": "01000000-0a01-4000-8000-000000000002"
+    },
+    "affectedEntities": [
+      {
+        "$objectType": "monitoring.v4.common.EntityReference",
+        "name": "harbor-edge",
+        "extId": "01000000-0a01-4000-8000-000000000002"
+      }
+    ],
+    "impactedEntities": {
+      "$objectType": "monitoring.v4.common.ImpactedEntities",
+      "clusters": [
+        "01000000-0a01-4000-8000-000000000002"
+      ]
+    },
+    "parameters": [
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "cluster_name",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "harbor-edge"
+        }
+      },
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "reason",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "Inventory on edge-n1 timed out after 1800 seconds"
+        }
+      }
+    ]
+  }
+]

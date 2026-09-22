@@ -1,0 +1,156 @@
+[
+  {
+    "$objectType": "vmm.v4.esxi.config.Vm",
+    "extId": "2d000000-0a01-4000-8000-000000000001",
+    "name": "esx-legacy-01",
+    "description": "Legacy reporting host kept on ESXi until its licence lapses",
+    "cluster": {
+      "$objectType": "vmm.v4.esxi.config.ClusterReference",
+      "extId": "01000000-0a01-4000-8000-000000000001"
+    },
+    "host": {
+      "$objectType": "vmm.v4.esxi.config.HostReference",
+      "extId": "02000000-0a01-4000-8000-000000000003"
+    },
+    "categories": [
+      {
+        "$objectType": "vmm.v4.esxi.config.CategoryReference",
+        "extId": "07000000-0a01-4000-8000-000000000003"
+      }
+    ],
+    "ownershipInfo": {
+      "$objectType": "vmm.v4.esxi.config.OwnershipInfo",
+      "owner": {
+        "$objectType": "vmm.v4.esxi.config.OwnerReference",
+        "entityType": "USER",
+        "extId": "0e000000-0a01-4000-8000-000000000001"
+      }
+    },
+    "powerState": "ON",
+    "memorySizeBytes": 8589934592,
+    "numCoresPerSocket": 2,
+    "numCpus": 4,
+    "guestOsName": "Ubuntu Linux (64-bit)",
+    "virtualHardwareVersion": 19,
+    "disks": [
+      {
+        "$objectType": "vmm.v4.esxi.config.Disk",
+        "diskAddress": {
+          "$objectType": "vmm.v4.esxi.config.DiskAddress",
+          "busType": "SCSI",
+          "index": 0
+        },
+        "backingInfo": {
+          "$objectType": "vmm.v4.esxi.config.VmDisk",
+          "diskSizeBytes": 214748364800,
+          "storageContainer": {
+            "$objectType": "vmm.v4.esxi.config.VmDiskContainerReference",
+            "extId": "06000000-0a01-4000-8000-000000000001"
+          }
+        }
+      }
+    ],
+    "cdRoms": [],
+    "nics": [
+      {
+        "$objectType": "vmm.v4.esxi.config.Nic",
+        "backingInfo": {
+          "$objectType": "vmm.v4.esxi.config.NicBackingInfo",
+          "macAddress": "00:00:5e:00:53:c1",
+          "isConnected": true,
+          "adapterType": "VMXNET3"
+        },
+        "networkInfo": {
+          "$objectType": "vmm.v4.esxi.config.NicNetworkInfo",
+          "portGroupInfo": {
+            "$objectType": "vmm.v4.esxi.config.PortGroupInfo",
+            "name": "prod-vlan-100"
+          },
+          "ipAddressInfo": {
+            "$objectType": "vmm.v4.esxi.config.IpAddressInfo",
+            "ipv4Addresses": [
+              {
+                "$objectType": "common.v1.config.IPv4Address",
+                "value": "203.0.113.120",
+                "prefixLength": 24
+              }
+            ],
+            "ipv6Addresses": []
+          }
+        }
+      }
+    ]
+  },
+  {
+    "$objectType": "vmm.v4.esxi.config.Vm",
+    "extId": "2d000000-0a01-4000-8000-000000000002",
+    "name": "esx-legacy-02",
+    "description": "Retired file-transfer host, kept for the archive",
+    "cluster": {
+      "$objectType": "vmm.v4.esxi.config.ClusterReference",
+      "extId": "01000000-0a01-4000-8000-000000000001"
+    },
+    "categories": [
+      {
+        "$objectType": "vmm.v4.esxi.config.CategoryReference",
+        "extId": "07000000-0a01-4000-8000-000000000003"
+      }
+    ],
+    "ownershipInfo": {
+      "$objectType": "vmm.v4.esxi.config.OwnershipInfo",
+      "owner": {
+        "$objectType": "vmm.v4.esxi.config.OwnerReference",
+        "entityType": "USER",
+        "extId": "0e000000-0a01-4000-8000-000000000001"
+      }
+    },
+    "powerState": "OFF",
+    "memorySizeBytes": 4294967296,
+    "numCoresPerSocket": 1,
+    "numCpus": 2,
+    "guestOsName": "Windows Server 2016 (64-bit)",
+    "virtualHardwareVersion": 14,
+    "disks": [
+      {
+        "$objectType": "vmm.v4.esxi.config.Disk",
+        "diskAddress": {
+          "$objectType": "vmm.v4.esxi.config.DiskAddress",
+          "busType": "SCSI",
+          "index": 0
+        },
+        "backingInfo": {
+          "$objectType": "vmm.v4.esxi.config.VmDisk",
+          "diskSizeBytes": 107374182400,
+          "storageContainer": {
+            "$objectType": "vmm.v4.esxi.config.VmDiskContainerReference",
+            "extId": "06000000-0a01-4000-8000-000000000001"
+          }
+        }
+      }
+    ],
+    "cdRoms": [],
+    "nics": [
+      {
+        "$objectType": "vmm.v4.esxi.config.Nic",
+        "backingInfo": {
+          "$objectType": "vmm.v4.esxi.config.NicBackingInfo",
+          "macAddress": "00:00:5e:00:53:c2",
+          "isConnected": false,
+          "adapterType": "VMXNET3"
+        },
+        "networkInfo": {
+          "$objectType": "vmm.v4.esxi.config.NicNetworkInfo",
+          "portGroupInfo": {
+            "$objectType": "vmm.v4.esxi.config.PortGroupInfo",
+            "name": "prod-vlan-100"
+          },
+          "ipAddressInfo": {
+            "$objectType": "vmm.v4.esxi.config.IpAddressInfo",
+            "ipv4Addresses": [],
+            "ipv6Addresses": []
+          }
+        }
+      }
+    ]
+  }
+]

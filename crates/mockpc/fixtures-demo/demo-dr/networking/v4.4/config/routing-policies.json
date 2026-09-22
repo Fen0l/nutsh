@@ -1,0 +1,72 @@
+[
+  {
+    "$objectType": "networking.v4.config.RoutingPolicy",
+    "extId": "90070000-0b02-4000-8000-000000000001",
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "05e70000-0b02-4000-8000-000000000001",
+      "ownerUserName": "admin",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000",
+      "projectName": "default"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "permit-harbor",
+    "description": "Only the harbor networks reach ridge-overlay",
+    "priority": 10,
+    "policies": [
+      {
+        "$objectType": "networking.v4.config.RoutingPolicyRule",
+        "policyMatch": {
+          "$objectType": "networking.v4.config.RoutingPolicyMatchCondition",
+          "source": {
+            "$objectType": "networking.v4.config.AddressTypeObject",
+            "addressType": "SUBNET",
+            "subnetPrefix": {
+              "$objectType": "networking.v4.config.IPSubnet",
+              "ipv4": {
+                "$objectType": "networking.v4.config.IPv4Subnet",
+                "ip": {
+                  "$objectType": "common.v1.config.IPv4Address",
+                  "value": "203.0.113.0",
+                  "prefixLength": 32
+                },
+                "prefixLength": 24
+              }
+            }
+          },
+          "destination": {
+            "$objectType": "networking.v4.config.AddressTypeObject",
+            "addressType": "ANY"
+          },
+          "protocolType": "ANY"
+        },
+        "policyAction": {
+          "$objectType": "networking.v4.config.RoutingPolicyAction",
+          "actionType": "PERMIT"
+        },
+        "isBidirectional": true
+      },
+      {
+        "$objectType": "networking.v4.config.RoutingPolicyRule",
+        "policyMatch": {
+          "$objectType": "networking.v4.config.RoutingPolicyMatchCondition",
+          "source": {
+            "$objectType": "networking.v4.config.AddressTypeObject",
+            "addressType": "ANY"
+          },
+          "destination": {
+            "$objectType": "networking.v4.config.AddressTypeObject",
+            "addressType": "ANY"
+          },
+          "protocolType": "ANY"
+        },
+        "policyAction": {
+          "$objectType": "networking.v4.config.RoutingPolicyAction",
+          "actionType": "DENY"
+        },
+        "isBidirectional": true
+      }
+    ],
+    "vpcExtId": "0b9c0000-0b02-4000-8000-000000000001"
+  }
+]

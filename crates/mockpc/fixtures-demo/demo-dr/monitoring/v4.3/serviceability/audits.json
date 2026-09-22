@@ -1,0 +1,218 @@
+[
+  {
+    "$objectType": "monitoring.v4.serviceability.Audit",
+    "extId": "a0d17000-0b02-4000-8000-000000000001",
+    "title": "Powered off VM dr-web-01",
+    "message": "Powered off VM dr-web-01",
+    "auditType": "VmPowerStateAudit",
+    "operationType": "POWER_OFF",
+    "status": "SUCCEEDED",
+    "operationStartTime": "2026-09-05T08:00:05Z",
+    "operationEndTime": "2026-09-05T08:00:05Z",
+    "creationTime": "2026-09-05T08:00:05Z",
+    "userReference": {
+      "$objectType": "monitoring.v4.serviceability.UserReference",
+      "extId": "05e70000-0b02-4000-8000-000000000001",
+      "name": "admin",
+      "ipAddress": "192.0.2.90"
+    },
+    "sourceEntity": {
+      "$objectType": "monitoring.v4.serviceability.AuditEntityReference",
+      "type": "vm",
+      "name": "dr-web-01",
+      "extId": "ee000000-0b02-4000-8000-000000000001"
+    },
+    "affectedEntities": [
+      {
+        "$objectType": "monitoring.v4.common.EntityReference",
+        "type": "vm",
+        "name": "dr-web-01",
+        "extId": "ee000000-0b02-4000-8000-000000000001"
+      }
+    ],
+    "clusterReference": {
+      "$objectType": "monitoring.v4.common.EntityReference",
+      "extId": "c1000000-0b02-4000-8000-000000000001"
+    },
+    "impactedEntities": {
+      "$objectType": "monitoring.v4.common.ImpactedEntities",
+      "clusters": [
+        "c1000000-0b02-4000-8000-000000000001"
+      ]
+    },
+    "parameters": [
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "vm_name",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "dr-web-01"
+        }
+      }
+    ]
+  },
+  {
+    "$objectType": "monitoring.v4.serviceability.Audit",
+    "extId": "a0d17000-0b02-4000-8000-000000000002",
+    "title": "User operator logged in",
+    "message": "User operator logged in",
+    "auditType": "IAMLoginEventAudit",
+    "operationType": "LOGIN",
+    "status": "SUCCEEDED",
+    "operationStartTime": "2026-09-05T09:41:00Z",
+    "operationEndTime": "2026-09-05T09:41:00Z",
+    "creationTime": "2026-09-05T09:41:00Z",
+    "userReference": {
+      "$objectType": "monitoring.v4.serviceability.UserReference",
+      "extId": "05e70000-0b02-4000-8000-000000000002",
+      "name": "operator",
+      "ipAddress": "192.0.2.105"
+    },
+    "sourceEntity": {
+      "$objectType": "monitoring.v4.serviceability.AuditEntityReference",
+      "type": "user",
+      "name": "operator",
+      "extId": "05e70000-0b02-4000-8000-000000000002"
+    },
+    "affectedEntities": [
+      {
+        "$objectType": "monitoring.v4.common.EntityReference",
+        "type": "user",
+        "name": "operator",
+        "extId": "05e70000-0b02-4000-8000-000000000002"
+      }
+    ],
+    "clusterReference": {
+      "$objectType": "monitoring.v4.common.EntityReference",
+      "extId": "d0000000-0b02-4000-8000-000000000001"
+    },
+    "impactedEntities": {
+      "$objectType": "monitoring.v4.common.ImpactedEntities",
+      "clusters": [
+        "d0000000-0b02-4000-8000-000000000001"
+      ]
+    },
+    "parameters": [
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "username",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "operator"
+        }
+      },
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "auth_type",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "local"
+        }
+      }
+    ]
+  },
+  {
+    "$objectType": "monitoring.v4.serviceability.Audit",
+    "extId": "a0d17000-0b02-4000-8000-000000000003",
+    "title": "Created recovery point for ridge-backup-01",
+    "message": "Created recovery point for ridge-backup-01",
+    "auditType": "RecoveryPointAudit",
+    "operationType": "CREATE",
+    "status": "SUCCEEDED",
+    "operationStartTime": "2026-09-05T09:20:41Z",
+    "operationEndTime": "2026-09-05T09:20:41Z",
+    "creationTime": "2026-09-05T09:20:41Z",
+    "userReference": {
+      "$objectType": "monitoring.v4.serviceability.UserReference",
+      "extId": "05e70000-0b02-4000-8000-000000000003",
+      "name": "svc-backup",
+      "ipAddress": "192.0.2.103"
+    },
+    "sourceEntity": {
+      "$objectType": "monitoring.v4.serviceability.AuditEntityReference",
+      "type": "vm",
+      "name": "ridge-backup-01",
+      "extId": "ee000000-0b02-4000-8000-000000000003"
+    },
+    "affectedEntities": [
+      {
+        "$objectType": "monitoring.v4.common.EntityReference",
+        "type": "vm",
+        "name": "ridge-backup-01",
+        "extId": "ee000000-0b02-4000-8000-000000000003"
+      }
+    ],
+    "clusterReference": {
+      "$objectType": "monitoring.v4.common.EntityReference",
+      "extId": "c1000000-0b02-4000-8000-000000000001"
+    },
+    "impactedEntities": {
+      "$objectType": "monitoring.v4.common.ImpactedEntities",
+      "clusters": [
+        "c1000000-0b02-4000-8000-000000000001"
+      ]
+    },
+    "parameters": [
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "vm_name",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "ridge-backup-01"
+        }
+      }
+    ]
+  },
+  {
+    "$objectType": "monitoring.v4.serviceability.Audit",
+    "extId": "a0d17000-0b02-4000-8000-000000000004",
+    "title": "Updated protection policy local-daily",
+    "message": "Updated protection policy local-daily",
+    "auditType": "ProtectionPolicyAudit",
+    "operationType": "UPDATE",
+    "status": "SUCCEEDED",
+    "operationStartTime": "2026-09-04T16:12:00Z",
+    "operationEndTime": "2026-09-04T16:12:00Z",
+    "creationTime": "2026-09-04T16:12:00Z",
+    "userReference": {
+      "$objectType": "monitoring.v4.serviceability.UserReference",
+      "extId": "05e70000-0b02-4000-8000-000000000001",
+      "name": "admin",
+      "ipAddress": "192.0.2.90"
+    },
+    "sourceEntity": {
+      "$objectType": "monitoring.v4.serviceability.AuditEntityReference",
+      "type": "protection_policy",
+      "name": "local-daily",
+      "extId": "9b0c0000-0b02-4000-8000-000000000003"
+    },
+    "affectedEntities": [
+      {
+        "$objectType": "monitoring.v4.common.EntityReference",
+        "type": "protection_policy",
+        "name": "local-daily",
+        "extId": "9b0c0000-0b02-4000-8000-000000000003"
+      }
+    ],
+    "clusterReference": {
+      "$objectType": "monitoring.v4.common.EntityReference",
+      "extId": "d0000000-0b02-4000-8000-000000000001"
+    },
+    "impactedEntities": {
+      "$objectType": "monitoring.v4.common.ImpactedEntities",
+      "clusters": [
+        "d0000000-0b02-4000-8000-000000000001"
+      ]
+    },
+    "parameters": [
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "policy_name",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "local-daily"
+        }
+      }
+    ]
+  }
+]

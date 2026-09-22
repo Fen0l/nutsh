@@ -1,0 +1,42 @@
+[
+  {
+    "$objectType": "clustermgmt.v4.ahv.config.VirtualGpuProfile",
+    "extId": "4c000000-0a01-4000-8000-000000000001",
+    "configuration": {
+      "$objectType": "clustermgmt.v4.ahv.config.VirtualGpuProfileConfiguration",
+      "name": "L40S-8Q",
+      "numberOfVirtualDisplayHeads": 4,
+      "frameBufferSizeBytes": 8589934592,
+      "maxResolution": "7680x4320",
+      "maxInstancesPerVm": 1,
+      "maxInstances": 6,
+      "licenses": [
+        "NVIDIA-vWS",
+        "NVIDIA-vCS"
+      ]
+    },
+    "clusterExtIds": [
+      "01000000-0a01-4000-8000-000000000001"
+    ]
+  },
+  {
+    "$objectType": "clustermgmt.v4.ahv.config.VirtualGpuProfile",
+    "extId": "4c000000-0a01-4000-8000-000000000002",
+    "configuration": {
+      "$objectType": "clustermgmt.v4.ahv.config.VirtualGpuProfileConfiguration",
+      "name": "A16-4Q",
+      "numberOfVirtualDisplayHeads": 2,
+      "frameBufferSizeBytes": 4294967296,
+      "maxResolution": "5120x2880",
+      "maxInstancesPerVm": 1,
+      "maxInstances": 16,
+      "licenses": [
+        "NVIDIA-vPC",
+        "NVIDIA-vWS"
+      ]
+    },
+    "clusterExtIds": [
+      "01000000-0a01-4000-8000-000000000001"
+    ]
+  }
+]

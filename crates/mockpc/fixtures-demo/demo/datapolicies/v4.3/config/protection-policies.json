@@ -1,0 +1,130 @@
+[
+  {
+    "$objectType": "datapolicies.v4.config.ProtectionPolicy",
+    "extId": "11000000-0a01-4000-8000-000000000001",
+    "name": "gold-15m",
+    "description": "Web and database tier, 15-minute RPO to pc-ridge",
+    "ownerExtId": "0e000000-0a01-4000-8000-000000000001",
+    "isApprovalPolicyNeeded": true,
+    "categoryIds": [
+      "07000000-0a01-4000-8000-000000000004",
+      "07000000-0a01-4000-8000-000000000005"
+    ],
+    "replicationLocations": [
+      {
+        "$objectType": "datapolicies.v4.config.ReplicationLocation",
+        "label": "pc-harbor",
+        "domainManagerExtId": "d0000000-0a01-4000-8000-000000000001",
+        "isPrimary": true
+      },
+      {
+        "$objectType": "datapolicies.v4.config.ReplicationLocation",
+        "label": "pc-ridge",
+        "domainManagerExtId": "d0000000-0b02-4000-8000-000000000001",
+        "isPrimary": false
+      }
+    ],
+    "replicationConfigurations": [
+      {
+        "$objectType": "datapolicies.v4.config.ReplicationConfiguration",
+        "sourceLocationLabel": "pc-harbor",
+        "remoteLocationLabel": "pc-ridge",
+        "schedule": {
+          "$objectType": "datapolicies.v4.config.Schedule",
+          "recoveryPointType": "CRASH_CONSISTENT",
+          "recoveryPointObjectiveTimeSeconds": 900,
+          "isReplicationPaused": false,
+          "retention": {
+            "$objectType": "datapolicies.v4.config.LinearRetention",
+            "local": 4,
+            "remote": 4
+          }
+        }
+      }
+    ]
+  },
+  {
+    "$objectType": "datapolicies.v4.config.ProtectionPolicy",
+    "extId": "11000000-0a01-4000-8000-000000000002",
+    "name": "silver-1h",
+    "description": "Application and cache tier, hourly RPO to pc-ridge",
+    "ownerExtId": "0e000000-0a01-4000-8000-000000000002",
+    "isApprovalPolicyNeeded": false,
+    "categoryIds": [
+      "07000000-0a01-4000-8000-000000000006"
+    ],
+    "replicationLocations": [
+      {
+        "$objectType": "datapolicies.v4.config.ReplicationLocation",
+        "label": "pc-harbor",
+        "domainManagerExtId": "d0000000-0a01-4000-8000-000000000001",
+        "isPrimary": true
+      },
+      {
+        "$objectType": "datapolicies.v4.config.ReplicationLocation",
+        "label": "pc-ridge",
+        "domainManagerExtId": "d0000000-0b02-4000-8000-000000000001",
+        "isPrimary": false
+      }
+    ],
+    "replicationConfigurations": [
+      {
+        "$objectType": "datapolicies.v4.config.ReplicationConfiguration",
+        "sourceLocationLabel": "pc-harbor",
+        "remoteLocationLabel": "pc-ridge",
+        "schedule": {
+          "$objectType": "datapolicies.v4.config.Schedule",
+          "recoveryPointType": "CRASH_CONSISTENT",
+          "recoveryPointObjectiveTimeSeconds": 3600,
+          "isReplicationPaused": false,
+          "retention": {
+            "$objectType": "datapolicies.v4.config.LinearRetention",
+            "local": 24,
+            "remote": 12
+          }
+        }
+      }
+    ]
+  },
+  {
+    "$objectType": "datapolicies.v4.config.ProtectionPolicy",
+    "extId": "11000000-0a01-4000-8000-000000000003",
+    "name": "local-daily",
+    "description": "Daily local recovery points, kept a week, never replicated",
+    "ownerExtId": "0e000000-0a01-4000-8000-000000000001",
+    "isApprovalPolicyNeeded": false,
+    "categoryIds": [
+      "07000000-0a01-4000-8000-000000000007"
+    ],
+    "replicationLocations": [
+      {
+        "$objectType": "datapolicies.v4.config.ReplicationLocation",
+        "label": "pc-harbor",
+        "domainManagerExtId": "d0000000-0a01-4000-8000-000000000001",
+        "isPrimary": true,
+        "replicationSubLocation": {
+          "$objectType": "datapolicies.v4.config.NutanixCluster",
+          "clusterExtIds": [
+            "01000000-0a01-4000-8000-000000000001"
+          ]
+        }
+      }
+    ],
+    "replicationConfigurations": [
+      {
+        "$objectType": "datapolicies.v4.config.ReplicationConfiguration",
+        "sourceLocationLabel": "pc-harbor",
+        "schedule": {
+          "$objectType": "datapolicies.v4.config.Schedule",
+          "recoveryPointType": "CRASH_CONSISTENT",
+          "recoveryPointObjectiveTimeSeconds": 86400,
+          "isReplicationPaused": false,
+          "retention": {
+            "$objectType": "datapolicies.v4.config.LinearRetention",
+            "local": 7
+          }
+        }
+      }
+    ]
+  }
+]

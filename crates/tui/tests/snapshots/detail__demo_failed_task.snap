@@ -1,0 +1,40 @@
+---
+source: crates/tui/tests/detail.rs
+expression: "app.snapshot(120, 36).unwrap()"
+---
+╭ nutsh ─────────────────────────────────────────────────────────────────────────────────────╮
+│Context:    -                                                    ⏎ drill        y detail    │       clusters 2  hosts 4
+│PC:         127.0.0.1:PORT  pc.7.6                              S sort         w wide      │       vms 12  on/off 10/2
+│Cluster:    <all>                                               ←→ columns     ^r refresh   │           alerts ⚠ 3  ✖ 2
+│Kind:       Monitoring › Tasks                                  ^t every       ^x stop      │         tasks ▶ 2 running
+│Count:      1 of 10                                              a actions     ^c quit      │
+╰────────────────────────────────────────────────────────────────────────────────────────────╯           v0.1.0 · pc.7.6
+╭ nutsh ───────────────╮┌Tasks · VmPowerOn─────────────────────────────────────────────────────────────────────────────┐
+│  ▸ Dashboard         ││WHAT ─────────────────────────────────────────────────────────────────────────────────────────│
+│  ▸ Compute & Storage ││         Operation Vmpoweron                                                                  │
+│  ▸ Network & Security││       Description Power on VM dev-scratch-02                                                 │
+│  ▸ Data Protection   ││            Status FAILED                               Progress 100%                         │
+│  ▸ Hardware          ││        Cancelable ✗                                       Owner ops-lead                     │
+│  ▾ Monitoring        ││TIMING ───────────────────────────────────────────────────────────────────────────────────────│
+│      Overview        ││           Created 9m                                    Started 9m                           │
+│      Alerts          ││         Completed 8m                                    Updated 8m                           │
+│      Events          ││ENTITIES ─────────────────────────────────────────────────────────────────────────────────────│
+│    • Tasks [10]      ││          Entities 1                                        Name dev-scratch-02               │
+│      Audits          ││              Type vmm:ahv:config:vm                    Clusters harbor-prod                  │
+│      Alert Policies  ││HIERARCHY ────────────────────────────────────────────────────────────────────────────────────│
+│      Reports         ││            Parent -                                        Root -                            │
+│  ▸ Policies          ││          Subtasks 2                                                                          │
+│  ▸ Admin Center      ││             Steps Validate host resources +1                                                 │
+│  ▸ Files             ││ERRORS ───────────────────────────────────────────────────────────────────────────────────────│
+│  ▸ Objects           ││              Code kNoHostResources                                                           │
+│  ▸ Contexts          ││           Message No host in cluster harbor-prod can satisfy 64 GiB of memory with harbor-n2 │
+│  ▸ Settings          ││          Severity ERROR                                                                      │
+│  ─── by namespace ───││RESULT ───────────────────────────────────────────────────────────────────────────────────────│
+│  ▸ aiops             ││               Key attempts                                Value 3                            │
+│  ▸ clustermgmt       ││ALERTS 09:41–10:01 UTC ───────────────────────────────────────────────────────────────────────│
+│  ▸ dataprotection    ││           WARNING Memory usage on host harbor-n1 is at 93% · 8m                              │
+│  ▸ iam               ││JOURNAL ──────────────────────────────────────────────────────────────────────────────────────│
+│  ▸ licensing         ││           Started not started from here                                                      │
+╰───────────────── ↓12 ╯└──────────────────────────────────────────────────────────────────────────────────────────────┘
+ j/k:scroll  g/G:top/bottom  a:actions  w:watch  Y:yaml  J:json  esc:back
+[meter]          ● live

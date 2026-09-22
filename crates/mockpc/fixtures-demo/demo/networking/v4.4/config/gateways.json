@@ -1,0 +1,160 @@
+[
+  {
+    "$objectType": "networking.v4.config.Gateway",
+    "extId": "20000000-0a01-4000-8000-000000000001",
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "0e000000-0a01-4000-8000-000000000001",
+      "ownerUserName": "admin",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000",
+      "projectName": "default"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "gw-prod-vpn",
+    "description": "VPN and VTEP gateway of prod-vpc",
+    "vpcReference": "1c000000-0a01-4000-8000-000000000001",
+    "installedSoftwareVersion": "6.1.2",
+    "supportedSoftwareVersion": "6.1.2",
+    "deployment": {
+      "$objectType": "networking.v4.config.GatewayDeployment",
+      "clusterReference": "01000000-0a01-4000-8000-000000000001",
+      "interfaces": [
+        {
+          "$objectType": "networking.v4.config.GatewayInterface",
+          "subnetReference": "08000000-0a01-4000-8000-000000000001",
+          "ipAddress": {
+            "$objectType": "common.v1.config.IPAddress",
+            "ipv4": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "203.0.113.70",
+              "prefixLength": 32
+            }
+          },
+          "defaultGatewayAddress": {
+            "$objectType": "common.v1.config.IPAddress",
+            "ipv4": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "203.0.113.1",
+              "prefixLength": 32
+            }
+          },
+          "macAddress": "00:00:5e:00:53:b1",
+          "mtu": 1500
+        }
+      ],
+      "shouldSynchronizeSystemNtpServers": true,
+      "shouldSynchronizeSystemDnsServers": true
+    },
+    "gatewayDeviceVendor": "NUTANIX",
+    "services": {
+      "$objectType": "networking.v4.config.LocalNetworkServices",
+      "serviceAddress": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "203.0.113.70",
+          "prefixLength": 32
+        }
+      },
+      "localVtepService": {
+        "$objectType": "networking.v4.config.LocalVtepService",
+        "vxlanPort": 4789
+      },
+      "localBgpService": {
+        "$objectType": "networking.v4.config.LocalBgpService",
+        "vpcReference": "1c000000-0a01-4000-8000-000000000001",
+        "asn": 65010,
+        "isBgpAddPathEnabled": false
+      }
+    },
+    "highAvailabilityGroup": {
+      "$objectType": "networking.v4.config.HighAvailabilityGroup",
+      "isHaEnabled": false
+    },
+    "isActive": true,
+    "status": {
+      "$objectType": "networking.v4.config.Status",
+      "message": "gateway VM is running",
+      "state": "UP"
+    }
+  },
+  {
+    "$objectType": "networking.v4.config.Gateway",
+    "extId": "20000000-0a01-4000-8000-000000000002",
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "0e000000-0a01-4000-8000-000000000001",
+      "ownerUserName": "admin",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000",
+      "projectName": "default"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "gw-dev-vpn",
+    "description": "VPN gateway of dev-vpc, powered off since the partner link was dropped",
+    "vpcReference": "1c000000-0a01-4000-8000-000000000002",
+    "installedSoftwareVersion": "6.0.4",
+    "supportedSoftwareVersion": "6.1.2",
+    "deployment": {
+      "$objectType": "networking.v4.config.GatewayDeployment",
+      "clusterReference": "01000000-0a01-4000-8000-000000000001",
+      "interfaces": [
+        {
+          "$objectType": "networking.v4.config.GatewayInterface",
+          "subnetReference": "08000000-0a01-4000-8000-000000000003",
+          "ipAddress": {
+            "$objectType": "common.v1.config.IPAddress",
+            "ipv4": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "198.51.100.70",
+              "prefixLength": 32
+            }
+          },
+          "defaultGatewayAddress": {
+            "$objectType": "common.v1.config.IPAddress",
+            "ipv4": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "198.51.100.1",
+              "prefixLength": 32
+            }
+          },
+          "macAddress": "00:00:5e:00:53:b2",
+          "mtu": 1500
+        }
+      ],
+      "shouldSynchronizeSystemNtpServers": true,
+      "shouldSynchronizeSystemDnsServers": true
+    },
+    "gatewayDeviceVendor": "NUTANIX",
+    "services": {
+      "$objectType": "networking.v4.config.LocalNetworkServices",
+      "serviceAddress": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "198.51.100.70",
+          "prefixLength": 32
+        }
+      },
+      "localVtepService": {
+        "$objectType": "networking.v4.config.LocalVtepService",
+        "vxlanPort": 4789
+      },
+      "localBgpService": {
+        "$objectType": "networking.v4.config.LocalBgpService",
+        "vpcReference": "1c000000-0a01-4000-8000-000000000002",
+        "asn": 65020,
+        "isBgpAddPathEnabled": false
+      }
+    },
+    "highAvailabilityGroup": {
+      "$objectType": "networking.v4.config.HighAvailabilityGroup",
+      "isHaEnabled": false
+    },
+    "isActive": false,
+    "status": {
+      "$objectType": "networking.v4.config.Status",
+      "message": "gateway VM is powered off",
+      "state": "DOWN"
+    }
+  }
+]

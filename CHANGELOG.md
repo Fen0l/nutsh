@@ -9,6 +9,18 @@ Sections: ✨ new · 🐛 fixed · 🔒 security · ⚡ performance · 🎨 look
 
 ## Unreleased
 
+### ✨ nutsh demo
+
+- `nutsh demo` opens the ordinary screens on a built-in Prism Central: an invented estate,
+  every page populated, no config file and no credential needed, and nothing of yours written.
+  `nutsh demo vm`, `--snapshot`, `--readonly` work as they do on a real one; the Contexts
+  screen offers `demo` and `demo-edge`, the same site under a cluster pin with guardrails of
+  its own. The empty Contexts screen now suggests it; two built-in Prism Centrals, `--join`
+  for both in one table, `--site demo-dr` for the second one and its operator account. The
+  estate is fuller than a real v4 API: kinds the console reads through v3 `groups` (recovery
+  plans among them) have rows in the demo and none on a real Prism Central; the reference
+  lists them.
+
 ## 0.1.0 - 2026-09-19
 
 **The first release meant for other people.** A few weeks of daily use on my own Prism Central,

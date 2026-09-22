@@ -1,0 +1,62 @@
+[
+  {
+    "$objectType": "vmm.v4.ahv.config.VmProfile",
+    "extId": "28000000-0a01-4000-8000-000000000001",
+    "name": "small-web",
+    "description": "Two cores and 8 GiB with one offload NIC on sriov-25g",
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "sharedWithProjects": [],
+    "vmConfiguration": {
+      "$objectType": "vmm.v4.ahv.config.VmProfileVmConfiguration",
+      "memorySizeBytes": 8589934592,
+      "numCores": 2,
+      "nics": [
+        {
+          "$objectType": "vmm.v4.ahv.config.VmProfileNic",
+          "backingInfo": {
+            "$objectType": "vmm.v4.ahv.config.VmProfileDpOffloadNicBackingInfo",
+            "nicProfileReference": {
+              "$objectType": "vmm.v4.ahv.config.NicProfileReference",
+              "extId": "26000000-0a01-4000-8000-000000000001"
+            }
+          }
+        }
+      ]
+    },
+    "updateTime": "2026-06-03T09:00:00Z",
+    "updatedBy": {
+      "$objectType": "vmm.v4.ahv.config.UserReference",
+      "extId": "0e000000-0a01-4000-8000-000000000002"
+    }
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.VmProfile",
+    "extId": "28000000-0a01-4000-8000-000000000002",
+    "name": "large-db",
+    "description": "Eight cores and 64 GiB with one offload NIC on dpdk-100g",
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "sharedWithProjects": [],
+    "vmConfiguration": {
+      "$objectType": "vmm.v4.ahv.config.VmProfileVmConfiguration",
+      "memorySizeBytes": 68719476736,
+      "numCores": 8,
+      "nics": [
+        {
+          "$objectType": "vmm.v4.ahv.config.VmProfileNic",
+          "backingInfo": {
+            "$objectType": "vmm.v4.ahv.config.VmProfileDpOffloadNicBackingInfo",
+            "nicProfileReference": {
+              "$objectType": "vmm.v4.ahv.config.NicProfileReference",
+              "extId": "26000000-0a01-4000-8000-000000000002"
+            }
+          }
+        }
+      ]
+    },
+    "updateTime": "2026-08-12T15:30:00Z",
+    "updatedBy": {
+      "$objectType": "vmm.v4.ahv.config.UserReference",
+      "extId": "0e000000-0a01-4000-8000-000000000001"
+    }
+  }
+]

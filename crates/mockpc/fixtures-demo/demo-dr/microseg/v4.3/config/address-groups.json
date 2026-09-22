@@ -1,0 +1,22 @@
+[
+  {
+    "$objectType": "microseg.v4.config.AddressGroup",
+    "extId": "add90000-0b02-4000-8000-000000000001",
+    "name": "harbor-mgmt-range",
+    "description": "The harbor management network",
+    "ipv4Addresses": [
+      {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "203.0.113.0",
+        "prefixLength": 24
+      }
+    ],
+    "ipRanges": [],
+    "policyReferences": [],
+    "createdBy": "admin",
+    "creationTime": "2026-02-12T09:30:00Z",
+    "lastUpdateTime": "2026-02-12T09:30:00Z",
+    "isSharedWithAllProjects": true,
+    "projectExtId": "00000000-0000-0000-0000-000000000000"
+  }
+]

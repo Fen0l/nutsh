@@ -1,7 +1,7 @@
 use std::time::Duration;
 
-use nutsh_mockpc::{Gate, MockPc};
-use serde_json::Value;
+use nutsh_mockpc::{Gate, MockPc, Store};
+use serde_json::{Value, json};
 
 fn url(pc: &MockPc, path_and_query: &str) -> String {
     format!("http://{}:{}/api{}", pc.host(), pc.port(), path_and_query)
@@ -383,6 +383,38 @@ async fn failing_namespaces_and_missing_paths() {
             .await
             .status(),
         200
+    );
+}
+
+/// `missing_path` takes the path the client sends - at the version the namespace is pinned
+/// to - and is consulted before `serve_versions` maps that version onto the fixtures. The
+/// demo's second site pins `networking` at v4.0 and 404s the two v4.1-only kinds by that
+/// spelling; keyed by the mapped path instead, the same string would answer 200-empty, because
+/// a catalog-shaped path without a fixture is an empty list (`handler::get`'s last arm).
+#[tokio::test]
+async fn a_missing_path_is_keyed_by_the_clients_path_under_a_version_pin() {
+    let pc = MockPc::builder()
+        .serve_versions("networking", &["v4.0"])
+        .missing_path("/networking/v4.0/config/nic-profiles")
+        .start()
+        .await;
+    assert_eq!(
+        get(&pc, "/networking/v4.0/config/nic-profiles", "secret")
+            .await
+            .status(),
+        404
+    );
+    // The neighbouring kind at the same pin is the catalog-shaped empty list.
+    let r = get(&pc, "/networking/v4.0/config/subnets", "secret").await;
+    assert_eq!(r.status(), 200);
+    let v: Value = r.json().await.unwrap();
+    assert_eq!(v["metadata"]["totalAvailableResults"], 0);
+    // And the version the fixtures carry is refused, which is what a pin means.
+    assert_eq!(
+        get(&pc, "/networking/v4.4/config/nic-profiles", "secret")
+            .await
+            .status(),
+        404
     );
 }
 
@@ -891,4 +923,522 @@ async fn mutate_after_list_lands_behind_the_answer_that_completes_its_countdown(
     assert_eq!(name(&after), "renamed-01", "the VMs' own answer fires it");
     let last: Value = get(&pc, VMS, "secret").await.json().await.unwrap();
     assert_eq!(name(&last), "renamed-again");
+}
+
+/// A store the caller built is served as it is: nothing is read from disk, and the tasks path
+/// falls back to the catalog's own version when the store has no prism fixtures.
+#[tokio::test]
+async fn the_builder_serves_an_in_memory_store() {
+    let mut store = Store::default();
+    store.insert(
+        VMS,
+        vec![
+            json!({"extId": "a", "name": "vm-a", "powerState": "ON"}),
+            json!({"extId": "b", "name": "vm-b", "powerState": "OFF"}),
+        ],
+    );
+    let pc = MockPc::builder().store(store).start().await;
+    let r = get(&pc, VMS, "secret").await;
+    assert_eq!(r.status(), 200);
+    let v: Value = r.json().await.unwrap();
+    assert_eq!(v["metadata"]["totalAvailableResults"], 2);
+    assert_eq!(v["data"][1]["name"], "vm-b");
+    // Not the bundled tree: a list only the fixtures have is empty here.
+    let v: Value = get(&pc, "/clustermgmt/v4.3/config/clusters", "secret")
+        .await
+        .json()
+        .await
+        .unwrap();
+    assert_eq!(v["metadata"]["totalAvailableResults"], 0);
+    // A mutation still lands a task, and it walks.
+    let r = act(
+        &pc,
+        "vmm.ahv.config.Vm",
+        "power-off",
+        &format!("{VMS}/a/$actions/power-off"),
+        None,
+    )
+    .await;
+    assert_eq!(r.status(), 202);
+    let id = task_id(r).await;
+    assert_eq!(task(&pc, &id).await["data"]["status"], "QUEUED");
+}
+
+/// `try_start` is `start` with the failure handed back: a fixture tree that does not parse is
+/// an `Err` naming the file, not a panic. (A bind of `127.0.0.1:0` cannot be made to fail
+/// deterministically, so the fixture error is the one that stands in for every early exit.)
+#[tokio::test]
+async fn try_start_reports_an_unreadable_fixture_tree() {
+    let dir = std::env::temp_dir().join(format!("nutsh-mockpc-bad-{}", std::process::id()));
+    let list = dir.join("vmm/v4.3/ahv/config");
+    std::fs::create_dir_all(&list).unwrap();
+    std::fs::write(list.join("vms.json"), "{").unwrap();
+    let result = MockPc::builder().fixtures(dir.clone()).try_start().await;
+    let _ = std::fs::remove_dir_all(&dir);
+    let err = result
+        .err()
+        .expect("a fixture that does not parse is an error, not a panic");
+    assert!(err.to_string().contains("vms.json"), "{err}");
+}
+
+/// A list GET with a `$filter`, sent the way the client sends one: as a query parameter that
+/// reqwest percent-encodes and the mock decodes.
+async fn filtered(pc: &MockPc, path: &str, filter: &str) -> reqwest::Response {
+    reqwest::Client::new()
+        .get(url(pc, path))
+        .query(&[("$filter", filter)])
+        .basic_auth("admin", Some("secret"))
+        .send()
+        .await
+        .unwrap()
+}
+
+const ALERTS: &str = "/monitoring/v4.3/serviceability/alerts";
+const TASKS: &str = "/prism/v4.4/config/tasks";
+const LAB_CLUSTER: &str = "0006158a-2f0d-4d5a-8e2d-000000000010";
+
+#[tokio::test]
+async fn a_filter_narrows_the_list_when_honoured() {
+    const OFF: &str = "powerState eq Vmm.Ahv.Config.PowerState'OFF'";
+    let ignoring = MockPc::builder().start().await;
+    let v: Value = filtered(&ignoring, VMS, OFF).await.json().await.unwrap();
+    assert_eq!(
+        v["metadata"]["totalAvailableResults"], 3,
+        "the default mock ignores $filter, as every existing test assumes"
+    );
+
+    let pc = MockPc::builder().honours_filter().start().await;
+    let v: Value = filtered(&pc, VMS, OFF).await.json().await.unwrap();
+    assert_eq!(
+        v["metadata"]["totalAvailableResults"], 1,
+        "the total is the filtered count, which is what a header counter reads"
+    );
+    assert_eq!(v["data"].as_array().unwrap().len(), 1);
+    assert_eq!(v["data"][0]["name"], "web-02");
+
+    // Paging counts against the narrowed list: page 1 of a one-row list is empty.
+    let r = reqwest::Client::new()
+        .get(url(&pc, VMS))
+        .query(&[("$filter", OFF), ("$page", "1"), ("$limit", "1")])
+        .basic_auth("admin", Some("secret"))
+        .send()
+        .await
+        .unwrap();
+    let v: Value = r.json().await.unwrap();
+    assert_eq!(v["data"].as_array().unwrap().len(), 0);
+    assert_eq!(v["metadata"]["totalAvailableResults"], 1);
+}
+
+/// Every `$filter` the program sends, spelled as the source spells it, with the count the
+/// bundled fixtures answer. A spelling added to `pages.toml`, `stats.rs`, `evidence.rs` or
+/// `search.rs` without a row here is the alarm the demo would raise as a pane error.
+#[tokio::test]
+async fn every_filter_the_program_sends_parses() {
+    let pc = MockPc::builder().honours_filter().start().await;
+    let scoped = |f: &str, field: &str| format!("{f} and {field} eq '{LAB_CLUSTER}'");
+    let table: Vec<(&str, String, u64)> = vec![
+        // pages.toml:143, :474
+        (ALERTS, "isResolved eq false".into(), 2),
+        // pages.toml:158, stats.rs:117
+        (TASKS, "status eq Prism.Config.TaskStatus'RUNNING'".into(), 1),
+        // pages.toml:203
+        (
+            ALERTS,
+            "isResolved eq false and (severity eq Monitoring.Common.Severity'CRITICAL' or severity eq Monitoring.Common.Severity'WARNING')".into(),
+            2,
+        ),
+        // pages.toml:218
+        (TASKS, "status eq Prism.Config.TaskStatus'FAILED'".into(), 1),
+        // pages.toml:234
+        (VMS, "powerState eq Vmm.Ahv.Config.PowerState'OFF'".into(), 1),
+        // stats.rs:95
+        (VMS, "powerState eq Vmm.Ahv.Config.PowerState'ON'".into(), 2),
+        // stats.rs:101, :107
+        (
+            ALERTS,
+            "severity eq Monitoring.Common.Severity'CRITICAL' and isResolved eq false".into(),
+            1,
+        ),
+        (
+            ALERTS,
+            "severity eq Monitoring.Common.Severity'WARNING' and isResolved eq false".into(),
+            1,
+        ),
+        // stats.rs:245-256: a pinned cluster scopes the counter on `cluster/extId` (VMs) or
+        // `clusterUUID` (alerts).
+        (
+            VMS,
+            scoped("powerState eq Vmm.Ahv.Config.PowerState'ON'", "cluster/extId"),
+            2,
+        ),
+        (
+            ALERTS,
+            scoped(
+                "severity eq Monitoring.Common.Severity'CRITICAL' and isResolved eq false",
+                "clusterUUID",
+            ),
+            1,
+        ),
+        // evidence.rs:30-36: unquoted instants either side of a failed task's start. The
+        // WARNING alert (09:50:46) is inside this window, the CRITICAL one (09:40:00) is not.
+        (
+            ALERTS,
+            "creationTime ge 2026-09-05T09:49:00Z and creationTime le 2026-09-05T10:09:00Z".into(),
+            1,
+        ),
+        // search.rs:183 and :238-240 (a quote doubled), :187
+        (VMS, "startswith(name,'web')".into(), 2),
+        (VMS, "startswith(name,'o''brien')".into(), 0),
+        (VMS, format!("extId eq '{WEB01}'"), 1),
+    ];
+    for (path, filter, expected) in table {
+        let r = filtered(&pc, path, &filter).await;
+        assert_eq!(r.status(), 200, "{filter}");
+        let v: Value = r.json().await.unwrap();
+        assert_eq!(v["metadata"]["totalAvailableResults"], expected, "{filter}");
+    }
+}
+
+#[tokio::test]
+async fn an_unparseable_filter_is_400() {
+    let pc = MockPc::builder().honours_filter().start().await;
+    for bad in [
+        "status eq RUNNING",
+        "powerState eq",
+        "name contains 'web'",
+        "(isResolved eq false",
+        "isResolved eq false and",
+    ] {
+        let r = filtered(&pc, VMS, bad).await;
+        assert_eq!(r.status(), 400, "{bad}");
+        let v: Value = r.json().await.unwrap();
+        assert_eq!(v["data"]["$objectType"], "prism.v4.error.ErrorResponse");
+        let message = v["data"]["error"][0]["message"].as_str().unwrap();
+        assert!(message.starts_with("$filter: "), "{bad}: {message}");
+    }
+    // The same string is fine on the mock that ignores the parameter.
+    let ignoring = MockPc::builder().start().await;
+    assert_eq!(
+        filtered(&ignoring, VMS, "status eq RUNNING").await.status(),
+        200
+    );
+}
+
+/// With `live_clock` a task is stamped with the wall clock instead of the constants: created
+/// between two readings taken around the request, and every later step no earlier than the
+/// one before. Whole seconds and `Z` on both sides, so the strings order as the instants do.
+#[tokio::test]
+async fn a_live_clock_task_is_stamped_now() {
+    let fixed = MockPc::builder().start().await;
+    let id = task_id(
+        act(
+            &fixed,
+            "vmm.ahv.config.Vm",
+            "power-off",
+            &format!("{VMS}/{WEB01}/$actions/power-off"),
+            None,
+        )
+        .await,
+    )
+    .await;
+    assert_eq!(
+        task(&fixed, &id).await["data"]["createdTime"],
+        "2026-09-05T09:59:00Z",
+        "the default is the constant every snapshot was drawn with"
+    );
+
+    let pc = MockPc::builder().live_clock().start().await;
+    let before = nutsh_mockpc::rfc3339(std::time::SystemTime::now());
+    let id = task_id(
+        act(
+            &pc,
+            "vmm.ahv.config.Vm",
+            "power-off",
+            &format!("{VMS}/{WEB01}/$actions/power-off"),
+            None,
+        )
+        .await,
+    )
+    .await;
+    let after = nutsh_mockpc::rfc3339(std::time::SystemTime::now());
+    let queued = task(&pc, &id).await;
+    let created = queued["data"]["createdTime"].as_str().unwrap().to_string();
+    assert!(
+        before.as_str() <= created.as_str() && created.as_str() <= after.as_str(),
+        "{before} <= {created} <= {after}"
+    );
+    assert_eq!(created.len(), 20, "whole seconds, Z: {created}");
+    let running = task(&pc, &id).await;
+    assert!(running["data"]["startedTime"].as_str().unwrap() >= created.as_str());
+    task(&pc, &id).await;
+    let done = task(&pc, &id).await;
+    assert_eq!(done["data"]["status"], "SUCCEEDED");
+    assert!(done["data"]["completedTime"].as_str().unwrap() >= created.as_str());
+    assert_ne!(done["data"]["completedTime"], "2026-09-05T10:00:00Z");
+}
+
+/// Walk a mock-created task to its terminal state and return it: the default walk is four
+/// steps, so five reads is one more than enough, and a task that never gets there is the
+/// failure.
+async fn finish(pc: &MockPc, id: &str) -> Value {
+    for _ in 0..5 {
+        let t = task(pc, id).await;
+        if matches!(
+            t["data"]["status"].as_str(),
+            Some("SUCCEEDED" | "FAILED" | "CANCELED")
+        ) {
+            return t;
+        }
+    }
+    panic!("task {id} never reached a terminal state");
+}
+
+const ALERT01: &str = "9ead870c-d76f-4475-8a13-000000000001";
+
+/// Three curated actions share the `manage-alert` endpoint, told apart by the constant body
+/// each sends: the task is named by the body that arrived, not by whichever action the catalog
+/// lists first.
+#[tokio::test]
+async fn a_shared_endpoint_names_the_task_by_its_body() {
+    let pc = MockPc::builder().start().await;
+    let action = format!("{ALERTS}/{ALERT01}/$actions/manage-alert");
+    let ack = task_id(
+        act(
+            &pc,
+            "monitoring.serviceability.Alert",
+            "acknowledge",
+            &action,
+            Some(json!({"actionType": "ACKNOWLEDGE"})),
+        )
+        .await,
+    )
+    .await;
+    assert_eq!(task(&pc, &ack).await["data"]["operation"], "acknowledge");
+    let resolve = task_id(
+        act(
+            &pc,
+            "monitoring.serviceability.Alert",
+            "resolve",
+            &action,
+            Some(json!({"actionType": "RESOLVE"})),
+        )
+        .await,
+    )
+    .await;
+    let t = task(&pc, &resolve).await;
+    assert_eq!(t["data"]["operation"], "resolve");
+    assert_eq!(
+        t["data"]["operationDescription"],
+        "resolve on Disk space usage high for /home on Controller VM 203.0.113.11"
+    );
+}
+
+#[tokio::test]
+async fn resolve_marks_the_alert_resolved() {
+    let pc = MockPc::builder().honours_filter().start().await;
+    let alert = format!("{ALERTS}/{ALERT01}");
+    let action = format!("{alert}/$actions/manage-alert");
+    let ack = act(
+        &pc,
+        "monitoring.serviceability.Alert",
+        "acknowledge",
+        &action,
+        Some(json!({"actionType": "ACKNOWLEDGE"})),
+    )
+    .await;
+    assert_eq!(ack.status(), 202);
+    finish(&pc, &task_id(ack).await).await;
+    let a: Value = get(&pc, &alert, "secret").await.json().await.unwrap();
+    assert_eq!(a["data"]["isAcknowledged"], true);
+    assert_eq!(a["data"]["status"], "ACKNOWLEDGED");
+    assert_eq!(a["data"]["acknowledgedTime"], "2026-09-05T10:00:00Z");
+    assert_eq!(a["data"]["acknowledgedByUsername"], "admin");
+    assert_eq!(
+        a["data"]["isResolved"], false,
+        "acknowledged is not resolved"
+    );
+
+    let resolve = act(
+        &pc,
+        "monitoring.serviceability.Alert",
+        "resolve",
+        &action,
+        Some(json!({"actionType": "RESOLVE"})),
+    )
+    .await;
+    assert_eq!(resolve.status(), 202);
+    let id = task_id(resolve).await;
+    // Nothing moves before the terminal step.
+    for _ in 0..3 {
+        assert_ne!(task(&pc, &id).await["data"]["status"], "SUCCEEDED");
+        let a: Value = get(&pc, &alert, "secret").await.json().await.unwrap();
+        assert_eq!(a["data"]["isResolved"], false);
+    }
+    assert_eq!(task(&pc, &id).await["data"]["status"], "SUCCEEDED");
+    let a: Value = get(&pc, &alert, "secret").await.json().await.unwrap();
+    assert_eq!(a["data"]["isResolved"], true);
+    assert_eq!(a["data"]["status"], "RESOLVED");
+    assert_eq!(a["data"]["resolvedTime"], "2026-09-05T10:00:00Z");
+    assert_eq!(a["data"]["resolvedByUsername"], "admin");
+    // And the Dashboard's filter no longer counts it.
+    let v: Value = filtered(&pc, ALERTS, "isResolved eq false")
+        .await
+        .json()
+        .await
+        .unwrap();
+    assert_eq!(v["metadata"]["totalAvailableResults"], 1);
+}
+
+#[tokio::test]
+async fn enter_maintenance_moves_the_host() {
+    let pc = MockPc::builder().start().await;
+    let host = "7b2f2f70-0f6a-4b58-9f9b-000000000020";
+    let scoped = format!("/clustermgmt/v4.3/config/clusters/{LAB_CLUSTER}/hosts/{host}");
+    let top = format!("/clustermgmt/v4.3/config/hosts/{host}");
+    let operations = format!("/clustermgmt/v4.3/operations/clusters/{LAB_CLUSTER}/hosts/{host}");
+    let state = |v: Value| v["data"]["maintenanceState"].as_str().unwrap().to_string();
+
+    let r = act(
+        &pc,
+        "clustermgmt.config.Host~hosts",
+        "enter-host-maintenance",
+        &format!("{operations}/$actions/enter-host-maintenance"),
+        Some(json!({"shouldRollbackOnFailure": true})),
+    )
+    .await;
+    assert_eq!(r.status(), 202);
+    finish(&pc, &task_id(r).await).await;
+    let in_scoped: Value = get(&pc, &scoped, "secret").await.json().await.unwrap();
+    assert_eq!(state(in_scoped), "IN_MAINTENANCE");
+    let in_top: Value = get(&pc, &top, "secret").await.json().await.unwrap();
+    assert_eq!(
+        state(in_top),
+        "IN_MAINTENANCE",
+        "the Hosts page reads the top-level list"
+    );
+
+    let r = act(
+        &pc,
+        "clustermgmt.config.Host~hosts",
+        "exit-host-maintenance",
+        &format!("{operations}/$actions/exit-host-maintenance"),
+        Some(json!({})),
+    )
+    .await;
+    assert_eq!(r.status(), 202);
+    finish(&pc, &task_id(r).await).await;
+    let out: Value = get(&pc, &top, "secret").await.json().await.unwrap();
+    assert_eq!(state(out), "NORMAL");
+}
+
+#[tokio::test]
+async fn migrate_to_host_moves_the_vm() {
+    let pc = MockPc::builder().start().await;
+    // The mock does not check that the host exists: it is not a scheduler, and the picker
+    // that fills this body only offers hosts the list has.
+    let target = "7b2f2f70-0f6a-4b58-9f9b-000000000021";
+    let r = act(
+        &pc,
+        "vmm.ahv.config.Vm",
+        "migrate-to-host",
+        &format!("{VMS}/{WEB01}/$actions/migrate-to-host"),
+        Some(json!({"host": {"extId": target}})),
+    )
+    .await;
+    assert_eq!(r.status(), 202);
+    finish(&pc, &task_id(r).await).await;
+    let vm: Value = get(&pc, &format!("{VMS}/{WEB01}"), "secret")
+        .await
+        .json()
+        .await
+        .unwrap();
+    assert_eq!(vm["data"]["host"]["extId"], target);
+    assert_eq!(
+        vm["data"]["powerState"], "ON",
+        "a migration is not a power action"
+    );
+}
+
+#[tokio::test]
+async fn clone_adds_a_vm() {
+    let pc = MockPc::builder().start().await;
+    let r = act(
+        &pc,
+        "vmm.ahv.config.Vm",
+        "clone",
+        &format!("{VMS}/{WEB01}/$actions/clone"),
+        Some(json!({"name": "web-03"})),
+    )
+    .await;
+    assert_eq!(r.status(), 202);
+    let done = finish(&pc, &task_id(r).await).await;
+    assert_eq!(done["data"]["entitiesAffected"][0]["name"], "web-01");
+    let list: Value = get(&pc, VMS, "secret").await.json().await.unwrap();
+    assert_eq!(list["metadata"]["totalAvailableResults"], 4);
+    let rows = list["data"].as_array().unwrap();
+    let clone = rows
+        .iter()
+        .find(|r| r["name"] == "web-03")
+        .expect("the clone");
+    assert_ne!(clone["extId"], WEB01);
+    assert_eq!(clone["powerState"], "OFF", "a clone is created off");
+    assert!(clone.get("host").is_none(), "an OFF VM has no host");
+    assert_eq!(
+        clone["disks"].as_array().unwrap().len(),
+        rows[0]["disks"].as_array().unwrap().len(),
+        "the clone carries the original's disks"
+    );
+    assert_eq!(clone["updateTime"], "2026-09-05T10:00:00Z");
+    // The original is untouched.
+    let original: Value = get(&pc, &format!("{VMS}/{WEB01}"), "secret")
+        .await
+        .json()
+        .await
+        .unwrap();
+    assert_eq!(original["data"]["name"], "web-01");
+    assert_eq!(original["data"]["powerState"], "ON");
+}
+
+#[tokio::test]
+async fn a_recovery_point_lands_in_the_list() {
+    let pc = MockPc::builder().start().await;
+    const RPS: &str = "/dataprotection/v4.4/config/recovery-points";
+    let before: Value = get(&pc, RPS, "secret").await.json().await.unwrap();
+    assert_eq!(before["metadata"]["totalAvailableResults"], 5);
+    // The VM's `snapshot` action posts to the recovery-points list (generated.rs:9571) with
+    // the body its form builds: name, the VM under vmRecoveryPoints[0], an expiry.
+    let r = act(
+        &pc,
+        "vmm.ahv.config.Vm",
+        "snapshot",
+        RPS,
+        Some(json!({
+            "name": "web-01-before-upgrade",
+            "vmRecoveryPoints": [{"vmExtId": WEB01}],
+            "expirationTime": "2026-10-05T10:00:00Z"
+        })),
+    )
+    .await;
+    assert_eq!(r.status(), 202);
+    let done = finish(&pc, &task_id(r).await).await;
+    assert_eq!(
+        done["data"]["numberOfEntitiesAffected"], 0,
+        "a list-level create"
+    );
+    let after: Value = get(&pc, RPS, "secret").await.json().await.unwrap();
+    assert_eq!(after["metadata"]["totalAvailableResults"], 6);
+    let rp = after["data"].as_array().unwrap().last().unwrap();
+    assert_eq!(rp["name"], "web-01-before-upgrade");
+    assert_eq!(rp["status"], "COMPLETE");
+    assert_eq!(rp["recoveryPointType"], "CRASH_CONSISTENT");
+    assert_eq!(rp["creationTime"], "2026-09-05T10:00:00Z");
+    assert_eq!(rp["expirationTime"], "2026-10-05T10:00:00Z");
+    assert_eq!(rp["vmRecoveryPoints"][0]["vmExtId"], WEB01);
+    assert!(rp["extId"].as_str().is_some_and(|id| !id.is_empty()));
+    // And it is an entity: a GET by its extId answers.
+    let id = rp["extId"].as_str().unwrap();
+    assert_eq!(
+        get(&pc, &format!("{RPS}/{id}"), "secret").await.status(),
+        200
+    );
 }

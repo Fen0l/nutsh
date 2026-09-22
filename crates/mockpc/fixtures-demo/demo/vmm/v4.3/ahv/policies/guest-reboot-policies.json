@@ -1,0 +1,58 @@
+[
+  {
+    "$objectType": "vmm.v4.ahv.policies.GuestRebootPolicy",
+    "extId": "31000000-0a01-4000-8000-000000000001",
+    "name": "reboot-web-monthly",
+    "description": "Web tier reboots on the first Sunday of the month after patching",
+    "createTime": "2026-02-10T10:00:00Z",
+    "updateTime": "2026-02-10T10:00:00Z",
+    "createdBy": {
+      "$objectType": "vmm.v4.ahv.policies.UserReference",
+      "extId": "0e000000-0a01-4000-8000-000000000002"
+    },
+    "updatedBy": {
+      "$objectType": "vmm.v4.ahv.policies.UserReference",
+      "extId": "0e000000-0a01-4000-8000-000000000002"
+    },
+    "categories": [
+      {
+        "$objectType": "vmm.v4.ahv.policies.CategoryReference",
+        "extId": "07000000-0a01-4000-8000-000000000004"
+      }
+    ],
+    "rebootSchedule": {
+      "$objectType": "vmm.v4.ahv.policies.RebootScheduleLater",
+      "dayOfWeek": "SUNDAY",
+      "timeOfDay": "02:00"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000"
+  },
+  {
+    "$objectType": "vmm.v4.ahv.policies.GuestRebootPolicy",
+    "extId": "31000000-0a01-4000-8000-000000000002",
+    "name": "reboot-dev-weekly",
+    "description": "Development VMs reboot every Saturday night",
+    "createTime": "2026-03-05T11:00:00Z",
+    "updateTime": "2026-06-20T08:00:00Z",
+    "createdBy": {
+      "$objectType": "vmm.v4.ahv.policies.UserReference",
+      "extId": "0e000000-0a01-4000-8000-000000000002"
+    },
+    "updatedBy": {
+      "$objectType": "vmm.v4.ahv.policies.UserReference",
+      "extId": "0e000000-0a01-4000-8000-000000000002"
+    },
+    "categories": [
+      {
+        "$objectType": "vmm.v4.ahv.policies.CategoryReference",
+        "extId": "07000000-0a01-4000-8000-000000000002"
+      }
+    ],
+    "rebootSchedule": {
+      "$objectType": "vmm.v4.ahv.policies.RebootScheduleLater",
+      "dayOfWeek": "SATURDAY",
+      "timeOfDay": "23:00"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000"
+  }
+]

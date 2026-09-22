@@ -1,0 +1,84 @@
+[
+  {
+    "$objectType": "networking.v4.config.TrafficMirror",
+    "extId": "24000000-0a01-4000-8000-000000000001",
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "0e000000-0a01-4000-8000-000000000002",
+      "ownerUserName": "ops-lead",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000",
+      "projectName": "default"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "mirror-web-ingress",
+    "description": "Ingress of prd-web-01 copied to the capture port on harbor-n1",
+    "sourceList": [
+      {
+        "$objectType": "networking.v4.config.TrafficMirrorSourcePort",
+        "nicType": "VIRTUAL_NIC",
+        "nicUuid": "53000000-0a01-4000-8000-000000000101",
+        "isUp": true,
+        "direction": "INGRESS"
+      }
+    ],
+    "destinationList": [
+      {
+        "$objectType": "networking.v4.config.TrafficMirrorPort",
+        "nicType": "HOST_NIC",
+        "nicUuid": "05000000-0a01-4000-8000-000000000002",
+        "isUp": true
+      }
+    ],
+    "isEnabled": true,
+    "clusterReferenceList": [
+      "01000000-0a01-4000-8000-000000000001"
+    ],
+    "hostReferenceList": [
+      "02000000-0a01-4000-8000-000000000001"
+    ],
+    "virtualSwitchReference": "1e000000-0a01-4000-8000-000000000001",
+    "state": "ACTIVE",
+    "stateMessage": "mirror session is active"
+  },
+  {
+    "$objectType": "networking.v4.config.TrafficMirror",
+    "extId": "24000000-0a01-4000-8000-000000000002",
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "0e000000-0a01-4000-8000-000000000002",
+      "ownerUserName": "ops-lead",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000",
+      "projectName": "default"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "mirror-db-debug",
+    "description": "Both directions of prd-db-01, kept for the next latency investigation",
+    "sourceList": [
+      {
+        "$objectType": "networking.v4.config.TrafficMirrorSourcePort",
+        "nicType": "VIRTUAL_NIC",
+        "nicUuid": "53000000-0a01-4000-8000-000000000301",
+        "isUp": true,
+        "direction": "BIDIRECTIONAL"
+      }
+    ],
+    "destinationList": [
+      {
+        "$objectType": "networking.v4.config.TrafficMirrorPort",
+        "nicType": "HOST_NIC",
+        "nicUuid": "05000000-0a01-4000-8000-000000000002",
+        "isUp": true
+      }
+    ],
+    "isEnabled": false,
+    "clusterReferenceList": [
+      "01000000-0a01-4000-8000-000000000001"
+    ],
+    "hostReferenceList": [
+      "02000000-0a01-4000-8000-000000000001"
+    ],
+    "virtualSwitchReference": "1e000000-0a01-4000-8000-000000000001",
+    "state": "DISABLED",
+    "stateMessage": "mirror session is disabled"
+  }
+]

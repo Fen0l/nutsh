@@ -73,11 +73,14 @@ test failed and the failure has not been looked at.
 ## Fixtures and the mock
 
 `crates/mockpc` is a Prism Central built from the published specs, and every test runs against
-it. Two kinds of fixture feed it:
+it. Three kinds of fixture feed it:
 
 - `crates/mockpc/fixtures/` is curated by hand, to show one shape clearly.
 - `crates/mockpc/fixtures-lab*/` are recordings from real Prism Centrals, redacted on the way
   in by `cargo xtask record --host PC --username U --kinds vm,cluster`.
+- `crates/mockpc/fixtures-demo/` is curated too, one directory per built-in site, and embedded
+  in the binary: `crates/mockpc/src/demo.rs` lists every file, a test holds the list equal to
+  the tree on disk, and `fixtures-demo/README.md` has the rules its names and addresses follow.
 
 Tests pick whichever shows the shape under test. Use a curated fixture when the point is the
 rule; use a recording when the point is what a real API actually sends, which is often not what

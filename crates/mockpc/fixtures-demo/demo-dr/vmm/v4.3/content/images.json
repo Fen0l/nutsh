@@ -1,0 +1,41 @@
+[
+  {
+    "$objectType": "vmm.v4.content.Image",
+    "extId": "1ba9e000-0b02-4000-8000-000000000001",
+    "name": "ubuntu-24.04-cloud",
+    "description": "Ubuntu 24.04 cloud image, the base of the site's utility VMs",
+    "type": "DISK_IMAGE",
+    "sizeBytes": 629145600,
+    "ownerName": "admin",
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "checksum": {
+      "$objectType": "vmm.v4.content.Sha256Checksum",
+      "hexDigest": "0b02000000000000000000000000000000000000000000000000000000000001"
+    },
+    "contentRepositoryName": "ridge-images",
+    "clusterLocationExtIds": [
+      "c1000000-0b02-4000-8000-000000000001"
+    ],
+    "placementPolicyStatus": [
+      {
+        "$objectType": "vmm.v4.content.PlacementPolicyStatus",
+        "placementPolicyExtId": "91ac0000-0b02-4000-8000-000000000001",
+        "complianceStatus": "COMPLIANT",
+        "enforcementMode": "HARD",
+        "policyClusterExtIds": [
+          "c1000000-0b02-4000-8000-000000000001"
+        ],
+        "compliantClusterExtIds": [
+          "c1000000-0b02-4000-8000-000000000001"
+        ],
+        "enforcedClusterExtIds": []
+      }
+    ],
+    "categoryExtIds": [
+      "ca7e0000-0b02-4000-8000-000000000001"
+    ],
+    "isSharedWithAllProjects": true,
+    "createTime": "2026-03-01T08:00:00Z",
+    "lastUpdateTime": "2026-06-01T08:00:00Z"
+  }
+]

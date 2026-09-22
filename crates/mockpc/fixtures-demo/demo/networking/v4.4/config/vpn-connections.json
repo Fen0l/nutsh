@@ -1,0 +1,191 @@
+[
+  {
+    "$objectType": "networking.v4.config.VpnConnection",
+    "extId": "21000000-0a01-4000-8000-000000000001",
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "0e000000-0a01-4000-8000-000000000001",
+      "ownerUserName": "admin",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000",
+      "projectName": "default"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "vpn-to-ridge",
+    "description": "Site-to-site tunnel to pc-ridge for replication and the stretched VLANs",
+    "localGatewayReference": "20000000-0a01-4000-8000-000000000001",
+    "remoteGatewayReference": "20000000-0a01-4000-8000-000000000001",
+    "ipsecConfig": {
+      "$objectType": "networking.v4.config.IpsecConfig",
+      "localVtiIp": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "192.0.2.201",
+          "prefixLength": 30
+        }
+      },
+      "remoteVtiIp": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "192.0.2.202",
+          "prefixLength": 30
+        }
+      },
+      "localAuthenticationId": "gw-prod-vpn.example.com",
+      "remoteAuthenticationId": "gw-ridge-vpn.example.com",
+      "ikeLifetimeSecs": 28800,
+      "ipsecLifetimeSecs": 3600,
+      "espPfsDhGroupNumber": 14,
+      "ikeEncryptionAlgorithm": "AES256",
+      "ikeAuthenticationAlgorithm": "SHA256",
+      "ipsecEncryptionAlgorithm": "AES256GCM128",
+      "ipsecAuthenticationAlgorithm": "SHA256"
+    },
+    "dpdConfig": {
+      "$objectType": "networking.v4.config.DpdConfig",
+      "operation": "RESTART",
+      "intervalSecs": 30,
+      "timeoutSecs": 120
+    },
+    "qosConfig": {
+      "$objectType": "networking.v4.config.QosConfig",
+      "ingressLimitMbps": 200,
+      "egressLimitMbps": 200
+    },
+    "localGatewayRole": "INITIATOR",
+    "dynamicRoutePriority": 100,
+    "advertisedPrefixes": [
+      {
+        "$objectType": "networking.v4.config.IPSubnet",
+        "ipv4": {
+          "$objectType": "networking.v4.config.IPv4Subnet",
+          "ip": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "203.0.113.0",
+            "prefixLength": 32
+          },
+          "prefixLength": 25
+        }
+      },
+      {
+        "$objectType": "networking.v4.config.IPSubnet",
+        "ipv4": {
+          "$objectType": "networking.v4.config.IPv4Subnet",
+          "ip": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "203.0.113.128",
+            "prefixLength": 32
+          },
+          "prefixLength": 25
+        }
+      }
+    ],
+    "learnedPrefixes": [
+      {
+        "$objectType": "networking.v4.config.IPSubnet",
+        "ipv4": {
+          "$objectType": "networking.v4.config.IPv4Subnet",
+          "ip": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "192.0.2.0",
+            "prefixLength": 32
+          },
+          "prefixLength": 25
+        }
+      }
+    ],
+    "ipsecTunnelStatus": {
+      "$objectType": "networking.v4.config.Status",
+      "message": "IPsec tunnel is up",
+      "state": "UP"
+    },
+    "ebgpStatus": {
+      "$objectType": "networking.v4.config.Status",
+      "message": "eBGP session is established",
+      "state": "UP"
+    }
+  },
+  {
+    "$objectType": "networking.v4.config.VpnConnection",
+    "extId": "21000000-0a01-4000-8000-000000000002",
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "0e000000-0a01-4000-8000-000000000001",
+      "ownerUserName": "admin",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000",
+      "projectName": "default"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "vpn-to-partner",
+    "description": "Tunnel to the partner network, down since the partner rotated its endpoint",
+    "localGatewayReference": "20000000-0a01-4000-8000-000000000002",
+    "remoteGatewayReference": "20000000-0a01-4000-8000-000000000002",
+    "ipsecConfig": {
+      "$objectType": "networking.v4.config.IpsecConfig",
+      "localVtiIp": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "192.0.2.205",
+          "prefixLength": 30
+        }
+      },
+      "remoteVtiIp": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "192.0.2.206",
+          "prefixLength": 30
+        }
+      },
+      "localAuthenticationId": "gw-dev-vpn.example.com",
+      "remoteAuthenticationId": "partner-vpn.example.com",
+      "ikeLifetimeSecs": 28800,
+      "ipsecLifetimeSecs": 3600,
+      "espPfsDhGroupNumber": 14,
+      "ikeEncryptionAlgorithm": "AES256",
+      "ikeAuthenticationAlgorithm": "SHA256",
+      "ipsecEncryptionAlgorithm": "AES256GCM128",
+      "ipsecAuthenticationAlgorithm": "SHA256"
+    },
+    "dpdConfig": {
+      "$objectType": "networking.v4.config.DpdConfig",
+      "operation": "RESTART",
+      "intervalSecs": 30,
+      "timeoutSecs": 120
+    },
+    "qosConfig": {
+      "$objectType": "networking.v4.config.QosConfig",
+      "ingressLimitMbps": 200,
+      "egressLimitMbps": 200
+    },
+    "localGatewayRole": "ACCEPTOR",
+    "dynamicRoutePriority": 200,
+    "advertisedPrefixes": [
+      {
+        "$objectType": "networking.v4.config.IPSubnet",
+        "ipv4": {
+          "$objectType": "networking.v4.config.IPv4Subnet",
+          "ip": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "198.51.100.0",
+            "prefixLength": 32
+          },
+          "prefixLength": 25
+        }
+      }
+    ],
+    "learnedPrefixes": [],
+    "ipsecTunnelStatus": {
+      "$objectType": "networking.v4.config.Status",
+      "message": "IKE negotiation timed out",
+      "state": "DOWN"
+    },
+    "ebgpStatus": {
+      "$objectType": "networking.v4.config.Status",
+      "message": "eBGP session is idle",
+      "state": "DOWN"
+    }
+  }
+]

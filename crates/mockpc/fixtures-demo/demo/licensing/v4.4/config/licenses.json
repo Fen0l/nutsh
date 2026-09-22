@@ -1,0 +1,41 @@
+[
+  {
+    "$objectType": "licensing.v4.config.License",
+    "extId": "41000000-0a01-4000-8000-000000000001",
+    "name": "NCI-PRO-harbor",
+    "type": "NCI",
+    "category": "PRO",
+    "expiryDate": "2027-03-01",
+    "salesforceLicenseId": "LIC-0a01-0001",
+    "meter": "CORES",
+    "scope": "PC_PE",
+    "quantity": 96.0,
+    "isDeleted": false
+  },
+  {
+    "$objectType": "licensing.v4.config.License",
+    "extId": "41000000-0a01-4000-8000-000000000002",
+    "name": "NUS-PRO-harbor",
+    "type": "NUS",
+    "category": "PRO",
+    "expiryDate": "2027-03-01",
+    "salesforceLicenseId": "LIC-0a01-0002",
+    "meter": "TIB",
+    "scope": "PC_PE",
+    "quantity": 40.0,
+    "isDeleted": false
+  },
+  {
+    "$objectType": "licensing.v4.config.License",
+    "extId": "41000000-0a01-4000-8000-000000000003",
+    "name": "NCM-STARTER-edge",
+    "type": "NCM",
+    "category": "STARTER",
+    "expiryDate": "2026-10-15",
+    "salesforceLicenseId": "LIC-0a01-0003",
+    "meter": "CORES",
+    "scope": "PC_PE",
+    "quantity": 16.0,
+    "isDeleted": false
+  }
+]

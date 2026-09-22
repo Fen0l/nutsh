@@ -179,6 +179,23 @@ async fn snapshot_of_the_disaster_recovery_page() {
     ] {
         assert!(frame.contains(title), "{title}:\n{frame}");
     }
+    // The summary column's sampler is not a pane: it paces itself at 200 ms per VM and answers
+    // after the panes have. A frame printed before it answers says `Sampled VMs 0` about three
+    // VMs it never asked about, so `--snapshot` waits for its first cycle too.
+    assert_eq!(
+        summary_value(&frame, "Sampled VMs").as_deref(),
+        Some("3"),
+        "{frame}"
+    );
+}
+
+/// The value beside `label` in a page's summary column: the cell is `label`, padding, value,
+/// closed by the column's `│`.
+fn summary_value(frame: &str, label: &str) -> Option<String> {
+    let line = frame.lines().find(|l| l.contains(label))?;
+    let after = &line[line.find(label)? + label.len()..];
+    let cell = after.split('│').next()?;
+    Some(cell.trim().to_string())
 }
 
 /// A frame with no colour at all still lays out.
@@ -267,7 +284,7 @@ async fn snapshot_without_a_usable_target_shows_the_screen_or_says_why() {
         String::from_utf8_lossy(&out.stderr)
     );
     assert!(
-        stdout.contains("No contexts. Press a to add one"),
+        stdout.contains("No contexts. Press a to add one, run nutsh ctx add, or try nutsh demo."),
         "{stdout}"
     );
 

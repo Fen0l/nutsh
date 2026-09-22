@@ -1,0 +1,58 @@
+[
+  {
+    "$objectType": "opsmgmt.v4.config.Report",
+    "extId": "3b000000-0a01-4000-8000-000000000001",
+    "name": "weekly-capacity",
+    "description": "Capacity runway of harbor-prod and harbor-edge, one week",
+    "isPersistent": true,
+    "startTime": "2026-08-29T00:00:00Z",
+    "endTime": "2026-09-04T23:59:00Z",
+    "creationTime": "2026-09-05T01:00:00Z",
+    "timezone": "Europe/Luxembourg",
+    "ownerExtId": "0e000000-0a01-4000-8000-000000000002",
+    "recipientFormats": [
+      "PDF"
+    ],
+    "recipients": [
+      {
+        "$objectType": "opsmgmt.v4.config.Recipient",
+        "emailAddress": "ops-lead@example.invalid",
+        "recipientName": "ops-lead"
+      }
+    ],
+    "availableFormats": [
+      "PDF",
+      "CSV"
+    ]
+  },
+  {
+    "$objectType": "opsmgmt.v4.config.Report",
+    "extId": "3b000000-0a01-4000-8000-000000000002",
+    "name": "monthly-compliance",
+    "description": "Licence compliance and protection coverage, one month",
+    "isPersistent": false,
+    "startTime": "2026-08-01T00:00:00Z",
+    "endTime": "2026-08-31T23:59:00Z",
+    "creationTime": "2026-09-01T01:00:00Z",
+    "timezone": "Europe/Luxembourg",
+    "ownerExtId": "0e000000-0a01-4000-8000-000000000001",
+    "recipientFormats": [
+      "PDF"
+    ],
+    "recipients": [
+      {
+        "$objectType": "opsmgmt.v4.config.Recipient",
+        "emailAddress": "ops-lead@example.invalid",
+        "recipientName": "ops-lead"
+      },
+      {
+        "$objectType": "opsmgmt.v4.config.Recipient",
+        "emailAddress": "audit-ro@example.invalid",
+        "recipientName": "audit-ro"
+      }
+    ],
+    "availableFormats": [
+      "PDF"
+    ]
+  }
+]

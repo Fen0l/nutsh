@@ -1,0 +1,107 @@
+[
+  {
+    "$objectType": "dataprotection.v4.config.ProtectedResource",
+    "extId": "03000000-0a01-4000-8000-000000000001",
+    "entityType": "VM",
+    "sourceSite": {
+      "$objectType": "dataprotection.v4.config.DataProtectionSiteReference",
+      "domainManagerExtId": "d0000000-0a01-4000-8000-000000000001"
+    },
+    "replicationStates": [
+      {
+        "$objectType": "dataprotection.v4.config.ReplicationState",
+        "targetSite": {
+          "$objectType": "dataprotection.v4.config.DataProtectionSiteReference",
+          "domainManagerExtId": "d0000000-0b02-4000-8000-000000000001"
+        },
+        "replicationStatus": "IN_SYNC",
+        "protectionPolicyExtId": "11000000-0a01-4000-8000-000000000001",
+        "recoveryPointObjectiveSeconds": 900
+      }
+    ]
+  },
+  {
+    "$objectType": "dataprotection.v4.config.ProtectedResource",
+    "extId": "03000000-0a01-4000-8000-000000000002",
+    "entityType": "VM",
+    "sourceSite": {
+      "$objectType": "dataprotection.v4.config.DataProtectionSiteReference",
+      "domainManagerExtId": "d0000000-0a01-4000-8000-000000000001"
+    },
+    "replicationStates": [
+      {
+        "$objectType": "dataprotection.v4.config.ReplicationState",
+        "targetSite": {
+          "$objectType": "dataprotection.v4.config.DataProtectionSiteReference",
+          "domainManagerExtId": "d0000000-0b02-4000-8000-000000000001"
+        },
+        "replicationStatus": "IN_SYNC",
+        "protectionPolicyExtId": "11000000-0a01-4000-8000-000000000001",
+        "recoveryPointObjectiveSeconds": 900
+      }
+    ]
+  },
+  {
+    "$objectType": "dataprotection.v4.config.ProtectedResource",
+    "extId": "03000000-0a01-4000-8000-000000000003",
+    "entityType": "VM",
+    "sourceSite": {
+      "$objectType": "dataprotection.v4.config.DataProtectionSiteReference",
+      "domainManagerExtId": "d0000000-0a01-4000-8000-000000000001"
+    },
+    "replicationStates": [
+      {
+        "$objectType": "dataprotection.v4.config.ReplicationState",
+        "targetSite": {
+          "$objectType": "dataprotection.v4.config.DataProtectionSiteReference",
+          "domainManagerExtId": "d0000000-0b02-4000-8000-000000000001"
+        },
+        "replicationStatus": "IN_SYNC",
+        "protectionPolicyExtId": "11000000-0a01-4000-8000-000000000001",
+        "recoveryPointObjectiveSeconds": 900
+      }
+    ]
+  },
+  {
+    "$objectType": "dataprotection.v4.config.ProtectedResource",
+    "extId": "03000000-0a01-4000-8000-000000000005",
+    "entityType": "VM",
+    "sourceSite": {
+      "$objectType": "dataprotection.v4.config.DataProtectionSiteReference",
+      "domainManagerExtId": "d0000000-0a01-4000-8000-000000000001"
+    },
+    "replicationStates": [
+      {
+        "$objectType": "dataprotection.v4.config.ReplicationState",
+        "targetSite": {
+          "$objectType": "dataprotection.v4.config.DataProtectionSiteReference",
+          "domainManagerExtId": "d0000000-0b02-4000-8000-000000000001"
+        },
+        "replicationStatus": "SYNCING",
+        "protectionPolicyExtId": "11000000-0a01-4000-8000-000000000002",
+        "recoveryPointObjectiveSeconds": 3600
+      }
+    ]
+  },
+  {
+    "$objectType": "dataprotection.v4.config.ProtectedResource",
+    "extId": "03000000-0a01-4000-8000-000000000004",
+    "entityType": "VM",
+    "sourceSite": {
+      "$objectType": "dataprotection.v4.config.DataProtectionSiteReference",
+      "domainManagerExtId": "d0000000-0a01-4000-8000-000000000001"
+    },
+    "replicationStates": [
+      {
+        "$objectType": "dataprotection.v4.config.ReplicationState",
+        "targetSite": {
+          "$objectType": "dataprotection.v4.config.DataProtectionSiteReference",
+          "domainManagerExtId": "d0000000-0b02-4000-8000-000000000001"
+        },
+        "replicationStatus": "OUT_OF_SYNC",
+        "protectionPolicyExtId": "11000000-0a01-4000-8000-000000000002",
+        "recoveryPointObjectiveSeconds": 3600
+      }
+    ]
+  }
+]

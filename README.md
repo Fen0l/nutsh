@@ -69,6 +69,7 @@ Not on crates.io yet.
 ## First five minutes
 
 ```sh
+nutsh demo                                                   # no Prism Central yet? two invented ones, every screen populated (fuller than a real v4 API)
 nutsh ctx add home --host pc.example.com --username admin    # one Prism Central, one context
 nutsh ctx login home                                         # asks for the password once, checks it, stores it
 nutsh --readonly                                             # the Dashboard, nothing can change

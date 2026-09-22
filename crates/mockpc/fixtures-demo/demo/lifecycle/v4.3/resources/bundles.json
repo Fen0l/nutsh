@@ -1,0 +1,78 @@
+[
+  {
+    "$objectType": "lifecycle.v4.resources.Bundle",
+    "extId": "18000000-0a01-4000-8000-000000000001",
+    "name": "lcm-ahv-10-3-2",
+    "sizeBytes": 2147483648,
+    "type": "SOFTWARE",
+    "vendor": "NUTANIX",
+    "uploadMode": "TARGETED",
+    "clusterExtId": "01000000-0a01-4000-8000-000000000002",
+    "createdTime": "2026-09-03T09:00:00Z",
+    "images": [
+      {
+        "$objectType": "lifecycle.v4.resources.Image",
+        "clusterExtId": "01000000-0a01-4000-8000-000000000002",
+        "isStub": false,
+        "entityClass": "Hypervisor",
+        "entityModel": "AHV hypervisor",
+        "entityVersion": "10.3.2",
+        "releaseNotes": "https://portal.example.com/release-notes/ahv-10-3-2",
+        "files": [
+          {
+            "$objectType": "lifecycle.v4.resources.ImageFile",
+            "name": "lcm-ahv-10-3-2.tar.gz",
+            "sizeBytes": 2147475347,
+            "checksumType": "SHASUM",
+            "checksum": "0a01000000000000000000000000000000000000000000000000000000000181"
+          },
+          {
+            "$objectType": "lifecycle.v4.resources.ImageFile",
+            "name": "lcm-ahv-10-3-2-metadata.json",
+            "sizeBytes": 8301,
+            "checksumType": "SHASUM",
+            "checksum": "0a0100000000000000000000000000000000000000000000000000000000018f"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Bundle",
+    "extId": "18000000-0a01-4000-8000-000000000002",
+    "name": "lcm-aos-7-6",
+    "sizeBytes": 5368709120,
+    "type": "SOFTWARE",
+    "vendor": "NUTANIX",
+    "uploadMode": "TARGETED",
+    "clusterExtId": "01000000-0a01-4000-8000-000000000002",
+    "createdTime": "2026-09-03T09:30:00Z",
+    "images": [
+      {
+        "$objectType": "lifecycle.v4.resources.Image",
+        "clusterExtId": "01000000-0a01-4000-8000-000000000002",
+        "isStub": false,
+        "entityClass": "Core Cluster",
+        "entityModel": "AOS",
+        "entityVersion": "7.6",
+        "releaseNotes": "https://portal.example.com/release-notes/aos-7-6",
+        "files": [
+          {
+            "$objectType": "lifecycle.v4.resources.ImageFile",
+            "name": "lcm-aos-7-6.tar.gz",
+            "sizeBytes": 5368700819,
+            "checksumType": "SHASUM",
+            "checksum": "0a01000000000000000000000000000000000000000000000000000000000182"
+          },
+          {
+            "$objectType": "lifecycle.v4.resources.ImageFile",
+            "name": "lcm-aos-7-6-metadata.json",
+            "sizeBytes": 8301,
+            "checksumType": "SHASUM",
+            "checksum": "0a0100000000000000000000000000000000000000000000000000000000018f"
+          }
+        ]
+      }
+    ]
+  }
+]

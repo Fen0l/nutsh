@@ -1,0 +1,217 @@
+[
+  {
+    "$objectType": "monitoring.v4.serviceability.Event",
+    "extId": "e0e70000-0b02-4000-8000-000000000001",
+    "title": "Replication of dr-db-01 started",
+    "message": "Replication of dr-db-01 started",
+    "eventType": "ReplicationStarted",
+    "classifications": [
+      "DR"
+    ],
+    "creationTime": "2026-09-05T09:55:02Z",
+    "clusterName": "ridge-dr",
+    "clusterUUID": "c1000000-0b02-4000-8000-000000000001",
+    "sourceClusterUUID": "c1000000-0b02-4000-8000-000000000001",
+    "sourceEntity": {
+      "$objectType": "monitoring.v4.serviceability.EventEntityReference",
+      "type": "vm",
+      "name": "dr-db-01",
+      "extId": "ee000000-0b02-4000-8000-000000000002"
+    },
+    "affectedEntities": [
+      {
+        "$objectType": "monitoring.v4.common.EntityReference",
+        "name": "dr-db-01",
+        "extId": "ee000000-0b02-4000-8000-000000000002"
+      }
+    ],
+    "impactedEntities": {
+      "$objectType": "monitoring.v4.common.ImpactedEntities",
+      "clusters": [
+        "c1000000-0b02-4000-8000-000000000001"
+      ],
+      "vms": [
+        "ee000000-0b02-4000-8000-000000000002"
+      ]
+    },
+    "parameters": [
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "vm_name",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "dr-db-01"
+        }
+      },
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "source_site",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "pc-harbor"
+        }
+      }
+    ]
+  },
+  {
+    "$objectType": "monitoring.v4.serviceability.Event",
+    "extId": "e0e70000-0b02-4000-8000-000000000002",
+    "title": "Test failover of rp-web-tier started",
+    "message": "Test failover of rp-web-tier started",
+    "eventType": "RecoveryPlanTestFailover",
+    "classifications": [
+      "DR",
+      "UserAction"
+    ],
+    "creationTime": "2026-09-05T09:48:00Z",
+    "clusterName": "ridge-dr",
+    "clusterUUID": "c1000000-0b02-4000-8000-000000000001",
+    "sourceClusterUUID": "c1000000-0b02-4000-8000-000000000001",
+    "sourceEntity": {
+      "$objectType": "monitoring.v4.serviceability.EventEntityReference",
+      "type": "recovery_plan",
+      "name": "rp-web-tier",
+      "extId": "9b1a0000-0b02-4000-8000-000000000001"
+    },
+    "affectedEntities": [
+      {
+        "$objectType": "monitoring.v4.common.EntityReference",
+        "name": "rp-web-tier",
+        "extId": "9b1a0000-0b02-4000-8000-000000000001"
+      }
+    ],
+    "impactedEntities": {
+      "$objectType": "monitoring.v4.common.ImpactedEntities",
+      "clusters": [
+        "c1000000-0b02-4000-8000-000000000001"
+      ]
+    },
+    "parameters": [
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "plan_name",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "rp-web-tier"
+        }
+      },
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "user",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "operator"
+        }
+      }
+    ]
+  },
+  {
+    "$objectType": "monitoring.v4.serviceability.Event",
+    "extId": "e0e70000-0b02-4000-8000-000000000003",
+    "title": "Replication of dr-web-01 finished",
+    "message": "Replication of dr-web-01 finished",
+    "eventType": "ReplicationCompleted",
+    "classifications": [
+      "DR"
+    ],
+    "creationTime": "2026-09-05T09:45:30Z",
+    "clusterName": "ridge-dr",
+    "clusterUUID": "c1000000-0b02-4000-8000-000000000001",
+    "sourceClusterUUID": "c1000000-0b02-4000-8000-000000000001",
+    "sourceEntity": {
+      "$objectType": "monitoring.v4.serviceability.EventEntityReference",
+      "type": "vm",
+      "name": "dr-web-01",
+      "extId": "ee000000-0b02-4000-8000-000000000001"
+    },
+    "affectedEntities": [
+      {
+        "$objectType": "monitoring.v4.common.EntityReference",
+        "name": "dr-web-01",
+        "extId": "ee000000-0b02-4000-8000-000000000001"
+      }
+    ],
+    "impactedEntities": {
+      "$objectType": "monitoring.v4.common.ImpactedEntities",
+      "clusters": [
+        "c1000000-0b02-4000-8000-000000000001"
+      ],
+      "vms": [
+        "ee000000-0b02-4000-8000-000000000001"
+      ]
+    },
+    "parameters": [
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "vm_name",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "dr-web-01"
+        }
+      },
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "source_site",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "pc-harbor"
+        }
+      }
+    ]
+  },
+  {
+    "$objectType": "monitoring.v4.serviceability.Event",
+    "extId": "e0e70000-0b02-4000-8000-000000000004",
+    "title": "Host NIC eth1 on ridge-n3 lost its link",
+    "message": "Host NIC eth1 on ridge-n3 lost its link",
+    "eventType": "HostNicLinkDown",
+    "classifications": [
+      "Host",
+      "Network"
+    ],
+    "creationTime": "2026-09-05T07:30:00Z",
+    "clusterName": "ridge-dr",
+    "clusterUUID": "c1000000-0b02-4000-8000-000000000001",
+    "sourceClusterUUID": "c1000000-0b02-4000-8000-000000000001",
+    "sourceEntity": {
+      "$objectType": "monitoring.v4.serviceability.EventEntityReference",
+      "type": "node",
+      "name": "ridge-n3",
+      "extId": "40570000-0b02-4000-8000-000000000003"
+    },
+    "affectedEntities": [
+      {
+        "$objectType": "monitoring.v4.common.EntityReference",
+        "name": "ridge-n3",
+        "extId": "40570000-0b02-4000-8000-000000000003"
+      }
+    ],
+    "impactedEntities": {
+      "$objectType": "monitoring.v4.common.ImpactedEntities",
+      "clusters": [
+        "c1000000-0b02-4000-8000-000000000001"
+      ],
+      "nodes": [
+        "40570000-0b02-4000-8000-000000000003"
+      ]
+    },
+    "parameters": [
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "host_name",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "ridge-n3"
+        }
+      },
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "nic_name",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "eth1"
+        }
+      }
+    ]
+  }
+]

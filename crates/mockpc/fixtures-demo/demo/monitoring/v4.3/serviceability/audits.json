@@ -1,0 +1,608 @@
+[
+  {
+    "$objectType": "monitoring.v4.serviceability.Audit",
+    "extId": "0d000000-0a01-4000-8000-000000000001",
+    "title": "User admin logged in",
+    "message": "User admin logged in",
+    "auditType": "IAMLoginEventAudit",
+    "operationType": "LOGIN",
+    "status": "SUCCEEDED",
+    "operationStartTime": "2026-09-05T09:40:00Z",
+    "operationEndTime": "2026-09-05T09:40:00Z",
+    "creationTime": "2026-09-05T09:40:00Z",
+    "userReference": {
+      "$objectType": "monitoring.v4.serviceability.UserReference",
+      "extId": "0e000000-0a01-4000-8000-000000000001",
+      "name": "admin",
+      "ipAddress": "198.51.100.50"
+    },
+    "sourceEntity": {
+      "$objectType": "monitoring.v4.serviceability.AuditEntityReference",
+      "type": "user",
+      "name": "admin",
+      "extId": "0e000000-0a01-4000-8000-000000000001"
+    },
+    "affectedEntities": [
+      {
+        "$objectType": "monitoring.v4.common.EntityReference",
+        "type": "user",
+        "name": "admin",
+        "extId": "0e000000-0a01-4000-8000-000000000001"
+      }
+    ],
+    "clusterReference": {
+      "$objectType": "monitoring.v4.common.EntityReference",
+      "extId": "d0000000-0a01-4000-8000-000000000001"
+    },
+    "impactedEntities": {
+      "$objectType": "monitoring.v4.common.ImpactedEntities",
+      "clusters": [
+        "d0000000-0a01-4000-8000-000000000001"
+      ]
+    },
+    "parameters": [
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "username",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "admin"
+        }
+      },
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "auth_type",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "local"
+        }
+      }
+    ]
+  },
+  {
+    "$objectType": "monitoring.v4.serviceability.Audit",
+    "extId": "0d000000-0a01-4000-8000-000000000002",
+    "title": "User ops-night logged in",
+    "message": "User ops-night logged in",
+    "auditType": "IAMLoginEventAudit",
+    "operationType": "LOGIN",
+    "status": "SUCCEEDED",
+    "operationStartTime": "2026-09-05T07:55:00Z",
+    "operationEndTime": "2026-09-05T07:55:00Z",
+    "creationTime": "2026-09-05T07:55:00Z",
+    "userReference": {
+      "$objectType": "monitoring.v4.serviceability.UserReference",
+      "extId": "0e000000-0a01-4000-8000-000000000003",
+      "name": "ops-night",
+      "ipAddress": "198.51.100.52"
+    },
+    "sourceEntity": {
+      "$objectType": "monitoring.v4.serviceability.AuditEntityReference",
+      "type": "user",
+      "name": "ops-night",
+      "extId": "0e000000-0a01-4000-8000-000000000003"
+    },
+    "affectedEntities": [
+      {
+        "$objectType": "monitoring.v4.common.EntityReference",
+        "type": "user",
+        "name": "ops-night",
+        "extId": "0e000000-0a01-4000-8000-000000000003"
+      }
+    ],
+    "clusterReference": {
+      "$objectType": "monitoring.v4.common.EntityReference",
+      "extId": "d0000000-0a01-4000-8000-000000000001"
+    },
+    "impactedEntities": {
+      "$objectType": "monitoring.v4.common.ImpactedEntities",
+      "clusters": [
+        "d0000000-0a01-4000-8000-000000000001"
+      ]
+    },
+    "parameters": [
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "username",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "ops-night"
+        }
+      },
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "auth_type",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "local"
+        }
+      }
+    ]
+  },
+  {
+    "$objectType": "monitoring.v4.serviceability.Audit",
+    "extId": "0d000000-0a01-4000-8000-000000000003",
+    "title": "User ops-lead logged in",
+    "message": "User ops-lead logged in",
+    "auditType": "IAMLoginEventAudit",
+    "operationType": "LOGIN",
+    "status": "SUCCEEDED",
+    "operationStartTime": "2026-09-05T09:05:00Z",
+    "operationEndTime": "2026-09-05T09:05:00Z",
+    "creationTime": "2026-09-05T09:05:00Z",
+    "userReference": {
+      "$objectType": "monitoring.v4.serviceability.UserReference",
+      "extId": "0e000000-0a01-4000-8000-000000000002",
+      "name": "ops-lead",
+      "ipAddress": "198.51.100.51"
+    },
+    "sourceEntity": {
+      "$objectType": "monitoring.v4.serviceability.AuditEntityReference",
+      "type": "user",
+      "name": "ops-lead",
+      "extId": "0e000000-0a01-4000-8000-000000000002"
+    },
+    "affectedEntities": [
+      {
+        "$objectType": "monitoring.v4.common.EntityReference",
+        "type": "user",
+        "name": "ops-lead",
+        "extId": "0e000000-0a01-4000-8000-000000000002"
+      }
+    ],
+    "clusterReference": {
+      "$objectType": "monitoring.v4.common.EntityReference",
+      "extId": "d0000000-0a01-4000-8000-000000000001"
+    },
+    "impactedEntities": {
+      "$objectType": "monitoring.v4.common.ImpactedEntities",
+      "clusters": [
+        "d0000000-0a01-4000-8000-000000000001"
+      ]
+    },
+    "parameters": [
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "username",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "ops-lead"
+        }
+      },
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "auth_type",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "local"
+        }
+      }
+    ]
+  },
+  {
+    "$objectType": "monitoring.v4.serviceability.Audit",
+    "extId": "0d000000-0a01-4000-8000-000000000004",
+    "title": "Created VM dev-build-01",
+    "message": "Created VM dev-build-01",
+    "auditType": "VmConfigAudit",
+    "operationType": "CREATE",
+    "status": "SUCCEEDED",
+    "operationStartTime": "2026-09-02T10:00:00Z",
+    "operationEndTime": "2026-09-02T10:00:20Z",
+    "creationTime": "2026-09-02T10:00:20Z",
+    "userReference": {
+      "$objectType": "monitoring.v4.serviceability.UserReference",
+      "extId": "0e000000-0a01-4000-8000-000000000001",
+      "name": "admin",
+      "ipAddress": "198.51.100.50"
+    },
+    "sourceEntity": {
+      "$objectType": "monitoring.v4.serviceability.AuditEntityReference",
+      "type": "vm",
+      "name": "dev-build-01",
+      "extId": "03000000-0a01-4000-8000-000000000007"
+    },
+    "affectedEntities": [
+      {
+        "$objectType": "monitoring.v4.common.EntityReference",
+        "type": "vm",
+        "name": "dev-build-01",
+        "extId": "03000000-0a01-4000-8000-000000000007"
+      }
+    ],
+    "clusterReference": {
+      "$objectType": "monitoring.v4.common.EntityReference",
+      "extId": "d0000000-0a01-4000-8000-000000000001"
+    },
+    "impactedEntities": {
+      "$objectType": "monitoring.v4.common.ImpactedEntities",
+      "clusters": [
+        "d0000000-0a01-4000-8000-000000000001"
+      ]
+    },
+    "parameters": [
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "vm_name",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "dev-build-01"
+        }
+      },
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "cluster_name",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "harbor-prod"
+        }
+      }
+    ]
+  },
+  {
+    "$objectType": "monitoring.v4.serviceability.Audit",
+    "extId": "0d000000-0a01-4000-8000-000000000005",
+    "title": "Created recovery point for prd-db-01",
+    "message": "Created recovery point for prd-db-01",
+    "auditType": "RecoveryPointAudit",
+    "operationType": "CREATE",
+    "status": "SUCCEEDED",
+    "operationStartTime": "2026-09-05T09:45:00Z",
+    "operationEndTime": "2026-09-05T09:45:30Z",
+    "creationTime": "2026-09-05T09:45:30Z",
+    "userReference": {
+      "$objectType": "monitoring.v4.serviceability.UserReference",
+      "extId": "0e000000-0a01-4000-8000-000000000005",
+      "name": "svc-backup",
+      "ipAddress": "203.0.113.90"
+    },
+    "sourceEntity": {
+      "$objectType": "monitoring.v4.serviceability.AuditEntityReference",
+      "type": "vm",
+      "name": "prd-db-01",
+      "extId": "03000000-0a01-4000-8000-000000000003"
+    },
+    "affectedEntities": [
+      {
+        "$objectType": "monitoring.v4.common.EntityReference",
+        "type": "vm",
+        "name": "prd-db-01",
+        "extId": "03000000-0a01-4000-8000-000000000003"
+      }
+    ],
+    "clusterReference": {
+      "$objectType": "monitoring.v4.common.EntityReference",
+      "extId": "d0000000-0a01-4000-8000-000000000001"
+    },
+    "impactedEntities": {
+      "$objectType": "monitoring.v4.common.ImpactedEntities",
+      "clusters": [
+        "d0000000-0a01-4000-8000-000000000001"
+      ]
+    },
+    "parameters": [
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "vm_name",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "prd-db-01"
+        }
+      },
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "recovery_point",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "rp-prd-db-01-0905-0945"
+        }
+      }
+    ]
+  },
+  {
+    "$objectType": "monitoring.v4.serviceability.Audit",
+    "extId": "0d000000-0a01-4000-8000-000000000006",
+    "title": "Updated category AppTier:Web",
+    "message": "Updated category AppTier:Web",
+    "auditType": "CategoryAudit",
+    "operationType": "UPDATE",
+    "status": "SUCCEEDED",
+    "operationStartTime": "2026-09-04T10:00:00Z",
+    "operationEndTime": "2026-09-04T10:00:02Z",
+    "creationTime": "2026-09-04T10:00:02Z",
+    "userReference": {
+      "$objectType": "monitoring.v4.serviceability.UserReference",
+      "extId": "0e000000-0a01-4000-8000-000000000001",
+      "name": "admin",
+      "ipAddress": "198.51.100.50"
+    },
+    "sourceEntity": {
+      "$objectType": "monitoring.v4.serviceability.AuditEntityReference",
+      "type": "category",
+      "name": "AppTier:Web",
+      "extId": "07000000-0a01-4000-8000-000000000004"
+    },
+    "affectedEntities": [
+      {
+        "$objectType": "monitoring.v4.common.EntityReference",
+        "type": "category",
+        "name": "AppTier:Web",
+        "extId": "07000000-0a01-4000-8000-000000000004"
+      }
+    ],
+    "clusterReference": {
+      "$objectType": "monitoring.v4.common.EntityReference",
+      "extId": "d0000000-0a01-4000-8000-000000000001"
+    },
+    "impactedEntities": {
+      "$objectType": "monitoring.v4.common.ImpactedEntities",
+      "clusters": [
+        "d0000000-0a01-4000-8000-000000000001"
+      ]
+    },
+    "parameters": [
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "category",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "AppTier:Web"
+        }
+      },
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "field",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "description"
+        }
+      }
+    ]
+  },
+  {
+    "$objectType": "monitoring.v4.serviceability.Audit",
+    "extId": "0d000000-0a01-4000-8000-000000000007",
+    "title": "Updated protection policy silver-1h",
+    "message": "Updated protection policy silver-1h",
+    "auditType": "ProtectionPolicyAudit",
+    "operationType": "UPDATE",
+    "status": "SUCCEEDED",
+    "operationStartTime": "2026-09-04T14:00:00Z",
+    "operationEndTime": "2026-09-04T14:00:05Z",
+    "creationTime": "2026-09-04T14:00:05Z",
+    "userReference": {
+      "$objectType": "monitoring.v4.serviceability.UserReference",
+      "extId": "0e000000-0a01-4000-8000-000000000002",
+      "name": "ops-lead",
+      "ipAddress": "198.51.100.51"
+    },
+    "sourceEntity": {
+      "$objectType": "monitoring.v4.serviceability.AuditEntityReference",
+      "type": "protection_policy",
+      "name": "silver-1h",
+      "extId": "11000000-0a01-4000-8000-000000000002"
+    },
+    "affectedEntities": [
+      {
+        "$objectType": "monitoring.v4.common.EntityReference",
+        "type": "protection_policy",
+        "name": "silver-1h",
+        "extId": "11000000-0a01-4000-8000-000000000002"
+      }
+    ],
+    "clusterReference": {
+      "$objectType": "monitoring.v4.common.EntityReference",
+      "extId": "d0000000-0a01-4000-8000-000000000001"
+    },
+    "impactedEntities": {
+      "$objectType": "monitoring.v4.common.ImpactedEntities",
+      "clusters": [
+        "d0000000-0a01-4000-8000-000000000001"
+      ]
+    },
+    "parameters": [
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "policy_name",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "silver-1h"
+        }
+      },
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "field",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "retention"
+        }
+      }
+    ]
+  },
+  {
+    "$objectType": "monitoring.v4.serviceability.Audit",
+    "extId": "0d000000-0a01-4000-8000-000000000008",
+    "title": "Deleted VM dev-scratch-01",
+    "message": "Deleted VM dev-scratch-01",
+    "auditType": "VmConfigAudit",
+    "operationType": "DELETE",
+    "status": "SUCCEEDED",
+    "operationStartTime": "2026-09-01T09:00:00Z",
+    "operationEndTime": "2026-09-01T09:00:12Z",
+    "creationTime": "2026-09-01T09:00:12Z",
+    "userReference": {
+      "$objectType": "monitoring.v4.serviceability.UserReference",
+      "extId": "0e000000-0a01-4000-8000-000000000001",
+      "name": "admin",
+      "ipAddress": "198.51.100.50"
+    },
+    "sourceEntity": {
+      "$objectType": "monitoring.v4.serviceability.AuditEntityReference",
+      "type": "vm",
+      "name": "dev-scratch-01"
+    },
+    "affectedEntities": [
+      {
+        "$objectType": "monitoring.v4.common.EntityReference",
+        "type": "vm",
+        "name": "dev-scratch-01"
+      }
+    ],
+    "clusterReference": {
+      "$objectType": "monitoring.v4.common.EntityReference",
+      "extId": "d0000000-0a01-4000-8000-000000000001"
+    },
+    "impactedEntities": {
+      "$objectType": "monitoring.v4.common.ImpactedEntities",
+      "clusters": [
+        "d0000000-0a01-4000-8000-000000000001"
+      ]
+    },
+    "parameters": [
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "vm_name",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "dev-scratch-01"
+        }
+      },
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "cluster_name",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "harbor-prod"
+        }
+      }
+    ]
+  },
+  {
+    "$objectType": "monitoring.v4.serviceability.Audit",
+    "extId": "0d000000-0a01-4000-8000-000000000009",
+    "title": "Powered off VM dev-ci-01",
+    "message": "Powered off VM dev-ci-01",
+    "auditType": "VmPowerStateAudit",
+    "operationType": "POWER_OFF",
+    "status": "SUCCEEDED",
+    "operationStartTime": "2026-09-05T08:00:00Z",
+    "operationEndTime": "2026-09-05T08:00:08Z",
+    "creationTime": "2026-09-05T08:00:08Z",
+    "userReference": {
+      "$objectType": "monitoring.v4.serviceability.UserReference",
+      "extId": "0e000000-0a01-4000-8000-000000000003",
+      "name": "ops-night",
+      "ipAddress": "198.51.100.52"
+    },
+    "sourceEntity": {
+      "$objectType": "monitoring.v4.serviceability.AuditEntityReference",
+      "type": "vm",
+      "name": "dev-ci-01",
+      "extId": "03000000-0a01-4000-8000-000000000006"
+    },
+    "affectedEntities": [
+      {
+        "$objectType": "monitoring.v4.common.EntityReference",
+        "type": "vm",
+        "name": "dev-ci-01",
+        "extId": "03000000-0a01-4000-8000-000000000006"
+      }
+    ],
+    "clusterReference": {
+      "$objectType": "monitoring.v4.common.EntityReference",
+      "extId": "d0000000-0a01-4000-8000-000000000001"
+    },
+    "impactedEntities": {
+      "$objectType": "monitoring.v4.common.ImpactedEntities",
+      "clusters": [
+        "d0000000-0a01-4000-8000-000000000001"
+      ]
+    },
+    "parameters": [
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "vm_name",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "dev-ci-01"
+        }
+      },
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "task",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "ZXJnb24=:7a5c0000-0a01-4000-8000-000000000006"
+        }
+      }
+    ]
+  },
+  {
+    "$objectType": "monitoring.v4.serviceability.Audit",
+    "extId": "0d000000-0a01-4000-8000-000000000010",
+    "title": "Powered on VM dev-scratch-02",
+    "message": "Powered on VM dev-scratch-02",
+    "auditType": "VmPowerStateAudit",
+    "operationType": "POWER_ON",
+    "status": "FAILED",
+    "operationStartTime": "2026-09-05T09:51:00Z",
+    "operationEndTime": "2026-09-05T09:51:04Z",
+    "creationTime": "2026-09-05T09:51:04Z",
+    "userReference": {
+      "$objectType": "monitoring.v4.serviceability.UserReference",
+      "extId": "0e000000-0a01-4000-8000-000000000002",
+      "name": "ops-lead",
+      "ipAddress": "198.51.100.51"
+    },
+    "sourceEntity": {
+      "$objectType": "monitoring.v4.serviceability.AuditEntityReference",
+      "type": "vm",
+      "name": "dev-scratch-02",
+      "extId": "03000000-0a01-4000-8000-000000000008"
+    },
+    "affectedEntities": [
+      {
+        "$objectType": "monitoring.v4.common.EntityReference",
+        "type": "vm",
+        "name": "dev-scratch-02",
+        "extId": "03000000-0a01-4000-8000-000000000008"
+      }
+    ],
+    "clusterReference": {
+      "$objectType": "monitoring.v4.common.EntityReference",
+      "extId": "d0000000-0a01-4000-8000-000000000001"
+    },
+    "impactedEntities": {
+      "$objectType": "monitoring.v4.common.ImpactedEntities",
+      "clusters": [
+        "d0000000-0a01-4000-8000-000000000001"
+      ]
+    },
+    "parameters": [
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "vm_name",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "dev-scratch-02"
+        }
+      },
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "task",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "ZXJnb24=:7a5c0000-0a01-4000-8000-000000000001"
+        }
+      },
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "reason",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "No host in cluster harbor-prod can satisfy 64 GiB of memory with harbor-n2 entering maintenance"
+        }
+      }
+    ]
+  }
+]

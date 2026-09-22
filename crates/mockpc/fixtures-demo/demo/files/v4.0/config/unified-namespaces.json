@@ -1,0 +1,31 @@
+[
+  {
+    "$objectType": "files.v4.config.UnifiedNamespace",
+    "extId": "47000000-0a01-4000-8000-000000000001",
+    "name": "uns-harbor",
+    "namespaceMemberConfigs": [
+      {
+        "$objectType": "files.v4.config.NamespaceMemberConfig",
+        "fileServerExtId": "44000000-0a01-4000-8000-000000000001",
+        "isCoreMember": true
+      },
+      {
+        "$objectType": "files.v4.config.NamespaceMemberConfig",
+        "fileServerExtId": "44000000-0a01-4000-8000-000000000002",
+        "isCoreMember": false
+      }
+    ]
+  },
+  {
+    "$objectType": "files.v4.config.UnifiedNamespace",
+    "extId": "47000000-0a01-4000-8000-000000000002",
+    "name": "uns-archive",
+    "namespaceMemberConfigs": [
+      {
+        "$objectType": "files.v4.config.NamespaceMemberConfig",
+        "fileServerExtId": "44000000-0a01-4000-8000-000000000002",
+        "isCoreMember": true
+      }
+    ]
+  }
+]

@@ -1,0 +1,93 @@
+[
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "1b000000-0a01-4000-8000-000000000001",
+    "name": "https",
+    "description": "TLS web traffic",
+    "isSystemDefined": false,
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 443,
+        "endPort": 443
+      }
+    ],
+    "udpServices": [],
+    "icmpServices": [],
+    "policyReferences": [
+      "19000000-0a01-4000-8000-000000000002"
+    ],
+    "createdBy": "ops-lead",
+    "creationTime": "2026-05-12T13:40:00Z",
+    "lastUpdateTime": "2026-05-12T13:40:00Z",
+    "isSharedWithAllProjects": true,
+    "projectExtId": "00000000-0000-0000-0000-000000000000"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "1b000000-0a01-4000-8000-000000000002",
+    "name": "ssh",
+    "description": "Administrative shell",
+    "isSystemDefined": false,
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 22,
+        "endPort": 22
+      }
+    ],
+    "udpServices": [],
+    "icmpServices": [],
+    "policyReferences": [],
+    "createdBy": "ops-lead",
+    "creationTime": "2026-05-12T13:40:00Z",
+    "lastUpdateTime": "2026-05-12T13:40:00Z",
+    "isSharedWithAllProjects": true,
+    "projectExtId": "00000000-0000-0000-0000-000000000000"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "1b000000-0a01-4000-8000-000000000003",
+    "name": "postgres",
+    "description": "Orders database listener",
+    "isSystemDefined": false,
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 5432,
+        "endPort": 5432
+      }
+    ],
+    "udpServices": [],
+    "icmpServices": [],
+    "policyReferences": [
+      "19000000-0a01-4000-8000-000000000002"
+    ],
+    "createdBy": "ops-lead",
+    "creationTime": "2026-05-12T13:40:00Z",
+    "lastUpdateTime": "2026-06-01T10:00:00Z",
+    "isSharedWithAllProjects": true,
+    "projectExtId": "00000000-0000-0000-0000-000000000000"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "1b000000-0a01-4000-8000-000000000004",
+    "name": "icmp-any",
+    "description": "Every ICMP type and code",
+    "isSystemDefined": true,
+    "tcpServices": [],
+    "udpServices": [],
+    "icmpServices": [
+      {
+        "$objectType": "microseg.v4.config.IcmpTypeCodeSpec",
+        "isAllAllowed": true
+      }
+    ],
+    "policyReferences": [],
+    "createdBy": "system",
+    "creationTime": "2025-06-10T08:00:00Z",
+    "lastUpdateTime": "2025-06-10T08:00:00Z",
+    "isSharedWithAllProjects": true,
+    "projectExtId": "00000000-0000-0000-0000-000000000000"
+  }
+]

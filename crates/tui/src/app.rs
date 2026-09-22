@@ -647,6 +647,9 @@ pub struct App {
     /// The warm-up has reported at least once for the current session; the same reason, with a
     /// five-minute cycle to wait out instead of thirty seconds.
     pub(crate) names_seen: bool,
+    /// The open page's sampler has reported at least once for the current session, so
+    /// `settle_sample_once` returns at once instead of waiting out its five-minute period.
+    pub(crate) sample_seen: bool,
     /// The connect the Contexts screen started, arriving off the UI thread.
     pub(crate) connect_tx: mpsc::Sender<ConnectOutcome>,
     pub(crate) connect_rx: mpsc::Receiver<ConnectOutcome>,

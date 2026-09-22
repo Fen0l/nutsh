@@ -1,0 +1,60 @@
+[
+  {
+    "$objectType": "networking.v4.config.FloatingIp",
+    "extId": "1d000000-0a01-4000-8000-000000000001",
+    "association": {
+      "$objectType": "networking.v4.config.VmNicAssociation",
+      "vmNicReference": "53000000-0a01-4000-8000-000000000101",
+      "vpcReference": "1c000000-0a01-4000-8000-000000000001",
+      "privateIp": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "203.0.113.110"
+        }
+      }
+    },
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "0e000000-0a01-4000-8000-000000000001",
+      "ownerUserName": "admin",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000",
+      "projectName": "default"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "fip-web",
+    "description": "Public address of prd-web-01",
+    "floatingIp": {
+      "$objectType": "networking.v4.config.FloatingIPAddress",
+      "ipv4": {
+        "$objectType": "networking.v4.config.FloatingIPv4Address",
+        "value": "203.0.113.250"
+      }
+    },
+    "externalSubnetReference": "08000000-0a01-4000-8000-000000000001",
+    "associationStatus": "ASSOCIATED_TO_VNIC"
+  },
+  {
+    "$objectType": "networking.v4.config.FloatingIp",
+    "extId": "1d000000-0a01-4000-8000-000000000002",
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "0e000000-0a01-4000-8000-000000000001",
+      "ownerUserName": "admin",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000",
+      "projectName": "default"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "fip-spare",
+    "description": "Reserved for the next web node",
+    "floatingIp": {
+      "$objectType": "networking.v4.config.FloatingIPAddress",
+      "ipv4": {
+        "$objectType": "networking.v4.config.FloatingIPv4Address",
+        "value": "203.0.113.251"
+      }
+    },
+    "externalSubnetReference": "08000000-0a01-4000-8000-000000000001",
+    "associationStatus": "NOT_ASSOCIATED"
+  }
+]

@@ -1,0 +1,60 @@
+[
+  {
+    "$objectType": "files.v4.config.MountTarget",
+    "extId": "48000000-0a01-4000-8000-000000000001",
+    "name": "home",
+    "description": "Home directories of the harbor staff",
+    "type": "HOMES",
+    "protocol": "SMB",
+    "secondaryProtocol": [],
+    "path": "/home",
+    "maxSizeGB": 500,
+    "workloadType": "DEFAULT",
+    "statusType": "AVAILABLE",
+    "state": "ONLINE",
+    "isCompressionEnabled": true,
+    "isPreviousVersionEnabled": true,
+    "isLongNameEnabled": false,
+    "isSnapshotPaused": false,
+    "blockedFileExtensions": [
+      ".exe",
+      ".scr"
+    ],
+    "smbProperties": {
+      "$objectType": "files.v4.config.SmbProtocolProperties",
+      "isAccessBasedEnumerationEnabled": true,
+      "isSmb3EncryptionEnabled": true,
+      "isCaEnabled": false
+    }
+  },
+  {
+    "$objectType": "files.v4.config.MountTarget",
+    "extId": "48000000-0a01-4000-8000-000000000002",
+    "name": "shared",
+    "description": "Shared build artefacts and exports",
+    "type": "GENERAL",
+    "protocol": "NFS",
+    "secondaryProtocol": [],
+    "path": "/shared",
+    "maxSizeGB": 2000,
+    "workloadType": "SEQUENTIAL",
+    "statusType": "AVAILABLE",
+    "state": "ONLINE",
+    "isCompressionEnabled": true,
+    "isPreviousVersionEnabled": false,
+    "isLongNameEnabled": true,
+    "isSnapshotPaused": false,
+    "blockedFileExtensions": [],
+    "nfsProperties": {
+      "$objectType": "files.v4.config.NfsProtocolProperties",
+      "authenticationType": "SYSTEM",
+      "squashType": "ROOT_SQUASH",
+      "accessType": "READ_WRITE",
+      "anonymousIdentifier": {
+        "$objectType": "files.v4.config.AnonymousIdentifier",
+        "uid": 65534,
+        "gid": 65534
+      }
+    }
+  }
+]

@@ -1,0 +1,10 @@
+[
+  {
+    "$objectType": "volumes.v4.config.VolumeDisk",
+    "extId": "0c90d000-0b02-4000-8000-000000000001",
+    "index": 0,
+    "diskSizeBytes": 2199023255552,
+    "storageContainerId": "5c000000-0b02-4000-8000-000000000002",
+    "description": "ridge-backup-01 catalog volume"
+  }
+]

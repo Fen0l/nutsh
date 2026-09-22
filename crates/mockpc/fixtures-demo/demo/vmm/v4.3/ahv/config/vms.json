@@ -1,0 +1,2062 @@
+[
+  {
+    "$objectType": "vmm.v4.ahv.config.Vm",
+    "extId": "03000000-0a01-4000-8000-000000000001",
+    "name": "prd-web-01",
+    "description": "Front-end web server, first of the pair",
+    "createTime": "2025-11-18T09:00:00Z",
+    "updateTime": "2026-08-30T02:20:00Z",
+    "powerState": "ON",
+    "numSockets": 2,
+    "numCoresPerSocket": 2,
+    "numThreadsPerCore": 1,
+    "memorySizeBytes": 8589934592,
+    "machineType": "PC",
+    "hardwareClockTimezone": "UTC",
+    "isAgentVm": false,
+    "isLiveMigrateCapable": true,
+    "isCrossClusterMigrationInProgress": false,
+    "isCpuHotplugEnabled": true,
+    "isCpuPassthroughEnabled": false,
+    "isVcpuHardPinningEnabled": false,
+    "isMemoryOvercommitEnabled": false,
+    "isScsiControllerEnabled": true,
+    "isVgaConsoleEnabled": true,
+    "isBrandingEnabled": true,
+    "vtpmConfig": {
+      "$objectType": "vmm.v4.ahv.config.VtpmConfig",
+      "isVtpmEnabled": false
+    },
+    "storageConfig": {
+      "$objectType": "vmm.v4.ahv.config.ADSFVmStorageConfig",
+      "isFlashModeEnabled": false
+    },
+    "cluster": {
+      "$objectType": "vmm.v4.ahv.config.ClusterReference",
+      "extId": "01000000-0a01-4000-8000-000000000001"
+    },
+    "host": {
+      "$objectType": "vmm.v4.ahv.config.HostReference",
+      "extId": "02000000-0a01-4000-8000-000000000001"
+    },
+    "project": {
+      "$objectType": "vmm.v4.ahv.config.ProjectReference",
+      "extId": "00000000-0000-0000-0000-000000000000"
+    },
+    "ownershipInfo": {
+      "$objectType": "vmm.v4.ahv.config.OwnershipInfo",
+      "owner": {
+        "$objectType": "vmm.v4.ahv.config.OwnerReference",
+        "extId": "0e000000-0a01-4000-8000-000000000001"
+      }
+    },
+    "categories": [
+      {
+        "$objectType": "vmm.v4.ahv.config.CategoryReference",
+        "extId": "07000000-0a01-4000-8000-000000000001"
+      },
+      {
+        "$objectType": "vmm.v4.ahv.config.CategoryReference",
+        "extId": "07000000-0a01-4000-8000-000000000004"
+      },
+      {
+        "$objectType": "vmm.v4.ahv.config.CategoryReference",
+        "extId": "07000000-0a01-4000-8000-000000000008"
+      },
+      {
+        "$objectType": "vmm.v4.ahv.config.CategoryReference",
+        "extId": "07000000-0a01-4000-8000-000000000007"
+      }
+    ],
+    "bootConfig": {
+      "$objectType": "vmm.v4.ahv.config.UefiBoot",
+      "isSecureBootEnabled": true,
+      "bootOrder": [
+        "DISK",
+        "CDROM",
+        "NETWORK"
+      ],
+      "nvramDevice": {
+        "$objectType": "vmm.v4.ahv.config.NvramDevice",
+        "backingStorageInfo": {
+          "$objectType": "vmm.v4.ahv.config.VmDisk",
+          "diskSizeBytes": 540672,
+          "storageContainer": {
+            "$objectType": "vmm.v4.ahv.config.VmDiskContainerReference",
+            "extId": "06000000-0a01-4000-8000-000000000001"
+          }
+        }
+      }
+    },
+    "disks": [
+      {
+        "$objectType": "vmm.v4.ahv.config.Disk",
+        "extId": "52000000-0a01-4000-8000-000000000101",
+        "diskAddress": {
+          "$objectType": "vmm.v4.ahv.config.DiskAddress",
+          "busType": "SCSI",
+          "index": 0
+        },
+        "backingInfo": {
+          "$objectType": "vmm.v4.ahv.config.VmDisk",
+          "diskSizeBytes": 107374182400,
+          "isMigrationInProgress": false,
+          "storageContainer": {
+            "$objectType": "vmm.v4.ahv.config.VmDiskContainerReference",
+            "extId": "06000000-0a01-4000-8000-000000000001"
+          },
+          "dataSource": {
+            "$objectType": "vmm.v4.ahv.config.DataSource",
+            "reference": {
+              "$objectType": "vmm.v4.ahv.config.ImageReference",
+              "imageExtId": "09000000-0a01-4000-8000-000000000001"
+            }
+          }
+        }
+      }
+    ],
+    "cdRoms": [],
+    "nics": [
+      {
+        "$objectType": "vmm.v4.ahv.config.Nic",
+        "extId": "53000000-0a01-4000-8000-000000000101",
+        "nicBackingInfo": {
+          "$objectType": "vmm.v4.ahv.config.VirtualEthernetNic",
+          "macAddress": "00:00:5e:00:53:11",
+          "isConnected": true,
+          "model": "VIRTIO",
+          "numQueues": 2
+        },
+        "nicNetworkInfo": {
+          "$objectType": "vmm.v4.ahv.config.VirtualEthernetNicNetworkInfo",
+          "nicType": "NORMAL_NIC",
+          "vlanMode": "ACCESS",
+          "subnet": {
+            "$objectType": "vmm.v4.ahv.config.SubnetReference",
+            "extId": "08000000-0a01-4000-8000-000000000001"
+          },
+          "ipv4Config": {
+            "$objectType": "vmm.v4.ahv.config.Ipv4Config",
+            "shouldAssignIp": true,
+            "ipAddress": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "203.0.113.110",
+              "prefixLength": 24
+            }
+          },
+          "ipv4Info": {
+            "$objectType": "vmm.v4.ahv.config.Ipv4Info",
+            "learnedIpAddresses": [
+              {
+                "$objectType": "common.v1.config.IPv4Address",
+                "value": "203.0.113.110",
+                "prefixLength": 32
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "guestTools": {
+      "$objectType": "vmm.v4.ahv.config.GuestTools",
+      "isInstalled": true,
+      "isEnabled": true,
+      "isReachable": true,
+      "isIsoInserted": false,
+      "version": "4.5",
+      "availableVersion": "4.6",
+      "guestOsVersion": "linux:64:Ubuntu 24.04 LTS",
+      "capabilities": [
+        "SELF_SERVICE_RESTORE",
+        "VSS_SNAPSHOT"
+      ],
+      "guestInfo": {
+        "$objectType": "vmm.v4.ahv.config.GuestInfo",
+        "guestOsFullName": "Ubuntu 24.04.2 LTS",
+        "installedVirtIoVersion": "1.2.5",
+        "lastBootUpTime": "2026-08-30T02:10:00Z",
+        "dnsName": {
+          "$objectType": "common.v1.config.FQDN",
+          "value": "prd-web-01.demo.example.com"
+        }
+      }
+    },
+    "protectionType": "RULE_PROTECTED",
+    "protectionPolicyState": {
+      "$objectType": "vmm.v4.ahv.config.ProtectionPolicyState",
+      "policy": {
+        "$objectType": "vmm.v4.ahv.config.PolicyReference",
+        "extId": "11000000-0a01-4000-8000-000000000001"
+      }
+    }
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.Vm",
+    "extId": "03000000-0a01-4000-8000-000000000002",
+    "name": "prd-web-02",
+    "description": "Front-end web server, second of the pair",
+    "createTime": "2025-11-18T09:05:00Z",
+    "updateTime": "2026-08-30T02:25:00Z",
+    "powerState": "ON",
+    "numSockets": 2,
+    "numCoresPerSocket": 2,
+    "numThreadsPerCore": 1,
+    "memorySizeBytes": 8589934592,
+    "machineType": "PC",
+    "hardwareClockTimezone": "UTC",
+    "isAgentVm": false,
+    "isLiveMigrateCapable": true,
+    "isCrossClusterMigrationInProgress": false,
+    "isCpuHotplugEnabled": true,
+    "isCpuPassthroughEnabled": false,
+    "isVcpuHardPinningEnabled": false,
+    "isMemoryOvercommitEnabled": false,
+    "isScsiControllerEnabled": true,
+    "isVgaConsoleEnabled": true,
+    "isBrandingEnabled": true,
+    "vtpmConfig": {
+      "$objectType": "vmm.v4.ahv.config.VtpmConfig",
+      "isVtpmEnabled": false
+    },
+    "storageConfig": {
+      "$objectType": "vmm.v4.ahv.config.ADSFVmStorageConfig",
+      "isFlashModeEnabled": false
+    },
+    "cluster": {
+      "$objectType": "vmm.v4.ahv.config.ClusterReference",
+      "extId": "01000000-0a01-4000-8000-000000000001"
+    },
+    "host": {
+      "$objectType": "vmm.v4.ahv.config.HostReference",
+      "extId": "02000000-0a01-4000-8000-000000000003"
+    },
+    "project": {
+      "$objectType": "vmm.v4.ahv.config.ProjectReference",
+      "extId": "00000000-0000-0000-0000-000000000000"
+    },
+    "ownershipInfo": {
+      "$objectType": "vmm.v4.ahv.config.OwnershipInfo",
+      "owner": {
+        "$objectType": "vmm.v4.ahv.config.OwnerReference",
+        "extId": "0e000000-0a01-4000-8000-000000000001"
+      }
+    },
+    "categories": [
+      {
+        "$objectType": "vmm.v4.ahv.config.CategoryReference",
+        "extId": "07000000-0a01-4000-8000-000000000001"
+      },
+      {
+        "$objectType": "vmm.v4.ahv.config.CategoryReference",
+        "extId": "07000000-0a01-4000-8000-000000000004"
+      },
+      {
+        "$objectType": "vmm.v4.ahv.config.CategoryReference",
+        "extId": "07000000-0a01-4000-8000-000000000008"
+      },
+      {
+        "$objectType": "vmm.v4.ahv.config.CategoryReference",
+        "extId": "07000000-0a01-4000-8000-000000000007"
+      }
+    ],
+    "bootConfig": {
+      "$objectType": "vmm.v4.ahv.config.UefiBoot",
+      "isSecureBootEnabled": true,
+      "bootOrder": [
+        "DISK",
+        "CDROM",
+        "NETWORK"
+      ],
+      "nvramDevice": {
+        "$objectType": "vmm.v4.ahv.config.NvramDevice",
+        "backingStorageInfo": {
+          "$objectType": "vmm.v4.ahv.config.VmDisk",
+          "diskSizeBytes": 540672,
+          "storageContainer": {
+            "$objectType": "vmm.v4.ahv.config.VmDiskContainerReference",
+            "extId": "06000000-0a01-4000-8000-000000000001"
+          }
+        }
+      }
+    },
+    "disks": [
+      {
+        "$objectType": "vmm.v4.ahv.config.Disk",
+        "extId": "52000000-0a01-4000-8000-000000000201",
+        "diskAddress": {
+          "$objectType": "vmm.v4.ahv.config.DiskAddress",
+          "busType": "SCSI",
+          "index": 0
+        },
+        "backingInfo": {
+          "$objectType": "vmm.v4.ahv.config.VmDisk",
+          "diskSizeBytes": 107374182400,
+          "isMigrationInProgress": false,
+          "storageContainer": {
+            "$objectType": "vmm.v4.ahv.config.VmDiskContainerReference",
+            "extId": "06000000-0a01-4000-8000-000000000001"
+          },
+          "dataSource": {
+            "$objectType": "vmm.v4.ahv.config.DataSource",
+            "reference": {
+              "$objectType": "vmm.v4.ahv.config.ImageReference",
+              "imageExtId": "09000000-0a01-4000-8000-000000000001"
+            }
+          }
+        }
+      }
+    ],
+    "cdRoms": [],
+    "nics": [
+      {
+        "$objectType": "vmm.v4.ahv.config.Nic",
+        "extId": "53000000-0a01-4000-8000-000000000201",
+        "nicBackingInfo": {
+          "$objectType": "vmm.v4.ahv.config.VirtualEthernetNic",
+          "macAddress": "00:00:5e:00:53:21",
+          "isConnected": true,
+          "model": "VIRTIO",
+          "numQueues": 2
+        },
+        "nicNetworkInfo": {
+          "$objectType": "vmm.v4.ahv.config.VirtualEthernetNicNetworkInfo",
+          "nicType": "NORMAL_NIC",
+          "vlanMode": "ACCESS",
+          "subnet": {
+            "$objectType": "vmm.v4.ahv.config.SubnetReference",
+            "extId": "08000000-0a01-4000-8000-000000000001"
+          },
+          "ipv4Config": {
+            "$objectType": "vmm.v4.ahv.config.Ipv4Config",
+            "shouldAssignIp": true,
+            "ipAddress": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "203.0.113.111",
+              "prefixLength": 24
+            }
+          },
+          "ipv4Info": {
+            "$objectType": "vmm.v4.ahv.config.Ipv4Info",
+            "learnedIpAddresses": [
+              {
+                "$objectType": "common.v1.config.IPv4Address",
+                "value": "203.0.113.111",
+                "prefixLength": 32
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "protectionType": "RULE_PROTECTED",
+    "protectionPolicyState": {
+      "$objectType": "vmm.v4.ahv.config.ProtectionPolicyState",
+      "policy": {
+        "$objectType": "vmm.v4.ahv.config.PolicyReference",
+        "extId": "11000000-0a01-4000-8000-000000000001"
+      }
+    }
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.Vm",
+    "extId": "03000000-0a01-4000-8000-000000000003",
+    "name": "prd-db-01",
+    "description": "Orders database, primary",
+    "createTime": "2025-11-18T09:12:00Z",
+    "updateTime": "2026-09-05T09:45:00Z",
+    "powerState": "ON",
+    "numSockets": 4,
+    "numCoresPerSocket": 2,
+    "numThreadsPerCore": 1,
+    "memorySizeBytes": 34359738368,
+    "machineType": "PC",
+    "hardwareClockTimezone": "UTC",
+    "isAgentVm": false,
+    "isLiveMigrateCapable": true,
+    "isCrossClusterMigrationInProgress": false,
+    "isCpuHotplugEnabled": true,
+    "isCpuPassthroughEnabled": false,
+    "isVcpuHardPinningEnabled": false,
+    "isMemoryOvercommitEnabled": false,
+    "isScsiControllerEnabled": true,
+    "isVgaConsoleEnabled": true,
+    "isBrandingEnabled": true,
+    "vtpmConfig": {
+      "$objectType": "vmm.v4.ahv.config.VtpmConfig",
+      "isVtpmEnabled": true
+    },
+    "storageConfig": {
+      "$objectType": "vmm.v4.ahv.config.ADSFVmStorageConfig",
+      "isFlashModeEnabled": true
+    },
+    "cluster": {
+      "$objectType": "vmm.v4.ahv.config.ClusterReference",
+      "extId": "01000000-0a01-4000-8000-000000000001"
+    },
+    "host": {
+      "$objectType": "vmm.v4.ahv.config.HostReference",
+      "extId": "02000000-0a01-4000-8000-000000000001"
+    },
+    "project": {
+      "$objectType": "vmm.v4.ahv.config.ProjectReference",
+      "extId": "00000000-0000-0000-0000-000000000000"
+    },
+    "ownershipInfo": {
+      "$objectType": "vmm.v4.ahv.config.OwnershipInfo",
+      "owner": {
+        "$objectType": "vmm.v4.ahv.config.OwnerReference",
+        "extId": "0e000000-0a01-4000-8000-000000000002"
+      }
+    },
+    "categories": [
+      {
+        "$objectType": "vmm.v4.ahv.config.CategoryReference",
+        "extId": "07000000-0a01-4000-8000-000000000001"
+      },
+      {
+        "$objectType": "vmm.v4.ahv.config.CategoryReference",
+        "extId": "07000000-0a01-4000-8000-000000000005"
+      },
+      {
+        "$objectType": "vmm.v4.ahv.config.CategoryReference",
+        "extId": "07000000-0a01-4000-8000-000000000008"
+      }
+    ],
+    "bootConfig": {
+      "$objectType": "vmm.v4.ahv.config.UefiBoot",
+      "isSecureBootEnabled": true,
+      "bootOrder": [
+        "DISK",
+        "CDROM",
+        "NETWORK"
+      ],
+      "nvramDevice": {
+        "$objectType": "vmm.v4.ahv.config.NvramDevice",
+        "backingStorageInfo": {
+          "$objectType": "vmm.v4.ahv.config.VmDisk",
+          "diskSizeBytes": 540672,
+          "storageContainer": {
+            "$objectType": "vmm.v4.ahv.config.VmDiskContainerReference",
+            "extId": "06000000-0a01-4000-8000-000000000002"
+          }
+        }
+      }
+    },
+    "disks": [
+      {
+        "$objectType": "vmm.v4.ahv.config.Disk",
+        "extId": "52000000-0a01-4000-8000-000000000301",
+        "diskAddress": {
+          "$objectType": "vmm.v4.ahv.config.DiskAddress",
+          "busType": "SCSI",
+          "index": 0
+        },
+        "backingInfo": {
+          "$objectType": "vmm.v4.ahv.config.VmDisk",
+          "diskSizeBytes": 107374182400,
+          "isMigrationInProgress": false,
+          "storageContainer": {
+            "$objectType": "vmm.v4.ahv.config.VmDiskContainerReference",
+            "extId": "06000000-0a01-4000-8000-000000000002"
+          },
+          "dataSource": {
+            "$objectType": "vmm.v4.ahv.config.DataSource",
+            "reference": {
+              "$objectType": "vmm.v4.ahv.config.ImageReference",
+              "imageExtId": "09000000-0a01-4000-8000-000000000001"
+            }
+          }
+        }
+      },
+      {
+        "$objectType": "vmm.v4.ahv.config.Disk",
+        "extId": "52000000-0a01-4000-8000-000000000302",
+        "diskAddress": {
+          "$objectType": "vmm.v4.ahv.config.DiskAddress",
+          "busType": "SCSI",
+          "index": 1
+        },
+        "backingInfo": {
+          "$objectType": "vmm.v4.ahv.config.VmDisk",
+          "diskSizeBytes": 536870912000,
+          "isMigrationInProgress": false,
+          "storageContainer": {
+            "$objectType": "vmm.v4.ahv.config.VmDiskContainerReference",
+            "extId": "06000000-0a01-4000-8000-000000000002"
+          }
+        }
+      },
+      {
+        "$objectType": "vmm.v4.ahv.config.Disk",
+        "extId": "52000000-0a01-4000-8000-000000000303",
+        "diskAddress": {
+          "$objectType": "vmm.v4.ahv.config.DiskAddress",
+          "busType": "SCSI",
+          "index": 2
+        },
+        "backingInfo": {
+          "$objectType": "vmm.v4.ahv.config.VmDisk",
+          "diskSizeBytes": 107374182400,
+          "isMigrationInProgress": false,
+          "storageContainer": {
+            "$objectType": "vmm.v4.ahv.config.VmDiskContainerReference",
+            "extId": "06000000-0a01-4000-8000-000000000002"
+          }
+        }
+      },
+      {
+        "$objectType": "vmm.v4.ahv.config.Disk",
+        "extId": "52000000-0a01-4000-8000-000000000304",
+        "diskAddress": {
+          "$objectType": "vmm.v4.ahv.config.DiskAddress",
+          "busType": "SCSI",
+          "index": 3
+        },
+        "backingInfo": {
+          "$objectType": "vmm.v4.ahv.config.ADSFVolumeGroupReference",
+          "volumeGroupExtId": "0a000000-0a01-4000-8000-000000000001"
+        }
+      }
+    ],
+    "cdRoms": [
+      {
+        "$objectType": "vmm.v4.ahv.config.CdRom",
+        "extId": "54000000-0a01-4000-8000-000000000301",
+        "diskAddress": {
+          "$objectType": "vmm.v4.ahv.config.CdRomAddress",
+          "busType": "SATA",
+          "index": 0
+        },
+        "isoType": "GUEST_TOOLS",
+        "backingInfo": {
+          "$objectType": "vmm.v4.ahv.config.VmDisk",
+          "diskSizeBytes": 734003200,
+          "isMigrationInProgress": false,
+          "storageContainer": {
+            "$objectType": "vmm.v4.ahv.config.VmDiskContainerReference",
+            "extId": "06000000-0a01-4000-8000-000000000003"
+          },
+          "dataSource": {
+            "$objectType": "vmm.v4.ahv.config.DataSource",
+            "reference": {
+              "$objectType": "vmm.v4.ahv.config.ImageReference",
+              "imageExtId": "09000000-0a01-4000-8000-000000000003"
+            }
+          }
+        }
+      }
+    ],
+    "nics": [
+      {
+        "$objectType": "vmm.v4.ahv.config.Nic",
+        "extId": "53000000-0a01-4000-8000-000000000301",
+        "nicBackingInfo": {
+          "$objectType": "vmm.v4.ahv.config.VirtualEthernetNic",
+          "macAddress": "00:00:5e:00:53:31",
+          "isConnected": true,
+          "model": "VIRTIO",
+          "numQueues": 2
+        },
+        "nicNetworkInfo": {
+          "$objectType": "vmm.v4.ahv.config.VirtualEthernetNicNetworkInfo",
+          "nicType": "NORMAL_NIC",
+          "vlanMode": "ACCESS",
+          "subnet": {
+            "$objectType": "vmm.v4.ahv.config.SubnetReference",
+            "extId": "08000000-0a01-4000-8000-000000000002"
+          },
+          "ipv4Config": {
+            "$objectType": "vmm.v4.ahv.config.Ipv4Config",
+            "shouldAssignIp": true,
+            "ipAddress": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "203.0.113.140",
+              "prefixLength": 25
+            }
+          },
+          "ipv4Info": {
+            "$objectType": "vmm.v4.ahv.config.Ipv4Info",
+            "learnedIpAddresses": [
+              {
+                "$objectType": "common.v1.config.IPv4Address",
+                "value": "203.0.113.140",
+                "prefixLength": 32
+              }
+            ]
+          }
+        }
+      },
+      {
+        "$objectType": "vmm.v4.ahv.config.Nic",
+        "extId": "53000000-0a01-4000-8000-000000000302",
+        "nicBackingInfo": {
+          "$objectType": "vmm.v4.ahv.config.VirtualEthernetNic",
+          "macAddress": "00:00:5e:00:53:32",
+          "isConnected": true,
+          "model": "VIRTIO",
+          "numQueues": 1
+        },
+        "nicNetworkInfo": {
+          "$objectType": "vmm.v4.ahv.config.VirtualEthernetNicNetworkInfo",
+          "nicType": "NORMAL_NIC",
+          "vlanMode": "ACCESS",
+          "subnet": {
+            "$objectType": "vmm.v4.ahv.config.SubnetReference",
+            "extId": "08000000-0a01-4000-8000-000000000001"
+          },
+          "ipv4Config": {
+            "$objectType": "vmm.v4.ahv.config.Ipv4Config",
+            "shouldAssignIp": true,
+            "ipAddress": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "203.0.113.112",
+              "prefixLength": 24
+            }
+          }
+        }
+      }
+    ],
+    "guestTools": {
+      "$objectType": "vmm.v4.ahv.config.GuestTools",
+      "isInstalled": true,
+      "isEnabled": true,
+      "isReachable": true,
+      "isIsoInserted": false,
+      "version": "4.5",
+      "availableVersion": "4.6",
+      "guestOsVersion": "linux:64:Ubuntu 24.04 LTS",
+      "capabilities": [
+        "SELF_SERVICE_RESTORE",
+        "VSS_SNAPSHOT"
+      ],
+      "guestInfo": {
+        "$objectType": "vmm.v4.ahv.config.GuestInfo",
+        "guestOsFullName": "Ubuntu 24.04.2 LTS",
+        "installedVirtIoVersion": "1.2.5",
+        "lastBootUpTime": "2026-08-30T02:14:00Z",
+        "dnsName": {
+          "$objectType": "common.v1.config.FQDN",
+          "value": "prd-db-01.demo.example.com"
+        }
+      }
+    },
+    "protectionType": "RULE_PROTECTED",
+    "protectionPolicyState": {
+      "$objectType": "vmm.v4.ahv.config.ProtectionPolicyState",
+      "policy": {
+        "$objectType": "vmm.v4.ahv.config.PolicyReference",
+        "extId": "11000000-0a01-4000-8000-000000000001"
+      }
+    }
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.Vm",
+    "extId": "03000000-0a01-4000-8000-000000000004",
+    "name": "prd-app-01",
+    "description": "Orders application server",
+    "createTime": "2025-11-20T14:00:00Z",
+    "updateTime": "2026-09-05T09:20:00Z",
+    "powerState": "ON",
+    "numSockets": 4,
+    "numCoresPerSocket": 2,
+    "numThreadsPerCore": 1,
+    "memorySizeBytes": 17179869184,
+    "machineType": "PC",
+    "hardwareClockTimezone": "UTC",
+    "isAgentVm": false,
+    "isLiveMigrateCapable": true,
+    "isCrossClusterMigrationInProgress": false,
+    "isCpuHotplugEnabled": true,
+    "isCpuPassthroughEnabled": false,
+    "isVcpuHardPinningEnabled": false,
+    "isMemoryOvercommitEnabled": false,
+    "isScsiControllerEnabled": true,
+    "isVgaConsoleEnabled": true,
+    "isBrandingEnabled": true,
+    "vtpmConfig": {
+      "$objectType": "vmm.v4.ahv.config.VtpmConfig",
+      "isVtpmEnabled": false
+    },
+    "storageConfig": {
+      "$objectType": "vmm.v4.ahv.config.ADSFVmStorageConfig",
+      "isFlashModeEnabled": false
+    },
+    "cluster": {
+      "$objectType": "vmm.v4.ahv.config.ClusterReference",
+      "extId": "01000000-0a01-4000-8000-000000000001"
+    },
+    "host": {
+      "$objectType": "vmm.v4.ahv.config.HostReference",
+      "extId": "02000000-0a01-4000-8000-000000000003"
+    },
+    "project": {
+      "$objectType": "vmm.v4.ahv.config.ProjectReference",
+      "extId": "00000000-0000-0000-0000-000000000000"
+    },
+    "ownershipInfo": {
+      "$objectType": "vmm.v4.ahv.config.OwnershipInfo",
+      "owner": {
+        "$objectType": "vmm.v4.ahv.config.OwnerReference",
+        "extId": "0e000000-0a01-4000-8000-000000000002"
+      }
+    },
+    "categories": [
+      {
+        "$objectType": "vmm.v4.ahv.config.CategoryReference",
+        "extId": "07000000-0a01-4000-8000-000000000001"
+      },
+      {
+        "$objectType": "vmm.v4.ahv.config.CategoryReference",
+        "extId": "07000000-0a01-4000-8000-000000000006"
+      },
+      {
+        "$objectType": "vmm.v4.ahv.config.CategoryReference",
+        "extId": "07000000-0a01-4000-8000-000000000008"
+      }
+    ],
+    "bootConfig": {
+      "$objectType": "vmm.v4.ahv.config.UefiBoot",
+      "isSecureBootEnabled": true,
+      "bootOrder": [
+        "DISK",
+        "CDROM",
+        "NETWORK"
+      ],
+      "nvramDevice": {
+        "$objectType": "vmm.v4.ahv.config.NvramDevice",
+        "backingStorageInfo": {
+          "$objectType": "vmm.v4.ahv.config.VmDisk",
+          "diskSizeBytes": 540672,
+          "storageContainer": {
+            "$objectType": "vmm.v4.ahv.config.VmDiskContainerReference",
+            "extId": "06000000-0a01-4000-8000-000000000001"
+          }
+        }
+      }
+    },
+    "disks": [
+      {
+        "$objectType": "vmm.v4.ahv.config.Disk",
+        "extId": "52000000-0a01-4000-8000-000000000401",
+        "diskAddress": {
+          "$objectType": "vmm.v4.ahv.config.DiskAddress",
+          "busType": "SCSI",
+          "index": 0
+        },
+        "backingInfo": {
+          "$objectType": "vmm.v4.ahv.config.VmDisk",
+          "diskSizeBytes": 107374182400,
+          "isMigrationInProgress": false,
+          "storageContainer": {
+            "$objectType": "vmm.v4.ahv.config.VmDiskContainerReference",
+            "extId": "06000000-0a01-4000-8000-000000000001"
+          },
+          "dataSource": {
+            "$objectType": "vmm.v4.ahv.config.DataSource",
+            "reference": {
+              "$objectType": "vmm.v4.ahv.config.ImageReference",
+              "imageExtId": "09000000-0a01-4000-8000-000000000001"
+            }
+          }
+        }
+      },
+      {
+        "$objectType": "vmm.v4.ahv.config.Disk",
+        "extId": "52000000-0a01-4000-8000-000000000402",
+        "diskAddress": {
+          "$objectType": "vmm.v4.ahv.config.DiskAddress",
+          "busType": "SCSI",
+          "index": 1
+        },
+        "backingInfo": {
+          "$objectType": "vmm.v4.ahv.config.VmDisk",
+          "diskSizeBytes": 214748364800,
+          "isMigrationInProgress": false,
+          "storageContainer": {
+            "$objectType": "vmm.v4.ahv.config.VmDiskContainerReference",
+            "extId": "06000000-0a01-4000-8000-000000000001"
+          }
+        }
+      }
+    ],
+    "cdRoms": [],
+    "nics": [
+      {
+        "$objectType": "vmm.v4.ahv.config.Nic",
+        "extId": "53000000-0a01-4000-8000-000000000401",
+        "nicBackingInfo": {
+          "$objectType": "vmm.v4.ahv.config.VirtualEthernetNic",
+          "macAddress": "00:00:5e:00:53:41",
+          "isConnected": true,
+          "model": "VIRTIO",
+          "numQueues": 2
+        },
+        "nicNetworkInfo": {
+          "$objectType": "vmm.v4.ahv.config.VirtualEthernetNicNetworkInfo",
+          "nicType": "NORMAL_NIC",
+          "vlanMode": "ACCESS",
+          "subnet": {
+            "$objectType": "vmm.v4.ahv.config.SubnetReference",
+            "extId": "08000000-0a01-4000-8000-000000000001"
+          },
+          "ipv4Config": {
+            "$objectType": "vmm.v4.ahv.config.Ipv4Config",
+            "shouldAssignIp": true,
+            "ipAddress": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "203.0.113.113",
+              "prefixLength": 24
+            }
+          },
+          "ipv4Info": {
+            "$objectType": "vmm.v4.ahv.config.Ipv4Info",
+            "learnedIpAddresses": [
+              {
+                "$objectType": "common.v1.config.IPv4Address",
+                "value": "203.0.113.113",
+                "prefixLength": 32
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "protectionType": "RULE_PROTECTED",
+    "protectionPolicyState": {
+      "$objectType": "vmm.v4.ahv.config.ProtectionPolicyState",
+      "policy": {
+        "$objectType": "vmm.v4.ahv.config.PolicyReference",
+        "extId": "11000000-0a01-4000-8000-000000000002"
+      }
+    }
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.Vm",
+    "extId": "03000000-0a01-4000-8000-000000000005",
+    "name": "prd-cache-01",
+    "description": "In-memory cache for the orders application",
+    "createTime": "2025-11-20T14:10:00Z",
+    "updateTime": "2026-09-05T09:57:00Z",
+    "powerState": "ON",
+    "numSockets": 2,
+    "numCoresPerSocket": 2,
+    "numThreadsPerCore": 1,
+    "memorySizeBytes": 17179869184,
+    "machineType": "PC",
+    "hardwareClockTimezone": "UTC",
+    "isAgentVm": false,
+    "isLiveMigrateCapable": true,
+    "isCrossClusterMigrationInProgress": false,
+    "isCpuHotplugEnabled": true,
+    "isCpuPassthroughEnabled": false,
+    "isVcpuHardPinningEnabled": false,
+    "isMemoryOvercommitEnabled": false,
+    "isScsiControllerEnabled": true,
+    "isVgaConsoleEnabled": true,
+    "isBrandingEnabled": true,
+    "vtpmConfig": {
+      "$objectType": "vmm.v4.ahv.config.VtpmConfig",
+      "isVtpmEnabled": false
+    },
+    "storageConfig": {
+      "$objectType": "vmm.v4.ahv.config.ADSFVmStorageConfig",
+      "isFlashModeEnabled": false
+    },
+    "cluster": {
+      "$objectType": "vmm.v4.ahv.config.ClusterReference",
+      "extId": "01000000-0a01-4000-8000-000000000001"
+    },
+    "host": {
+      "$objectType": "vmm.v4.ahv.config.HostReference",
+      "extId": "02000000-0a01-4000-8000-000000000002"
+    },
+    "project": {
+      "$objectType": "vmm.v4.ahv.config.ProjectReference",
+      "extId": "00000000-0000-0000-0000-000000000000"
+    },
+    "ownershipInfo": {
+      "$objectType": "vmm.v4.ahv.config.OwnershipInfo",
+      "owner": {
+        "$objectType": "vmm.v4.ahv.config.OwnerReference",
+        "extId": "0e000000-0a01-4000-8000-000000000002"
+      }
+    },
+    "categories": [
+      {
+        "$objectType": "vmm.v4.ahv.config.CategoryReference",
+        "extId": "07000000-0a01-4000-8000-000000000001"
+      },
+      {
+        "$objectType": "vmm.v4.ahv.config.CategoryReference",
+        "extId": "07000000-0a01-4000-8000-000000000006"
+      },
+      {
+        "$objectType": "vmm.v4.ahv.config.CategoryReference",
+        "extId": "07000000-0a01-4000-8000-000000000008"
+      }
+    ],
+    "bootConfig": {
+      "$objectType": "vmm.v4.ahv.config.UefiBoot",
+      "isSecureBootEnabled": true,
+      "bootOrder": [
+        "DISK",
+        "CDROM",
+        "NETWORK"
+      ],
+      "nvramDevice": {
+        "$objectType": "vmm.v4.ahv.config.NvramDevice",
+        "backingStorageInfo": {
+          "$objectType": "vmm.v4.ahv.config.VmDisk",
+          "diskSizeBytes": 540672,
+          "storageContainer": {
+            "$objectType": "vmm.v4.ahv.config.VmDiskContainerReference",
+            "extId": "06000000-0a01-4000-8000-000000000001"
+          }
+        }
+      }
+    },
+    "disks": [
+      {
+        "$objectType": "vmm.v4.ahv.config.Disk",
+        "extId": "52000000-0a01-4000-8000-000000000501",
+        "diskAddress": {
+          "$objectType": "vmm.v4.ahv.config.DiskAddress",
+          "busType": "SCSI",
+          "index": 0
+        },
+        "backingInfo": {
+          "$objectType": "vmm.v4.ahv.config.VmDisk",
+          "diskSizeBytes": 53687091200,
+          "isMigrationInProgress": false,
+          "storageContainer": {
+            "$objectType": "vmm.v4.ahv.config.VmDiskContainerReference",
+            "extId": "06000000-0a01-4000-8000-000000000001"
+          },
+          "dataSource": {
+            "$objectType": "vmm.v4.ahv.config.DataSource",
+            "reference": {
+              "$objectType": "vmm.v4.ahv.config.ImageReference",
+              "imageExtId": "09000000-0a01-4000-8000-000000000001"
+            }
+          }
+        }
+      }
+    ],
+    "cdRoms": [],
+    "nics": [
+      {
+        "$objectType": "vmm.v4.ahv.config.Nic",
+        "extId": "53000000-0a01-4000-8000-000000000501",
+        "nicBackingInfo": {
+          "$objectType": "vmm.v4.ahv.config.VirtualEthernetNic",
+          "macAddress": "00:00:5e:00:53:51",
+          "isConnected": true,
+          "model": "VIRTIO",
+          "numQueues": 1
+        },
+        "nicNetworkInfo": {
+          "$objectType": "vmm.v4.ahv.config.VirtualEthernetNicNetworkInfo",
+          "nicType": "NORMAL_NIC",
+          "vlanMode": "ACCESS",
+          "subnet": {
+            "$objectType": "vmm.v4.ahv.config.SubnetReference",
+            "extId": "08000000-0a01-4000-8000-000000000001"
+          },
+          "ipv4Config": {
+            "$objectType": "vmm.v4.ahv.config.Ipv4Config",
+            "shouldAssignIp": true,
+            "ipAddress": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "203.0.113.114",
+              "prefixLength": 24
+            }
+          },
+          "ipv4Info": {
+            "$objectType": "vmm.v4.ahv.config.Ipv4Info",
+            "learnedIpAddresses": [
+              {
+                "$objectType": "common.v1.config.IPv4Address",
+                "value": "203.0.113.114",
+                "prefixLength": 32
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "protectionType": "RULE_PROTECTED",
+    "protectionPolicyState": {
+      "$objectType": "vmm.v4.ahv.config.ProtectionPolicyState",
+      "policy": {
+        "$objectType": "vmm.v4.ahv.config.PolicyReference",
+        "extId": "11000000-0a01-4000-8000-000000000002"
+      }
+    }
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.Vm",
+    "extId": "03000000-0a01-4000-8000-000000000006",
+    "name": "dev-ci-01",
+    "description": "CI runner, powered off outside working hours",
+    "createTime": "2026-03-02T08:00:00Z",
+    "updateTime": "2026-09-05T08:00:00Z",
+    "powerState": "OFF",
+    "numSockets": 2,
+    "numCoresPerSocket": 2,
+    "numThreadsPerCore": 1,
+    "memorySizeBytes": 8589934592,
+    "machineType": "PC",
+    "hardwareClockTimezone": "UTC",
+    "isAgentVm": false,
+    "isLiveMigrateCapable": true,
+    "isCrossClusterMigrationInProgress": false,
+    "isCpuHotplugEnabled": true,
+    "isCpuPassthroughEnabled": false,
+    "isVcpuHardPinningEnabled": false,
+    "isMemoryOvercommitEnabled": true,
+    "isScsiControllerEnabled": true,
+    "isVgaConsoleEnabled": true,
+    "isBrandingEnabled": true,
+    "vtpmConfig": {
+      "$objectType": "vmm.v4.ahv.config.VtpmConfig",
+      "isVtpmEnabled": false
+    },
+    "storageConfig": {
+      "$objectType": "vmm.v4.ahv.config.ADSFVmStorageConfig",
+      "isFlashModeEnabled": false
+    },
+    "cluster": {
+      "$objectType": "vmm.v4.ahv.config.ClusterReference",
+      "extId": "01000000-0a01-4000-8000-000000000001"
+    },
+    "project": {
+      "$objectType": "vmm.v4.ahv.config.ProjectReference",
+      "extId": "00000000-0000-0000-0000-000000000000"
+    },
+    "ownershipInfo": {
+      "$objectType": "vmm.v4.ahv.config.OwnershipInfo",
+      "owner": {
+        "$objectType": "vmm.v4.ahv.config.OwnerReference",
+        "extId": "0e000000-0a01-4000-8000-000000000002"
+      }
+    },
+    "categories": [
+      {
+        "$objectType": "vmm.v4.ahv.config.CategoryReference",
+        "extId": "07000000-0a01-4000-8000-000000000002"
+      },
+      {
+        "$objectType": "vmm.v4.ahv.config.CategoryReference",
+        "extId": "07000000-0a01-4000-8000-000000000008"
+      }
+    ],
+    "bootConfig": {
+      "$objectType": "vmm.v4.ahv.config.UefiBoot",
+      "isSecureBootEnabled": false,
+      "bootOrder": [
+        "DISK",
+        "CDROM",
+        "NETWORK"
+      ],
+      "nvramDevice": {
+        "$objectType": "vmm.v4.ahv.config.NvramDevice",
+        "backingStorageInfo": {
+          "$objectType": "vmm.v4.ahv.config.VmDisk",
+          "diskSizeBytes": 540672,
+          "storageContainer": {
+            "$objectType": "vmm.v4.ahv.config.VmDiskContainerReference",
+            "extId": "06000000-0a01-4000-8000-000000000001"
+          }
+        }
+      }
+    },
+    "disks": [
+      {
+        "$objectType": "vmm.v4.ahv.config.Disk",
+        "extId": "52000000-0a01-4000-8000-000000000601",
+        "diskAddress": {
+          "$objectType": "vmm.v4.ahv.config.DiskAddress",
+          "busType": "SCSI",
+          "index": 0
+        },
+        "backingInfo": {
+          "$objectType": "vmm.v4.ahv.config.VmDisk",
+          "diskSizeBytes": 107374182400,
+          "isMigrationInProgress": false,
+          "storageContainer": {
+            "$objectType": "vmm.v4.ahv.config.VmDiskContainerReference",
+            "extId": "06000000-0a01-4000-8000-000000000001"
+          },
+          "dataSource": {
+            "$objectType": "vmm.v4.ahv.config.DataSource",
+            "reference": {
+              "$objectType": "vmm.v4.ahv.config.ImageReference",
+              "imageExtId": "09000000-0a01-4000-8000-000000000001"
+            }
+          }
+        }
+      }
+    ],
+    "cdRoms": [],
+    "nics": [
+      {
+        "$objectType": "vmm.v4.ahv.config.Nic",
+        "extId": "53000000-0a01-4000-8000-000000000601",
+        "nicBackingInfo": {
+          "$objectType": "vmm.v4.ahv.config.VirtualEthernetNic",
+          "macAddress": "00:00:5e:00:53:61",
+          "isConnected": true,
+          "model": "VIRTIO",
+          "numQueues": 1
+        },
+        "nicNetworkInfo": {
+          "$objectType": "vmm.v4.ahv.config.VirtualEthernetNicNetworkInfo",
+          "nicType": "NORMAL_NIC",
+          "vlanMode": "ACCESS",
+          "subnet": {
+            "$objectType": "vmm.v4.ahv.config.SubnetReference",
+            "extId": "08000000-0a01-4000-8000-000000000003"
+          },
+          "ipv4Config": {
+            "$objectType": "vmm.v4.ahv.config.Ipv4Config",
+            "shouldAssignIp": true,
+            "ipAddress": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "198.51.100.100",
+              "prefixLength": 25
+            }
+          }
+        }
+      }
+    ],
+    "protectionType": "UNPROTECTED"
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.Vm",
+    "extId": "03000000-0a01-4000-8000-000000000007",
+    "name": "dev-build-01",
+    "description": "Build agent for the release pipeline",
+    "createTime": "2026-09-02T10:00:00Z",
+    "updateTime": "2026-09-02T10:05:00Z",
+    "powerState": "ON",
+    "numSockets": 8,
+    "numCoresPerSocket": 1,
+    "numThreadsPerCore": 1,
+    "memorySizeBytes": 17179869184,
+    "machineType": "PC",
+    "hardwareClockTimezone": "UTC",
+    "isAgentVm": false,
+    "isLiveMigrateCapable": true,
+    "isCrossClusterMigrationInProgress": false,
+    "isCpuHotplugEnabled": true,
+    "isCpuPassthroughEnabled": false,
+    "isVcpuHardPinningEnabled": false,
+    "isMemoryOvercommitEnabled": true,
+    "isScsiControllerEnabled": true,
+    "isVgaConsoleEnabled": true,
+    "isBrandingEnabled": true,
+    "vtpmConfig": {
+      "$objectType": "vmm.v4.ahv.config.VtpmConfig",
+      "isVtpmEnabled": false
+    },
+    "storageConfig": {
+      "$objectType": "vmm.v4.ahv.config.ADSFVmStorageConfig",
+      "isFlashModeEnabled": false
+    },
+    "cluster": {
+      "$objectType": "vmm.v4.ahv.config.ClusterReference",
+      "extId": "01000000-0a01-4000-8000-000000000001"
+    },
+    "host": {
+      "$objectType": "vmm.v4.ahv.config.HostReference",
+      "extId": "02000000-0a01-4000-8000-000000000003"
+    },
+    "project": {
+      "$objectType": "vmm.v4.ahv.config.ProjectReference",
+      "extId": "00000000-0000-0000-0000-000000000000"
+    },
+    "ownershipInfo": {
+      "$objectType": "vmm.v4.ahv.config.OwnershipInfo",
+      "owner": {
+        "$objectType": "vmm.v4.ahv.config.OwnerReference",
+        "extId": "0e000000-0a01-4000-8000-000000000001"
+      }
+    },
+    "categories": [
+      {
+        "$objectType": "vmm.v4.ahv.config.CategoryReference",
+        "extId": "07000000-0a01-4000-8000-000000000002"
+      },
+      {
+        "$objectType": "vmm.v4.ahv.config.CategoryReference",
+        "extId": "07000000-0a01-4000-8000-000000000008"
+      }
+    ],
+    "bootConfig": {
+      "$objectType": "vmm.v4.ahv.config.UefiBoot",
+      "isSecureBootEnabled": false,
+      "bootOrder": [
+        "DISK",
+        "CDROM",
+        "NETWORK"
+      ],
+      "nvramDevice": {
+        "$objectType": "vmm.v4.ahv.config.NvramDevice",
+        "backingStorageInfo": {
+          "$objectType": "vmm.v4.ahv.config.VmDisk",
+          "diskSizeBytes": 540672,
+          "storageContainer": {
+            "$objectType": "vmm.v4.ahv.config.VmDiskContainerReference",
+            "extId": "06000000-0a01-4000-8000-000000000001"
+          }
+        }
+      }
+    },
+    "disks": [
+      {
+        "$objectType": "vmm.v4.ahv.config.Disk",
+        "extId": "52000000-0a01-4000-8000-000000000701",
+        "diskAddress": {
+          "$objectType": "vmm.v4.ahv.config.DiskAddress",
+          "busType": "SCSI",
+          "index": 0
+        },
+        "backingInfo": {
+          "$objectType": "vmm.v4.ahv.config.VmDisk",
+          "diskSizeBytes": 107374182400,
+          "isMigrationInProgress": false,
+          "storageContainer": {
+            "$objectType": "vmm.v4.ahv.config.VmDiskContainerReference",
+            "extId": "06000000-0a01-4000-8000-000000000001"
+          },
+          "dataSource": {
+            "$objectType": "vmm.v4.ahv.config.DataSource",
+            "reference": {
+              "$objectType": "vmm.v4.ahv.config.ImageReference",
+              "imageExtId": "09000000-0a01-4000-8000-000000000001"
+            }
+          }
+        }
+      },
+      {
+        "$objectType": "vmm.v4.ahv.config.Disk",
+        "extId": "52000000-0a01-4000-8000-000000000702",
+        "diskAddress": {
+          "$objectType": "vmm.v4.ahv.config.DiskAddress",
+          "busType": "SCSI",
+          "index": 1
+        },
+        "backingInfo": {
+          "$objectType": "vmm.v4.ahv.config.VmDisk",
+          "diskSizeBytes": 536870912000,
+          "isMigrationInProgress": false,
+          "storageContainer": {
+            "$objectType": "vmm.v4.ahv.config.VmDiskContainerReference",
+            "extId": "06000000-0a01-4000-8000-000000000001"
+          }
+        }
+      }
+    ],
+    "cdRoms": [],
+    "nics": [
+      {
+        "$objectType": "vmm.v4.ahv.config.Nic",
+        "extId": "53000000-0a01-4000-8000-000000000701",
+        "nicBackingInfo": {
+          "$objectType": "vmm.v4.ahv.config.VirtualEthernetNic",
+          "macAddress": "00:00:5e:00:53:71",
+          "isConnected": true,
+          "model": "VIRTIO",
+          "numQueues": 1
+        },
+        "nicNetworkInfo": {
+          "$objectType": "vmm.v4.ahv.config.VirtualEthernetNicNetworkInfo",
+          "nicType": "NORMAL_NIC",
+          "vlanMode": "ACCESS",
+          "subnet": {
+            "$objectType": "vmm.v4.ahv.config.SubnetReference",
+            "extId": "08000000-0a01-4000-8000-000000000003"
+          },
+          "ipv4Config": {
+            "$objectType": "vmm.v4.ahv.config.Ipv4Config",
+            "shouldAssignIp": true,
+            "ipAddress": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "198.51.100.101",
+              "prefixLength": 25
+            }
+          },
+          "ipv4Info": {
+            "$objectType": "vmm.v4.ahv.config.Ipv4Info",
+            "learnedIpAddresses": [
+              {
+                "$objectType": "common.v1.config.IPv4Address",
+                "value": "198.51.100.101",
+                "prefixLength": 32
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "protectionType": "UNPROTECTED"
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.Vm",
+    "extId": "03000000-0a01-4000-8000-000000000008",
+    "name": "dev-scratch-02",
+    "description": "Scratch VM for load tests, 64 GiB",
+    "createTime": "2026-08-15T11:00:00Z",
+    "updateTime": "2026-09-05T09:51:04Z",
+    "powerState": "OFF",
+    "numSockets": 8,
+    "numCoresPerSocket": 2,
+    "numThreadsPerCore": 1,
+    "memorySizeBytes": 68719476736,
+    "machineType": "PC",
+    "hardwareClockTimezone": "UTC",
+    "isAgentVm": false,
+    "isLiveMigrateCapable": true,
+    "isCrossClusterMigrationInProgress": false,
+    "isCpuHotplugEnabled": true,
+    "isCpuPassthroughEnabled": false,
+    "isVcpuHardPinningEnabled": false,
+    "isMemoryOvercommitEnabled": true,
+    "isScsiControllerEnabled": true,
+    "isVgaConsoleEnabled": true,
+    "isBrandingEnabled": true,
+    "vtpmConfig": {
+      "$objectType": "vmm.v4.ahv.config.VtpmConfig",
+      "isVtpmEnabled": false
+    },
+    "storageConfig": {
+      "$objectType": "vmm.v4.ahv.config.ADSFVmStorageConfig",
+      "isFlashModeEnabled": false
+    },
+    "cluster": {
+      "$objectType": "vmm.v4.ahv.config.ClusterReference",
+      "extId": "01000000-0a01-4000-8000-000000000001"
+    },
+    "project": {
+      "$objectType": "vmm.v4.ahv.config.ProjectReference",
+      "extId": "00000000-0000-0000-0000-000000000000"
+    },
+    "ownershipInfo": {
+      "$objectType": "vmm.v4.ahv.config.OwnershipInfo",
+      "owner": {
+        "$objectType": "vmm.v4.ahv.config.OwnerReference",
+        "extId": "0e000000-0a01-4000-8000-000000000003"
+      }
+    },
+    "categories": [
+      {
+        "$objectType": "vmm.v4.ahv.config.CategoryReference",
+        "extId": "07000000-0a01-4000-8000-000000000002"
+      },
+      {
+        "$objectType": "vmm.v4.ahv.config.CategoryReference",
+        "extId": "07000000-0a01-4000-8000-000000000008"
+      }
+    ],
+    "bootConfig": {
+      "$objectType": "vmm.v4.ahv.config.UefiBoot",
+      "isSecureBootEnabled": false,
+      "bootOrder": [
+        "DISK",
+        "CDROM",
+        "NETWORK"
+      ],
+      "nvramDevice": {
+        "$objectType": "vmm.v4.ahv.config.NvramDevice",
+        "backingStorageInfo": {
+          "$objectType": "vmm.v4.ahv.config.VmDisk",
+          "diskSizeBytes": 540672,
+          "storageContainer": {
+            "$objectType": "vmm.v4.ahv.config.VmDiskContainerReference",
+            "extId": "06000000-0a01-4000-8000-000000000001"
+          }
+        }
+      }
+    },
+    "disks": [
+      {
+        "$objectType": "vmm.v4.ahv.config.Disk",
+        "extId": "52000000-0a01-4000-8000-000000000801",
+        "diskAddress": {
+          "$objectType": "vmm.v4.ahv.config.DiskAddress",
+          "busType": "SCSI",
+          "index": 0
+        },
+        "backingInfo": {
+          "$objectType": "vmm.v4.ahv.config.VmDisk",
+          "diskSizeBytes": 214748364800,
+          "isMigrationInProgress": false,
+          "storageContainer": {
+            "$objectType": "vmm.v4.ahv.config.VmDiskContainerReference",
+            "extId": "06000000-0a01-4000-8000-000000000001"
+          }
+        }
+      }
+    ],
+    "cdRoms": [],
+    "nics": [
+      {
+        "$objectType": "vmm.v4.ahv.config.Nic",
+        "extId": "53000000-0a01-4000-8000-000000000801",
+        "nicBackingInfo": {
+          "$objectType": "vmm.v4.ahv.config.VirtualEthernetNic",
+          "macAddress": "00:00:5e:00:53:81",
+          "isConnected": true,
+          "model": "VIRTIO",
+          "numQueues": 1
+        },
+        "nicNetworkInfo": {
+          "$objectType": "vmm.v4.ahv.config.VirtualEthernetNicNetworkInfo",
+          "nicType": "NORMAL_NIC",
+          "vlanMode": "ACCESS",
+          "subnet": {
+            "$objectType": "vmm.v4.ahv.config.SubnetReference",
+            "extId": "08000000-0a01-4000-8000-000000000003"
+          },
+          "ipv4Config": {
+            "$objectType": "vmm.v4.ahv.config.Ipv4Config",
+            "shouldAssignIp": true,
+            "ipAddress": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "198.51.100.102",
+              "prefixLength": 25
+            }
+          }
+        }
+      }
+    ],
+    "protectionType": "UNPROTECTED"
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.Vm",
+    "extId": "03000000-0a01-4000-8000-000000000009",
+    "name": "infra-dns-01",
+    "description": "Internal DNS resolver for the harbor site",
+    "createTime": "2025-06-12T08:30:00Z",
+    "updateTime": "2026-05-01T10:00:00Z",
+    "powerState": "ON",
+    "numSockets": 1,
+    "numCoresPerSocket": 2,
+    "numThreadsPerCore": 1,
+    "memorySizeBytes": 4294967296,
+    "machineType": "PC",
+    "hardwareClockTimezone": "UTC",
+    "isAgentVm": false,
+    "isLiveMigrateCapable": true,
+    "isCrossClusterMigrationInProgress": false,
+    "isCpuHotplugEnabled": false,
+    "isCpuPassthroughEnabled": false,
+    "isVcpuHardPinningEnabled": false,
+    "isMemoryOvercommitEnabled": false,
+    "isScsiControllerEnabled": true,
+    "isVgaConsoleEnabled": true,
+    "isBrandingEnabled": true,
+    "vtpmConfig": {
+      "$objectType": "vmm.v4.ahv.config.VtpmConfig",
+      "isVtpmEnabled": false
+    },
+    "storageConfig": {
+      "$objectType": "vmm.v4.ahv.config.ADSFVmStorageConfig",
+      "isFlashModeEnabled": false
+    },
+    "cluster": {
+      "$objectType": "vmm.v4.ahv.config.ClusterReference",
+      "extId": "01000000-0a01-4000-8000-000000000001"
+    },
+    "host": {
+      "$objectType": "vmm.v4.ahv.config.HostReference",
+      "extId": "02000000-0a01-4000-8000-000000000001"
+    },
+    "project": {
+      "$objectType": "vmm.v4.ahv.config.ProjectReference",
+      "extId": "00000000-0000-0000-0000-000000000000"
+    },
+    "ownershipInfo": {
+      "$objectType": "vmm.v4.ahv.config.OwnershipInfo",
+      "owner": {
+        "$objectType": "vmm.v4.ahv.config.OwnerReference",
+        "extId": "0e000000-0a01-4000-8000-000000000001"
+      }
+    },
+    "categories": [
+      {
+        "$objectType": "vmm.v4.ahv.config.CategoryReference",
+        "extId": "07000000-0a01-4000-8000-000000000003"
+      },
+      {
+        "$objectType": "vmm.v4.ahv.config.CategoryReference",
+        "extId": "07000000-0a01-4000-8000-000000000008"
+      }
+    ],
+    "bootConfig": {
+      "$objectType": "vmm.v4.ahv.config.LegacyBoot",
+      "bootOrder": [
+        "DISK",
+        "CDROM",
+        "NETWORK"
+      ],
+      "bootDevice": {
+        "$objectType": "vmm.v4.ahv.config.BootDeviceDisk",
+        "diskAddress": {
+          "$objectType": "vmm.v4.ahv.config.DiskAddress",
+          "busType": "SCSI",
+          "index": 0
+        }
+      }
+    },
+    "disks": [
+      {
+        "$objectType": "vmm.v4.ahv.config.Disk",
+        "extId": "52000000-0a01-4000-8000-000000000901",
+        "diskAddress": {
+          "$objectType": "vmm.v4.ahv.config.DiskAddress",
+          "busType": "SCSI",
+          "index": 0
+        },
+        "backingInfo": {
+          "$objectType": "vmm.v4.ahv.config.VmDisk",
+          "diskSizeBytes": 53687091200,
+          "isMigrationInProgress": false,
+          "storageContainer": {
+            "$objectType": "vmm.v4.ahv.config.VmDiskContainerReference",
+            "extId": "06000000-0a01-4000-8000-000000000001"
+          },
+          "dataSource": {
+            "$objectType": "vmm.v4.ahv.config.DataSource",
+            "reference": {
+              "$objectType": "vmm.v4.ahv.config.ImageReference",
+              "imageExtId": "09000000-0a01-4000-8000-000000000001"
+            }
+          }
+        }
+      }
+    ],
+    "cdRoms": [],
+    "nics": [
+      {
+        "$objectType": "vmm.v4.ahv.config.Nic",
+        "extId": "53000000-0a01-4000-8000-000000000901",
+        "nicBackingInfo": {
+          "$objectType": "vmm.v4.ahv.config.VirtualEthernetNic",
+          "macAddress": "00:00:5e:00:53:91",
+          "isConnected": true,
+          "model": "VIRTIO",
+          "numQueues": 1
+        },
+        "nicNetworkInfo": {
+          "$objectType": "vmm.v4.ahv.config.VirtualEthernetNicNetworkInfo",
+          "nicType": "NORMAL_NIC",
+          "vlanMode": "ACCESS",
+          "subnet": {
+            "$objectType": "vmm.v4.ahv.config.SubnetReference",
+            "extId": "08000000-0a01-4000-8000-000000000001"
+          },
+          "ipv4Config": {
+            "$objectType": "vmm.v4.ahv.config.Ipv4Config",
+            "shouldAssignIp": true,
+            "ipAddress": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "203.0.113.53",
+              "prefixLength": 24
+            }
+          },
+          "ipv4Info": {
+            "$objectType": "vmm.v4.ahv.config.Ipv4Info",
+            "learnedIpAddresses": [
+              {
+                "$objectType": "common.v1.config.IPv4Address",
+                "value": "203.0.113.53",
+                "prefixLength": 32
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "protectionType": "UNPROTECTED"
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.Vm",
+    "extId": "03000000-0a01-4000-8000-000000000010",
+    "name": "infra-ad-01",
+    "description": "Directory server for the harbor site",
+    "createTime": "2025-06-12T09:00:00Z",
+    "updateTime": "2026-07-20T22:00:00Z",
+    "powerState": "ON",
+    "numSockets": 2,
+    "numCoresPerSocket": 2,
+    "numThreadsPerCore": 1,
+    "memorySizeBytes": 8589934592,
+    "machineType": "PC",
+    "hardwareClockTimezone": "UTC",
+    "isAgentVm": false,
+    "isLiveMigrateCapable": true,
+    "isCrossClusterMigrationInProgress": false,
+    "isCpuHotplugEnabled": true,
+    "isCpuPassthroughEnabled": false,
+    "isVcpuHardPinningEnabled": false,
+    "isMemoryOvercommitEnabled": false,
+    "isScsiControllerEnabled": true,
+    "isVgaConsoleEnabled": true,
+    "isBrandingEnabled": true,
+    "vtpmConfig": {
+      "$objectType": "vmm.v4.ahv.config.VtpmConfig",
+      "isVtpmEnabled": true
+    },
+    "storageConfig": {
+      "$objectType": "vmm.v4.ahv.config.ADSFVmStorageConfig",
+      "isFlashModeEnabled": false
+    },
+    "cluster": {
+      "$objectType": "vmm.v4.ahv.config.ClusterReference",
+      "extId": "01000000-0a01-4000-8000-000000000001"
+    },
+    "host": {
+      "$objectType": "vmm.v4.ahv.config.HostReference",
+      "extId": "02000000-0a01-4000-8000-000000000002"
+    },
+    "project": {
+      "$objectType": "vmm.v4.ahv.config.ProjectReference",
+      "extId": "00000000-0000-0000-0000-000000000000"
+    },
+    "ownershipInfo": {
+      "$objectType": "vmm.v4.ahv.config.OwnershipInfo",
+      "owner": {
+        "$objectType": "vmm.v4.ahv.config.OwnerReference",
+        "extId": "0e000000-0a01-4000-8000-000000000001"
+      }
+    },
+    "categories": [
+      {
+        "$objectType": "vmm.v4.ahv.config.CategoryReference",
+        "extId": "07000000-0a01-4000-8000-000000000003"
+      },
+      {
+        "$objectType": "vmm.v4.ahv.config.CategoryReference",
+        "extId": "07000000-0a01-4000-8000-000000000008"
+      }
+    ],
+    "bootConfig": {
+      "$objectType": "vmm.v4.ahv.config.UefiBoot",
+      "isSecureBootEnabled": true,
+      "bootOrder": [
+        "DISK",
+        "CDROM",
+        "NETWORK"
+      ],
+      "nvramDevice": {
+        "$objectType": "vmm.v4.ahv.config.NvramDevice",
+        "backingStorageInfo": {
+          "$objectType": "vmm.v4.ahv.config.VmDisk",
+          "diskSizeBytes": 540672,
+          "storageContainer": {
+            "$objectType": "vmm.v4.ahv.config.VmDiskContainerReference",
+            "extId": "06000000-0a01-4000-8000-000000000001"
+          }
+        }
+      }
+    },
+    "disks": [
+      {
+        "$objectType": "vmm.v4.ahv.config.Disk",
+        "extId": "52000000-0a01-4000-8000-000000001001",
+        "diskAddress": {
+          "$objectType": "vmm.v4.ahv.config.DiskAddress",
+          "busType": "SCSI",
+          "index": 0
+        },
+        "backingInfo": {
+          "$objectType": "vmm.v4.ahv.config.VmDisk",
+          "diskSizeBytes": 107374182400,
+          "isMigrationInProgress": false,
+          "storageContainer": {
+            "$objectType": "vmm.v4.ahv.config.VmDiskContainerReference",
+            "extId": "06000000-0a01-4000-8000-000000000001"
+          },
+          "dataSource": {
+            "$objectType": "vmm.v4.ahv.config.DataSource",
+            "reference": {
+              "$objectType": "vmm.v4.ahv.config.ImageReference",
+              "imageExtId": "09000000-0a01-4000-8000-000000000002"
+            }
+          }
+        }
+      }
+    ],
+    "cdRoms": [],
+    "nics": [
+      {
+        "$objectType": "vmm.v4.ahv.config.Nic",
+        "extId": "53000000-0a01-4000-8000-000000001001",
+        "nicBackingInfo": {
+          "$objectType": "vmm.v4.ahv.config.VirtualEthernetNic",
+          "macAddress": "00:00:5e:00:53:d1",
+          "isConnected": true,
+          "model": "VIRTIO",
+          "numQueues": 1
+        },
+        "nicNetworkInfo": {
+          "$objectType": "vmm.v4.ahv.config.VirtualEthernetNicNetworkInfo",
+          "nicType": "NORMAL_NIC",
+          "vlanMode": "ACCESS",
+          "subnet": {
+            "$objectType": "vmm.v4.ahv.config.SubnetReference",
+            "extId": "08000000-0a01-4000-8000-000000000001"
+          },
+          "ipv4Config": {
+            "$objectType": "vmm.v4.ahv.config.Ipv4Config",
+            "shouldAssignIp": true,
+            "ipAddress": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "203.0.113.115",
+              "prefixLength": 24
+            }
+          },
+          "ipv4Info": {
+            "$objectType": "vmm.v4.ahv.config.Ipv4Info",
+            "learnedIpAddresses": [
+              {
+                "$objectType": "common.v1.config.IPv4Address",
+                "value": "203.0.113.115",
+                "prefixLength": 32
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "guestTools": {
+      "$objectType": "vmm.v4.ahv.config.GuestTools",
+      "isInstalled": true,
+      "isEnabled": true,
+      "isReachable": true,
+      "isIsoInserted": false,
+      "version": "4.5",
+      "availableVersion": "4.6",
+      "guestOsVersion": "windows:64:Windows Server 2022 Standard",
+      "capabilities": [
+        "VSS_SNAPSHOT"
+      ],
+      "guestInfo": {
+        "$objectType": "vmm.v4.ahv.config.GuestInfo",
+        "guestOsFullName": "Windows Server 2022 Standard",
+        "installedVirtIoVersion": "1.2.5",
+        "lastBootUpTime": "2026-07-20T22:05:00Z",
+        "dnsName": {
+          "$objectType": "common.v1.config.FQDN",
+          "value": "infra-ad-01.demo.example.com"
+        }
+      }
+    },
+    "protectionType": "UNPROTECTED"
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.Vm",
+    "extId": "03000000-0a01-4000-8000-000000000011",
+    "name": "edge-pos-01",
+    "description": "Point-of-sale gateway at the edge site",
+    "createTime": "2026-01-10T08:00:00Z",
+    "updateTime": "2026-06-01T09:00:00Z",
+    "powerState": "ON",
+    "numSockets": 2,
+    "numCoresPerSocket": 1,
+    "numThreadsPerCore": 1,
+    "memorySizeBytes": 4294967296,
+    "machineType": "PC",
+    "hardwareClockTimezone": "UTC",
+    "isAgentVm": false,
+    "isLiveMigrateCapable": true,
+    "isCrossClusterMigrationInProgress": false,
+    "isCpuHotplugEnabled": true,
+    "isCpuPassthroughEnabled": false,
+    "isVcpuHardPinningEnabled": false,
+    "isMemoryOvercommitEnabled": false,
+    "isScsiControllerEnabled": true,
+    "isVgaConsoleEnabled": true,
+    "isBrandingEnabled": true,
+    "vtpmConfig": {
+      "$objectType": "vmm.v4.ahv.config.VtpmConfig",
+      "isVtpmEnabled": false
+    },
+    "storageConfig": {
+      "$objectType": "vmm.v4.ahv.config.ADSFVmStorageConfig",
+      "isFlashModeEnabled": false
+    },
+    "cluster": {
+      "$objectType": "vmm.v4.ahv.config.ClusterReference",
+      "extId": "01000000-0a01-4000-8000-000000000002"
+    },
+    "host": {
+      "$objectType": "vmm.v4.ahv.config.HostReference",
+      "extId": "02000000-0a01-4000-8000-000000000004"
+    },
+    "project": {
+      "$objectType": "vmm.v4.ahv.config.ProjectReference",
+      "extId": "00000000-0000-0000-0000-000000000000"
+    },
+    "ownershipInfo": {
+      "$objectType": "vmm.v4.ahv.config.OwnershipInfo",
+      "owner": {
+        "$objectType": "vmm.v4.ahv.config.OwnerReference",
+        "extId": "0e000000-0a01-4000-8000-000000000001"
+      }
+    },
+    "categories": [
+      {
+        "$objectType": "vmm.v4.ahv.config.CategoryReference",
+        "extId": "07000000-0a01-4000-8000-000000000001"
+      },
+      {
+        "$objectType": "vmm.v4.ahv.config.CategoryReference",
+        "extId": "07000000-0a01-4000-8000-000000000009"
+      }
+    ],
+    "bootConfig": {
+      "$objectType": "vmm.v4.ahv.config.UefiBoot",
+      "isSecureBootEnabled": true,
+      "bootOrder": [
+        "DISK",
+        "CDROM",
+        "NETWORK"
+      ],
+      "nvramDevice": {
+        "$objectType": "vmm.v4.ahv.config.NvramDevice",
+        "backingStorageInfo": {
+          "$objectType": "vmm.v4.ahv.config.VmDisk",
+          "diskSizeBytes": 540672,
+          "storageContainer": {
+            "$objectType": "vmm.v4.ahv.config.VmDiskContainerReference",
+            "extId": "06000000-0a01-4000-8000-000000000004"
+          }
+        }
+      }
+    },
+    "disks": [
+      {
+        "$objectType": "vmm.v4.ahv.config.Disk",
+        "extId": "52000000-0a01-4000-8000-000000001101",
+        "diskAddress": {
+          "$objectType": "vmm.v4.ahv.config.DiskAddress",
+          "busType": "SCSI",
+          "index": 0
+        },
+        "backingInfo": {
+          "$objectType": "vmm.v4.ahv.config.VmDisk",
+          "diskSizeBytes": 53687091200,
+          "isMigrationInProgress": false,
+          "storageContainer": {
+            "$objectType": "vmm.v4.ahv.config.VmDiskContainerReference",
+            "extId": "06000000-0a01-4000-8000-000000000004"
+          },
+          "dataSource": {
+            "$objectType": "vmm.v4.ahv.config.DataSource",
+            "reference": {
+              "$objectType": "vmm.v4.ahv.config.ImageReference",
+              "imageExtId": "09000000-0a01-4000-8000-000000000001"
+            }
+          }
+        }
+      }
+    ],
+    "cdRoms": [],
+    "nics": [
+      {
+        "$objectType": "vmm.v4.ahv.config.Nic",
+        "extId": "53000000-0a01-4000-8000-000000001101",
+        "nicBackingInfo": {
+          "$objectType": "vmm.v4.ahv.config.VirtualEthernetNic",
+          "macAddress": "00:00:5e:00:53:e1",
+          "isConnected": true,
+          "model": "VIRTIO",
+          "numQueues": 1
+        },
+        "nicNetworkInfo": {
+          "$objectType": "vmm.v4.ahv.config.VirtualEthernetNicNetworkInfo",
+          "nicType": "NORMAL_NIC",
+          "vlanMode": "ACCESS",
+          "subnet": {
+            "$objectType": "vmm.v4.ahv.config.SubnetReference",
+            "extId": "08000000-0a01-4000-8000-000000000004"
+          },
+          "ipv4Config": {
+            "$objectType": "vmm.v4.ahv.config.Ipv4Config",
+            "shouldAssignIp": true,
+            "ipAddress": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "198.51.100.201",
+              "prefixLength": 25
+            }
+          },
+          "ipv4Info": {
+            "$objectType": "vmm.v4.ahv.config.Ipv4Info",
+            "learnedIpAddresses": [
+              {
+                "$objectType": "common.v1.config.IPv4Address",
+                "value": "198.51.100.201",
+                "prefixLength": 32
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "protectionType": "UNPROTECTED"
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.Vm",
+    "extId": "03000000-0a01-4000-8000-000000000012",
+    "name": "edge-cache-01",
+    "description": "Local cache for the edge site",
+    "createTime": "2026-01-10T08:10:00Z",
+    "updateTime": "2026-06-01T09:05:00Z",
+    "powerState": "ON",
+    "numSockets": 2,
+    "numCoresPerSocket": 1,
+    "numThreadsPerCore": 1,
+    "memorySizeBytes": 8589934592,
+    "machineType": "PC",
+    "hardwareClockTimezone": "UTC",
+    "isAgentVm": false,
+    "isLiveMigrateCapable": true,
+    "isCrossClusterMigrationInProgress": false,
+    "isCpuHotplugEnabled": true,
+    "isCpuPassthroughEnabled": false,
+    "isVcpuHardPinningEnabled": false,
+    "isMemoryOvercommitEnabled": false,
+    "isScsiControllerEnabled": true,
+    "isVgaConsoleEnabled": true,
+    "isBrandingEnabled": true,
+    "vtpmConfig": {
+      "$objectType": "vmm.v4.ahv.config.VtpmConfig",
+      "isVtpmEnabled": false
+    },
+    "storageConfig": {
+      "$objectType": "vmm.v4.ahv.config.ADSFVmStorageConfig",
+      "isFlashModeEnabled": false
+    },
+    "cluster": {
+      "$objectType": "vmm.v4.ahv.config.ClusterReference",
+      "extId": "01000000-0a01-4000-8000-000000000002"
+    },
+    "host": {
+      "$objectType": "vmm.v4.ahv.config.HostReference",
+      "extId": "02000000-0a01-4000-8000-000000000004"
+    },
+    "project": {
+      "$objectType": "vmm.v4.ahv.config.ProjectReference",
+      "extId": "00000000-0000-0000-0000-000000000000"
+    },
+    "ownershipInfo": {
+      "$objectType": "vmm.v4.ahv.config.OwnershipInfo",
+      "owner": {
+        "$objectType": "vmm.v4.ahv.config.OwnerReference",
+        "extId": "0e000000-0a01-4000-8000-000000000001"
+      }
+    },
+    "categories": [
+      {
+        "$objectType": "vmm.v4.ahv.config.CategoryReference",
+        "extId": "07000000-0a01-4000-8000-000000000001"
+      },
+      {
+        "$objectType": "vmm.v4.ahv.config.CategoryReference",
+        "extId": "07000000-0a01-4000-8000-000000000009"
+      }
+    ],
+    "bootConfig": {
+      "$objectType": "vmm.v4.ahv.config.UefiBoot",
+      "isSecureBootEnabled": true,
+      "bootOrder": [
+        "DISK",
+        "CDROM",
+        "NETWORK"
+      ],
+      "nvramDevice": {
+        "$objectType": "vmm.v4.ahv.config.NvramDevice",
+        "backingStorageInfo": {
+          "$objectType": "vmm.v4.ahv.config.VmDisk",
+          "diskSizeBytes": 540672,
+          "storageContainer": {
+            "$objectType": "vmm.v4.ahv.config.VmDiskContainerReference",
+            "extId": "06000000-0a01-4000-8000-000000000004"
+          }
+        }
+      }
+    },
+    "disks": [
+      {
+        "$objectType": "vmm.v4.ahv.config.Disk",
+        "extId": "52000000-0a01-4000-8000-000000001201",
+        "diskAddress": {
+          "$objectType": "vmm.v4.ahv.config.DiskAddress",
+          "busType": "SCSI",
+          "index": 0
+        },
+        "backingInfo": {
+          "$objectType": "vmm.v4.ahv.config.VmDisk",
+          "diskSizeBytes": 107374182400,
+          "isMigrationInProgress": false,
+          "storageContainer": {
+            "$objectType": "vmm.v4.ahv.config.VmDiskContainerReference",
+            "extId": "06000000-0a01-4000-8000-000000000004"
+          },
+          "dataSource": {
+            "$objectType": "vmm.v4.ahv.config.DataSource",
+            "reference": {
+              "$objectType": "vmm.v4.ahv.config.ImageReference",
+              "imageExtId": "09000000-0a01-4000-8000-000000000001"
+            }
+          }
+        }
+      }
+    ],
+    "cdRoms": [],
+    "nics": [
+      {
+        "$objectType": "vmm.v4.ahv.config.Nic",
+        "extId": "53000000-0a01-4000-8000-000000001201",
+        "nicBackingInfo": {
+          "$objectType": "vmm.v4.ahv.config.VirtualEthernetNic",
+          "macAddress": "00:00:5e:00:53:f1",
+          "isConnected": true,
+          "model": "VIRTIO",
+          "numQueues": 1
+        },
+        "nicNetworkInfo": {
+          "$objectType": "vmm.v4.ahv.config.VirtualEthernetNicNetworkInfo",
+          "nicType": "NORMAL_NIC",
+          "vlanMode": "ACCESS",
+          "subnet": {
+            "$objectType": "vmm.v4.ahv.config.SubnetReference",
+            "extId": "08000000-0a01-4000-8000-000000000004"
+          },
+          "ipv4Config": {
+            "$objectType": "vmm.v4.ahv.config.Ipv4Config",
+            "shouldAssignIp": true,
+            "ipAddress": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "198.51.100.202",
+              "prefixLength": 25
+            }
+          },
+          "ipv4Info": {
+            "$objectType": "vmm.v4.ahv.config.Ipv4Info",
+            "learnedIpAddresses": [
+              {
+                "$objectType": "common.v1.config.IPv4Address",
+                "value": "198.51.100.202",
+                "prefixLength": 32
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "protectionType": "UNPROTECTED"
+  }
+]

@@ -1,0 +1,80 @@
+[
+  {
+    "$objectType": "clustermgmt.v4.config.Cvm",
+    "extId": "c0000000-0b02-4000-8000-000000000001",
+    "name": "NTNX-ridge-n1-CVM",
+    "clusterExtId": "c1000000-0b02-4000-8000-000000000001",
+    "nodeExtId": "40570000-0b02-4000-8000-000000000001",
+    "ipAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "192.0.2.21",
+        "prefixLength": 32
+      }
+    },
+    "numVcpus": 12,
+    "memorySizeBytes": 51539607552,
+    "hypervisorType": "AHV",
+    "backplaneIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "192.0.2.51",
+        "prefixLength": 32
+      }
+    }
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.Cvm",
+    "extId": "c0000000-0b02-4000-8000-000000000002",
+    "name": "NTNX-ridge-n2-CVM",
+    "clusterExtId": "c1000000-0b02-4000-8000-000000000001",
+    "nodeExtId": "40570000-0b02-4000-8000-000000000002",
+    "ipAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "192.0.2.22",
+        "prefixLength": 32
+      }
+    },
+    "numVcpus": 12,
+    "memorySizeBytes": 51539607552,
+    "hypervisorType": "AHV",
+    "backplaneIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "192.0.2.52",
+        "prefixLength": 32
+      }
+    }
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.Cvm",
+    "extId": "c0000000-0b02-4000-8000-000000000003",
+    "name": "NTNX-ridge-n3-CVM",
+    "clusterExtId": "c1000000-0b02-4000-8000-000000000001",
+    "nodeExtId": "40570000-0b02-4000-8000-000000000003",
+    "ipAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "192.0.2.23",
+        "prefixLength": 32
+      }
+    },
+    "numVcpus": 12,
+    "memorySizeBytes": 51539607552,
+    "hypervisorType": "AHV",
+    "backplaneIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "192.0.2.53",
+        "prefixLength": 32
+      }
+    }
+  }
+]

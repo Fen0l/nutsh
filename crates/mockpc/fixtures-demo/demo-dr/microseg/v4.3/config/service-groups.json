@@ -1,0 +1,46 @@
+[
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "5e9c0000-0b02-4000-8000-000000000001",
+    "name": "ssh",
+    "description": "Operator shell access",
+    "isSystemDefined": false,
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 22,
+        "endPort": 22
+      }
+    ],
+    "udpServices": [],
+    "icmpServices": [],
+    "policyReferences": [],
+    "createdBy": "admin",
+    "creationTime": "2026-02-12T09:35:00Z",
+    "lastUpdateTime": "2026-02-12T09:35:00Z",
+    "isSharedWithAllProjects": true,
+    "projectExtId": "00000000-0000-0000-0000-000000000000"
+  },
+  {
+    "$objectType": "microseg.v4.config.ServiceGroup",
+    "extId": "5e9c0000-0b02-4000-8000-000000000002",
+    "name": "https",
+    "description": "TLS web traffic",
+    "isSystemDefined": false,
+    "tcpServices": [
+      {
+        "$objectType": "microseg.v4.config.TcpPortRangeSpec",
+        "startPort": 443,
+        "endPort": 443
+      }
+    ],
+    "udpServices": [],
+    "icmpServices": [],
+    "policyReferences": [],
+    "createdBy": "admin",
+    "creationTime": "2026-02-12T09:35:00Z",
+    "lastUpdateTime": "2026-02-12T09:35:00Z",
+    "isSharedWithAllProjects": true,
+    "projectExtId": "00000000-0000-0000-0000-000000000000"
+  }
+]

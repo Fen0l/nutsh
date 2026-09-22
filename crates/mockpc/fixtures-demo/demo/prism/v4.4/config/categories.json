@@ -1,0 +1,92 @@
+[
+  {
+    "$objectType": "prism.v4.config.Category",
+    "extId": "07000000-0a01-4000-8000-000000000001",
+    "key": "Environment",
+    "value": "Production",
+    "type": "USER",
+    "description": "Production workloads",
+    "ownerUuid": "0e000000-0a01-4000-8000-000000000001",
+    "isSharedWithAllProjects": true
+  },
+  {
+    "$objectType": "prism.v4.config.Category",
+    "extId": "07000000-0a01-4000-8000-000000000002",
+    "key": "Environment",
+    "value": "Development",
+    "type": "USER",
+    "description": "Development and CI workloads",
+    "ownerUuid": "0e000000-0a01-4000-8000-000000000001",
+    "isSharedWithAllProjects": true
+  },
+  {
+    "$objectType": "prism.v4.config.Category",
+    "extId": "07000000-0a01-4000-8000-000000000003",
+    "key": "Environment",
+    "value": "Infrastructure",
+    "type": "USER",
+    "description": "Shared infrastructure services",
+    "ownerUuid": "0e000000-0a01-4000-8000-000000000001",
+    "isSharedWithAllProjects": true
+  },
+  {
+    "$objectType": "prism.v4.config.Category",
+    "extId": "07000000-0a01-4000-8000-000000000004",
+    "key": "AppTier",
+    "value": "Web",
+    "type": "USER",
+    "description": "Front-end web servers",
+    "ownerUuid": "0e000000-0a01-4000-8000-000000000001",
+    "isSharedWithAllProjects": true
+  },
+  {
+    "$objectType": "prism.v4.config.Category",
+    "extId": "07000000-0a01-4000-8000-000000000005",
+    "key": "AppTier",
+    "value": "Database",
+    "type": "USER",
+    "description": "Database servers",
+    "ownerUuid": "0e000000-0a01-4000-8000-000000000001",
+    "isSharedWithAllProjects": true
+  },
+  {
+    "$objectType": "prism.v4.config.Category",
+    "extId": "07000000-0a01-4000-8000-000000000006",
+    "key": "AppTier",
+    "value": "Application",
+    "type": "USER",
+    "description": "Application servers",
+    "ownerUuid": "0e000000-0a01-4000-8000-000000000001",
+    "isSharedWithAllProjects": true
+  },
+  {
+    "$objectType": "prism.v4.config.Category",
+    "extId": "07000000-0a01-4000-8000-000000000007",
+    "key": "Backup",
+    "value": "Daily",
+    "type": "USER",
+    "description": "Daily backup schedule",
+    "ownerUuid": "0e000000-0a01-4000-8000-000000000001",
+    "isSharedWithAllProjects": true
+  },
+  {
+    "$objectType": "prism.v4.config.Category",
+    "extId": "07000000-0a01-4000-8000-000000000008",
+    "key": "Site",
+    "value": "Harbor",
+    "type": "USER",
+    "description": "Harbor site",
+    "ownerUuid": "0e000000-0a01-4000-8000-000000000001",
+    "isSharedWithAllProjects": true
+  },
+  {
+    "$objectType": "prism.v4.config.Category",
+    "extId": "07000000-0a01-4000-8000-000000000009",
+    "key": "Site",
+    "value": "Edge",
+    "type": "USER",
+    "description": "Edge site",
+    "ownerUuid": "0e000000-0a01-4000-8000-000000000001",
+    "isSharedWithAllProjects": true
+  }
+]

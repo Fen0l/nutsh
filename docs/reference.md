@@ -93,6 +93,66 @@ Discarding a stale cache is not the same act: that leaves the history where it i
 
 Secrets never reach it: a field whose name looks like a secret is deleted on the way to disk.
 
+## The demo
+
+`nutsh demo` is the program on Prism Centrals it brought with it. What boots: two mock Prism
+Centrals, in this process, each on a loopback port picked by the operating system, speaking
+plain HTTP; the first serves an invented estate of two clusters, four hosts and twelve VMs with
+the alerts, tasks, policies, subnets and users around them. Each reports itself as `pc.7.6`, and the header
+shows the real endpoint: `PC: 127.0.0.1:<port>`. Every screen, table, detail, picker and action
+menu is the ordinary one; `nutsh demo vm`, `nutsh demo --snapshot`, `--size`, `--format` and
+`--readonly` mean what they mean on a real Prism Central. Connection flags and `NUTSH_*`
+variables are parsed and ignored.
+
+Two Prism Centrals boot: `demo` (context `demo`, account `admin`; `demo-edge` is the same one
+under a cluster pin) and `demo-dr` (account `operator`, who may power VMs on and off and
+nothing more). `nutsh demo --join` reads the other one beside the session from the first frame;
+`nutsh demo --site demo-dr` starts on the second. The second site shows the three ways a kind
+is greyed: a namespace this account may not read (licensing, HTTP 403), a namespace this Prism
+Central pins at an older version (networking at v4.0, so NIC profiles and network functions say
+which version they need; `:try` asks anyway and meets the server's 404), and namespaces it does
+not serve at all (files, opsmgmt, security).
+
+**The estate is invented, and it is fuller than a real v4 API.** The mock answers every kind
+the catalog lists, including ones a real Prism Central's v4 collections leave empty because the
+console reads them through the older v3 `groups` query (the note under Proof in the README).
+On the recorded pc.7.6 these came back with no rows: recovery plans and their jobs, recovery
+points, protected resources, entity sync policies, registered domains, images and OVAs. In the
+demo they have rows so the Disaster Recovery page and those tables can be seen at all; on your
+own Prism Central expect `no recovery plans` where the demo shows two. What the demo proves is
+the program, not the API.
+
+What is never touched: your config file, your secret store, your cache, your log. The demo
+writes one context file of its own into a private temporary directory (`nutsh-demo-<pid>`
+under the system temp directory, mode 0700, removed on exit) and keeps its password - `secret`,
+for every account - in memory. It runs with `--no-cache`, so no directory appears under
+`$XDG_STATE_HOME/nutsh/cache` and no palette history is kept. The Contexts screen lists two
+rows from that file, `demo` and `demo-edge`; the second is the same Prism Central under a
+cluster pin (`harbor-edge`), and `a`, `l`, `d`, `:hide`, `:skin`, `:mouse`, `:header` and
+`:log`'s level edit that file and no other. Your own `[[guardrails]]` never apply in the demo;
+the demo's file carries two rules of its own on `demo-edge` - deleting a VM is refused with a
+reason, powering one off asks for its name - so both kinds of rule can be seen, while `demo`
+keeps the built-in confirmations.
+
+What does touch the filesystem, as in any session: `:export` writes the file you name in the
+working directory, and a log level (`NUTSH_LOG`, or `:log`) writes
+`$XDG_STATE_HOME/nutsh/logs/nutsh.log`.
+
+Some keys change what is on the screen and some only produce a task. A power action, a
+maintenance action or a migration lands a task in the Tasks table and the row follows it -
+POWER flips, a host's state changes - because the mock walks its tasks to completion; a task
+can be cancelled while it is running. Nothing else about the estate is a hypervisor: cloning
+adds a row, deleting removes one, and that is the whole effect.
+
+The per-namespace explorer opens every kind the catalog has, and the estate does not fill all
+of them: a kind with no rows opens an empty table, which is what an empty kind looks like on a
+real Prism Central too. Four namespaces are absent altogether (`aiops`, `storage`, `tenancy`,
+`objects`) and grey out in the sidebar with the reason, the way an unserved namespace does.
+
+A 401 never occurs - the stored password is right - and neither does a 429: the mock advertises
+the client's own ceiling. `ctrl-c` or `:q` quits; when a task you are watching is still running,
+it asks first.
+
 ## The log
 
 Nothing is written down unless you ask for it. The default is `off`, and a run nobody asked
@@ -115,8 +175,8 @@ Where the lines go depends on the run, not on what you asked for. `--check`, `--
 `cache` write to stderr. The TUI cannot: it owns the alternate screen, and a line on stderr
 there is a hole in the frame rather than a message, so it writes to
 `$XDG_STATE_HOME/nutsh/logs/nutsh.log` instead. `--snapshot` renders a frame to stdout and is
-the same case. The file is capped at 4 MB and rolls over one older copy beside it, so a session
-left running overnight costs 8 MB and keeps the recent end.
+the same case, and so is `nutsh demo`. The file is capped at 4 MB and rolls over one older copy
+beside it, so a session left running overnight costs 8 MB and keeps the recent end.
 
 At `debug` every request is one line: the method, the URL, the status, how long it took, and
 which credential it went out with - `presented` for the password, `session` for a cookie that

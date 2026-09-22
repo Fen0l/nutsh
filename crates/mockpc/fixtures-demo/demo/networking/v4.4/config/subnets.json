@@ -1,0 +1,369 @@
+[
+  {
+    "$objectType": "networking.v4.config.Subnet",
+    "extId": "08000000-0a01-4000-8000-000000000001",
+    "name": "prod-vlan-100",
+    "description": "Production web and application tier",
+    "subnetType": "VLAN",
+    "networkId": 100,
+    "hypervisorType": "acropolis",
+    "bridgeName": "br0",
+    "isExternal": false,
+    "isNatEnabled": false,
+    "isConnected": true,
+    "isAdvancedNetworking": false,
+    "clusterReference": "01000000-0a01-4000-8000-000000000001",
+    "clusterReferenceList": [
+      "01000000-0a01-4000-8000-000000000001"
+    ],
+    "virtualSwitchReference": "1e000000-0a01-4000-8000-000000000001",
+    "vpcReference": "1c000000-0a01-4000-8000-000000000001",
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "0e000000-0a01-4000-8000-000000000001",
+      "ownerUserName": "admin",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000",
+      "projectName": "default"
+    },
+    "ipConfig": [
+      {
+        "$objectType": "networking.v4.config.IPConfig",
+        "ipv4": {
+          "$objectType": "networking.v4.config.IPv4Config",
+          "ipSubnet": {
+            "$objectType": "networking.v4.config.IPv4Subnet",
+            "ip": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "203.0.113.0",
+              "prefixLength": 32
+            },
+            "prefixLength": 25
+          },
+          "defaultGatewayIp": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "203.0.113.1",
+            "prefixLength": 32
+          },
+          "dhcpServerAddress": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "203.0.113.100",
+            "prefixLength": 32
+          },
+          "poolList": [
+            {
+              "$objectType": "networking.v4.config.IPv4Pool",
+              "startIp": {
+                "$objectType": "common.v1.config.IPv4Address",
+                "value": "203.0.113.102",
+                "prefixLength": 32
+              },
+              "endIp": {
+                "$objectType": "common.v1.config.IPv4Address",
+                "value": "203.0.113.126",
+                "prefixLength": 32
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "dhcpOptions": {
+      "$objectType": "networking.v4.config.DhcpOptions",
+      "domainName": "demo.example.com",
+      "searchDomains": [
+        "demo.example.com",
+        "example.com"
+      ],
+      "domainNameServers": [
+        {
+          "$objectType": "common.v1.config.IPAddress",
+          "ipv4": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "203.0.113.53",
+            "prefixLength": 32
+          }
+        }
+      ]
+    },
+    "reservedIpAddresses": [
+      {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "203.0.113.100",
+          "prefixLength": 32
+        }
+      },
+      {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "203.0.113.101",
+          "prefixLength": 32
+        }
+      }
+    ]
+  },
+  {
+    "$objectType": "networking.v4.config.Subnet",
+    "extId": "08000000-0a01-4000-8000-000000000002",
+    "name": "prod-vlan-110-db",
+    "description": "Production database tier, no DHCP",
+    "subnetType": "VLAN",
+    "networkId": 110,
+    "hypervisorType": "acropolis",
+    "bridgeName": "br0",
+    "isExternal": false,
+    "isNatEnabled": false,
+    "isConnected": true,
+    "isAdvancedNetworking": false,
+    "clusterReference": "01000000-0a01-4000-8000-000000000001",
+    "clusterReferenceList": [
+      "01000000-0a01-4000-8000-000000000001"
+    ],
+    "virtualSwitchReference": "1e000000-0a01-4000-8000-000000000001",
+    "vpcReference": "1c000000-0a01-4000-8000-000000000001",
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "0e000000-0a01-4000-8000-000000000002",
+      "ownerUserName": "ops-lead",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000",
+      "projectName": "default"
+    },
+    "ipConfig": [
+      {
+        "$objectType": "networking.v4.config.IPConfig",
+        "ipv4": {
+          "$objectType": "networking.v4.config.IPv4Config",
+          "ipSubnet": {
+            "$objectType": "networking.v4.config.IPv4Subnet",
+            "ip": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "203.0.113.128",
+              "prefixLength": 32
+            },
+            "prefixLength": 25
+          },
+          "defaultGatewayIp": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "203.0.113.129",
+            "prefixLength": 32
+          },
+          "poolList": [
+            {
+              "$objectType": "networking.v4.config.IPv4Pool",
+              "startIp": {
+                "$objectType": "common.v1.config.IPv4Address",
+                "value": "203.0.113.140",
+                "prefixLength": 32
+              },
+              "endIp": {
+                "$objectType": "common.v1.config.IPv4Address",
+                "value": "203.0.113.190",
+                "prefixLength": 32
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "dhcpOptions": {
+      "$objectType": "networking.v4.config.DhcpOptions",
+      "domainName": "demo.example.com",
+      "searchDomains": [
+        "demo.example.com",
+        "example.com"
+      ],
+      "domainNameServers": [
+        {
+          "$objectType": "common.v1.config.IPAddress",
+          "ipv4": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "203.0.113.53",
+            "prefixLength": 32
+          }
+        }
+      ]
+    },
+    "reservedIpAddresses": []
+  },
+  {
+    "$objectType": "networking.v4.config.Subnet",
+    "extId": "08000000-0a01-4000-8000-000000000003",
+    "name": "dev-vlan-200",
+    "description": "Development and CI",
+    "subnetType": "VLAN",
+    "networkId": 200,
+    "hypervisorType": "acropolis",
+    "bridgeName": "br0",
+    "isExternal": false,
+    "isNatEnabled": false,
+    "isConnected": true,
+    "isAdvancedNetworking": false,
+    "clusterReference": "01000000-0a01-4000-8000-000000000001",
+    "clusterReferenceList": [
+      "01000000-0a01-4000-8000-000000000001"
+    ],
+    "virtualSwitchReference": "1e000000-0a01-4000-8000-000000000001",
+    "vpcReference": "1c000000-0a01-4000-8000-000000000002",
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "0e000000-0a01-4000-8000-000000000002",
+      "ownerUserName": "ops-lead",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000",
+      "projectName": "default"
+    },
+    "ipConfig": [
+      {
+        "$objectType": "networking.v4.config.IPConfig",
+        "ipv4": {
+          "$objectType": "networking.v4.config.IPv4Config",
+          "ipSubnet": {
+            "$objectType": "networking.v4.config.IPv4Subnet",
+            "ip": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "198.51.100.0",
+              "prefixLength": 32
+            },
+            "prefixLength": 25
+          },
+          "defaultGatewayIp": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "198.51.100.1",
+            "prefixLength": 32
+          },
+          "dhcpServerAddress": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "198.51.100.2",
+            "prefixLength": 32
+          },
+          "poolList": [
+            {
+              "$objectType": "networking.v4.config.IPv4Pool",
+              "startIp": {
+                "$objectType": "common.v1.config.IPv4Address",
+                "value": "198.51.100.100",
+                "prefixLength": 32
+              },
+              "endIp": {
+                "$objectType": "common.v1.config.IPv4Address",
+                "value": "198.51.100.126",
+                "prefixLength": 32
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "dhcpOptions": {
+      "$objectType": "networking.v4.config.DhcpOptions",
+      "domainName": "dev.example.com",
+      "searchDomains": [
+        "dev.example.com",
+        "example.com"
+      ],
+      "domainNameServers": [
+        {
+          "$objectType": "common.v1.config.IPAddress",
+          "ipv4": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "203.0.113.53",
+            "prefixLength": 32
+          }
+        }
+      ]
+    },
+    "reservedIpAddresses": []
+  },
+  {
+    "$objectType": "networking.v4.config.Subnet",
+    "extId": "08000000-0a01-4000-8000-000000000004",
+    "name": "edge-vlan-300",
+    "description": "Edge site, point of sale",
+    "subnetType": "VLAN",
+    "networkId": 300,
+    "hypervisorType": "acropolis",
+    "bridgeName": "br0",
+    "isExternal": false,
+    "isNatEnabled": false,
+    "isConnected": true,
+    "isAdvancedNetworking": false,
+    "clusterReference": "01000000-0a01-4000-8000-000000000002",
+    "clusterReferenceList": [
+      "01000000-0a01-4000-8000-000000000002"
+    ],
+    "virtualSwitchReference": "1e000000-0a01-4000-8000-000000000002",
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "0e000000-0a01-4000-8000-000000000001",
+      "ownerUserName": "admin",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000",
+      "projectName": "default"
+    },
+    "ipConfig": [
+      {
+        "$objectType": "networking.v4.config.IPConfig",
+        "ipv4": {
+          "$objectType": "networking.v4.config.IPv4Config",
+          "ipSubnet": {
+            "$objectType": "networking.v4.config.IPv4Subnet",
+            "ip": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "198.51.100.128",
+              "prefixLength": 32
+            },
+            "prefixLength": 25
+          },
+          "defaultGatewayIp": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "198.51.100.129",
+            "prefixLength": 32
+          },
+          "dhcpServerAddress": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "198.51.100.130",
+            "prefixLength": 32
+          },
+          "poolList": [
+            {
+              "$objectType": "networking.v4.config.IPv4Pool",
+              "startIp": {
+                "$objectType": "common.v1.config.IPv4Address",
+                "value": "198.51.100.200",
+                "prefixLength": 32
+              },
+              "endIp": {
+                "$objectType": "common.v1.config.IPv4Address",
+                "value": "198.51.100.220",
+                "prefixLength": 32
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "dhcpOptions": {
+      "$objectType": "networking.v4.config.DhcpOptions",
+      "domainName": "edge.example.com",
+      "searchDomains": [
+        "edge.example.com",
+        "example.com"
+      ],
+      "domainNameServers": [
+        {
+          "$objectType": "common.v1.config.IPAddress",
+          "ipv4": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "203.0.113.53",
+            "prefixLength": 32
+          }
+        }
+      ]
+    },
+    "reservedIpAddresses": []
+  }
+]

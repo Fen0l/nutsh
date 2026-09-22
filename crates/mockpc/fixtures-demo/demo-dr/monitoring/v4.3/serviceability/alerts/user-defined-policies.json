@@ -1,0 +1,34 @@
+[
+  {
+    "$objectType": "monitoring.v4.serviceability.UserDefinedPolicy",
+    "extId": "0d9c0000-0b02-4000-8000-000000000001",
+    "policyId": "A0d9c0000-0b02-4000-8000-000000000001",
+    "title": "rps-capacity",
+    "description": "A recovery point store past 85% of its capacity",
+    "isEnabled": true,
+    "isAutoResolved": true,
+    "entityType": "recovery_point_store",
+    "triggerConditions": [
+      {
+        "$objectType": "monitoring.v4.serviceability.TriggerCondition",
+        "conditionType": "STATIC_THRESHOLD",
+        "condition": {
+          "$objectType": "monitoring.v4.serviceability.Condition",
+          "metricName": "storage_usage_ppm",
+          "operator": "GREATER_THAN_OR_EQUAL_TO",
+          "thresholdValue": {
+            "$objectType": "monitoring.v4.common.IntValue",
+            "intValue": 850000
+          }
+        },
+        "severityLevel": "CRITICAL"
+      }
+    ],
+    "impactTypes": [
+      "CAPACITY"
+    ],
+    "triggerWaitPeriod": 600,
+    "createdBy": "admin",
+    "lastUpdatedTime": "2026-06-15T09:00:00Z"
+  }
+]

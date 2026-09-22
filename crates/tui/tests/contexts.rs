@@ -159,7 +159,7 @@ async fn empty_state_and_rows() {
     settings.bind(|| insta::assert_snapshot!("contexts_empty", app.snapshot(100, 17).unwrap()));
     let frame = app.snapshot(100, 17).unwrap();
     assert!(
-        frame.contains("No contexts. Press a to add one, or run nutsh ctx add."),
+        frame.contains("No contexts. Press a to add one, run nutsh ctx add, or try nutsh demo."),
         "{frame}"
     );
     // Nothing polls without a session, so the status line neither claims to be syncing nor

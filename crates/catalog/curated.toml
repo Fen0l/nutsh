@@ -2006,13 +2006,14 @@ columns = [
 # The generator refuses `warm` on a kind nothing can list, and on one that would name itself
 # with its own extId.
 #
-# This section is now a note and not a table: every one of the eleven carries `warm = true`
+# This section is now a note and not a table: every one of the twelve carries `warm = true`
 # beside its own columns, because a second TOML table with the same key is a parse error and
 # not a merge. They are `clustermgmt.config.Cluster`, `clustermgmt.config.Host` and
 # `clustermgmt.config.StorageContainer`; `vmm.content.Image`; `networking.config.Subnet`,
 # `networking.config.Vpc`, `networking.config.VirtualSwitch` and `networking.config.Gateway`;
 # `prism.config.Category`; and `iam.authn.User` and `prism.config.DomainManager` in Admin
-# Center below. `crates/catalog/tests/consistency.rs` asserts the set whole.
+# Center below; and `multidomain.config.RegisteredDomain`, the twelfth, for the reason on its
+# own block. `crates/catalog/tests/consistency.rs` asserts the set whole.
 
 # ── Admin Center ────────────────────────────────────────────────────────────────────────────
 # Every `display`, `aliases` and `category` in this section is new curation beside the columns:
@@ -2168,6 +2169,12 @@ columns = [
 display = "Registered Prism Centrals"
 aliases = ["registered", "registered-domain", "registered-domains"]
 category = "Platform"
+# The twelfth warmed kind: `domainManagerExtId` on protection policies, recovery plans and
+# protected resources names the other Prism Central, whose only row here is this one. The DR
+# page's pane lists it and so names it; a standalone table does not, and stays a stub without
+# this. `name` is top-level, so no `name_path`. `crates/catalog/tests/consistency.rs` asserts
+# the set whole.
+warm = true
 columns = [
     { header = "NAME", path = "name", kind = "Text" },
     { header = "PC VERSION", path = "platformData.pcVersion", kind = "Text" },

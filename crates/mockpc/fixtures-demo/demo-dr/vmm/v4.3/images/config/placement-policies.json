@@ -1,0 +1,28 @@
+[
+  {
+    "$objectType": "vmm.v4.images.config.PlacementPolicy",
+    "extId": "91ac0000-0b02-4000-8000-000000000001",
+    "name": "images-on-ridge",
+    "description": "DR images are held on the ridge cluster",
+    "placementType": "HARD",
+    "imageEntityFilter": {
+      "$objectType": "vmm.v4.images.config.Filter",
+      "type": "CATEGORIES_MATCH_ANY",
+      "categoryExtIds": [
+        "ca7e0000-0b02-4000-8000-000000000001"
+      ]
+    },
+    "clusterEntityFilter": {
+      "$objectType": "vmm.v4.images.config.Filter",
+      "type": "CATEGORIES_MATCH_ANY",
+      "categoryExtIds": [
+        "ca7e0000-0b02-4000-8000-000000000004"
+      ]
+    },
+    "enforcementState": "ACTIVE",
+    "createTime": "2026-03-01T08:10:00Z",
+    "lastUpdateTime": "2026-03-01T08:10:00Z",
+    "ownerExtId": "05e70000-0b02-4000-8000-000000000001",
+    "ownerName": "admin"
+  }
+]

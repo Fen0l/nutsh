@@ -1,0 +1,24 @@
+[
+  {
+    "$objectType": "iam.v4.authn.DirectoryService",
+    "extId": "d1c00000-0b02-4000-8000-000000000001",
+    "name": "quillmere",
+    "directoryType": "ACTIVE_DIRECTORY",
+    "domainName": "quillmere.example.com",
+    "url": "ldaps://ad.quillmere.example.com:636",
+    "secondaryUrls": [],
+    "groupSearchType": "RECURSIVE",
+    "serviceAccount": {
+      "$objectType": "iam.v4.authn.DsServiceAccount",
+      "username": "svc-prism"
+    },
+    "whiteListedGroups": [
+      "cn=ridge-ops,ou=groups,dc=quillmere,dc=example,dc=com"
+    ],
+    "isSharedWithAllProjects": false,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "createdBy": "admin",
+    "createdTime": "2026-02-12T09:50:00Z",
+    "lastUpdatedTime": "2026-02-12T09:50:00Z"
+  }
+]

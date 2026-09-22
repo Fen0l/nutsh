@@ -1,0 +1,37 @@
+[
+  {
+    "$objectType": "prism.v4.config.TaskJob",
+    "extId": "10b70000-0b02-4000-8000-000000000001",
+    "name": "Validate recovery plan",
+    "status": "FAILED",
+    "createdTime": "2026-09-05T09:48:00Z",
+    "completedTime": "2026-09-05T09:48:40Z",
+    "entitiesAffected": [
+      {
+        "$objectType": "prism.v4.config.EntityReference",
+        "extId": "9b1a0000-0b02-4000-8000-000000000001",
+        "name": "rp-web-tier",
+        "rel": "datapolicies:config:recovery-plan"
+      }
+    ],
+    "errorMessages": [
+      {
+        "$objectType": "prism.v4.config.AppMessage",
+        "code": "kRecoveryPlanValidationFailed",
+        "severity": "ERROR",
+        "message": "validation failed: recovery subnet ridge-vlan-200 has no free address"
+      }
+    ],
+    "warnings": [],
+    "clusterExtIds": [
+      "c1000000-0b02-4000-8000-000000000001"
+    ],
+    "completionDetails": [
+      {
+        "$objectType": "prism.v4.config.KVPair",
+        "name": "validation_errors",
+        "value": "1"
+      }
+    ]
+  }
+]

@@ -1,0 +1,37 @@
+[
+  {
+    "$objectType": "networking.v4.config.FloatingIp",
+    "extId": "f1ba0000-0b02-4000-8000-000000000001",
+    "association": {
+      "$objectType": "networking.v4.config.VmNicAssociation",
+      "vmNicReference": "5d1c0000-0b02-4000-8000-000000050000",
+      "vpcReference": "0b9c0000-0b02-4000-8000-000000000001",
+      "privateIp": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "192.0.2.105"
+        }
+      }
+    },
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "05e70000-0b02-4000-8000-000000000001",
+      "ownerUserName": "admin",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000",
+      "projectName": "default"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "fip-jump",
+    "description": "Public address of ridge-jump-01",
+    "floatingIp": {
+      "$objectType": "networking.v4.config.FloatingIPAddress",
+      "ipv4": {
+        "$objectType": "networking.v4.config.FloatingIPv4Address",
+        "value": "192.0.2.200"
+      }
+    },
+    "externalSubnetReference": "5ab00000-0b02-4000-8000-000000000001",
+    "associationStatus": "ASSOCIATED_TO_VNIC"
+  }
+]

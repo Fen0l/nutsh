@@ -1,0 +1,18 @@
+[
+  {
+    "$objectType": "vmm.v4.ahv.config.VmGuestCustomizationProfile",
+    "extId": "9c0f0000-0b02-4000-8000-000000000001",
+    "name": "ridge-cloudinit",
+    "description": "Ubuntu cloud image profile for the ridge site; the user data is supplied at deploy time",
+    "createTime": "2026-03-05T09:30:00Z",
+    "updateTime": "2026-03-05T09:30:00Z",
+    "createdBy": {
+      "$objectType": "vmm.v4.ahv.config.UserReference",
+      "extId": "05e70000-0b02-4000-8000-000000000001"
+    },
+    "updatedBy": {
+      "$objectType": "vmm.v4.ahv.config.UserReference",
+      "extId": "05e70000-0b02-4000-8000-000000000001"
+    }
+  }
+]

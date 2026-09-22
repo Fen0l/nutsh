@@ -1,0 +1,14 @@
+[
+  {
+    "$objectType": "networking.v4.config.ReservedIp",
+    "extId": "27000000-0a01-4000-8000-000000000001",
+    "ipv4Address": "203.0.113.100",
+    "clientContext": "dhcp-server"
+  },
+  {
+    "$objectType": "networking.v4.config.ReservedIp",
+    "extId": "27000000-0a01-4000-8000-000000000002",
+    "ipv4Address": "203.0.113.101",
+    "clientContext": "gateway-standby"
+  }
+]
