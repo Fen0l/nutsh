@@ -1,0 +1,72 @@
+[
+  {
+    "$objectType": "networking.v4.config.VirtualSwitch",
+    "extId": "5c170000-0b02-4000-8000-000000000001",
+    "hasDeploymentError": false,
+    "hasUpdateInProgress": false,
+    "hasDeleteInProgress": false,
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "00000000-0000-0000-0000-000000000000",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "vs0",
+    "description": "Default virtual switch of ridge-dr",
+    "isDefault": true,
+    "mtu": 1500,
+    "bondMode": "ACTIVE_BACKUP",
+    "clusters": [
+      {
+        "$objectType": "networking.v4.config.Cluster",
+        "extId": "c1000000-0b02-4000-8000-000000000001",
+        "hosts": [
+          {
+            "$objectType": "networking.v4.config.Host",
+            "extId": "40570000-0b02-4000-8000-000000000001",
+            "hostNics": [
+              "eth0",
+              "eth1"
+            ],
+            "activeUplink": "eth0",
+            "internalBridgeName": "br0",
+            "routeTable": 1000
+          },
+          {
+            "$objectType": "networking.v4.config.Host",
+            "extId": "40570000-0b02-4000-8000-000000000002",
+            "hostNics": [
+              "eth0",
+              "eth1"
+            ],
+            "activeUplink": "eth0",
+            "internalBridgeName": "br0",
+            "routeTable": 1000
+          },
+          {
+            "$objectType": "networking.v4.config.Host",
+            "extId": "40570000-0b02-4000-8000-000000000003",
+            "hostNics": [
+              "eth0",
+              "eth1"
+            ],
+            "activeUplink": "eth0",
+            "internalBridgeName": "br0",
+            "routeTable": 1000
+          }
+        ],
+        "gatewayIpAddress": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "192.0.2.1",
+          "prefixLength": 32
+        },
+        "vlanIdentifier": 0
+      }
+    ],
+    "igmpSpec": {
+      "$objectType": "networking.v4.config.IgmpSpec",
+      "isSnoopingEnabled": false
+    },
+    "ownerType": "PE"
+  }
+]

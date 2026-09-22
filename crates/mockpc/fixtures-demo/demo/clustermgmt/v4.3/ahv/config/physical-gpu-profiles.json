@@ -1,0 +1,24 @@
+[
+  {
+    "$objectType": "clustermgmt.v4.ahv.config.PhysicalGpuProfile",
+    "extId": "4b000000-0a01-4000-8000-000000000001",
+    "configuration": {
+      "$objectType": "clustermgmt.v4.ahv.config.PhysicalGpuProfileConfiguration",
+      "name": "L40S"
+    },
+    "clusterExtIds": [
+      "01000000-0a01-4000-8000-000000000001"
+    ]
+  },
+  {
+    "$objectType": "clustermgmt.v4.ahv.config.PhysicalGpuProfile",
+    "extId": "4b000000-0a01-4000-8000-000000000002",
+    "configuration": {
+      "$objectType": "clustermgmt.v4.ahv.config.PhysicalGpuProfileConfiguration",
+      "name": "A16"
+    },
+    "clusterExtIds": [
+      "01000000-0a01-4000-8000-000000000001"
+    ]
+  }
+]

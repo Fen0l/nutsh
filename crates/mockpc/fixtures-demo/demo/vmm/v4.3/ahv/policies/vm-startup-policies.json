@@ -1,0 +1,122 @@
+[
+  {
+    "$objectType": "vmm.v4.ahv.policies.VmStartupPolicy",
+    "extId": "30000000-0a01-4000-8000-000000000001",
+    "name": "boot-infra-first",
+    "description": "Directory and DNS come up before the web and application tiers",
+    "createTime": "2026-01-25T09:00:00Z",
+    "updateTime": "2026-05-11T10:00:00Z",
+    "createdBy": {
+      "$objectType": "vmm.v4.ahv.policies.UserReference",
+      "extId": "0e000000-0a01-4000-8000-000000000001"
+    },
+    "updatedBy": {
+      "$objectType": "vmm.v4.ahv.policies.UserReference",
+      "extId": "0e000000-0a01-4000-8000-000000000001"
+    },
+    "groups": [
+      {
+        "$objectType": "vmm.v4.ahv.policies.DependencyGroup",
+        "categories": [
+          {
+            "$objectType": "vmm.v4.ahv.policies.CategoryReference",
+            "extId": "07000000-0a01-4000-8000-000000000003"
+          }
+        ]
+      },
+      {
+        "$objectType": "vmm.v4.ahv.policies.DependencyGroup",
+        "categories": [
+          {
+            "$objectType": "vmm.v4.ahv.policies.CategoryReference",
+            "extId": "07000000-0a01-4000-8000-000000000004"
+          }
+        ]
+      },
+      {
+        "$objectType": "vmm.v4.ahv.policies.DependencyGroup",
+        "categories": [
+          {
+            "$objectType": "vmm.v4.ahv.policies.CategoryReference",
+            "extId": "07000000-0a01-4000-8000-000000000006"
+          }
+        ]
+      }
+    ],
+    "startConditions": [
+      {
+        "$objectType": "vmm.v4.ahv.policies.StartCondition",
+        "powerStateCriteria": {
+          "$objectType": "vmm.v4.ahv.policies.PowerStateCriteriaGuestBootup",
+          "timeoutDurationSecs": 300
+        },
+        "delayDurationSecs": 30
+      },
+      {
+        "$objectType": "vmm.v4.ahv.policies.StartCondition",
+        "powerStateCriteria": {
+          "$objectType": "vmm.v4.ahv.policies.PowerStateCriteriaPowerOn"
+        },
+        "delayDurationSecs": 60
+      }
+    ],
+    "numCompliantVms": 6,
+    "numNonCompliantVms": 0,
+    "numPendingVms": 0,
+    "numDependencyConflicts": 0,
+    "numStartConditionConflicts": 0,
+    "projectExtId": "00000000-0000-0000-0000-000000000000"
+  },
+  {
+    "$objectType": "vmm.v4.ahv.policies.VmStartupPolicy",
+    "extId": "30000000-0a01-4000-8000-000000000002",
+    "name": "boot-app-after-db",
+    "description": "The application tier waits for the database",
+    "createTime": "2026-01-25T09:10:00Z",
+    "updateTime": "2026-09-01T09:00:00Z",
+    "createdBy": {
+      "$objectType": "vmm.v4.ahv.policies.UserReference",
+      "extId": "0e000000-0a01-4000-8000-000000000002"
+    },
+    "updatedBy": {
+      "$objectType": "vmm.v4.ahv.policies.UserReference",
+      "extId": "0e000000-0a01-4000-8000-000000000002"
+    },
+    "groups": [
+      {
+        "$objectType": "vmm.v4.ahv.policies.DependencyGroup",
+        "categories": [
+          {
+            "$objectType": "vmm.v4.ahv.policies.CategoryReference",
+            "extId": "07000000-0a01-4000-8000-000000000005"
+          }
+        ]
+      },
+      {
+        "$objectType": "vmm.v4.ahv.policies.DependencyGroup",
+        "categories": [
+          {
+            "$objectType": "vmm.v4.ahv.policies.CategoryReference",
+            "extId": "07000000-0a01-4000-8000-000000000006"
+          }
+        ]
+      }
+    ],
+    "startConditions": [
+      {
+        "$objectType": "vmm.v4.ahv.policies.StartCondition",
+        "powerStateCriteria": {
+          "$objectType": "vmm.v4.ahv.policies.PowerStateCriteriaGuestBootup",
+          "timeoutDurationSecs": 300
+        },
+        "delayDurationSecs": 120
+      }
+    ],
+    "numCompliantVms": 2,
+    "numNonCompliantVms": 1,
+    "numPendingVms": 0,
+    "numDependencyConflicts": 1,
+    "numStartConditionConflicts": 0,
+    "projectExtId": "00000000-0000-0000-0000-000000000000"
+  }
+]

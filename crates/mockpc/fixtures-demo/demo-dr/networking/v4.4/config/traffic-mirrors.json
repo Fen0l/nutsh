@@ -1,0 +1,43 @@
+[
+  {
+    "$objectType": "networking.v4.config.TrafficMirror",
+    "extId": "7a4f0000-0b02-4000-8000-000000000001",
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "05e70000-0b02-4000-8000-000000000002",
+      "ownerUserName": "operator",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000",
+      "projectName": "default"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "mirror-web",
+    "description": "Ingress of dr-web-01 copied to the capture port on ridge-n1",
+    "sourceList": [
+      {
+        "$objectType": "networking.v4.config.TrafficMirrorSourcePort",
+        "nicType": "VIRTUAL_NIC",
+        "nicUuid": "5d1c0000-0b02-4000-8000-000000010000",
+        "isUp": false,
+        "direction": "INGRESS"
+      }
+    ],
+    "destinationList": [
+      {
+        "$objectType": "networking.v4.config.TrafficMirrorPort",
+        "nicType": "HOST_NIC",
+        "nicUuid": "40571c00-0b02-4000-8000-000000000002",
+        "isUp": true
+      }
+    ],
+    "isEnabled": true,
+    "clusterReferenceList": [
+      "c1000000-0b02-4000-8000-000000000001"
+    ],
+    "hostReferenceList": [
+      "40570000-0b02-4000-8000-000000000001"
+    ],
+    "virtualSwitchReference": "5c170000-0b02-4000-8000-000000000001",
+    "state": "INACTIVE",
+    "stateMessage": "source NIC is not connected"
+  }
+]

@@ -1,0 +1,34 @@
+[
+  {
+    "$objectType": "vmm.v4.ahv.policies.VmHostAffinityPolicy",
+    "extId": "aff10000-0b02-4000-8000-000000000001",
+    "name": "pin-backup-to-n1",
+    "description": "The backup proxy stays on ridge-n1, where its volume group lives",
+    "createTime": "2026-03-05T10:30:00Z",
+    "updateTime": "2026-03-05T10:30:00Z",
+    "createdBy": {
+      "$objectType": "vmm.v4.ahv.policies.UserReference",
+      "extId": "05e70000-0b02-4000-8000-000000000001"
+    },
+    "lastUpdatedBy": {
+      "$objectType": "vmm.v4.ahv.policies.UserReference",
+      "extId": "05e70000-0b02-4000-8000-000000000001"
+    },
+    "vmCategories": [
+      {
+        "$objectType": "vmm.v4.ahv.policies.CategoryReference",
+        "extId": "ca7e0000-0b02-4000-8000-000000000001"
+      }
+    ],
+    "hostCategories": [
+      {
+        "$objectType": "vmm.v4.ahv.policies.CategoryReference",
+        "extId": "ca7e0000-0b02-4000-8000-000000000004"
+      }
+    ],
+    "numVms": 2,
+    "numHosts": 1,
+    "numCompliantVms": 2,
+    "numNonCompliantVms": 0
+  }
+]

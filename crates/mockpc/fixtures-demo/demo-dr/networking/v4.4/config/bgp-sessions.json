@@ -1,0 +1,32 @@
+[
+  {
+    "$objectType": "networking.v4.config.BgpSession",
+    "extId": "b9b00000-0b02-4000-8000-000000000001",
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "05e70000-0b02-4000-8000-000000000001",
+      "ownerUserName": "admin",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000",
+      "projectName": "default"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "ridge-bgp-1",
+    "description": "eBGP with pc-harbor over to-harbor",
+    "localGatewayReference": "9a7e0000-0b02-4000-8000-000000000001",
+    "localGatewayInterfaceIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "192.0.2.202"
+      }
+    },
+    "dynamicRoutePriority": 700,
+    "status": {
+      "$objectType": "networking.v4.config.Status",
+      "message": "bgp session is established",
+      "state": "ESTABLISHED"
+    },
+    "shouldAdvertiseAllExternallyRoutablePrefixes": true,
+    "externallyRoutablePrefixesToAdvertise": []
+  }
+]

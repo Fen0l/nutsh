@@ -1,0 +1,49 @@
+[
+  {
+    "$objectType": "microseg.v4.config.NetworkSecurityPolicyRule",
+    "extId": "39000000-0a01-4000-8000-000000000001",
+    "name": "allow-https-in",
+    "description": "HTTPS from the offices and the monitoring hosts into the web tier",
+    "type": "APPLICATION",
+    "isLoggingEnabled": true,
+    "spec": {
+      "$objectType": "microseg.v4.config.ApplicationRuleSpec",
+      "securedGroupCategoryAssociatedEntityType": "VM",
+      "securedGroupCategoryReferences": [
+        "07000000-0a01-4000-8000-000000000004"
+      ],
+      "srcAllowSpec": "NONE",
+      "srcAddressGroupReferences": [
+        "1a000000-0a01-4000-8000-000000000001",
+        "1a000000-0a01-4000-8000-000000000002"
+      ],
+      "serviceGroupReferences": [
+        "1b000000-0a01-4000-8000-000000000001"
+      ],
+      "isAllProtocolAllowed": false
+    }
+  },
+  {
+    "$objectType": "microseg.v4.config.NetworkSecurityPolicyRule",
+    "extId": "39000000-0a01-4000-8000-000000000002",
+    "name": "allow-db-out",
+    "description": "Postgres from the web tier to the database tier",
+    "type": "APPLICATION",
+    "isLoggingEnabled": false,
+    "spec": {
+      "$objectType": "microseg.v4.config.ApplicationRuleSpec",
+      "securedGroupCategoryAssociatedEntityType": "VM",
+      "securedGroupCategoryReferences": [
+        "07000000-0a01-4000-8000-000000000004"
+      ],
+      "destCategoryAssociatedEntityType": "VM",
+      "destCategoryReferences": [
+        "07000000-0a01-4000-8000-000000000005"
+      ],
+      "serviceGroupReferences": [
+        "1b000000-0a01-4000-8000-000000000003"
+      ],
+      "isAllProtocolAllowed": false
+    }
+  }
+]

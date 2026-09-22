@@ -1,0 +1,40 @@
+[
+  {
+    "$objectType": "clustermgmt.v4.config.ExternalStorage",
+    "extId": "4e000000-0a01-4000-8000-000000000001",
+    "name": "harbor-flex",
+    "providerType": "DELL_POWERFLEX",
+    "health": "HEALTHY",
+    "totalCapacityBytes": 109951162777600,
+    "freeCapacityBytes": 61572651155456,
+    "endPointAddress": {
+      "$objectType": "common.v1.config.IPAddressOrFQDN",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "203.0.113.61",
+        "prefixLength": 32
+      }
+    },
+    "clusterExtId": "01000000-0a01-4000-8000-000000000001",
+    "ownerExtId": "00000000-0000-0000-0000-000000000000"
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.ExternalStorage",
+    "extId": "4e000000-0a01-4000-8000-000000000002",
+    "name": "harbor-nfs-archive",
+    "providerType": "NFS",
+    "health": "DEGRADED",
+    "totalCapacityBytes": 54975581388800,
+    "freeCapacityBytes": 4398046511104,
+    "endPointAddress": {
+      "$objectType": "common.v1.config.IPAddressOrFQDN",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "203.0.113.62",
+        "prefixLength": 32
+      }
+    },
+    "clusterExtId": "01000000-0a01-4000-8000-000000000001",
+    "ownerExtId": "00000000-0000-0000-0000-000000000000"
+  }
+]

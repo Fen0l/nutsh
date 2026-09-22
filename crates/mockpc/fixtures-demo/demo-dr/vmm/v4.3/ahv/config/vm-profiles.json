@@ -1,0 +1,21 @@
+[
+  {
+    "$objectType": "vmm.v4.ahv.config.VmProfile",
+    "extId": "9f000000-0b02-4000-8000-000000000001",
+    "name": "ridge-small",
+    "description": "Two cores and 4 GiB for the site's utility VMs",
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "sharedWithProjects": [],
+    "vmConfiguration": {
+      "$objectType": "vmm.v4.ahv.config.VmProfileVmConfiguration",
+      "memorySizeBytes": 4294967296,
+      "numCores": 2,
+      "nics": []
+    },
+    "updateTime": "2026-04-12T07:50:00Z",
+    "updatedBy": {
+      "$objectType": "vmm.v4.ahv.config.UserReference",
+      "extId": "05e70000-0b02-4000-8000-000000000001"
+    }
+  }
+]

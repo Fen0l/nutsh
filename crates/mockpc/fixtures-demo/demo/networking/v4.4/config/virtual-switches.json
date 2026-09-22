@@ -1,0 +1,120 @@
+[
+  {
+    "$objectType": "networking.v4.config.VirtualSwitch",
+    "extId": "1e000000-0a01-4000-8000-000000000001",
+    "hasDeploymentError": false,
+    "hasUpdateInProgress": false,
+    "hasDeleteInProgress": false,
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "00000000-0000-0000-0000-000000000000",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "vs0",
+    "description": "Default virtual switch of harbor-prod",
+    "isDefault": true,
+    "mtu": 1500,
+    "bondMode": "ACTIVE_BACKUP",
+    "clusters": [
+      {
+        "$objectType": "networking.v4.config.Cluster",
+        "extId": "01000000-0a01-4000-8000-000000000001",
+        "hosts": [
+          {
+            "$objectType": "networking.v4.config.Host",
+            "extId": "02000000-0a01-4000-8000-000000000001",
+            "hostNics": [
+              "eth0",
+              "eth1"
+            ],
+            "activeUplink": "eth0",
+            "internalBridgeName": "br0",
+            "routeTable": 1000
+          },
+          {
+            "$objectType": "networking.v4.config.Host",
+            "extId": "02000000-0a01-4000-8000-000000000002",
+            "hostNics": [
+              "eth0",
+              "eth1"
+            ],
+            "activeUplink": "eth0",
+            "internalBridgeName": "br0",
+            "routeTable": 1000
+          },
+          {
+            "$objectType": "networking.v4.config.Host",
+            "extId": "02000000-0a01-4000-8000-000000000003",
+            "hostNics": [
+              "eth0",
+              "eth1"
+            ],
+            "activeUplink": "eth1",
+            "internalBridgeName": "br0",
+            "routeTable": 1000
+          }
+        ],
+        "gatewayIpAddress": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "203.0.113.1",
+          "prefixLength": 32
+        },
+        "vlanIdentifier": 0
+      }
+    ],
+    "igmpSpec": {
+      "$objectType": "networking.v4.config.IgmpSpec",
+      "isSnoopingEnabled": false
+    },
+    "ownerType": "PE"
+  },
+  {
+    "$objectType": "networking.v4.config.VirtualSwitch",
+    "extId": "1e000000-0a01-4000-8000-000000000002",
+    "hasDeploymentError": true,
+    "hasUpdateInProgress": false,
+    "hasDeleteInProgress": false,
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "00000000-0000-0000-0000-000000000000",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "vs0-edge",
+    "description": "Default virtual switch of harbor-edge",
+    "isDefault": true,
+    "mtu": 9000,
+    "bondMode": "BALANCE_SLB",
+    "clusters": [
+      {
+        "$objectType": "networking.v4.config.Cluster",
+        "extId": "01000000-0a01-4000-8000-000000000002",
+        "hosts": [
+          {
+            "$objectType": "networking.v4.config.Host",
+            "extId": "02000000-0a01-4000-8000-000000000004",
+            "hostNics": [
+              "eth0",
+              "eth1"
+            ],
+            "activeUplink": "eth0",
+            "internalBridgeName": "br0",
+            "routeTable": 1000
+          }
+        ],
+        "gatewayIpAddress": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "198.51.100.129",
+          "prefixLength": 32
+        },
+        "vlanIdentifier": 0
+      }
+    ],
+    "igmpSpec": {
+      "$objectType": "networking.v4.config.IgmpSpec",
+      "isSnoopingEnabled": false
+    },
+    "ownerType": "PE"
+  }
+]

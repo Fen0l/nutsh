@@ -1,0 +1,66 @@
+[
+  {
+    "$objectType": "vmm.v4.ahv.policies.VmHostAffinityPolicy",
+    "extId": "2e000000-0a01-4000-8000-000000000001",
+    "name": "pin-db-to-n1",
+    "description": "The database tier stays on harbor-n1, where its volume group lives",
+    "createTime": "2026-01-20T10:00:00Z",
+    "updateTime": "2026-08-04T13:50:00Z",
+    "createdBy": {
+      "$objectType": "vmm.v4.ahv.policies.UserReference",
+      "extId": "0e000000-0a01-4000-8000-000000000002"
+    },
+    "lastUpdatedBy": {
+      "$objectType": "vmm.v4.ahv.policies.UserReference",
+      "extId": "0e000000-0a01-4000-8000-000000000002"
+    },
+    "vmCategories": [
+      {
+        "$objectType": "vmm.v4.ahv.policies.CategoryReference",
+        "extId": "07000000-0a01-4000-8000-000000000005"
+      }
+    ],
+    "hostCategories": [
+      {
+        "$objectType": "vmm.v4.ahv.policies.CategoryReference",
+        "extId": "07000000-0a01-4000-8000-000000000008"
+      }
+    ],
+    "numVms": 1,
+    "numHosts": 1,
+    "numCompliantVms": 1,
+    "numNonCompliantVms": 0
+  },
+  {
+    "$objectType": "vmm.v4.ahv.policies.VmHostAffinityPolicy",
+    "extId": "2e000000-0a01-4000-8000-000000000002",
+    "name": "pin-pos-to-edge",
+    "description": "Edge workloads never leave edge-n1",
+    "createTime": "2026-01-22T08:00:00Z",
+    "updateTime": "2026-01-22T08:00:00Z",
+    "createdBy": {
+      "$objectType": "vmm.v4.ahv.policies.UserReference",
+      "extId": "0e000000-0a01-4000-8000-000000000001"
+    },
+    "lastUpdatedBy": {
+      "$objectType": "vmm.v4.ahv.policies.UserReference",
+      "extId": "0e000000-0a01-4000-8000-000000000001"
+    },
+    "vmCategories": [
+      {
+        "$objectType": "vmm.v4.ahv.policies.CategoryReference",
+        "extId": "07000000-0a01-4000-8000-000000000009"
+      }
+    ],
+    "hostCategories": [
+      {
+        "$objectType": "vmm.v4.ahv.policies.CategoryReference",
+        "extId": "07000000-0a01-4000-8000-000000000009"
+      }
+    ],
+    "numVms": 2,
+    "numHosts": 1,
+    "numCompliantVms": 2,
+    "numNonCompliantVms": 0
+  }
+]

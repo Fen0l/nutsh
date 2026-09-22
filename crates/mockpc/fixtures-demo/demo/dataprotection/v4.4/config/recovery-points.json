@@ -1,0 +1,98 @@
+[
+  {
+    "$objectType": "dataprotection.v4.config.RecoveryPoint",
+    "extId": "14000000-0a01-4000-8000-000000000001",
+    "name": "rp-prd-web-01-0905-0900",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "creationTime": "2026-09-05T09:00:00Z",
+    "expirationTime": "2026-09-06T09:00:00Z",
+    "totalExclusiveUsageBytes": 536870912,
+    "vmRecoveryPoints": [
+      {
+        "$objectType": "dataprotection.v4.config.VmRecoveryPointReference",
+        "extId": "15000000-0a01-4000-8000-000000000001"
+      }
+    ]
+  },
+  {
+    "$objectType": "dataprotection.v4.config.RecoveryPoint",
+    "extId": "14000000-0a01-4000-8000-000000000002",
+    "name": "rp-prd-web-02-0905-0900",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "creationTime": "2026-09-05T09:00:00Z",
+    "expirationTime": "2026-09-06T09:00:00Z",
+    "totalExclusiveUsageBytes": 402653184,
+    "vmRecoveryPoints": [
+      {
+        "$objectType": "dataprotection.v4.config.VmRecoveryPointReference",
+        "extId": "15000000-0a01-4000-8000-000000000002"
+      }
+    ]
+  },
+  {
+    "$objectType": "dataprotection.v4.config.RecoveryPoint",
+    "extId": "14000000-0a01-4000-8000-000000000003",
+    "name": "rp-prd-db-01-0905-0945",
+    "status": "COMPLETE",
+    "recoveryPointType": "APPLICATION_CONSISTENT",
+    "creationTime": "2026-09-05T09:45:00Z",
+    "expirationTime": "2026-09-12T09:45:00Z",
+    "totalExclusiveUsageBytes": 3221225472,
+    "vmRecoveryPoints": [
+      {
+        "$objectType": "dataprotection.v4.config.VmRecoveryPointReference",
+        "extId": "15000000-0a01-4000-8000-000000000003"
+      }
+    ]
+  },
+  {
+    "$objectType": "dataprotection.v4.config.RecoveryPoint",
+    "extId": "14000000-0a01-4000-8000-000000000004",
+    "name": "rp-prd-db-01-0905-0930",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "creationTime": "2026-09-05T09:30:00Z",
+    "expirationTime": "2026-09-12T09:30:00Z",
+    "totalExclusiveUsageBytes": 2147483472,
+    "vmRecoveryPoints": [
+      {
+        "$objectType": "dataprotection.v4.config.VmRecoveryPointReference",
+        "extId": "15000000-0a01-4000-8000-000000000004"
+      }
+    ]
+  },
+  {
+    "$objectType": "dataprotection.v4.config.RecoveryPoint",
+    "extId": "14000000-0a01-4000-8000-000000000005",
+    "name": "rp-prd-app-01-0905-0700",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "creationTime": "2026-09-05T07:00:00Z",
+    "expirationTime": "2026-09-06T07:00:00Z",
+    "totalExclusiveUsageBytes": 805306368,
+    "vmRecoveryPoints": [
+      {
+        "$objectType": "dataprotection.v4.config.VmRecoveryPointReference",
+        "extId": "15000000-0a01-4000-8000-000000000005"
+      }
+    ]
+  },
+  {
+    "$objectType": "dataprotection.v4.config.RecoveryPoint",
+    "extId": "14000000-0a01-4000-8000-000000000006",
+    "name": "rp-prd-cache-01-0904-1000",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "creationTime": "2026-09-04T10:00:00Z",
+    "expirationTime": "2026-09-06T10:00:00Z",
+    "totalExclusiveUsageBytes": 268435456,
+    "vmRecoveryPoints": [
+      {
+        "$objectType": "dataprotection.v4.config.VmRecoveryPointReference",
+        "extId": "15000000-0a01-4000-8000-000000000006"
+      }
+    ]
+  }
+]

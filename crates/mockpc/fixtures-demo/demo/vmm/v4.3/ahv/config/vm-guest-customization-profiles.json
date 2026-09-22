@@ -1,0 +1,58 @@
+[
+  {
+    "$objectType": "vmm.v4.ahv.config.VmGuestCustomizationProfile",
+    "extId": "29000000-0a01-4000-8000-000000000001",
+    "name": "cloud-init-ubuntu",
+    "description": "Ubuntu cloud image profile; the cloud-init user data is supplied at deploy time",
+    "createTime": "2026-02-03T09:30:00Z",
+    "updateTime": "2026-07-14T08:45:00Z",
+    "createdBy": {
+      "$objectType": "vmm.v4.ahv.config.UserReference",
+      "extId": "0e000000-0a01-4000-8000-000000000002"
+    },
+    "updatedBy": {
+      "$objectType": "vmm.v4.ahv.config.UserReference",
+      "extId": "0e000000-0a01-4000-8000-000000000002"
+    }
+  },
+  {
+    "$objectType": "vmm.v4.ahv.config.VmGuestCustomizationProfile",
+    "extId": "29000000-0a01-4000-8000-000000000002",
+    "name": "sysprep-windows",
+    "description": "Sysprep answer for Windows Server 2022, workgroup join, en-US",
+    "createTime": "2026-04-22T12:30:00Z",
+    "updateTime": "2026-04-22T12:30:00Z",
+    "createdBy": {
+      "$objectType": "vmm.v4.ahv.config.UserReference",
+      "extId": "0e000000-0a01-4000-8000-000000000001"
+    },
+    "updatedBy": {
+      "$objectType": "vmm.v4.ahv.config.UserReference",
+      "extId": "0e000000-0a01-4000-8000-000000000001"
+    },
+    "config": {
+      "$objectType": "vmm.v4.ahv.config.VmGcProfileSysprepConfig",
+      "customization": {
+        "$objectType": "vmm.v4.ahv.config.VmGcProfileSysprepParams",
+        "generalSettings": {
+          "$objectType": "vmm.v4.ahv.config.VmGcProfileGeneralSettings",
+          "computerName": {
+            "$objectType": "vmm.v4.ahv.config.VmGcProfileUseVmName"
+          },
+          "timezone": "W. Europe Standard Time",
+          "registeredOwner": "ops-lead"
+        },
+        "localeSettings": {
+          "$objectType": "vmm.v4.ahv.config.VmGcProfileLocaleSettings",
+          "userLocale": "en-US",
+          "systemLocale": "en-US",
+          "uiLanguage": "en-US"
+        },
+        "workgroupOrDomainInfo": {
+          "$objectType": "vmm.v4.ahv.config.VmGcProfileWorkgroup",
+          "name": "WORKGROUP"
+        }
+      }
+    }
+  }
+]

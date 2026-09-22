@@ -1,0 +1,257 @@
+[
+  {
+    "$objectType": "monitoring.v4.serviceability.Alert",
+    "extId": "a1e70000-0b02-4000-8000-000000000001",
+    "title": "Recovery point store ridge-archive-rps is 91% full",
+    "message": "Recovery point store {store_name} is {usage_pct}% full.",
+    "severity": "CRITICAL",
+    "status": "OPEN",
+    "alertType": "A130202",
+    "serviceName": "Prism",
+    "isAcknowledged": false,
+    "isAutoResolved": false,
+    "isResolved": false,
+    "isRunnable": false,
+    "isUserDefined": false,
+    "creationTime": "2026-09-05T09:20:00Z",
+    "lastOccurredTime": "2026-09-05T09:50:00Z",
+    "lastUpdatedTime": "2026-09-05T09:50:00Z",
+    "clusterName": "ridge-dr",
+    "clusterUUID": "c1000000-0b02-4000-8000-000000000001",
+    "originatingClusterUUID": "c1000000-0b02-4000-8000-000000000001",
+    "sourceEntity": {
+      "$objectType": "monitoring.v4.common.AlertEntityReference",
+      "type": "recovery_point_store",
+      "name": "ridge-archive-rps",
+      "extId": "9b570000-0b02-4000-8000-000000000001"
+    },
+    "affectedEntities": [
+      {
+        "$objectType": "monitoring.v4.common.EntityReference",
+        "type": "recovery_point_store",
+        "name": "ridge-archive-rps",
+        "extId": "9b570000-0b02-4000-8000-000000000001"
+      }
+    ],
+    "impactedEntities": {
+      "$objectType": "monitoring.v4.common.ImpactedEntities",
+      "clusters": [
+        "c1000000-0b02-4000-8000-000000000001"
+      ]
+    },
+    "primaryImpactType": "CAPACITY",
+    "impactTypes": [
+      "CAPACITY"
+    ],
+    "classifications": [
+      "Storage"
+    ],
+    "rootCauseAnalysis": [
+      {
+        "$objectType": "monitoring.v4.serviceability.RootCauseAnalysis",
+        "cause": "The daily backups of the harbor site have outgrown the bucket backups-daily.",
+        "resolution": "Expire the recovery points older than 30 days or grow the object store ridge-archive."
+      }
+    ],
+    "kbArticles": [
+      "KB-6203"
+    ],
+    "parameters": [
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "store_name",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "ridge-archive-rps"
+        }
+      },
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "usage_pct",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "91"
+        }
+      }
+    ],
+    "severityTrails": [
+      {
+        "$objectType": "monitoring.v4.serviceability.SeverityTrail",
+        "severity": "CRITICAL",
+        "severityChangeTime": "2026-09-05T09:20:00Z"
+      }
+    ],
+    "projectExtId": "00000000-0000-0000-0000-000000000000"
+  },
+  {
+    "$objectType": "monitoring.v4.serviceability.Alert",
+    "extId": "a1e70000-0b02-4000-8000-000000000002",
+    "title": "Test failover of rp-web-tier failed validation",
+    "message": "Test failover of recovery plan {plan_name} failed validation: {reason}.",
+    "severity": "WARNING",
+    "status": "OPEN",
+    "alertType": "A130141",
+    "serviceName": "Prism",
+    "isAcknowledged": false,
+    "isAutoResolved": false,
+    "isResolved": false,
+    "isRunnable": false,
+    "isUserDefined": false,
+    "creationTime": "2026-09-05T09:46:00Z",
+    "lastOccurredTime": "2026-09-05T09:49:00Z",
+    "lastUpdatedTime": "2026-09-05T09:49:00Z",
+    "clusterName": "ridge-dr",
+    "clusterUUID": "c1000000-0b02-4000-8000-000000000001",
+    "originatingClusterUUID": "c1000000-0b02-4000-8000-000000000001",
+    "sourceEntity": {
+      "$objectType": "monitoring.v4.common.AlertEntityReference",
+      "type": "recovery_plan",
+      "name": "rp-web-tier",
+      "extId": "9b1a0000-0b02-4000-8000-000000000001"
+    },
+    "affectedEntities": [
+      {
+        "$objectType": "monitoring.v4.common.EntityReference",
+        "type": "recovery_plan",
+        "name": "rp-web-tier",
+        "extId": "9b1a0000-0b02-4000-8000-000000000001"
+      }
+    ],
+    "impactedEntities": {
+      "$objectType": "monitoring.v4.common.ImpactedEntities",
+      "clusters": [
+        "c1000000-0b02-4000-8000-000000000001"
+      ]
+    },
+    "primaryImpactType": "AVAILABILITY",
+    "impactTypes": [
+      "AVAILABILITY"
+    ],
+    "classifications": [
+      "DR"
+    ],
+    "rootCauseAnalysis": [
+      {
+        "$objectType": "monitoring.v4.serviceability.RootCauseAnalysis",
+        "cause": "Every address of the pool on ridge-vlan-200 is assigned or reserved.",
+        "resolution": "Widen the pool of ridge-vlan-200 and retry the test failover."
+      }
+    ],
+    "kbArticles": [
+      "KB-6110"
+    ],
+    "parameters": [
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "plan_name",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "rp-web-tier"
+        }
+      },
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "reason",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "recovery subnet ridge-vlan-200 has no free address"
+        }
+      }
+    ],
+    "severityTrails": [
+      {
+        "$objectType": "monitoring.v4.serviceability.SeverityTrail",
+        "severity": "WARNING",
+        "severityChangeTime": "2026-09-05T09:46:00Z"
+      }
+    ],
+    "projectExtId": "00000000-0000-0000-0000-000000000000"
+  },
+  {
+    "$objectType": "monitoring.v4.serviceability.Alert",
+    "extId": "a1e70000-0b02-4000-8000-000000000003",
+    "title": "Memory usage on ridge-n3 is 88%",
+    "message": "Memory usage on host {host_name} is {usage_pct}%.",
+    "severity": "WARNING",
+    "status": "OPEN",
+    "alertType": "A1056",
+    "serviceName": "Prism",
+    "isAcknowledged": false,
+    "isAutoResolved": false,
+    "isResolved": false,
+    "isRunnable": false,
+    "isUserDefined": false,
+    "creationTime": "2026-09-05T07:00:00Z",
+    "lastOccurredTime": "2026-09-05T09:55:00Z",
+    "lastUpdatedTime": "2026-09-05T09:55:00Z",
+    "clusterName": "ridge-dr",
+    "clusterUUID": "c1000000-0b02-4000-8000-000000000001",
+    "originatingClusterUUID": "c1000000-0b02-4000-8000-000000000001",
+    "sourceEntity": {
+      "$objectType": "monitoring.v4.common.AlertEntityReference",
+      "type": "node",
+      "name": "ridge-n3",
+      "extId": "40570000-0b02-4000-8000-000000000003"
+    },
+    "affectedEntities": [
+      {
+        "$objectType": "monitoring.v4.common.EntityReference",
+        "type": "node",
+        "name": "ridge-n3",
+        "extId": "40570000-0b02-4000-8000-000000000003"
+      }
+    ],
+    "impactedEntities": {
+      "$objectType": "monitoring.v4.common.ImpactedEntities",
+      "clusters": [
+        "c1000000-0b02-4000-8000-000000000001"
+      ],
+      "nodes": [
+        "40570000-0b02-4000-8000-000000000003"
+      ]
+    },
+    "primaryImpactType": "PERFORMANCE",
+    "impactTypes": [
+      "PERFORMANCE"
+    ],
+    "classifications": [
+      "Node"
+    ],
+    "rootCauseAnalysis": [
+      {
+        "$objectType": "monitoring.v4.serviceability.RootCauseAnalysis",
+        "cause": "Controller VM memory on ridge-n3 grew with the replica count.",
+        "resolution": "Rebalance the replicas or add memory to ridge-n3."
+      }
+    ],
+    "kbArticles": [
+      "KB-1001"
+    ],
+    "parameters": [
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "host_name",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "ridge-n3"
+        }
+      },
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "usage_pct",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "88"
+        }
+      }
+    ],
+    "severityTrails": [
+      {
+        "$objectType": "monitoring.v4.serviceability.SeverityTrail",
+        "severity": "WARNING",
+        "severityChangeTime": "2026-09-05T07:00:00Z"
+      }
+    ],
+    "projectExtId": "00000000-0000-0000-0000-000000000000"
+  }
+]

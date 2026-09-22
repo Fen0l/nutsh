@@ -1,0 +1,142 @@
+[
+  {
+    "$objectType": "objects.v4.config.ObjectStore",
+    "extId": "0b7ec000-0b02-4000-8000-000000000001",
+    "name": "ridge-archive",
+    "description": "cold copies of harbor backups",
+    "creationTime": "2026-03-02T10:00:00Z",
+    "lastUpdateTime": "2026-09-01T06:00:00Z",
+    "deploymentVersion": "5.4",
+    "domain": "objects.ridge.example.com",
+    "region": "ridge",
+    "numWorkerNodes": 3,
+    "clusterExtId": "c1000000-0b02-4000-8000-000000000001",
+    "storageNetworkReference": "5ab00000-0b02-4000-8000-000000000002",
+    "publicNetworkReference": "5ab00000-0b02-4000-8000-000000000001",
+    "storageNetworkVip": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "192.0.2.40",
+        "prefixLength": 32
+      }
+    },
+    "storageNetworkDnsIp": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "192.0.2.41",
+        "prefixLength": 32
+      }
+    },
+    "vip": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "192.0.2.42",
+        "prefixLength": 32
+      }
+    },
+    "dnsIp": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "192.0.2.41",
+        "prefixLength": 32
+      }
+    },
+    "publicNetworkIps": [
+      {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "192.0.2.43",
+          "prefixLength": 32
+        }
+      }
+    ],
+    "totalCapacityGiB": 40960,
+    "state": "OBJECT_STORE_AVAILABLE",
+    "isHighPerfConfigEnabled": false,
+    "shouldUseMaxLbForHybridCluster": false,
+    "hypervisorType": "AHV",
+    "objectCount": 418223,
+    "bucketCount": 3,
+    "storageUsageBytes": 12094627905536,
+    "localUsageBytes": 12094627905536,
+    "licensingUsageBytes": 12094627905536,
+    "tieredUsageBytes": 0,
+    "tieredGarbageBytes": 0,
+    "errorMessage": ""
+  },
+  {
+    "$objectType": "objects.v4.config.ObjectStore",
+    "extId": "0b7ec000-0b02-4000-8000-000000000002",
+    "name": "ridge-staging",
+    "description": "staging store for image uploads, being deployed",
+    "creationTime": "2026-09-04T15:00:00Z",
+    "lastUpdateTime": "2026-09-05T09:50:00Z",
+    "deploymentVersion": "5.4",
+    "domain": "staging.ridge.example.com",
+    "region": "ridge",
+    "numWorkerNodes": 1,
+    "clusterExtId": "c1000000-0b02-4000-8000-000000000001",
+    "storageNetworkReference": "5ab00000-0b02-4000-8000-000000000002",
+    "publicNetworkReference": "5ab00000-0b02-4000-8000-000000000001",
+    "storageNetworkVip": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "192.0.2.44",
+        "prefixLength": 32
+      }
+    },
+    "storageNetworkDnsIp": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "192.0.2.41",
+        "prefixLength": 32
+      }
+    },
+    "vip": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "192.0.2.45",
+        "prefixLength": 32
+      }
+    },
+    "dnsIp": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "192.0.2.41",
+        "prefixLength": 32
+      }
+    },
+    "publicNetworkIps": [
+      {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "192.0.2.46",
+          "prefixLength": 32
+        }
+      }
+    ],
+    "totalCapacityGiB": 2048,
+    "state": "DEPLOYING_OBJECT_STORE",
+    "isHighPerfConfigEnabled": false,
+    "shouldUseMaxLbForHybridCluster": false,
+    "hypervisorType": "AHV",
+    "objectCount": 0,
+    "bucketCount": 0,
+    "storageUsageBytes": 0,
+    "localUsageBytes": 0,
+    "licensingUsageBytes": 0,
+    "tieredUsageBytes": 0,
+    "tieredGarbageBytes": 0,
+    "errorMessage": ""
+  }
+]

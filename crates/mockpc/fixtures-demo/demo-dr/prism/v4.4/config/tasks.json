@@ -1,0 +1,194 @@
+[
+  {
+    "$objectType": "prism.v4.config.Task",
+    "extId": "ZXJnb24=:7a5c0000-0b02-4000-8000-000000000001",
+    "operation": "RecoveryPointReplicate",
+    "operationDescription": "Replicate recovery point for dr-db-01",
+    "status": "RUNNING",
+    "progressPercentage": 20,
+    "isCancelable": true,
+    "isBackgroundTask": false,
+    "createdTime": "2026-09-05T09:55:00Z",
+    "startedTime": "2026-09-05T09:55:02Z",
+    "lastUpdatedTime": "2026-09-05T09:58:00Z",
+    "numberOfEntitiesAffected": 1,
+    "numberOfSubtasks": 0,
+    "clusterExtIds": [
+      "c1000000-0b02-4000-8000-000000000001"
+    ],
+    "ownedBy": {
+      "$objectType": "prism.v4.config.OwnerReference",
+      "extId": "05e70000-0b02-4000-8000-000000000003",
+      "name": "svc-backup"
+    },
+    "entitiesAffected": [
+      {
+        "$objectType": "prism.v4.config.EntityReference",
+        "extId": "ee000000-0b02-4000-8000-000000000002",
+        "name": "dr-db-01",
+        "rel": "vmm:ahv:config:vm"
+      }
+    ],
+    "subSteps": [
+      {
+        "$objectType": "prism.v4.config.TaskStep",
+        "name": "Snapshot disks"
+      },
+      {
+        "$objectType": "prism.v4.config.TaskStep",
+        "name": "Replicate to local store"
+      }
+    ]
+  },
+  {
+    "$objectType": "prism.v4.config.Task",
+    "extId": "ZXJnb24=:7a5c0000-0b02-4000-8000-000000000002",
+    "operation": "RecoveryPlanTestFailover",
+    "operationDescription": "Test failover rp-web-tier",
+    "status": "FAILED",
+    "progressPercentage": 100,
+    "isCancelable": false,
+    "isBackgroundTask": false,
+    "createdTime": "2026-09-05T09:47:58Z",
+    "startedTime": "2026-09-05T09:48:00Z",
+    "completedTime": "2026-09-05T09:49:00Z",
+    "lastUpdatedTime": "2026-09-05T09:49:00Z",
+    "numberOfEntitiesAffected": 1,
+    "numberOfSubtasks": 1,
+    "clusterExtIds": [
+      "c1000000-0b02-4000-8000-000000000001"
+    ],
+    "ownedBy": {
+      "$objectType": "prism.v4.config.OwnerReference",
+      "extId": "05e70000-0b02-4000-8000-000000000002",
+      "name": "operator"
+    },
+    "entitiesAffected": [
+      {
+        "$objectType": "prism.v4.config.EntityReference",
+        "extId": "9b1a0000-0b02-4000-8000-000000000001",
+        "name": "rp-web-tier",
+        "rel": "datapolicies:config:recovery-plan"
+      }
+    ],
+    "subSteps": [
+      {
+        "$objectType": "prism.v4.config.TaskStep",
+        "name": "Validate recovery plan"
+      },
+      {
+        "$objectType": "prism.v4.config.TaskStep",
+        "name": "Create test network"
+      }
+    ],
+    "errorMessages": [
+      {
+        "$objectType": "prism.v4.config.AppMessage",
+        "code": "kRecoveryPlanValidationFailed",
+        "severity": "ERROR",
+        "message": "validation failed: recovery subnet ridge-vlan-200 has no free address"
+      }
+    ],
+    "completionDetails": [
+      {
+        "$objectType": "prism.v4.config.KVPair",
+        "name": "validation_errors",
+        "value": "1"
+      }
+    ]
+  },
+  {
+    "$objectType": "prism.v4.config.Task",
+    "extId": "ZXJnb24=:7a5c0000-0b02-4000-8000-000000000003",
+    "operation": "VmPowerOff",
+    "operationDescription": "Power off VM dr-web-01",
+    "status": "SUCCEEDED",
+    "progressPercentage": 100,
+    "isCancelable": false,
+    "isBackgroundTask": false,
+    "createdTime": "2026-09-05T07:59:58Z",
+    "startedTime": "2026-09-05T08:00:00Z",
+    "completedTime": "2026-09-05T08:00:05Z",
+    "lastUpdatedTime": "2026-09-05T08:00:05Z",
+    "numberOfEntitiesAffected": 1,
+    "numberOfSubtasks": 0,
+    "clusterExtIds": [
+      "c1000000-0b02-4000-8000-000000000001"
+    ],
+    "ownedBy": {
+      "$objectType": "prism.v4.config.OwnerReference",
+      "extId": "05e70000-0b02-4000-8000-000000000001",
+      "name": "admin"
+    },
+    "entitiesAffected": [
+      {
+        "$objectType": "prism.v4.config.EntityReference",
+        "extId": "ee000000-0b02-4000-8000-000000000001",
+        "name": "dr-web-01",
+        "rel": "vmm:ahv:config:vm"
+      }
+    ]
+  },
+  {
+    "$objectType": "prism.v4.config.Task",
+    "extId": "ZXJnb24=:7a5c0000-0b02-4000-8000-000000000004",
+    "operation": "VmRecoveryPointCreate",
+    "operationDescription": "Create recovery point for ridge-backup-01",
+    "status": "SUCCEEDED",
+    "progressPercentage": 100,
+    "isCancelable": false,
+    "isBackgroundTask": false,
+    "createdTime": "2026-09-05T09:19:58Z",
+    "startedTime": "2026-09-05T09:20:00Z",
+    "completedTime": "2026-09-05T09:20:41Z",
+    "lastUpdatedTime": "2026-09-05T09:20:41Z",
+    "numberOfEntitiesAffected": 1,
+    "numberOfSubtasks": 0,
+    "clusterExtIds": [
+      "c1000000-0b02-4000-8000-000000000001"
+    ],
+    "ownedBy": {
+      "$objectType": "prism.v4.config.OwnerReference",
+      "extId": "05e70000-0b02-4000-8000-000000000003",
+      "name": "svc-backup"
+    },
+    "entitiesAffected": [
+      {
+        "$objectType": "prism.v4.config.EntityReference",
+        "extId": "ee000000-0b02-4000-8000-000000000003",
+        "name": "ridge-backup-01",
+        "rel": "vmm:ahv:config:vm"
+      }
+    ]
+  },
+  {
+    "$objectType": "prism.v4.config.Task",
+    "extId": "ZXJnb24=:7a5c0000-0b02-4000-8000-000000000005",
+    "operation": "VmClone",
+    "operationDescription": "Clone VM ridge-jump-01",
+    "status": "QUEUED",
+    "progressPercentage": 0,
+    "isCancelable": false,
+    "isBackgroundTask": false,
+    "createdTime": "2026-09-05T09:58:00Z",
+    "lastUpdatedTime": "2026-09-05T09:58:00Z",
+    "numberOfEntitiesAffected": 1,
+    "numberOfSubtasks": 0,
+    "clusterExtIds": [
+      "c1000000-0b02-4000-8000-000000000001"
+    ],
+    "ownedBy": {
+      "$objectType": "prism.v4.config.OwnerReference",
+      "extId": "05e70000-0b02-4000-8000-000000000002",
+      "name": "operator"
+    },
+    "entitiesAffected": [
+      {
+        "$objectType": "prism.v4.config.EntityReference",
+        "extId": "ee000000-0b02-4000-8000-000000000005",
+        "name": "ridge-jump-01",
+        "rel": "vmm:ahv:config:vm"
+      }
+    ]
+  }
+]

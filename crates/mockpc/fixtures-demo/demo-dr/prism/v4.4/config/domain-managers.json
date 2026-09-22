@@ -1,0 +1,64 @@
+[
+  {
+    "$objectType": "prism.v4.config.DomainManager",
+    "extId": "d0000000-0b02-4000-8000-000000000001",
+    "isRegisteredWithHostingCluster": true,
+    "hostingClusterExtId": "c1000000-0b02-4000-8000-000000000001",
+    "createdTime": "2026-02-10T08:30:00Z",
+    "config": {
+      "$objectType": "prism.v4.config.DomainManagerClusterConfig",
+      "name": "pc-ridge",
+      "size": "SMALL",
+      "buildInfo": {
+        "$objectType": "clustermgmt.v4.config.BuildInfo",
+        "version": "pc.7.6"
+      },
+      "bootstrapConfig": {
+        "$objectType": "prism.v4.config.BootstrapConfig",
+        "environmentInfo": {
+          "$objectType": "prism.v4.config.EnvironmentInfo",
+          "type": "ONPREM",
+          "providerType": "NTNX",
+          "provisioningType": "NTNX"
+        }
+      },
+      "resourceConfig": {
+        "$objectType": "prism.v4.config.DomainManagerResourceConfig",
+        "numVcpus": 6,
+        "memorySizeBytes": 27917287424,
+        "dataDiskSizeBytes": 536870912000
+      }
+    },
+    "network": {
+      "$objectType": "prism.v4.config.DomainManagerNetwork",
+      "externalAddress": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "192.0.2.5",
+          "prefixLength": 24
+        }
+      },
+      "nameServers": [
+        {
+          "$objectType": "common.v1.config.IPAddressOrFQDN",
+          "ipv4": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "192.0.2.41",
+            "prefixLength": 24
+          }
+        }
+      ],
+      "ntpServers": [
+        {
+          "$objectType": "common.v1.config.IPAddressOrFQDN",
+          "fqdn": {
+            "$objectType": "common.v1.config.FQDN",
+            "value": "ntp.ridge.example.com"
+          }
+        }
+      ],
+      "fqdn": "pc-ridge.example.com"
+    }
+  }
+]

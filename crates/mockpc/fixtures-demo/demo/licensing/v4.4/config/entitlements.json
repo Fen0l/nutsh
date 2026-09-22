@@ -1,0 +1,56 @@
+[
+  {
+    "$objectType": "licensing.v4.config.Entitlement",
+    "extId": "42000000-0a01-4000-8000-000000000001",
+    "name": "NCI Pro",
+    "type": "NUTANIX",
+    "clusterExtId": "01000000-0a01-4000-8000-000000000001",
+    "isRegistered": true,
+    "isMulticluster": false,
+    "isDeleted": false,
+    "details": [
+      {
+        "$objectType": "licensing.v4.config.EntitlementDetail",
+        "name": "NCI Pro",
+        "type": "NCI",
+        "category": "PRO",
+        "meter": "CORES",
+        "quantity": 96.0,
+        "earliestExpiryDate": "2027-03-01",
+        "isDeleted": false
+      },
+      {
+        "$objectType": "licensing.v4.config.EntitlementDetail",
+        "name": "NUS Pro",
+        "type": "NUS",
+        "category": "PRO",
+        "meter": "TIB",
+        "quantity": 40.0,
+        "earliestExpiryDate": "2027-03-01",
+        "isDeleted": false
+      }
+    ]
+  },
+  {
+    "$objectType": "licensing.v4.config.Entitlement",
+    "extId": "42000000-0a01-4000-8000-000000000002",
+    "name": "NCM Starter",
+    "type": "NUTANIX",
+    "clusterExtId": "01000000-0a01-4000-8000-000000000002",
+    "isRegistered": true,
+    "isMulticluster": false,
+    "isDeleted": false,
+    "details": [
+      {
+        "$objectType": "licensing.v4.config.EntitlementDetail",
+        "name": "NCM Starter",
+        "type": "NCM",
+        "category": "STARTER",
+        "meter": "CORES",
+        "quantity": 16.0,
+        "earliestExpiryDate": "2026-10-15",
+        "isDeleted": false
+      }
+    ]
+  }
+]

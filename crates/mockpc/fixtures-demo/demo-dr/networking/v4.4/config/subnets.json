@@ -1,0 +1,117 @@
+[
+  {
+    "$objectType": "networking.v4.config.Subnet",
+    "extId": "5ab00000-0b02-4000-8000-000000000001",
+    "name": "ridge-vlan-200",
+    "description": "Recovery network of the ridge site",
+    "subnetType": "VLAN",
+    "networkId": 200,
+    "hypervisorType": "acropolis",
+    "bridgeName": "br0",
+    "isExternal": true,
+    "isNatEnabled": false,
+    "isConnected": true,
+    "isAdvancedNetworking": false,
+    "clusterReference": "c1000000-0b02-4000-8000-000000000001",
+    "clusterReferenceList": [
+      "c1000000-0b02-4000-8000-000000000001"
+    ],
+    "virtualSwitchReference": "5c170000-0b02-4000-8000-000000000001",
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "05e70000-0b02-4000-8000-000000000001",
+      "ownerUserName": "admin",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000",
+      "projectName": "default"
+    },
+    "ipConfig": [
+      {
+        "$objectType": "networking.v4.config.IPConfig",
+        "ipv4": {
+          "$objectType": "networking.v4.config.IPv4Config",
+          "ipSubnet": {
+            "$objectType": "networking.v4.config.IPv4Subnet",
+            "ip": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "192.0.2.0",
+              "prefixLength": 32
+            },
+            "prefixLength": 24
+          },
+          "defaultGatewayIp": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "192.0.2.1",
+            "prefixLength": 32
+          },
+          "dhcpServerAddress": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "192.0.2.2",
+            "prefixLength": 32
+          },
+          "poolList": [
+            {
+              "$objectType": "networking.v4.config.IPv4Pool",
+              "startIp": {
+                "$objectType": "common.v1.config.IPv4Address",
+                "value": "192.0.2.100",
+                "prefixLength": 32
+              },
+              "endIp": {
+                "$objectType": "common.v1.config.IPv4Address",
+                "value": "192.0.2.110",
+                "prefixLength": 32
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "dhcpOptions": {
+      "$objectType": "networking.v4.config.DhcpOptions",
+      "domainName": "ridge.example.com",
+      "searchDomains": [
+        "ridge.example.com",
+        "example.com"
+      ],
+      "domainNameServers": [
+        {
+          "$objectType": "common.v1.config.IPAddress",
+          "ipv4": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "192.0.2.41",
+            "prefixLength": 32
+          }
+        }
+      ]
+    }
+  },
+  {
+    "$objectType": "networking.v4.config.Subnet",
+    "extId": "5ab00000-0b02-4000-8000-000000000002",
+    "name": "ridge-mgmt",
+    "description": "Management VLAN of the ridge site; addresses are static",
+    "subnetType": "VLAN",
+    "networkId": 10,
+    "hypervisorType": "acropolis",
+    "bridgeName": "br0",
+    "isExternal": false,
+    "isNatEnabled": false,
+    "isConnected": true,
+    "isAdvancedNetworking": false,
+    "clusterReference": "c1000000-0b02-4000-8000-000000000001",
+    "clusterReferenceList": [
+      "c1000000-0b02-4000-8000-000000000001"
+    ],
+    "virtualSwitchReference": "5c170000-0b02-4000-8000-000000000001",
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "05e70000-0b02-4000-8000-000000000001",
+      "ownerUserName": "admin",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000",
+      "projectName": "default"
+    },
+    "ipConfig": []
+  }
+]

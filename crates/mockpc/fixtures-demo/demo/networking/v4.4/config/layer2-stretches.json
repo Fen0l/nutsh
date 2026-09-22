@@ -1,0 +1,216 @@
+[
+  {
+    "$objectType": "networking.v4.config.Layer2Stretch",
+    "extId": "1f000000-0a01-4000-8000-000000000001",
+    "remoteStretchStatus": [
+      {
+        "$objectType": "networking.v4.config.RemoteVtepStretchStatus",
+        "address": {
+          "$objectType": "common.v1.config.IPAddress",
+          "ipv4": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "192.0.2.101",
+            "prefixLength": 32
+          }
+        },
+        "status": {
+          "$objectType": "networking.v4.config.StretchStatus",
+          "detail": "VXLAN tunnel end point is reachable",
+          "tunnelState": "UP",
+          "interfaceState": "UP",
+          "roundTripTimeMillis": 4.2
+        }
+      },
+      {
+        "$objectType": "networking.v4.config.RemoteVtepStretchStatus",
+        "address": {
+          "$objectType": "common.v1.config.IPAddress",
+          "ipv4": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "192.0.2.102",
+            "prefixLength": 32
+          }
+        },
+        "status": {
+          "$objectType": "networking.v4.config.StretchStatus",
+          "detail": "VXLAN tunnel end point is reachable",
+          "tunnelState": "UP",
+          "interfaceState": "UP",
+          "roundTripTimeMillis": 4.4
+        }
+      },
+      {
+        "$objectType": "networking.v4.config.RemoteVtepStretchStatus",
+        "address": {
+          "$objectType": "common.v1.config.IPAddress",
+          "ipv4": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "192.0.2.103",
+            "prefixLength": 32
+          }
+        },
+        "status": {
+          "$objectType": "networking.v4.config.StretchStatus",
+          "detail": "VXLAN tunnel end point is reachable",
+          "tunnelState": "UP",
+          "interfaceState": "UP",
+          "roundTripTimeMillis": 4.1
+        }
+      }
+    ],
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "0e000000-0a01-4000-8000-000000000001",
+      "ownerUserName": "admin",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000",
+      "projectName": "default"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "stretch-prod-100",
+    "description": "prod-vlan-100 stretched to pc-ridge",
+    "localSiteParams": {
+      "$objectType": "networking.v4.config.SiteParams",
+      "pcClusterReference": "d0000000-0a01-4000-8000-000000000001",
+      "stretchSubnetReference": "08000000-0a01-4000-8000-000000000001",
+      "connectionReference": "21000000-0a01-4000-8000-000000000001",
+      "stretchInterfaceIpAddress": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "203.0.113.60",
+          "prefixLength": 32
+        }
+      },
+      "vpnInterfaceIPAddress": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "203.0.113.60",
+          "prefixLength": 32
+        }
+      }
+    },
+    "remoteSiteParams": {
+      "$objectType": "networking.v4.config.SiteParams",
+      "pcClusterReference": "d0000000-0b02-4000-8000-000000000001",
+      "stretchInterfaceIpAddress": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "192.0.2.100",
+          "prefixLength": 32
+        }
+      }
+    },
+    "connectionType": "VXLAN",
+    "mtu": 1392,
+    "vni": 5100
+  },
+  {
+    "$objectType": "networking.v4.config.Layer2Stretch",
+    "extId": "1f000000-0a01-4000-8000-000000000002",
+    "remoteStretchStatus": [
+      {
+        "$objectType": "networking.v4.config.RemoteVtepStretchStatus",
+        "address": {
+          "$objectType": "common.v1.config.IPAddress",
+          "ipv4": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "192.0.2.101",
+            "prefixLength": 32
+          }
+        },
+        "status": {
+          "$objectType": "networking.v4.config.StretchStatus",
+          "detail": "VXLAN tunnel end point is not responding",
+          "tunnelState": "DOWN",
+          "interfaceState": "UP",
+          "roundTripTimeMillis": 0
+        }
+      },
+      {
+        "$objectType": "networking.v4.config.RemoteVtepStretchStatus",
+        "address": {
+          "$objectType": "common.v1.config.IPAddress",
+          "ipv4": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "192.0.2.102",
+            "prefixLength": 32
+          }
+        },
+        "status": {
+          "$objectType": "networking.v4.config.StretchStatus",
+          "detail": "VXLAN tunnel end point is reachable",
+          "tunnelState": "UP",
+          "interfaceState": "UP",
+          "roundTripTimeMillis": 5.0
+        }
+      },
+      {
+        "$objectType": "networking.v4.config.RemoteVtepStretchStatus",
+        "address": {
+          "$objectType": "common.v1.config.IPAddress",
+          "ipv4": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "192.0.2.103",
+            "prefixLength": 32
+          }
+        },
+        "status": {
+          "$objectType": "networking.v4.config.StretchStatus",
+          "detail": "VXLAN tunnel end point is reachable",
+          "tunnelState": "UP",
+          "interfaceState": "UP",
+          "roundTripTimeMillis": 4.9
+        }
+      }
+    ],
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "0e000000-0a01-4000-8000-000000000002",
+      "ownerUserName": "ops-lead",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000",
+      "projectName": "default"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "stretch-db-110",
+    "description": "prod-vlan-110-db stretched to pc-ridge over the VPN",
+    "localSiteParams": {
+      "$objectType": "networking.v4.config.SiteParams",
+      "pcClusterReference": "d0000000-0a01-4000-8000-000000000001",
+      "stretchSubnetReference": "08000000-0a01-4000-8000-000000000002",
+      "connectionReference": "21000000-0a01-4000-8000-000000000001",
+      "stretchInterfaceIpAddress": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "203.0.113.61",
+          "prefixLength": 32
+        }
+      },
+      "vpnInterfaceIPAddress": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "203.0.113.61",
+          "prefixLength": 32
+        }
+      }
+    },
+    "remoteSiteParams": {
+      "$objectType": "networking.v4.config.SiteParams",
+      "pcClusterReference": "d0000000-0b02-4000-8000-000000000001",
+      "stretchInterfaceIpAddress": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "192.0.2.100",
+          "prefixLength": 32
+        }
+      }
+    },
+    "connectionType": "VPN",
+    "mtu": 1392,
+    "vni": 5110
+  }
+]

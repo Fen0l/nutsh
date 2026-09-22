@@ -1,0 +1,7 @@
+[
+  {
+    "$objectType": "volumes.v4.config.VmAttachment",
+    "extId": "03000000-0a01-4000-8000-000000000003",
+    "name": "prd-db-01"
+  }
+]

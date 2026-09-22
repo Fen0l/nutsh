@@ -1,0 +1,417 @@
+[
+  {
+    "$objectType": "clustermgmt.v4.config.Host",
+    "extId": "02000000-0a01-4000-8000-000000000001",
+    "hostName": "harbor-n1",
+    "hostType": "HYPER_CONVERGED",
+    "nodeStatus": "NORMAL",
+    "maintenanceState": "NORMAL",
+    "isSecureBooted": true,
+    "isHardwareVirtualized": true,
+    "hasCsr": false,
+    "bootTimeUsecs": 1784714400000000,
+    "cpuModel": "Intel(R) Xeon(R) Gold 6426Y",
+    "cpuFrequencyHz": 2500000000,
+    "numberOfCpuSockets": 2,
+    "numberOfCpuCores": 32,
+    "numberOfCpuThreads": 64,
+    "memorySizeBytes": 549755813888,
+    "nodeSerial": "NODE-0a01-0001",
+    "blockSerial": "BLOCK-0a01-0001",
+    "blockModel": "NX-3170-G9",
+    "gpuList": [],
+    "cluster": {
+      "$objectType": "clustermgmt.v4.config.ClusterReference",
+      "uuid": "01000000-0a01-4000-8000-000000000001",
+      "name": "harbor-prod"
+    },
+    "hypervisor": {
+      "$objectType": "clustermgmt.v4.config.HypervisorReference",
+      "type": "AHV",
+      "fullName": "Nutanix AHV 10.3.2",
+      "state": "ACROPOLIS_NORMAL",
+      "acropolisConnectionState": "CONNECTED",
+      "numberOfVms": 3,
+      "userName": "root",
+      "externalAddress": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "203.0.113.11",
+          "prefixLength": 32
+        }
+      }
+    },
+    "controllerVm": {
+      "$objectType": "clustermgmt.v4.config.ControllerVmReference",
+      "isInMaintenanceMode": false,
+      "externalAddress": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "203.0.113.31",
+          "prefixLength": 32
+        }
+      },
+      "backplaneAddress": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "192.0.2.11",
+          "prefixLength": 32
+        }
+      }
+    },
+    "ipmi": {
+      "$objectType": "clustermgmt.v4.config.IpmiReference",
+      "ip": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "198.51.100.11",
+          "prefixLength": 32
+        }
+      },
+      "username": "ADMIN"
+    },
+    "disk": [
+      {
+        "$objectType": "clustermgmt.v4.config.DiskReference",
+        "uuid": "04000000-0a01-4000-8000-000000000001",
+        "mountPath": "/home/nutanix/data/stargate-storage/disks/S4EN-0000-0a01-01",
+        "sizeInBytes": 1920383410176,
+        "serialId": "S4EN-0000-0a01-01",
+        "storageTier": "SSD_SATA"
+      },
+      {
+        "$objectType": "clustermgmt.v4.config.DiskReference",
+        "uuid": "04000000-0a01-4000-8000-000000000002",
+        "mountPath": "/home/nutanix/data/stargate-storage/disks/S4EN-0000-0a01-02",
+        "sizeInBytes": 1920383410176,
+        "serialId": "S4EN-0000-0a01-02",
+        "storageTier": "SSD_SATA"
+      },
+      {
+        "$objectType": "clustermgmt.v4.config.DiskReference",
+        "uuid": "04000000-0a01-4000-8000-000000000003",
+        "mountPath": "/home/nutanix/data/stargate-storage/disks/S4EN-0000-0a01-03",
+        "sizeInBytes": 7681501126656,
+        "serialId": "S4EN-0000-0a01-03",
+        "storageTier": "HDD"
+      }
+    ],
+    "rackableUnitUuid": "4a000000-0a01-4000-8000-000000000001"
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.Host",
+    "extId": "02000000-0a01-4000-8000-000000000002",
+    "hostName": "harbor-n2",
+    "hostType": "HYPER_CONVERGED",
+    "nodeStatus": "NORMAL",
+    "maintenanceState": "ENTERING_MAINTENANCE",
+    "isSecureBooted": true,
+    "isHardwareVirtualized": true,
+    "hasCsr": false,
+    "bootTimeUsecs": 1784714700000000,
+    "cpuModel": "Intel(R) Xeon(R) Gold 6426Y",
+    "cpuFrequencyHz": 2500000000,
+    "numberOfCpuSockets": 2,
+    "numberOfCpuCores": 32,
+    "numberOfCpuThreads": 64,
+    "memorySizeBytes": 549755813888,
+    "nodeSerial": "NODE-0a01-0002",
+    "blockSerial": "BLOCK-0a01-0001",
+    "blockModel": "NX-3170-G9",
+    "gpuList": [],
+    "cluster": {
+      "$objectType": "clustermgmt.v4.config.ClusterReference",
+      "uuid": "01000000-0a01-4000-8000-000000000001",
+      "name": "harbor-prod"
+    },
+    "hypervisor": {
+      "$objectType": "clustermgmt.v4.config.HypervisorReference",
+      "type": "AHV",
+      "fullName": "Nutanix AHV 10.3.2",
+      "state": "ACROPOLIS_NORMAL",
+      "acropolisConnectionState": "CONNECTED",
+      "numberOfVms": 2,
+      "userName": "root",
+      "externalAddress": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "203.0.113.12",
+          "prefixLength": 32
+        }
+      }
+    },
+    "controllerVm": {
+      "$objectType": "clustermgmt.v4.config.ControllerVmReference",
+      "isInMaintenanceMode": false,
+      "externalAddress": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "203.0.113.32",
+          "prefixLength": 32
+        }
+      },
+      "backplaneAddress": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "192.0.2.12",
+          "prefixLength": 32
+        }
+      }
+    },
+    "ipmi": {
+      "$objectType": "clustermgmt.v4.config.IpmiReference",
+      "ip": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "198.51.100.12",
+          "prefixLength": 32
+        }
+      },
+      "username": "ADMIN"
+    },
+    "disk": [
+      {
+        "$objectType": "clustermgmt.v4.config.DiskReference",
+        "uuid": "04000000-0a01-4000-8000-000000000004",
+        "mountPath": "/home/nutanix/data/stargate-storage/disks/S4EN-0000-0a01-04",
+        "sizeInBytes": 1920383410176,
+        "serialId": "S4EN-0000-0a01-04",
+        "storageTier": "SSD_SATA"
+      },
+      {
+        "$objectType": "clustermgmt.v4.config.DiskReference",
+        "uuid": "04000000-0a01-4000-8000-000000000005",
+        "mountPath": "/home/nutanix/data/stargate-storage/disks/S4EN-0000-0a01-05",
+        "sizeInBytes": 1920383410176,
+        "serialId": "S4EN-0000-0a01-05",
+        "storageTier": "SSD_SATA"
+      },
+      {
+        "$objectType": "clustermgmt.v4.config.DiskReference",
+        "uuid": "04000000-0a01-4000-8000-000000000006",
+        "mountPath": "/home/nutanix/data/stargate-storage/disks/S4EN-0000-0a01-06",
+        "sizeInBytes": 7681501126656,
+        "serialId": "S4EN-0000-0a01-06",
+        "storageTier": "HDD"
+      }
+    ],
+    "rackableUnitUuid": "4a000000-0a01-4000-8000-000000000001"
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.Host",
+    "extId": "02000000-0a01-4000-8000-000000000003",
+    "hostName": "harbor-n3",
+    "hostType": "HYPER_CONVERGED",
+    "nodeStatus": "NORMAL",
+    "maintenanceState": "NORMAL",
+    "isSecureBooted": true,
+    "isHardwareVirtualized": true,
+    "hasCsr": false,
+    "bootTimeUsecs": 1787565600000000,
+    "cpuModel": "Intel(R) Xeon(R) Gold 6426Y",
+    "cpuFrequencyHz": 2500000000,
+    "numberOfCpuSockets": 2,
+    "numberOfCpuCores": 32,
+    "numberOfCpuThreads": 64,
+    "memorySizeBytes": 549755813888,
+    "nodeSerial": "NODE-0a01-0003",
+    "blockSerial": "BLOCK-0a01-0001",
+    "blockModel": "NX-3170-G9",
+    "gpuList": [
+      "NVIDIA L40S",
+      "NVIDIA A16"
+    ],
+    "cluster": {
+      "$objectType": "clustermgmt.v4.config.ClusterReference",
+      "uuid": "01000000-0a01-4000-8000-000000000001",
+      "name": "harbor-prod"
+    },
+    "hypervisor": {
+      "$objectType": "clustermgmt.v4.config.HypervisorReference",
+      "type": "AHV",
+      "fullName": "Nutanix AHV 10.3.2",
+      "state": "ACROPOLIS_NORMAL",
+      "acropolisConnectionState": "CONNECTED",
+      "numberOfVms": 3,
+      "userName": "root",
+      "externalAddress": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "203.0.113.13",
+          "prefixLength": 32
+        }
+      }
+    },
+    "controllerVm": {
+      "$objectType": "clustermgmt.v4.config.ControllerVmReference",
+      "isInMaintenanceMode": false,
+      "externalAddress": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "203.0.113.33",
+          "prefixLength": 32
+        }
+      },
+      "backplaneAddress": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "192.0.2.13",
+          "prefixLength": 32
+        }
+      }
+    },
+    "ipmi": {
+      "$objectType": "clustermgmt.v4.config.IpmiReference",
+      "ip": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "198.51.100.13",
+          "prefixLength": 32
+        }
+      },
+      "username": "ADMIN"
+    },
+    "disk": [
+      {
+        "$objectType": "clustermgmt.v4.config.DiskReference",
+        "uuid": "04000000-0a01-4000-8000-000000000007",
+        "mountPath": "/home/nutanix/data/stargate-storage/disks/S4EN-0000-0a01-07",
+        "sizeInBytes": 1920383410176,
+        "serialId": "S4EN-0000-0a01-07",
+        "storageTier": "SSD_SATA"
+      },
+      {
+        "$objectType": "clustermgmt.v4.config.DiskReference",
+        "uuid": "04000000-0a01-4000-8000-000000000008",
+        "mountPath": "/home/nutanix/data/stargate-storage/disks/S4EN-0000-0a01-08",
+        "sizeInBytes": 1920383410176,
+        "serialId": "S4EN-0000-0a01-08",
+        "storageTier": "SSD_SATA"
+      },
+      {
+        "$objectType": "clustermgmt.v4.config.DiskReference",
+        "uuid": "04000000-0a01-4000-8000-000000000009",
+        "mountPath": "/home/nutanix/data/stargate-storage/disks/S4EN-0000-0a01-09",
+        "sizeInBytes": 7681501126656,
+        "serialId": "S4EN-0000-0a01-09",
+        "storageTier": "HDD"
+      }
+    ],
+    "rackableUnitUuid": "4a000000-0a01-4000-8000-000000000001"
+  },
+  {
+    "$objectType": "clustermgmt.v4.config.Host",
+    "extId": "02000000-0a01-4000-8000-000000000004",
+    "hostName": "edge-n1",
+    "hostType": "HYPER_CONVERGED",
+    "nodeStatus": "NORMAL",
+    "maintenanceState": "NORMAL",
+    "isSecureBooted": true,
+    "isHardwareVirtualized": true,
+    "hasCsr": false,
+    "bootTimeUsecs": 1780826400000000,
+    "cpuModel": "Intel(R) Xeon(R) Silver 4410Y",
+    "cpuFrequencyHz": 2000000000,
+    "numberOfCpuSockets": 1,
+    "numberOfCpuCores": 12,
+    "numberOfCpuThreads": 24,
+    "memorySizeBytes": 137438953472,
+    "nodeSerial": "NODE-0a01-0004",
+    "blockSerial": "BLOCK-0a01-0002",
+    "blockModel": "NX-1175S-G9",
+    "gpuList": [],
+    "cluster": {
+      "$objectType": "clustermgmt.v4.config.ClusterReference",
+      "uuid": "01000000-0a01-4000-8000-000000000002",
+      "name": "harbor-edge"
+    },
+    "hypervisor": {
+      "$objectType": "clustermgmt.v4.config.HypervisorReference",
+      "type": "AHV",
+      "fullName": "Nutanix AHV 10.3.1",
+      "state": "ACROPOLIS_NORMAL",
+      "acropolisConnectionState": "CONNECTED",
+      "numberOfVms": 2,
+      "userName": "root",
+      "externalAddress": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "203.0.113.14",
+          "prefixLength": 32
+        }
+      }
+    },
+    "controllerVm": {
+      "$objectType": "clustermgmt.v4.config.ControllerVmReference",
+      "isInMaintenanceMode": false,
+      "externalAddress": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "203.0.113.34",
+          "prefixLength": 32
+        }
+      },
+      "backplaneAddress": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "192.0.2.14",
+          "prefixLength": 32
+        }
+      }
+    },
+    "ipmi": {
+      "$objectType": "clustermgmt.v4.config.IpmiReference",
+      "ip": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "198.51.100.14",
+          "prefixLength": 32
+        }
+      },
+      "username": "ADMIN"
+    },
+    "disk": [
+      {
+        "$objectType": "clustermgmt.v4.config.DiskReference",
+        "uuid": "04000000-0a01-4000-8000-000000000010",
+        "mountPath": "/home/nutanix/data/stargate-storage/disks/S4EN-0000-0a01-10",
+        "sizeInBytes": 1920383410176,
+        "serialId": "S4EN-0000-0a01-10",
+        "storageTier": "SSD_SATA"
+      },
+      {
+        "$objectType": "clustermgmt.v4.config.DiskReference",
+        "uuid": "04000000-0a01-4000-8000-000000000011",
+        "mountPath": "/home/nutanix/data/stargate-storage/disks/S4EN-0000-0a01-11",
+        "sizeInBytes": 1920383410176,
+        "serialId": "S4EN-0000-0a01-11",
+        "storageTier": "SSD_SATA"
+      },
+      {
+        "$objectType": "clustermgmt.v4.config.DiskReference",
+        "uuid": "04000000-0a01-4000-8000-000000000012",
+        "mountPath": "/home/nutanix/data/stargate-storage/disks/S4EN-0000-0a01-12",
+        "sizeInBytes": 7681501126656,
+        "serialId": "S4EN-0000-0a01-12",
+        "storageTier": "HDD"
+      }
+    ],
+    "rackableUnitUuid": "4a000000-0a01-4000-8000-000000000002"
+  }
+]

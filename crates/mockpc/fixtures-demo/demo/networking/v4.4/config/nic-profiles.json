@@ -1,0 +1,72 @@
+[
+  {
+    "$objectType": "networking.v4.config.NicProfile",
+    "extId": "26000000-0a01-4000-8000-000000000001",
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "0e000000-0a01-4000-8000-000000000001",
+      "ownerUserName": "admin",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000",
+      "projectName": "default"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "sriov-25g",
+    "description": "SR-IOV on the second 25G port of every production host",
+    "capabilityConfig": {
+      "$objectType": "networking.v4.config.CapabilityConfig",
+      "capabilityType": "SRIOV"
+    },
+    "hostNicReferences": [
+      {
+        "$objectType": "networking.v4.config.HostNicReference",
+        "extId": "05000000-0a01-4000-8000-000000000002",
+        "numVFs": 8,
+        "associatedVmNicReferences": [
+          "53000000-0a01-4000-8000-000000000301"
+        ],
+        "complianceStatus": "SUCCESS"
+      },
+      {
+        "$objectType": "networking.v4.config.HostNicReference",
+        "extId": "05000000-0a01-4000-8000-000000000004",
+        "numVFs": 8,
+        "associatedVmNicReferences": [],
+        "complianceStatus": "SUCCESS"
+      },
+      {
+        "$objectType": "networking.v4.config.HostNicReference",
+        "extId": "05000000-0a01-4000-8000-000000000006",
+        "numVFs": 8,
+        "associatedVmNicReferences": [
+          "53000000-0a01-4000-8000-000000000401"
+        ],
+        "complianceStatus": "NIC_PROFILE_MISMATCH_ERROR"
+      }
+    ],
+    "nicFamily": "Intel E810",
+    "operatingMode": "ETHERNET",
+    "ownerType": "USER"
+  },
+  {
+    "$objectType": "networking.v4.config.NicProfile",
+    "extId": "26000000-0a01-4000-8000-000000000002",
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "0e000000-0a01-4000-8000-000000000001",
+      "ownerUserName": "admin",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000",
+      "projectName": "default"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "dpdk-100g",
+    "description": "Datapath offload for the GPU node, not yet bound to a port",
+    "capabilityConfig": {
+      "$objectType": "networking.v4.config.CapabilityConfig",
+      "capabilityType": "DP_OFFLOAD"
+    },
+    "hostNicReferences": [],
+    "nicFamily": "NVIDIA ConnectX-7",
+    "operatingMode": "ETHERNET",
+    "ownerType": "USER"
+  }
+]

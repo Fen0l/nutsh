@@ -1,0 +1,107 @@
+[
+  {
+    "$objectType": "vmm.v4.content.Image",
+    "extId": "09000000-0a01-4000-8000-000000000001",
+    "name": "ubuntu-24-cloud",
+    "description": "Ubuntu 24.04 cloud image, the base of every Linux VM",
+    "type": "DISK_IMAGE",
+    "sizeBytes": 629145600,
+    "ownerName": "admin",
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "checksum": {
+      "$objectType": "vmm.v4.content.Sha256Checksum",
+      "hexDigest": "0a01000000000000000000000000000000000000000000000000000000000001"
+    },
+    "contentRepositoryName": "harbor-images",
+    "clusterLocationExtIds": [
+      "01000000-0a01-4000-8000-000000000001",
+      "01000000-0a01-4000-8000-000000000002"
+    ],
+    "placementPolicyStatus": [
+      {
+        "$objectType": "vmm.v4.content.PlacementPolicyStatus",
+        "placementPolicyExtId": "32000000-0a01-4000-8000-000000000001",
+        "complianceStatus": "COMPLIANT",
+        "enforcementMode": "HARD",
+        "policyClusterExtIds": [
+          "01000000-0a01-4000-8000-000000000001"
+        ],
+        "compliantClusterExtIds": [
+          "01000000-0a01-4000-8000-000000000001"
+        ],
+        "enforcedClusterExtIds": []
+      }
+    ],
+    "categoryExtIds": [
+      "07000000-0a01-4000-8000-000000000001"
+    ],
+    "isSharedWithAllProjects": true,
+    "createTime": "2025-09-15T10:00:00Z",
+    "lastUpdateTime": "2026-06-01T08:00:00Z"
+  },
+  {
+    "$objectType": "vmm.v4.content.Image",
+    "extId": "09000000-0a01-4000-8000-000000000002",
+    "name": "windows-2022-eval",
+    "description": "Windows Server 2022 evaluation, sysprepped",
+    "type": "DISK_IMAGE",
+    "sizeBytes": 12884901888,
+    "ownerName": "ops-lead",
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "checksum": {
+      "$objectType": "vmm.v4.content.Sha256Checksum",
+      "hexDigest": "0a01000000000000000000000000000000000000000000000000000000000002"
+    },
+    "contentRepositoryName": "harbor-images",
+    "clusterLocationExtIds": [
+      "01000000-0a01-4000-8000-000000000001",
+      "01000000-0a01-4000-8000-000000000002"
+    ],
+    "placementPolicyStatus": [
+      {
+        "$objectType": "vmm.v4.content.PlacementPolicyStatus",
+        "placementPolicyExtId": "32000000-0a01-4000-8000-000000000001",
+        "complianceStatus": "NON_COMPLIANT",
+        "enforcementMode": "HARD",
+        "policyClusterExtIds": [
+          "01000000-0a01-4000-8000-000000000001"
+        ],
+        "compliantClusterExtIds": [
+          "01000000-0a01-4000-8000-000000000001"
+        ],
+        "enforcedClusterExtIds": [
+          "01000000-0a01-4000-8000-000000000002"
+        ]
+      }
+    ],
+    "categoryExtIds": [
+      "07000000-0a01-4000-8000-000000000002"
+    ],
+    "isSharedWithAllProjects": true,
+    "createTime": "2026-02-14T11:00:00Z",
+    "lastUpdateTime": "2026-09-05T06:00:00Z"
+  },
+  {
+    "$objectType": "vmm.v4.content.Image",
+    "extId": "09000000-0a01-4000-8000-000000000003",
+    "name": "virtio-drivers-iso",
+    "description": "VirtIO drivers and guest tools ISO",
+    "type": "ISO_IMAGE",
+    "sizeBytes": 734003200,
+    "ownerName": "ops-lead",
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "checksum": {
+      "$objectType": "vmm.v4.content.Sha256Checksum",
+      "hexDigest": "0a01000000000000000000000000000000000000000000000000000000000003"
+    },
+    "contentRepositoryName": "harbor-images",
+    "clusterLocationExtIds": [
+      "01000000-0a01-4000-8000-000000000001"
+    ],
+    "placementPolicyStatus": [],
+    "categoryExtIds": [],
+    "isSharedWithAllProjects": true,
+    "createTime": "2025-09-15T10:30:00Z",
+    "lastUpdateTime": "2025-09-15T10:30:00Z"
+  }
+]

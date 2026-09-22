@@ -1,0 +1,130 @@
+[
+  {
+    "$objectType": "vmm.v4.content.TemplateVersionSpec",
+    "extId": "2b000000-0a01-4000-8000-000000000001",
+    "createTime": "2026-02-03T10:00:00Z",
+    "clusterLocationExtIds": [
+      "01000000-0a01-4000-8000-000000000001"
+    ],
+    "versionName": "v1",
+    "versionDescription": "Initial capture from prd-web-01",
+    "vmSpec": {
+      "$objectType": "vmm.v4.ahv.config.Vm",
+      "numSockets": 2,
+      "numCoresPerSocket": 2,
+      "numThreadsPerCore": 1,
+      "memorySizeBytes": 4294967296,
+      "hardwareClockTimezone": "UTC",
+      "disks": [
+        {
+          "$objectType": "vmm.v4.ahv.config.Disk",
+          "backingInfo": {
+            "$objectType": "vmm.v4.ahv.config.VmDisk",
+            "diskSizeBytes": 53687091200,
+            "dataSource": {
+              "$objectType": "vmm.v4.ahv.config.DataSource",
+              "reference": {
+                "$objectType": "vmm.v4.ahv.config.ImageReference",
+                "imageExtId": "09000000-0a01-4000-8000-000000000001"
+              }
+            }
+          }
+        }
+      ],
+      "nics": [
+        {
+          "$objectType": "vmm.v4.ahv.config.Nic",
+          "nicBackingInfo": {
+            "$objectType": "vmm.v4.ahv.config.VirtualEthernetNic",
+            "isConnected": true,
+            "numQueues": 1
+          },
+          "nicNetworkInfo": {
+            "$objectType": "vmm.v4.ahv.config.VirtualEthernetNicNetworkInfo",
+            "nicType": "NORMAL_NIC",
+            "vlanMode": "ACCESS",
+            "subnet": {
+              "$objectType": "vmm.v4.ahv.config.SubnetReference",
+              "extId": "08000000-0a01-4000-8000-000000000001"
+            }
+          }
+        }
+      ]
+    },
+    "createdBy": {
+      "$objectType": "vmm.v4.content.TemplateUser",
+      "extId": "0e000000-0a01-4000-8000-000000000002",
+      "username": "ops-lead"
+    },
+    "isActiveVersion": false,
+    "isGcOverrideEnabled": false,
+    "guestCustomizationProfile": {
+      "$objectType": "vmm.v4.ahv.config.VmGcProfileReference",
+      "extId": "29000000-0a01-4000-8000-000000000001"
+    }
+  },
+  {
+    "$objectType": "vmm.v4.content.TemplateVersionSpec",
+    "extId": "2b000000-0a01-4000-8000-000000000002",
+    "createTime": "2026-07-14T09:00:00Z",
+    "clusterLocationExtIds": [
+      "01000000-0a01-4000-8000-000000000001"
+    ],
+    "versionName": "v2",
+    "versionDescription": "Updated packages and guest tools 4.5",
+    "vmSpec": {
+      "$objectType": "vmm.v4.ahv.config.Vm",
+      "numSockets": 2,
+      "numCoresPerSocket": 2,
+      "numThreadsPerCore": 1,
+      "memorySizeBytes": 8589934592,
+      "hardwareClockTimezone": "UTC",
+      "disks": [
+        {
+          "$objectType": "vmm.v4.ahv.config.Disk",
+          "backingInfo": {
+            "$objectType": "vmm.v4.ahv.config.VmDisk",
+            "diskSizeBytes": 107374182400,
+            "dataSource": {
+              "$objectType": "vmm.v4.ahv.config.DataSource",
+              "reference": {
+                "$objectType": "vmm.v4.ahv.config.ImageReference",
+                "imageExtId": "09000000-0a01-4000-8000-000000000001"
+              }
+            }
+          }
+        }
+      ],
+      "nics": [
+        {
+          "$objectType": "vmm.v4.ahv.config.Nic",
+          "nicBackingInfo": {
+            "$objectType": "vmm.v4.ahv.config.VirtualEthernetNic",
+            "isConnected": true,
+            "numQueues": 1
+          },
+          "nicNetworkInfo": {
+            "$objectType": "vmm.v4.ahv.config.VirtualEthernetNicNetworkInfo",
+            "nicType": "NORMAL_NIC",
+            "vlanMode": "ACCESS",
+            "subnet": {
+              "$objectType": "vmm.v4.ahv.config.SubnetReference",
+              "extId": "08000000-0a01-4000-8000-000000000001"
+            }
+          }
+        }
+      ]
+    },
+    "createdBy": {
+      "$objectType": "vmm.v4.content.TemplateUser",
+      "extId": "0e000000-0a01-4000-8000-000000000002",
+      "username": "ops-lead"
+    },
+    "isActiveVersion": true,
+    "isGcOverrideEnabled": true,
+    "guestCustomizationProfile": {
+      "$objectType": "vmm.v4.ahv.config.VmGcProfileReference",
+      "extId": "29000000-0a01-4000-8000-000000000001"
+    }
+  }
+]

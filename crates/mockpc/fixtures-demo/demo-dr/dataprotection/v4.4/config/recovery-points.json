@@ -1,0 +1,34 @@
+[
+  {
+    "$objectType": "dataprotection.v4.config.RecoveryPoint",
+    "extId": "9b0d0000-0b02-4000-8000-000000000001",
+    "name": "rp-dr-web-01-0905-0945",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "creationTime": "2026-09-05T09:45:00Z",
+    "expirationTime": "2026-09-06T09:45:00Z",
+    "totalExclusiveUsageBytes": 536870912,
+    "vmRecoveryPoints": [
+      {
+        "$objectType": "dataprotection.v4.config.VmRecoveryPointReference",
+        "extId": "0e9b0000-0b02-4000-8000-000000000001"
+      }
+    ]
+  },
+  {
+    "$objectType": "dataprotection.v4.config.RecoveryPoint",
+    "extId": "9b0d0000-0b02-4000-8000-000000000002",
+    "name": "rp-dr-db-01-0905-0930",
+    "status": "COMPLETE",
+    "recoveryPointType": "CRASH_CONSISTENT",
+    "creationTime": "2026-09-05T09:30:00Z",
+    "expirationTime": "2026-09-06T09:30:00Z",
+    "totalExclusiveUsageBytes": 4294967296,
+    "vmRecoveryPoints": [
+      {
+        "$objectType": "dataprotection.v4.config.VmRecoveryPointReference",
+        "extId": "0e9b0000-0b02-4000-8000-000000000002"
+      }
+    ]
+  }
+]

@@ -1,0 +1,38 @@
+[
+  {
+    "$objectType": "dataprotection.v4.config.RecoveryPointStore",
+    "extId": "36000000-0a01-4000-8000-000000000001",
+    "name": "harbor-rps",
+    "bucket": {
+      "$objectType": "common.v1.config.ObjectStoreBucket",
+      "provider": "NUTANIX",
+      "providerConfig": {
+        "$objectType": "common.v1.config.NutanixObjectsBucket",
+        "endPoint": "objects.example.com",
+        "bucketName": "harbor-rps"
+      },
+      "bucketName": "harbor-rps"
+    },
+    "isHealthy": true,
+    "currentLogicalUsageBytes": 1319413953331,
+    "ownerExtId": "0e000000-0a01-4000-8000-000000000001"
+  },
+  {
+    "$objectType": "dataprotection.v4.config.RecoveryPointStore",
+    "extId": "36000000-0a01-4000-8000-000000000002",
+    "name": "harbor-rps-cold",
+    "bucket": {
+      "$objectType": "common.v1.config.ObjectStoreBucket",
+      "provider": "AWS",
+      "providerConfig": {
+        "$objectType": "common.v1.config.AmazonS3Bucket",
+        "bucketName": "harbor-rps-cold",
+        "region": "eu-central-1"
+      },
+      "bucketName": "harbor-rps-cold"
+    },
+    "isHealthy": false,
+    "currentLogicalUsageBytes": 8796093022208,
+    "ownerExtId": "0e000000-0a01-4000-8000-000000000005"
+  }
+]

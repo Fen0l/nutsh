@@ -1,0 +1,62 @@
+[
+  {
+    "$objectType": "iam.v4.authn.DirectoryService",
+    "extId": "3f000000-0a01-4000-8000-000000000001",
+    "name": "corp-ad",
+    "directoryType": "ACTIVE_DIRECTORY",
+    "domainName": "example.com",
+    "url": "ldaps://ad.example.com:636",
+    "secondaryUrls": [
+      "ldaps://ad2.example.com:636"
+    ],
+    "groupSearchType": "RECURSIVE",
+    "serviceAccount": {
+      "$objectType": "iam.v4.authn.DsServiceAccount",
+      "username": "svc-prism"
+    },
+    "whiteListedGroups": [
+      "cn=harbor-auditors,ou=groups,dc=example,dc=com"
+    ],
+    "isSharedWithAllProjects": false,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "createdBy": "admin",
+    "createdTime": "2025-09-01T08:00:00Z",
+    "lastUpdatedTime": "2026-05-02T10:00:00Z"
+  },
+  {
+    "$objectType": "iam.v4.authn.DirectoryService",
+    "extId": "3f000000-0a01-4000-8000-000000000002",
+    "name": "legacy-ldap",
+    "directoryType": "OPEN_LDAP",
+    "domainName": "legacy.example.com",
+    "url": "ldap://ldap.example.com:389",
+    "secondaryUrls": [],
+    "groupSearchType": "NON_RECURSIVE",
+    "serviceAccount": {
+      "$objectType": "iam.v4.authn.DsServiceAccount",
+      "username": "cn=prism,ou=services,dc=legacy,dc=example,dc=com"
+    },
+    "openLdapConfiguration": {
+      "$objectType": "iam.v4.authn.OpenLdapConfig",
+      "userConfiguration": {
+        "$objectType": "iam.v4.authn.UserConfiguration",
+        "userObjectClass": "inetOrgPerson",
+        "userSearchBase": "ou=people,dc=legacy,dc=example,dc=com",
+        "usernameAttribute": "uid"
+      },
+      "userGroupConfiguration": {
+        "$objectType": "iam.v4.authn.UserGroupConfiguration",
+        "groupObjectClass": "groupOfNames",
+        "groupSearchBase": "ou=groups,dc=legacy,dc=example,dc=com",
+        "groupMemberAttribute": "member",
+        "groupMemberAttributeValue": "dn"
+      }
+    },
+    "whiteListedGroups": [],
+    "isSharedWithAllProjects": false,
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "createdBy": "admin",
+    "createdTime": "2025-06-12T09:00:00Z",
+    "lastUpdatedTime": "2025-06-12T09:00:00Z"
+  }
+]

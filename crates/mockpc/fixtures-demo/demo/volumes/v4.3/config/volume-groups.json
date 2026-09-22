@@ -1,0 +1,44 @@
+[
+  {
+    "$objectType": "volumes.v4.config.VolumeGroup",
+    "extId": "0a000000-0a01-4000-8000-000000000001",
+    "name": "prd-db-01-data",
+    "description": "Orders database data volumes",
+    "createdBy": "ops-lead",
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "clusterReference": "01000000-0a01-4000-8000-000000000001",
+    "sharingStatus": "NOT_SHARED",
+    "hydrationStatus": "COMPLETE",
+    "usageType": "USER",
+    "attachmentType": "DIRECT",
+    "protocol": "NONE",
+    "isHidden": false,
+    "shouldLoadBalanceVmAttachments": false,
+    "targetName": "iqn.2010-06.com.example:prd-db-01-data",
+    "attachments": [
+      {
+        "$objectType": "volumes.v4.config.VmAttachment",
+        "extId": "03000000-0a01-4000-8000-000000000003",
+        "name": "prd-db-01"
+      }
+    ]
+  },
+  {
+    "$objectType": "volumes.v4.config.VolumeGroup",
+    "extId": "0a000000-0a01-4000-8000-000000000002",
+    "name": "backup-scratch",
+    "description": "iSCSI scratch target for the nightly backup job",
+    "createdBy": "svc-backup",
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "clusterReference": "01000000-0a01-4000-8000-000000000001",
+    "sharingStatus": "SHARED",
+    "hydrationStatus": "COMPLETE",
+    "usageType": "BACKUP_TARGET",
+    "attachmentType": "EXTERNAL",
+    "protocol": "ISCSI",
+    "isHidden": false,
+    "shouldLoadBalanceVmAttachments": true,
+    "targetName": "iqn.2010-06.com.example:backup-scratch",
+    "attachments": []
+  }
+]

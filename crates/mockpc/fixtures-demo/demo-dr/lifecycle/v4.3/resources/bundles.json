@@ -1,0 +1,40 @@
+[
+  {
+    "$objectType": "lifecycle.v4.resources.Bundle",
+    "extId": "b0d1e000-0b02-4000-8000-000000000001",
+    "name": "aos-7.6-bundle",
+    "sizeBytes": 6442450944,
+    "type": "SOFTWARE",
+    "vendor": "NUTANIX",
+    "uploadMode": "TARGETED",
+    "clusterExtId": "c1000000-0b02-4000-8000-000000000001",
+    "createdTime": "2026-08-14T09:00:00Z",
+    "images": [
+      {
+        "$objectType": "lifecycle.v4.resources.Image",
+        "clusterExtId": "c1000000-0b02-4000-8000-000000000001",
+        "isStub": false,
+        "entityClass": "Core",
+        "entityModel": "AOS",
+        "entityVersion": "7.6",
+        "releaseNotes": "https://portal.example.com/release-notes/aos-7-6",
+        "files": [
+          {
+            "$objectType": "lifecycle.v4.resources.ImageFile",
+            "name": "nutanix_installer_package-release-ganges-7.6-stable.tar.gz",
+            "sizeBytes": 6442440000,
+            "checksumType": "SHASUM",
+            "checksum": "0b02000000000000000000000000000000000000000000000000000000000076"
+          },
+          {
+            "$objectType": "lifecycle.v4.resources.ImageFile",
+            "name": "aos-7.6-metadata.json",
+            "sizeBytes": 7910,
+            "checksumType": "SHASUM",
+            "checksum": "0b0200000000000000000000000000000000000000000000000000000000007f"
+          }
+        ]
+      }
+    ]
+  }
+]

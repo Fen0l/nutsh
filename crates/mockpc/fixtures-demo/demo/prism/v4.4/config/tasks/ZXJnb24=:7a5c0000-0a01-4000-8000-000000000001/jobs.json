@@ -1,0 +1,64 @@
+[
+  {
+    "$objectType": "prism.v4.config.TaskJob",
+    "extId": "51000000-0a01-4000-8000-000000000001",
+    "name": "Validate host resources",
+    "status": "FAILED",
+    "createdTime": "2026-09-05T09:51:00Z",
+    "completedTime": "2026-09-05T09:51:04Z",
+    "entitiesAffected": [
+      {
+        "$objectType": "prism.v4.config.EntityReference",
+        "extId": "03000000-0a01-4000-8000-000000000008",
+        "name": "dev-scratch-02",
+        "rel": "vmm:ahv:config:vm"
+      }
+    ],
+    "errorMessages": [
+      {
+        "$objectType": "prism.v4.config.AppMessage",
+        "code": "kNoHostResources",
+        "severity": "ERROR",
+        "message": "No host in cluster harbor-prod can satisfy 64 GiB of memory with harbor-n2 entering maintenance"
+      },
+      {
+        "$objectType": "prism.v4.config.AppMessage",
+        "code": "kNoHostResources",
+        "severity": "ERROR",
+        "message": "Placement failed after 3 attempts"
+      }
+    ],
+    "warnings": [],
+    "clusterExtIds": [
+      "01000000-0a01-4000-8000-000000000001"
+    ],
+    "completionDetails": [
+      {
+        "$objectType": "prism.v4.config.KVPair",
+        "name": "attempts",
+        "value": "3"
+      }
+    ]
+  },
+  {
+    "$objectType": "prism.v4.config.TaskJob",
+    "extId": "51000000-0a01-4000-8000-000000000002",
+    "name": "Power on",
+    "status": "QUEUED",
+    "createdTime": "2026-09-05T09:51:00Z",
+    "entitiesAffected": [
+      {
+        "$objectType": "prism.v4.config.EntityReference",
+        "extId": "03000000-0a01-4000-8000-000000000008",
+        "name": "dev-scratch-02",
+        "rel": "vmm:ahv:config:vm"
+      }
+    ],
+    "errorMessages": [],
+    "warnings": [],
+    "clusterExtIds": [
+      "01000000-0a01-4000-8000-000000000001"
+    ],
+    "completionDetails": []
+  }
+]

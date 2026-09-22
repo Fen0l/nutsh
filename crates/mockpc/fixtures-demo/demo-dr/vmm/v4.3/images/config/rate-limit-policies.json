@@ -1,0 +1,23 @@
+[
+  {
+    "$objectType": "vmm.v4.images.config.RateLimitPolicy",
+    "extId": "9a7e1000-0b02-4000-8000-000000000001",
+    "name": "ridge-image-throttle",
+    "description": "Image replication into the ridge site stays under 100 Mbit/s",
+    "rateLimitKbps": 102400,
+    "clusterEntityFilter": {
+      "$objectType": "vmm.v4.images.config.Filter",
+      "type": "CATEGORIES_MATCH_ANY",
+      "categoryExtIds": [
+        "ca7e0000-0b02-4000-8000-000000000004"
+      ]
+    },
+    "createTime": "2026-03-01T08:20:00Z",
+    "lastUpdateTime": "2026-03-01T08:20:00Z",
+    "ownerExtId": "05e70000-0b02-4000-8000-000000000001",
+    "ownerName": "admin",
+    "matchingClusterExtIds": [
+      "c1000000-0b02-4000-8000-000000000001"
+    ]
+  }
+]

@@ -5929,7 +5929,7 @@ pub static KINDS: &[Kind] = &[
         rate: RateLimit { count: 20, per_secs: 1 },
         ext_id_key: "extId",
         name_path: "",
-        warm: false,
+        warm: true,
         columns: &[
             Column { header: "NAME", path: "name", kind: ColumnKind::Text },
             Column { header: "PC VERSION", path: "platformData.pcVersion", kind: ColumnKind::Text },

@@ -1,0 +1,154 @@
+[
+  {
+    "$objectType": "iam.v4.authz.Role",
+    "extId": "c01e0000-0b02-4000-8000-000000000001",
+    "displayName": "Super Admin",
+    "description": "Every operation on every entity, including identity and licensing",
+    "isSystemDefined": true,
+    "isGlobal": true,
+    "isSharedWithAllProjects": true,
+    "clientName": "prism",
+    "accessibleClients": [
+      "prism"
+    ],
+    "accessibleClientsCount": 1,
+    "accessibleEntityTypes": [
+      "Virtual Machine",
+      "Cluster",
+      "Host",
+      "Subnet",
+      "Image",
+      "Category",
+      "User",
+      "Role",
+      "Protection Policy",
+      "Recovery Plan"
+    ],
+    "accessibleEntityTypesCount": 10,
+    "assignedUsersCount": 1,
+    "assignedUserGroupsCount": 0,
+    "operations": [
+      "vm:view",
+      "vm:create",
+      "vm:update",
+      "vm:delete",
+      "vm:power-on",
+      "vm:power-off",
+      "cluster:view",
+      "host:view",
+      "subnet:view",
+      "image:view",
+      "category:view",
+      "user:create",
+      "role:create",
+      "license:update"
+    ],
+    "createdBy": "system",
+    "createdTime": "2026-02-10T08:30:00Z",
+    "lastUpdatedTime": "2026-02-10T08:30:00Z",
+    "projectExtId": "00000000-0000-0000-0000-000000000000"
+  },
+  {
+    "$objectType": "iam.v4.authz.Role",
+    "extId": "c01e0000-0b02-4000-8000-000000000002",
+    "displayName": "Prism Admin",
+    "description": "Manage the infrastructure short of identity and licensing",
+    "isSystemDefined": true,
+    "isGlobal": true,
+    "isSharedWithAllProjects": true,
+    "clientName": "prism",
+    "accessibleClients": [
+      "prism"
+    ],
+    "accessibleClientsCount": 1,
+    "accessibleEntityTypes": [
+      "Virtual Machine",
+      "Cluster",
+      "Host",
+      "Subnet",
+      "Image",
+      "Category",
+      "Protection Policy",
+      "Recovery Plan"
+    ],
+    "accessibleEntityTypesCount": 8,
+    "assignedUsersCount": 0,
+    "assignedUserGroupsCount": 0,
+    "operations": [
+      "vm:view",
+      "vm:create",
+      "vm:update",
+      "vm:delete",
+      "vm:power-on",
+      "vm:power-off",
+      "cluster:view",
+      "host:view",
+      "subnet:view",
+      "image:view",
+      "category:view"
+    ],
+    "createdBy": "system",
+    "createdTime": "2026-02-10T08:30:00Z",
+    "lastUpdatedTime": "2026-02-10T08:30:00Z",
+    "projectExtId": "00000000-0000-0000-0000-000000000000"
+  },
+  {
+    "$objectType": "iam.v4.authz.Role",
+    "extId": "c01e0000-0b02-4000-8000-000000000003",
+    "displayName": "Virtual Machine Operator",
+    "description": "Power, console and snapshot operations on VMs",
+    "clientName": "Prism",
+    "isSystemDefined": true,
+    "operations": [],
+    "accessibleClients": [
+      "Prism",
+      "Virtual Machine Management"
+    ],
+    "accessibleClientsCount": 2,
+    "accessibleEntityTypes": [
+      "AHV VM"
+    ],
+    "accessibleEntityTypesCount": 1,
+    "assignedUsersCount": 1,
+    "assignedUserGroupsCount": 0,
+    "createdTime": "2026-02-10T08:30:00Z",
+    "lastUpdatedTime": "2026-02-10T08:30:00Z"
+  },
+  {
+    "$objectType": "iam.v4.authz.Role",
+    "extId": "c01e0000-0b02-4000-8000-000000000004",
+    "displayName": "Prism Viewer",
+    "description": "Read everything, change nothing",
+    "isSystemDefined": true,
+    "isGlobal": true,
+    "isSharedWithAllProjects": true,
+    "clientName": "prism",
+    "accessibleClients": [
+      "prism"
+    ],
+    "accessibleClientsCount": 1,
+    "accessibleEntityTypes": [
+      "Virtual Machine",
+      "Cluster",
+      "Host",
+      "Subnet",
+      "Image",
+      "Category"
+    ],
+    "accessibleEntityTypesCount": 6,
+    "assignedUsersCount": 0,
+    "assignedUserGroupsCount": 0,
+    "operations": [
+      "vm:view",
+      "cluster:view",
+      "host:view",
+      "subnet:view",
+      "image:view",
+      "category:view"
+    ],
+    "createdBy": "system",
+    "createdTime": "2026-02-10T08:30:00Z",
+    "lastUpdatedTime": "2026-02-10T08:30:00Z",
+    "projectExtId": "00000000-0000-0000-0000-000000000000"
+  }
+]

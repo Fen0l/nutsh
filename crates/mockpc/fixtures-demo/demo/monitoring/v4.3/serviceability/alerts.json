@@ -1,0 +1,742 @@
+[
+  {
+    "$objectType": "monitoring.v4.serviceability.Alert",
+    "extId": "0b000000-0a01-4000-8000-000000000001",
+    "title": "Replication of prd-app-01 is 2 hours behind its RPO",
+    "message": "Replication of {vm_name} to {remote_site} is {lag} behind the RPO of policy {policy_name}.",
+    "severity": "CRITICAL",
+    "status": "OPEN",
+    "alertType": "A130137",
+    "serviceName": "Prism",
+    "isAcknowledged": false,
+    "isAutoResolved": false,
+    "isResolved": false,
+    "isRunnable": false,
+    "isUserDefined": false,
+    "creationTime": "2026-09-05T09:20:00Z",
+    "lastOccurredTime": "2026-09-05T09:50:00Z",
+    "lastUpdatedTime": "2026-09-05T09:50:00Z",
+    "clusterName": "harbor-prod",
+    "clusterUUID": "01000000-0a01-4000-8000-000000000001",
+    "originatingClusterUUID": "01000000-0a01-4000-8000-000000000001",
+    "sourceEntity": {
+      "$objectType": "monitoring.v4.common.AlertEntityReference",
+      "type": "vm",
+      "name": "prd-app-01",
+      "extId": "03000000-0a01-4000-8000-000000000004"
+    },
+    "affectedEntities": [
+      {
+        "$objectType": "monitoring.v4.common.EntityReference",
+        "type": "vm",
+        "name": "prd-app-01",
+        "extId": "03000000-0a01-4000-8000-000000000004"
+      }
+    ],
+    "impactedEntities": {
+      "$objectType": "monitoring.v4.common.ImpactedEntities",
+      "clusters": [
+        "01000000-0a01-4000-8000-000000000001"
+      ],
+      "vms": [
+        "03000000-0a01-4000-8000-000000000004"
+      ]
+    },
+    "primaryImpactType": "AVAILABILITY",
+    "impactTypes": [
+      "AVAILABILITY"
+    ],
+    "classifications": [
+      "DR"
+    ],
+    "rootCauseAnalysis": [
+      {
+        "$objectType": "monitoring.v4.serviceability.RootCauseAnalysis",
+        "cause": "The replication link to pc-ridge is saturated.",
+        "resolution": "Raise the bandwidth of vpn-to-ridge or lower the RPO of silver-1h."
+      }
+    ],
+    "kbArticles": [
+      "KB-6109"
+    ],
+    "parameters": [
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "vm_name",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "prd-app-01"
+        }
+      },
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "remote_site",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "pc-ridge"
+        }
+      },
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "lag",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "2 hours"
+        }
+      },
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "policy_name",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "silver-1h"
+        }
+      }
+    ],
+    "severityTrails": [
+      {
+        "$objectType": "monitoring.v4.serviceability.SeverityTrail",
+        "severity": "CRITICAL",
+        "severityChangeTime": "2026-09-05T09:20:00Z"
+      }
+    ],
+    "projectExtId": "00000000-0000-0000-0000-000000000000"
+  },
+  {
+    "$objectType": "monitoring.v4.serviceability.Alert",
+    "extId": "0b000000-0a01-4000-8000-000000000002",
+    "title": "Controller VM 203.0.113.32 is unreachable",
+    "message": "Controller VM {cvm_ip} on host {host_name} has not answered for {minutes} minutes.",
+    "severity": "CRITICAL",
+    "status": "ACKNOWLEDGED",
+    "alertType": "A3034",
+    "serviceName": "Prism",
+    "isAcknowledged": true,
+    "isAutoResolved": false,
+    "isResolved": false,
+    "isRunnable": false,
+    "isUserDefined": false,
+    "creationTime": "2026-09-05T09:35:00Z",
+    "lastOccurredTime": "2026-09-05T09:55:00Z",
+    "lastUpdatedTime": "2026-09-05T09:55:00Z",
+    "acknowledgedTime": "2026-09-05T09:40:00Z",
+    "clusterName": "harbor-prod",
+    "clusterUUID": "01000000-0a01-4000-8000-000000000001",
+    "originatingClusterUUID": "01000000-0a01-4000-8000-000000000001",
+    "sourceEntity": {
+      "$objectType": "monitoring.v4.common.AlertEntityReference",
+      "type": "node",
+      "name": "harbor-n2",
+      "extId": "02000000-0a01-4000-8000-000000000002"
+    },
+    "affectedEntities": [
+      {
+        "$objectType": "monitoring.v4.common.EntityReference",
+        "type": "node",
+        "name": "harbor-n2",
+        "extId": "02000000-0a01-4000-8000-000000000002"
+      }
+    ],
+    "impactedEntities": {
+      "$objectType": "monitoring.v4.common.ImpactedEntities",
+      "clusters": [
+        "01000000-0a01-4000-8000-000000000001"
+      ],
+      "nodes": [
+        "02000000-0a01-4000-8000-000000000002"
+      ]
+    },
+    "primaryImpactType": "AVAILABILITY",
+    "impactTypes": [
+      "AVAILABILITY"
+    ],
+    "classifications": [
+      "Node"
+    ],
+    "rootCauseAnalysis": [
+      {
+        "$objectType": "monitoring.v4.serviceability.RootCauseAnalysis",
+        "cause": "harbor-n2 is entering maintenance and its Controller VM has been shut down for the BMC update.",
+        "resolution": "No action while the maintenance task runs; the alert resolves when harbor-n2 leaves maintenance."
+      }
+    ],
+    "kbArticles": [
+      "KB-3034"
+    ],
+    "parameters": [
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "cvm_ip",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "203.0.113.32"
+        }
+      },
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "host_name",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "harbor-n2"
+        }
+      },
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "minutes",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "20"
+        }
+      }
+    ],
+    "severityTrails": [
+      {
+        "$objectType": "monitoring.v4.serviceability.SeverityTrail",
+        "severity": "CRITICAL",
+        "severityChangeTime": "2026-09-05T09:35:00Z"
+      }
+    ],
+    "projectExtId": "00000000-0000-0000-0000-000000000000"
+  },
+  {
+    "$objectType": "monitoring.v4.serviceability.Alert",
+    "extId": "0b000000-0a01-4000-8000-000000000003",
+    "title": "Memory usage on host harbor-n1 is at 93%",
+    "message": "Memory usage on host {host_name} is {usage}% and above the {threshold}% threshold.",
+    "severity": "WARNING",
+    "status": "OPEN",
+    "alertType": "A1035",
+    "serviceName": "Prism",
+    "isAcknowledged": false,
+    "isAutoResolved": false,
+    "isResolved": false,
+    "isRunnable": false,
+    "isUserDefined": false,
+    "creationTime": "2026-09-05T09:52:00Z",
+    "lastOccurredTime": "2026-09-05T09:57:00Z",
+    "lastUpdatedTime": "2026-09-05T09:57:00Z",
+    "clusterName": "harbor-prod",
+    "clusterUUID": "01000000-0a01-4000-8000-000000000001",
+    "originatingClusterUUID": "01000000-0a01-4000-8000-000000000001",
+    "sourceEntity": {
+      "$objectType": "monitoring.v4.common.AlertEntityReference",
+      "type": "node",
+      "name": "harbor-n1",
+      "extId": "02000000-0a01-4000-8000-000000000001"
+    },
+    "affectedEntities": [
+      {
+        "$objectType": "monitoring.v4.common.EntityReference",
+        "type": "node",
+        "name": "harbor-n1",
+        "extId": "02000000-0a01-4000-8000-000000000001"
+      }
+    ],
+    "impactedEntities": {
+      "$objectType": "monitoring.v4.common.ImpactedEntities",
+      "clusters": [
+        "01000000-0a01-4000-8000-000000000001"
+      ],
+      "nodes": [
+        "02000000-0a01-4000-8000-000000000001"
+      ]
+    },
+    "primaryImpactType": "PERFORMANCE",
+    "impactTypes": [
+      "PERFORMANCE",
+      "CAPACITY"
+    ],
+    "classifications": [
+      "Host"
+    ],
+    "rootCauseAnalysis": [
+      {
+        "$objectType": "monitoring.v4.serviceability.RootCauseAnalysis",
+        "cause": "VMs migrated off harbor-n2 while it enters maintenance are landing on harbor-n1.",
+        "resolution": "Wait for harbor-n2 to finish, or migrate prd-cache-01 to harbor-n3 by hand."
+      }
+    ],
+    "kbArticles": [
+      "KB-1035",
+      "KB-2022"
+    ],
+    "parameters": [
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "host_name",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "harbor-n1"
+        }
+      },
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "usage",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "93"
+        }
+      },
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "threshold",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "90"
+        }
+      }
+    ],
+    "severityTrails": [
+      {
+        "$objectType": "monitoring.v4.serviceability.SeverityTrail",
+        "severity": "WARNING",
+        "severityChangeTime": "2026-09-05T09:52:00Z"
+      }
+    ],
+    "projectExtId": "00000000-0000-0000-0000-000000000000"
+  },
+  {
+    "$objectType": "monitoring.v4.serviceability.Alert",
+    "extId": "0b000000-0a01-4000-8000-000000000004",
+    "title": "Disk space usage high for /home on Controller VM 203.0.113.31",
+    "message": "Disk space usage for {mount_path} on {entity} {ip_address} has exceeded {threshold}%.",
+    "severity": "WARNING",
+    "status": "OPEN",
+    "alertType": "A1031",
+    "serviceName": "Prism",
+    "isAcknowledged": false,
+    "isAutoResolved": false,
+    "isResolved": false,
+    "isRunnable": true,
+    "isUserDefined": false,
+    "creationTime": "2026-09-05T07:00:00Z",
+    "lastOccurredTime": "2026-09-05T09:00:00Z",
+    "lastUpdatedTime": "2026-09-05T09:00:00Z",
+    "clusterName": "harbor-prod",
+    "clusterUUID": "01000000-0a01-4000-8000-000000000001",
+    "originatingClusterUUID": "01000000-0a01-4000-8000-000000000001",
+    "sourceEntity": {
+      "$objectType": "monitoring.v4.common.AlertEntityReference",
+      "type": "node",
+      "name": "harbor-n1",
+      "extId": "02000000-0a01-4000-8000-000000000001"
+    },
+    "affectedEntities": [
+      {
+        "$objectType": "monitoring.v4.common.EntityReference",
+        "type": "node",
+        "name": "harbor-n1",
+        "extId": "02000000-0a01-4000-8000-000000000001"
+      }
+    ],
+    "impactedEntities": {
+      "$objectType": "monitoring.v4.common.ImpactedEntities",
+      "clusters": [
+        "01000000-0a01-4000-8000-000000000001"
+      ],
+      "nodes": [
+        "02000000-0a01-4000-8000-000000000001"
+      ]
+    },
+    "primaryImpactType": "SYSTEM_INDICATOR",
+    "impactTypes": [
+      "SYSTEM_INDICATOR"
+    ],
+    "classifications": [
+      "Storage"
+    ],
+    "rootCauseAnalysis": [
+      {
+        "$objectType": "monitoring.v4.serviceability.RootCauseAnalysis",
+        "cause": "Collected log bundles under the home directory of harbor-n1 are not being rotated.",
+        "resolution": "Remove old log bundles on harbor-n1 or raise the threshold."
+      }
+    ],
+    "kbArticles": [
+      "KB-1523"
+    ],
+    "parameters": [
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "mount_path",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "/home"
+        }
+      },
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "entity",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "Controller VM"
+        }
+      },
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "ip_address",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "203.0.113.31"
+        }
+      },
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "threshold",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "75"
+        }
+      }
+    ],
+    "severityTrails": [
+      {
+        "$objectType": "monitoring.v4.serviceability.SeverityTrail",
+        "severity": "WARNING",
+        "severityChangeTime": "2026-09-05T07:00:00Z"
+      }
+    ],
+    "projectExtId": "00000000-0000-0000-0000-000000000000"
+  },
+  {
+    "$objectType": "monitoring.v4.serviceability.Alert",
+    "extId": "0b000000-0a01-4000-8000-000000000005",
+    "title": "LCM update available for AHV on harbor-edge",
+    "message": "An LCM update is available for {component} on cluster {cluster_name}.",
+    "severity": "WARNING",
+    "status": "OPEN",
+    "alertType": "A200600",
+    "serviceName": "Prism",
+    "isAcknowledged": false,
+    "isAutoResolved": false,
+    "isResolved": false,
+    "isRunnable": false,
+    "isUserDefined": false,
+    "creationTime": "2026-09-03T10:00:00Z",
+    "lastOccurredTime": "2026-09-03T10:00:00Z",
+    "lastUpdatedTime": "2026-09-03T10:00:00Z",
+    "clusterName": "harbor-edge",
+    "clusterUUID": "01000000-0a01-4000-8000-000000000002",
+    "originatingClusterUUID": "01000000-0a01-4000-8000-000000000002",
+    "sourceEntity": {
+      "$objectType": "monitoring.v4.common.AlertEntityReference",
+      "type": "cluster",
+      "name": "harbor-edge",
+      "extId": "01000000-0a01-4000-8000-000000000002"
+    },
+    "affectedEntities": [
+      {
+        "$objectType": "monitoring.v4.common.EntityReference",
+        "type": "cluster",
+        "name": "harbor-edge",
+        "extId": "01000000-0a01-4000-8000-000000000002"
+      }
+    ],
+    "impactedEntities": {
+      "$objectType": "monitoring.v4.common.ImpactedEntities",
+      "clusters": [
+        "01000000-0a01-4000-8000-000000000002"
+      ]
+    },
+    "primaryImpactType": "SYSTEM_INDICATOR",
+    "impactTypes": [
+      "SYSTEM_INDICATOR"
+    ],
+    "classifications": [
+      "Lifecycle"
+    ],
+    "rootCauseAnalysis": [
+      {
+        "$objectType": "monitoring.v4.serviceability.RootCauseAnalysis",
+        "cause": "Inventory on harbor-edge found a newer AHV in the bundle lcm-ahv-10-3-2.",
+        "resolution": "Run the update from LCM once harbor-edge has a maintenance window."
+      }
+    ],
+    "kbArticles": [
+      "KB-9020"
+    ],
+    "parameters": [
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "component",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "AHV hypervisor"
+        }
+      },
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "cluster_name",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "harbor-edge"
+        }
+      }
+    ],
+    "severityTrails": [
+      {
+        "$objectType": "monitoring.v4.serviceability.SeverityTrail",
+        "severity": "WARNING",
+        "severityChangeTime": "2026-09-03T10:00:00Z"
+      }
+    ],
+    "projectExtId": "00000000-0000-0000-0000-000000000000"
+  },
+  {
+    "$objectType": "monitoring.v4.serviceability.Alert",
+    "extId": "0b000000-0a01-4000-8000-000000000006",
+    "title": "Recovery point created for prd-db-01",
+    "message": "Recovery point {recovery_point} was created for VM {vm_name} by policy {policy_name}.",
+    "severity": "INFO",
+    "status": "AUTO_RESOLVED",
+    "alertType": "A130190",
+    "serviceName": "Prism",
+    "isAcknowledged": false,
+    "isAutoResolved": true,
+    "isResolved": true,
+    "isRunnable": false,
+    "isUserDefined": false,
+    "creationTime": "2026-09-05T09:30:00Z",
+    "lastOccurredTime": "2026-09-05T09:30:00Z",
+    "lastUpdatedTime": "2026-09-05T09:45:00Z",
+    "resolvedTime": "2026-09-05T09:45:00Z",
+    "clusterName": "harbor-prod",
+    "clusterUUID": "01000000-0a01-4000-8000-000000000001",
+    "originatingClusterUUID": "01000000-0a01-4000-8000-000000000001",
+    "sourceEntity": {
+      "$objectType": "monitoring.v4.common.AlertEntityReference",
+      "type": "vm",
+      "name": "prd-db-01",
+      "extId": "03000000-0a01-4000-8000-000000000003"
+    },
+    "affectedEntities": [
+      {
+        "$objectType": "monitoring.v4.common.EntityReference",
+        "type": "vm",
+        "name": "prd-db-01",
+        "extId": "03000000-0a01-4000-8000-000000000003"
+      }
+    ],
+    "impactedEntities": {
+      "$objectType": "monitoring.v4.common.ImpactedEntities",
+      "clusters": [
+        "01000000-0a01-4000-8000-000000000001"
+      ],
+      "vms": [
+        "03000000-0a01-4000-8000-000000000003"
+      ]
+    },
+    "primaryImpactType": "SYSTEM_INDICATOR",
+    "impactTypes": [
+      "SYSTEM_INDICATOR"
+    ],
+    "classifications": [
+      "DR"
+    ],
+    "kbArticles": [],
+    "parameters": [
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "recovery_point",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "rp-prd-db-01-0905-0930"
+        }
+      },
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "vm_name",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "prd-db-01"
+        }
+      },
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "policy_name",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "gold-15m"
+        }
+      }
+    ],
+    "severityTrails": [
+      {
+        "$objectType": "monitoring.v4.serviceability.SeverityTrail",
+        "severity": "INFO",
+        "severityChangeTime": "2026-09-05T09:30:00Z"
+      }
+    ],
+    "projectExtId": "00000000-0000-0000-0000-000000000000"
+  },
+  {
+    "$objectType": "monitoring.v4.serviceability.Alert",
+    "extId": "0b000000-0a01-4000-8000-000000000007",
+    "title": "Recovery point for prd-cache-01 is older than the RPO",
+    "message": "The newest recovery point of VM {vm_name} is older than the RPO of policy {policy_name}.",
+    "severity": "WARNING",
+    "status": "RESOLVED",
+    "alertType": "A130120",
+    "serviceName": "Prism",
+    "isAcknowledged": true,
+    "isAutoResolved": false,
+    "isResolved": true,
+    "isRunnable": false,
+    "isUserDefined": false,
+    "creationTime": "2026-09-04T10:00:00Z",
+    "lastOccurredTime": "2026-09-04T11:00:00Z",
+    "lastUpdatedTime": "2026-09-04T11:15:00Z",
+    "acknowledgedTime": "2026-09-04T10:20:00Z",
+    "resolvedTime": "2026-09-04T11:15:00Z",
+    "clusterName": "harbor-prod",
+    "clusterUUID": "01000000-0a01-4000-8000-000000000001",
+    "originatingClusterUUID": "01000000-0a01-4000-8000-000000000001",
+    "sourceEntity": {
+      "$objectType": "monitoring.v4.common.AlertEntityReference",
+      "type": "vm",
+      "name": "prd-cache-01",
+      "extId": "03000000-0a01-4000-8000-000000000005"
+    },
+    "affectedEntities": [
+      {
+        "$objectType": "monitoring.v4.common.EntityReference",
+        "type": "vm",
+        "name": "prd-cache-01",
+        "extId": "03000000-0a01-4000-8000-000000000005"
+      }
+    ],
+    "impactedEntities": {
+      "$objectType": "monitoring.v4.common.ImpactedEntities",
+      "clusters": [
+        "01000000-0a01-4000-8000-000000000001"
+      ],
+      "vms": [
+        "03000000-0a01-4000-8000-000000000005"
+      ]
+    },
+    "primaryImpactType": "AVAILABILITY",
+    "impactTypes": [
+      "AVAILABILITY"
+    ],
+    "classifications": [
+      "DR"
+    ],
+    "rootCauseAnalysis": [
+      {
+        "$objectType": "monitoring.v4.serviceability.RootCauseAnalysis",
+        "cause": "The replication to pc-ridge was paused during the change window of 2026-09-04.",
+        "resolution": "Resume the replication; the next recovery point clears the alert."
+      }
+    ],
+    "kbArticles": [
+      "KB-6109"
+    ],
+    "parameters": [
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "vm_name",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "prd-cache-01"
+        }
+      },
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "policy_name",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "silver-1h"
+        }
+      }
+    ],
+    "severityTrails": [
+      {
+        "$objectType": "monitoring.v4.serviceability.SeverityTrail",
+        "severity": "WARNING",
+        "severityChangeTime": "2026-09-04T10:00:00Z"
+      }
+    ],
+    "projectExtId": "00000000-0000-0000-0000-000000000000"
+  },
+  {
+    "$objectType": "monitoring.v4.serviceability.Alert",
+    "extId": "0b000000-0a01-4000-8000-000000000008",
+    "title": "Host harbor-n3 rebooted unexpectedly",
+    "message": "Host {host_name} rebooted without a maintenance request.",
+    "severity": "CRITICAL",
+    "status": "RESOLVED",
+    "alertType": "A1020",
+    "serviceName": "Prism",
+    "isAcknowledged": true,
+    "isAutoResolved": false,
+    "isResolved": true,
+    "isRunnable": false,
+    "isUserDefined": false,
+    "creationTime": "2026-09-05T04:00:00Z",
+    "lastOccurredTime": "2026-09-05T04:00:00Z",
+    "lastUpdatedTime": "2026-09-05T04:30:00Z",
+    "acknowledgedTime": "2026-09-05T04:10:00Z",
+    "resolvedTime": "2026-09-05T04:30:00Z",
+    "clusterName": "harbor-prod",
+    "clusterUUID": "01000000-0a01-4000-8000-000000000001",
+    "originatingClusterUUID": "01000000-0a01-4000-8000-000000000001",
+    "sourceEntity": {
+      "$objectType": "monitoring.v4.common.AlertEntityReference",
+      "type": "node",
+      "name": "harbor-n3",
+      "extId": "02000000-0a01-4000-8000-000000000003"
+    },
+    "affectedEntities": [
+      {
+        "$objectType": "monitoring.v4.common.EntityReference",
+        "type": "node",
+        "name": "harbor-n3",
+        "extId": "02000000-0a01-4000-8000-000000000003"
+      }
+    ],
+    "impactedEntities": {
+      "$objectType": "monitoring.v4.common.ImpactedEntities",
+      "clusters": [
+        "01000000-0a01-4000-8000-000000000001"
+      ],
+      "nodes": [
+        "02000000-0a01-4000-8000-000000000003"
+      ]
+    },
+    "primaryImpactType": "AVAILABILITY",
+    "impactTypes": [
+      "AVAILABILITY"
+    ],
+    "classifications": [
+      "Host"
+    ],
+    "rootCauseAnalysis": [
+      {
+        "$objectType": "monitoring.v4.serviceability.RootCauseAnalysis",
+        "cause": "The BMC of harbor-n3 issued a power cycle.",
+        "resolution": "Check the BMC event log of harbor-n3 and schedule the BMC update."
+      }
+    ],
+    "kbArticles": [
+      "KB-1020"
+    ],
+    "parameters": [
+      {
+        "$objectType": "monitoring.v4.common.Parameter",
+        "paramName": "host_name",
+        "paramValue": {
+          "$objectType": "monitoring.v4.common.StringValue",
+          "stringValue": "harbor-n3"
+        }
+      }
+    ],
+    "severityTrails": [
+      {
+        "$objectType": "monitoring.v4.serviceability.SeverityTrail",
+        "severity": "CRITICAL",
+        "severityChangeTime": "2026-09-05T04:00:00Z"
+      }
+    ],
+    "projectExtId": "00000000-0000-0000-0000-000000000000"
+  }
+]

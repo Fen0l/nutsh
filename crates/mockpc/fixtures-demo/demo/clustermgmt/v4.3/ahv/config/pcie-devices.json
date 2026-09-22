@@ -1,0 +1,43 @@
+[
+  {
+    "$objectType": "clustermgmt.v4.ahv.config.PcieDevice",
+    "extId": "4d000000-0a01-4000-8000-000000000001",
+    "clusterExtId": "01000000-0a01-4000-8000-000000000001",
+    "hostExtId": "02000000-0a01-4000-8000-000000000003",
+    "description": "NVIDIA L40S",
+    "maxPartitions": 8,
+    "state": "UVM_AVAILABLE",
+    "configuration": {
+      "$objectType": "clustermgmt.v4.ahv.config.PcieDeviceConfiguration",
+      "vendorId": 4318,
+      "deviceId": 9913,
+      "subSystemVendorId": 4318,
+      "subSystemId": 6394,
+      "classId": 3,
+      "subClassId": 2,
+      "progIFace": 0
+    },
+    "type": "DISPLAY_CONTROLLER"
+  },
+  {
+    "$objectType": "clustermgmt.v4.ahv.config.PcieDevice",
+    "extId": "4d000000-0a01-4000-8000-000000000002",
+    "clusterExtId": "01000000-0a01-4000-8000-000000000001",
+    "hostExtId": "02000000-0a01-4000-8000-000000000003",
+    "description": "NVIDIA A16",
+    "maxPartitions": 4,
+    "state": "UVM_ASSIGNED",
+    "ownerVmExtId": "03000000-0a01-4000-8000-000000000004",
+    "configuration": {
+      "$objectType": "clustermgmt.v4.ahv.config.PcieDeviceConfiguration",
+      "vendorId": 4318,
+      "deviceId": 9686,
+      "subSystemVendorId": 4318,
+      "subSystemId": 5346,
+      "classId": 3,
+      "subClassId": 2,
+      "progIFace": 0
+    },
+    "type": "DISPLAY_CONTROLLER"
+  }
+]

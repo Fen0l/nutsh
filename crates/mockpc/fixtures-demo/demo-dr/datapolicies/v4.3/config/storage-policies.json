@@ -1,0 +1,28 @@
+[
+  {
+    "$objectType": "datapolicies.v4.config.StoragePolicy",
+    "extId": "5709c000-0b02-4000-8000-000000000001",
+    "name": "ridge-replica-tier",
+    "categoryExtIds": [
+      "ca7e0000-0b02-4000-8000-000000000001"
+    ],
+    "compressionSpec": {
+      "$objectType": "datapolicies.v4.config.CompressionSpec",
+      "compressionState": "ENABLED"
+    },
+    "encryptionSpec": {
+      "$objectType": "datapolicies.v4.config.EncryptionSpec",
+      "encryptionState": "ENABLED"
+    },
+    "qosSpec": {
+      "$objectType": "datapolicies.v4.config.QosSpec",
+      "throttledIops": 5000
+    },
+    "faultToleranceSpec": {
+      "$objectType": "datapolicies.v4.config.FaultToleranceSpec",
+      "replicationFactor": "TWO"
+    },
+    "policyType": "USER",
+    "ownerUuid": "05e70000-0b02-4000-8000-000000000001"
+  }
+]

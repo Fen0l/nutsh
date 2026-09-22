@@ -1,0 +1,355 @@
+[
+  {
+    "$objectType": "prism.v4.config.Task",
+    "extId": "ZXJnb24=:7a5c0000-0a01-4000-8000-000000000001",
+    "operation": "VmPowerOn",
+    "operationDescription": "Power on VM dev-scratch-02",
+    "status": "FAILED",
+    "progressPercentage": 100,
+    "isCancelable": false,
+    "isBackgroundTask": false,
+    "createdTime": "2026-09-05T09:50:58Z",
+    "startedTime": "2026-09-05T09:51:00Z",
+    "completedTime": "2026-09-05T09:51:04Z",
+    "lastUpdatedTime": "2026-09-05T09:51:04Z",
+    "numberOfEntitiesAffected": 1,
+    "numberOfSubtasks": 2,
+    "clusterExtIds": [
+      "01000000-0a01-4000-8000-000000000001"
+    ],
+    "ownedBy": {
+      "$objectType": "prism.v4.config.OwnerReference",
+      "extId": "0e000000-0a01-4000-8000-000000000002",
+      "name": "ops-lead"
+    },
+    "entitiesAffected": [
+      {
+        "$objectType": "prism.v4.config.EntityReference",
+        "extId": "03000000-0a01-4000-8000-000000000008",
+        "name": "dev-scratch-02",
+        "rel": "vmm:ahv:config:vm"
+      }
+    ],
+    "subSteps": [
+      {
+        "$objectType": "prism.v4.config.TaskStep",
+        "name": "Validate host resources"
+      },
+      {
+        "$objectType": "prism.v4.config.TaskStep",
+        "name": "Power on"
+      }
+    ],
+    "errorMessages": [
+      {
+        "$objectType": "prism.v4.config.AppMessage",
+        "code": "kNoHostResources",
+        "severity": "ERROR",
+        "message": "No host in cluster harbor-prod can satisfy 64 GiB of memory with harbor-n2 entering maintenance"
+      },
+      {
+        "$objectType": "prism.v4.config.AppMessage",
+        "code": "kNoHostResources",
+        "severity": "ERROR",
+        "message": "Placement failed after 3 attempts"
+      }
+    ],
+    "completionDetails": [
+      {
+        "$objectType": "prism.v4.config.KVPair",
+        "name": "attempts",
+        "value": "3"
+      }
+    ]
+  },
+  {
+    "$objectType": "prism.v4.config.Task",
+    "extId": "ZXJnb24=:7a5c0000-0a01-4000-8000-000000000002",
+    "operation": "LcmInventory",
+    "operationDescription": "Run LCM inventory on harbor-edge",
+    "status": "FAILED",
+    "progressPercentage": 100,
+    "isCancelable": false,
+    "isBackgroundTask": true,
+    "createdTime": "2026-07-07T09:59:30Z",
+    "startedTime": "2026-07-07T10:00:00Z",
+    "completedTime": "2026-07-07T10:30:00Z",
+    "lastUpdatedTime": "2026-07-07T10:30:00Z",
+    "numberOfEntitiesAffected": 1,
+    "numberOfSubtasks": 0,
+    "clusterExtIds": [
+      "01000000-0a01-4000-8000-000000000002"
+    ],
+    "ownedBy": {
+      "$objectType": "prism.v4.config.OwnerReference",
+      "extId": "0e000000-0a01-4000-8000-000000000001",
+      "name": "admin"
+    },
+    "entitiesAffected": [
+      {
+        "$objectType": "prism.v4.config.EntityReference",
+        "extId": "01000000-0a01-4000-8000-000000000002",
+        "name": "harbor-edge",
+        "rel": "clustermgmt:config:cluster"
+      }
+    ],
+    "errorMessages": [
+      {
+        "$objectType": "prism.v4.config.AppMessage",
+        "code": "kLcmInventoryFailed",
+        "severity": "ERROR",
+        "message": "Inventory on edge-n1 timed out after 1800 seconds"
+      }
+    ]
+  },
+  {
+    "$objectType": "prism.v4.config.Task",
+    "extId": "ZXJnb24=:7a5c0000-0a01-4000-8000-000000000003",
+    "operation": "VmMigrate",
+    "operationDescription": "Migrate VM prd-cache-01 to harbor-n3",
+    "status": "RUNNING",
+    "progressPercentage": 40,
+    "isCancelable": true,
+    "isBackgroundTask": false,
+    "createdTime": "2026-09-05T09:56:58Z",
+    "startedTime": "2026-09-05T09:57:00Z",
+    "lastUpdatedTime": "2026-09-05T09:58:30Z",
+    "numberOfEntitiesAffected": 1,
+    "numberOfSubtasks": 0,
+    "clusterExtIds": [
+      "01000000-0a01-4000-8000-000000000001"
+    ],
+    "ownedBy": {
+      "$objectType": "prism.v4.config.OwnerReference",
+      "extId": "0e000000-0a01-4000-8000-000000000001",
+      "name": "admin"
+    },
+    "entitiesAffected": [
+      {
+        "$objectType": "prism.v4.config.EntityReference",
+        "extId": "03000000-0a01-4000-8000-000000000005",
+        "name": "prd-cache-01",
+        "rel": "vmm:ahv:config:vm"
+      }
+    ]
+  },
+  {
+    "$objectType": "prism.v4.config.Task",
+    "extId": "ZXJnb24=:7a5c0000-0a01-4000-8000-000000000004",
+    "operation": "HostEnterMaintenance",
+    "operationDescription": "Enter maintenance mode on host harbor-n2",
+    "status": "RUNNING",
+    "progressPercentage": 65,
+    "isCancelable": false,
+    "isBackgroundTask": false,
+    "createdTime": "2026-09-05T09:53:58Z",
+    "startedTime": "2026-09-05T09:54:00Z",
+    "lastUpdatedTime": "2026-09-05T09:58:00Z",
+    "numberOfEntitiesAffected": 1,
+    "numberOfSubtasks": 0,
+    "clusterExtIds": [
+      "01000000-0a01-4000-8000-000000000001"
+    ],
+    "ownedBy": {
+      "$objectType": "prism.v4.config.OwnerReference",
+      "extId": "0e000000-0a01-4000-8000-000000000001",
+      "name": "admin"
+    },
+    "entitiesAffected": [
+      {
+        "$objectType": "prism.v4.config.EntityReference",
+        "extId": "02000000-0a01-4000-8000-000000000002",
+        "name": "harbor-n2",
+        "rel": "clustermgmt:config:host"
+      }
+    ]
+  },
+  {
+    "$objectType": "prism.v4.config.Task",
+    "extId": "ZXJnb24=:7a5c0000-0a01-4000-8000-000000000005",
+    "operation": "VmClone",
+    "operationDescription": "Clone VM prd-web-01",
+    "status": "QUEUED",
+    "progressPercentage": 0,
+    "isCancelable": false,
+    "isBackgroundTask": false,
+    "createdTime": "2026-09-05T09:58:00Z",
+    "lastUpdatedTime": "2026-09-05T09:58:00Z",
+    "numberOfEntitiesAffected": 1,
+    "numberOfSubtasks": 0,
+    "clusterExtIds": [
+      "01000000-0a01-4000-8000-000000000001"
+    ],
+    "ownedBy": {
+      "$objectType": "prism.v4.config.OwnerReference",
+      "extId": "0e000000-0a01-4000-8000-000000000001",
+      "name": "admin"
+    },
+    "entitiesAffected": [
+      {
+        "$objectType": "prism.v4.config.EntityReference",
+        "extId": "03000000-0a01-4000-8000-000000000001",
+        "name": "prd-web-01",
+        "rel": "vmm:ahv:config:vm"
+      }
+    ]
+  },
+  {
+    "$objectType": "prism.v4.config.Task",
+    "extId": "ZXJnb24=:7a5c0000-0a01-4000-8000-000000000006",
+    "operation": "VmPowerOff",
+    "operationDescription": "Power off VM dev-ci-01",
+    "status": "SUCCEEDED",
+    "progressPercentage": 100,
+    "isCancelable": false,
+    "isBackgroundTask": false,
+    "createdTime": "2026-09-05T07:59:58Z",
+    "startedTime": "2026-09-05T08:00:00Z",
+    "completedTime": "2026-09-05T08:00:06Z",
+    "lastUpdatedTime": "2026-09-05T08:00:06Z",
+    "numberOfEntitiesAffected": 1,
+    "numberOfSubtasks": 0,
+    "clusterExtIds": [
+      "01000000-0a01-4000-8000-000000000001"
+    ],
+    "ownedBy": {
+      "$objectType": "prism.v4.config.OwnerReference",
+      "extId": "0e000000-0a01-4000-8000-000000000003",
+      "name": "ops-night"
+    },
+    "entitiesAffected": [
+      {
+        "$objectType": "prism.v4.config.EntityReference",
+        "extId": "03000000-0a01-4000-8000-000000000006",
+        "name": "dev-ci-01",
+        "rel": "vmm:ahv:config:vm"
+      }
+    ]
+  },
+  {
+    "$objectType": "prism.v4.config.Task",
+    "extId": "ZXJnb24=:7a5c0000-0a01-4000-8000-000000000007",
+    "operation": "VmCreate",
+    "operationDescription": "Create VM dev-build-01",
+    "status": "SUCCEEDED",
+    "progressPercentage": 100,
+    "isCancelable": false,
+    "isBackgroundTask": false,
+    "createdTime": "2026-09-02T09:59:58Z",
+    "startedTime": "2026-09-02T10:00:00Z",
+    "completedTime": "2026-09-02T10:00:12Z",
+    "lastUpdatedTime": "2026-09-02T10:00:12Z",
+    "numberOfEntitiesAffected": 1,
+    "numberOfSubtasks": 0,
+    "clusterExtIds": [
+      "01000000-0a01-4000-8000-000000000001"
+    ],
+    "ownedBy": {
+      "$objectType": "prism.v4.config.OwnerReference",
+      "extId": "0e000000-0a01-4000-8000-000000000001",
+      "name": "admin"
+    },
+    "entitiesAffected": [
+      {
+        "$objectType": "prism.v4.config.EntityReference",
+        "extId": "03000000-0a01-4000-8000-000000000007",
+        "name": "dev-build-01",
+        "rel": "vmm:ahv:config:vm"
+      }
+    ]
+  },
+  {
+    "$objectType": "prism.v4.config.Task",
+    "extId": "ZXJnb24=:7a5c0000-0a01-4000-8000-000000000008",
+    "operation": "RecoveryPointCreate",
+    "operationDescription": "Create recovery point for prd-db-01",
+    "status": "SUCCEEDED",
+    "progressPercentage": 100,
+    "isCancelable": false,
+    "isBackgroundTask": false,
+    "createdTime": "2026-09-05T09:44:58Z",
+    "startedTime": "2026-09-05T09:45:00Z",
+    "completedTime": "2026-09-05T09:45:20Z",
+    "lastUpdatedTime": "2026-09-05T09:45:20Z",
+    "numberOfEntitiesAffected": 1,
+    "numberOfSubtasks": 0,
+    "clusterExtIds": [
+      "01000000-0a01-4000-8000-000000000001"
+    ],
+    "ownedBy": {
+      "$objectType": "prism.v4.config.OwnerReference",
+      "extId": "0e000000-0a01-4000-8000-000000000001",
+      "name": "admin"
+    },
+    "entitiesAffected": [
+      {
+        "$objectType": "prism.v4.config.EntityReference",
+        "extId": "03000000-0a01-4000-8000-000000000003",
+        "name": "prd-db-01",
+        "rel": "vmm:ahv:config:vm"
+      }
+    ]
+  },
+  {
+    "$objectType": "prism.v4.config.Task",
+    "extId": "ZXJnb24=:7a5c0000-0a01-4000-8000-000000000009",
+    "operation": "CategoryUpdate",
+    "operationDescription": "Update category AppTier:Web",
+    "status": "SUCCEEDED",
+    "progressPercentage": 100,
+    "isCancelable": false,
+    "isBackgroundTask": false,
+    "createdTime": "2026-09-04T09:59:58Z",
+    "startedTime": "2026-09-04T10:00:00Z",
+    "completedTime": "2026-09-04T10:00:01Z",
+    "lastUpdatedTime": "2026-09-04T10:00:01Z",
+    "numberOfEntitiesAffected": 1,
+    "numberOfSubtasks": 0,
+    "clusterExtIds": [],
+    "ownedBy": {
+      "$objectType": "prism.v4.config.OwnerReference",
+      "extId": "0e000000-0a01-4000-8000-000000000001",
+      "name": "admin"
+    },
+    "entitiesAffected": [
+      {
+        "$objectType": "prism.v4.config.EntityReference",
+        "extId": "07000000-0a01-4000-8000-000000000004",
+        "name": "AppTier:Web",
+        "rel": "prism:config:category"
+      }
+    ]
+  },
+  {
+    "$objectType": "prism.v4.config.Task",
+    "extId": "ZXJnb24=:7a5c0000-0a01-4000-8000-000000000010",
+    "operation": "ImageUpload",
+    "operationDescription": "Upload image windows-2022-eval",
+    "status": "CANCELED",
+    "progressPercentage": 100,
+    "isCancelable": false,
+    "isBackgroundTask": false,
+    "createdTime": "2026-09-05T05:59:58Z",
+    "startedTime": "2026-09-05T06:00:00Z",
+    "completedTime": "2026-09-05T06:12:00Z",
+    "lastUpdatedTime": "2026-09-05T06:12:00Z",
+    "numberOfEntitiesAffected": 1,
+    "numberOfSubtasks": 0,
+    "clusterExtIds": [
+      "01000000-0a01-4000-8000-000000000001"
+    ],
+    "ownedBy": {
+      "$objectType": "prism.v4.config.OwnerReference",
+      "extId": "0e000000-0a01-4000-8000-000000000001",
+      "name": "admin"
+    },
+    "entitiesAffected": [
+      {
+        "$objectType": "prism.v4.config.EntityReference",
+        "extId": "09000000-0a01-4000-8000-000000000002",
+        "name": "windows-2022-eval",
+        "rel": "vmm:content:image"
+      }
+    ]
+  }
+]

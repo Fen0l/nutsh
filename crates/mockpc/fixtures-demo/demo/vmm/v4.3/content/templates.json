@@ -1,0 +1,167 @@
+[
+  {
+    "$objectType": "vmm.v4.content.Template",
+    "extId": "2a000000-0a01-4000-8000-000000000001",
+    "createTime": "2026-02-03T10:00:00Z",
+    "updateTime": "2026-07-14T09:00:00Z",
+    "templateName": "tpl-ubuntu-web",
+    "templateDescription": "Ubuntu 24.04 web server base",
+    "templateVersionSpec": {
+      "$objectType": "vmm.v4.content.TemplateVersionSpec",
+      "extId": "2b000000-0a01-4000-8000-000000000002",
+      "createTime": "2026-07-14T09:00:00Z",
+      "clusterLocationExtIds": [
+        "01000000-0a01-4000-8000-000000000001"
+      ],
+      "versionName": "v2",
+      "versionDescription": "Updated packages and guest tools 4.5",
+      "vmSpec": {
+        "$objectType": "vmm.v4.ahv.config.Vm",
+        "numSockets": 2,
+        "numCoresPerSocket": 2,
+        "numThreadsPerCore": 1,
+        "memorySizeBytes": 8589934592,
+        "hardwareClockTimezone": "UTC",
+        "disks": [
+          {
+            "$objectType": "vmm.v4.ahv.config.Disk",
+            "backingInfo": {
+              "$objectType": "vmm.v4.ahv.config.VmDisk",
+              "diskSizeBytes": 107374182400,
+              "dataSource": {
+                "$objectType": "vmm.v4.ahv.config.DataSource",
+                "reference": {
+                  "$objectType": "vmm.v4.ahv.config.ImageReference",
+                  "imageExtId": "09000000-0a01-4000-8000-000000000001"
+                }
+              }
+            }
+          }
+        ],
+        "nics": [
+          {
+            "$objectType": "vmm.v4.ahv.config.Nic",
+            "nicBackingInfo": {
+              "$objectType": "vmm.v4.ahv.config.VirtualEthernetNic",
+              "isConnected": true,
+              "numQueues": 1
+            },
+            "nicNetworkInfo": {
+              "$objectType": "vmm.v4.ahv.config.VirtualEthernetNicNetworkInfo",
+              "nicType": "NORMAL_NIC",
+              "vlanMode": "ACCESS",
+              "subnet": {
+                "$objectType": "vmm.v4.ahv.config.SubnetReference",
+                "extId": "08000000-0a01-4000-8000-000000000001"
+              }
+            }
+          }
+        ]
+      },
+      "createdBy": {
+        "$objectType": "vmm.v4.content.TemplateUser",
+        "extId": "0e000000-0a01-4000-8000-000000000002",
+        "username": "ops-lead"
+      },
+      "isActiveVersion": true,
+      "isGcOverrideEnabled": true,
+      "guestCustomizationProfile": {
+        "$objectType": "vmm.v4.ahv.config.VmGcProfileReference",
+        "extId": "29000000-0a01-4000-8000-000000000001"
+      }
+    },
+    "createdBy": {
+      "$objectType": "vmm.v4.content.TemplateUser",
+      "extId": "0e000000-0a01-4000-8000-000000000002",
+      "username": "ops-lead"
+    },
+    "updatedBy": {
+      "$objectType": "vmm.v4.content.TemplateUser",
+      "extId": "0e000000-0a01-4000-8000-000000000002",
+      "username": "ops-lead"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000"
+  },
+  {
+    "$objectType": "vmm.v4.content.Template",
+    "extId": "2a000000-0a01-4000-8000-000000000002",
+    "createTime": "2026-04-22T13:00:00Z",
+    "updateTime": "2026-04-22T13:00:00Z",
+    "templateName": "tpl-windows-app",
+    "templateDescription": "Windows Server 2022 application server base",
+    "templateVersionSpec": {
+      "$objectType": "vmm.v4.content.TemplateVersionSpec",
+      "createTime": "2026-04-22T13:00:00Z",
+      "clusterLocationExtIds": [
+        "01000000-0a01-4000-8000-000000000001"
+      ],
+      "versionName": "v1",
+      "versionDescription": "Windows Server 2022 with the application runtime",
+      "vmSpec": {
+        "$objectType": "vmm.v4.ahv.config.Vm",
+        "numSockets": 4,
+        "numCoresPerSocket": 2,
+        "numThreadsPerCore": 1,
+        "memorySizeBytes": 17179869184,
+        "hardwareClockTimezone": "UTC",
+        "disks": [
+          {
+            "$objectType": "vmm.v4.ahv.config.Disk",
+            "backingInfo": {
+              "$objectType": "vmm.v4.ahv.config.VmDisk",
+              "diskSizeBytes": 107374182400,
+              "dataSource": {
+                "$objectType": "vmm.v4.ahv.config.DataSource",
+                "reference": {
+                  "$objectType": "vmm.v4.ahv.config.ImageReference",
+                  "imageExtId": "09000000-0a01-4000-8000-000000000002"
+                }
+              }
+            }
+          }
+        ],
+        "nics": [
+          {
+            "$objectType": "vmm.v4.ahv.config.Nic",
+            "nicBackingInfo": {
+              "$objectType": "vmm.v4.ahv.config.VirtualEthernetNic",
+              "isConnected": true,
+              "numQueues": 1
+            },
+            "nicNetworkInfo": {
+              "$objectType": "vmm.v4.ahv.config.VirtualEthernetNicNetworkInfo",
+              "nicType": "NORMAL_NIC",
+              "vlanMode": "ACCESS",
+              "subnet": {
+                "$objectType": "vmm.v4.ahv.config.SubnetReference",
+                "extId": "08000000-0a01-4000-8000-000000000001"
+              }
+            }
+          }
+        ]
+      },
+      "createdBy": {
+        "$objectType": "vmm.v4.content.TemplateUser",
+        "extId": "0e000000-0a01-4000-8000-000000000001",
+        "username": "admin"
+      },
+      "isActiveVersion": true,
+      "isGcOverrideEnabled": true,
+      "guestCustomizationProfile": {
+        "$objectType": "vmm.v4.ahv.config.VmGcProfileReference",
+        "extId": "29000000-0a01-4000-8000-000000000002"
+      }
+    },
+    "createdBy": {
+      "$objectType": "vmm.v4.content.TemplateUser",
+      "extId": "0e000000-0a01-4000-8000-000000000001",
+      "username": "admin"
+    },
+    "updatedBy": {
+      "$objectType": "vmm.v4.content.TemplateUser",
+      "extId": "0e000000-0a01-4000-8000-000000000001",
+      "username": "admin"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000"
+  }
+]

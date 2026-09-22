@@ -433,3 +433,47 @@ async fn the_file_asks_for_a_log_and_the_environment_overrules_it() {
         "NUTSH_LOG=off over a file that asked for a log wrote one anyway"
     );
 }
+
+/// The demo's password is a constant anybody can read in the reference, and the rule holds
+/// for it all the same: a `trace` log of a demo run carries neither the word nor the header it
+/// was sent in. The mock is inside the child here, so the values are the two the demo is known
+/// to put on the wire rather than ones read back off a mock this test owns.
+#[tokio::test(flavor = "multi_thread", worker_threads = 2)]
+async fn the_demo_never_logs_its_credential() {
+    let dir = tempfile::tempdir().unwrap();
+    let out = run(
+        vec!["demo".into(), "vm".into(), "--snapshot".into()],
+        dir.path().to_path_buf(),
+        vec![("NUTSH_LOG", "trace".into())],
+    )
+    .await;
+    let stdout = String::from_utf8_lossy(&out.stdout);
+    let stderr = String::from_utf8_lossy(&out.stderr);
+    assert_eq!(out.status.code(), Some(0), "stderr:\n{stderr}");
+    assert!(stdout.contains("prd-web-01"), "no frame:\n{stdout}");
+    assert!(
+        !stderr.contains("nutsh starting"),
+        "the demo's stderr carries log lines:\n{stderr}"
+    );
+    let path = log_file(dir.path());
+    let written =
+        std::fs::read_to_string(&path).unwrap_or_else(|e| panic!("{}: {e}", path.display()));
+    // `admin:secret`, base64: the whole `Authorization` value and the blob inside it.
+    assert_clean(
+        "the demo's log file",
+        &written,
+        &[
+            "Basic YWRtaW46c2VjcmV0".to_string(),
+            "YWRtaW46c2VjcmV0".to_string(),
+        ],
+    );
+    let words = written.split(|c: char| !c.is_ascii_alphanumeric());
+    assert!(
+        !words.clone().any(|w| w == "secret"),
+        "the password is in the log:\n{written}"
+    );
+    assert!(
+        written.lines().any(|l| l.contains("credential=presented")),
+        "the demo logged in, and said so without the value:\n{written}"
+    );
+}

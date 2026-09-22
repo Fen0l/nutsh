@@ -1,0 +1,91 @@
+[
+  {
+    "$objectType": "files.v4.config.ReplicationPolicy",
+    "extId": "45000000-0a01-4000-8000-000000000001",
+    "name": "files-to-archive-hourly",
+    "description": "Home and shared directories to harbor-files-archive every hour",
+    "type": "SMART_DR",
+    "status": "ENABLED",
+    "replicationConfigurations": [
+      {
+        "$objectType": "files.v4.config.ReplicationConfiguration",
+        "primaryFileServerExtId": "44000000-0a01-4000-8000-000000000001",
+        "secondaryFileServerExtId": "44000000-0a01-4000-8000-000000000002",
+        "primaryDomainManagerExtId": "d0000000-0a01-4000-8000-000000000001",
+        "secondaryDomainManagerExtId": "d0000000-0a01-4000-8000-000000000001",
+        "replicationEntities": [
+          {
+            "$objectType": "files.v4.config.ReplicationEntity",
+            "primaryFileServerMountTargetExtId": "48000000-0a01-4000-8000-000000000001",
+            "primaryFileServerMountTargetPath": "/home",
+            "secondaryFileServerMountTargetPath": "/home",
+            "excludeDirPatterns": [],
+            "isAvailableForReplication": true
+          },
+          {
+            "$objectType": "files.v4.config.ReplicationEntity",
+            "primaryFileServerMountTargetExtId": "48000000-0a01-4000-8000-000000000002",
+            "primaryFileServerMountTargetPath": "/shared",
+            "secondaryFileServerMountTargetPath": "/shared",
+            "excludeDirPatterns": [],
+            "isAvailableForReplication": true
+          }
+        ],
+        "schedule": {
+          "$objectType": "files.v4.config.ReplicationSchedule",
+          "frequency": 1,
+          "scheduleInterval": "HOUR",
+          "startTime": "2026-01-05T00:00:00Z"
+        },
+        "status": "ENABLED",
+        "shouldCancelOngoingReplicationJobs": false,
+        "replicationSummary": "SCHEDULE_MET"
+      }
+    ],
+    "shouldIncludeNewMountTargets": true,
+    "shouldKeepDeletedFiles": false,
+    "excludeFilePatterns": [
+      "*.tmp",
+      "~$*"
+    ],
+    "isReverse": false
+  },
+  {
+    "$objectType": "files.v4.config.ReplicationPolicy",
+    "extId": "45000000-0a01-4000-8000-000000000002",
+    "name": "files-to-ridge-daily",
+    "description": "Shared directory to the ridge site nightly; the target is not yet paired",
+    "type": "SMART_DR",
+    "status": "PARTIALLY_ENABLED",
+    "replicationConfigurations": [
+      {
+        "$objectType": "files.v4.config.ReplicationConfiguration",
+        "primaryFileServerExtId": "44000000-0a01-4000-8000-000000000001",
+        "primaryDomainManagerExtId": "d0000000-0a01-4000-8000-000000000001",
+        "replicationEntities": [
+          {
+            "$objectType": "files.v4.config.ReplicationEntity",
+            "primaryFileServerMountTargetExtId": "48000000-0a01-4000-8000-000000000002",
+            "primaryFileServerMountTargetPath": "/shared",
+            "secondaryFileServerMountTargetPath": "/shared",
+            "excludeDirPatterns": [],
+            "isAvailableForReplication": true
+          }
+        ],
+        "schedule": {
+          "$objectType": "files.v4.config.ReplicationSchedule",
+          "frequency": 1,
+          "scheduleInterval": "DAY",
+          "startTime": "2026-08-01T01:00:00Z"
+        },
+        "status": "DISABLED",
+        "shouldCancelOngoingReplicationJobs": true,
+        "replicationSummary": "SCHEDULE_MISSED"
+      }
+    ],
+    "shouldIncludeNewMountTargets": false,
+    "shouldKeepDeletedFiles": true,
+    "excludeFilePatterns": [],
+    "isReverse": false
+  }
+]

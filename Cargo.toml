@@ -74,9 +74,9 @@ nutsh-config.workspace = true
 nutsh-core.workspace = true
 nutsh-prism.workspace = true
 nutsh-tui.workspace = true
+nutsh-mockpc.workspace = true
 
 [dev-dependencies]
-nutsh-mockpc.workspace = true
 serde_json.workspace = true
 tempfile.workspace = true
 

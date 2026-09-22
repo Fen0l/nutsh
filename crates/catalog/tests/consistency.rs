@@ -368,17 +368,23 @@ fn only_the_two_proven_kinds_carry_a_probe_field() {
     }
 }
 
-/// The warm set is the ten kinds the spec derived plus the gateway, and every one of them can
-/// be listed and has a name to cache. The count is asserted because the flag is cheap to add
-/// and each one costs a request at every connect.
+/// The warm set is the ten kinds the spec derived, the gateway, and the registered Prism
+/// Central; every one of them can be listed and has a name to cache. The count is asserted
+/// because the flag is cheap to add and each one costs a request at every connect.
 ///
 /// The gateway is the eleventh on the spec's own evidence rule (§4.3 counts `Reference` paths
 /// inside the default six): curation put `localGatewayReference` and `remoteGatewayReference`
 /// in the first six columns of both `networking.config.VpnConnection` and
 /// `networking.config.BgpSession`, which is four - the count that warms `vpc.extId` and
 /// `host.extId` - where the spec counted the pre-curation `localGateway.extId` as a singleton.
+///
+/// The registered domain is the twelfth for a different reason: `domainManagerExtId` on
+/// protection policies, recovery plans and protected resources names the *other* Prism
+/// Central, whose only row on this one is its registered-domain entry. The DR page polls
+/// that pane and so names it; a standalone table never does, and without the warm-up its
+/// SITES cell is an eight-hex stub after a perfect warm-up of everything else.
 #[test]
-fn the_warm_set_is_eleven_listable_named_kinds() {
+fn the_warm_set_is_twelve_listable_named_kinds() {
     let warm: Vec<&str> = KINDS.iter().filter(|k| k.warm).map(|k| k.id).collect();
     assert_eq!(
         warm,
@@ -387,6 +393,7 @@ fn the_warm_set_is_eleven_listable_named_kinds() {
             "clustermgmt.config.Host",
             "clustermgmt.config.StorageContainer",
             "iam.authn.User",
+            "multidomain.config.RegisteredDomain",
             "networking.config.Gateway",
             "networking.config.Subnet",
             "networking.config.VirtualSwitch",

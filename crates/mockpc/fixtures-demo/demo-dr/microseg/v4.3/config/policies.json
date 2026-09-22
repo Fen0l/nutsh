@@ -1,0 +1,22 @@
+[
+  {
+    "$objectType": "microseg.v4.config.NetworkSecurityPolicy",
+    "extId": "f10c0000-0b02-4000-8000-000000000001",
+    "name": "ridge-quarantine",
+    "description": "System quarantine: a VM placed here talks to nothing",
+    "type": "QUARANTINE",
+    "state": "ENFORCE",
+    "scope": "ALL_VLAN",
+    "isSystemDefined": true,
+    "isHitlogEnabled": false,
+    "isIpv4AddressScope": true,
+    "isIpv6AddressScope": false,
+    "isIpv6TrafficAllowed": false,
+    "isSharedWithAllProjects": true,
+    "securedGroups": [],
+    "createdBy": "system",
+    "creationTime": "2026-02-10T08:30:00Z",
+    "lastUpdateTime": "2026-02-10T08:30:00Z",
+    "projectExtId": "00000000-0000-0000-0000-000000000000"
+  }
+]

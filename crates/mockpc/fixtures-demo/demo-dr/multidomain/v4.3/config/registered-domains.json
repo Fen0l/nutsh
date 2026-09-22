@@ -1,0 +1,17 @@
+[
+  {
+    "$objectType": "multidomain.v4.config.RegisteredDomain",
+    "extId": "d0000000-0a01-4000-8000-000000000001",
+    "name": "pc-harbor",
+    "fqdn": "pc-harbor.example.com",
+    "registrationState": "REGISTERED",
+    "apiCredentialStatus": "VALID",
+    "registeredTime": "2026-02-12T09:00:00Z",
+    "platformData": {
+      "$objectType": "multidomain.v4.config.PlatformData",
+      "pcVersion": "pc.7.6",
+      "clusterCount": 2,
+      "connectivityStatus": "CONNECTED"
+    }
+  }
+]

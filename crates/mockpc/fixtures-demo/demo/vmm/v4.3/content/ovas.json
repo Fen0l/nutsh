@@ -1,0 +1,75 @@
+[
+  {
+    "$objectType": "vmm.v4.content.Ova",
+    "extId": "2c000000-0a01-4000-8000-000000000001",
+    "name": "ova-monitoring-appliance",
+    "checksum": {
+      "$objectType": "vmm.v4.content.OvaSha256Checksum",
+      "hexDigest": "0a012c0000000000000000000000000000000000000000000000000000000001"
+    },
+    "sizeBytes": 3221225472,
+    "source": {
+      "$objectType": "vmm.v4.content.OvaUrlSource",
+      "url": "https://portal.example.com/ova/monitoring-appliance.ova"
+    },
+    "createTime": "2026-03-10T09:00:00Z",
+    "lastUpdateTime": "2026-03-10T09:20:00Z",
+    "createdBy": {
+      "$objectType": "iam.v4.authn.User",
+      "extId": "0e000000-0a01-4000-8000-000000000002",
+      "username": "ops-lead"
+    },
+    "clusterLocationExtIds": [
+      "01000000-0a01-4000-8000-000000000001"
+    ],
+    "parentVm": "monitoring-appliance",
+    "vmConfig": {
+      "$objectType": "vmm.v4.ahv.config.Vm",
+      "name": "monitoring-appliance",
+      "numSockets": 2,
+      "numCoresPerSocket": 1,
+      "numThreadsPerCore": 1,
+      "memorySizeBytes": 8589934592,
+      "hardwareClockTimezone": "UTC"
+    },
+    "diskFormat": "QCOW2",
+    "projectExtId": "00000000-0000-0000-0000-000000000000"
+  },
+  {
+    "$objectType": "vmm.v4.content.Ova",
+    "extId": "2c000000-0a01-4000-8000-000000000002",
+    "name": "ova-jump-host",
+    "checksum": {
+      "$objectType": "vmm.v4.content.OvaSha256Checksum",
+      "hexDigest": "0a012c0000000000000000000000000000000000000000000000000000000002"
+    },
+    "sizeBytes": 1610612736,
+    "source": {
+      "$objectType": "vmm.v4.content.OvaUrlSource",
+      "url": "https://portal.example.com/ova/jump-host.ova"
+    },
+    "createTime": "2026-05-06T14:00:00Z",
+    "lastUpdateTime": "2026-05-06T14:10:00Z",
+    "createdBy": {
+      "$objectType": "iam.v4.authn.User",
+      "extId": "0e000000-0a01-4000-8000-000000000001",
+      "username": "admin"
+    },
+    "clusterLocationExtIds": [
+      "01000000-0a01-4000-8000-000000000001",
+      "01000000-0a01-4000-8000-000000000002"
+    ],
+    "parentVm": "jump-host",
+    "vmConfig": {
+      "$objectType": "vmm.v4.ahv.config.Vm",
+      "name": "jump-host",
+      "numSockets": 1,
+      "numCoresPerSocket": 1,
+      "numThreadsPerCore": 1,
+      "memorySizeBytes": 2147483648,
+      "hardwareClockTimezone": "UTC"
+    },
+    "diskFormat": "QCOW2",
+    "projectExtId": "00000000-0000-0000-0000-000000000000"
+  }
+]

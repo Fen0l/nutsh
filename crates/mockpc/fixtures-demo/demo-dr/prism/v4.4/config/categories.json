@@ -1,0 +1,42 @@
+[
+  {
+    "$objectType": "prism.v4.config.Category",
+    "extId": "ca7e0000-0b02-4000-8000-000000000001",
+    "key": "Environment",
+    "value": "DR",
+    "type": "USER",
+    "description": "Replicas and the DR tooling on pc-ridge",
+    "ownerUuid": "05e70000-0b02-4000-8000-000000000001",
+    "isSharedWithAllProjects": true
+  },
+  {
+    "$objectType": "prism.v4.config.Category",
+    "extId": "ca7e0000-0b02-4000-8000-000000000002",
+    "key": "AppTier",
+    "value": "Web",
+    "type": "USER",
+    "description": "Front-end web servers",
+    "ownerUuid": "05e70000-0b02-4000-8000-000000000001",
+    "isSharedWithAllProjects": true
+  },
+  {
+    "$objectType": "prism.v4.config.Category",
+    "extId": "ca7e0000-0b02-4000-8000-000000000003",
+    "key": "AppTier",
+    "value": "DB",
+    "type": "USER",
+    "description": "Database servers",
+    "ownerUuid": "05e70000-0b02-4000-8000-000000000001",
+    "isSharedWithAllProjects": true
+  },
+  {
+    "$objectType": "prism.v4.config.Category",
+    "extId": "ca7e0000-0b02-4000-8000-000000000004",
+    "key": "Site",
+    "value": "ridge",
+    "type": "USER",
+    "description": "Everything hosted on the ridge cluster",
+    "ownerUuid": "05e70000-0b02-4000-8000-000000000001",
+    "isSharedWithAllProjects": true
+  }
+]

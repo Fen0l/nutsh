@@ -12,11 +12,23 @@
 //! are missing from, or failing inside, an otherwise served namespace.
 //!
 //! Mutations change the store: an accepted one inserts a task that advances one step per GET by
-//! extId, and applies its effect on the transition into `SUCCEEDED`. Hooks make a task fail or
-//! stall, forbid one kind's action (403), change an entity between the ETag fetch and the
-//! mutation that follows (412), hold a path's answers behind a gate the test opens by hand, or
-//! repeat a fixture up to N rows with fresh extIds.
+//! extId, and applies its effect on the transition into `SUCCEEDED`: the power actions move
+//! `powerState`, `delete` removes the row, `manage-alert` resolves or acknowledges, host
+//! maintenance moves `maintenanceState`, `migrate-to-host` moves the host, `clone` and a
+//! recovery-point create add a row. Hooks make a task fail or stall, forbid one kind's action
+//! (403), change an entity between the ETag fetch and the mutation that follows (412), hold a
+//! path's answers behind a gate the test opens by hand, or repeat a fixture up to N rows with
+//! fresh extIds.
+//!
+//! Three knobs exist for a mock that stands in for a Prism Central rather than for a test:
+//! [`MockPcBuilder::store`] serves a store built in memory, [`MockPcBuilder::honours_filter`]
+//! answers `$filter` with the grammar the program sends, and [`MockPcBuilder::live_clock`]
+//! stamps tasks with the wall clock. All three are off by default, so every test written
+//! against the constants stands.
 
+mod clock;
+pub mod demo;
+mod filter;
 mod handler;
 mod store;
 
@@ -27,6 +39,7 @@ use std::sync::{Arc, Mutex, RwLock};
 
 use serde_json::Value;
 
+pub use clock::rfc3339;
 pub use store::Store;
 
 #[derive(Debug, Clone, PartialEq)]
@@ -147,6 +160,15 @@ pub struct Shared {
     /// catch, so the default mock is the unsorted case and a test that wants the sorted one
     /// asks for it by name.
     pub(crate) sorts: bool,
+    /// Whether a list answers `$filter`, with the grammar `filter.rs` reads and a 400 for
+    /// anything else. Off by default for the reason `sorts` is: every count a test reads off
+    /// the mock today was written against a Prism Central that ignores the parameter.
+    pub(crate) filters: bool,
+    /// Whether a mock-created task is stamped with the wall clock rather than the September
+    /// 2026 constants. Off by default: the constants are what every snapshot over a task was
+    /// drawn with. On, so a demo whose fixtures were rebased onto now sees its tasks age in
+    /// seconds beside them.
+    pub(crate) live_clock: bool,
     /// `(path suffix, milliseconds)`: responses to paths ending with the suffix are held back,
     /// so a test can assert what the first frame shows *before* the network answers. A path
     /// suffix rather than everything, because `connect`'s domain-manager read is a list too
@@ -209,6 +231,16 @@ pub(crate) struct MockTask {
     /// task registered only so it can be cancelled.
     pub(crate) target: Option<Target>,
     pub(crate) canceling: bool,
+    /// The catalog path of the action behind the mutation; `None` for a mutation the catalog
+    /// has no action for, and for a fixture task registered only to be cancelled. An effect
+    /// keys on this and `body`, never on `operation`: several curated actions can share one
+    /// endpoint, and the name says which was asked only when a constant body told it.
+    pub(crate) action_path: Option<&'static str>,
+    /// The API path the mutation was sent to, after version mapping. For a list-level create
+    /// it is the list its effect lands a row in.
+    pub(crate) path: String,
+    /// The body the mutation carried, as sent.
+    pub(crate) body: Option<Value>,
 }
 
 /// The entity a mock-created task acts on, addressed the way the store is.
@@ -255,6 +287,8 @@ pub(crate) fn default_steps() -> Vec<(String, u8)> {
 
 pub struct MockPcBuilder {
     fixtures: PathBuf,
+    /// A store handed over ready-made; `fixtures` is read only when this is `None`.
+    store: Option<Store>,
     username: String,
     password: String,
     unavailable: Vec<String>,
@@ -275,6 +309,8 @@ pub struct MockPcBuilder {
     repeat: Vec<(String, usize)>,
     narrows: bool,
     sorts: bool,
+    filters: bool,
+    live_clock: bool,
     rate_limit: Option<nutsh_catalog::RateLimit>,
     rate_budget: Option<(u64, u64)>,
     expire_after: Option<usize>,
@@ -292,6 +328,7 @@ impl MockPc {
     pub fn builder() -> MockPcBuilder {
         MockPcBuilder {
             fixtures: PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("fixtures"),
+            store: None,
             username: "admin".into(),
             password: "secret".into(),
             unavailable: Vec::new(),
@@ -312,6 +349,8 @@ impl MockPc {
             repeat: Vec::new(),
             narrows: false,
             sorts: false,
+            filters: false,
+            live_clock: false,
             rate_limit: Some(GENEROUS),
             rate_budget: None,
             expire_after: None,
@@ -427,6 +466,13 @@ impl Drop for MockPc {
 impl MockPcBuilder {
     pub fn fixtures(mut self, dir: impl Into<PathBuf>) -> Self {
         self.fixtures = dir.into();
+        self
+    }
+
+    /// Serve this store instead of reading `fixtures` from disk. What an embedded fixture
+    /// tree, or a test that wants three rows it wrote itself, hands over.
+    pub fn store(mut self, store: Store) -> Self {
+        self.store = Some(store);
         self
     }
 
@@ -595,6 +641,21 @@ impl MockPcBuilder {
         self
     }
 
+    /// Honour `$filter` on lists, with the grammar the program sends and a 400 for anything
+    /// else, so `totalAvailableResults` is the filtered count. Off by default; see
+    /// `Shared::filters`.
+    pub fn honours_filter(mut self) -> Self {
+        self.filters = true;
+        self
+    }
+
+    /// Stamp mock-created tasks with the wall clock instead of the constants. Off by default;
+    /// see `Shared::live_clock`.
+    pub fn live_clock(mut self) -> Self {
+        self.live_clock = true;
+        self
+    }
+
     /// Tasks for `operation` end `FAILED` with `errorMessages` and apply no effect.
     pub fn fail_task(mut self, operation: &str) -> Self {
         self.fail_task.push(operation.into());
@@ -626,8 +687,19 @@ impl MockPcBuilder {
         self
     }
 
+    /// [`MockPcBuilder::try_start`] with every failure a panic: the shape every test wants.
     pub async fn start(self) -> MockPc {
-        let mut store = Store::load(&self.fixtures).expect("loading fixtures");
+        self.try_start().await.expect("starting the mock")
+    }
+
+    /// Load the store (unless one was handed over), bind a loopback port and serve. Every
+    /// failure comes back as an `io::Error`, so a caller that is not a test can say what it
+    /// was doing when the mock would not start.
+    pub async fn try_start(self) -> std::io::Result<MockPc> {
+        let mut store = match self.store {
+            Some(store) => store,
+            None => Store::load(&self.fixtures)?,
+        };
         for (path, n) in &self.repeat {
             let items = store.list(path).unwrap_or_default().to_vec();
             if items.is_empty() || *n == 0 {
@@ -674,6 +746,8 @@ impl MockPcBuilder {
             tasks: Mutex::new(HashMap::new()),
             gates: self.gates,
             sorts: self.sorts,
+            filters: self.filters,
+            live_clock: self.live_clock,
             delay: Mutex::new((String::new(), 0)),
             rate_limit: self.rate_limit,
             rate_budget: self.rate_budget,
@@ -687,13 +761,11 @@ impl MockPcBuilder {
         let app = axum::Router::new()
             .fallback(handler::handle)
             .with_state(shared.clone());
-        let listener = tokio::net::TcpListener::bind("127.0.0.1:0")
-            .await
-            .expect("bind");
-        let addr = listener.local_addr().expect("local addr");
+        let listener = tokio::net::TcpListener::bind("127.0.0.1:0").await?;
+        let addr = listener.local_addr()?;
         let task = tokio::spawn(async move {
             axum::serve(listener, app).await.expect("serve");
         });
-        MockPc { addr, shared, task }
+        Ok(MockPc { addr, shared, task })
     }
 }

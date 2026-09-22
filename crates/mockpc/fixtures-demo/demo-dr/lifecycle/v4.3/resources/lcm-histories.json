@@ -1,0 +1,45 @@
+[
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "41570000-0b02-4000-8000-000000000001",
+    "operationType": "INVENTORY",
+    "operationStatus": "SUCCEEDED",
+    "startTime": "2026-09-04T21:00:00Z",
+    "endTime": "2026-09-04T21:12:00Z",
+    "frameworkVersion": "3.3.1",
+    "clusterName": "ridge-dr",
+    "clusterExtId": "c1000000-0b02-4000-8000-000000000001"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "41570000-0b02-4000-8000-000000000002",
+    "operationType": "UPGRADE",
+    "operationStatus": "SUCCEEDED",
+    "startTime": "2026-08-15T22:00:00Z",
+    "endTime": "2026-08-16T01:30:00Z",
+    "frameworkVersion": "3.3.1",
+    "clusterName": "ridge-dr",
+    "clusterExtId": "c1000000-0b02-4000-8000-000000000001",
+    "operationInfo": {
+      "$objectType": "lifecycle.v4.resources.UpgradeInfo",
+      "componentDetails": [
+        {
+          "$objectType": "lifecycle.v4.resources.ComponentDetails",
+          "extId": "1c000000-0b02-4000-8000-000000000001",
+          "entityClass": "Core",
+          "entityModel": "AOS",
+          "entityType": "SOFTWARE",
+          "entityVersion": "7.5",
+          "upgradedVersion": "7.6",
+          "upgradeStatus": "SUCCEEDED",
+          "locationInfo": {
+            "$objectType": "lifecycle.v4.common.LocationInfo",
+            "uuid": "c1000000-0b02-4000-8000-000000000001",
+            "locationType": "CLUSTER",
+            "locationName": "ridge-dr"
+          }
+        }
+      ]
+    }
+  }
+]

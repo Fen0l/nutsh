@@ -124,6 +124,7 @@ impl App {
             cache_dirty: false,
             stats_seen: false,
             names_seen: false,
+            sample_seen: false,
             connect_tx,
             connect_rx,
             pending_peers: Vec::new(),
@@ -159,6 +160,7 @@ impl App {
         // The new session's pollers have not reported yet, whatever the old ones' had done.
         self.stats_seen = false;
         self.names_seen = false;
+        self.sample_seen = false;
         let scheduler = Scheduler::new(session.client.clone(), self.poll_tx.clone());
         let stats = nutsh_core::stats::spawn(
             session.client.clone(),

@@ -1,0 +1,175 @@
+[
+  {
+    "$objectType": "clustermgmt.v4.config.Cluster",
+    "extId": "c1000000-0b02-4000-8000-000000000001",
+    "name": "ridge-dr",
+    "vmCount": 5,
+    "backupEligibilityScore": 3,
+    "upgradeStatus": "SUCCEEDED",
+    "nodes": {
+      "$objectType": "clustermgmt.v4.config.NodeReference",
+      "numberOfNodes": 3,
+      "nodeList": [
+        {
+          "$objectType": "clustermgmt.v4.config.NodeListItemReference",
+          "nodeUuid": "40570000-0b02-4000-8000-000000000001",
+          "hostIp": {
+            "$objectType": "common.v1.config.IPAddress",
+            "ipv4": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "192.0.2.11",
+              "prefixLength": 32
+            }
+          },
+          "controllerVmIp": {
+            "$objectType": "common.v1.config.IPAddress",
+            "ipv4": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "192.0.2.21",
+              "prefixLength": 32
+            }
+          }
+        },
+        {
+          "$objectType": "clustermgmt.v4.config.NodeListItemReference",
+          "nodeUuid": "40570000-0b02-4000-8000-000000000002",
+          "hostIp": {
+            "$objectType": "common.v1.config.IPAddress",
+            "ipv4": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "192.0.2.12",
+              "prefixLength": 32
+            }
+          },
+          "controllerVmIp": {
+            "$objectType": "common.v1.config.IPAddress",
+            "ipv4": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "192.0.2.22",
+              "prefixLength": 32
+            }
+          }
+        },
+        {
+          "$objectType": "clustermgmt.v4.config.NodeListItemReference",
+          "nodeUuid": "40570000-0b02-4000-8000-000000000003",
+          "hostIp": {
+            "$objectType": "common.v1.config.IPAddress",
+            "ipv4": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "192.0.2.13",
+              "prefixLength": 32
+            }
+          },
+          "controllerVmIp": {
+            "$objectType": "common.v1.config.IPAddress",
+            "ipv4": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "192.0.2.23",
+              "prefixLength": 32
+            }
+          }
+        }
+      ]
+    },
+    "config": {
+      "$objectType": "clustermgmt.v4.config.ClusterConfigReference",
+      "clusterFunction": [
+        "AOS"
+      ],
+      "clusterType": "HYPER_CONVERGED",
+      "clusterArch": "X86_64",
+      "hypervisorTypes": [
+        "AHV"
+      ],
+      "operationMode": "NORMAL",
+      "isAvailable": true,
+      "isLts": true,
+      "isRemoteSupportEnabled": false,
+      "timezone": "Europe/Luxembourg",
+      "redundancyFactor": 2,
+      "encryptionInTransitStatus": "ENABLED",
+      "encryptionOption": [
+        "SOFTWARE"
+      ],
+      "encryptionScope": [
+        "CLUSTER"
+      ],
+      "buildInfo": {
+        "$objectType": "clustermgmt.v4.config.BuildReference",
+        "buildType": "release",
+        "version": "7.6",
+        "fullVersion": "el9-release-ganges-7.6-stable-0b02",
+        "shortCommitId": "0b02bb"
+      },
+      "clusterSoftwareMap": [
+        {
+          "$objectType": "clustermgmt.v4.config.SoftwareMapReference",
+          "softwareType": "NOS",
+          "version": "7.6"
+        },
+        {
+          "$objectType": "clustermgmt.v4.config.SoftwareMapReference",
+          "softwareType": "NCC",
+          "version": "6.0.0.1"
+        }
+      ],
+      "faultToleranceState": {
+        "$objectType": "clustermgmt.v4.config.FaultToleranceState",
+        "currentMaxFaultTolerance": 1,
+        "desiredMaxFaultTolerance": 1,
+        "currentClusterFaultTolerance": "CFT_1N_OR_1D",
+        "desiredClusterFaultTolerance": "CFT_1N_OR_1D",
+        "domainAwarenessLevel": "NODE",
+        "isStrictRackAwarenessEnabled": false
+      },
+      "pulseStatus": {
+        "$objectType": "clustermgmt.v4.config.PulseStatus",
+        "isEnabled": true
+      }
+    },
+    "network": {
+      "$objectType": "clustermgmt.v4.config.ClusterNetworkReference",
+      "externalAddress": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "192.0.2.10",
+          "prefixLength": 32
+        }
+      },
+      "externalDataServiceIp": {
+        "$objectType": "common.v1.config.IPAddress",
+        "ipv4": {
+          "$objectType": "common.v1.config.IPv4Address",
+          "value": "192.0.2.20",
+          "prefixLength": 32
+        }
+      },
+      "externalSubnet": "192.0.2.0/24",
+      "nameServerIpList": [
+        {
+          "$objectType": "common.v1.config.IPAddressOrFQDN",
+          "ipv4": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "192.0.2.41",
+            "prefixLength": 32
+          }
+        }
+      ],
+      "ntpServerIpList": [
+        {
+          "$objectType": "common.v1.config.IPAddressOrFQDN",
+          "fqdn": {
+            "$objectType": "common.v1.config.FQDN",
+            "value": "ntp.ridge.example.com"
+          }
+        }
+      ],
+      "backplane": {
+        "$objectType": "clustermgmt.v4.config.BackplaneNetworkParams",
+        "isSegmentationEnabled": true
+      }
+    }
+  }
+]

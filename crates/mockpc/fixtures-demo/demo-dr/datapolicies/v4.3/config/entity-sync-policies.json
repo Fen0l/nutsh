@@ -1,0 +1,12 @@
+[
+  {
+    "$objectType": "datapolicies.v4.config.EntitySyncPolicy",
+    "extId": "e5c00000-0b02-4000-8000-000000000001",
+    "remoteDomainManagerExtId": "d0000000-0a01-4000-8000-000000000001",
+    "entityExtId": "ca7e0000-0b02-4000-8000-000000000002",
+    "entityType": "CATEGORY",
+    "entityName": "AppTier",
+    "status": "IN_SYNC",
+    "ownerExtId": "05e70000-0b02-4000-8000-000000000001"
+  }
+]

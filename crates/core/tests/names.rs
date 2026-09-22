@@ -53,6 +53,27 @@ async fn one_cycle_names_the_reference_kinds() {
     assert_eq!(store.names().get(PC), Some("pc-lab"));
 }
 
+/// The registered Prism Central is warmed too: the bundled fixture's registered domain is the
+/// `pc-dr` every DR reference on the same tree points at, and nothing but the warm-up lists it
+/// while a VM table is the only subscription. Without `warm = true` on
+/// `multidomain.config.RegisteredDomain` this id stays a stub.
+#[tokio::test(flavor = "multi_thread", worker_threads = 2)]
+async fn one_cycle_names_the_registered_prism_central() {
+    let pc = MockPc::builder().start().await;
+    let client = Arc::new(common::client(&pc).await);
+    let (tx, mut rx) = mpsc::channel(64);
+    let _handle = nutsh_core::names::spawn(client, tx, 1, awake());
+
+    let names = first_cycle(&mut rx).await;
+    let mut store = Store::default();
+    store.apply_names(names);
+    // `crates/mockpc/fixtures/multidomain/v4.3/config/registered-domains.json`.
+    assert_eq!(
+        store.names().get("8f4d1c92-0000-4000-8000-000000000401"),
+        Some("pc-dr")
+    );
+}
+
 /// A kind whose namespace this Prism Central does not serve is skipped without a request, and
 /// the others still land: one missing namespace must not cost the whole cycle.
 #[tokio::test(flavor = "multi_thread", worker_threads = 2)]

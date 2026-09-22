@@ -66,6 +66,7 @@ impl App {
             if generation == self.session_generation {
                 live.store.set_sample(sample);
                 live.refresh_summary();
+                self.sample_seen = true;
                 self.dirty = true;
             }
             return;
@@ -419,8 +420,14 @@ impl App {
         }
     }
 
-    /// Drains poll messages until the open page's sampler has reported once.
+    /// Drains poll messages until the open page's sampler has reported once - and returns at
+    /// once if it already has, for the reason `settle_stats_once` is idempotent: a caller that
+    /// settled the page's panes and its names first may already hold the cycle, and the next
+    /// one is five minutes away.
     pub async fn settle_sample_once(&mut self) {
+        if self.sample_seen {
+            return;
+        }
         self.settle_until(|msg| matches!(msg, Msg::Sample { .. }))
             .await;
     }

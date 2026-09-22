@@ -1,0 +1,75 @@
+[
+  {
+    "$objectType": "security.v4.management.ApprovalPolicy",
+    "extId": "3c000000-0a01-4000-8000-000000000001",
+    "name": "protect-gold-snapshots",
+    "description": "A change to gold-15m needs a second operator",
+    "approverGroups": [
+      {
+        "$objectType": "security.v4.management.ApproverGroup",
+        "name": "harbor-operators",
+        "expiryHours": 24,
+        "approvers": [
+          {
+            "$objectType": "iam.v4.authn.User",
+            "extId": "0e000000-0a01-4000-8000-000000000001",
+            "username": "admin",
+            "userType": "LOCAL"
+          },
+          {
+            "$objectType": "iam.v4.authn.User",
+            "extId": "0e000000-0a01-4000-8000-000000000002",
+            "username": "ops-lead",
+            "userType": "LOCAL"
+          }
+        ]
+      }
+    ],
+    "securedPolicies": [
+      {
+        "$objectType": "security.v4.management.SecuredPolicy",
+        "policyExtId": "11000000-0a01-4000-8000-000000000001",
+        "policyType": "PROTECTION_POLICY"
+      }
+    ],
+    "lastUpdatedBy": "admin",
+    "lastUpdateTime": "2026-07-20T10:00:00Z",
+    "isUpdatePending": false
+  },
+  {
+    "$objectType": "security.v4.management.ApprovalPolicy",
+    "extId": "3c000000-0a01-4000-8000-000000000002",
+    "name": "protect-db-deletes",
+    "description": "Deleting the database recovery points needs approval",
+    "approverGroups": [
+      {
+        "$objectType": "security.v4.management.ApproverGroup",
+        "name": "harbor-operators",
+        "expiryHours": 8,
+        "approvers": [
+          {
+            "$objectType": "iam.v4.authn.User",
+            "extId": "0e000000-0a01-4000-8000-000000000002",
+            "username": "ops-lead",
+            "userType": "LOCAL"
+          }
+        ]
+      }
+    ],
+    "securedPolicies": [
+      {
+        "$objectType": "security.v4.management.SecuredPolicy",
+        "policyExtId": "11000000-0a01-4000-8000-000000000002",
+        "policyType": "PROTECTION_POLICY"
+      },
+      {
+        "$objectType": "security.v4.management.SecuredPolicy",
+        "policyExtId": "11000000-0a01-4000-8000-000000000003",
+        "policyType": "PROTECTION_POLICY"
+      }
+    ],
+    "lastUpdatedBy": "ops-lead",
+    "lastUpdateTime": "2026-09-04T15:00:00Z",
+    "isUpdatePending": true
+  }
+]

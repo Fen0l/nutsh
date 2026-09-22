@@ -1,0 +1,28 @@
+[
+  {
+    "$objectType": "clustermgmt.v4.config.Cvm",
+    "extId": "49000000-0a01-4000-8000-000000000004",
+    "name": "NTNX-edge-n1-CVM",
+    "clusterExtId": "01000000-0a01-4000-8000-000000000002",
+    "nodeExtId": "02000000-0a01-4000-8000-000000000004",
+    "ipAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "203.0.113.34",
+        "prefixLength": 32
+      }
+    },
+    "numVcpus": 8,
+    "memorySizeBytes": 34359738368,
+    "hypervisorType": "AHV",
+    "backplaneIpAddress": {
+      "$objectType": "common.v1.config.IPAddress",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "192.0.2.14",
+        "prefixLength": 32
+      }
+    }
+  }
+]

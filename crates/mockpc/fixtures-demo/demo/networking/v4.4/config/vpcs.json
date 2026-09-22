@@ -1,0 +1,159 @@
+[
+  {
+    "$objectType": "networking.v4.config.Vpc",
+    "extId": "1c000000-0a01-4000-8000-000000000001",
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "0e000000-0a01-4000-8000-000000000001",
+      "ownerUserName": "admin",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000",
+      "projectName": "default"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "prod-vpc",
+    "description": "Production overlay, NAT-free external subnet on prod-vlan-100",
+    "vpcType": "REGULAR",
+    "commonDhcpOptions": {
+      "$objectType": "networking.v4.config.VpcDhcpOptions",
+      "domainNameServers": [
+        {
+          "$objectType": "common.v1.config.IPAddress",
+          "ipv4": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "203.0.113.53",
+            "prefixLength": 32
+          }
+        }
+      ]
+    },
+    "externalSubnets": [
+      {
+        "$objectType": "networking.v4.config.ExternalSubnet",
+        "subnetReference": "08000000-0a01-4000-8000-000000000001",
+        "externalIps": [
+          {
+            "$objectType": "common.v1.config.IPAddress",
+            "ipv4": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "203.0.113.240",
+              "prefixLength": 32
+            }
+          },
+          {
+            "$objectType": "common.v1.config.IPAddress",
+            "ipv4": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "203.0.113.241",
+              "prefixLength": 32
+            }
+          }
+        ],
+        "activeGatewayNodes": [
+          {
+            "$objectType": "networking.v4.config.GatewayNodeReference",
+            "nodeId": "02000000-0a01-4000-8000-000000000001",
+            "nodeIpAddress": {
+              "$objectType": "common.v1.config.IPAddress",
+              "ipv4": {
+                "$objectType": "common.v1.config.IPv4Address",
+                "value": "203.0.113.11",
+                "prefixLength": 32
+              }
+            }
+          },
+          {
+            "$objectType": "networking.v4.config.GatewayNodeReference",
+            "nodeId": "02000000-0a01-4000-8000-000000000003",
+            "nodeIpAddress": {
+              "$objectType": "common.v1.config.IPAddress",
+              "ipv4": {
+                "$objectType": "common.v1.config.IPv4Address",
+                "value": "203.0.113.13",
+                "prefixLength": 32
+              }
+            }
+          }
+        ],
+        "activeGatewayCount": 2
+      }
+    ],
+    "externallyRoutablePrefixes": [
+      {
+        "$objectType": "networking.v4.config.IPSubnet",
+        "ipv4": {
+          "$objectType": "networking.v4.config.IPv4Subnet",
+          "ip": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "203.0.113.128",
+            "prefixLength": 32
+          },
+          "prefixLength": 25
+        }
+      }
+    ],
+    "scope": "VMS",
+    "supportedMultipleExternalSubnetType": "ONLY_NONAT"
+  },
+  {
+    "$objectType": "networking.v4.config.Vpc",
+    "extId": "1c000000-0a01-4000-8000-000000000002",
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "0e000000-0a01-4000-8000-000000000002",
+      "ownerUserName": "ops-lead",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000",
+      "projectName": "default"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "dev-vpc",
+    "description": "Development overlay behind NAT",
+    "vpcType": "REGULAR",
+    "commonDhcpOptions": {
+      "$objectType": "networking.v4.config.VpcDhcpOptions",
+      "domainNameServers": [
+        {
+          "$objectType": "common.v1.config.IPAddress",
+          "ipv4": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "203.0.113.53",
+            "prefixLength": 32
+          }
+        }
+      ]
+    },
+    "externalSubnets": [
+      {
+        "$objectType": "networking.v4.config.ExternalSubnet",
+        "subnetReference": "08000000-0a01-4000-8000-000000000003",
+        "externalIps": [
+          {
+            "$objectType": "common.v1.config.IPAddress",
+            "ipv4": {
+              "$objectType": "common.v1.config.IPv4Address",
+              "value": "198.51.100.60",
+              "prefixLength": 32
+            }
+          }
+        ],
+        "activeGatewayNodes": [
+          {
+            "$objectType": "networking.v4.config.GatewayNodeReference",
+            "nodeId": "02000000-0a01-4000-8000-000000000001",
+            "nodeIpAddress": {
+              "$objectType": "common.v1.config.IPAddress",
+              "ipv4": {
+                "$objectType": "common.v1.config.IPv4Address",
+                "value": "203.0.113.11",
+                "prefixLength": 32
+              }
+            }
+          }
+        ],
+        "activeGatewayCount": 1
+      }
+    ],
+    "externallyRoutablePrefixes": [],
+    "scope": "VMS",
+    "supportedMultipleExternalSubnetType": "ONLY_NAT"
+  }
+]

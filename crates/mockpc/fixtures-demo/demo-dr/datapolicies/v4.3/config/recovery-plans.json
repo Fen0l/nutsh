@@ -1,0 +1,46 @@
+[
+  {
+    "$objectType": "datapolicies.v4.config.RecoveryPlan",
+    "extId": "9b1a0000-0b02-4000-8000-000000000001",
+    "name": "rp-web-tier",
+    "description": "Web tier first, then everything tagged AppTier:Web",
+    "primaryLocation": {
+      "$objectType": "datapolicies.v4.config.DisasterRecoveryLocation",
+      "domainManagerExtId": "d0000000-0a01-4000-8000-000000000001"
+    },
+    "recoveryLocation": {
+      "$objectType": "datapolicies.v4.config.DisasterRecoveryLocation",
+      "domainManagerExtId": "d0000000-0b02-4000-8000-000000000001",
+      "clusters": [
+        {
+          "$objectType": "datapolicies.v4.config.EntityReference",
+          "extId": "c1000000-0b02-4000-8000-000000000001"
+        }
+      ]
+    },
+    "ownerExtId": "05e70000-0b02-4000-8000-000000000001",
+    "isProtectionPausedPostFailover": false
+  },
+  {
+    "$objectType": "datapolicies.v4.config.RecoveryPlan",
+    "extId": "9b1a0000-0b02-4000-8000-000000000002",
+    "name": "rp-database",
+    "description": "The orders database and its data volumes",
+    "primaryLocation": {
+      "$objectType": "datapolicies.v4.config.DisasterRecoveryLocation",
+      "domainManagerExtId": "d0000000-0a01-4000-8000-000000000001"
+    },
+    "recoveryLocation": {
+      "$objectType": "datapolicies.v4.config.DisasterRecoveryLocation",
+      "domainManagerExtId": "d0000000-0b02-4000-8000-000000000001",
+      "clusters": [
+        {
+          "$objectType": "datapolicies.v4.config.EntityReference",
+          "extId": "c1000000-0b02-4000-8000-000000000001"
+        }
+      ]
+    },
+    "ownerExtId": "05e70000-0b02-4000-8000-000000000001",
+    "isProtectionPausedPostFailover": false
+  }
+]

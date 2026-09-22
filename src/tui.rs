@@ -1,5 +1,6 @@
 //! `nutsh [KIND]`: the TUI, and `--snapshot` for one headless frame.
 
+use std::path::PathBuf;
 use std::time::{Duration, SystemTime};
 
 use anyhow::Context as _;
@@ -25,6 +26,10 @@ pub(crate) struct TuiArgs {
     pub(crate) format: Option<nutsh_core::export::Format>,
     pub(crate) readonly: bool,
     pub(crate) no_cache: bool,
+    /// What `Config.now` is: the clock every age on the frame is measured from. `None` is the
+    /// wall clock; a caller whose data is pinned to an instant passes that instant so its
+    /// frames say the same thing every time.
+    pub(crate) now: Option<SystemTime>,
 }
 
 /// What startup decided: a connected app on a table, or the Contexts screen.
@@ -37,153 +42,182 @@ enum Start {
     Failed(App, Option<String>),
 }
 
-pub(crate) fn run(args: TuiArgs, conn: &ConnArgs, from_env: Option<String>) -> anyhow::Result<i32> {
+pub(crate) fn run(
+    args: TuiArgs,
+    conn: &ConnArgs,
+    from_env: Option<String>,
+    config_path: PathBuf,
+    secrets: Secrets,
+) -> anyhow::Result<i32> {
     // Before anything connects: an unknown kind is a mistake in the command line, and saying
     // so costs nothing, while a round trip to Prism Central to reach the same conclusion does.
     nutsh_tui::app::resolve_home(&args.start)?;
     let rt = crate::runtime()?;
-    rt.block_on(async {
-        let config_path = nutsh_config::config_path();
-        // Resolved once. It is both what this session connects with and, when `--host` named
-        // it, the `(env)` row the Contexts screen offers; and when it cannot be resolved at
-        // all, that failure is the Contexts screen's reason rather than a second lookup.
-        let target = session::target(conn, &config_path);
-        // Before the alternate screen and before any frame: the auto-detected skin queries the
-        // terminal's background colour, and a warning printed later would land inside a frame.
-        // The context is the resolved one, so a skin on `current_context` counts as much as
-        // one on `--context`; the warning names the key the name came from, so a context's
-        // skin is looked for where it is.
-        let file = nutsh_config::load(&config_path).unwrap_or_default();
-        // `--check` never gets here, and it never caches: its job is to probe every namespace
-        // and report, and a cache would make it report the past.
-        let caching = file.cache && !args.no_cache;
-        let cache_max_age = file
-            .cache_max_age
-            .map_or(nutsh_core::cache::MAX_AGE, u64::from);
-        if caching {
-            // Before the directory this run wants is read: keep the tree from growing a
-            // directory per Prism Central ever visited.
-            let root = nutsh_config::cache_dir();
-            // Printed, not logged. There is a subscriber now, but a TUI run writes to a file
-            // nobody has been told to look in, and a sweep that failed is something this run
-            // has to say out loud. The skin warnings below print at the same point for the
-            // same reason - before the alternate screen, where a line on stderr is still a
-            // line and not a hole in a frame.
-            if let Err(e) = nutsh_core::cache::sweep(&root) {
-                eprintln!("warning: cache sweep failed: {e:#}");
+    rt.block_on(run_on(args, conn, from_env, config_path, secrets))
+}
+
+/// [`run`] on a runtime the caller owns, reading the config file at `config_path` and the
+/// passwords in `secrets`. The two are parameters rather than the process's own because a run
+/// on a Prism Central this program brought with it must not read, and must never write, the
+/// user's config file or secret store; everything else - the Contexts screen, `:settings`,
+/// the guardrail file, the skin - comes through the same `CliContexts` either way.
+pub(crate) async fn run_on(
+    args: TuiArgs,
+    conn: &ConnArgs,
+    from_env: Option<String>,
+    config_path: PathBuf,
+    secrets: Secrets,
+) -> anyhow::Result<i32> {
+    // Resolved once. It is both what this session connects with and, when `--host` named
+    // it, the `(env)` row the Contexts screen offers; and when it cannot be resolved at
+    // all, that failure is the Contexts screen's reason rather than a second lookup.
+    let target = session::target(conn, &config_path);
+    // Before the alternate screen and before any frame: the auto-detected skin queries the
+    // terminal's background colour, and a warning printed later would land inside a frame.
+    // The context is the resolved one, so a skin on `current_context` counts as much as
+    // one on `--context`; the warning names the key the name came from, so a context's
+    // skin is looked for where it is.
+    let file = nutsh_config::load(&config_path).unwrap_or_default();
+    // `--check` never gets here, and it never caches: its job is to probe every namespace
+    // and report, and a cache would make it report the past.
+    let caching = file.cache && !args.no_cache;
+    let cache_max_age = file
+        .cache_max_age
+        .map_or(nutsh_core::cache::MAX_AGE, u64::from);
+    if caching {
+        // Before the directory this run wants is read: keep the tree from growing a
+        // directory per Prism Central ever visited.
+        let root = nutsh_config::cache_dir();
+        // Printed, not logged. There is a subscriber now, but a TUI run writes to a file
+        // nobody has been told to look in, and a sweep that failed is something this run
+        // has to say out loud. The skin warnings below print at the same point for the
+        // same reason - before the alternate screen, where a line on stderr is still a
+        // line and not a hole in a frame.
+        if let Err(e) = nutsh_core::cache::sweep(&root) {
+            eprintln!("warning: cache sweep failed: {e:#}");
+        }
+    }
+    // Before the network: the first frame must paint before anything answers. This is the
+    // one caller that can still print - it runs before the alternate screen - so a name
+    // that cannot be a directory is said out loud here rather than swallowed.
+    let (cache, restored) = match caching.then(|| target.as_ref().ok()).flatten() {
+        Some(t) => match crate::cache::open_for(t.context.as_deref(), &t.profile, cache_max_age) {
+            Ok((dir, restored)) => (Some(dir), restored),
+            Err(name) => {
+                eprintln!(
+                    "warning: {name} is not a usable cache directory name; this session is cacheless"
+                );
+                (None, None)
             }
-        }
-        // Before the network: the first frame must paint before anything answers. This is the
-        // one caller that can still print - it runs before the alternate screen - so a name
-        // that cannot be a directory is said out loud here rather than swallowed.
-        let (cache, restored) = match caching.then(|| target.as_ref().ok()).flatten() {
-            Some(t) => match crate::cache::open_for(t.context.as_deref(), &t.profile, cache_max_age) {
-                Ok((dir, restored)) => (Some(dir), restored),
-                Err(name) => {
-                    eprintln!(
-                        "warning: {name} is not a usable cache directory name; this session is cacheless"
-                    );
-                    (None, None)
-                }
-            },
-            None => (None, None),
-        };
-        let context_skin = target
-            .as_ref()
-            .ok()
-            .and_then(|t| t.context.as_deref())
-            .and_then(|name| {
-                let skin = file.contexts.get(name)?.skin.as_deref()?;
-                Some((skin, format!("contexts.{name}.skin")))
-            });
-        let (skin_name, source) = match context_skin {
-            Some((skin, source)) => (Some(skin), source),
-            None => (file.skin.name.as_deref(), "skin.name".to_string()),
-        };
-        for warning in nutsh_tui::theme::validate_skin(skin_name, &file.skin.colors, &source) {
-            eprintln!("warning: {warning}");
-        }
-        nutsh_tui::theme::install(skin_name, &file.skin.colors, file.skin.background);
-        let env_target = match (&conn.host, &target) {
-            (Some(_), Ok(t)) => Some((t.profile.clone(), from_env.clone())),
-            _ => None,
-        };
-        let contexts = CliContexts::new(
-            config_path.clone(),
-            Secrets::default_stores(),
-            env_target,
-            conn.context.clone(),
-            Overrides::from_args(conn, args.readonly),
+        },
+        None => (None, None),
+    };
+    let context_skin = target
+        .as_ref()
+        .ok()
+        .and_then(|t| t.context.as_deref())
+        .and_then(|name| {
+            let skin = file.contexts.get(name)?.skin.as_deref()?;
+            Some((skin, format!("contexts.{name}.skin")))
+        });
+    let (skin_name, source) = match context_skin {
+        Some((skin, source)) => (Some(skin), source),
+        None => (file.skin.name.as_deref(), "skin.name".to_string()),
+    };
+    for warning in nutsh_tui::theme::validate_skin(skin_name, &file.skin.colors, &source) {
+        eprintln!("warning: {warning}");
+    }
+    nutsh_tui::theme::install(skin_name, &file.skin.colors, file.skin.background);
+    let env_target = match (&conn.host, &target) {
+        (Some(_), Ok(t)) => Some((t.profile.clone(), from_env.clone())),
+        _ => None,
+    };
+    let contexts = CliContexts::new(
+        config_path.clone(),
+        secrets,
+        env_target,
+        conn.context.clone(),
+        Overrides::from_args(conn, args.readonly),
+    )
+    // A context switch reads its own directory before connecting, on the same terms as
+    // this run's: `cache = false` and `--no-cache` are properties of the run, not of the
+    // context it started on.
+    .caching(caching, cache_max_age);
+    let config = Config {
+        now: args.now.unwrap_or_else(SystemTime::now),
+        config_path: Some(config_path.display().to_string()),
+        // `--readonly`, the context's, and the file's; any one is enough. The context's
+        // reaches the session instead, which `core::actions::reason` reads beside these.
+        // An invalid rule stopped startup in `main`, so this cannot fail here.
+        guardrails: nutsh_core::guardrails::Guardrails::from_config(
+            file.readonly || args.readonly,
+            &file.guardrails,
         )
-        // A context switch reads its own directory before connecting, on the same terms as
-        // this run's: `cache = false` and `--no-cache` are properties of the run, not of the
-        // context it started on.
-        .caching(caching, cache_max_age);
-        let config = Config {
-            now: SystemTime::now(),
-            config_path: Some(config_path.display().to_string()),
-            // `--readonly`, the context's, and the file's; any one is enough. The context's
-            // reaches the session instead, which `core::actions::reason` reads beside these.
-            // An invalid rule stopped startup in `main`, so this cannot fail here.
-            guardrails: nutsh_core::guardrails::Guardrails::from_config(
-                file.readonly || args.readonly,
-                &file.guardrails,
-            )
-            .unwrap_or_default(),
-            snapshot: args.snapshot,
-            // The file's alone: there is no flag for it. `ctrl-o` turns it off for a session
-            // and `:mouse` writes the answer back here.
-            mouse: file.mouse,
-            // Likewise the file's, and `auto` unless it says otherwise: the terminal's height
-            // decides, and `:header` writes an override back here.
-            header: file.header,
-        };
-        let start = start(&args, target, from_env, contexts, config, cache, restored).await?;
-        match (start, args.snapshot) {
-            (Start::App(mut app), true) => {
-                // A page waits for every pane; a table for its one subscription.
-                let settled = if app.page().is_some() {
-                    tokio::time::timeout(Duration::from_secs(10), app.settle_page_once()).await
-                } else {
-                    tokio::time::timeout(Duration::from_secs(10), app.settle_once()).await
-                };
-                settled.context("the first poll did not complete within 10 s")?;
-                // The peers' first cycle too, so a merged table is drawn whole; a peer that
-                // never answers costs the frame nothing but its rows.
+        .unwrap_or_default(),
+        snapshot: args.snapshot,
+        // The file's alone: there is no flag for it. `ctrl-o` turns it off for a session
+        // and `:mouse` writes the answer back here.
+        mouse: file.mouse,
+        // Likewise the file's, and `auto` unless it says otherwise: the terminal's height
+        // decides, and `:header` writes an override back here.
+        header: file.header,
+    };
+    let start = start(&args, target, from_env, contexts, config, cache, restored).await?;
+    match (start, args.snapshot) {
+        (Start::App(mut app), true) => {
+            // A page waits for every pane; a table for its one subscription.
+            let settled = if app.page().is_some() {
+                tokio::time::timeout(Duration::from_secs(10), app.settle_page_once()).await
+            } else {
+                tokio::time::timeout(Duration::from_secs(10), app.settle_once()).await
+            };
+            settled.context("the first poll did not complete within 10 s")?;
+            // The peers' first cycle too, so a merged table is drawn whole; a peer that
+            // never answers costs the frame nothing but its rows.
+            let _ = tokio::time::timeout(Duration::from_secs(10), app.settle_peers_once()).await;
+            // A *second*, separate, non-fatal wait. The first one turns its timeout into an
+            // error, and a wait for the warm-up built the same way would turn a slow Prism
+            // Central into a failed `--snapshot` - trading one kind of non-determinism for a
+            // worse one. So this one is awaited after the poll timeout has already
+            // succeeded, its `Err` is discarded, and the frame is printed either way. What
+            // it buys is "a frame with the names and the numbers, whenever the Prism
+            // Central can answer in time"; the guarantee is bought against `mockpc`, where
+            // both always arrive, by `tests/snapshot.rs`.
+            let _ = tokio::time::timeout(Duration::from_secs(10), async {
+                app.settle_names_once().await;
+                app.settle_stats_once().await;
+            })
+            .await;
+            // The Disaster Recovery page's sampler is its own poller, outside the panes
+            // `settle_page_once` waits for, and it paces itself at 200 ms per VM
+            // (`nutsh_core::sampler`). Waited for on the same non-fatal terms as the
+            // names: without it the summary says `Sampled VMs 0` on every frame this
+            // command prints, about VMs it was still asking about.
+            if app
+                .page()
+                .is_some_and(|p| p.def.summary == Some("disaster-recovery"))
+            {
                 let _ =
-                    tokio::time::timeout(Duration::from_secs(10), app.settle_peers_once()).await;
-                // A *second*, separate, non-fatal wait. The first one turns its timeout into an
-                // error, and a wait for the warm-up built the same way would turn a slow Prism
-                // Central into a failed `--snapshot` - trading one kind of non-determinism for a
-                // worse one. So this one is awaited after the poll timeout has already
-                // succeeded, its `Err` is discarded, and the frame is printed either way. What
-                // it buys is "a frame with the names and the numbers, whenever the Prism
-                // Central can answer in time"; the guarantee is bought against `mockpc`, where
-                // both always arrive, by `tests/snapshot.rs`.
-                let _ = tokio::time::timeout(Duration::from_secs(10), async {
-                    app.settle_names_once().await;
-                    app.settle_stats_once().await;
-                })
-                .await;
-                match args.format {
-                    Some(format) => print!("{}", app.export(format)?),
-                    None => print!("{}", app.snapshot(args.size.0, args.size.1)?),
-                }
-                Ok(0)
+                    tokio::time::timeout(Duration::from_secs(10), app.settle_sample_once()).await;
             }
-            (Start::Failed(app, reason), true) => match reason {
-                Some(reason) => Err(anyhow::anyhow!("{reason}")),
-                None => {
-                    print!("{}", app.snapshot(args.size.0, args.size.1)?);
-                    Ok(0)
-                }
-            },
-            (Start::App(app) | Start::Failed(app, _), false) => {
-                nutsh_tui::run(app).await?;
-                Ok(0)
+            match args.format {
+                Some(format) => print!("{}", app.export(format)?),
+                None => print!("{}", app.snapshot(args.size.0, args.size.1)?),
             }
+            Ok(0)
         }
-    })
+        (Start::Failed(app, reason), true) => match reason {
+            Some(reason) => Err(anyhow::anyhow!("{reason}")),
+            None => {
+                print!("{}", app.snapshot(args.size.0, args.size.1)?);
+                Ok(0)
+            }
+        },
+        (Start::App(app) | Start::Failed(app, _), false) => {
+            nutsh_tui::run(app).await?;
+            Ok(0)
+        }
+    }
 }
 
 /// The startup rules of the design: connect when a target and a password exist; otherwise, or

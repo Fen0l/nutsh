@@ -1,0 +1,12 @@
+[
+  {
+    "$objectType": "files.v4.config.FileServer",
+    "extId": "44000000-0a01-4000-8000-000000000001",
+    "name": "harbor-files"
+  },
+  {
+    "$objectType": "files.v4.config.FileServer",
+    "extId": "44000000-0a01-4000-8000-000000000002",
+    "name": "harbor-files-archive"
+  }
+]

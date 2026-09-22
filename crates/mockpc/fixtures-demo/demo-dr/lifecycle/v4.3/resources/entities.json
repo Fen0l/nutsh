@@ -1,0 +1,56 @@
+[
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "1c000000-0b02-4000-8000-000000000001",
+    "entityClass": "Core",
+    "entityModel": "AOS",
+    "entityType": "SOFTWARE",
+    "entityVersion": "7.6",
+    "hardwareVendor": "Nutanix",
+    "clusterExtId": "c1000000-0b02-4000-8000-000000000001",
+    "locationInfo": {
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "uuid": "c1000000-0b02-4000-8000-000000000001",
+      "locationType": "CLUSTER"
+    },
+    "lastUpdatedTime": "2026-09-04T21:12:00Z",
+    "hasPreviousInventoryFailed": false,
+    "availableVersions": []
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "1c000000-0b02-4000-8000-000000000002",
+    "entityClass": "Hypervisor",
+    "entityModel": "AHV hypervisor",
+    "entityType": "SOFTWARE",
+    "entityVersion": "10.3.2",
+    "hardwareVendor": "Nutanix",
+    "clusterExtId": "c1000000-0b02-4000-8000-000000000001",
+    "locationInfo": {
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "uuid": "c1000000-0b02-4000-8000-000000000001",
+      "locationType": "CLUSTER"
+    },
+    "lastUpdatedTime": "2026-09-04T21:12:00Z",
+    "hasPreviousInventoryFailed": false,
+    "availableVersions": []
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "1c000000-0b02-4000-8000-000000000003",
+    "entityClass": "Core",
+    "entityModel": "NCC",
+    "entityType": "SOFTWARE",
+    "entityVersion": "6.0.0.1",
+    "hardwareVendor": "Nutanix",
+    "clusterExtId": "c1000000-0b02-4000-8000-000000000001",
+    "locationInfo": {
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "uuid": "c1000000-0b02-4000-8000-000000000001",
+      "locationType": "CLUSTER"
+    },
+    "lastUpdatedTime": "2026-09-04T21:12:00Z",
+    "hasPreviousInventoryFailed": false,
+    "availableVersions": []
+  }
+]

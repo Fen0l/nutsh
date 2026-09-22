@@ -1,0 +1,62 @@
+[
+  {
+    "$objectType": "networking.v4.config.LoadBalancerSession",
+    "extId": "1b000000-0b02-4000-8000-000000000001",
+    "metadata": {
+      "$objectType": "common.v1.config.Metadata",
+      "ownerReferenceId": "05e70000-0b02-4000-8000-000000000001",
+      "ownerUserName": "admin",
+      "projectReferenceId": "00000000-0000-0000-0000-000000000000",
+      "projectName": "default"
+    },
+    "projectExtId": "00000000-0000-0000-0000-000000000000",
+    "name": "lb-web",
+    "description": "HTTPS front of the recovered web tier",
+    "type": "NETWORK_LOAD_BALANCER",
+    "vpcReference": "0b9c0000-0b02-4000-8000-000000000001",
+    "listener": {
+      "$objectType": "networking.v4.config.Listener",
+      "virtualIP": {
+        "$objectType": "networking.v4.config.VirtualIP",
+        "subnetReference": "5ab00000-0b02-4000-8000-000000000001",
+        "assignmentType": "STATIC",
+        "ipAddress": {
+          "$objectType": "common.v1.config.IPAddress",
+          "ipv4": {
+            "$objectType": "common.v1.config.IPv4Address",
+            "value": "192.0.2.230",
+            "prefixLength": 32
+          }
+        }
+      },
+      "protocol": "TCP",
+      "portRanges": [
+        {
+          "$objectType": "networking.v4.config.PortRange",
+          "startPort": 443,
+          "endPort": 443
+        }
+      ]
+    },
+    "algorithm": "FIVE_TUPLE_HASH",
+    "targetsConfig": {
+      "$objectType": "networking.v4.config.Target",
+      "nicTargets": [
+        {
+          "$objectType": "networking.v4.config.NicTarget",
+          "vmReference": "ee000000-0b02-4000-8000-000000000001",
+          "virtualNicReference": "5d1c0000-0b02-4000-8000-000000010000",
+          "port": 443,
+          "health": "UNHEALTHY"
+        }
+      ]
+    },
+    "healthCheckConfig": {
+      "$objectType": "networking.v4.config.HealthCheck",
+      "intervalSecs": 5,
+      "timeoutSecs": 2,
+      "successThreshold": 3,
+      "failureThreshold": 3
+    }
+  }
+]

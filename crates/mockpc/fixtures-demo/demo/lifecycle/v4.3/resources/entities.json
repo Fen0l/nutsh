@@ -1,0 +1,143 @@
+[
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "16000000-0a01-4000-8000-000000000001",
+    "entityClass": "Hypervisor",
+    "entityModel": "AHV hypervisor",
+    "entityType": "SOFTWARE",
+    "entityVersion": "10.3.1",
+    "targetVersion": "10.3.2",
+    "hardwareVendor": "Nutanix",
+    "clusterExtId": "01000000-0a01-4000-8000-000000000002",
+    "locationInfo": {
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "uuid": "02000000-0a01-4000-8000-000000000004",
+      "locationType": "NODE"
+    },
+    "lastUpdatedTime": "2026-09-03T10:00:00Z",
+    "hasPreviousInventoryFailed": true,
+    "availableVersions": [
+      {
+        "$objectType": "lifecycle.v4.resources.AvailableVersion",
+        "version": "10.3.2",
+        "status": "AVAILABLE",
+        "isEnabled": true,
+        "order": 1,
+        "isImagePresent": true,
+        "releaseNotes": "https://portal.example.com/release-notes/ahv-10-3-2"
+      }
+    ]
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "16000000-0a01-4000-8000-000000000002",
+    "entityClass": "Core Cluster",
+    "entityModel": "AOS",
+    "entityType": "SOFTWARE",
+    "entityVersion": "7.3",
+    "targetVersion": "7.6",
+    "hardwareVendor": "Nutanix",
+    "clusterExtId": "01000000-0a01-4000-8000-000000000002",
+    "locationInfo": {
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "uuid": "01000000-0a01-4000-8000-000000000002",
+      "locationType": "CLUSTER"
+    },
+    "lastUpdatedTime": "2026-09-03T10:00:00Z",
+    "hasPreviousInventoryFailed": true,
+    "availableVersions": [
+      {
+        "$objectType": "lifecycle.v4.resources.AvailableVersion",
+        "version": "7.6",
+        "status": "LTS",
+        "isEnabled": true,
+        "order": 1,
+        "isImagePresent": true,
+        "releaseNotes": "https://portal.example.com/release-notes/aos-7-6"
+      }
+    ]
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "16000000-0a01-4000-8000-000000000003",
+    "entityClass": "BMCs",
+    "entityModel": "BMC",
+    "entityType": "FIRMWARE",
+    "entityVersion": "3.10",
+    "targetVersion": "3.12",
+    "hardwareVendor": "Nutanix",
+    "clusterExtId": "01000000-0a01-4000-8000-000000000001",
+    "locationInfo": {
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "uuid": "02000000-0a01-4000-8000-000000000002",
+      "locationType": "NODE"
+    },
+    "lastUpdatedTime": "2026-09-04T22:30:00Z",
+    "hasPreviousInventoryFailed": false,
+    "availableVersions": [
+      {
+        "$objectType": "lifecycle.v4.resources.AvailableVersion",
+        "version": "3.12",
+        "status": "RECOMMENDED",
+        "isEnabled": true,
+        "order": 1,
+        "isImagePresent": true,
+        "releaseNotes": "https://portal.example.com/release-notes/bmc-3-12"
+      }
+    ]
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "16000000-0a01-4000-8000-000000000004",
+    "entityClass": "Core Cluster",
+    "entityModel": "NCC",
+    "entityType": "SOFTWARE",
+    "entityVersion": "6.0.0.1",
+    "hardwareVendor": "Nutanix",
+    "clusterExtId": "01000000-0a01-4000-8000-000000000001",
+    "locationInfo": {
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "uuid": "01000000-0a01-4000-8000-000000000001",
+      "locationType": "CLUSTER"
+    },
+    "lastUpdatedTime": "2026-09-04T22:30:00Z",
+    "hasPreviousInventoryFailed": false,
+    "availableVersions": []
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "16000000-0a01-4000-8000-000000000005",
+    "entityClass": "Core Cluster",
+    "entityModel": "Foundation",
+    "entityType": "SOFTWARE",
+    "entityVersion": "5.9",
+    "hardwareVendor": "Nutanix",
+    "clusterExtId": "01000000-0a01-4000-8000-000000000001",
+    "locationInfo": {
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "uuid": "01000000-0a01-4000-8000-000000000001",
+      "locationType": "CLUSTER"
+    },
+    "lastUpdatedTime": "2026-09-04T22:30:00Z",
+    "hasPreviousInventoryFailed": false,
+    "availableVersions": []
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.Entity",
+    "extId": "16000000-0a01-4000-8000-000000000006",
+    "entityClass": "Hypervisor",
+    "entityModel": "AHV hypervisor",
+    "entityType": "SOFTWARE",
+    "entityVersion": "10.3.2",
+    "hardwareVendor": "Nutanix",
+    "clusterExtId": "01000000-0a01-4000-8000-000000000001",
+    "locationInfo": {
+      "$objectType": "lifecycle.v4.common.LocationInfo",
+      "uuid": "01000000-0a01-4000-8000-000000000001",
+      "locationType": "CLUSTER"
+    },
+    "lastUpdatedTime": "2026-09-04T22:30:00Z",
+    "hasPreviousInventoryFailed": false,
+    "availableVersions": []
+  }
+]

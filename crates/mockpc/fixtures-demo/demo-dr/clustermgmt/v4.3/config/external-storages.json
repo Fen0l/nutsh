@@ -1,0 +1,21 @@
+[
+  {
+    "$objectType": "clustermgmt.v4.config.ExternalStorage",
+    "extId": "e5700000-0b02-4000-8000-000000000001",
+    "name": "ridge-nfs-archive",
+    "providerType": "DELL_POWERSTORE",
+    "health": "HEALTHY",
+    "totalCapacityBytes": 54975581388800,
+    "freeCapacityBytes": 41231686041600,
+    "endPointAddress": {
+      "$objectType": "common.v1.config.IPAddressOrFQDN",
+      "ipv4": {
+        "$objectType": "common.v1.config.IPv4Address",
+        "value": "192.0.2.61",
+        "prefixLength": 32
+      }
+    },
+    "clusterExtId": "c1000000-0b02-4000-8000-000000000001",
+    "ownerExtId": "00000000-0000-0000-0000-000000000000"
+  }
+]

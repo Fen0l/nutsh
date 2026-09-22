@@ -1,0 +1,44 @@
+[
+  {
+    "$objectType": "vmm.v4.images.config.RateLimitPolicy",
+    "extId": "33000000-0a01-4000-8000-000000000001",
+    "name": "edge-uplink-50m",
+    "description": "Image replication to the edge site stays under 50 Mbit/s",
+    "rateLimitKbps": 51200,
+    "clusterEntityFilter": {
+      "$objectType": "vmm.v4.images.config.Filter",
+      "type": "CATEGORIES_MATCH_ANY",
+      "categoryExtIds": [
+        "07000000-0a01-4000-8000-000000000009"
+      ]
+    },
+    "createTime": "2026-01-15T14:10:00Z",
+    "lastUpdateTime": "2026-01-15T14:10:00Z",
+    "ownerExtId": "0e000000-0a01-4000-8000-000000000002",
+    "ownerName": "ops-lead",
+    "matchingClusterExtIds": [
+      "01000000-0a01-4000-8000-000000000002"
+    ]
+  },
+  {
+    "$objectType": "vmm.v4.images.config.RateLimitPolicy",
+    "extId": "33000000-0a01-4000-8000-000000000002",
+    "name": "prod-unthrottled",
+    "description": "No limit inside the harbor site",
+    "rateLimitKbps": 10000000,
+    "clusterEntityFilter": {
+      "$objectType": "vmm.v4.images.config.Filter",
+      "type": "CATEGORIES_MATCH_ANY",
+      "categoryExtIds": [
+        "07000000-0a01-4000-8000-000000000008"
+      ]
+    },
+    "createTime": "2025-10-02T09:05:00Z",
+    "lastUpdateTime": "2025-10-02T09:05:00Z",
+    "ownerExtId": "0e000000-0a01-4000-8000-000000000001",
+    "ownerName": "admin",
+    "matchingClusterExtIds": [
+      "01000000-0a01-4000-8000-000000000001"
+    ]
+  }
+]

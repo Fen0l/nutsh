@@ -1,0 +1,42 @@
+[
+  {
+    "$objectType": "clustermgmt.v4.ahv.config.PcieDevice",
+    "extId": "9c1e0000-0b02-4000-8000-000000000001",
+    "clusterExtId": "c1000000-0b02-4000-8000-000000000001",
+    "hostExtId": "40570000-0b02-4000-8000-000000000001",
+    "description": "Mellanox Technologies MT2892 ConnectX-6 Dx",
+    "maxPartitions": 8,
+    "state": "UVM_AVAILABLE",
+    "configuration": {
+      "$objectType": "clustermgmt.v4.ahv.config.PcieDeviceConfiguration",
+      "vendorId": 5555,
+      "deviceId": 4125,
+      "subSystemVendorId": 5555,
+      "subSystemId": 6,
+      "classId": 2,
+      "subClassId": 0,
+      "progIFace": 0
+    },
+    "type": "NETWORK_CONTROLLER"
+  },
+  {
+    "$objectType": "clustermgmt.v4.ahv.config.PcieDevice",
+    "extId": "9c1e0000-0b02-4000-8000-000000000002",
+    "clusterExtId": "c1000000-0b02-4000-8000-000000000001",
+    "hostExtId": "40570000-0b02-4000-8000-000000000001",
+    "description": "Mellanox Technologies MT2892 ConnectX-6 Dx",
+    "maxPartitions": 8,
+    "state": "UVM_AVAILABLE",
+    "configuration": {
+      "$objectType": "clustermgmt.v4.ahv.config.PcieDeviceConfiguration",
+      "vendorId": 5555,
+      "deviceId": 4125,
+      "subSystemVendorId": 5555,
+      "subSystemId": 6,
+      "classId": 2,
+      "subClassId": 0,
+      "progIFace": 0
+    },
+    "type": "NETWORK_CONTROLLER"
+  }
+]

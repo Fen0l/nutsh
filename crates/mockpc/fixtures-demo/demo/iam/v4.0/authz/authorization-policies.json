@@ -1,0 +1,167 @@
+[
+  {
+    "$objectType": "iam.v4.authz.AuthorizationPolicy",
+    "extId": "10000000-0a01-4000-8000-000000000001",
+    "displayName": "admins-super",
+    "description": "The platform administrator holds Super Admin",
+    "authorizationPolicyType": "PREDEFINED_READ_ONLY",
+    "role": "0f000000-0a01-4000-8000-000000000001",
+    "isSystemDefined": true,
+    "clientName": "prism",
+    "assignedUsersCount": 1,
+    "assignedUserGroupsCount": 0,
+    "createdBy": "system",
+    "createdTime": "2025-06-10T08:00:00Z",
+    "lastUpdatedTime": "2025-06-10T08:00:00Z",
+    "identities": [
+      {
+        "$objectType": "iam.v4.authz.IdentityFilter",
+        "identityFilter": {
+          "user": {
+            "uuid": {
+              "anyof": [
+                "0e000000-0a01-4000-8000-000000000001"
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "entities": [
+      {
+        "$objectType": "iam.v4.authz.EntityFilter",
+        "entityFilter": {
+          "*": {
+            "*": {
+              "eq": "*"
+            }
+          }
+        }
+      }
+    ]
+  },
+  {
+    "$objectType": "iam.v4.authz.AuthorizationPolicy",
+    "extId": "10000000-0a01-4000-8000-000000000002",
+    "displayName": "ops-vm-operator",
+    "description": "Operations staff may power and reboot VMs",
+    "authorizationPolicyType": "USER_DEFINED",
+    "role": "0f000000-0a01-4000-8000-000000000003",
+    "isSystemDefined": false,
+    "clientName": "prism",
+    "assignedUsersCount": 2,
+    "assignedUserGroupsCount": 0,
+    "createdBy": "admin",
+    "createdTime": "2025-09-01T08:05:00Z",
+    "lastUpdatedTime": "2026-08-04T13:49:00Z",
+    "identities": [
+      {
+        "$objectType": "iam.v4.authz.IdentityFilter",
+        "identityFilter": {
+          "user": {
+            "uuid": {
+              "anyof": [
+                "0e000000-0a01-4000-8000-000000000002",
+                "0e000000-0a01-4000-8000-000000000003"
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "entities": [
+      {
+        "$objectType": "iam.v4.authz.EntityFilter",
+        "entityFilter": {
+          "vm": {
+            "*": {
+              "eq": "*"
+            }
+          }
+        }
+      }
+    ]
+  },
+  {
+    "$objectType": "iam.v4.authz.AuthorizationPolicy",
+    "extId": "10000000-0a01-4000-8000-000000000003",
+    "displayName": "auditors-viewer",
+    "description": "The auditors group reads everything and changes nothing",
+    "authorizationPolicyType": "USER_DEFINED",
+    "role": "0f000000-0a01-4000-8000-000000000004",
+    "isSystemDefined": false,
+    "clientName": "prism",
+    "assignedUsersCount": 0,
+    "assignedUserGroupsCount": 1,
+    "createdBy": "admin",
+    "createdTime": "2025-09-15T09:10:00Z",
+    "lastUpdatedTime": "2025-09-15T09:10:00Z",
+    "identities": [
+      {
+        "$objectType": "iam.v4.authz.IdentityFilter",
+        "identityFilter": {
+          "user_group": {
+            "uuid": {
+              "anyof": [
+                "3e000000-0a01-4000-8000-000000000002"
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "entities": [
+      {
+        "$objectType": "iam.v4.authz.EntityFilter",
+        "entityFilter": {
+          "*": {
+            "*": {
+              "eq": "*"
+            }
+          }
+        }
+      }
+    ]
+  },
+  {
+    "$objectType": "iam.v4.authz.AuthorizationPolicy",
+    "extId": "10000000-0a01-4000-8000-000000000004",
+    "displayName": "backup-service",
+    "description": "The backup integration manages recovery points",
+    "authorizationPolicyType": "USER_DEFINED",
+    "role": "0f000000-0a01-4000-8000-000000000005",
+    "isSystemDefined": false,
+    "clientName": "prism",
+    "assignedUsersCount": 1,
+    "assignedUserGroupsCount": 0,
+    "createdBy": "admin",
+    "createdTime": "2025-11-20T10:10:00Z",
+    "lastUpdatedTime": "2025-11-20T10:10:00Z",
+    "identities": [
+      {
+        "$objectType": "iam.v4.authz.IdentityFilter",
+        "identityFilter": {
+          "user": {
+            "uuid": {
+              "anyof": [
+                "0e000000-0a01-4000-8000-000000000005"
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "entities": [
+      {
+        "$objectType": "iam.v4.authz.EntityFilter",
+        "entityFilter": {
+          "vm": {
+            "*": {
+              "eq": "*"
+            }
+          }
+        }
+      }
+    ]
+  }
+]

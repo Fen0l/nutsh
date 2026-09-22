@@ -1,0 +1,130 @@
+[
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "17000000-0a01-4000-8000-000000000001",
+    "operationType": "INVENTORY",
+    "operationStatus": "SUCCEEDED",
+    "startTime": "2026-09-04T22:00:00Z",
+    "endTime": "2026-09-04T22:14:00Z",
+    "frameworkVersion": "3.3.1",
+    "clusterName": "harbor-prod",
+    "clusterExtId": "01000000-0a01-4000-8000-000000000001"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "17000000-0a01-4000-8000-000000000002",
+    "operationType": "UPGRADE",
+    "operationStatus": "SUCCEEDED",
+    "startTime": "2026-08-20T22:00:00Z",
+    "endTime": "2026-08-20T23:41:00Z",
+    "frameworkVersion": "3.3.1",
+    "clusterName": "harbor-prod",
+    "clusterExtId": "01000000-0a01-4000-8000-000000000001",
+    "operationInfo": {
+      "$objectType": "lifecycle.v4.resources.UpgradeInfo",
+      "componentDetails": [
+        {
+          "$objectType": "lifecycle.v4.resources.ComponentDetails",
+          "extId": "16000000-0a01-4000-8000-000000000006",
+          "entityClass": "Hypervisor",
+          "entityModel": "AHV hypervisor",
+          "entityType": "SOFTWARE",
+          "entityVersion": "10.3.1",
+          "upgradedVersion": "10.3.2",
+          "upgradeStatus": "SUCCEEDED",
+          "locationInfo": {
+            "$objectType": "lifecycle.v4.common.LocationInfo",
+            "uuid": "01000000-0a01-4000-8000-000000000001",
+            "locationType": "CLUSTER",
+            "locationName": "harbor-prod"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "17000000-0a01-4000-8000-000000000003",
+    "operationType": "INVENTORY",
+    "operationStatus": "FAILED",
+    "startTime": "2026-07-07T10:00:00Z",
+    "endTime": "2026-07-07T10:30:00Z",
+    "frameworkVersion": "3.3.1",
+    "clusterName": "harbor-edge",
+    "clusterExtId": "01000000-0a01-4000-8000-000000000002"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "17000000-0a01-4000-8000-000000000004",
+    "operationType": "UPGRADE",
+    "operationStatus": "RUNNING",
+    "startTime": "2026-09-05T09:54:00Z",
+    "frameworkVersion": "3.3.1",
+    "clusterName": "harbor-prod",
+    "clusterExtId": "01000000-0a01-4000-8000-000000000001",
+    "operationInfo": {
+      "$objectType": "lifecycle.v4.resources.UpgradeInfo",
+      "componentDetails": [
+        {
+          "$objectType": "lifecycle.v4.resources.ComponentDetails",
+          "extId": "16000000-0a01-4000-8000-000000000003",
+          "entityClass": "BMCs",
+          "entityModel": "BMC",
+          "entityType": "FIRMWARE",
+          "entityVersion": "3.10",
+          "upgradedVersion": "3.12",
+          "upgradeStatus": "RUNNING",
+          "locationInfo": {
+            "$objectType": "lifecycle.v4.common.LocationInfo",
+            "uuid": "02000000-0a01-4000-8000-000000000002",
+            "locationType": "NODE",
+            "locationName": "harbor-n2"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "17000000-0a01-4000-8000-000000000005",
+    "operationType": "INVENTORY",
+    "operationStatus": "SUCCEEDED",
+    "startTime": "2026-09-03T09:45:00Z",
+    "endTime": "2026-09-03T10:00:00Z",
+    "frameworkVersion": "3.3.1",
+    "clusterName": "harbor-edge",
+    "clusterExtId": "01000000-0a01-4000-8000-000000000002"
+  },
+  {
+    "$objectType": "lifecycle.v4.resources.LcmHistory",
+    "extId": "17000000-0a01-4000-8000-000000000006",
+    "operationType": "UPGRADE",
+    "operationStatus": "SUCCEEDED",
+    "startTime": "2026-06-01T22:00:00Z",
+    "endTime": "2026-06-01T23:20:00Z",
+    "frameworkVersion": "3.3.1",
+    "clusterName": "harbor-edge",
+    "clusterExtId": "01000000-0a01-4000-8000-000000000002",
+    "operationInfo": {
+      "$objectType": "lifecycle.v4.resources.UpgradeInfo",
+      "componentDetails": [
+        {
+          "$objectType": "lifecycle.v4.resources.ComponentDetails",
+          "extId": "16000000-0a01-4000-8000-000000000002",
+          "entityClass": "Core Cluster",
+          "entityModel": "AOS",
+          "entityType": "SOFTWARE",
+          "entityVersion": "7.2",
+          "upgradedVersion": "7.3",
+          "upgradeStatus": "SUCCEEDED",
+          "locationInfo": {
+            "$objectType": "lifecycle.v4.common.LocationInfo",
+            "uuid": "01000000-0a01-4000-8000-000000000002",
+            "locationType": "CLUSTER",
+            "locationName": "harbor-edge"
+          }
+        }
+      ]
+    }
+  }
+]

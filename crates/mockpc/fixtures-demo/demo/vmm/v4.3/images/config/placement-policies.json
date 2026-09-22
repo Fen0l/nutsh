@@ -1,0 +1,55 @@
+[
+  {
+    "$objectType": "vmm.v4.images.config.PlacementPolicy",
+    "extId": "32000000-0a01-4000-8000-000000000001",
+    "name": "images-stay-on-prod",
+    "description": "Production and development disk images are held on harbor-prod only",
+    "placementType": "HARD",
+    "imageEntityFilter": {
+      "$objectType": "vmm.v4.images.config.Filter",
+      "type": "CATEGORIES_MATCH_ANY",
+      "categoryExtIds": [
+        "07000000-0a01-4000-8000-000000000001",
+        "07000000-0a01-4000-8000-000000000002"
+      ]
+    },
+    "clusterEntityFilter": {
+      "$objectType": "vmm.v4.images.config.Filter",
+      "type": "CATEGORIES_MATCH_ANY",
+      "categoryExtIds": [
+        "07000000-0a01-4000-8000-000000000008"
+      ]
+    },
+    "enforcementState": "ACTIVE",
+    "createTime": "2025-10-02T09:00:00Z",
+    "lastUpdateTime": "2026-06-01T08:00:00Z",
+    "ownerExtId": "0e000000-0a01-4000-8000-000000000001",
+    "ownerName": "admin"
+  },
+  {
+    "$objectType": "vmm.v4.images.config.PlacementPolicy",
+    "extId": "32000000-0a01-4000-8000-000000000002",
+    "name": "iso-to-edge",
+    "description": "Installer ISOs are copied to the edge site; suspended while the uplink is throttled",
+    "placementType": "SOFT",
+    "imageEntityFilter": {
+      "$objectType": "vmm.v4.images.config.Filter",
+      "type": "CATEGORIES_MATCH_ANY",
+      "categoryExtIds": [
+        "07000000-0a01-4000-8000-000000000003"
+      ]
+    },
+    "clusterEntityFilter": {
+      "$objectType": "vmm.v4.images.config.Filter",
+      "type": "CATEGORIES_MATCH_ANY",
+      "categoryExtIds": [
+        "07000000-0a01-4000-8000-000000000009"
+      ]
+    },
+    "enforcementState": "SUSPENDED",
+    "createTime": "2026-01-15T14:00:00Z",
+    "lastUpdateTime": "2026-08-28T16:00:00Z",
+    "ownerExtId": "0e000000-0a01-4000-8000-000000000002",
+    "ownerName": "ops-lead"
+  }
+]

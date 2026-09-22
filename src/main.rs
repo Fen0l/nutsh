@@ -5,6 +5,7 @@ mod check;
 mod completions;
 mod contexts;
 mod ctx;
+mod demo;
 mod session;
 mod tui;
 
@@ -69,6 +70,18 @@ enum SnapshotFormat {
     Text,
     Csv,
     Json,
+}
+
+/// What `--format` means to the run: `text` is the frame, the other two are the table in view.
+/// One conversion for the two command lines that take the flag.
+impl From<SnapshotFormat> for Option<nutsh_core::export::Format> {
+    fn from(format: SnapshotFormat) -> Self {
+        match format {
+            SnapshotFormat::Text => None,
+            SnapshotFormat::Csv => Some(nutsh_core::export::Format::Csv),
+            SnapshotFormat::Json => Some(nutsh_core::export::Format::Json),
+        }
+    }
 }
 
 /// The frame `--size` may ask for. The lower bound keeps a zero-sized frame from parsing; the
@@ -148,6 +161,46 @@ enum Command {
         /// bash, zsh, fish, elvish or powershell
         shell: String,
     },
+    /// Try nutsh with no Prism Central: two invented ones, every screen populated
+    ///
+    /// The demo brings its own two Prism Centrals, on loopback ports, and opens the ordinary
+    /// screens on them. The estate is invented and fuller than a real v4 API: kinds a real
+    /// Prism Central lists only through the console (recovery plans among them) have rows here.
+    /// Connection flags and NUTSH_* variables are ignored. Nothing is written
+    /// under your config or state directories: the demo's own context file lives in a
+    /// private temporary directory that is removed on exit, and its password is held in
+    /// memory. `:log` and `:export` are the two acts that write elsewhere, as they do in any
+    /// session.
+    Demo {
+        /// Kind or page to open (default: the Dashboard); any catalog id, alias, page name, or
+        /// display-name prefix
+        #[arg(add = clap_complete::ArgValueCandidates::new(completions::kinds))]
+        kind: Option<String>,
+        /// Render one frame to stdout and exit (waits for the first poll)
+        #[arg(long)]
+        snapshot: bool,
+        /// Frame size for --snapshot, COLSxROWS (default 120x40)
+        #[arg(long, value_name = "COLSxROWS", value_parser = parse_size)]
+        size: Option<(u16, u16)>,
+        /// What --snapshot prints: the frame, or the table in view as csv or json
+        #[arg(
+            long,
+            value_name = "text|csv|json",
+            default_value = "text",
+            requires = "snapshot"
+        )]
+        format: SnapshotFormat,
+        /// Refuse every mutation in this session
+        #[arg(long)]
+        readonly: bool,
+        /// Read the other Prism Central beside the session before the first frame: one
+        /// table, a CONTEXT column
+        #[arg(long)]
+        join: bool,
+        /// Which built-in Prism Central is the session (default: demo)
+        #[arg(long, value_name = "NAME", value_parser = ["demo", "demo-dr", "demo-edge"])]
+        site: Option<String>,
+    },
 }
 
 fn main() {
@@ -173,11 +226,13 @@ fn main() {
     // Before any branch can want to say something. Where the lines go is a property of the run
     // and not of what the user asked for: the TUI and `--snapshot` own the screen, so theirs go
     // to a file, and every other path has a terminal it is already writing to.
-    let logging = nutsh_core::log::install(if cli.command.is_none() && !cli.check && !cli.info {
-        nutsh_core::log::Sink::File
-    } else {
-        nutsh_core::log::Sink::Stderr
-    });
+    let logging = nutsh_core::log::install(
+        if matches!(cli.command, None | Some(Command::Demo { .. })) && !cli.check && !cli.info {
+            nutsh_core::log::Sink::File
+        } else {
+            nutsh_core::log::Sink::Stderr
+        },
+    );
     if let Some(warning) = &logging.warning {
         eprintln!("warning: {warning}");
     }
@@ -205,13 +260,30 @@ fn main() {
         eprintln!("error: {e}");
         std::process::exit(3);
     }
-    // One `match` rather than a chain of `if let`s: the two subcommands are arms of one
+    // One `match` rather than a chain of `if let`s: the subcommands are arms of one
     // `Option<Command>`, and a second `if let` would be re-testing a value the first had moved.
     let result = match cli.command {
         Some(Command::Ctx { action }) => ctx::run(action, &cli.conn, from_env),
         Some(Command::Completions { shell }) => completions::print(&shell),
         // Neither cache subcommand connects to anything, so neither takes a password.
         Some(Command::Cache { action }) => cache::run(action),
+        Some(Command::Demo {
+            kind,
+            snapshot,
+            size,
+            format,
+            readonly,
+            join,
+            site,
+        }) => demo::run(demo::DemoArgs {
+            start: kind.unwrap_or_else(|| "dashboard".into()),
+            snapshot,
+            size: size.unwrap_or(DEFAULT_SIZE),
+            format: format.into(),
+            readonly,
+            join,
+            site,
+        }),
         None if cli.check => check::run(&cli.conn, from_env, &peers),
         None => tui::run(
             tui::TuiArgs {
@@ -225,16 +297,15 @@ fn main() {
                 snapshot: cli.snapshot,
                 peers,
                 size: cli.size.unwrap_or(DEFAULT_SIZE),
-                format: match cli.format {
-                    SnapshotFormat::Text => None,
-                    SnapshotFormat::Csv => Some(nutsh_core::export::Format::Csv),
-                    SnapshotFormat::Json => Some(nutsh_core::export::Format::Json),
-                },
+                format: cli.format.into(),
                 readonly: cli.readonly,
                 no_cache: cli.no_cache,
+                now: None,
             },
             &cli.conn,
             from_env,
+            nutsh_config::config_path(),
+            nutsh_config::Secrets::default_stores(),
         ),
     };
     match result {
