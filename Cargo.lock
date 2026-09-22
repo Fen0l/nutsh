@@ -1834,7 +1834,7 @@ dependencies = [
 
 [[package]]
 name = "nutsh"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "clap",
@@ -1855,14 +1855,14 @@ dependencies = [
 
 [[package]]
 name = "nutsh-catalog"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "serde_json",
 ]
 
 [[package]]
 name = "nutsh-config"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "apple-native-keyring-store",
  "dbus-secret-service-keyring-store",
@@ -1875,7 +1875,7 @@ dependencies = [
 
 [[package]]
 name = "nutsh-core"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "futures",
@@ -1897,7 +1897,7 @@ dependencies = [
 
 [[package]]
 name = "nutsh-mockpc"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "axum",
  "base64 0.23.1",
@@ -1911,7 +1911,7 @@ dependencies = [
 
 [[package]]
 name = "nutsh-prism"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "futures",
  "nutsh-catalog",
@@ -1928,7 +1928,7 @@ dependencies = [
 
 [[package]]
 name = "nutsh-tui"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "crossterm",
@@ -3901,7 +3901,7 @@ checksum = "3ad82d2a33cdc9674dc7465672f271e096168fcdbe0f799d9e6db8c5892679dc"
 
 [[package]]
 name = "xtask"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "anyhow",
  "clap",

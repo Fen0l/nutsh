@@ -35,9 +35,10 @@ Prism Centrals a day, and Community Edition home labs.
 
 ## Status
 
-**0.1.0, the first release meant for other people.** One author, a few months of daily use
-against one Prism Central (pc.7.6) and a mock built from the published pc.2024.3 API specs.
-Nobody else has run it for a week yet. Expect rough edges; report what you find.
+**0.2.0.** 0.1.0 was the first release meant for other people; 0.2.0 adds `nutsh demo` and
+attested builds. One author, a few months of daily use against one Prism Central (pc.7.6) and a
+mock built from the published pc.2024.3 API specs. Nobody else has run it for a week yet.
+Expect rough edges; report what you find.
 
 Before you point it at anything real, know what it holds and does:
 
@@ -63,6 +64,9 @@ macOS and Linux today. No Windows build yet; WSL works.
 | **Shell installer**, any distribution | `curl --proto '=https' --tlsv1.2 -LsSf https://github.com/Fen0l/nutsh/releases/latest/download/nutsh-installer.sh \| sh` |
 | **Binaries** | [Releases](https://github.com/Fen0l/nutsh/releases): macOS and Linux, x86_64 and arm64, each archive with its SHA-256. Linux comes as `gnu` and as `musl`, a static binary for any distribution. |
 | **From source** | `git clone https://github.com/Fen0l/nutsh && cd nutsh && make release`, with a Rust toolchain. The binary lands at `target/release/nutsh`. |
+
+Every release from 0.2.0 on is built by CI from its tag and carries a GitHub artifact
+attestation: `gh attestation verify <archive> --repo Fen0l/nutsh` checks one.
 
 Not on crates.io yet.
 

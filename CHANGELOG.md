@@ -9,6 +9,8 @@ Sections: ✨ new · 🐛 fixed · 🔒 security · ⚡ performance · 🎨 look
 
 ## Unreleased
 
+## 0.2.0 - 2026-09-22
+
 ### ✨ nutsh demo
 
 - `nutsh demo` opens the ordinary screens on a built-in Prism Central: an invented estate,
@@ -20,6 +22,13 @@ Sections: ✨ new · 🐛 fixed · 🔒 security · ⚡ performance · 🎨 look
   estate is fuller than a real v4 API: kinds the console reads through v3 `groups` (recovery
   plans among them) have rows in the demo and none on a real Prism Central; the reference
   lists them.
+
+### 📦 Attested builds
+
+- Every release asset now carries a GitHub artifact attestation, produced by the release
+  workflow from the tag. `gh attestation verify <archive> --repo Fen0l/nutsh` checks one.
+  0.1.0's assets predate this and have none.
+- Dependencies: clap_complete 4.6.11, CodeQL action v4.
 
 ## 0.1.0 - 2026-09-19
 
