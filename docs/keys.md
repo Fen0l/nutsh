@@ -190,7 +190,7 @@ refuses all of them before anything reaches the wire.
 | <kbd>q</kbd> | quit |
 
 The add form takes name, host, port, username, password, an optional cluster, and the
-insecure and read-only switches. <kbd>⇥</kbd> moves between fields, <kbd>space</kbd> toggles a
+insecure and read-only switches; read-only starts ticked. <kbd>⇥</kbd> moves between fields, <kbd>space</kbd> toggles a
 switch, <kbd>⏎</kbd> submits.
 
 In `nutsh demo` the screen is the demo's own: <kbd>a</kbd> adds a row to the demo's temporary

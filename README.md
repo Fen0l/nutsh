@@ -35,16 +35,18 @@ Prism Centrals a day, and Community Edition home labs.
 
 ## Status
 
-**0.2.0.** 0.1.0 was the first release meant for other people; 0.2.0 adds `nutsh demo` and
-attested builds. One author, a few months of daily use against one Prism Central (pc.7.6) and a
+**0.3.0.** 0.1.0 was the first release meant for other people; 0.2.0 added `nutsh demo` and
+attested builds; 0.3.0 makes a new context read-only and keeps the password in the Secret
+Service on Linux. One author, a few months of daily use against one Prism Central (pc.7.6) and a
 mock built from the published pc.2024.3 API specs. Nobody else has run it for a week yet.
 Expect rough edges; report what you find.
 
 Before you point it at anything real, know what it holds and does:
 
-- It stores a Prism Central password: in the OS keyring where one exists, otherwise in a
-  `0600` file under `$XDG_STATE_HOME/nutsh/secrets/`. Never in the config file, `argv`, a log
-  or the cache.
+- It stores a Prism Central password in the OS keyring: the macOS Keychain, or on Linux the
+  Secret Service when one is running. Otherwise, in a container or under WSL for instance, in
+  a `0600` file under `$XDG_STATE_HOME/nutsh/secrets/`. `ctx login` says which it used. Never
+  in the config file, `argv`, a log or the cache.
 - A rejected credential is presented **once**, then everything stops. There is no retry path
   that can reach an authenticating request. This program has locked out a lab account in its
   past; the rules that stop that from happening again are pinned by tests, and
@@ -74,10 +76,13 @@ Not on crates.io yet.
 
 ```sh
 nutsh demo                                                   # no Prism Central yet? two invented ones, every screen populated (fuller than a real v4 API)
-nutsh ctx add home --host pc.example.com --username admin    # one Prism Central, one context
+nutsh ctx add home --host pc.example.com --username admin    # one Prism Central, one context, read-only
 nutsh ctx login home                                         # asks for the password once, checks it, stores it
-nutsh --readonly                                             # the Dashboard, nothing can change
+nutsh                                                        # the Dashboard; nothing can change yet
 ```
+
+A new context refuses every action until you say otherwise: `nutsh ctx add home --force --write`
+with the same flags, or untick read-only in the Contexts screen's form.
 
 Then, inside:
 

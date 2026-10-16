@@ -280,6 +280,11 @@ impl Client {
                 reqwest::Certificate::from_pem(&pem).map_err(|e| PrismError::Tls(describe(&e)))?;
             builder = builder.tls_certs_merge([cert]);
         }
+        // Plain HTTP never handshakes, so it must not need the system store: an empty explicit
+        // root set stops the platform verifier loading it, which fails where there is none.
+        if profile.plain_http {
+            builder = builder.tls_certs_only([]);
+        }
         let jar = std::sync::Arc::new(SessionJar {
             origin: Origin::of(profile),
             inner: std::sync::RwLock::new(Jarred::default()),

@@ -34,9 +34,13 @@ pub(crate) enum CtxCommand {
         insecure: bool,
         #[arg(long, value_name = "FILE")]
         ca_bundle: Option<PathBuf>,
-        /// Refuse every mutation in this context
-        #[arg(long)]
+        /// Refuse every mutation in this context (the default for a new one)
+        #[arg(long, conflicts_with = "write")]
         readonly: bool,
+        /// Allow mutations in this context; a new context is read-only without it
+        #[arg(long)]
+        write: bool,
+        /// Replace an existing context, keeping its read-only setting unless a flag says otherwise
         #[arg(long)]
         force: bool,
     },
@@ -88,6 +92,7 @@ pub(crate) fn run(
             insecure,
             ca_bundle,
             readonly,
+            write,
             force,
         } => {
             anyhow::ensure!(valid_name(&name), ConfigError::InvalidName(name.clone()));
@@ -96,6 +101,12 @@ pub(crate) fn run(
             }
             let first = cfg.contexts.is_empty();
             let previous = cfg.contexts.get(&name).map(Context::secret_key);
+            // Without a flag, a replaced context keeps its setting and a new one cannot write.
+            let readonly = match (readonly, write) {
+                (true, _) => true,
+                (_, true) => false,
+                _ => cfg.contexts.get(&name).is_none_or(|c| c.readonly),
+            };
             let ctx = Context {
                 host,
                 port,

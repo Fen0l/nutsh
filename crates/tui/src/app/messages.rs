@@ -381,6 +381,35 @@ impl App {
         }
     }
 
+    /// Drains poll messages until nothing the open view draws has a cycle in flight - the
+    /// table, or every pane of the page - and returns at once if nothing has.
+    ///
+    /// Every other settle helper stops on the message it waits for and applies whatever came
+    /// before it, `Started` included, so a table whose next cycle began while the stats or the
+    /// warm-up were still on their way is caught mid-walk: its title carries the walking
+    /// bracket and the frame depends on how the requests interleaved. State moves only when a
+    /// message is applied, so a frame drawn the moment this returns is the settled one.
+    pub async fn settle_idle(&mut self) {
+        loop {
+            let busy = self.live.as_ref().is_some_and(|live| {
+                let walking = |key| live.store.table(key).cycle_started.is_some();
+                live.table().is_some_and(|view| walking(&view.key))
+                    || live.page().is_some_and(|page| {
+                        page.panes
+                            .iter()
+                            .any(|p| p.sub.is_some() && walking(&p.key))
+                    })
+            });
+            if !busy {
+                return;
+            }
+            let Some(msg) = self.poll_rx.recv().await else {
+                return;
+            };
+            self.apply(msg);
+        }
+    }
+
     /// Drains poll messages, applying each, until one of them satisfies `wanted`.
     ///
     /// Like [`App::settle_once`], it waits forever if that message never arrives: every caller

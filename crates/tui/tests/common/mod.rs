@@ -150,11 +150,23 @@ pub async fn settle_page(app: &mut App) {
         .expect("every pane settles");
 }
 
+/// Runs the app's poll channel until nothing the open view draws has a cycle in flight. Last
+/// before a snapshot, after whichever settles the frame needs.
+pub async fn settle_idle(app: &mut App) {
+    tokio::time::timeout(Duration::from_secs(20), app.settle_idle())
+        .await
+        .expect("the view goes idle");
+}
+
 /// Runs the app's poll channel until the DR sampler's first cycle lands.
+///
+/// This and the two below end in [`settle_idle`]: while they wait, a table's next cycle may
+/// have started, and a frame drawn mid-walk is a frame that depends on timing.
 pub async fn settle_sample(app: &mut App) {
     tokio::time::timeout(Duration::from_secs(20), app.settle_sample_once())
         .await
         .expect("the sampler reports");
+    settle_idle(app).await;
 }
 
 /// Runs the app's poll channel until the stats poller's first cycle lands.
@@ -162,6 +174,7 @@ pub async fn settle_stats(app: &mut App) {
     tokio::time::timeout(Duration::from_secs(20), app.settle_stats_once())
         .await
         .expect("the stats poller reports");
+    settle_idle(app).await;
 }
 
 /// Runs the app's poll channel until every kind the open search asked has answered.
@@ -176,6 +189,7 @@ pub async fn settle_names(app: &mut App) {
     tokio::time::timeout(Duration::from_secs(20), app.settle_names_once())
         .await
         .expect("the warm-up reports");
+    settle_idle(app).await;
 }
 
 /// Waits for the connect the app started and applies its result.

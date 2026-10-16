@@ -18,8 +18,8 @@
 //! list narrows the detail with it unless something else can hand the store a whole document.
 //! A single-entity GET is that something, and a kind with no `get_path` has none: those are not
 //! narrowed at all. Neither is a kind whose endpoint declares no `$select`, one whose schema
-//! could not be found, one that reads a property its schema does not declare, or one whose
-//! union names every property there is.
+//! could not be found, one that reads a property its schema does not declare or its `$select`
+//! allowlist does not name, or one whose union names every property there is.
 
 use std::collections::BTreeSet;
 
@@ -127,9 +127,73 @@ fn select_for(k: &KindModel, pane_columns: &[&ColumnModel]) -> Option<String> {
     if want.iter().any(|root| !declared.contains(root)) {
         return None;
     }
+    // Nor one the endpoint does not allow in `$select`, when it says what it allows. Declaring
+    // a property is not allowing it, and a root outside the allowlist is either a 400 on the
+    // whole list or, worse, a 200 with that root silently missing from every row: columns
+    // blank with nothing to say why. An entry can be a path (`metadata/ownerReferenceId`); its
+    // head is the root it allows.
+    if !k.list_params.select_fields.is_empty() {
+        let allowed: BTreeSet<&str> = k
+            .list_params
+            .select_fields
+            .iter()
+            .map(|f| f.split('/').next().unwrap_or(f))
+            .collect();
+        if want.iter().any(|root| !allowed.contains(root)) {
+            return None;
+        }
+    }
     // Nothing to save.
     if want.len() >= declared.len() {
         return None;
     }
     Some(want.into_iter().collect::<Vec<_>>().join(","))
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::catalog::model::ListParamsModel;
+
+    /// A kind that reads `extId` and `name` off a row and declares a third property, so that
+    /// narrowing saves something and only the allowlist decides.
+    fn kind(select_fields: &[&str]) -> KindModel {
+        KindModel {
+            get_path: Some("/x/v4.0/config/things/{extId}".into()),
+            ext_id_key: "extId".into(),
+            properties: vec!["extId".into(), "name".into(), "ipConfig".into()],
+            list_params: ListParamsModel {
+                select: true,
+                select_fields: select_fields.iter().map(|f| (*f).to_string()).collect(),
+                ..ListParamsModel::default()
+            },
+            ..KindModel::default()
+        }
+    }
+
+    #[test]
+    fn a_root_the_select_allowlist_does_not_name_leaves_the_list_whole() {
+        assert_eq!(select_for(&kind(&["extId", "ipConfig"]), &[]), None);
+    }
+
+    #[test]
+    fn every_root_on_the_allowlist_narrows() {
+        assert_eq!(
+            select_for(&kind(&["extId", "name"]), &[]).as_deref(),
+            Some("extId,name")
+        );
+    }
+
+    #[test]
+    fn an_allowlist_entry_allows_the_root_of_its_path() {
+        assert_eq!(
+            select_for(&kind(&["extId", "name/first"]), &[]).as_deref(),
+            Some("extId,name")
+        );
+    }
+
+    #[test]
+    fn no_allowlist_is_no_restriction() {
+        assert_eq!(select_for(&kind(&[]), &[]).as_deref(), Some("extId,name"));
+    }
 }

@@ -27,6 +27,9 @@ pub struct ListParamsModel {
     /// v4.0.a2 and v4.0.b1 and at `monitoring` v4.0 and v4.0.b1, so a hard check would refuse
     /// to emit `probe_by` for exactly the Prism Centrals whose slowness makes it worth having.
     pub orderby_fields: Vec<String>,
+    /// The `$select` `x-odata-fields` allowlist, or empty when the endpoint declares none.
+    /// Generator-only: `select_for` narrows a list only when every root it asks for is on it.
+    pub select_fields: Vec<String>,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]

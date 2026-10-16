@@ -7,7 +7,37 @@ state. This file says what each release added, fixed or changed, newest first.
 Sections: ✨ new · 🐛 fixed · 🔒 security · ⚡ performance · 🎨 look · 📚 docs · 📦 release ·
 ⚠️ known limitations.
 
-## Unreleased
+## 0.3.0 - 2026-10-16
+
+### 🐛 Fixed
+
+- `nutsh demo` no longer needs a certificate store: on a machine without one, a minimal
+  container for instance, it exited before drawing a frame. Plain-HTTP contexts skip it.
+- A list is narrowed with `$select` only when every property the table reads is one the
+  endpoint allows in `$select`, not merely one its schema declares. Clusters are listed whole:
+  a Prism Central that answered the narrowed list without `nodes` and `network` left NODES and
+  EXTERNAL IP blank. Subnets, VPCs, NIC profiles, images, image rate-limit policies and volume
+  groups no longer spend a refused request before every first fill; 40 kinds in all are now
+  listed whole, mostly small collections.
+
+### 🔒 Read-only until you say otherwise
+
+- A new context is read-only: `ctx add` writes `readonly = true` unless given `--write`, and
+  the Contexts screen's form starts with read-only ticked. `--readonly` is still accepted.
+  `ctx add --force` keeps the replaced context's setting unless a flag says otherwise.
+  Contexts already in the config file are untouched.
+
+### 🔒 The Secret Service on Linux
+
+- Linux builds now keep the password in the Secret Service when one is running, through a
+  pure-Rust D-Bus client, and fall back to the `0600` file when there is no session bus or no
+  daemon on it. Released Linux binaries had no keyring support at all. `ctx login` says which
+  it used; `NUTSH_KEYRING=0` still turns the keyring off.
+
+### 📦 Release
+
+- Dependencies refreshed within their declared ranges: tokio 1.53.3, uuid 1.28.0, rustls
+  0.23.46, hyper 1.12.0, insta 1.49.0 among them.
 
 ## 0.2.0 - 2026-09-22
 

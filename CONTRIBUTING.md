@@ -17,9 +17,10 @@ cargo build
 `make release` builds, strips, and prints a receipt: the absolute path and byte count of
 `target/release/nutsh`, so "it built" is something you can check rather than take on trust.
 
-**Never build with `--features linux-keyring` unless you actually have a Secret Service.** It
-needs libdbus and a running daemon. Under WSL2 there is neither, and the default Linux build
-uses the file store instead.
+**The Linux keyring is on by default and needs nothing to build.** It talks to the Secret
+Service over D-Bus in pure Rust. Where there is no session bus or no daemon on it, under WSL2
+or in a container, the password goes to the file store instead, and the tests set
+`NUTSH_KEYRING=0` so they never touch a real keyring; the same variable turns it off at run time.
 
 ## The gate
 
