@@ -330,7 +330,8 @@ async fn add_form_validates_then_adds_and_connects() {
                     new.insecure,
                     new.readonly
                 ),
-                ("new", "pc.new.example", "admin", true, false)
+                ("new", "pc.new.example", "admin", true, true),
+                "read-only was left ticked"
             );
             assert_eq!(new.port, 9440);
         }

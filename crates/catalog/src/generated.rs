@@ -458,7 +458,7 @@ pub static KINDS: &[Kind] = &[
         orderby: None,
         probe_by: None,
         max_rows: Some(1000),
-        select: Some("config,containerName,extId,name,network,nodes,upgradeStatus,vmCount"),
+        select: None,
         parent: None,
         actions: &[
             Action { name: "add-disk", path: "/clustermgmt/v4.3/config/clusters/{extId}/$actions/add-disk", method: Method::Post, needs_etag: true, needs_body: true, takes_body: true, returns: ActionReturn::Task, scope: &["extId"], roles: &["Prism Admin", "Project Manager", "Super Admin", "Cluster Admin"], key: "", label: "", danger: Danger::None, confirm: ConfirmKind::None, order: 0, hidden: false, body: None, form: &[ Field { name: "serialNumber", label: "Serial number", ty: FieldType::Text, required: true, value: None, hidden: false }, Field { name: "diskPartitionInfo", label: "Disk partition info", ty: FieldType::Json("{}"), required: false, value: None, hidden: false },], rate: RateLimit { count: 1, per_secs: 1 } },
@@ -669,7 +669,7 @@ pub static KINDS: &[Kind] = &[
         orderby: None,
         probe_by: None,
         max_rows: Some(1000),
-        select: Some("clusterExtId,extId,hypervisorType,memorySizeBytes,name,nodeExtId,numVcpus"),
+        select: None,
         parent: Some("clustermgmt.config.Cluster"),
         actions: &[
             Action { name: "update", path: "/clustermgmt/v4.3/config/clusters/{clusterExtId}/cvms/{extId}", method: Method::Put, needs_etag: true, needs_body: true, takes_body: true, returns: ActionReturn::Task, scope: &["clusterExtId", "extId"], roles: &["Prism Admin", "Super Admin", "Cluster Admin"], key: "", label: "", danger: Danger::None, confirm: ConfirmKind::None, order: 0, hidden: false, body: None, form: &[ Field { name: "name", label: "Name", ty: FieldType::Text, required: false, value: None, hidden: false },], rate: RateLimit { count: 1, per_secs: 1 } },
@@ -1053,7 +1053,7 @@ pub static KINDS: &[Kind] = &[
         orderby: None,
         probe_by: None,
         max_rows: Some(1000),
-        select: Some("clusterExtId,discoveryProtocol,extId,hostDescription,interfaceStatus,isDhcpEnabled,linkSpeedInKbps,macAddress,mtuInBytes,name,nicProfileExtId,nodeUuid,operatingMode,rxRingSizeInBytes,switchDeviceId,switchMacAddress,switchPortId,switchVendorInfo,switchVlanId,txRingSizeInBytes,virtualSwitchExtId"),
+        select: None,
         parent: Some("clustermgmt.config.Host~hosts"),
         actions: &[
         ],
@@ -1109,7 +1109,7 @@ pub static KINDS: &[Kind] = &[
         orderby: None,
         probe_by: None,
         max_rows: Some(1000),
-        select: Some("bootTimeUsecs,controllerVm,extId,hostName,hypervisor,maintenanceState"),
+        select: None,
         parent: Some("clustermgmt.config.Cluster"),
         actions: &[
             Action { name: "enter-host-maintenance", path: "/clustermgmt/v4.3/operations/clusters/{clusterExtId}/hosts/{extId}/$actions/enter-host-maintenance", method: Method::Post, needs_etag: false, needs_body: true, takes_body: true, returns: ActionReturn::Task, scope: &["clusterExtId", "extId"], roles: &["Cluster Admin", "Prism Admin", "Super Admin"], key: "M", label: "Enter maintenance", danger: Danger::Medium, confirm: ConfirmKind::Yes, order: 10, hidden: false, body: None, form: &[ Field { name: "vcenterInfo", label: "Vcenter info", ty: FieldType::Json("{\"address\": null, \"credentials\": null}"), required: false, value: None, hidden: false }, Field { name: "timeoutSeconds", label: "Timeout seconds", ty: FieldType::Integer, required: false, value: None, hidden: false }, Field { name: "shouldRollbackOnFailure", label: "Should rollback on failure", ty: FieldType::Bool, required: false, value: None, hidden: false }, Field { name: "shouldShutdownNonMigratableUvms", label: "Should shutdown non migratable uvms", ty: FieldType::Bool, required: false, value: None, hidden: false },], rate: RateLimit { count: 1, per_secs: 1 } },
@@ -1174,7 +1174,7 @@ pub static KINDS: &[Kind] = &[
         orderby: None,
         probe_by: None,
         max_rows: Some(1000),
-        select: Some("extId,isInUse,name,ranges,type"),
+        select: None,
         parent: Some("clustermgmt.config.Cluster"),
         actions: &[
             Action { name: "create", path: "/clustermgmt/v4.3/config/clusters/{clusterExtId}/ip-pools", method: Method::Post, needs_etag: false, needs_body: true, takes_body: true, returns: ActionReturn::Task, scope: &["clusterExtId"], roles: &["Cluster Admin", "Prism Admin", "Super Admin"], key: "", label: "", danger: Danger::None, confirm: ConfirmKind::None, order: 0, hidden: false, body: None, form: &[ Field { name: "name", label: "Name", ty: FieldType::Text, required: false, value: None, hidden: false }, Field { name: "ranges", label: "Ranges", ty: FieldType::Json("[{\"endAddress\": null, \"startAddress\": null}]"), required: false, value: None, hidden: false }, Field { name: "netmask", label: "Netmask", ty: FieldType::Json("{}"), required: false, value: None, hidden: false },], rate: RateLimit { count: 1, per_secs: 1 } },
@@ -1601,7 +1601,7 @@ pub static KINDS: &[Kind] = &[
         orderby: None,
         probe_by: None,
         max_rows: Some(1000),
-        select: Some("extId,hostDescription,hostNicsUuids,interfaceStatus,ipv4Addresses,ipv6Addresses,isDhcpEnabled,linkSpeedInKbps,macAddress,mtuInBytes,name,nodeUuid,vlanId"),
+        select: None,
         parent: Some("clustermgmt.config.Host~hosts"),
         actions: &[
         ],
@@ -1731,7 +1731,7 @@ pub static KINDS: &[Kind] = &[
         orderby: None,
         probe_by: None,
         max_rows: Some(1000),
-        select: Some("entityName,entityType,extId,ownerExtId,remoteDomainManagerExtId,status"),
+        select: None,
         parent: None,
         actions: &[
             Action { name: "sync-entity", path: "/datapolicies/v4.3/config/entity-sync-policies/{extId}/$actions/sync-entity", method: Method::Post, needs_etag: true, needs_body: false, takes_body: false, returns: ActionReturn::Task, scope: &["extId"], roles: &["Prism Admin", "Super Admin", "Disaster Recovery Admin", "Flow Admin", "Project Manager"], key: "", label: "", danger: Danger::None, confirm: ConfirmKind::None, order: 0, hidden: false, body: None, form: &[], rate: RateLimit { count: 10, per_secs: 1 } },
@@ -1819,7 +1819,7 @@ pub static KINDS: &[Kind] = &[
         orderby: None,
         probe_by: None,
         max_rows: Some(1000),
-        select: Some("categoryIds,extId,isApprovalPolicyNeeded,name,ownerExtId,replicationConfigurations,replicationLocations"),
+        select: None,
         parent: None,
         actions: &[
             Action { name: "create", path: "/datapolicies/v4.3/config/protection-policies", method: Method::Post, needs_etag: false, needs_body: true, takes_body: true, returns: ActionReturn::Task, scope: &[], roles: &["Account Owner", "Administrator", "Prism Admin", "Super Admin", "Disaster Recovery Admin", "Project Manager", "NCM Connector"], key: "", label: "", danger: Danger::None, confirm: ConfirmKind::None, order: 0, hidden: false, body: None, form: &[ Field { name: "name", label: "Name", ty: FieldType::Text, required: false, value: None, hidden: false }, Field { name: "description", label: "Description", ty: FieldType::Text, required: false, value: None, hidden: false }, Field { name: "replicationLocations", label: "Replication locations", ty: FieldType::Json("[{\"domainManagerExtId\": null, \"label\": null}]"), required: false, value: None, hidden: false }, Field { name: "replicationConfigurations", label: "Replication configurations", ty: FieldType::Json("[{\"schedule\": null, \"sourceLocationLabel\": null}]"), required: false, value: None, hidden: false }, Field { name: "categoryIds", label: "Category ids", ty: FieldType::Json("[]"), required: false, value: None, hidden: false },], rate: RateLimit { count: 2, per_secs: 1 } },
@@ -2110,7 +2110,7 @@ pub static KINDS: &[Kind] = &[
         orderby: None,
         probe_by: None,
         max_rows: Some(1000),
-        select: Some("actionType,endTime,extId,name,numRecoverableVMs,percentageComplete,recoveryPlanExtId,startTime,status"),
+        select: None,
         parent: None,
         actions: &[
             Action { name: "delete", path: "/dataprotection/v4.4/config/recovery-plan-jobs/{extId}", method: Method::Delete, needs_etag: true, needs_body: false, takes_body: false, returns: ActionReturn::Task, scope: &["extId"], roles: &["Prism Admin", "Super Admin", "Disaster Recovery Admin", "Project Manager"], key: "", label: "", danger: Danger::None, confirm: ConfirmKind::None, order: 0, hidden: false, body: None, form: &[], rate: RateLimit { count: 5, per_secs: 1 } },
@@ -2258,7 +2258,7 @@ pub static KINDS: &[Kind] = &[
         orderby: None,
         probe_by: None,
         max_rows: Some(1000),
-        select: Some("creationTime,expirationTime,extId,name,recoveryPointType,status,totalExclusiveUsageBytes,vmRecoveryPoints"),
+        select: None,
         parent: None,
         actions: &[
             Action { name: "create", path: "/dataprotection/v4.4/config/recovery-points", method: Method::Post, needs_etag: false, needs_body: true, takes_body: true, returns: ActionReturn::Task, scope: &[], roles: &["Prism Admin", "Super Admin", "Disaster Recovery Admin", "CSI System", "Kubernetes Data Services System", "Backup Admin", "Project Admin", "Project Manager", "NCM Connector", "Tenant Admin", "Tenant Consumer"], key: "", label: "Create recovery point", danger: Danger::Low, confirm: ConfirmKind::None, order: 10, hidden: false, body: None, form: &[ Field { name: "projectExtId", label: "Project ext id", ty: FieldType::Text, required: false, value: None, hidden: false }, Field { name: "name", label: "Name", ty: FieldType::Text, required: false, value: None, hidden: false }, Field { name: "expirationTime", label: "Expiration time", ty: FieldType::Text, required: false, value: None, hidden: false }, Field { name: "recoveryPointType", label: "Recovery point type", ty: FieldType::Enum(&["CRASH_CONSISTENT", "APPLICATION_CONSISTENT", "$UNKNOWN", "$REDACTED"]), required: false, value: None, hidden: false }, Field { name: "sourceLocation", label: "Source location", ty: FieldType::Json("{\"clusterExtIds\": null, \"domainManagerExtId\": null}"), required: false, value: None, hidden: false }, Field { name: "vmRecoveryPoints", label: "Vm recovery points", ty: FieldType::Json("[{}]"), required: false, value: None, hidden: false }, Field { name: "volumeGroupRecoveryPoints", label: "Volume group recovery points", ty: FieldType::Json("[{}]"), required: false, value: None, hidden: false },], rate: RateLimit { count: 2, per_secs: 1 } },
@@ -4083,7 +4083,7 @@ pub static KINDS: &[Kind] = &[
         orderby: None,
         probe_by: None,
         max_rows: Some(1000),
-        select: Some("assignmentDetails,associationDetails,category,entitlementExpiryDate,extId,groupId,key,meter,quantity,subCategory,type,validationDetail"),
+        select: None,
         parent: None,
         actions: &[
             Action { name: "associate-license-keys", path: "/licensing/v4.4/config/license-keys/{extId}/$actions/associate-license-keys", method: Method::Post, needs_etag: true, needs_body: true, takes_body: true, returns: ActionReturn::Payload, scope: &["extId"], roles: &["License Admin", "Internal Super Admin", "Prism Admin", "Super Admin"], key: "", label: "", danger: Danger::None, confirm: ConfirmKind::None, order: 0, hidden: false, body: None, form: &[ Field { name: "keyAssociations", label: "Key associations", ty: FieldType::Json("[{\"associatedKey\": null, \"associationType\": null, \"reclaimType\": null}]"), required: true, value: None, hidden: false },], rate: RateLimit { count: 3, per_secs: 1 } },
@@ -4427,7 +4427,7 @@ pub static KINDS: &[Kind] = &[
         orderby: None,
         probe_by: None,
         max_rows: Some(1000),
-        select: Some("extId,identifiers,lastRefreshedTime,managedBy,manufacturer,memoryGB,model"),
+        select: None,
         parent: Some("lifecycle.config.Connection"),
         actions: &[
         ],
@@ -4510,7 +4510,7 @@ pub static KINDS: &[Kind] = &[
         orderby: None,
         probe_by: None,
         max_rows: Some(1000),
-        select: Some("createdTime,extId,fileStatus,metadataDownloadUrl,metadataStatus,name,source,type,url,version"),
+        select: None,
         parent: None,
         actions: &[
             Action { name: "create", path: "/lifecycle/v4.3/config/images", method: Method::Post, needs_etag: false, needs_body: true, takes_body: true, returns: ActionReturn::Task, scope: &[], roles: &["Super Admin"], key: "", label: "", danger: Danger::None, confirm: ConfirmKind::None, order: 0, hidden: false, body: None, form: &[ Field { name: "type", label: "Type", ty: FieldType::Enum(&["AOS", "AHV", "ESX", "$UNKNOWN", "$REDACTED"]), required: false, value: None, hidden: false }, Field { name: "source", label: "Source", ty: FieldType::Enum(&["LOCAL", "REMOTE_URL", "$UNKNOWN", "$REDACTED"]), required: false, value: None, hidden: false }, Field { name: "name", label: "Name", ty: FieldType::Text, required: false, value: None, hidden: false }, Field { name: "checksum", label: "Checksum", ty: FieldType::Json("{\"$objectType\": null}"), required: false, value: None, hidden: false }, Field { name: "url", label: "Url", ty: FieldType::Text, required: false, value: None, hidden: false },], rate: RateLimit { count: 1, per_secs: 1 } },
@@ -4558,7 +4558,7 @@ pub static KINDS: &[Kind] = &[
         orderby: None,
         probe_by: None,
         max_rows: Some(1000),
-        select: Some("extId,groups,ipv4AvailableCount,ipv6AvailableCount,lastUpdatedTime,name,referenceId"),
+        select: None,
         parent: Some("lifecycle.config.Connection"),
         actions: &[
         ],
@@ -4600,7 +4600,7 @@ pub static KINDS: &[Kind] = &[
         orderby: None,
         probe_by: None,
         max_rows: Some(1000),
-        select: Some("availableCount,extId,groups,lastUpdatedTime,name,referenceId"),
+        select: None,
         parent: Some("lifecycle.config.Connection"),
         actions: &[
         ],
@@ -4641,7 +4641,7 @@ pub static KINDS: &[Kind] = &[
         orderby: None,
         probe_by: None,
         max_rows: Some(1000),
-        select: Some("aosVersion,blockSerialNumber,createdTime,customAttributes,cvmConnectivityStatus,extId,hostConnectivityStatus,hostType,hostVersion,hostname,identifiers,manufacturer,memoryGB,model,ownerExtId,providerConnectionExtId,providerExtId,state"),
+        select: None,
         parent: None,
         actions: &[
             Action { name: "create", path: "/lifecycle/v4.3/config/nodes", method: Method::Post, needs_etag: false, needs_body: true, takes_body: true, returns: ActionReturn::Task, scope: &[], roles: &["Super Admin", "Prism Admin", "Cluster Admin"], key: "", label: "", danger: Danger::None, confirm: ConfirmKind::None, order: 0, hidden: false, body: None, form: &[ Field { name: "manufacturer", label: "Manufacturer", ty: FieldType::Text, required: false, value: None, hidden: false }, Field { name: "identifiers", label: "Identifiers", ty: FieldType::Json("[{\"type\": null, \"value\": null}]"), required: false, value: None, hidden: false }, Field { name: "providerConnectionExtId", label: "Provider connection ext id", ty: FieldType::Text, required: false, value: None, hidden: false }, Field { name: "customAttributes", label: "Custom attributes", ty: FieldType::Json("[]"), required: false, value: None, hidden: false },], rate: RateLimit { count: 15, per_secs: 1 } },
@@ -4746,7 +4746,7 @@ pub static KINDS: &[Kind] = &[
         orderby: None,
         probe_by: None,
         max_rows: Some(1000),
-        select: Some("availableCount,extId,groups,lastUpdatedTime,name,referenceId"),
+        select: None,
         parent: Some("lifecycle.config.Connection"),
         actions: &[
         ],
@@ -5081,7 +5081,7 @@ pub static KINDS: &[Kind] = &[
         orderby: None,
         probe_by: None,
         max_rows: Some(1000),
-        select: Some("createdBy,extId,ipRanges,ipv4Addresses,lastUpdateTime,name,policyReferences"),
+        select: None,
         parent: None,
         actions: &[
             Action { name: "create", path: "/microseg/v4.3/config/address-groups", method: Method::Post, needs_etag: false, needs_body: true, takes_body: true, returns: ActionReturn::Task, scope: &[], roles: &["Super Admin", "Prism Admin", "Flow Admin", "Project Admin", "Project Manager", "Tenant Admin"], key: "", label: "", danger: Danger::None, confirm: ConfirmKind::None, order: 0, hidden: false, body: None, form: &[ Field { name: "name", label: "Name", ty: FieldType::Text, required: false, value: None, hidden: false }, Field { name: "description", label: "Description", ty: FieldType::Text, required: false, value: None, hidden: false }, Field { name: "ipv4Addresses", label: "Ipv4 addresses", ty: FieldType::Json("[{\"value\": null}]"), required: false, value: None, hidden: false }, Field { name: "ipRanges", label: "Ip ranges", ty: FieldType::Json("[{\"endIp\": null, \"startIp\": null}]"), required: false, value: None, hidden: false }, Field { name: "ipv6Addresses", label: "Ipv6 addresses", ty: FieldType::Json("[{\"value\": null}]"), required: false, value: None, hidden: false }, Field { name: "ipv6Ranges", label: "Ipv6 ranges", ty: FieldType::Json("[{\"endIp\": null, \"startIp\": null}]"), required: false, value: None, hidden: false }, Field { name: "projectExtId", label: "Project ext id", ty: FieldType::Text, required: false, value: None, hidden: false },], rate: RateLimit { count: 2, per_secs: 1 } },
@@ -5837,7 +5837,7 @@ pub static KINDS: &[Kind] = &[
         orderby: None,
         probe_by: None,
         max_rows: Some(1000),
-        select: Some("extId,name,ownerExtId"),
+        select: None,
         parent: None,
         actions: &[
             Action { name: "create", path: "/multidomain/v4.3/config/external-repositories", method: Method::Post, needs_etag: false, needs_body: true, takes_body: true, returns: ActionReturn::Task, scope: &[], roles: &["Super Admin", "Disaster Recovery Admin", "Backup Admin", "Internal Super Admin", "Prism Admin", "Cluster Admin", "Project Manager"], key: "", label: "", danger: Danger::None, confirm: ConfirmKind::None, order: 0, hidden: false, body: None, form: &[ Field { name: "name", label: "Name", ty: FieldType::Text, required: false, value: None, hidden: false }, Field { name: "location", label: "Location", ty: FieldType::Json("{\"$objectType\": null}"), required: false, value: None, hidden: false },], rate: RateLimit { count: 5, per_secs: 1 } },
@@ -6433,7 +6433,7 @@ pub static KINDS: &[Kind] = &[
         orderby: None,
         probe_by: None,
         max_rows: Some(1000),
-        select: Some("algorithm,extId,healthCheckConfig,listener,name,type,vpcReference"),
+        select: None,
         parent: None,
         actions: &[
             Action { name: "create", path: "/networking/v4.4/config/load-balancer-sessions", method: Method::Post, needs_etag: false, needs_body: true, takes_body: true, returns: ActionReturn::Task, scope: &[], roles: &["Super Admin", "Account Owner", "Administrator", "Prism Admin", "VPC Admin"], key: "", label: "", danger: Danger::None, confirm: ConfirmKind::None, order: 0, hidden: false, body: None, form: &[ Field { name: "metadata", label: "Metadata", ty: FieldType::Json("{}"), required: false, value: None, hidden: false }, Field { name: "projectExtId", label: "Project ext id", ty: FieldType::Text, required: false, value: None, hidden: false }, Field { name: "name", label: "Name", ty: FieldType::Text, required: false, value: None, hidden: false }, Field { name: "description", label: "Description", ty: FieldType::Text, required: false, value: None, hidden: false }, Field { name: "type", label: "Type", ty: FieldType::Enum(&["NETWORK_LOAD_BALANCER", "$UNKNOWN", "$REDACTED"]), required: false, value: None, hidden: false }, Field { name: "vpcReference", label: "Vpc reference", ty: FieldType::Text, required: false, value: None, hidden: false }, Field { name: "listener", label: "Listener", ty: FieldType::Json("{\"portRanges\": null, \"protocol\": null, \"virtualIP\": null}"), required: false, value: None, hidden: false }, Field { name: "algorithm", label: "Algorithm", ty: FieldType::Enum(&["FIVE_TUPLE_HASH", "$UNKNOWN", "$REDACTED"]), required: false, value: None, hidden: false }, Field { name: "targetsConfig", label: "Targets config", ty: FieldType::Json("{}"), required: false, value: None, hidden: false }, Field { name: "healthCheckConfig", label: "Health check config", ty: FieldType::Json("{}"), required: false, value: None, hidden: false },], rate: RateLimit { count: 5, per_secs: 1 } },
@@ -6571,7 +6571,7 @@ pub static KINDS: &[Kind] = &[
         orderby: None,
         probe_by: None,
         max_rows: Some(1000),
-        select: Some("capabilityConfig,extId,hostNicReferences,name,nicFamily,operatingMode,ownerType"),
+        select: None,
         parent: None,
         actions: &[
             Action { name: "associate-host-nic", path: "/networking/v4.4/config/nic-profiles/{extId}/$actions/associate-host-nic", method: Method::Post, needs_etag: true, needs_body: true, takes_body: true, returns: ActionReturn::Task, scope: &["extId"], roles: &["Super Admin", "Account Owner", "Administrator", "Prism Admin"], key: "", label: "", danger: Danger::None, confirm: ConfirmKind::None, order: 0, hidden: false, body: None, form: &[ Field { name: "hostNicExtId", label: "Host nic ext id", ty: FieldType::Text, required: false, value: None, hidden: false },], rate: RateLimit { count: 5, per_secs: 1 } },
@@ -6979,7 +6979,7 @@ pub static KINDS: &[Kind] = &[
         orderby: None,
         probe_by: None,
         max_rows: Some(1000),
-        select: Some("clusterName,clusterReference,dhcpOptions,extId,ipConfig,name,networkId,reservedIpAddresses,subnetType,vpcReference"),
+        select: None,
         parent: None,
         actions: &[
             Action { name: "create", path: "/networking/v4.4/config/subnets", method: Method::Post, needs_etag: false, needs_body: true, takes_body: true, returns: ActionReturn::Task, scope: &[], roles: &["Super Admin", "Account Owner", "Administrator", "Prism Admin", "Network Infra Admin", "VPC Admin", "User", "Tenant Admin", "Project Admin", "Project Manager"], key: "", label: "Create subnet", danger: Danger::Low, confirm: ConfirmKind::None, order: 10, hidden: false, body: None, form: &[ Field { name: "metadata", label: "Metadata", ty: FieldType::Json("{}"), required: false, value: None, hidden: false }, Field { name: "projectExtId", label: "Project ext id", ty: FieldType::Text, required: false, value: None, hidden: false }, Field { name: "name", label: "Name", ty: FieldType::Text, required: true, value: None, hidden: false }, Field { name: "description", label: "Description", ty: FieldType::Text, required: false, value: None, hidden: false }, Field { name: "subnetType", label: "Subnet type", ty: FieldType::Enum(&["OVERLAY", "VLAN", "$UNKNOWN", "$REDACTED"]), required: true, value: None, hidden: false }, Field { name: "networkId", label: "Network id", ty: FieldType::Integer, required: false, value: None, hidden: false }, Field { name: "dhcpOptions", label: "Dhcp options", ty: FieldType::Json("{}"), required: false, value: None, hidden: false }, Field { name: "ipConfig", label: "Ip config", ty: FieldType::Json("[{}]"), required: false, value: None, hidden: false }, Field { name: "clusterReference", label: "Cluster reference", ty: FieldType::Text, required: false, value: None, hidden: false }, Field { name: "virtualSwitchReference", label: "Virtual switch reference", ty: FieldType::Text, required: false, value: None, hidden: false }, Field { name: "vpcReference", label: "Vpc reference", ty: FieldType::Text, required: false, value: None, hidden: false }, Field { name: "isNatEnabled", label: "Is nat enabled", ty: FieldType::Bool, required: false, value: None, hidden: false }, Field { name: "isExternal", label: "Is external", ty: FieldType::Bool, required: false, value: None, hidden: false }, Field { name: "networkFunctionChainReference", label: "Network function chain reference", ty: FieldType::Text, required: false, value: None, hidden: false }, Field { name: "bridgeName", label: "Bridge name", ty: FieldType::Text, required: false, value: None, hidden: false }, Field { name: "isAdvancedNetworking", label: "Is advanced networking", ty: FieldType::Bool, required: false, value: None, hidden: false }, Field { name: "clusterName", label: "Cluster name", ty: FieldType::Text, required: false, value: None, hidden: false }, Field { name: "hypervisorType", label: "Hypervisor type", ty: FieldType::Text, required: false, value: None, hidden: false }, Field { name: "ipPrefix", label: "Ip prefix", ty: FieldType::Text, required: false, value: None, hidden: false }, Field { name: "externalDhcpServers", label: "External dhcp servers", ty: FieldType::Json("[{}]"), required: false, value: None, hidden: false }, Field { name: "isConnected", label: "Is connected", ty: FieldType::Bool, required: false, value: None, hidden: false },], rate: RateLimit { count: 3, per_secs: 1 } },
@@ -7282,7 +7282,7 @@ pub static KINDS: &[Kind] = &[
         orderby: None,
         probe_by: None,
         max_rows: Some(1000),
-        select: Some("extId,externalSubnets,externallyRoutablePrefixes,name,scope,vpcType"),
+        select: None,
         parent: None,
         actions: &[
             Action { name: "create", path: "/networking/v4.4/config/vpcs", method: Method::Post, needs_etag: false, needs_body: true, takes_body: true, returns: ActionReturn::Task, scope: &[], roles: &["Super Admin", "Account Owner", "Administrator", "Prism Admin", "VPC Admin", "Tenant Admin", "Project Admin", "Project Manager"], key: "", label: "", danger: Danger::None, confirm: ConfirmKind::None, order: 0, hidden: false, body: None, form: &[ Field { name: "metadata", label: "Metadata", ty: FieldType::Json("{}"), required: false, value: None, hidden: false }, Field { name: "projectExtId", label: "Project ext id", ty: FieldType::Text, required: false, value: None, hidden: false }, Field { name: "name", label: "Name", ty: FieldType::Text, required: true, value: None, hidden: false }, Field { name: "description", label: "Description", ty: FieldType::Text, required: false, value: None, hidden: false }, Field { name: "vpcType", label: "Vpc type", ty: FieldType::Enum(&["REGULAR", "TRANSIT", "$UNKNOWN", "$REDACTED"]), required: false, value: None, hidden: false }, Field { name: "commonDhcpOptions", label: "Common dhcp options", ty: FieldType::Json("{}"), required: false, value: None, hidden: false }, Field { name: "externalSubnets", label: "External subnets", ty: FieldType::Json("[{\"subnetReference\": null}]"), required: false, value: None, hidden: false }, Field { name: "externalRoutingDomainReference", label: "External routing domain reference", ty: FieldType::Text, required: false, value: None, hidden: false }, Field { name: "externallyRoutablePrefixes", label: "Externally routable prefixes", ty: FieldType::Json("[{}]"), required: false, value: None, hidden: false }, Field { name: "kubernetesClusters", label: "Kubernetes clusters", ty: FieldType::Json("[{\"extId\": null}]"), required: false, value: None, hidden: false }, Field { name: "scope", label: "Scope", ty: FieldType::Enum(&["VMS", "CONTAINERS", "VMS_AND_CONTAINERS", "$UNKNOWN", "$REDACTED"]), required: false, value: None, hidden: false }, Field { name: "shouldAdvertiseConnectedSubnets", label: "Should advertise connected subnets", ty: FieldType::Bool, required: false, value: None, hidden: false },], rate: RateLimit { count: 5, per_secs: 1 } },
@@ -7560,7 +7560,7 @@ pub static KINDS: &[Kind] = &[
         orderby: None,
         probe_by: None,
         max_rows: Some(1000),
-        select: Some("alternateFqdns,alternateIps,dnsNames,extId,ipAddresses"),
+        select: None,
         parent: Some("objects.config.ObjectStore"),
         actions: &[
             Action { name: "create", path: "/objects/v4.1/config/object-stores/{objectStoreExtId}/certificates", method: Method::Post, needs_etag: false, needs_body: true, takes_body: true, returns: ActionReturn::Task, scope: &["objectStoreExtId"], roles: &["Objects Editor", "Objects Admin", "Prism Admin", "Super Admin"], key: "", label: "", danger: Danger::None, confirm: ConfirmKind::None, order: 0, hidden: false, body: None, form: &[], rate: RateLimit { count: 1, per_secs: 1 } },
@@ -7601,7 +7601,7 @@ pub static KINDS: &[Kind] = &[
         orderby: None,
         probe_by: None,
         max_rows: Some(1000),
-        select: Some("extId,name,type"),
+        select: None,
         parent: Some("objects.config.ObjectStore"),
         actions: &[
             Action { name: "create", path: "/objects/v4.1/config/object-stores/{objectStoreExtId}/data-movement-targets", method: Method::Post, needs_etag: false, needs_body: true, takes_body: true, returns: ActionReturn::Payload, scope: &["objectStoreExtId"], roles: &["Objects Editor", "Objects Admin", "Prism Admin", "Super Admin"], key: "", label: "", danger: Danger::None, confirm: ConfirmKind::None, order: 0, hidden: false, body: None, form: &[ Field { name: "name", label: "Name", ty: FieldType::Text, required: false, value: None, hidden: false }, Field { name: "details", label: "Details", ty: FieldType::Json("{\"$objectType\": null}"), required: false, value: None, hidden: false },], rate: RateLimit { count: 5, per_secs: 1 } },
@@ -7640,7 +7640,7 @@ pub static KINDS: &[Kind] = &[
         orderby: None,
         probe_by: None,
         max_rows: Some(1000),
-        select: Some("bucketCount,clusterExtId,domain,extId,name,objectCount,state,storageUsageBytes,tieredUsageBytes"),
+        select: None,
         parent: None,
         actions: &[
             Action { name: "create", path: "/objects/v4.1/config/object-stores", method: Method::Post, needs_etag: false, needs_body: true, takes_body: true, returns: ActionReturn::Task, scope: &[], roles: &["Objects Admin", "Prism Admin", "Super Admin"], key: "", label: "", danger: Danger::None, confirm: ConfirmKind::None, order: 0, hidden: false, body: None, form: &[ Field { name: "metadata", label: "Metadata", ty: FieldType::Json("{}"), required: false, value: None, hidden: false }, Field { name: "name", label: "Name", ty: FieldType::Text, required: false, value: None, hidden: false }, Field { name: "description", label: "Description", ty: FieldType::Text, required: false, value: None, hidden: false }, Field { name: "deploymentVersion", label: "Deployment version", ty: FieldType::Text, required: false, value: None, hidden: false }, Field { name: "domain", label: "Domain", ty: FieldType::Text, required: false, value: None, hidden: false }, Field { name: "region", label: "Region", ty: FieldType::Text, required: false, value: None, hidden: false }, Field { name: "numWorkerNodes", label: "Num worker nodes", ty: FieldType::Integer, required: false, value: None, hidden: false }, Field { name: "clusterExtId", label: "Cluster ext id", ty: FieldType::Text, required: false, value: None, hidden: false }, Field { name: "storageNetworkReference", label: "Storage network reference", ty: FieldType::Text, required: false, value: None, hidden: false }, Field { name: "storageNetworkVip", label: "Storage network vip", ty: FieldType::Json("{}"), required: false, value: None, hidden: false }, Field { name: "storageNetworkDnsIp", label: "Storage network dns ip", ty: FieldType::Json("{}"), required: false, value: None, hidden: false }, Field { name: "publicNetworkReference", label: "Public network reference", ty: FieldType::Text, required: false, value: None, hidden: false }, Field { name: "publicNetworkConfig", label: "Public network config", ty: FieldType::Json("{}"), required: false, value: None, hidden: false }, Field { name: "publicNetworkIps", label: "Public network ips", ty: FieldType::Json("[{}]"), required: false, value: None, hidden: false }, Field { name: "managementNetworkReference", label: "Management network reference", ty: FieldType::Text, required: false, value: None, hidden: false }, Field { name: "vip", label: "Vip", ty: FieldType::Json("{}"), required: false, value: None, hidden: false }, Field { name: "dnsIp", label: "Dns ip", ty: FieldType::Json("{}"), required: false, value: None, hidden: false }, Field { name: "totalCapacityGiB", label: "Total capacity gi b", ty: FieldType::Integer, required: false, value: None, hidden: false }, Field { name: "state", label: "State", ty: FieldType::Enum(&["OBJECT_STORE_DEPLOYMENT_FAILED", "OBJECT_STORE_CERT_CREATION_FAILED", "OBJECT_STORE_DELETION_FAILED", "UNDEPLOYED_OBJECT_STORE", "DEPLOYING_OBJECT_STORE", "CREATING_OBJECT_STORE_CERT", "DELETING_OBJECT_STORE", "OBJECT_STORE_AVAILABLE", "OBJECT_STORE_OPERATION_PENDING", "OBJECT_STORE_OPERATION_FAILED", "$UNKNOWN", "$REDACTED"]), required: false, value: None, hidden: false }, Field { name: "isHighPerfConfigEnabled", label: "Is high perf config enabled", ty: FieldType::Bool, required: false, value: None, hidden: false }, Field { name: "shouldUseMaxLbForHybridCluster", label: "Should use max lb for hybrid cluster", ty: FieldType::Bool, required: false, value: None, hidden: false },], rate: RateLimit { count: 1, per_secs: 1 } },
@@ -7707,7 +7707,7 @@ pub static KINDS: &[Kind] = &[
         orderby: None,
         probe_by: None,
         max_rows: Some(1000),
-        select: Some("availableCapacityBytes,clusterExtId,containerName,extId,isPrimary,logicalUsedCapacityBytes,maxUsagePct,name,physicalUsedCapacityBytes,totalCapacityBytes"),
+        select: None,
         parent: Some("objects.config.ObjectStore"),
         actions: &[
         ],
@@ -7954,7 +7954,7 @@ pub static KINDS: &[Kind] = &[
         orderby: None,
         probe_by: None,
         max_rows: Some(1000),
-        select: Some("config,createdTime,extId,hostingClusterExtId,nodeExtIds,shouldEnableHighAvailability"),
+        select: None,
         parent: None,
         actions: &[
             Action { name: "create", path: "/prism/v4.4/config/domain-managers", method: Method::Post, needs_etag: false, needs_body: true, takes_body: true, returns: ActionReturn::Task, scope: &[], roles: &["Super Admin", "Internal Super Admin", "Prism Admin", "Cluster Admin", "Domain Manager Admin"], key: "", label: "", danger: Danger::None, confirm: ConfirmKind::None, order: 0, hidden: false, body: None, form: &[ Field { name: "config", label: "Config", ty: FieldType::Json("{\"name\": null, \"size\": null}"), required: false, value: None, hidden: false }, Field { name: "network", label: "Network", ty: FieldType::Json("{\"externalNetworks\": null, \"nameServers\": null, \"ntpServers\": null}"), required: false, value: None, hidden: false }, Field { name: "hostingClusterExtId", label: "Hosting cluster ext id", ty: FieldType::Text, required: false, value: None, hidden: false }, Field { name: "shouldEnableHighAvailability", label: "Should enable high availability", ty: FieldType::Bool, required: false, value: None, hidden: false },], rate: RateLimit { count: 1, per_secs: 1 } },
@@ -8273,7 +8273,7 @@ pub static KINDS: &[Kind] = &[
         orderby: None,
         probe_by: None,
         max_rows: Some(1000),
-        select: Some("connectivityStatus,extId,remoteClusterDetails,remoteClusterExtId"),
+        select: None,
         parent: None,
         actions: &[
         ],
@@ -8438,7 +8438,7 @@ pub static KINDS: &[Kind] = &[
         orderby: None,
         probe_by: None,
         max_rows: Some(1000),
-        select: Some("extId,isValid,name"),
+        select: None,
         parent: None,
         actions: &[
             Action { name: "create", path: "/security/v4.1/config/credentials", method: Method::Post, needs_etag: false, needs_body: true, takes_body: true, returns: ActionReturn::Task, scope: &[], roles: &["Internal Super Admin", "Super Admin", "Prism Admin"], key: "", label: "", danger: Danger::None, confirm: ConfirmKind::None, order: 0, hidden: false, body: None, form: &[ Field { name: "name", label: "Name", ty: FieldType::Text, required: false, value: None, hidden: false }, Field { name: "credentialDetails", label: "Credential details", ty: FieldType::Json("{\"$objectType\": null}"), required: false, value: None, hidden: false },], rate: RateLimit { count: 10, per_secs: 1 } },
@@ -8522,7 +8522,7 @@ pub static KINDS: &[Kind] = &[
         orderby: None,
         probe_by: None,
         max_rows: Some(1000),
-        select: Some("approverGroups,extId,isUpdatePending,lastUpdateTime,lastUpdatedBy,name,securedPolicies"),
+        select: None,
         parent: None,
         actions: &[
             Action { name: "associate-policies", path: "/security/v4.1/management/approval-policies/{extId}/$actions/associate-policies", method: Method::Post, needs_etag: true, needs_body: true, takes_body: true, returns: ActionReturn::Task, scope: &["extId"], roles: &["Secure Policy Disaster Recovery Admin", "Disaster Recovery Admin", "Super Admin", "Prism Admin"], key: "", label: "", danger: Danger::None, confirm: ConfirmKind::None, order: 0, hidden: false, body: None, form: &[ Field { name: "securedPolicies", label: "Secured policies", ty: FieldType::Json("[{\"policyExtId\": null, \"policyType\": null}]"), required: true, value: None, hidden: false },], rate: RateLimit { count: 3, per_secs: 1 } },
@@ -10525,7 +10525,7 @@ pub static KINDS: &[Kind] = &[
         orderby: None,
         probe_by: None,
         max_rows: Some(1000),
-        select: Some("createTime,createdBy,extId,name,phony,placementType,updateTime,updatedBy"),
+        select: None,
         parent: None,
         actions: &[
             Action { name: "create", path: "/vmm/v4.3/config/template-placement-policies", method: Method::Post, needs_etag: false, needs_body: true, takes_body: true, returns: ActionReturn::Task, scope: &[], roles: &["Super Admin", "Prism Admin", "Project Manager"], key: "", label: "", danger: Danger::None, confirm: ConfirmKind::None, order: 0, hidden: false, body: None, form: &[ Field { name: "name", label: "Name", ty: FieldType::Text, required: true, value: None, hidden: false }, Field { name: "description", label: "Description", ty: FieldType::Text, required: false, value: None, hidden: false }, Field { name: "placementType", label: "Placement type", ty: FieldType::Enum(&["SOFT", "$UNKNOWN", "$REDACTED"]), required: true, value: None, hidden: false }, Field { name: "contentFilter", label: "Content filter", ty: FieldType::Json("{\"categoryExtIds\": null, \"type\": null}"), required: true, value: None, hidden: false }, Field { name: "clusterFilter", label: "Cluster filter", ty: FieldType::Json("{\"categoryExtIds\": null, \"type\": null}"), required: true, value: None, hidden: false },], rate: RateLimit { count: 5, per_secs: 1 } },
@@ -10571,7 +10571,7 @@ pub static KINDS: &[Kind] = &[
         orderby: None,
         probe_by: None,
         max_rows: Some(1000),
-        select: Some("clusterLocationExtIds,createTime,extId,name,ownerName,placementPolicyStatus,sizeBytes,type"),
+        select: None,
         parent: None,
         actions: &[
             Action { name: "create", path: "/vmm/v4.3/content/images", method: Method::Post, needs_etag: false, needs_body: true, takes_body: true, returns: ActionReturn::Task, scope: &[], roles: &["Super Admin", "Prism Admin", "Account Owner", "Administrator", "User", "Consumer", "Developer", "Project Admin", "Project Manager", "CSI System", "Kubernetes Data Services System", "Kubernetes Infrastructure Provision", "Virtual Machine Admin", "NCM Connector", "Tenant Admin"], key: "", label: "Create image", danger: Danger::Low, confirm: ConfirmKind::None, order: 10, hidden: false, body: None, form: &[ Field { name: "name", label: "Name", ty: FieldType::Text, required: false, value: None, hidden: false }, Field { name: "description", label: "Description", ty: FieldType::Text, required: false, value: None, hidden: false }, Field { name: "type", label: "Type", ty: FieldType::Enum(&["DISK_IMAGE", "ISO_IMAGE", "$UNKNOWN", "$REDACTED"]), required: false, value: None, hidden: false }, Field { name: "checksum", label: "Checksum", ty: FieldType::Json("{\"$objectType\": null}"), required: false, value: None, hidden: false }, Field { name: "source", label: "Source", ty: FieldType::Json("{\"$objectType\": null}"), required: false, value: None, hidden: false }, Field { name: "categoryExtIds", label: "Category ext ids", ty: FieldType::Json("[]"), required: false, value: None, hidden: false }, Field { name: "clusterLocationExtIds", label: "Cluster location ext ids", ty: FieldType::Json("[]"), required: false, value: None, hidden: false }, Field { name: "contentRepositoryExtId", label: "Content repository ext id", ty: FieldType::Text, required: false, value: None, hidden: false }, Field { name: "projectExtId", label: "Project ext id", ty: FieldType::Text, required: false, value: None, hidden: false },], rate: RateLimit { count: 5, per_secs: 1 } },
@@ -10714,7 +10714,7 @@ pub static KINDS: &[Kind] = &[
         orderby: None,
         probe_by: None,
         max_rows: Some(1000),
-        select: Some("createTime,createdBy,extId,templateName,templateVersionSpec,updateTime"),
+        select: None,
         parent: None,
         actions: &[
             Action { name: "cancel-guest-update", path: "/vmm/v4.3/content/templates/{extId}/$actions/cancel-guest-update", method: Method::Post, needs_etag: true, needs_body: false, takes_body: false, returns: ActionReturn::Task, scope: &["extId"], roles: &["Super Admin", "Prism Admin", "Virtual Machine Admin", "Tenant Admin", "Project Admin", "Project Manager"], key: "", label: "", danger: Danger::None, confirm: ConfirmKind::None, order: 0, hidden: false, body: None, form: &[], rate: RateLimit { count: 20, per_secs: 1 } },
@@ -10773,7 +10773,7 @@ pub static KINDS: &[Kind] = &[
         orderby: None,
         probe_by: None,
         max_rows: Some(1000),
-        select: Some("clusterLocationExtIds,createTime,createdBy,extId,guestCustomizationProfile,isActiveVersion,isGcOverrideEnabled,versionDescription,versionName,vmSpec"),
+        select: None,
         parent: Some("vmm.content.Template"),
         actions: &[
             Action { name: "delete", path: "/vmm/v4.3/content/templates/{templateExtId}/versions/{extId}", method: Method::Delete, needs_etag: true, needs_body: false, takes_body: false, returns: ActionReturn::Task, scope: &["templateExtId", "extId"], roles: &["Super Admin", "Prism Admin", "Virtual Machine Admin", "Tenant Admin", "Project Admin", "Project Manager"], key: "", label: "", danger: Danger::None, confirm: ConfirmKind::None, order: 0, hidden: false, body: None, form: &[], rate: RateLimit { count: 20, per_secs: 1 } },
@@ -11018,7 +11018,7 @@ pub static KINDS: &[Kind] = &[
         orderby: None,
         probe_by: None,
         max_rows: Some(1000),
-        select: Some("createTime,extId,lastUpdateTime,matchingClusterExtIds,name,ownerName,rateLimitKbps"),
+        select: None,
         parent: None,
         actions: &[
             Action { name: "create", path: "/vmm/v4.3/images/config/rate-limit-policies", method: Method::Post, needs_etag: false, needs_body: true, takes_body: true, returns: ActionReturn::Task, scope: &[], roles: &["Super Admin", "Prism Admin", "Virtual Machine Admin"], key: "", label: "", danger: Danger::None, confirm: ConfirmKind::None, order: 0, hidden: false, body: None, form: &[ Field { name: "name", label: "Name", ty: FieldType::Text, required: false, value: None, hidden: false }, Field { name: "description", label: "Description", ty: FieldType::Text, required: false, value: None, hidden: false }, Field { name: "rateLimitKbps", label: "Rate limit kbps", ty: FieldType::Integer, required: false, value: None, hidden: false }, Field { name: "clusterEntityFilter", label: "Cluster entity filter", ty: FieldType::Json("{\"categoryExtIds\": null, \"type\": null}"), required: false, value: None, hidden: false },], rate: RateLimit { count: 5, per_secs: 1 } },
@@ -11109,7 +11109,7 @@ pub static KINDS: &[Kind] = &[
         orderby: None,
         probe_by: None,
         max_rows: Some(1000),
-        select: Some("attachedTargets,attachmentSite,clusterReference,enabledAuthentications,extId,iscsiInitiatorName"),
+        select: None,
         parent: None,
         actions: &[
             Action { name: "update", path: "/volumes/v4.3/config/iscsi-clients/{extId}", method: Method::Put, needs_etag: true, needs_body: true, takes_body: true, returns: ActionReturn::Task, scope: &["extId"], roles: &["Prism Admin", "Super Admin", "Storage Admin", "Project Manager", "Backup Admin", "Project Admin"], key: "", label: "", danger: Danger::None, confirm: ConfirmKind::None, order: 0, hidden: false, body: None, form: &[ Field { name: "iscsiInitiatorName", label: "Iscsi initiator name", ty: FieldType::Text, required: false, value: None, hidden: false }, Field { name: "iscsiInitiatorNetworkId", label: "Iscsi initiator network id", ty: FieldType::Json("{}"), required: false, value: None, hidden: false }, Field { name: "clientSecret", label: "Client secret", ty: FieldType::Text, required: false, value: None, hidden: false }, Field { name: "enabledAuthentications", label: "Enabled authentications", ty: FieldType::Enum(&["CHAP", "NONE", "$UNKNOWN", "$REDACTED"]), required: false, value: None, hidden: false }, Field { name: "numVirtualTargets", label: "Num virtual targets", ty: FieldType::Integer, required: false, value: None, hidden: false }, Field { name: "attachmentSite", label: "Attachment site", ty: FieldType::Enum(&["PRIMARY", "SECONDARY", "$UNKNOWN", "$REDACTED"]), required: false, value: None, hidden: false },], rate: RateLimit { count: 15, per_secs: 1 } },
@@ -11188,7 +11188,7 @@ pub static KINDS: &[Kind] = &[
         orderby: None,
         probe_by: None,
         max_rows: Some(1000),
-        select: Some("attachedTargets,clusterReference,extId,nvmfInitiatorName"),
+        select: None,
         parent: None,
         actions: &[
         ],
@@ -11265,7 +11265,7 @@ pub static KINDS: &[Kind] = &[
         orderby: None,
         probe_by: None,
         max_rows: Some(1000),
-        select: Some("diskDataSourceReference,diskSizeBytes,extId,index,storageContainerId"),
+        select: None,
         parent: Some("volumes.config.VolumeGroup"),
         actions: &[
             Action { name: "create", path: "/volumes/v4.3/config/volume-groups/{volumeGroupExtId}/disks", method: Method::Post, needs_etag: false, needs_body: true, takes_body: true, returns: ActionReturn::Task, scope: &["volumeGroupExtId"], roles: &["CSI System", "Kubernetes Data Services System", "Prism Admin", "Super Admin", "Storage Admin", "Project Manager", "Backup Admin", "Tenant Admin", "Tenant Consumer", "Project Admin"], key: "", label: "", danger: Danger::None, confirm: ConfirmKind::None, order: 0, hidden: false, body: None, form: &[ Field { name: "index", label: "Index", ty: FieldType::Integer, required: false, value: None, hidden: false }, Field { name: "diskSizeBytes", label: "Disk size bytes", ty: FieldType::Integer, required: false, value: None, hidden: false }, Field { name: "description", label: "Description", ty: FieldType::Text, required: false, value: None, hidden: false }, Field { name: "diskDataSourceReference", label: "Disk data source reference", ty: FieldType::Reference(None), required: false, value: None, hidden: false }, Field { name: "diskStorageFeatures", label: "Disk storage features", ty: FieldType::Json("{}"), required: false, value: None, hidden: false },], rate: RateLimit { count: 20, per_secs: 1 } },
@@ -11308,7 +11308,7 @@ pub static KINDS: &[Kind] = &[
         orderby: None,
         probe_by: None,
         max_rows: Some(1000),
-        select: Some("attachmentType,attachments,clusterReference,extId,hydrationStatus,name,protocol,sharingStatus,targetName"),
+        select: None,
         parent: None,
         actions: &[
             Action { name: "associate-category", path: "/volumes/v4.3/config/volume-groups/{extId}/$actions/associate-category", method: Method::Post, needs_etag: true, needs_body: true, takes_body: true, returns: ActionReturn::Task, scope: &["extId"], roles: &["CSI System", "Kubernetes Data Services System", "Prism Admin", "Super Admin", "Storage Admin", "Project Manager", "Tenant Admin", "Tenant Consumer", "Project Admin"], key: "", label: "", danger: Danger::None, confirm: ConfirmKind::None, order: 0, hidden: false, body: None, form: &[ Field { name: "categories", label: "Categories", ty: FieldType::Json("[{}]"), required: false, value: None, hidden: false },], rate: RateLimit { count: 10, per_secs: 1 } },

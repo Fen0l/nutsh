@@ -935,7 +935,6 @@ fn the_kinds_a_session_spends_its_time_on_are_narrowed() {
         "monitoring.serviceability.Alert",
         "monitoring.serviceability.Audit",
         "monitoring.serviceability.Event",
-        "networking.config.Subnet",
     ] {
         let k = kind(id).unwrap_or_else(|| panic!("no kind {id}"));
         assert!(k.select.is_some(), "{id} is not narrowed");

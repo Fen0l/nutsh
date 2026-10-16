@@ -1,8 +1,9 @@
 # Security
 
-nutsh holds Prism Central credentials. It stores a password in the operating system keyring
-where there is one and in a file under `$XDG_STATE_HOME/nutsh/secrets/` where there is not, and
-it carries that password, or the session cookie it bought, on every request it makes. A defect
+nutsh holds Prism Central credentials. It stores a password in the operating system keyring,
+the macOS Keychain or the Linux Secret Service, when one is running, and in a `0600` file under
+`$XDG_STATE_HOME/nutsh/secrets/` when none is. It carries that password, or the session cookie
+it bought, on every request it makes. A defect
 in how it handles either is worth reporting privately.
 
 ## Reporting a vulnerability

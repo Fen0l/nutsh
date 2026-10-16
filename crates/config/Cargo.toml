@@ -10,10 +10,10 @@ rust-version.workspace = true
 workspace = true
 
 [features]
-default = []
-# Linux Secret Service over D-Bus. Needs libdbus headers at build time and a running daemon;
-# does not work under WSL. Off by default: the file store is used instead.
-linux-keyring = ["dep:keyring-core", "dep:dbus-secret-service-keyring-store"]
+default = ["linux-keyring"]
+# Linux Secret Service over D-Bus, in pure Rust: nothing to link. With no session bus or no
+# daemon on it, the file store is used instead.
+linux-keyring = ["dep:keyring-core", "dep:zbus-secret-service-keyring-store"]
 
 [dependencies]
 serde.workspace = true
@@ -22,7 +22,7 @@ toml.workspace = true
 
 [target.'cfg(target_os = "linux")'.dependencies]
 keyring-core = { version = "1", optional = true }
-dbus-secret-service-keyring-store = { version = "1", optional = true, features = ["crypto-rust"] }
+zbus-secret-service-keyring-store = { version = "1", optional = true, features = ["rt-async-io-crypto-rust"] }
 
 [target.'cfg(target_os = "macos")'.dependencies]
 keyring-core = "1"

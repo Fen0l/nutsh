@@ -70,7 +70,8 @@ fn without_a_config_the_snapshot_is_the_empty_contexts_screen() {
 
 /// `--readonly` is this run's flag, not a property to be written down. `ctx add --readonly` is
 /// a different flag of the same name, and the two must not be one: a session someone wanted
-/// read-only once should never leave the context read-only for good.
+/// read-only once should never leave the context read-only for good, so the top-level flag
+/// cannot override the subcommand's `--write`.
 #[test]
 fn readonly_before_a_subcommand_is_not_ctx_adds_readonly() {
     let dir = tempfile::tempdir().unwrap();
@@ -85,6 +86,7 @@ fn readonly_before_a_subcommand_is_not_ctx_adds_readonly() {
             "10.0.0.1",
             "--username",
             "admin",
+            "--write",
         ])
         .env("NUTSH_CONFIG", &config)
         .env("XDG_STATE_HOME", dir.path().join("state"))
@@ -101,6 +103,86 @@ fn readonly_before_a_subcommand_is_not_ctx_adds_readonly() {
     let text = std::fs::read_to_string(&config).expect("the context was written");
     assert!(text.contains("[contexts.lab]"), "{text}");
     assert!(!text.contains("readonly = true"), "{text}");
+}
+
+/// A context added without a word about writing cannot change anything: the first session
+/// against a real Prism Central is a read. `--force` over an existing context keeps that
+/// context's setting unless a flag says otherwise, so repointing a host never flips it.
+#[test]
+fn ctx_add_is_read_only_unless_write() {
+    let dir = tempfile::tempdir().unwrap();
+    let config = dir.path().join("config.toml");
+    let add = |args: &[&str]| {
+        let out = nutsh()
+            .args(["ctx", "add"])
+            .args(args)
+            .env("NUTSH_CONFIG", &config)
+            .env("XDG_STATE_HOME", dir.path().join("state"))
+            .env("NUTSH_KEYRING", "0")
+            .stdin(std::process::Stdio::null())
+            .output()
+            .expect("run nutsh");
+        assert_eq!(
+            out.status.code(),
+            Some(0),
+            "{args:?}: {}",
+            String::from_utf8_lossy(&out.stderr)
+        );
+    };
+    let readonly = |name: &str| {
+        let text = std::fs::read_to_string(&config).expect("the config was written");
+        let header = format!("[contexts.{name}]");
+        let start = text
+            .find(&header)
+            .unwrap_or_else(|| panic!("{header}: {text}"));
+        let body = &text[start + header.len()..];
+        let body = &body[..body.find("\n[").unwrap_or(body.len())];
+        body.contains("readonly = true")
+    };
+    add(&["ro", "--host", "pc.ro.example", "--username", "admin"]);
+    add(&[
+        "rw",
+        "--host",
+        "pc.rw.example",
+        "--username",
+        "admin",
+        "--write",
+    ]);
+    assert!(readonly("ro"), "a bare add is read-only");
+    assert!(!readonly("rw"), "--write is writable");
+
+    add(&[
+        "rw",
+        "--host",
+        "pc.rw2.example",
+        "--username",
+        "admin",
+        "--force",
+    ]);
+    add(&[
+        "ro",
+        "--host",
+        "pc.ro2.example",
+        "--username",
+        "admin",
+        "--force",
+    ]);
+    assert!(!readonly("rw"), "--force keeps a writable context writable");
+    assert!(
+        readonly("ro"),
+        "--force keeps a read-only context read-only"
+    );
+
+    add(&[
+        "ro",
+        "--host",
+        "pc.ro2.example",
+        "--username",
+        "admin",
+        "--force",
+        "--write",
+    ]);
+    assert!(!readonly("ro"), "--write on --force says otherwise");
 }
 
 /// `--size` is a terminal, not an arbitrary allocation: a zero-sized frame is not a frame, and
@@ -433,6 +515,29 @@ fn demo_snapshot_needs_no_config_and_writes_nothing() {
     );
     assert!(csv.contains("prd-web-01"), "{csv}");
     assert!(!dir.path().join("state").exists());
+}
+
+/// The demo speaks plain HTTP to its own loopback mocks, so a machine with no certificate
+/// store - a minimal container, a scratch image - must still get a frame.
+#[test]
+fn demo_runs_without_a_certificate_store() {
+    let dir = tempfile::tempdir().unwrap();
+    let empty = dir.path().join("empty.pem");
+    std::fs::write(&empty, "").unwrap();
+    let certs = dir.path().join("certs");
+    std::fs::create_dir(&certs).unwrap();
+    let out = nutsh()
+        .args(["demo", "--snapshot", "--size", "100x12"])
+        .env("NUTSH_CONFIG", dir.path().join("absent.toml"))
+        .env("XDG_STATE_HOME", dir.path().join("state"))
+        .env("NUTSH_KEYRING", "0")
+        .env("SSL_CERT_FILE", &empty)
+        .env("SSL_CERT_DIR", &certs)
+        .stdin(std::process::Stdio::null())
+        .output()
+        .expect("run nutsh");
+    let stdout = stdout_of(&out);
+    assert!(stdout.contains("ctx:demo"), "{stdout}");
 }
 
 /// `--readonly` is the demo's own flag, the same shape as `ctx add`'s: the badge is on the

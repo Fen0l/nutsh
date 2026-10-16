@@ -88,6 +88,7 @@ fn add_list_show_use_remove() {
         "--cluster",
         "prod-01",
         "--insecure",
+        "--write",
     ]);
     let text = e.config_text();
     assert!(text.contains("current_context = \"lab\""), "{text}");
@@ -309,6 +310,40 @@ fn add_mock_context(e: &Env, pc: &MockPc, name: &str, cluster: Option<&str>) {
         args.extend(["--cluster", c]);
     }
     e.ok(&args);
+}
+
+/// The Secret Service is on by default on Linux, so a machine without one - no session bus,
+/// a container, WSL - must still store the password, in the file, and without waiting on a
+/// bus that will never answer.
+#[cfg(target_os = "linux")]
+#[tokio::test(flavor = "multi_thread", worker_threads = 2)]
+async fn login_falls_back_to_the_file_when_no_secret_service_answers() {
+    let pc = MockPc::builder().start().await;
+    let e = Env::new();
+    add_mock_context(&e, &pc, "lab", None);
+    let no_bus = format!("unix:path={}", e.state.join("no-bus").display());
+    let started = std::time::Instant::now();
+    let out = tokio::task::block_in_place(|| {
+        e.cmd(&["--plain-http", "ctx", "login", "lab"])
+            .env_remove("NUTSH_KEYRING")
+            .env("DBUS_SESSION_BUS_ADDRESS", &no_bus)
+            .env("NUTSH_PASSWORD", "secret")
+            .output()
+            .expect("run nutsh")
+    });
+    let stdout = String::from_utf8_lossy(&out.stdout);
+    assert_eq!(
+        out.status.code(),
+        Some(0),
+        "{}",
+        String::from_utf8_lossy(&out.stderr)
+    );
+    assert!(stdout.contains("in file"), "{stdout}");
+    assert!(
+        started.elapsed() < std::time::Duration::from_secs(10),
+        "the fallback waited {:?}",
+        started.elapsed()
+    );
 }
 
 #[tokio::test(flavor = "multi_thread", worker_threads = 2)]

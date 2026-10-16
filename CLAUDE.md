@@ -22,8 +22,8 @@ make release            # stripped binary, with a receipt
 `make ci` mirrors CI exactly. Run it before calling anything done; a change that has not passed
 it is not finished.
 
-Do not build with `--features linux-keyring` unless the machine has libdbus and a running Secret
-Service. Without them the build fails, and the file secret store is the default on Linux anyway.
+The Linux keyring (`linux-keyring`, on by default) is pure Rust and builds anywhere; with no
+Secret Service reachable it falls back to the file store. Tests set `NUTSH_KEYRING=0`.
 
 ## Layout
 

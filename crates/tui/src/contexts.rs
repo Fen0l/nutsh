@@ -104,9 +104,11 @@ impl std::fmt::Debug for Form {
 }
 
 impl Form {
+    /// Read-only ticked: a new context cannot write until someone unticks it.
     pub fn new() -> Form {
         Form {
             port: crate::DEFAULT_PORT.to_string().into(),
+            readonly: true,
             ..Form::default()
         }
     }
@@ -596,7 +598,10 @@ mod tests {
         assert_eq!(new.port, crate::DEFAULT_PORT);
         assert_eq!(new.cluster, None);
         assert_eq!(new.ca_bundle, None);
-        assert!(new.insecure && !new.readonly);
+        assert!(new.insecure && new.readonly, "a new form starts read-only");
+        let mut form = filled();
+        form.readonly = false;
+        assert!(!form.submit(|_| false).expect("valid").readonly);
     }
 
     /// Only `y` removes; every other key cancels, and none of them falls through to the row

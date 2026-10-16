@@ -1,6 +1,6 @@
-//! OS keyring backend: macOS login Keychain by default, Linux Secret Service behind the
-//! `linux-keyring` feature. Any failure other than "no entry" marks the backend unavailable so
-//! the facade falls through to the file store.
+//! OS keyring backend: the macOS login Keychain, or the Linux Secret Service through the
+//! default `linux-keyring` feature. Any failure other than "no entry" marks the backend
+//! unavailable so the facade falls through to the file store.
 
 use std::collections::HashMap;
 use std::sync::OnceLock;
@@ -31,7 +31,7 @@ impl KeyringStore {
             #[cfg(target_os = "macos")]
             let store = apple_native_keyring_store::keychain::Store::new();
             #[cfg(all(target_os = "linux", feature = "linux-keyring"))]
-            let store = dbus_secret_service_keyring_store::Store::new();
+            let store = zbus_secret_service_keyring_store::Store::new();
             match store {
                 Ok(s) => {
                     keyring_core::set_default_store(s);

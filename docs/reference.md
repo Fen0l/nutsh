@@ -67,7 +67,9 @@ readonly   = true        # this context only
 ```
 
 `readonly` at the top level, `readonly` on one context, and `--readonly` all refuse every
-mutation for the session, and any one of them is enough. A guardrail is narrower: it
+mutation for the session, and any one of them is enough. `ctx add` and the Contexts screen's
+form write `readonly = true` unless told `--write` or unticked; a context with no `readonly`
+key can write. A guardrail is narrower: it
 matches on context, kind and action, and either denies outright with a reason, forces a
 confirmation, or caps how many rows one run may touch. Whatever refuses an action says so in
 the menu beside it, so nothing is offered and then taken away.
